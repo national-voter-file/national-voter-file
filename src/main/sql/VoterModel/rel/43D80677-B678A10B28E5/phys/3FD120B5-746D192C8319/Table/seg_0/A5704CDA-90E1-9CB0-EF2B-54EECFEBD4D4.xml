@@ -1,0 +1,18 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev12c class="oracle.dbtools.crest.model.design.storage.oracle.v12c.TableProxyOraclev12c" name="state_senate_district_dim" directorySegmentName="seg_0" id="A5704CDA-90E1-9CB0-EF2B-54EECFEBD4D4">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="IFv4_PK" id="EE6FB6D9-5D1B-D3BE-A203-2DE68CF5C7E4">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<indexSort>SORTED</indexSort>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev12c>

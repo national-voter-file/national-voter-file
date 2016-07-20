@@ -1,0 +1,64 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="0FBED98D-E7C7-3547-AA75-95879C7E8827" name="reporter_dim">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<ordsAlias>if</ordsAlias>
+<typeID>2</typeID>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="reporter_id" id="F543EB83-E781-D47F-3D29-9EF22A20F5C7">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<notNullConstraintName>NNC_reporter_dim_`reporter_id`</notNullConstraintName>
+</Column>
+<Column name="`reporter_name`" id="A5E5F314-36CA-3280-3AA8-608E90F2C4D6">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="`reporter_type`" id="13AFE61A-49B1-F2DB-B01E-C68DFC783287">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="806DD819-EE2C-528E-EBDC-BDF1B2EE6D4D" name="reporter_dim_PK">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="F543EB83-E781-D47F-3D29-9EF22A20F5C7"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

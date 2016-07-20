@@ -1,0 +1,162 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev12c class="oracle.dbtools.crest.model.design.storage.oracle.v12c.TableProxyOraclev12c" name="voter_report_fact" directorySegmentName="seg_0" id="FE14AC58-478B-2EBC-8595-887BF4F1907D">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="social_media_account_key" id="0FA159EF-97D7-9F55-9280-DE73208DEF2A">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 20:07:46 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="state_key" id="1EF9F1A9-5F26-40D6-07C7-E94F1A09F226">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 20:07:46 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="state_house_district_key" id="2AE97909-A36F-1A72-7DCB-C0C3348775AC">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 20:07:46 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="state_senate_district_key" id="38CB3C54-420F-924B-C9BD-224472EA9B1B">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 20:07:46 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="date_key" id="507852E5-EDCD-F3FE-0D6C-48C50CFAF631">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 21:46:40 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="ward_key" id="91DD36C9-B010-0AC3-A7B0-8FA940921D6B">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 20:07:46 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="county_district_key" id="9A449DF1-837F-7244-20CF-138196CD6F7C">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 20:07:46 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="staffer_key" id="A1B2B1E6-0A35-2DCC-D64A-1760CB8884EF">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 21:24:03 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="household_key" id="BF22D255-B23D-3DC1-6E3E-74FF5F824BE4">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 20:07:46 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="county_key" id="D34BFFAE-A94D-F778-3554-4D576C236E32">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 20:07:46 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="congressional_district_key" id="DD136E22-860B-AC2A-948B-001420151C12">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 20:07:46 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="campaign_key" id="EA69D14B-8101-0C5C-84EF-35D8B5ABB082">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 21:37:16 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="voter_key" id="FBDFC590-6823-C8A0-5CE9-735FDC463F15">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 20:07:46 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<foreignKeys>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="voter_report_fact_date_dim_FK" id="10D747CE-1E5B-C2B1-349A-FE46AB5453D3">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 21:47:32 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="voter_report_fact_state_house_district_dim_FKv2" id="1E79E83A-2A59-5A94-41C8-FF24A00C46EE">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 20:07:46 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="voter_report_fact_campaign_dim_FK" id="2A3AE7B9-035E-D88B-1FCF-7C45C80CF495">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 21:37:16 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="voter_report_fact_county_district_dim_FKv2" id="3EC61199-3E47-5831-96EF-0A05A8FBA6BE">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 20:07:46 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="voter_report_fact_congressional_district_dim_FKv2" id="41973CF2-D08C-4B8D-8561-3E27EC768B9E">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 20:07:46 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="voter_report_fact_ward_dim_FKv2" id="5476739C-540F-F68D-4787-D42041C78BCA">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 20:07:46 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="voter_report_fact_county_dim_FK" id="61B5CA72-482D-3AF8-D800-88989262A032">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 14:39:46 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="voter_report_fact_reporter_dim_FK" id="649DF8A9-F821-42C9-9D4D-79602A69167A">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 14:35:01 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="voter_report_fact_voter_dim_FKv2" id="6637DB2E-6807-1D93-482A-0150DC814B2A">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 20:07:46 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="voter_report_fact_household_dim_FKv2" id="6CC7E408-4D4D-CBBB-5F83-C754FF634B05">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 20:07:46 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="voter_report_fact_state_dim_FKv2" id="8EAAF194-383C-EAB1-8FA9-BC0756582668">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 20:07:46 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="voter_report_fact_social_media_account_dim_FKv2" id="902118E6-7E58-1FEC-265D-CBC990998EFE">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 20:07:46 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="voter_report_fact_county_dim_FKv2" id="AEA23935-194A-3BAE-7BD6-8E8B634EED14">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 20:07:46 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="voter_report_fact_state_senate_district_dim_FKv2" id="BFFDE84B-1F0F-3CC6-CFAA-60B203CD29AB">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 20:07:46 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="voter_report_fact_Staffer_Dim_FK" id="F62C7234-920C-9DB6-1CFB-692C7806ABE9">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 21:24:03 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+</ForeignKey>
+</foreignKeys>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="voter_report_fact_PK" id="2925F0B6-28BC-71F4-0539-79E14A6BFBFE">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<indexSort>SORTED</indexSort>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev12c>

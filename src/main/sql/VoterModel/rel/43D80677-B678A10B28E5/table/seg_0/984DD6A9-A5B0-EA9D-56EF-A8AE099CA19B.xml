@@ -1,0 +1,75 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="984DD6A9-A5B0-EA9D-56EF-A8AE099CA19B" name="state_dim">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<ordsAlias>ifv8</ordsAlias>
+<typeID>2</typeID>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="`state_id`" id="F5C8AAD6-6825-CC00-E54D-1268A59E1FCF">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="`state_name`" id="35DE1617-4051-C27C-D076-162615E59C3F">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="`state_abbrev`" id="0813D34A-A828-0336-AD07-51F6813726D1">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="`geometry`" id="F5AE530D-4791-F17E-0417-4656B98E8372">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="5FF62A4E-93A3-2D7B-95EB-5F5627973213" name="state_dim_PK">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="F5C8AAD6-6825-CC00-E54D-1268A59E1FCF"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

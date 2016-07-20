@@ -1,0 +1,351 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="B38E9D71-66AE-BE00-E5B8-99D0CACADD0A" name="household_dim">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<ordsAlias>ifv1</ordsAlias>
+<typeID>2</typeID>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="`household_id`" id="CB0E7D46-75C9-2898-820D-19FA3C51B319">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="`AddressNumber`" id="4235A4EA-45E0-DF08-CDAF-3EEC50CA4986">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="`AddressNumberPrefix`" id="00163643-213F-A3D5-2996-E6ECFFBACB4B">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="`AddressNumberSuffix`" id="E94C7C83-4174-4107-6191-62EE275502B1">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="`BuildingName`" id="A5EFAB24-72AF-4045-FFDD-A1DCF5AA2B67">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="`CornerOf`" id="D1E5B2E5-CE78-D015-1964-3024210C3928">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="`IntersectionSeparator`" id="0CAFC5BC-CF10-D1C5-D1D6-69A7C11B4315">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="`LandmarkName`" id="6E794B66-AED6-4EDA-D9AD-461135A0E3AE">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="`NotAddress`" id="983323A3-86F6-29EA-893F-89F10491D673">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="`OccupancyType`" id="3251E146-9C2C-2A77-935C-8FEB5D808A69">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="`OccupancyIdentifier`" id="E80D2629-9C60-26E4-752A-12535A78C56A">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="`PlaceName`" id="EAA89405-72C6-EF2E-C0A8-018C547FEFC7">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="`StateName`" id="A066A256-F4CC-5FD7-1A96-95560AA99A6A">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="`StreetName`" id="05767547-4FED-50CD-3051-FE4DAE587D75">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="`StreetNamePreDirectional`" id="81706BA0-1A17-EC66-F0B7-D76E0B1A9EAC">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="`StreetNamePreModifier`" id="B29522CC-7008-C3E0-799A-8639738033B0">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="`StreetNamePreType`" id="C0754AD0-0A56-2612-73B8-F4F294D38C78">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="`StreetNamePostDirectional`" id="4AE33916-A215-5A8A-8988-2580BB695818">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="`StreetNamePostModifier`" id="1F879F8B-21E0-2EDD-E762-8B43AA6C44CD">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="`StreetNamePostType`" id="43A6F45C-C2BA-1244-AED1-72BD6E019E1F">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="`SubaddressIdentifier`" id="62567157-1728-EDCB-3346-F2351AD7EDB5">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="`SubaddressType`" id="2270BBD9-DABB-F3DA-F9C6-F4C5059C3F2D">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="`USPSBoxGroupID`" id="EFBA0C74-424F-7077-F9D2-40F52DDBF27E">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="`USPSBoxGroupType`" id="FDE7A2CF-639F-BB23-BE3D-ACF7FF4DAA9D">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="`USPSBoxID`" id="C3BA96CB-6415-AAC9-EBC1-C597B91045A2">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="`USPSBoxType`" id="9C4B3D2F-3B6A-F2DC-7072-7AB1A11F5792">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="`ZipCode`" id="B6E77D21-934B-D3D1-EBD7-B71FC2AAC83B">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="8DD1A67E-A73B-8FFF-D6EE-8192BBAEFA8F" name="household_dim_PK">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="CB0E7D46-75C9-2898-820D-19FA3C51B319"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

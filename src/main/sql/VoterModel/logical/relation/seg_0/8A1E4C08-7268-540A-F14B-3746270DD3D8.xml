@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="canvassing_fact_ward_dim_FK" directorySegmentName="seg_0" id="8A1E4C08-7268-540A-F14B-3746270DD3D8">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 20:16:55 UTC</createdTime>
+<generatorID>12291B61-1E62-BA26-6388-C4A2082D4E21</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<sourcePk>DCC533E6-A214-39A1-E115-086EE094B677</sourcePk>
+<identifying>true</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>2BB738BB-5A88-475E-187B-A6FBB2E39750</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>FF4FCD47-F3EA-0185-6A21-6BB4C60FA50B</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

@@ -1,0 +1,134 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="CDF9EF95-EFB7-9E8B-F4C4-B535E56B40CE" name="congressional district dim">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:34:30 UTC</createdTime>
+<generatorID>4DE764D7-B0A9-59CC-80C6-2AF13EA4B993</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<typeID>2</typeID>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="`congressional district id`" id="7C398455-08F8-4934-4C02-4C830EF1409C">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:34:30 UTC</createdTime>
+<generatorID>C9BA1067-9E01-515B-03A6-23CEAD9765EE</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="`district name`" id="776ADAF5-C4EA-7B5C-8E0E-8C6CD9317F56">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:34:30 UTC</createdTime>
+<generatorID>B5884572-6DAF-BA73-BC55-7C61933A3E05</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="`state`" id="A7C1A21B-2EE7-6E92-AC36-52C700D20FF4">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:34:30 UTC</createdTime>
+<generatorID>BD8B38B8-DC5E-2F01-3101-A909ACFEC772</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="`district number`" id="B77D85DD-ED97-D5B2-D81A-E822898ADD61">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:34:30 UTC</createdTime>
+<generatorID>06AE67EC-705A-E3F8-C3CA-E014DD9DC0A6</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="`valid from`" id="5BF5E322-28DE-99BB-EDAB-B107C22CDDF3">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:34:30 UTC</createdTime>
+<generatorID>2AA0BC41-4B9D-190A-45D5-62D208748DB2</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<domain>42140577-E14C-B529-8CF5-C53B0F9849C0</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="`valid to`" id="E53E2893-FB6A-9499-CF3C-A353D406DA05">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:34:30 UTC</createdTime>
+<generatorID>A4B27F92-97A5-9D1F-1FD7-0FD5D11E4193</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<domain>42140577-E14C-B529-8CF5-C53B0F9849C0</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="`geometry`" id="9535F5AF-BE21-491D-9A42-892D4C9E7769">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:34:30 UTC</createdTime>
+<generatorID>DB6109B0-FD24-5071-02E6-DBEB045A447A</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="A096459F-4054-E72E-3CC1-DFFFC70E9FB4" name="congressional_district_dim_PK">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:34:30 UTC</createdTime>
+<generatorID>9670DCAB-A6AE-3B78-EB2B-DC72F0410E3D</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>7C398455-08F8-4934-4C02-4C830EF1409C</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

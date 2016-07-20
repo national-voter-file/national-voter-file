@@ -1,0 +1,290 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="6489D753-31B7-E688-704A-24A188D1AF79" name="voter report fact">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 14:51:55 UTC</createdTime>
+<generatorID>FE14AC58-478B-2EBC-8595-887BF4F1907D</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<typeID>1</typeID>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="`voter report id`" id="5FAF6782-0F30-2B9E-5FA3-59A20217D75F">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 14:51:55 UTC</createdTime>
+<generatorID>D8578D22-97A0-842F-7349-1288EAADDD6C</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="`voter report date`" id="25178854-AA6B-1ABE-D482-FADA1EF14A33">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 14:51:55 UTC</createdTime>
+<generatorID>464F57DE-B82C-5161-ACE0-7C1AEDB399EE</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="`report status`" id="2F4F3181-D44E-500E-6560-6BAEEC35810A">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 14:51:55 UTC</createdTime>
+<generatorID>341DBAE8-EC68-E82B-814A-89E79FD46D59</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="`report date`" id="F01F6C8A-F80B-B5BD-0AE8-E90985BF59D1">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 14:51:55 UTC</createdTime>
+<generatorID>6051270E-72B5-94A0-711A-14346E5B1974</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<domain>42140577-E14C-B529-8CF5-C53B0F9849C0</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="ward key" id="0228A73F-C862-0D4A-650D-81F234EE31BB">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 14:52:33 UTC</createdTime>
+<generatorID>EDD6ACEE-F741-4251-4970-5682AFF472BD</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<referedAttribute>3F3FE7F8-2127-F522-8AF3-859F6B0C0F58</referedAttribute>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="voter key" id="6FC30544-2505-02DE-CCD7-8C018D064B88">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 14:52:50 UTC</createdTime>
+<generatorID>2587F13A-99F5-5AB6-755E-E2296E42DB3E</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<referedAttribute>0032CEEF-F5A4-2631-4B71-F8A980B9A99D</referedAttribute>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="household key" id="4CE72819-347E-CE0B-9043-4A748DD0696A">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 14:58:18 UTC</createdTime>
+<generatorID>21D13B97-207D-2FD9-08AA-1BF17F9A16D4</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<referedAttribute>E75B5C98-01DE-A0D3-FCBD-B72BDF024D36</referedAttribute>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="social media account key" id="ECD4EED0-6604-3136-67F8-28B3EA8F0BD5">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 15:01:27 UTC</createdTime>
+<generatorID>24EC5B4D-1586-491A-DE91-7C640A89C3C3</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<referedAttribute>DF58BCCF-ACE6-2521-3F98-A29652848FC6</referedAttribute>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="congressional district key" id="3718AF28-7486-26B0-86DD-7F50F85E4FFF">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 15:01:42 UTC</createdTime>
+<generatorID>A4EEDD1B-0109-1010-35CE-E8FC0AE2EEA4</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<referedAttribute>7C398455-08F8-4934-4C02-4C830EF1409C</referedAttribute>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="county key" id="6AE2251C-CC6D-22D2-B3D7-127E66F665CE">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 15:01:49 UTC</createdTime>
+<generatorID>25D3FD05-7AA7-9563-B028-D75D7D8B9B7D</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<referedAttribute>4E3846AB-444F-7748-F735-A841939F50D9</referedAttribute>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="county district key" id="76C7265B-8FA6-C12D-41ED-C90D1AEAE2F9">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 15:01:55 UTC</createdTime>
+<generatorID>5A5E592A-CA64-17F7-2887-3DA7A12B3AE2</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<referedAttribute>58D26B4B-66C7-A30D-60E5-B85E80DC82A4</referedAttribute>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="state key" id="71F14194-AC6C-E597-B920-E51D51471862">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 15:02:23 UTC</createdTime>
+<generatorID>7D0A21A0-028C-F2D1-A640-C38934362A3B</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<referedAttribute>976584A4-757B-9860-4415-B1B876470924</referedAttribute>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="state house district key" id="37C69912-1563-00B8-4E2A-5942282F7ECF">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 15:02:29 UTC</createdTime>
+<generatorID>DF95F818-A299-E6F9-D4AA-CAC41634C7DA</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<referedAttribute>630A9C5C-2A75-0157-9206-026C796D79B3</referedAttribute>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="state senate district key" id="9E2D94C9-FCEA-8316-6348-142299DC692B">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 15:02:35 UTC</createdTime>
+<generatorID>C85B40EC-E300-2A14-74CC-F8F137FA4175</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<referedAttribute>272FFF5C-E95C-57BA-42ED-ADECA351355A</referedAttribute>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="reporter id" id="3655F3BF-C772-ED8D-51C8-CC7A711A3676">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 20:58:21 UTC</createdTime>
+<generatorID>3C4401F9-DC61-CBFF-30AD-DAC5FE4BD356</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<referedAttribute>F10AB82A-637A-43B2-A1E1-665DBFAAC850</referedAttribute>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="staffer key" id="079D2BD6-BD5D-945B-DEA0-FB9C0D11AD94">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 21:33:45 UTC</createdTime>
+<generatorID>18BA0BA9-07CD-5191-2A74-1CD2246DB131</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<referedAttribute>5E8ED61F-D1D1-5AEF-B097-1B68BBE80AF6</referedAttribute>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="campaign key" id="C08F2875-60F5-B670-DB9D-A275DD169F97">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 21:42:48 UTC</createdTime>
+<generatorID>0FBB4DFF-056E-E710-C8E1-A8D67083F4C1</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<referedAttribute>C840583A-0973-DD62-2280-5970AAE13EA7</referedAttribute>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="date key" id="2FB06D99-29CC-1F2B-D1BE-FBA19D6ECA93">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 21:49:12 UTC</createdTime>
+<generatorID>3BC2AADD-57DE-A286-9EFE-90A4B9F7B4DA</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<referedAttribute>53C36753-D648-6923-E491-74591E2261B2</referedAttribute>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="61050485-59D6-ECF1-CB11-64F99C2E3178" name="voter report fact PK">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 14:51:55 UTC</createdTime>
+<generatorID>2925F0B6-28BC-71F4-0539-79E14A6BFBFE</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>5FAF6782-0F30-2B9E-5FA3-59A20217D75F</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

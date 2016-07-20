@@ -1,0 +1,106 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="214B6914-4C2D-56B7-2B80-6EB199C43FB4" name="social media account dim">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:34:30 UTC</createdTime>
+<generatorID>275E6348-1BEF-0849-1903-18C5FFBA6F2B</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<typeID>2</typeID>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="`social media account id`" id="DF58BCCF-ACE6-2521-3F98-A29652848FC6">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:34:30 UTC</createdTime>
+<generatorID>A6A40794-4BEC-20AE-32FA-926DD14A6D5B</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="`facebook account`" id="5A213989-2A84-2529-3BBF-E938F2F2CD9B">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:34:30 UTC</createdTime>
+<generatorID>02DFE0A1-BBBF-BEFB-E50D-BBC4EA0D7A08</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="`twitter account`" id="DC9D044D-2456-4878-C27B-7DED34A00CD9">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:34:30 UTC</createdTime>
+<generatorID>95C67E15-373A-F44D-ABC1-C1C0FD1998BA</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="`linked in account`" id="A6E20CC8-FD50-7501-BB86-E8107A734495">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:34:30 UTC</createdTime>
+<generatorID>B417CE14-8E47-6BA1-9552-2B7147C744C5</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="person dim `person id`" id="4DD31657-7434-395F-EEA5-62B925D3EEE4">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:34:30 UTC</createdTime>
+<generatorID>17321C39-1CBE-1A2C-8B35-B64C0178185F</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<referedAttribute>CF9E3CAC-FDD8-4994-E845-4F642E88CB5D</referedAttribute>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="BEAE088C-075D-3FF3-88AE-D424AA708EE3" name="social_media_account_dim_PK">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:34:30 UTC</createdTime>
+<generatorID>A6EEC27A-25EC-3BD2-9DA0-10EE994ACED4</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>DF58BCCF-ACE6-2521-3F98-A29652848FC6</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

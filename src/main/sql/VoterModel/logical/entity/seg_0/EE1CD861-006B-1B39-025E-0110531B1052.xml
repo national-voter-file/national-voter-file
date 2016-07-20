@@ -1,0 +1,92 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="EE1CD861-006B-1B39-025E-0110531B1052" name="state senate district dim">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:34:30 UTC</createdTime>
+<generatorID>A5704CDA-90E1-9CB0-EF2B-54EECFEBD4D4</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<typeID>2</typeID>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="`state senate district id`" id="272FFF5C-E95C-57BA-42ED-ADECA351355A">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:34:30 UTC</createdTime>
+<generatorID>0CAC054C-07E5-1118-0F66-030CD2E6C309</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="`state`" id="372A3A0B-6F7C-41EC-30CB-BE620E3299D6">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:34:30 UTC</createdTime>
+<generatorID>E5EFBA1E-CFB0-3CFD-4698-407FEBC14EF5</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="`district name`" id="32290CC6-2762-00FF-6D7A-C80C0F649ED0">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:34:30 UTC</createdTime>
+<generatorID>1D8B2A69-1989-EAD4-C831-310364982410</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="`geometry`" id="887039BE-2A00-25F0-9511-177FC0E2DB49">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:34:30 UTC</createdTime>
+<generatorID>35BD8C18-1C38-9D71-49DC-0E1F82BA61CA</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="3620848B-38E8-A964-4512-289C44202AAC" name="state_senate_district_dim_PK">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:34:30 UTC</createdTime>
+<generatorID>EE6FB6D9-5D1B-D3BE-A203-2DE68CF5C7E4</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>272FFF5C-E95C-57BA-42ED-ADECA351355A</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

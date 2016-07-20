@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="canvassing_fact_social_media_account_dim_FK" directorySegmentName="seg_0" id="361BFB81-5776-8DBB-45F0-519EE3EA438C">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 20:16:55 UTC</createdTime>
+<generatorID>7E368D0C-822C-E95D-0872-DC4D78882E3C</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<sourcePk>BEAE088C-075D-3FF3-88AE-D424AA708EE3</sourcePk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>214B6914-4C2D-56B7-2B80-6EB199C43FB4</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>FF4FCD47-F3EA-0185-6A21-6BB4C60FA50B</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

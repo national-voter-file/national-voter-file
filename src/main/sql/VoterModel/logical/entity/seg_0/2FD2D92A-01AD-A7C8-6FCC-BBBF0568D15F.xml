@@ -1,0 +1,106 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="2FD2D92A-01AD-A7C8-6FCC-BBBF0568D15F" name="county dim">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:34:30 UTC</createdTime>
+<generatorID>DEFE0409-FF7C-31B7-044D-7DCFD7D99716</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<typeID>2</typeID>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="`country id`" id="4E3846AB-444F-7748-F735-A841939F50D9">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:34:30 UTC</createdTime>
+<generatorID>77FF3169-4F8B-8699-7C0B-B1032FF02B2C</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="`state name`" id="AF4EA770-938A-2632-849D-23D98C689886">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:34:30 UTC</createdTime>
+<generatorID>B0E00E21-514B-3752-70F1-619A238A0422</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="`state abbrev`" id="3BE2B696-4DEE-26E3-66F5-F5CC361E1AA3">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:34:30 UTC</createdTime>
+<generatorID>6EF588AC-CC30-50CA-1173-852CD9C371FF</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="`county name`" id="C938F83F-09E6-30D1-6562-37F1B97CF7A6">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:34:30 UTC</createdTime>
+<generatorID>B9318C26-B86D-769E-D717-5DF16AE15EF6</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="`geometry`" id="920F44EF-55E2-EBDE-ED93-47C26B1F24EB">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:34:30 UTC</createdTime>
+<generatorID>FAF4F144-35F1-8317-3523-F57A330C26AF</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="0DC966B0-B992-6666-5F7A-F9C4908A20F5" name="county_dim_PK">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:34:30 UTC</createdTime>
+<generatorID>A1573213-FD43-FD3E-C75D-329F61239E3B</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<shouldEngineer>false</shouldEngineer>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="false"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>4E3846AB-444F-7748-F735-A841939F50D9</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

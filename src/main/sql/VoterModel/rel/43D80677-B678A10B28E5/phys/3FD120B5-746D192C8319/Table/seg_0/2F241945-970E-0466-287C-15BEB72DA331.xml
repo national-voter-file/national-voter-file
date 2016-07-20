@@ -1,0 +1,41 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev12c class="oracle.dbtools.crest.model.design.storage.oracle.v12c.TableProxyOraclev12c" name="Staffer_Dim" directorySegmentName="seg_0" id="2F241945-970E-0466-287C-15BEB72DA331">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 21:23:30 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="First_Name" id="76394F9F-CA5F-10A4-915D-5A4A01EBB3C5">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 21:23:30 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="Last_Name" id="82F9A5AD-A451-06A9-BEA7-E5A02D9A6D62">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 21:23:30 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="Staffer_ID" id="83DE9916-39AA-0950-3CD5-A5FD530E2523">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 21:23:30 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="Username" id="C3146847-7C0D-F1B6-22EB-792AE9164E09">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 21:23:30 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="Staffer_Dim_PK" id="9AED6B58-DC4A-56BB-F26A-04F5A45F851D">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 21:23:30 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<indexSort>SORTED</indexSort>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev12c>

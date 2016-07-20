@@ -1,0 +1,20 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Relation class="oracle.dbtools.crest.model.design.logical.Relation" name="canvassing_fact_state_senate_district_dim_FK" directorySegmentName="seg_0" id="928C6D8A-AC76-1350-CC4A-239E9B3CA103">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 20:16:55 UTC</createdTime>
+<generatorID>0EE66819-D4BB-23C0-4746-D63362794888</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<sourcePk>3620848B-38E8-A964-4512-289C44202AAC</sourcePk>
+<identifying>false</identifying>
+<optionalSource>true</optionalSource>
+<optionalTarget>false</optionalTarget>
+<sourceCardinality>1</sourceCardinality>
+<sourceEntity>EE1CD861-006B-1B39-025E-0110531B1052</sourceEntity>
+<targetCardinalityString>*</targetCardinalityString>
+<targetEntity>FF4FCD47-F3EA-0185-6A21-6BB4C60FA50B</targetEntity>
+<transferable>true</transferable>
+<deleteRule>NO ACTION</deleteRule>
+</Relation>

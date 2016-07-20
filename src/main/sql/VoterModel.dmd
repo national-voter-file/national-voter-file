@@ -1,0 +1,8 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<OSDM_Design class="oracle.dbtools.crest.model.design.Design" name="VoterModel" id="0CC026B5-EA60-FD07-0645-B62ADA76DEFE" version="3.5">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:07:44 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<capitalNames>false</capitalNames>
+<designId>0CC026B5-EA60-FD07-0645-B62ADA76DEFE</designId>
+</OSDM_Design>

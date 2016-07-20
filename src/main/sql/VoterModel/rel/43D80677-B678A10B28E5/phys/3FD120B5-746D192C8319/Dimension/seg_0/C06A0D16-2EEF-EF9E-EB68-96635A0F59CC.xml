@@ -1,0 +1,6 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<DimensionOraclev10g class="oracle.dbtools.crest.model.design.storage.oracle.v10g.DimensionOraclev10g" name="voter_dim" directorySegmentName="seg_0" id="C06A0D16-2EEF-EF9E-EB68-96635A0F59CC">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:32:47 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+</DimensionOraclev10g>

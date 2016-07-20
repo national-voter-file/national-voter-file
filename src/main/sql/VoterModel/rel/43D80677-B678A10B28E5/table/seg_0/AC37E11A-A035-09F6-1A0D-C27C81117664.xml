@@ -1,0 +1,279 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="AC37E11A-A035-09F6-1A0D-C27C81117664" name="contribution_fact">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<ordsAlias>ifv16</ordsAlias>
+<typeID>1</typeID>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="`contribution_id`" id="46E4491B-CDC4-F76F-0F43-596BC48F3064">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="`amount`" id="27F1C9A6-0908-4BB0-B149-9EB7BAB4C4E5">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="`contribution_date`" id="ED12862A-4057-F101-621E-A4F9AB18F5D0">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<domain>42140577-E14C-B529-8CF5-C53B0F9849C0</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="reporter_dim_reporter_id" id="C17BE71C-F550-6E48-75F9-72DC3E959849">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="E4475C9D-4269-16AD-08C2-02BF7E8F05F7" referredColumn="F543EB83-E781-D47F-3D29-9EF22A20F5C7"/>
+</associations>
+</Column>
+<Column name="commitee_dim_`commitee_id`" id="BED0CD0A-B481-CD2D-50D9-432C64D1E812">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="A1B102C4-3933-131B-F24A-A9EA99237FAB" referredColumn="0777C8EA-6E11-34B4-8C2D-9E3B4CB8528F"/>
+</associations>
+</Column>
+<Column name="campaign_dim_`campaign_id`" id="E8D4A2DA-5A8F-CC86-B76E-FA88243790B5">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="B1CA9490-33DC-A6AE-407E-D387435BFD13" referredColumn="4D7C3547-D63D-7299-E83A-8C1E0CBDF43D"/>
+</associations>
+</Column>
+<Column name="congressional_district_dim_`congressional_district_id`" id="EF23BC30-14AC-D373-9EE8-FB6DBC63C4D4">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="595D7EA7-FCF2-3779-BF97-0B45DA2AED6B" referredColumn="C9BA1067-9E01-515B-03A6-23CEAD9765EE"/>
+</associations>
+</Column>
+<Column name="date_dim_`date_id`" id="311C3A4A-9244-6B61-BCE2-272BAB611D8E">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="73DCF56E-D6D2-FDBE-059E-DF1D99B3C701" referredColumn="A3D87716-68AE-5807-AAFA-54C6964666D5"/>
+</associations>
+</Column>
+<Column name="voter_dim_`voter_id`" id="00282ED3-AB61-6803-5B2A-5E0A12551755">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="F9B54D1D-7DEE-9278-039E-EB3D99EC1B1C" referredColumn="6FAAD8CF-4B75-7A5D-B8AF-49AF670483E6"/>
+</associations>
+</Column>
+<Column name="ward_dim_`ward_id`" id="4BFC664C-FC89-0DEF-623E-A480703027C9">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="BACD8D32-DBAA-291B-70A3-4C5F886E3E60" referredColumn="701ED275-E20B-A003-116A-C75B78C0DF2F"/>
+</associations>
+</Column>
+<Column name="state_house_district_dim_`state_house_district_id`" id="B5D58E96-B5C9-1703-BDE3-BE22C2F4D376">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="D3978D4E-DCEC-9889-3209-1EA1300E4E62" referredColumn="1FD25CDC-4670-EF7F-02B7-F40B9B7D5228"/>
+</associations>
+</Column>
+<Column name="state_senate_district_dim_`state_senate_district_id`" id="EB84A19A-E554-C640-765D-22A949AD3C4B">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="AE0BFC3F-1AAE-865A-C892-DF4E601087BB" referredColumn="0CAC054C-07E5-1118-0F66-030CD2E6C309"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="4C394F72-B23F-F6E5-3968-D7538102ABEB" name="contribution_fact_PK">
+<sourceDDLFile>ddl.sql</sourceDDLFile>
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:11:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="46E4491B-CDC4-F76F-0F43-596BC48F3064"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="F00A0E54-06A1-66B8-D4E0-2714F91AF8F2" name="contribution_fact_reporter_dim_FK">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:41:13 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="C17BE71C-F550-6E48-75F9-72DC3E959849"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="899C12E1-4F1C-59C3-788C-8FA229A3D803" name="contribution_fact_campaign_dim_FK">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:42:12 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="E8D4A2DA-5A8F-CC86-B76E-FA88243790B5"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="5DE3C00F-075B-5199-AC5B-B3B92B549E32" name="contribution_fact_commitee_dim_FK">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:44:14 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="BED0CD0A-B481-CD2D-50D9-432C64D1E812"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="09B95ADD-BDE0-97AE-4742-D67F255318E9" name="contribution_fact_congressional_district_dim_FK">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:47:04 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="EF23BC30-14AC-D373-9EE8-FB6DBC63C4D4"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="7A4744F4-F4CB-7009-E1FB-D78B545417DF" name="contribution_fact_date_dim_FK">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:47:24 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="311C3A4A-9244-6B61-BCE2-272BAB611D8E"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="97B573DF-03F8-4B7F-FD51-1C575B98EE37" name="contribution_fact_voter_dim_FK">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:47:57 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="00282ED3-AB61-6803-5B2A-5E0A12551755"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="F80F59AE-0D2C-FC4B-8739-223ED991DD79" name="contribution_fact_ward_dim_FK">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:48:33 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="4BFC664C-FC89-0DEF-623E-A480703027C9"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="42F81922-172F-4468-1C7A-2F45C46FAF22" name="contribution_fact_state_house_district_dim_FK">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:48:53 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="B5D58E96-B5C9-1703-BDE3-BE22C2F4D376"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="D4DB4350-3AF0-2C90-5D16-0B02FB958D71" name="contribution_fact_state_senate_district_dim_FK">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:49:23 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="EB84A19A-E554-C640-765D-22A949AD3C4B"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

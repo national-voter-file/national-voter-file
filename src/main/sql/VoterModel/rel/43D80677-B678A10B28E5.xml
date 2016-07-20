@@ -1,0 +1,15 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<relationalModel class="oracle.dbtools.crest.model.design.relational.RelationalDesign" name="Voter" id="43D80677-0A7E-5735-AC15-B678A10B28E5" mainViewID="369CBF0D-3DD4-E3E8-2F34-1857318D86CC">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-18 13:08:19 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<shouldBeOpen>false</shouldBeOpen>
+<selectedRDBMSSite>3FD120B5-9F4E-6278-D5E2-746D192C8319</selectedRDBMSSite>
+<importDDLFileStamps>
+<importDDLFileStamp class="oracle.dbtools.crest.imports.DDLFileStamp">
+<fileName>ddl.sql</fileName>
+<pathName>C:\dev\GitHub\getmovement\movement-api\data</pathName>
+<dbType>11</dbType>
+</importDDLFileStamp>
+</importDDLFileStamps>
+</relationalModel>
