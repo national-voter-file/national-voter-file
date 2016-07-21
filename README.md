@@ -19,3 +19,13 @@ The model will be used for maintaining a national voter file that can be enriche
 Some of the data will be exposed as an open-source resource for any political campaign. An authorization model will be developed to allow campaigns to create private resources with data sharing between allied campaigns.
 
 The voter file will be leveraged to power campaign donation, canvassing and other campaign interactions.
+
+## Database Architecture
+We have a document describing the data architecture available as a [google doc](https://docs.google.com/document/d/169mIkiIdl4OetbGvnbVCzq9Srw9PKCsB6U1CErTD9aI/edit?usp=sharing)
+
+Take a look inside [SQL Folder](https://github.com/getmovement/national-voter-file/tree/master/src/main/sql) in the github to see how to view and modify the relational model.
+
+## How we work
+Join our slack [#national-voter-file] (http://slack.progcode.co/)
+
+We have a [google doc](https://docs.google.com/spreadsheets/d/1CtNePb4LQSz-pk8UF58wwuVoBIc_YDAsBJZnIk7hKso/edit?usp=sharing) with information on obtaining each of the voter files
