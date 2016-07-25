@@ -17,20 +17,22 @@
 <minVolumes>0</minVolumes>
 <normalForm>Third</normalForm>
 <attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
-<Attribute name="`household id`" id="E75B5C98-01DE-A0D3-FCBD-B72BDF024D36">
+<Attribute name="HouseholdID" id="E75B5C98-01DE-A0D3-FCBD-B72BDF024D36">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 13:34:30 UTC</createdTime>
+<comment>The address components are based upon the United States Thoroughfare, Landmark, and Postal Address Data Standard&lt;br/&gt;&lt;br/&gt;http://www.urisa.org/advocacy/united-states-thoroughfare-landmark-and-postal-address-data-standard/&lt;br/&gt;</comment>
 <generatorID>CB0E7D46-75C9-2898-820D-19FA3C51B319</generatorID>
 <ownerDesignName>VoterModel</ownerDesignName>
 <engineerTo>
 <item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
 </engineerTo>
-<use>0</use>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
 <logicalDatatype>LOGDT011</logicalDatatype>
-<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
+<preferredAbbreviation>HOUSEHOLD_ID</preferredAbbreviation>
 </Attribute>
-<Attribute name="`AddressNumber`" id="C8702D76-3BCC-01BC-3A2A-6E35B320F6E8">
+<Attribute name="AddressNumber" id="C8702D76-3BCC-01BC-3A2A-6E35B320F6E8">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 13:34:30 UTC</createdTime>
 <generatorID>4235A4EA-45E0-DF08-CDAF-3EEC50CA4986</generatorID>
@@ -39,12 +41,14 @@
 <item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
-<use>0</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>15 CHAR</dataTypeSize>
+<ownDataTypeParameters>15 CHAR,,</ownDataTypeParameters>
+<preferredAbbreviation>ADDRESS_NUMBER</preferredAbbreviation>
 </Attribute>
-<Attribute name="`AddressNumberPrefix`" id="88BE1E52-3849-E618-2182-11F715D79C88">
+<Attribute name="AddressNumberPrefix" id="88BE1E52-3849-E618-2182-11F715D79C88">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 13:34:30 UTC</createdTime>
 <generatorID>00163643-213F-A3D5-2996-E6ECFFBACB4B</generatorID>
@@ -53,12 +57,14 @@
 <item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
-<use>0</use>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<dataTypeSize>2 CHAR</dataTypeSize>
+<ownDataTypeParameters>2 CHAR,,</ownDataTypeParameters>
+<preferredAbbreviation>ADDRESS_NUMBER_PREFIX</preferredAbbreviation>
 </Attribute>
-<Attribute name="`AddressNumberSuffix`" id="65EDBF52-45D7-D1BE-D703-28422C10077E">
+<Attribute name="AddressNumberSuffix" id="65EDBF52-45D7-D1BE-D703-28422C10077E">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 13:34:30 UTC</createdTime>
 <generatorID>E94C7C83-4174-4107-6191-62EE275502B1</generatorID>
@@ -67,12 +73,14 @@
 <item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
-<use>0</use>
-<logicalDatatype>LOGDT011</logicalDatatype>
-<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>2 CHAR</dataTypeSize>
+<ownDataTypeParameters>2 CHAR,,</ownDataTypeParameters>
+<preferredAbbreviation>ADDRESS_NUMBER_SUFFIX</preferredAbbreviation>
 </Attribute>
-<Attribute name="`BuildingName`" id="3EA7C2E6-0B21-C863-5BAD-13171C9FB36C">
+<Attribute name="BuildingName" id="3EA7C2E6-0B21-C863-5BAD-13171C9FB36C">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 13:34:30 UTC</createdTime>
 <generatorID>A5EFAB24-72AF-4045-FFDD-A1DCF5AA2B67</generatorID>
@@ -81,12 +89,14 @@
 <item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
-<use>0</use>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<dataTypeSize>50</dataTypeSize>
+<ownDataTypeParameters>50,,</ownDataTypeParameters>
+<preferredAbbreviation>BUILDING_NAME</preferredAbbreviation>
 </Attribute>
-<Attribute name="`CornerOf`" id="D7ED1C97-F629-233B-7BEC-A61185F555AB">
+<Attribute name="CornerOf" id="D7ED1C97-F629-233B-7BEC-A61185F555AB">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 13:34:30 UTC</createdTime>
 <generatorID>D1E5B2E5-CE78-D015-1964-3024210C3928</generatorID>
@@ -95,12 +105,14 @@
 <item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
-<use>0</use>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<dataTypeSize>50 CHAR</dataTypeSize>
+<ownDataTypeParameters>50 CHAR,,</ownDataTypeParameters>
+<preferredAbbreviation>CORNER_OF</preferredAbbreviation>
 </Attribute>
-<Attribute name="`IntersectionSeparator`" id="3B219375-64BF-C687-FFCF-AA7CC3C14356">
+<Attribute name="IntersectionSeparator" id="3B219375-64BF-C687-FFCF-AA7CC3C14356">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 13:34:30 UTC</createdTime>
 <generatorID>0CAFC5BC-CF10-D1C5-D1D6-69A7C11B4315</generatorID>
@@ -109,12 +121,14 @@
 <item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
-<use>0</use>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<dataTypeSize>5</dataTypeSize>
+<ownDataTypeParameters>5,,</ownDataTypeParameters>
+<preferredAbbreviation>INTERSECTION_SEPARATOR</preferredAbbreviation>
 </Attribute>
-<Attribute name="`LandmarkName`" id="3F463D6D-F744-1620-5A22-99F4315F8078">
+<Attribute name="LandmarkName" id="3F463D6D-F744-1620-5A22-99F4315F8078">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 13:34:30 UTC</createdTime>
 <generatorID>6E794B66-AED6-4EDA-D9AD-461135A0E3AE</generatorID>
@@ -123,12 +137,14 @@
 <item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
-<use>0</use>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<dataTypeSize>50 CHAR</dataTypeSize>
+<ownDataTypeParameters>50 CHAR,,</ownDataTypeParameters>
+<preferredAbbreviation>LANDMARK_NAME</preferredAbbreviation>
 </Attribute>
-<Attribute name="`NotAddress`" id="3EB47DE6-994A-671A-C014-199CA3C4882F">
+<Attribute name="NotAddress" id="3EB47DE6-994A-671A-C014-199CA3C4882F">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 13:34:30 UTC</createdTime>
 <generatorID>983323A3-86F6-29EA-893F-89F10491D673</generatorID>
@@ -137,12 +153,14 @@
 <item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
-<use>0</use>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<dataTypeSize>30</dataTypeSize>
+<ownDataTypeParameters>30,,</ownDataTypeParameters>
+<preferredAbbreviation>NOT_ADDRESS</preferredAbbreviation>
 </Attribute>
-<Attribute name="`OccupancyType`" id="B0385FD2-9B96-51D2-7377-63F1F1D1830F">
+<Attribute name="OccupancyType" id="B0385FD2-9B96-51D2-7377-63F1F1D1830F">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 13:34:30 UTC</createdTime>
 <generatorID>3251E146-9C2C-2A77-935C-8FEB5D808A69</generatorID>
@@ -151,12 +169,14 @@
 <item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
-<use>0</use>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<dataTypeSize>20 CHAR</dataTypeSize>
+<ownDataTypeParameters>20 CHAR,,</ownDataTypeParameters>
+<preferredAbbreviation>OCCUPANCY_TYPE</preferredAbbreviation>
 </Attribute>
-<Attribute name="`OccupancyIdentifier`" id="0F39FD10-0952-BAA3-277D-7CD880417697">
+<Attribute name="OccupancyIdentifier" id="0F39FD10-0952-BAA3-277D-7CD880417697">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 13:34:30 UTC</createdTime>
 <generatorID>E80D2629-9C60-26E4-752A-12535A78C56A</generatorID>
@@ -165,12 +185,14 @@
 <item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
-<use>0</use>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<dataTypeSize>20</dataTypeSize>
+<ownDataTypeParameters>20,,</ownDataTypeParameters>
+<preferredAbbreviation>OCCUPANCY_IDENTIFIER</preferredAbbreviation>
 </Attribute>
-<Attribute name="`PlaceName`" id="EE04CFDC-11E2-0DC0-95CC-22EFE49C2362">
+<Attribute name="PlaceName" id="EE04CFDC-11E2-0DC0-95CC-22EFE49C2362">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 13:34:30 UTC</createdTime>
 <generatorID>EAA89405-72C6-EF2E-C0A8-018C547FEFC7</generatorID>
@@ -179,12 +201,14 @@
 <item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
-<use>0</use>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<dataTypeSize>20 CHAR</dataTypeSize>
+<ownDataTypeParameters>20 CHAR,,</ownDataTypeParameters>
+<preferredAbbreviation>PLACE_NAME</preferredAbbreviation>
 </Attribute>
-<Attribute name="`StateName`" id="62D23E80-0E17-3770-A8AE-28AE261391D5">
+<Attribute name="StateName" id="62D23E80-0E17-3770-A8AE-28AE261391D5">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 13:34:30 UTC</createdTime>
 <generatorID>A066A256-F4CC-5FD7-1A96-95560AA99A6A</generatorID>
@@ -193,12 +217,14 @@
 <item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
-<use>0</use>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<dataTypeSize>15 CHAR</dataTypeSize>
+<ownDataTypeParameters>15 CHAR,,</ownDataTypeParameters>
+<preferredAbbreviation>STATE_NAME</preferredAbbreviation>
 </Attribute>
-<Attribute name="`StreetName`" id="986CCED5-B68E-D6C6-47C3-89D28F842CB7">
+<Attribute name="StreetName" id="986CCED5-B68E-D6C6-47C3-89D28F842CB7">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 13:34:30 UTC</createdTime>
 <generatorID>05767547-4FED-50CD-3051-FE4DAE587D75</generatorID>
@@ -207,12 +233,14 @@
 <item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
-<use>0</use>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<dataTypeSize>50 CHAR</dataTypeSize>
+<ownDataTypeParameters>50 CHAR,,</ownDataTypeParameters>
+<preferredAbbreviation>STREET_NAME</preferredAbbreviation>
 </Attribute>
-<Attribute name="`StreetNamePreDirectional`" id="5630109B-0451-3C50-B596-C0FC3E34B24F">
+<Attribute name="StreetNamePreDirectional" id="5630109B-0451-3C50-B596-C0FC3E34B24F">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 13:34:30 UTC</createdTime>
 <generatorID>81706BA0-1A17-EC66-F0B7-D76E0B1A9EAC</generatorID>
@@ -221,12 +249,14 @@
 <item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
-<use>0</use>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<dataTypeSize>10 CHAR</dataTypeSize>
+<ownDataTypeParameters>10 CHAR,,</ownDataTypeParameters>
+<preferredAbbreviation>STREET_NAME_PRE_DIRECTIONAL</preferredAbbreviation>
 </Attribute>
-<Attribute name="`StreetNamePreModifier`" id="AFDD0BB0-FF30-5BEB-2600-D12702B6CFFD">
+<Attribute name="StreetNamePreModifier" id="AFDD0BB0-FF30-5BEB-2600-D12702B6CFFD">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 13:34:30 UTC</createdTime>
 <generatorID>B29522CC-7008-C3E0-799A-8639738033B0</generatorID>
@@ -235,12 +265,14 @@
 <item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
-<use>0</use>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<dataTypeSize>10 CHAR</dataTypeSize>
+<ownDataTypeParameters>10 CHAR,,</ownDataTypeParameters>
+<preferredAbbreviation>STREET_NAME_PRE_MODIFIER</preferredAbbreviation>
 </Attribute>
-<Attribute name="`StreetNamePreType`" id="E4AA295E-AA85-82E8-6F78-3E784BC579FC">
+<Attribute name="StreetNamePreType" id="E4AA295E-AA85-82E8-6F78-3E784BC579FC">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 13:34:30 UTC</createdTime>
 <generatorID>C0754AD0-0A56-2612-73B8-F4F294D38C78</generatorID>
@@ -249,12 +281,14 @@
 <item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
-<use>0</use>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<dataTypeSize>10 CHAR</dataTypeSize>
+<ownDataTypeParameters>10 CHAR,,</ownDataTypeParameters>
+<preferredAbbreviation>STREET_NAME_PRE_TYPE</preferredAbbreviation>
 </Attribute>
-<Attribute name="`StreetNamePostDirectional`" id="2CB141E7-ED95-A042-82D2-332CF90C9324">
+<Attribute name="StreetNamePostDirectional" id="2CB141E7-ED95-A042-82D2-332CF90C9324">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 13:34:30 UTC</createdTime>
 <generatorID>4AE33916-A215-5A8A-8988-2580BB695818</generatorID>
@@ -263,12 +297,14 @@
 <item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
-<use>0</use>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<dataTypeSize>10 CHAR</dataTypeSize>
+<ownDataTypeParameters>10 CHAR,,</ownDataTypeParameters>
+<preferredAbbreviation>STREET_NAME_POST_DIRECTIONAL</preferredAbbreviation>
 </Attribute>
-<Attribute name="`StreetNamePostModifier`" id="48397099-09E1-5481-7B87-48F34ACD7912">
+<Attribute name="StreetNamePostModifier" id="48397099-09E1-5481-7B87-48F34ACD7912">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 13:34:30 UTC</createdTime>
 <generatorID>1F879F8B-21E0-2EDD-E762-8B43AA6C44CD</generatorID>
@@ -277,12 +313,14 @@
 <item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
-<use>0</use>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<dataTypeSize>10 CHAR</dataTypeSize>
+<ownDataTypeParameters>10 CHAR,,</ownDataTypeParameters>
+<preferredAbbreviation>STREET_NAME_POST_MODIFIER</preferredAbbreviation>
 </Attribute>
-<Attribute name="`StreetNamePostType`" id="42441A24-0ED2-6E57-395A-C330C9D46DCD">
+<Attribute name="StreetNamePostType" id="42441A24-0ED2-6E57-395A-C330C9D46DCD">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 13:34:30 UTC</createdTime>
 <generatorID>43A6F45C-C2BA-1244-AED1-72BD6E019E1F</generatorID>
@@ -291,12 +329,14 @@
 <item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
-<use>0</use>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<dataTypeSize>10 CHAR</dataTypeSize>
+<ownDataTypeParameters>10 CHAR,,</ownDataTypeParameters>
+<preferredAbbreviation>STREET_NAME_POST_TYPE</preferredAbbreviation>
 </Attribute>
-<Attribute name="`SubaddressIdentifier`" id="28A9AB1C-EB89-7F1E-721B-6D35EF21E489">
+<Attribute name="SubaddressIdentifier" id="28A9AB1C-EB89-7F1E-721B-6D35EF21E489">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 13:34:30 UTC</createdTime>
 <generatorID>62567157-1728-EDCB-3346-F2351AD7EDB5</generatorID>
@@ -305,12 +345,14 @@
 <item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
-<use>0</use>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<dataTypeSize>10 CHAR</dataTypeSize>
+<ownDataTypeParameters>10 CHAR,,</ownDataTypeParameters>
+<preferredAbbreviation>SUBADDRESS_IDENTIFIER</preferredAbbreviation>
 </Attribute>
-<Attribute name="`SubaddressType`" id="9E42177A-0E06-4AB1-9F13-BAD81944264B">
+<Attribute name="SubaddressType" id="9E42177A-0E06-4AB1-9F13-BAD81944264B">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 13:34:30 UTC</createdTime>
 <generatorID>2270BBD9-DABB-F3DA-F9C6-F4C5059C3F2D</generatorID>
@@ -319,12 +361,14 @@
 <item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
-<use>0</use>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<dataTypeSize>10 CHAR</dataTypeSize>
+<ownDataTypeParameters>10 CHAR,,</ownDataTypeParameters>
+<preferredAbbreviation>SUBADDRESS_TYPE</preferredAbbreviation>
 </Attribute>
-<Attribute name="`USPSBoxGroupID`" id="7C66EC21-2535-3062-801A-0E4E7E2B9BEE">
+<Attribute name="USPSBoxGroupID" id="7C66EC21-2535-3062-801A-0E4E7E2B9BEE">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 13:34:30 UTC</createdTime>
 <generatorID>EFBA0C74-424F-7077-F9D2-40F52DDBF27E</generatorID>
@@ -333,12 +377,14 @@
 <item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
-<use>0</use>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<dataTypeSize>10 CHAR</dataTypeSize>
+<ownDataTypeParameters>10 CHAR,,</ownDataTypeParameters>
+<preferredAbbreviation>USPS_BOX_GROUP_ID</preferredAbbreviation>
 </Attribute>
-<Attribute name="`USPSBoxGroupType`" id="8F078ABF-3E4F-CCBF-4640-D35FE00DD2B0">
+<Attribute name="USPSBoxGroupType" id="8F078ABF-3E4F-CCBF-4640-D35FE00DD2B0">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 13:34:30 UTC</createdTime>
 <generatorID>FDE7A2CF-639F-BB23-BE3D-ACF7FF4DAA9D</generatorID>
@@ -347,12 +393,14 @@
 <item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
-<use>0</use>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<dataTypeSize>2 CHAR</dataTypeSize>
+<ownDataTypeParameters>2 CHAR,,</ownDataTypeParameters>
+<preferredAbbreviation>USPS_BOX_GROUP_TYPE</preferredAbbreviation>
 </Attribute>
-<Attribute name="`USPSBoxID`" id="08C39203-CAB2-6382-0FF0-EA85D2BF400B">
+<Attribute name="USPSBoxID" id="08C39203-CAB2-6382-0FF0-EA85D2BF400B">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 13:34:30 UTC</createdTime>
 <generatorID>C3BA96CB-6415-AAC9-EBC1-C597B91045A2</generatorID>
@@ -361,12 +409,14 @@
 <item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
-<use>0</use>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<dataTypeSize>10 CHAR</dataTypeSize>
+<ownDataTypeParameters>10 CHAR,,</ownDataTypeParameters>
+<preferredAbbreviation>USPS_BOX_ID</preferredAbbreviation>
 </Attribute>
-<Attribute name="`USPSBoxType`" id="1F5C170A-7FD4-0309-2C13-FC35636A8495">
+<Attribute name="USPSBoxType" id="1F5C170A-7FD4-0309-2C13-FC35636A8495">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 13:34:30 UTC</createdTime>
 <generatorID>9C4B3D2F-3B6A-F2DC-7072-7AB1A11F5792</generatorID>
@@ -375,12 +425,14 @@
 <item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
-<use>0</use>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<dataTypeSize>10 CHAR</dataTypeSize>
+<ownDataTypeParameters>10 CHAR,,</ownDataTypeParameters>
+<preferredAbbreviation>USPS_BOX_TYPE</preferredAbbreviation>
 </Attribute>
-<Attribute name="`ZipCode`" id="67C5A3CD-BD32-43A5-2C21-67FC217FA1BA">
+<Attribute name="ZipCode" id="67C5A3CD-BD32-43A5-2C21-67FC217FA1BA">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 13:34:30 UTC</createdTime>
 <generatorID>B6E77D21-934B-D3D1-EBD7-B71FC2AAC83B</generatorID>
@@ -389,14 +441,16 @@
 <item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
 </engineerTo>
 <nullsAllowed>true</nullsAllowed>
-<use>0</use>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
-<ownDataTypeParameters>,,</ownDataTypeParameters>
+<dataTypeSize>10 CHAR</dataTypeSize>
+<ownDataTypeParameters>10 CHAR,,</ownDataTypeParameters>
+<preferredAbbreviation>ZIP_CODE</preferredAbbreviation>
 </Attribute>
 </attributes>
 <identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
-<identifier id="FC3BB855-BD39-4054-C9E9-8EC6EE979303" name="household_dim_PK">
+<identifier id="FC3BB855-BD39-4054-C9E9-8EC6EE979303" name="household dim PK">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 13:34:30 UTC</createdTime>
 <generatorID>8DD1A67E-A73B-8FFF-D6EE-8192BBAEFA8F</generatorID>

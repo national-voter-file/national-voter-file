@@ -73,7 +73,7 @@
 <colAssociation fkAssociation="61FA7B05-7C98-8E36-FC3A-8F50E809E204" referredColumn="77FF3169-4F8B-8699-7C0B-B1032FF02B2C"/>
 </associations>
 </Column>
-<Column name="ward_key" id="91DD36C9-B010-0AC3-A7B0-8FA940921D6B">
+<Column name="ward_dim_`ward_id`" id="91DD36C9-B010-0AC3-A7B0-8FA940921D6B">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 20:07:46 UTC</createdTime>
 <generatorID>0228A73F-C862-0D4A-650D-81F234EE31BB</generatorID>
@@ -88,7 +88,7 @@
 <colAssociation fkAssociation="70F8037E-4EB2-19D4-20FA-5C8B496E7AFE" referredColumn="701ED275-E20B-A003-116A-C75B78C0DF2F"/>
 </associations>
 </Column>
-<Column name="voter_key" id="FBDFC590-6823-C8A0-5CE9-735FDC463F15">
+<Column name="voter_dim_`voter_id`" id="FBDFC590-6823-C8A0-5CE9-735FDC463F15">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 20:07:46 UTC</createdTime>
 <generatorID>6FC30544-2505-02DE-CCD7-8C018D064B88</generatorID>
@@ -103,14 +103,13 @@
 <colAssociation fkAssociation="CC502B24-0BD3-D9B6-39A6-AEB313F48494" referredColumn="6FAAD8CF-4B75-7A5D-B8AF-49AF670483E6"/>
 </associations>
 </Column>
-<Column name="household_key" id="BF22D255-B23D-3DC1-6E3E-74FF5F824BE4">
+<Column name="household_dim_HOUSEHOLD_ID" id="BF22D255-B23D-3DC1-6E3E-74FF5F824BE4">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 20:07:46 UTC</createdTime>
 <generatorID>4CE72819-347E-CE0B-9043-4A748DD0696A</generatorID>
 <ownerDesignName>VoterModel</ownerDesignName>
-<use>0</use>
+<use>1</use>
 <logicalDatatype>LOGDT011</logicalDatatype>
-<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <previousColumn>false</previousColumn>
 <autoIncrementCycle>false</autoIncrementCycle>
@@ -118,7 +117,7 @@
 <colAssociation fkAssociation="A620F997-0065-0761-F24E-C6619C600A98" referredColumn="CB0E7D46-75C9-2898-820D-19FA3C51B319"/>
 </associations>
 </Column>
-<Column name="social_media_account_key" id="0FA159EF-97D7-9F55-9280-DE73208DEF2A">
+<Column name="social_media_account_dim_`social_media_account_id`" id="0FA159EF-97D7-9F55-9280-DE73208DEF2A">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 20:07:46 UTC</createdTime>
 <generatorID>ECD4EED0-6604-3136-67F8-28B3EA8F0BD5</generatorID>
@@ -133,7 +132,7 @@
 <colAssociation fkAssociation="0D27C589-15AD-F81F-F158-FFF15F6D6746" referredColumn="A6A40794-4BEC-20AE-32FA-926DD14A6D5B"/>
 </associations>
 </Column>
-<Column name="congressional_district_key" id="DD136E22-860B-AC2A-948B-001420151C12">
+<Column name="congressional_district_dim_`congressional_district_id`" id="DD136E22-860B-AC2A-948B-001420151C12">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 20:07:46 UTC</createdTime>
 <generatorID>3718AF28-7486-26B0-86DD-7F50F85E4FFF</generatorID>
@@ -148,7 +147,7 @@
 <colAssociation fkAssociation="CCE0F694-A5F0-00D3-AA26-6D61BBFF807B" referredColumn="C9BA1067-9E01-515B-03A6-23CEAD9765EE"/>
 </associations>
 </Column>
-<Column name="county_key" id="D34BFFAE-A94D-F778-3554-4D576C236E32">
+<Column name="county_dim_`country_id`" id="D34BFFAE-A94D-F778-3554-4D576C236E32">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 20:07:46 UTC</createdTime>
 <generatorID>6AE2251C-CC6D-22D2-B3D7-127E66F665CE</generatorID>
@@ -163,7 +162,7 @@
 <colAssociation fkAssociation="25F65A21-7BAD-65DF-555F-C25BF38DCB1B" referredColumn="77FF3169-4F8B-8699-7C0B-B1032FF02B2C"/>
 </associations>
 </Column>
-<Column name="county_district_key" id="9A449DF1-837F-7244-20CF-138196CD6F7C">
+<Column name="county_district_dim_`county_district_id`" id="9A449DF1-837F-7244-20CF-138196CD6F7C">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 20:07:46 UTC</createdTime>
 <generatorID>76C7265B-8FA6-C12D-41ED-C90D1AEAE2F9</generatorID>
@@ -178,7 +177,7 @@
 <colAssociation fkAssociation="8A64EF03-3A07-4DEE-4E71-6E92CE9719CD" referredColumn="9C9C85AE-035D-0E2A-9CD4-0D2021F201E3"/>
 </associations>
 </Column>
-<Column name="state_key" id="1EF9F1A9-5F26-40D6-07C7-E94F1A09F226">
+<Column name="state_dim_`state_id`" id="1EF9F1A9-5F26-40D6-07C7-E94F1A09F226">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 20:07:46 UTC</createdTime>
 <generatorID>71F14194-AC6C-E597-B920-E51D51471862</generatorID>
@@ -193,7 +192,7 @@
 <colAssociation fkAssociation="E082711B-BBCA-58B9-B52F-7B825E9E6CBD" referredColumn="F5C8AAD6-6825-CC00-E54D-1268A59E1FCF"/>
 </associations>
 </Column>
-<Column name="state_house_district_key" id="2AE97909-A36F-1A72-7DCB-C0C3348775AC">
+<Column name="state_house_district_dim_`state_house_district_id`" id="2AE97909-A36F-1A72-7DCB-C0C3348775AC">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 20:07:46 UTC</createdTime>
 <generatorID>37C69912-1563-00B8-4E2A-5942282F7ECF</generatorID>
@@ -208,7 +207,7 @@
 <colAssociation fkAssociation="663A2BCD-6A90-9BD6-6042-3A3B4695D195" referredColumn="1FD25CDC-4670-EF7F-02B7-F40B9B7D5228"/>
 </associations>
 </Column>
-<Column name="state_senate_district_key" id="38CB3C54-420F-924B-C9BD-224472EA9B1B">
+<Column name="state_senate_district_dim_`state_senate_district_id`" id="38CB3C54-420F-924B-C9BD-224472EA9B1B">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 20:07:46 UTC</createdTime>
 <generatorID>9E2D94C9-FCEA-8316-6348-142299DC692B</generatorID>
@@ -223,7 +222,7 @@
 <colAssociation fkAssociation="C7165B3B-3C62-84FA-7E6D-718A411C1871" referredColumn="0CAC054C-07E5-1118-0F66-030CD2E6C309"/>
 </associations>
 </Column>
-<Column name="staffer_key" id="A1B2B1E6-0A35-2DCC-D64A-1760CB8884EF">
+<Column name="Staffer_Dim_Staffer_ID" id="A1B2B1E6-0A35-2DCC-D64A-1760CB8884EF">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 21:24:03 UTC</createdTime>
 <ownerDesignName>VoterModel</ownerDesignName>
@@ -238,7 +237,7 @@
 <colAssociation fkAssociation="E18610AF-B21B-2C1B-70DC-93D6E493F502" referredColumn="83DE9916-39AA-0950-3CD5-A5FD530E2523"/>
 </associations>
 </Column>
-<Column name="campaign_key" id="EA69D14B-8101-0C5C-84EF-35D8B5ABB082">
+<Column name="campaign_dim_`campaign_id`" id="EA69D14B-8101-0C5C-84EF-35D8B5ABB082">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 21:37:16 UTC</createdTime>
 <ownerDesignName>VoterModel</ownerDesignName>
@@ -253,7 +252,7 @@
 <colAssociation fkAssociation="CAA34C1F-D44F-6F78-72F8-28EE863D3ACB" referredColumn="4D7C3547-D63D-7299-E83A-8C1E0CBDF43D"/>
 </associations>
 </Column>
-<Column name="date_key" id="507852E5-EDCD-F3FE-0D6C-48C50CFAF631">
+<Column name="date_dim_`date_id`" id="507852E5-EDCD-F3FE-0D6C-48C50CFAF631">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 21:46:40 UTC</createdTime>
 <ownerDesignName>VoterModel</ownerDesignName>
@@ -264,6 +263,33 @@
 <autoIncrementCycle>false</autoIncrementCycle>
 <associations>
 <colAssociation fkAssociation="7E99D83C-EF72-FD18-B1F4-E45BAEF7AD7A" referredColumn="A3D87716-68AE-5807-AAFA-54C6964666D5"/>
+</associations>
+</Column>
+<Column name="`report_date`" id="65F2A40A-7638-F678-3FBA-B5DE0006298F">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-21 20:11:19 UTC</createdTime>
+<generatorID>F01F6C8A-F80B-B5BD-0AE8-E90985BF59D1</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<logicalDatatype>LOGDT007</logicalDatatype>
+<domain>42140577-E14C-B529-8CF5-C53B0F9849C0</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="reporter_dim_reporter_id" id="775595C5-E88F-DD21-C2A0-BA3EC2EB9EE3">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-21 20:11:19 UTC</createdTime>
+<generatorID>3655F3BF-C772-ED8D-51C8-CC7A711A3676</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+<previousColumn>false</previousColumn>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="63776A76-923B-63D6-DF40-14D40116AC9F" referredColumn="F543EB83-E781-D47F-3D29-9EF22A20F5C7"/>
 </associations>
 </Column>
 </columns>
@@ -300,7 +326,7 @@
 <colUsage columnID="1BB14BEB-5D19-2755-CD40-7D5CB9B74C4B"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="5476739C-540F-F68D-4787-D42041C78BCA" name="voter_report_fact_ward_dim_FKv2">
+<ind_PK_UK id="5476739C-540F-F68D-4787-D42041C78BCA" name="voter_report_fact_ward_dim_FK">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 20:07:46 UTC</createdTime>
 <generatorID>EDD6ACEE-F741-4251-4970-5682AFF472BD</generatorID>
@@ -311,7 +337,7 @@
 <colUsage columnID="91DD36C9-B010-0AC3-A7B0-8FA940921D6B"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="6637DB2E-6807-1D93-482A-0150DC814B2A" name="voter_report_fact_voter_dim_FKv2">
+<ind_PK_UK id="6637DB2E-6807-1D93-482A-0150DC814B2A" name="voter_report_fact_voter_dim_FK">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 20:07:46 UTC</createdTime>
 <generatorID>2587F13A-99F5-5AB6-755E-E2296E42DB3E</generatorID>
@@ -322,7 +348,7 @@
 <colUsage columnID="FBDFC590-6823-C8A0-5CE9-735FDC463F15"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="6CC7E408-4D4D-CBBB-5F83-C754FF634B05" name="voter_report_fact_household_dim_FKv2">
+<ind_PK_UK id="6CC7E408-4D4D-CBBB-5F83-C754FF634B05" name="voter_report_fact_household_dim_FK">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 20:07:46 UTC</createdTime>
 <generatorID>21D13B97-207D-2FD9-08AA-1BF17F9A16D4</generatorID>
@@ -333,7 +359,7 @@
 <colUsage columnID="BF22D255-B23D-3DC1-6E3E-74FF5F824BE4"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="902118E6-7E58-1FEC-265D-CBC990998EFE" name="voter_report_fact_social_media_account_dim_FKv2">
+<ind_PK_UK id="902118E6-7E58-1FEC-265D-CBC990998EFE" name="voter_report_fact_social_media_account_dim_FK">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 20:07:46 UTC</createdTime>
 <generatorID>24EC5B4D-1586-491A-DE91-7C640A89C3C3</generatorID>
@@ -344,7 +370,7 @@
 <colUsage columnID="0FA159EF-97D7-9F55-9280-DE73208DEF2A"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="41973CF2-D08C-4B8D-8561-3E27EC768B9E" name="voter_report_fact_congressional_district_dim_FKv2">
+<ind_PK_UK id="41973CF2-D08C-4B8D-8561-3E27EC768B9E" name="voter_report_fact_congressional_district_dim_FK">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 20:07:46 UTC</createdTime>
 <generatorID>A4EEDD1B-0109-1010-35CE-E8FC0AE2EEA4</generatorID>
@@ -355,7 +381,7 @@
 <colUsage columnID="DD136E22-860B-AC2A-948B-001420151C12"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="AEA23935-194A-3BAE-7BD6-8E8B634EED14" name="voter_report_fact_county_dim_FKv2">
+<ind_PK_UK id="AEA23935-194A-3BAE-7BD6-8E8B634EED14" name="voter_report_fact_county_dim_FKv1">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 20:07:46 UTC</createdTime>
 <generatorID>25D3FD05-7AA7-9563-B028-D75D7D8B9B7D</generatorID>
@@ -366,7 +392,7 @@
 <colUsage columnID="D34BFFAE-A94D-F778-3554-4D576C236E32"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="3EC61199-3E47-5831-96EF-0A05A8FBA6BE" name="voter_report_fact_county_district_dim_FKv2">
+<ind_PK_UK id="3EC61199-3E47-5831-96EF-0A05A8FBA6BE" name="voter_report_fact_county_district_dim_FK">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 20:07:46 UTC</createdTime>
 <generatorID>5A5E592A-CA64-17F7-2887-3DA7A12B3AE2</generatorID>
@@ -377,7 +403,7 @@
 <colUsage columnID="9A449DF1-837F-7244-20CF-138196CD6F7C"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="8EAAF194-383C-EAB1-8FA9-BC0756582668" name="voter_report_fact_state_dim_FKv2">
+<ind_PK_UK id="8EAAF194-383C-EAB1-8FA9-BC0756582668" name="voter_report_fact_state_dim_FK">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 20:07:46 UTC</createdTime>
 <generatorID>7D0A21A0-028C-F2D1-A640-C38934362A3B</generatorID>
@@ -388,7 +414,7 @@
 <colUsage columnID="1EF9F1A9-5F26-40D6-07C7-E94F1A09F226"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="1E79E83A-2A59-5A94-41C8-FF24A00C46EE" name="voter_report_fact_state_house_district_dim_FKv2">
+<ind_PK_UK id="1E79E83A-2A59-5A94-41C8-FF24A00C46EE" name="voter_report_fact_state_house_district_dim_FK">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 20:07:46 UTC</createdTime>
 <generatorID>DF95F818-A299-E6F9-D4AA-CAC41634C7DA</generatorID>
@@ -399,7 +425,7 @@
 <colUsage columnID="2AE97909-A36F-1A72-7DCB-C0C3348775AC"/>
 </indexColumnUsage>
 </ind_PK_UK>
-<ind_PK_UK id="BFFDE84B-1F0F-3CC6-CFAA-60B203CD29AB" name="voter_report_fact_state_senate_district_dim_FKv2">
+<ind_PK_UK id="BFFDE84B-1F0F-3CC6-CFAA-60B203CD29AB" name="voter_report_fact_state_senate_district_dim_FK">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 20:07:46 UTC</createdTime>
 <generatorID>C85B40EC-E300-2A14-74CC-F8F137FA4175</generatorID>
@@ -439,6 +465,17 @@
 <isSurrogateKey>false</isSurrogateKey>
 <indexColumnUsage>
 <colUsage columnID="507852E5-EDCD-F3FE-0D6C-48C50CFAF631"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="2FCC59CD-6AA5-D74B-3FD6-52F279598D9D" name="voter_report_fact_reporter_dim_FKv1">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-21 20:11:19 UTC</createdTime>
+<generatorID>3C4401F9-DC61-CBFF-30AD-DAC5FE4BD356</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="775595C5-E88F-DD21-C2A0-BA3EC2EB9EE3"/>
 </indexColumnUsage>
 </ind_PK_UK>
 </indexes>

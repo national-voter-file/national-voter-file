@@ -1,6 +1,6 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
 <oracle.dbtools.crest.model.design.logical.LogicalDesign>
-   <object objectType="main_view" objectID="486B5A1B-CF9B-A1D2-0162-0C045F4284E4" name="Logical" visible="false"/>
+   <object objectType="main_view" objectID="486B5A1B-CF9B-A1D2-0162-0C045F4284E4" name="Logical" visible="true"/>
    <object objectType="sub_view" objectID="4D29B492-2B7D-0121-0EB8-7BC268305969" name="Voter Report Model" visible="true"/>
    <object objectType="sub_view" objectID="801BCC71-9B20-2F07-913C-49D5810F6971" name="Contribution Model" visible="true"/>
    <object objectType="sub_view" objectID="9AD40290-B3EA-BD11-0E8E-01B218CF004E" name="From_RM_Voter - SubView_1" visible="false"/>

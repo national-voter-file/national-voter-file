@@ -1,2 +1,4 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
-<metadatadoc version="2.0"/>
+<metadatadoc version="2.0">
+   <site name="SITE_1" type="11" oid="2F323E54-9613-CA5C-6ABA-0AB5AB182781" pathid="14"/>
+</metadatadoc>

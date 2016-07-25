@@ -3,7 +3,7 @@
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 13:08:19 UTC</createdTime>
 <ownerDesignName>VoterModel</ownerDesignName>
-<shouldBeOpen>false</shouldBeOpen>
+<shouldBeOpen>true</shouldBeOpen>
 <selectedRDBMSSite>3FD120B5-9F4E-6278-D5E2-746D192C8319</selectedRDBMSSite>
 <importDDLFileStamps>
 <importDDLFileStamp class="oracle.dbtools.crest.imports.DDLFileStamp">

@@ -114,7 +114,7 @@
 <domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="household dim `household id`" id="54CDC99D-17BD-C542-359F-7E49708DD4BE">
+<Attribute name="HouseholdID" id="54CDC99D-17BD-C542-359F-7E49708DD4BE">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 20:16:55 UTC</createdTime>
 <generatorID>E8252D88-91F2-436F-CEB2-F93FDA07E765</generatorID>
@@ -123,9 +123,8 @@
 <item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
 </engineerTo>
 <referedAttribute>E75B5C98-01DE-A0D3-FCBD-B72BDF024D36</referedAttribute>
-<use>0</use>
+<use>1</use>
 <logicalDatatype>LOGDT011</logicalDatatype>
-<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
 <Attribute name="campaign dim `campaign id`" id="261E423D-5E1E-9833-630C-6F091A692E40">

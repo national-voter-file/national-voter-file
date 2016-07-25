@@ -100,7 +100,7 @@
 <domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
-<Attribute name="household key" id="4CE72819-347E-CE0B-9043-4A748DD0696A">
+<Attribute name="HouseholdID" id="4CE72819-347E-CE0B-9043-4A748DD0696A">
 <createdBy>beng</createdBy>
 <createdTime>2016-07-18 14:58:18 UTC</createdTime>
 <generatorID>21D13B97-207D-2FD9-08AA-1BF17F9A16D4</generatorID>
@@ -109,9 +109,8 @@
 <item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
 </engineerTo>
 <referedAttribute>E75B5C98-01DE-A0D3-FCBD-B72BDF024D36</referedAttribute>
-<use>0</use>
+<use>1</use>
 <logicalDatatype>LOGDT011</logicalDatatype>
-<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 </Attribute>
 <Attribute name="social media account key" id="ECD4EED0-6604-3136-67F8-28B3EA8F0BD5">

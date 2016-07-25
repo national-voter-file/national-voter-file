@@ -63,9 +63,10 @@
 <createdTime>2016-07-18 13:11:10 UTC</createdTime>
 <ownerDesignName>VoterModel</ownerDesignName>
 <nullsAllowed>true</nullsAllowed>
-<use>0</use>
+<useDomainConstraints>false</useDomainConstraints>
+<use>3</use>
+<structuredType>47E390DE-0671-C4B1-8428-0F45CBEE18F8</structuredType>
 <logicalDatatype>LOGDT024</logicalDatatype>
-<domain>5405A833-1D5D-6035-B6A5-1160C370591E</domain>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
 <autoIncrementCycle>false</autoIncrementCycle>
 </Column>
