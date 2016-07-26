@@ -1,0 +1,2 @@
+
+INSERT INTO REPORTER_DIM(REPORTER_NAME, REPORTER_TYPE) VALUES ('WA Secretary of State', 'Secretary of State');
