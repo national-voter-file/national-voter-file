@@ -23,9 +23,13 @@ The voter file will be leveraged to power campaign donation, canvassing and othe
 ## Database Architecture
 We have a document describing the data architecture available as a [google doc](https://docs.google.com/document/d/169mIkiIdl4OetbGvnbVCzq9Srw9PKCsB6U1CErTD9aI/edit?usp=sharing)
 
-Take a look inside [SQL Folder](https://github.com/getmovement/national-voter-file/tree/master/src/main/sql) in the github to see how to view and modify the relational model.
+Take a look inside [SQL Folder](https://github.com/getmovement/national-voter-file/tree/master/src/main/sql) in the GitHub to see how to view and modify the relational model.
 
 ## How we work
-Join our slack [#national-voter-file] (http://slack.progcode.co/)
+We will use Pentaho's Opensource Extract Transform Load tool [Pentaho Data Integration](http://community.pentaho.com/projects/data-integration/) (also known as kettle) for the straightforward data load processes. More complex transformations may be coded in python as needed.
+
+To learn how to install Pentaho data integration please refer to [this page](https://github.com/getmovement/national-voter-file/tree/master/src/tools)
+
+Join our slack [#national-voter-file] (http://goo.gl/forms/8SJRDlo7Lx2rUsan1)
 
 We have a [google doc](https://docs.google.com/spreadsheets/d/1CtNePb4LQSz-pk8UF58wwuVoBIc_YDAsBJZnIk7hKso/edit?usp=sharing) with information on obtaining each of the voter files

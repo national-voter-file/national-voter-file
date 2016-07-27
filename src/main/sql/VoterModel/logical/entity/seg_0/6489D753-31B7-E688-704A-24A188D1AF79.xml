@@ -109,6 +109,7 @@
 <item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
 </engineerTo>
 <referedAttribute>E75B5C98-01DE-A0D3-FCBD-B72BDF024D36</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
 <use>1</use>
 <logicalDatatype>LOGDT011</logicalDatatype>
 <ownDataTypeParameters>,,</ownDataTypeParameters>
@@ -264,6 +265,20 @@
 <item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
 </engineerTo>
 <referedAttribute>53C36753-D648-6923-E491-74591E2261B2</referedAttribute>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="mailing_address_id" id="69D87762-F5F6-83F3-3D2D-F72A97029727">
+<createdBy>beng</createdBy>
+<createdTime>2016-07-27 01:44:52 UTC</createdTime>
+<generatorID>1542DB47-032E-A4CF-8C56-3B134FCDC0D8</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<referedAttribute>40969864-4A82-A9D9-9A91-6D25ECF250AD</referedAttribute>
 <use>0</use>
 <logicalDatatype>LOGDT011</logicalDatatype>
 <domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
