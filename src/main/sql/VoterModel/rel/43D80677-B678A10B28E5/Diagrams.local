@@ -1,7 +1,7 @@
 <?xml version = '1.0' encoding = 'UTF-8'?>
 <oracle.dbtools.crest.model.design.relational.RelationalDesign>
    <object objectType="main_view" objectID="369CBF0D-3DD4-E3E8-2F34-1857318D86CC" name="Voter" visible="false"/>
-   <object objectType="sub_view" objectID="295B3984-6B80-6C72-16A3-08653913368A" name="Canvassing Relational" visible="true"/>
+   <object objectType="sub_view" objectID="295B3984-6B80-6C72-16A3-08653913368A" name="Canvassing Relational" visible="false"/>
    <object objectType="sub_view" objectID="C84EE95F-BECE-A498-F906-3F9DE5C926BA" name="From_LM_Canvassing Model" visible="false"/>
    <object objectType="sub_view" objectID="15A88582-2FF2-424B-B92E-A568BB5A8491" name="From_LM_Contribution Model" visible="false"/>
    <object objectType="sub_view" objectID="36D0F377-B8F3-1AF5-BC74-5FB85794E782" name="From_LM_Voter Report Model" visible="false"/>
