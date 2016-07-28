@@ -11,12 +11,12 @@
     <parameters>
         <parameter>
             <name>reportDate</name>
-            <default_value>2016-06-06</default_value>
+            <default_value>2016-05-31</default_value>
             <description/>
         </parameter>
         <parameter>
             <name>reportFile</name>
-            <default_value>C&#x3a;&#x5c;dev&#x5c;GitHub&#x5c;getmovement&#x5c;national-voter-file&#x5c;data&#x5c;Washington&#x5c;201605_VRDB_ExtractSAMPLE.txt</default_value>
+            <default_value>C&#x3a;&#x5c;dev&#x5c;GitHub&#x5c;getmovement&#x5c;national-voter-file&#x5c;data&#x5c;Washington&#x5c;201605_VRDB_Extract.txt</default_value>
             <description/>
         </parameter>
         <parameter>
@@ -65,7 +65,7 @@
     <size_rowset>10000</size_rowset>
     <sleep_time_empty>50</sleep_time_empty>
     <sleep_time_full>50</sleep_time_full>
-    <unique_connections>Y</unique_connections>
+    <unique_connections>N</unique_connections>
     <feedback_shown>Y</feedback_shown>
     <feedback_size>50000</feedback_size>
     <using_thread_priorities>Y</using_thread_priorities>
@@ -134,9 +134,10 @@
   <hop> <from>Switch &#x2f; Case</from><to>Dimension lookup&#x2f;update</to><enabled>Y</enabled> </hop>
   <hop> <from>See if voter exists</from><to>Add constants</to><enabled>Y</enabled> </hop>
   <hop> <from>Add constants</from><to>Switch &#x2f; Case</to><enabled>Y</enabled> </hop>
-  <hop> <from>Dimension lookup&#x2f;update</from><to>Table output</to><enabled>Y</enabled> </hop>
+  <hop> <from>Dimension lookup&#x2f;update</from><to>Write voter report fact</to><enabled>Y</enabled> </hop>
   <hop> <from>Create Voter Record</from><to>Clean up fields to synch</to><enabled>Y</enabled> </hop>
-  <hop> <from>Clean up fields to synch</from><to>Table output</to><enabled>Y</enabled> </hop>
+  <hop> <from>Clean up fields to synch</from><to>Write voter report fact</to><enabled>Y</enabled> </hop>
+  <hop> <from>Lookup or Add Housholds 2</from><to>Write to log</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add constants</name>
@@ -293,6 +294,27 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>880</xloc>
       <yloc>224</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Clean up fields to synch</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>        <select_unspecified>N</select_unspecified>
+      <remove>        <name>person_key</name>
+      </remove>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>384</xloc>
+      <yloc>528</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -730,7 +752,7 @@
         <name>reporterKey</name>
         <variable>&#x24;&#x7b;reporterKey&#x7d;</variable>
         <type>Integer</type>
-        <format/>
+        <format>&#x23;</format>
         <currency/>
         <decimal/>
         <group/>
@@ -761,7 +783,7 @@
       <schema/>
       <table>household_dim</table>
       <connection>Localhost</connection>
-      <commit>100</commit>
+      <commit>1000</commit>
       <cache_size>0</cache_size>
       <replace>N</replace>
       <preloadCache>N</preloadCache>
@@ -937,7 +959,7 @@
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
-    <copies>1</copies>
+    <copies>2</copies>
          <partitioning>
            <method>none</method>
            <schema_name/>
@@ -1034,7 +1056,7 @@
         <precision>-2</precision>
       </field>      <field>        <name>RegUnitType</name>
         <rename>occupancy_type</rename>
-        <length>-2</length>
+        <length>20</length>
         <precision>-2</precision>
       </field>      <field>        <name>RegStPreDirection</name>
         <rename>street_name_pre_directional</rename>
@@ -1046,11 +1068,11 @@
         <precision>-2</precision>
       </field>      <field>        <name>RegUnitNum</name>
         <rename>occupancy_identifier</rename>
-        <length>-2</length>
+        <length>20</length>
         <precision>-2</precision>
       </field>      <field>        <name>RegCity</name>
         <rename>place_name</rename>
-        <length>-2</length>
+        <length>20</length>
         <precision>-2</precision>
       </field>      <field>        <name>RegState</name>
         <rename>state_name</rename>
@@ -1198,6 +1220,68 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>896</xloc>
       <yloc>528</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Write voter report fact</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Localhost</connection>
+    <schema/>
+    <table>voter_report_fact</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>N</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+        <field>
+          <column_name>date_key</column_name>
+          <stream_name>date_key</stream_name>
+        </field>
+        <field>
+          <column_name>voter_key</column_name>
+          <stream_name>voter_id</stream_name>
+        </field>
+        <field>
+          <column_name>household_key</column_name>
+          <stream_name>household_id</stream_name>
+        </field>
+        <field>
+          <column_name>mailing_address_key</column_name>
+          <stream_name>MAILING_ADDRESS_ID</stream_name>
+        </field>
+        <field>
+          <column_name>voter_report_date</column_name>
+          <stream_name>reportDate</stream_name>
+        </field>
+        <field>
+          <column_name>reporter_key</column_name>
+          <stream_name>reporterKey</stream_name>
+        </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>112</xloc>
+      <yloc>544</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1411,7 +1495,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>0</length>
+        <length>2</length>
         <precision>-1</precision>
         <trim_type>right</trim_type>
         <repeat>N</repeat>
@@ -1823,7 +1907,7 @@
       </field>
     </fields>
     <limit>0</limit>
-    <error_ignored>N</error_ignored>
+    <error_ignored>Y</error_ignored>
     <skip_bad_files>N</skip_bad_files>
     <file_error_field/>
     <file_error_message_field/>
@@ -1835,7 +1919,7 @@
     <bad_line_files_extension>warning</bad_line_files_extension>
     <error_line_files_destination_directory/>
     <error_line_files_extension>error</error_line_files_extension>
-    <line_number_files_destination_directory/>
+    <line_number_files_destination_directory>C&#x3a;&#x5c;dev&#x5c;GitHub&#x5c;getmovement&#x5c;national-voter-file&#x5c;data&#x5c;Washington&#x5c;linez</line_number_files_destination_directory>
     <line_number_files_extension>line</line_number_files_extension>
     <date_format_lenient>Y</date_format_lenient>
     <date_format_locale>en_US</date_format_locale>
@@ -1884,8 +1968,8 @@
     </step>
 
   <step>
-    <name>Table output</name>
-    <type>TableOutput</type>
+    <name>Write to log</name>
+    <type>WriteToLog</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1894,79 +1978,34 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>Localhost</connection>
-    <schema/>
-    <table>voter_report_fact</table>
-    <commit>1000</commit>
-    <truncate>N</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>N</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
+      <loglevel>log_level_basic</loglevel>
+      <displayHeader>Y</displayHeader>
+      <limitRows>N</limitRows>
+      <limitRowsNumber>1000</limitRowsNumber>
+      <logmessage/>
     <fields>
-        <field>
-          <column_name>date_key</column_name>
-          <stream_name>date_key</stream_name>
-        </field>
-        <field>
-          <column_name>voter_key</column_name>
-          <stream_name>voter_id</stream_name>
-        </field>
-        <field>
-          <column_name>household_key</column_name>
-          <stream_name>household_id</stream_name>
-        </field>
-        <field>
-          <column_name>mailing_address_key</column_name>
-          <stream_name>MAILING_ADDRESS_ID</stream_name>
-        </field>
-        <field>
-          <column_name>voter_report_date</column_name>
-          <stream_name>reportDate</stream_name>
-        </field>
-        <field>
-          <column_name>reporter_key</column_name>
-          <stream_name>reporterKey</stream_name>
-        </field>
-    </fields>
+      </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>112</xloc>
-      <yloc>544</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Clean up fields to synch</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>        <select_unspecified>N</select_unspecified>
-      <remove>        <name>person_key</name>
-      </remove>    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>384</xloc>
-      <yloc>528</yloc>
+      <xloc>448</xloc>
+      <yloc>320</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step_error_handling>
+      <error>
+        <source_step>Lookup or Add Housholds 2</source_step>
+        <target_step>Write to log</target_step>
+        <is_enabled>Y</is_enabled>
+        <nr_valuename/>
+        <descriptions_valuename/>
+        <fields_valuename/>
+        <codes_valuename/>
+        <max_errors/>
+        <max_pct_errors/>
+        <min_pct_rows/>
+      </error>
   </step_error_handling>
    <slave-step-copy-partition-distribution>
 </slave-step-copy-partition-distribution>
