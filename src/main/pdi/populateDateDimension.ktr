@@ -79,11 +79,11 @@
     <name>localpostgres</name>
     <server>localhost</server>
     <type>POSTGRESQL</type>
-    <access>Native</access>
-    <database>voter</database>
+    <access>JNDI</access>
+    <database>ProdVoter</database>
     <port>5432</port>
-    <username>postgres</username>
-    <password>Encrypted 2be98afc86aa7f2e4cb79a87fd190aec8</password>
+    <username/>
+    <password>Encrypted </password>
     <servername/>
     <data_tablespace/>
     <index_tablespace/>
@@ -619,7 +619,7 @@
     <schema/>
     <table>DATE_DIM</table>
     <commit>1000</commit>
-    <truncate>Y</truncate>
+    <truncate>N</truncate>
     <ignore_errors>N</ignore_errors>
     <use_batch>Y</use_batch>
     <specify_fields>Y</specify_fields>
