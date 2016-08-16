@@ -1,0 +1,116 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="FB705F5C-A9CC-9DD1-145C-2E356282C324" name="Vote Fact">
+<createdBy>beng</createdBy>
+<createdTime>2016-08-14 22:35:45 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="vote_fact_id" id="EAA703E2-D658-44D3-E706-7298A1FFBBB5">
+<createdBy>beng</createdBy>
+<createdTime>2016-08-14 22:39:33 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT027</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="voter_key" id="77F22189-D3EB-F8B3-20FF-D0D0C33EF906">
+<createdBy>beng</createdBy>
+<createdTime>2016-08-14 22:39:06 UTC</createdTime>
+<generatorID>FCC94428-2FF1-3795-268F-E39EF21A8D49</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<referedAttribute>0032CEEF-F5A4-2631-4B71-F8A980B9A99D</referedAttribute>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="date_key" id="9D75BB96-CFF4-802D-ECB8-BE5E63F7B7C8">
+<createdBy>beng</createdBy>
+<createdTime>2016-08-14 22:40:08 UTC</createdTime>
+<generatorID>0C0B07D3-148A-087F-F248-2F3DF2A53652</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<referedAttribute>53C36753-D648-6923-E491-74591E2261B2</referedAttribute>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="`country id`" id="EF36CD2D-BF7F-1A1F-C31E-9F9744FB3EA9">
+<createdBy>beng</createdBy>
+<createdTime>2016-08-14 22:40:39 UTC</createdTime>
+<generatorID>92E6821F-933A-C4A2-F888-7223431C0797</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<referedAttribute>4E3846AB-444F-7748-F735-A841939F50D9</referedAttribute>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="`state id`" id="2BC90664-0D99-F9E8-1ACA-50FDAB079045">
+<createdBy>beng</createdBy>
+<createdTime>2016-08-14 22:40:44 UTC</createdTime>
+<generatorID>91E663F0-4974-777C-8483-7A47C15EE9B7</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<referedAttribute>976584A4-757B-9860-4415-B1B876470924</referedAttribute>
+<use>0</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<domain>7CF6FDF1-812F-56E4-E492-4B0E518E67D7</domain>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="HouseholdID" id="FDE32374-CEB7-EE80-C1E3-BF7394D4FA35">
+<createdBy>beng</createdBy>
+<createdTime>2016-08-14 22:42:10 UTC</createdTime>
+<comment>The address components are based upon the United States Thoroughfare, Landmark, and Postal Address Data Standard&lt;br/&gt;&lt;br/&gt;http://www.urisa.org/advocacy/united-states-thoroughfare-landmark-and-postal-address-data-standard/&lt;br/&gt;</comment>
+<generatorID>134B8AC5-CED2-498C-808E-28227BEA00D0</generatorID>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<referedAttribute>E75B5C98-01DE-A0D3-FCBD-B72BDF024D36</referedAttribute>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT011</logicalDatatype>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+<identifiers itemClass="oracle.dbtools.crest.model.design.logical.CandidateKey">
+<identifier id="5BE8E67E-5AE8-0867-558C-D6FDFC48F690" name="Vote Fact PK">
+<createdBy>beng</createdBy>
+<createdTime>2016-08-14 22:39:49 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<pk>true</pk>
+<usedAttributes>
+<attributeRef>EAA703E2-D658-44D3-E706-7298A1FFBBB5</attributeRef>
+</usedAttributes>
+</identifier>
+</identifiers>
+</Entity>

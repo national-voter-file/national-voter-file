@@ -1,0 +1,372 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Entity class="oracle.dbtools.crest.model.design.logical.Entity" directorySegmentName="seg_0" id="A228C32E-B825-0F3C-2CBF-8F399331302C" name="Precinct Dim">
+<createdBy>beng</createdBy>
+<createdTime>2016-08-14 23:20:31 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<typeID>2</typeID>
+<adequatelyNormalized>NO</adequatelyNormalized>
+<expectedVolumes>0</expectedVolumes>
+<fwdEngineeringStrategyName>Single Table</fwdEngineeringStrategyName>
+<growthPercent>0</growthPercent>
+<growthType>Year</growthType>
+<maxVolumes>9999999</maxVolumes>
+<minVolumes>0</minVolumes>
+<normalForm>Third</normalForm>
+<attributes itemClass="oracle.dbtools.crest.model.design.logical.Attribute">
+<Attribute name="PRECINCT_ID" id="A7AE94EE-5600-76DD-991F-8A3BB6C71763">
+<createdBy>beng</createdBy>
+<createdTime>2016-08-14 23:20:39 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="COUNTY_CODE" id="003326AA-CD49-C928-FEC9-3A9159140B25">
+<createdBy>beng</createdBy>
+<createdTime>2016-08-14 23:20:52 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="COUNTY_NAME" id="5D62D159-E5B7-8C8F-8A60-659F875B3F47">
+<createdBy>beng</createdBy>
+<createdTime>2016-08-14 23:21:06 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="DISTRICT_ID" id="F13CBD30-4459-508C-7B7F-55265F7A3005">
+<createdBy>beng</createdBy>
+<createdTime>2016-08-14 23:21:17 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name=" DISTRICT_CODE" id="67622614-FD2E-CE66-B488-30FACE998C6C">
+<createdBy>beng</createdBy>
+<createdTime>2016-08-14 23:21:30 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="PRECINCT_CODE" id="69CD9E31-4510-3ED5-FA2C-329F8A512BA3">
+<createdBy>beng</createdBy>
+<createdTime>2016-08-14 23:21:42 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="PRECINCT_NAME" id="E45EDFA3-2801-19A0-4D7C-155D8B16D62B">
+<createdBy>beng</createdBy>
+<createdTime>2016-08-14 23:21:55 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="COUNTY_DISTRICT_NAME" id="76CB7D98-D296-5F8C-36C8-09BEFFA98FFD">
+<createdBy>beng</createdBy>
+<createdTime>2016-08-14 23:21:57 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="EMS_DISTRICT_NAME" id="965FE690-E2BE-ABA2-9012-3A3BECCD41A9">
+<createdBy>beng</createdBy>
+<createdTime>2016-08-14 23:22:04 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="FIRE_DISTRICT_NAME" id="DC5E789C-0512-48E4-9122-23422D706286">
+<createdBy>beng</createdBy>
+<createdTime>2016-08-14 23:22:12 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="JUDICIAL_DISTRICT_NAME" id="5221F732-D1C5-8E04-CCFF-1A321F86B60C">
+<createdBy>beng</createdBy>
+<createdTime>2016-08-14 23:22:25 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="LEGISLATIVE_DISTRICT_NAME" id="D1C323E7-0E3A-C692-4895-99D5E619688A">
+<createdBy>beng</createdBy>
+<createdTime>2016-08-14 23:22:45 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="LIBRARY_DISTRICT_NAME" id="BF3B17D4-1525-3CBA-5275-F07B31B3C55A">
+<createdBy>beng</createdBy>
+<createdTime>2016-08-14 23:22:51 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="OTHER_DISTRICT_NAME" id="637CAF33-90B7-7C41-18F1-6B67D26C19C4">
+<createdBy>beng</createdBy>
+<createdTime>2016-08-14 23:22:59 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="PCO_DISTRICT_NAME" id="3962CF74-4BB2-8D47-24D1-9FB695BA4EA8">
+<createdBy>beng</createdBy>
+<createdTime>2016-08-14 23:23:05 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="PARK_AND_REC_DISTRICT_NAME" id="097EB096-2860-5F1E-2056-BFD46D9B383C">
+<createdBy>beng</createdBy>
+<createdTime>2016-08-14 23:23:12 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="PORT_DISTRICT_NAME" id="0C5246AE-A9FB-BAE8-F566-BEA2F7168B36">
+<createdBy>beng</createdBy>
+<createdTime>2016-08-14 23:23:20 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="PUBLIC_HOSPITAL_DISTRICT_NAME" id="20DC57DE-E2B7-31DD-274A-237728FB4407">
+<createdBy>beng</createdBy>
+<createdTime>2016-08-14 23:23:30 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name=" PUBLIC_UTILITY_DISTRICT_NAME" id="129CC9A0-0754-7DAA-A295-BD67F641B8DB">
+<createdBy>beng</createdBy>
+<createdTime>2016-08-14 23:23:36 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="SCHOOL_DISTRICT_NAME" id="36AB1E53-4F1A-F048-6C92-5432E24872E5">
+<createdBy>beng</createdBy>
+<createdTime>2016-08-14 23:23:47 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="SEWER_DISTRICT_NAME" id="F8AC7FAF-2174-18FE-1483-692DE8B94E70">
+<createdBy>beng</createdBy>
+<createdTime>2016-08-14 23:23:53 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="STATE_DISTRICT_NAME" id="FC2209B5-2BC3-9169-5F8C-DA8357D9E4EF">
+<createdBy>beng</createdBy>
+<createdTime>2016-08-14 23:23:59 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="TAX_DISTRICT_NAME" id="7BB10A5E-CE84-1046-031A-2F9BCF5A1838">
+<createdBy>beng</createdBy>
+<createdTime>2016-08-14 23:24:05 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="TRANSPORTATION_DISTRICT_NAME" id="BEDCC118-FF60-1ACE-67B8-15427FFD3527">
+<createdBy>beng</createdBy>
+<createdTime>2016-08-14 23:24:11 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="WATER_DISTRICT_NAME" id="0F71330B-D30A-8A22-8494-7377B4CD1C97">
+<createdBy>beng</createdBy>
+<createdTime>2016-08-14 23:24:17 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="STATE_ABBREVIATION" id="8464D336-E3D6-3898-D689-C5323131B99B">
+<createdBy>beng</createdBy>
+<createdTime>2016-08-14 23:24:30 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="STATE_NAME" id="03FA634C-99B8-68E5-934D-3D79B6AD9D14">
+<createdBy>beng</createdBy>
+<createdTime>2016-08-14 23:24:36 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="OCD_NAME" id="63A29518-4A4A-81D5-69CF-ADEC1712EF2B">
+<createdBy>beng</createdBy>
+<createdTime>2016-08-14 23:24:43 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="OCD_ID" id="8094550D-0586-8539-BA2A-87B05AEE980C">
+<createdBy>beng</createdBy>
+<createdTime>2016-08-14 23:24:51 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="VERSION" id="11F15099-DB7C-5398-D99D-87CF6781987D">
+<createdBy>beng</createdBy>
+<createdTime>2016-08-14 23:24:57 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="VALID_FROM" id="0827703B-72FC-C8FF-4021-8DF79D1240BB">
+<createdBy>beng</createdBy>
+<createdTime>2016-08-14 23:25:04 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+<Attribute name="VALID_TO" id="62C3028A-B827-618D-FB77-41E02AE1DB78">
+<createdBy>beng</createdBy>
+<createdTime>2016-08-14 23:25:10 UTC</createdTime>
+<ownerDesignName>VoterModel</ownerDesignName>
+<engineerTo>
+<item key="43D80677-0A7E-5735-AC15-B678A10B28E5" value="true"/>
+</engineerTo>
+<nullsAllowed>true</nullsAllowed>
+<use>0</use>
+<ownDataTypeParameters>,,</ownDataTypeParameters>
+</Attribute>
+</attributes>
+</Entity>
