@@ -12,6 +12,8 @@ import collections
 ## Also uses the residential address if no mailing address is provided
 ## 
 ## Outputs lines that fail the address parser to an error log file
+###########################################################
+
 def appendParsedFields(outrow, addressValues):
 	# Construct the output
 	outrow.update({
@@ -25,8 +27,6 @@ def appendParsedFields(outrow, addressValues):
 	'NOT_ADDRESS': addressValues['NotAddress'],
 	'OCCUPANCY_TYPE': addressValues['OccupancyType'],
 	'OCCUPANCY_IDENTIFIER': addressValues['OccupancyIdentifier'],
-	'PLACE_NAME': addressValues['PlaceName'],
-	'STATE_NAME': addressValues['StateName'],
 	'STREET_NAME': addressValues['StreetName'],
 	'STREET_NAME_PRE_DIRECTIONAL': addressValues['StreetNamePreDirectional'],
 	'STREET_NAME_PRE_MODIFIER': addressValues['StreetNamePreModifier'],
@@ -40,7 +40,6 @@ def appendParsedFields(outrow, addressValues):
 	'USPS_BOX_GROUP_TYPE': addressValues['USPSBoxGroupType'],
 	'USPS_BOX_ID': addressValues['USPSBoxID'],
 	'USPS_BOX_TYPE': addressValues['USPSBoxType'],
-	'ZIP_CODE': addressValues['ZipCode']
 	})
 				
 def contstructAddressString(row):
@@ -146,7 +145,8 @@ with open(inputFile) as csvfile, \
 
 		i = 0;
 		for row in reader:
-			addr = contstructAddressString(row)
+		
+			addr = ' '.join([row['RESIDENTIAL_ADDRESS1'], row['RESIDENTIAL_SECONDARY_ADDR']])			
 				  
 			outrow = {
 					'STATE_VOTER_REF':row['SOS_VOTERID'],
@@ -158,7 +158,10 @@ with open(inputFile) as csvfile, \
 					'BIRTHDATE':row['DATE_OF_BIRTH'],
 					'REGISTRATION_DATE':row['REGISTRATION_DATE'],
 					'REGISTRATION_STATUS':row['VOTER_STATUS'],
-					'PARTY':row['PARTY_AFFILIATION']
+					'PARTY':row['PARTY_AFFILIATION'],
+					'PLACE_NAME':row['RESIDENTIAL_CITY'],
+					'STATE_NAME':row['RESIDENTIAL_STATE'],
+					'ZIP_CODE':row['RESIDENTIAL_ZIP']									
 			}
 			
 			appendMailingAddress(outrow, row)
@@ -185,8 +188,8 @@ with open(inputFile) as csvfile, \
 				
 				errWriter.writerow(outrow)					
 				
-			if i > 1000:
-				break
-			i += 1
+			# if i > 1000:
+				# break
+			# i += 1
 			
 
