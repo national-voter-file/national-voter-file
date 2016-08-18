@@ -76,13 +76,13 @@
   <notepads>
   </notepads>
   <connection>
-    <name>localpostgres</name>
+    <name>Voter</name>
     <server>localhost</server>
     <type>POSTGRESQL</type>
-    <access>JNDI</access>
-    <database>ProdVoter</database>
-    <port>5432</port>
-    <username/>
+    <access>Native</access>
+    <database>VOTER</database>
+    <port>54321</port>
+    <username>postgres</username>
     <password>Encrypted </password>
     <servername/>
     <data_tablespace/>
@@ -91,7 +91,7 @@
       <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
       <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
-      <attribute><code>PORT_NUMBER</code><attribute>5432</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>54321</attribute></attribute>
       <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>Y</attribute></attribute>
       <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
       <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
@@ -615,7 +615,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>localpostgres</connection>
+    <connection>Voter</connection>
     <schema/>
     <table>DATE_DIM</table>
     <commit>1000</commit>

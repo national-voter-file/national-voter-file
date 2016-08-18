@@ -25,6 +25,8 @@ We have a document describing the data architecture available as a [google doc](
 
 Take a look inside [SQL Folder](https://github.com/getmovement/national-voter-file/tree/master/src/main/sql) in the GitHub to see how to view and modify the relational model.
 
+The database can be built and launched in one step using Docker. See the README inside /src/main/sql for instructions.
+
 ## How we work
 We will use Pentaho's Opensource Extract Transform Load tool [Pentaho Data Integration](http://community.pentaho.com/projects/data-integration/) (also known as kettle) for the straightforward data load processes. More complex transformations may be coded in python as needed.
 
@@ -38,4 +40,3 @@ This site from  [The Election Project](http://voterlist.electproject.org/home) i
 
 We use Waffle.io to keep track of tasks that are ready for development:
 [![Stories in Ready](https://badge.waffle.io/getmovement/national-voter-file.svg?label=ready&title=Ready)](http://waffle.io/getmovement/national-voter-file)
-
