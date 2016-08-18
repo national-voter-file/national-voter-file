@@ -262,8 +262,8 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <accept_filenames>N</accept_filenames>
-    <passing_through_fields>N</passing_through_fields>
+    <accept_filenames>Y</accept_filenames>
+    <passing_through_fields>Y</passing_through_fields>
     <accept_field>reportFile</accept_field>
     <accept_stepname>Lookup report date key</accept_stepname>
     <separator>,</separator>
