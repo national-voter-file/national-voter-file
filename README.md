@@ -34,5 +34,8 @@ Join our slack [#national-voter-file] (http://goo.gl/forms/8SJRDlo7Lx2rUsan1)
 
 We have a [google doc](https://docs.google.com/spreadsheets/d/1CtNePb4LQSz-pk8UF58wwuVoBIc_YDAsBJZnIk7hKso/edit?usp=sharing) with information on obtaining each of the voter files
 
+This site from  [The Election Project](http://voterlist.electproject.org/home) is a handy resource on each state's policies on obtaining and using their file.
+
+We use Waffle.io to keep track of tasks that are ready for development:
 [![Stories in Ready](https://badge.waffle.io/getmovement/national-voter-file.svg?label=ready&title=Ready)](http://waffle.io/getmovement/national-voter-file)
 

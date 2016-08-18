@@ -127,6 +127,66 @@
   <hop> <from>Lookup or Add Mailing Addrs</from><to>Strings cut</to><enabled>Y</enabled> </hop>
   </order>
   <step>
+    <name>Determine Mailing Address</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>var ADDRESS_LINE1&#x3b;&#xd;&#xa;var ADDRESS_LINE2&#x3b;&#xd;&#xa;var CITY&#x3b;&#xd;&#xa;var STATE&#x3b;&#xd;&#xa;var MAILING_ZIP_CODE&#x3b;&#xd;&#xa;var COUNTRY&#x3b;&#xd;&#xa;&#xd;&#xa;if&#x28;&#x21;Mail1 &#x7c;&#x7c; &#x21;MailCity &#x7c;&#x7c; &#x21;MailState &#x7c;&#x7c; &#x21;MailZip&#x29;&#x7b;&#xd;&#xa;	ADDRESS_LINE1&#x3d;&#x28;address_number&#x3f;address_number&#x2b;&#x22; &#x22;&#x3a;&#x22;&#x22;&#x29;&#x2b; &#xd;&#xa;		&#x28;address_number_suffix&#x3f;address_number_suffix&#x2b;&#x22; &#x22;&#x3a;&#x22;&#x22;&#x29;&#x2b;&#xd;&#xa;		&#x28;street_name_pre_directional&#x3f;street_name_pre_directional&#x2b;&#x22; &#x22;&#x3a;&#x22;&#x22;&#x29;&#x2b; &#xd;&#xa;		&#x28;street_name&#x3f;street_name&#x2b;&#x22; &#x22;&#x3a;&#x22;&#x22;&#x29;&#x2b;&#xd;&#xa;		&#x28;street_name_post_type&#x3f;street_name_post_type&#x2b;&#x22; &#x22;&#x3a;&#x22;&#x22;&#x29;&#x2b;&#xd;&#xa;		&#x28;street_name_post_directional&#x3f;street_name_post_directional&#x2b;&#x22; &#x22;&#x3a;&#x22;&#x22;&#x29;&#x3b;&#xd;&#xa;&#xd;&#xa;	ADDRESS_LINE2&#x3d; &#x28;occupancy_type&#x3f;occupancy_type &#x2b;&#x22; &#x22;&#x3a;&#x22;&#x22;&#x29;&#x2b;&#xd;&#xa;					&#x28;occupancy_identifier&#x3f;occupancy_identifier&#x3a;&#x22;&#x22;&#x29;&#x3b;&#xd;&#xa;&#xd;&#xa;	CITY &#x3d; place_name&#x3b;&#xd;&#xa;	STATE &#x3d; state_name&#x3b;&#xd;&#xa;	MAILING_ZIP_CODE &#x3d; zip_code&#x3b;&#xd;&#xa;	COUNTRY &#x3d; &#x22;USA&#x22;&#x3b;&#xd;&#xa;&#xd;&#xa;&#x7d;else&#x7b;&#xd;&#xa;	ADDRESS_LINE1 &#x3d; Mail1&#x3b;&#xd;&#xa;	ADDRESS_LINE2 &#x3d; Mail2&#x3b;&#xd;&#xa;&#xd;&#xa;	CITY &#x3d; MailCity&#x3b;&#xd;&#xa;	STATE &#x3d; MailState&#x3b;&#xd;&#xa;	MAILING_ZIP_CODE &#x3d; MailZip&#x3b;&#xd;&#xa;	COUNTRY &#x3d; &#x28;MailCountry &#x3f; MailCountry &#x3a; &#x22;USA&#x22;&#x29;&#x3b;&#xd;&#xa;&#x7d;&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>ADDRESS_LINE1</name>
+        <rename>ADDRESS_LINE1</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>ADDRESS_LINE2</name>
+        <rename>ADDRESS_LINE2</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>CITY</name>
+        <rename>CITY</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>STATE</name>
+        <rename>STATE</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>MAILING_ZIP_CODE</name>
+        <rename>MAILING_ZIP_CODE</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>      <field>        <name>COUNTRY</name>
+        <rename>COUNTRY</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>704</xloc>
+      <yloc>176</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Get Variables</name>
     <type>GetVariable</type>
     <description/>
@@ -179,6 +239,148 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>64</xloc>
       <yloc>32</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Lookup or Add Housholds 2</name>
+    <type>CombinationLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <schema/>
+      <table>household_dim</table>
+      <connection>Localhost</connection>
+      <commit>1</commit>
+      <cache_size>0</cache_size>
+      <replace>N</replace>
+      <preloadCache>N</preloadCache>
+      <crc>Y</crc>
+      <crcfield>hashcode</crcfield>
+      <fields>
+        <key>
+          <name>address_number</name>
+          <lookup>address_number</lookup>
+        </key>
+        <key>
+          <name>address_number_suffix</name>
+          <lookup>address_number_suffix</lookup>
+        </key>
+        <key>
+          <name>street_name</name>
+          <lookup>street_name</lookup>
+        </key>
+        <key>
+          <name>street_name_post_type</name>
+          <lookup>street_name_post_type</lookup>
+        </key>
+        <key>
+          <name>occupancy_type</name>
+          <lookup>occupancy_type</lookup>
+        </key>
+        <key>
+          <name>street_name_pre_directional</name>
+          <lookup>street_name_pre_directional</lookup>
+        </key>
+        <key>
+          <name>street_name_post_directional</name>
+          <lookup>street_name_post_directional</lookup>
+        </key>
+        <key>
+          <name>occupancy_identifier</name>
+          <lookup>occupancy_identifier</lookup>
+        </key>
+        <key>
+          <name>place_name</name>
+          <lookup>place_name</lookup>
+        </key>
+        <key>
+          <name>state_name</name>
+          <lookup>state_name</lookup>
+        </key>
+        <key>
+          <name>zip_code</name>
+          <lookup>zip_code</lookup>
+        </key>
+        <return>
+          <name>household_id</name>
+          <creation_method>autoinc</creation_method>
+          <use_autoinc>Y</use_autoinc>
+        </return>
+      </fields>
+      <sequence/>
+      <last_update_field/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>448</xloc>
+      <yloc>176</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Lookup or Add Mailing Addrs</name>
+    <type>CombinationLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <schema/>
+      <table>mailing_address_dim</table>
+      <connection>Localhost</connection>
+      <commit>1</commit>
+      <cache_size>0</cache_size>
+      <replace>N</replace>
+      <preloadCache>N</preloadCache>
+      <crc>Y</crc>
+      <crcfield>hashcode</crcfield>
+      <fields>
+        <key>
+          <name>ADDRESS_LINE1</name>
+          <lookup>ADDRESS_LINE1</lookup>
+        </key>
+        <key>
+          <name>ADDRESS_LINE2</name>
+          <lookup>ADDRESS_LINE2</lookup>
+        </key>
+        <key>
+          <name>CITY</name>
+          <lookup>CITY</lookup>
+        </key>
+        <key>
+          <name>STATE</name>
+          <lookup>STATE</lookup>
+        </key>
+        <key>
+          <name>MAILING_ZIP_CODE</name>
+          <lookup>ZIP_CODE</lookup>
+        </key>
+        <key>
+          <name>COUNTRY</name>
+          <lookup>COUNTRY</lookup>
+        </key>
+        <return>
+          <name>MAILING_ADDRESS_ID</name>
+          <creation_method>autoinc</creation_method>
+          <use_autoinc>Y</use_autoinc>
+        </return>
+      </fields>
+      <sequence/>
+      <last_update_field/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>992</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -666,68 +868,6 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>992</xloc>
       <yloc>320</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Write Voter Report Fact</name>
-    <type>TableOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>Localhost</connection>
-    <schema/>
-    <table>voter_report_fact</table>
-    <commit>1000</commit>
-    <truncate>N</truncate>
-    <ignore_errors>N</ignore_errors>
-    <use_batch>N</use_batch>
-    <specify_fields>Y</specify_fields>
-    <partitioning_enabled>N</partitioning_enabled>
-    <partitioning_field/>
-    <partitioning_daily>N</partitioning_daily>
-    <partitioning_monthly>Y</partitioning_monthly>
-    <tablename_in_field>N</tablename_in_field>
-    <tablename_field/>
-    <tablename_in_table>Y</tablename_in_table>
-    <return_keys>N</return_keys>
-    <return_field/>
-    <fields>
-        <field>
-          <column_name>voter_report_date</column_name>
-          <stream_name>reportDate</stream_name>
-        </field>
-        <field>
-          <column_name>date_key</column_name>
-          <stream_name>date_key</stream_name>
-        </field>
-        <field>
-          <column_name>voter_key</column_name>
-          <stream_name>voter_id</stream_name>
-        </field>
-        <field>
-          <column_name>household_key</column_name>
-          <stream_name>household_id</stream_name>
-        </field>
-        <field>
-          <column_name>reporter_key</column_name>
-          <stream_name>reporterKey</stream_name>
-        </field>
-        <field>
-          <column_name>mailing_address_key</column_name>
-          <stream_name>MAILING_ADDRESS_ID</stream_name>
-        </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>992</xloc>
-      <yloc>560</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1491,8 +1631,8 @@
     </step>
 
   <step>
-    <name>Determine Mailing Address</name>
-    <type>ScriptValueMod</type>
+    <name>Write Voter Report Fact</name>
+    <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1501,193 +1641,53 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>var ADDRESS_LINE1&#x3b;&#xd;&#xa;var ADDRESS_LINE2&#x3b;&#xd;&#xa;var CITY&#x3b;&#xd;&#xa;var STATE&#x3b;&#xd;&#xa;var MAILING_ZIP_CODE&#x3b;&#xd;&#xa;var COUNTRY&#x3b;&#xd;&#xa;&#xd;&#xa;if&#x28;&#x21;Mail1 &#x7c;&#x7c; &#x21;MailCity &#x7c;&#x7c; &#x21;MailState &#x7c;&#x7c; &#x21;MailZip&#x29;&#x7b;&#xd;&#xa;	ADDRESS_LINE1&#x3d;&#x28;address_number&#x3f;address_number&#x2b;&#x22; &#x22;&#x3a;&#x22;&#x22;&#x29;&#x2b; &#xd;&#xa;		&#x28;address_number_suffix&#x3f;address_number_suffix&#x2b;&#x22; &#x22;&#x3a;&#x22;&#x22;&#x29;&#x2b;&#xd;&#xa;		&#x28;street_name_pre_directional&#x3f;street_name_pre_directional&#x2b;&#x22; &#x22;&#x3a;&#x22;&#x22;&#x29;&#x2b; &#xd;&#xa;		&#x28;street_name&#x3f;street_name&#x2b;&#x22; &#x22;&#x3a;&#x22;&#x22;&#x29;&#x2b;&#xd;&#xa;		&#x28;street_name_post_type&#x3f;street_name_post_type&#x2b;&#x22; &#x22;&#x3a;&#x22;&#x22;&#x29;&#x2b;&#xd;&#xa;		&#x28;street_name_post_directional&#x3f;street_name_post_directional&#x2b;&#x22; &#x22;&#x3a;&#x22;&#x22;&#x29;&#x3b;&#xd;&#xa;&#xd;&#xa;	ADDRESS_LINE2&#x3d; &#x28;occupancy_type&#x3f;occupancy_type &#x2b;&#x22; &#x22;&#x3a;&#x22;&#x22;&#x29;&#x2b;&#xd;&#xa;					&#x28;occupancy_identifier&#x3f;occupancy_identifier&#x3a;&#x22;&#x22;&#x29;&#x3b;&#xd;&#xa;&#xd;&#xa;	CITY &#x3d; place_name&#x3b;&#xd;&#xa;	STATE &#x3d; state_name&#x3b;&#xd;&#xa;	MAILING_ZIP_CODE &#x3d; zip_code&#x3b;&#xd;&#xa;	COUNTRY &#x3d; &#x22;USA&#x22;&#x3b;&#xd;&#xa;&#xd;&#xa;&#x7d;else&#x7b;&#xd;&#xa;	ADDRESS_LINE1 &#x3d; Mail1&#x3b;&#xd;&#xa;	ADDRESS_LINE2 &#x3d; Mail2&#x3b;&#xd;&#xa;&#xd;&#xa;	CITY &#x3d; MailCity&#x3b;&#xd;&#xa;	STATE &#x3d; MailState&#x3b;&#xd;&#xa;	MAILING_ZIP_CODE &#x3d; MailZip&#x3b;&#xd;&#xa;	COUNTRY &#x3d; &#x28;MailCountry &#x3f; MailCountry &#x3a; &#x22;USA&#x22;&#x29;&#x3b;&#xd;&#xa;&#x7d;&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>ADDRESS_LINE1</name>
-        <rename>ADDRESS_LINE1</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>ADDRESS_LINE2</name>
-        <rename>ADDRESS_LINE2</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>CITY</name>
-        <rename>CITY</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>STATE</name>
-        <rename>STATE</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>MAILING_ZIP_CODE</name>
-        <rename>MAILING_ZIP_CODE</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>COUNTRY</name>
-        <rename>COUNTRY</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>704</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Lookup or Add Housholds 2</name>
-    <type>CombinationLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <schema/>
-      <table>household_dim</table>
-      <connection>Localhost</connection>
-      <commit>1</commit>
-      <cache_size>0</cache_size>
-      <replace>N</replace>
-      <preloadCache>N</preloadCache>
-      <crc>Y</crc>
-      <crcfield>hashcode</crcfield>
-      <fields>
-        <key>
-          <name>address_number</name>
-          <lookup>address_number</lookup>
-        </key>
-        <key>
-          <name>address_number_suffix</name>
-          <lookup>address_number_suffix</lookup>
-        </key>
-        <key>
-          <name>street_name</name>
-          <lookup>street_name</lookup>
-        </key>
-        <key>
-          <name>street_name_post_type</name>
-          <lookup>street_name_post_type</lookup>
-        </key>
-        <key>
-          <name>occupancy_type</name>
-          <lookup>occupancy_type</lookup>
-        </key>
-        <key>
-          <name>street_name_pre_directional</name>
-          <lookup>street_name_pre_directional</lookup>
-        </key>
-        <key>
-          <name>street_name_post_directional</name>
-          <lookup>street_name_post_directional</lookup>
-        </key>
-        <key>
-          <name>occupancy_identifier</name>
-          <lookup>occupancy_identifier</lookup>
-        </key>
-        <key>
-          <name>place_name</name>
-          <lookup>place_name</lookup>
-        </key>
-        <key>
-          <name>state_name</name>
-          <lookup>state_name</lookup>
-        </key>
-        <key>
-          <name>zip_code</name>
-          <lookup>zip_code</lookup>
-        </key>
-        <return>
-          <name>household_id</name>
-          <creation_method>autoinc</creation_method>
-          <use_autoinc>Y</use_autoinc>
-        </return>
-      </fields>
-      <sequence/>
-      <last_update_field/>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>448</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Lookup or Add Mailing Addrs</name>
-    <type>CombinationLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <schema/>
-      <table>mailing_address_dim</table>
-      <connection>Localhost</connection>
-      <commit>1</commit>
-      <cache_size>0</cache_size>
-      <replace>N</replace>
-      <preloadCache>N</preloadCache>
-      <crc>Y</crc>
-      <crcfield>hashcode</crcfield>
-      <fields>
-        <key>
-          <name>ADDRESS_LINE1</name>
-          <lookup>ADDRESS_LINE1</lookup>
-        </key>
-        <key>
-          <name>ADDRESS_LINE2</name>
-          <lookup>ADDRESS_LINE2</lookup>
-        </key>
-        <key>
-          <name>CITY</name>
-          <lookup>CITY</lookup>
-        </key>
-        <key>
-          <name>STATE</name>
-          <lookup>STATE</lookup>
-        </key>
-        <key>
-          <name>MAILING_ZIP_CODE</name>
-          <lookup>ZIP_CODE</lookup>
-        </key>
-        <key>
-          <name>COUNTRY</name>
-          <lookup>COUNTRY</lookup>
-        </key>
-        <return>
-          <name>MAILING_ADDRESS_ID</name>
-          <creation_method>autoinc</creation_method>
-          <use_autoinc>Y</use_autoinc>
-        </return>
-      </fields>
-      <sequence/>
-      <last_update_field/>
+    <connection>Localhost</connection>
+    <schema/>
+    <table>voter_report_fact</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>N</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+        <field>
+          <column_name>voter_report_date</column_name>
+          <stream_name>reportDate</stream_name>
+        </field>
+        <field>
+          <column_name>date_key</column_name>
+          <stream_name>date_key</stream_name>
+        </field>
+        <field>
+          <column_name>voter_key</column_name>
+          <stream_name>voter_id</stream_name>
+        </field>
+        <field>
+          <column_name>household_key</column_name>
+          <stream_name>household_id</stream_name>
+        </field>
+        <field>
+          <column_name>reporter_key</column_name>
+          <stream_name>reporterKey</stream_name>
+        </field>
+        <field>
+          <column_name>mailing_address_key</column_name>
+          <stream_name>MAILING_ADDRESS_ID</stream_name>
+        </field>
+    </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>992</xloc>
-      <yloc>176</yloc>
+      <yloc>560</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

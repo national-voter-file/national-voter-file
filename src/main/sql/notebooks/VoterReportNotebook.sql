@@ -33,6 +33,7 @@ with may_voters as (
       limit 100;
     
 select count(*) from household_dim;
+select count(*) from voter_dim;
 select count(*) from mailing_address_dim;
 
 select * from mailing_address_dim limit 100;
@@ -42,7 +43,8 @@ select * from mailing_address_dim  where address_line2 is not null limit 200;
 select count(*) from VOTER_REPORT_FACT where date_key=2398;
 
 select month_name, count(*) from VOTER_REPORT_FACT join DATE_DIM on date_key=date_id group by month_name;
-
+select * from household_dim limit 100;
+select * from mailing_address_dim limit 100;
   
  select month_name, place_name, zip_code, count(*) from VOTER_REPORT_FACT 
   join DATE_DIM on date_key=date_id
