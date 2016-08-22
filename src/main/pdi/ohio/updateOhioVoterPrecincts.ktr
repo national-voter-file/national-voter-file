@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>saveOhioPrecincts</name>
+    <name>updateOhioVoterPrecincts</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -72,9 +72,9 @@
     <clusterschemas>
     </clusterschemas>
   <created_user>-</created_user>
-  <created_date>2016&#x2f;08&#x2f;20 16&#x3a;39&#x3a;10.993</created_date>
+  <created_date>2016&#x2f;08&#x2f;22 14&#x3a;11&#x3a;23.268</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;08&#x2f;20 16&#x3a;39&#x3a;10.993</modified_date>
+  <modified_date>2016&#x2f;08&#x2f;22 14&#x3a;11&#x3a;23.268</modified_date>
     <key_for_session_key/>
     <is_key_private>N</is_key_private>
   </info>
@@ -105,13 +105,42 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Text file input</from><to>Select values</to><enabled>Y</enabled> </hop>
-  <hop> <from>Select School District Field</from><to>Dimension lookup&#x2f;update</to><enabled>Y</enabled> </hop>
-  <hop> <from>Select values</from><to>Strings cut</to><enabled>Y</enabled> </hop>
-  <hop> <from>Strings cut</from><to>Add constants</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add constants</from><to>Select School District Field</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Filename</from><to>Text file input</to><enabled>Y</enabled> </hop>
+  <hop> <from>Text file input</from><to>Execute SQL script</to><enabled>Y</enabled> </hop>
   </order>
+  <step>
+    <name>Get Filename</name>
+    <type>GetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>reportFile</name>
+        <variable>&#x24;&#x7b;reportFile&#x7d;</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>305</xloc>
+      <yloc>220</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
   <step>
     <name>Text file input</name>
     <type>TextFileInput</type>
@@ -1644,15 +1673,15 @@
     <sizeFieldName/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>192</xloc>
-      <yloc>160</yloc>
+      <xloc>433</xloc>
+      <yloc>220</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Select values</name>
-    <type>SelectValues</type>
+    <name>Execute SQL script</name>
+    <type>ExecSQL</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1661,353 +1690,25 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <fields>        <select_unspecified>N</select_unspecified>
-      <remove>        <name>SOS_VOTERID</name>
-      </remove>      <remove>        <name>COUNTY_ID</name>
-      </remove>      <remove>        <name>LAST_NAME</name>
-      </remove>      <remove>        <name>FIRST_NAME</name>
-      </remove>      <remove>        <name>MIDDLE_NAME</name>
-      </remove>      <remove>        <name>SUFFIX</name>
-      </remove>      <remove>        <name>DATE_OF_BIRTH</name>
-      </remove>      <remove>        <name>REGISTRATION_DATE</name>
-      </remove>      <remove>        <name>VOTER_STATUS</name>
-      </remove>      <remove>        <name>PARTY_AFFILIATION</name>
-      </remove>      <remove>        <name>RESIDENTIAL_ADDRESS1</name>
-      </remove>      <remove>        <name>RESIDENTIAL_SECONDARY_ADDR</name>
-      </remove>      <remove>        <name>RESIDENTIAL_CITY</name>
-      </remove>      <remove>        <name>RESIDENTIAL_STATE</name>
-      </remove>      <remove>        <name>RESIDENTIAL_ZIP</name>
-      </remove>      <remove>        <name>RESIDENTIAL_ZIP_PLUS4</name>
-      </remove>      <remove>        <name>RESIDENTIAL_COUNTRY</name>
-      </remove>      <remove>        <name>RESIDENTIAL_POSTALCODE</name>
-      </remove>      <remove>        <name>MAILING_ADDRESS1</name>
-      </remove>      <remove>        <name>MAILING_SECONDARY_ADDRESS</name>
-      </remove>      <remove>        <name>MAILING_CITY</name>
-      </remove>      <remove>        <name>MAILING_STATE</name>
-      </remove>      <remove>        <name>MAILING_ZIP</name>
-      </remove>      <remove>        <name>MAILING_ZIP_PLUS4</name>
-      </remove>      <remove>        <name>MAILING_COUNTRY</name>
-      </remove>      <remove>        <name>MAILING_POSTAL_CODE</name>
-      </remove>      <remove>        <name>PRIMARY_03&#x2f;07&#x2f;2000</name>
-      </remove>      <remove>        <name>GENERAL_11&#x2f;07&#x2f;2000</name>
-      </remove>      <remove>        <name>SPECIAL_05&#x2f;08&#x2f;2001</name>
-      </remove>      <remove>        <name>GENERAL_11&#x2f;06&#x2f;2001</name>
-      </remove>      <remove>        <name>PRIMARY_05&#x2f;07&#x2f;2002</name>
-      </remove>      <remove>        <name>GENERAL_11&#x2f;05&#x2f;2002</name>
-      </remove>      <remove>        <name>SPECIAL_05&#x2f;06&#x2f;2003</name>
-      </remove>      <remove>        <name>GENERAL_11&#x2f;04&#x2f;2003</name>
-      </remove>      <remove>        <name>PRIMARY_03&#x2f;02&#x2f;2004</name>
-      </remove>      <remove>        <name>GENERAL_11&#x2f;02&#x2f;2004</name>
-      </remove>      <remove>        <name>SPECIAL_02&#x2f;08&#x2f;2005</name>
-      </remove>      <remove>        <name>PRIMARY_05&#x2f;03&#x2f;2005</name>
-      </remove>      <remove>        <name>PRIMARY_09&#x2f;13&#x2f;2005</name>
-      </remove>      <remove>        <name>GENERAL_11&#x2f;08&#x2f;2005</name>
-      </remove>      <remove>        <name>SPECIAL_02&#x2f;07&#x2f;2006</name>
-      </remove>      <remove>        <name>PRIMARY_05&#x2f;02&#x2f;2006</name>
-      </remove>      <remove>        <name>GENERAL_11&#x2f;07&#x2f;2006</name>
-      </remove>      <remove>        <name>PRIMARY_05&#x2f;08&#x2f;2007</name>
-      </remove>      <remove>        <name>PRIMARY_09&#x2f;11&#x2f;2007</name>
-      </remove>      <remove>        <name>GENERAL_11&#x2f;06&#x2f;2007</name>
-      </remove>      <remove>        <name>PRIMARY_11&#x2f;06&#x2f;2007</name>
-      </remove>      <remove>        <name>GENERAL_12&#x2f;11&#x2f;2007</name>
-      </remove>      <remove>        <name>PRIMARY_03&#x2f;04&#x2f;2008</name>
-      </remove>      <remove>        <name>PRIMARY_10&#x2f;14&#x2f;2008</name>
-      </remove>      <remove>        <name>GENERAL_11&#x2f;04&#x2f;2008</name>
-      </remove>      <remove>        <name>GENERAL_11&#x2f;18&#x2f;2008</name>
-      </remove>      <remove>        <name>PRIMARY_05&#x2f;05&#x2f;2009</name>
-      </remove>      <remove>        <name>PRIMARY_09&#x2f;08&#x2f;2009</name>
-      </remove>      <remove>        <name>PRIMARY_09&#x2f;15&#x2f;2009</name>
-      </remove>      <remove>        <name>PRIMARY_09&#x2f;29&#x2f;2009</name>
-      </remove>      <remove>        <name>GENERAL_11&#x2f;03&#x2f;2009</name>
-      </remove>      <remove>        <name>PRIMARY_05&#x2f;04&#x2f;2010</name>
-      </remove>      <remove>        <name>PRIMARY_07&#x2f;13&#x2f;2010</name>
-      </remove>      <remove>        <name>PRIMARY_09&#x2f;07&#x2f;2010</name>
-      </remove>      <remove>        <name>GENERAL_11&#x2f;02&#x2f;2010</name>
-      </remove>      <remove>        <name>PRIMARY_05&#x2f;03&#x2f;2011</name>
-      </remove>      <remove>        <name>PRIMARY_09&#x2f;13&#x2f;2011</name>
-      </remove>      <remove>        <name>GENERAL_11&#x2f;08&#x2f;2011</name>
-      </remove>      <remove>        <name>PRIMARY_03&#x2f;06&#x2f;2012</name>
-      </remove>      <remove>        <name>GENERAL_11&#x2f;06&#x2f;2012</name>
-      </remove>      <remove>        <name>PRIMARY_05&#x2f;07&#x2f;2013</name>
-      </remove>      <remove>        <name>PRIMARY_09&#x2f;10&#x2f;2013</name>
-      </remove>      <remove>        <name>PRIMARY_10&#x2f;01&#x2f;2013</name>
-      </remove>      <remove>        <name>GENERAL_11&#x2f;05&#x2f;2013</name>
-      </remove>      <remove>        <name>PRIMARY_05&#x2f;06&#x2f;2014</name>
-      </remove>      <remove>        <name>GENERAL_11&#x2f;04&#x2f;2014</name>
-      </remove>      <remove>        <name>PRIMARY_05&#x2f;05&#x2f;2015</name>
-      </remove>      <remove>        <name>PRIMARY_09&#x2f;15&#x2f;2015</name>
-      </remove>      <remove>        <name>GENERAL_11&#x2f;03&#x2f;2015</name>
-      </remove>      <remove>        <name>PRIMARY_03&#x2f;15&#x2f;2016</name>
-      </remove>      <remove>        <name>GENERAL_06&#x2f;07&#x2f;2016</name>
-      </remove>    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>336</xloc>
-      <yloc>160</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Select School District Field</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>var SCHOOL_DISTRICT&#x3b;&#xd;&#xa;&#xd;&#xa;if&#x28;CITY_SCHOOL_DISTRICT&#x29;&#x7b;&#xd;&#xa;	SCHOOL_DISTRICT &#x3d; CITY_SCHOOL_DISTRICT&#x3b;&#xd;&#xa;&#x7d;else if &#x28;LOCAL_SCHOOL_DISTRICT &#x29;&#x7b;&#xd;&#xa;	SCHOOL_DISTRICT &#x3d; LOCAL_SCHOOL_DISTRICT&#x3b;&#xd;&#xa;&#x7d;else&#x7b;&#xd;&#xa;	SCHOOL_DISTRICT &#x3d; EXEMPTED_VILL_SCHOOL_DISTRICT&#x3b;&#xd;&#xa;&#x7d;&#xd;&#xa;&#xd;&#xa;</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>SCHOOL_DISTRICT</name>
-        <rename>SCHOOL_DISTRICT</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>768</xloc>
-      <yloc>160</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Dimension lookup&#x2f;update</name>
-    <type>DimensionLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <schema/>
-      <table>precinct_dim</table>
-      <connection>Voter</connection>
-      <commit>100</commit>
-      <update>Y</update>
-      <fields>
-        <key>
-          <name>PRECINCT_CODE</name>
-          <lookup>precinct_code</lookup>
-        </key>
-        <date>
-          <name/>
-          <from>valid_from</from>
-          <to>valid_to</to>
-        </date>
-        <field>
-          <name>COUNTY_NUMBER</name>
-          <lookup>county_code</lookup>
-          <update>Punch through</update>
-        </field>
-        <field>
-          <name>CAREER_CENTER</name>
-          <lookup>career_center</lookup>
-          <update>Punch through</update>
-        </field>
-        <field>
-          <name>CITY</name>
-          <lookup>city</lookup>
-          <update>Punch through</update>
-        </field>
-        <field>
-          <name>SCHOOL_DISTRICT</name>
-          <lookup>school_district_name</lookup>
-          <update>Punch through</update>
-        </field>
-        <field>
-          <name>COUNTY_COURT_DISTRICT</name>
-          <lookup>county_court_district</lookup>
-          <update>Punch through</update>
-        </field>
-        <field>
-          <name>COURT_OF_APPEALS</name>
-          <lookup>court_of_appeals</lookup>
-          <update>Punch through</update>
-        </field>
-        <field>
-          <name>EDU_SERVICE_CENTER_DISTRICT</name>
-          <lookup>edu_service_center_district</lookup>
-          <update>Punch through</update>
-        </field>
-        <field>
-          <name>LIBRARY</name>
-          <lookup>library_district_name</lookup>
-          <update>Punch through</update>
-        </field>
-        <field>
-          <name>MUNICIPAL_COURT_DISTRICT</name>
-          <lookup>municipal_court_district</lookup>
-          <update>Punch through</update>
-        </field>
-        <field>
-          <name>PRECINCT_NAME</name>
-          <lookup>precinct_name</lookup>
-          <update>Punch through</update>
-        </field>
-        <field>
-          <name>STATE_BOARD_OF_EDUCATION</name>
-          <lookup>state_board_of_education</lookup>
-          <update>Punch through</update>
-        </field>
-        <field>
-          <name>TOWNSHIP</name>
-          <lookup>TOWNSHIP</lookup>
-          <update>Punch through</update>
-        </field>
-        <field>
-          <name>VILLAGE</name>
-          <lookup>VILLAGE</lookup>
-          <update>Punch through</update>
-        </field>
-        <field>
-          <name>WARD</name>
-          <lookup>WARD</lookup>
-          <update>Punch through</update>
-        </field>
-        <field>
-          <name>state_code</name>
-          <lookup>state_abbreviation</lookup>
-          <update>Punch through</update>
-        </field>
-        <field>
-          <name>state</name>
-          <lookup>state_name</lookup>
-          <update>Punch through</update>
-        </field>
-        <return>
-          <name>precinct_id</name>
-          <rename/>
-          <creation_method>autoinc</creation_method>
-          <use_autoinc>Y</use_autoinc>
-          <version>version</version>
-        </return>
-      </fields>
-      <sequence/>
-      <min_year>1900</min_year>
-      <max_year>2199</max_year>
-      <cache_size>5000</cache_size>
-      <preload_cache>N</preload_cache>
-      <use_start_date_alternative>N</use_start_date_alternative>
-      <start_date_alternative>none</start_date_alternative>
-      <start_date_field_name/>
+    <connection>Voter</connection>
+    <execute_each_row>Y</execute_each_row>
+    <single_statement>N</single_statement>
+    <replace_variables>Y</replace_variables>
+    <quoteString>N</quoteString>
+    <sql>update voter_report_fact set precinct_key &#x3d; &#x28;select precinct_id from PRECINCT_DIM where PRECINCT_CODE&#x3d;&#x27;&#x3f;&#x27;&#x29; where voter_key &#x3d; &#x28;select voter_id from voter_dim where STATE_VOTER_REF&#x3d;&#x27;&#x3f;&#x27;&#x29;&#x3b;&#xd;&#xa;</sql>
+    <set_params>N</set_params>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+       <argument><name>PRECINCT_CODE</name></argument>
+       <argument><name>SOS_VOTERID</name></argument>
+    </arguments>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1008</xloc>
-      <yloc>160</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Strings cut</name>
-    <type>StringCut</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <in_stream_name>COUNTY_COURT_DISTRICT</in_stream_name>
-        <out_stream_name/>
-        <cut_from/>
-        <cut_to>3</cut_to>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>464</xloc>
-      <yloc>160</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Add constants</name>
-    <type>Constant</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <name>state</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>Ohio</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>state_code</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>OH</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>592</xloc>
-      <yloc>160</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Get Filename</name>
-    <type>GetVariable</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <name>reportFile</name>
-        <variable>&#x24;&#x7b;reportFile&#x7d;</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>64</xloc>
-      <yloc>160</yloc>
+      <xloc>672</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
