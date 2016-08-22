@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>sampleOhio</name>
+    <name>saveOhioPrecincts</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
-    <trans_status>0</trans_status>
     <directory>&#x2f;</directory>
     <parameters>
     </parameters>
@@ -67,41 +66,45 @@
     <clusterschemas>
     </clusterschemas>
   <created_user>-</created_user>
-  <created_date>2016&#x2f;07&#x2f;21 09&#x3a;46&#x3a;54.627</created_date>
+  <created_date>2016&#x2f;08&#x2f;20 16&#x3a;39&#x3a;10.993</created_date>
   <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;07&#x2f;21 09&#x3a;46&#x3a;54.627</modified_date>
-    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA&#x3d;</key_for_session_key>
+  <modified_date>2016&#x2f;08&#x2f;20 16&#x3a;39&#x3a;10.993</modified_date>
+    <key_for_session_key/>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
+  <connection>
+    <name>Voter</name>
+    <server/>
+    <type>POSTGRESQL</type>
+    <access>JNDI</access>
+    <database>Voter</database>
+    <port>1521</port>
+    <username/>
+    <password>Encrypted </password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
+      <attribute><code>PRESERVE_RESERVED_WORD_CASE</code><attribute>Y</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_TIMESTAMP_DATA_TYPE</code><attribute>Y</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
   <order>
-  <hop> <from>Text file input</from><to>Reservoir Sampling</to><enabled>Y</enabled> </hop>
-  <hop> <from>Reservoir Sampling</from><to>Text file output</to><enabled>Y</enabled> </hop>
+  <hop> <from>Text file input</from><to>Select values</to><enabled>Y</enabled> </hop>
+  <hop> <from>Select School District Field</from><to>Dimension lookup&#x2f;update</to><enabled>Y</enabled> </hop>
+  <hop> <from>Select values</from><to>Strings cut</to><enabled>Y</enabled> </hop>
+  <hop> <from>Strings cut</from><to>Add constants</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add constants</from><to>Select School District Field</to><enabled>Y</enabled> </hop>
   </order>
-  <step>
-    <name>Reservoir Sampling</name>
-    <type>ReservoirSampling</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<reservoir_sampling>
-<sample_size>1000</sample_size>
-<seed>1</seed>
-</reservoir_sampling>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>288</xloc>
-      <yloc>144</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
   <step>
     <name>Text file input</name>
     <type>TextFileInput</type>
@@ -140,7 +143,7 @@
     <encoding/>
     <add_to_result_filenames>Y</add_to_result_filenames>
     <file>
-      <name>C&#x3a;&#x5c;dev&#x5c;GitHub&#x5c;getmovement&#x5c;national-voter-file&#x5c;data&#x5c;Ohio&#x5c;SWVF_1_44.TXT</name>
+      <name>C&#x3a;&#x5c;dev&#x5c;GitHub&#x5c;getmovement&#x5c;national-voter-file&#x5c;data&#x5c;Ohio&#x5c;SWVF_45_88.TXT</name>
       <filemask/>
       <exclude_filemask/>
       <file_required>N</file_required>
@@ -168,7 +171,7 @@
       </field>
       <field>
         <name>COUNTY_NUMBER</name>
-        <type>Integer</type>
+        <type>String</type>
         <format>&#x23;</format>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
@@ -611,7 +614,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>0</length>
+        <length>3</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -633,7 +636,7 @@
       </field>
       <field>
         <name>COURT_OF_APPEALS</name>
-        <type>Integer</type>
+        <type>String</type>
         <format>&#x23;</format>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
@@ -753,7 +756,7 @@
       </field>
       <field>
         <name>STATE_BOARD_OF_EDUCATION</name>
-        <type>Integer</type>
+        <type>String</type>
         <format>&#x23;</format>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
@@ -1634,15 +1637,15 @@
     <sizeFieldName/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>96</xloc>
-      <yloc>128</yloc>
+      <xloc>80</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Text file output</name>
-    <type>TextFileOutput</type>
+    <name>Select values</name>
+    <type>SelectValues</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1651,1206 +1654,319 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <separator>	</separator>
-    <enclosure>&#x22;</enclosure>
-    <enclosure_forced>N</enclosure_forced>
-    <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>Y</header>
-    <footer>N</footer>
-    <format>DOS</format>
-    <compression>None</compression>
-    <encoding/>
-    <endedLine/>
-    <fileNameInField>N</fileNameInField>
-    <fileNameField/>
-    <create_parent_folder>Y</create_parent_folder>
-    <file>
-      <name>C&#x3a;&#x5c;dev&#x5c;GitHub&#x5c;getmovement&#x5c;national-voter-file&#x5c;data&#x5c;Ohio&#x5c;SWVF_1_44_SAMPLE</name>
-      <is_command>N</is_command>
-      <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>N</do_not_open_new_file_init>
-      <extention>csv</extention>
-      <append>N</append>
-      <split>N</split>
-      <haspartno>N</haspartno>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <add_to_result_filenames>Y</add_to_result_filenames>
-      <pad>N</pad>
-      <fast_dump>N</fast_dump>
-      <splitevery>0</splitevery>
-    </file>
+    <fields>        <select_unspecified>N</select_unspecified>
+      <remove>        <name>SOS_VOTERID</name>
+      </remove>      <remove>        <name>COUNTY_ID</name>
+      </remove>      <remove>        <name>LAST_NAME</name>
+      </remove>      <remove>        <name>FIRST_NAME</name>
+      </remove>      <remove>        <name>MIDDLE_NAME</name>
+      </remove>      <remove>        <name>SUFFIX</name>
+      </remove>      <remove>        <name>DATE_OF_BIRTH</name>
+      </remove>      <remove>        <name>REGISTRATION_DATE</name>
+      </remove>      <remove>        <name>VOTER_STATUS</name>
+      </remove>      <remove>        <name>PARTY_AFFILIATION</name>
+      </remove>      <remove>        <name>RESIDENTIAL_ADDRESS1</name>
+      </remove>      <remove>        <name>RESIDENTIAL_SECONDARY_ADDR</name>
+      </remove>      <remove>        <name>RESIDENTIAL_CITY</name>
+      </remove>      <remove>        <name>RESIDENTIAL_STATE</name>
+      </remove>      <remove>        <name>RESIDENTIAL_ZIP</name>
+      </remove>      <remove>        <name>RESIDENTIAL_ZIP_PLUS4</name>
+      </remove>      <remove>        <name>RESIDENTIAL_COUNTRY</name>
+      </remove>      <remove>        <name>RESIDENTIAL_POSTALCODE</name>
+      </remove>      <remove>        <name>MAILING_ADDRESS1</name>
+      </remove>      <remove>        <name>MAILING_SECONDARY_ADDRESS</name>
+      </remove>      <remove>        <name>MAILING_CITY</name>
+      </remove>      <remove>        <name>MAILING_STATE</name>
+      </remove>      <remove>        <name>MAILING_ZIP</name>
+      </remove>      <remove>        <name>MAILING_ZIP_PLUS4</name>
+      </remove>      <remove>        <name>MAILING_COUNTRY</name>
+      </remove>      <remove>        <name>MAILING_POSTAL_CODE</name>
+      </remove>      <remove>        <name>PRIMARY_03&#x2f;07&#x2f;2000</name>
+      </remove>      <remove>        <name>GENERAL_11&#x2f;07&#x2f;2000</name>
+      </remove>      <remove>        <name>SPECIAL_05&#x2f;08&#x2f;2001</name>
+      </remove>      <remove>        <name>GENERAL_11&#x2f;06&#x2f;2001</name>
+      </remove>      <remove>        <name>PRIMARY_05&#x2f;07&#x2f;2002</name>
+      </remove>      <remove>        <name>GENERAL_11&#x2f;05&#x2f;2002</name>
+      </remove>      <remove>        <name>SPECIAL_05&#x2f;06&#x2f;2003</name>
+      </remove>      <remove>        <name>GENERAL_11&#x2f;04&#x2f;2003</name>
+      </remove>      <remove>        <name>PRIMARY_03&#x2f;02&#x2f;2004</name>
+      </remove>      <remove>        <name>GENERAL_11&#x2f;02&#x2f;2004</name>
+      </remove>      <remove>        <name>SPECIAL_02&#x2f;08&#x2f;2005</name>
+      </remove>      <remove>        <name>PRIMARY_05&#x2f;03&#x2f;2005</name>
+      </remove>      <remove>        <name>PRIMARY_09&#x2f;13&#x2f;2005</name>
+      </remove>      <remove>        <name>GENERAL_11&#x2f;08&#x2f;2005</name>
+      </remove>      <remove>        <name>SPECIAL_02&#x2f;07&#x2f;2006</name>
+      </remove>      <remove>        <name>PRIMARY_05&#x2f;02&#x2f;2006</name>
+      </remove>      <remove>        <name>GENERAL_11&#x2f;07&#x2f;2006</name>
+      </remove>      <remove>        <name>PRIMARY_05&#x2f;08&#x2f;2007</name>
+      </remove>      <remove>        <name>PRIMARY_09&#x2f;11&#x2f;2007</name>
+      </remove>      <remove>        <name>GENERAL_11&#x2f;06&#x2f;2007</name>
+      </remove>      <remove>        <name>PRIMARY_11&#x2f;06&#x2f;2007</name>
+      </remove>      <remove>        <name>GENERAL_12&#x2f;11&#x2f;2007</name>
+      </remove>      <remove>        <name>PRIMARY_03&#x2f;04&#x2f;2008</name>
+      </remove>      <remove>        <name>PRIMARY_10&#x2f;14&#x2f;2008</name>
+      </remove>      <remove>        <name>GENERAL_11&#x2f;04&#x2f;2008</name>
+      </remove>      <remove>        <name>GENERAL_11&#x2f;18&#x2f;2008</name>
+      </remove>      <remove>        <name>PRIMARY_05&#x2f;05&#x2f;2009</name>
+      </remove>      <remove>        <name>PRIMARY_09&#x2f;08&#x2f;2009</name>
+      </remove>      <remove>        <name>PRIMARY_09&#x2f;15&#x2f;2009</name>
+      </remove>      <remove>        <name>PRIMARY_09&#x2f;29&#x2f;2009</name>
+      </remove>      <remove>        <name>GENERAL_11&#x2f;03&#x2f;2009</name>
+      </remove>      <remove>        <name>PRIMARY_05&#x2f;04&#x2f;2010</name>
+      </remove>      <remove>        <name>PRIMARY_07&#x2f;13&#x2f;2010</name>
+      </remove>      <remove>        <name>PRIMARY_09&#x2f;07&#x2f;2010</name>
+      </remove>      <remove>        <name>GENERAL_11&#x2f;02&#x2f;2010</name>
+      </remove>      <remove>        <name>PRIMARY_05&#x2f;03&#x2f;2011</name>
+      </remove>      <remove>        <name>PRIMARY_09&#x2f;13&#x2f;2011</name>
+      </remove>      <remove>        <name>GENERAL_11&#x2f;08&#x2f;2011</name>
+      </remove>      <remove>        <name>PRIMARY_03&#x2f;06&#x2f;2012</name>
+      </remove>      <remove>        <name>GENERAL_11&#x2f;06&#x2f;2012</name>
+      </remove>      <remove>        <name>PRIMARY_05&#x2f;07&#x2f;2013</name>
+      </remove>      <remove>        <name>PRIMARY_09&#x2f;10&#x2f;2013</name>
+      </remove>      <remove>        <name>PRIMARY_10&#x2f;01&#x2f;2013</name>
+      </remove>      <remove>        <name>GENERAL_11&#x2f;05&#x2f;2013</name>
+      </remove>      <remove>        <name>PRIMARY_05&#x2f;06&#x2f;2014</name>
+      </remove>      <remove>        <name>GENERAL_11&#x2f;04&#x2f;2014</name>
+      </remove>      <remove>        <name>PRIMARY_05&#x2f;05&#x2f;2015</name>
+      </remove>      <remove>        <name>PRIMARY_09&#x2f;15&#x2f;2015</name>
+      </remove>      <remove>        <name>GENERAL_11&#x2f;03&#x2f;2015</name>
+      </remove>      <remove>        <name>PRIMARY_03&#x2f;15&#x2f;2016</name>
+      </remove>      <remove>        <name>GENERAL_06&#x2f;07&#x2f;2016</name>
+      </remove>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>272</xloc>
+      <yloc>176</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Select School District Field</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>var SCHOOL_DISTRICT&#x3b;&#xd;&#xa;&#xd;&#xa;if&#x28;CITY_SCHOOL_DISTRICT&#x29;&#x7b;&#xd;&#xa;	SCHOOL_DISTRICT &#x3d; CITY_SCHOOL_DISTRICT&#x3b;&#xd;&#xa;&#x7d;else if &#x28;LOCAL_SCHOOL_DISTRICT &#x29;&#x7b;&#xd;&#xa;	SCHOOL_DISTRICT &#x3d; LOCAL_SCHOOL_DISTRICT&#x3b;&#xd;&#xa;&#x7d;else&#x7b;&#xd;&#xa;	SCHOOL_DISTRICT &#x3d; EXEMPTED_VILL_SCHOOL_DISTRICT&#x3b;&#xd;&#xa;&#x7d;&#xd;&#xa;&#xd;&#xa;</jsScript_script>
+      </jsScript>    </jsScripts>    <fields>      <field>        <name>SCHOOL_DISTRICT</name>
+        <rename>SCHOOL_DISTRICT</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>608</xloc>
+      <yloc>176</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Dimension lookup&#x2f;update</name>
+    <type>DimensionLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <schema/>
+      <table>precinct_dim</table>
+      <connection>Voter</connection>
+      <commit>1</commit>
+      <update>Y</update>
+      <fields>
+        <key>
+          <name>PRECINCT_CODE</name>
+          <lookup>precinct_code</lookup>
+        </key>
+        <date>
+          <name/>
+          <from>valid_from</from>
+          <to>valid_to</to>
+        </date>
+        <field>
+          <name>COUNTY_NUMBER</name>
+          <lookup>county_code</lookup>
+          <update>Punch through</update>
+        </field>
+        <field>
+          <name>CAREER_CENTER</name>
+          <lookup>career_center</lookup>
+          <update>Punch through</update>
+        </field>
+        <field>
+          <name>CITY</name>
+          <lookup>city</lookup>
+          <update>Punch through</update>
+        </field>
+        <field>
+          <name>SCHOOL_DISTRICT</name>
+          <lookup>school_district_name</lookup>
+          <update>Punch through</update>
+        </field>
+        <field>
+          <name>COUNTY_COURT_DISTRICT</name>
+          <lookup>county_court_district</lookup>
+          <update>Punch through</update>
+        </field>
+        <field>
+          <name>COURT_OF_APPEALS</name>
+          <lookup>court_of_appeals</lookup>
+          <update>Punch through</update>
+        </field>
+        <field>
+          <name>EDU_SERVICE_CENTER_DISTRICT</name>
+          <lookup>edu_service_center_district</lookup>
+          <update>Punch through</update>
+        </field>
+        <field>
+          <name>LIBRARY</name>
+          <lookup>library_district_name</lookup>
+          <update>Punch through</update>
+        </field>
+        <field>
+          <name>MUNICIPAL_COURT_DISTRICT</name>
+          <lookup>municipal_court_district</lookup>
+          <update>Punch through</update>
+        </field>
+        <field>
+          <name>PRECINCT_NAME</name>
+          <lookup>precinct_name</lookup>
+          <update>Punch through</update>
+        </field>
+        <field>
+          <name>STATE_BOARD_OF_EDUCATION</name>
+          <lookup>state_board_of_education</lookup>
+          <update>Punch through</update>
+        </field>
+        <field>
+          <name>TOWNSHIP</name>
+          <lookup>TOWNSHIP</lookup>
+          <update>Punch through</update>
+        </field>
+        <field>
+          <name>VILLAGE</name>
+          <lookup>VILLAGE</lookup>
+          <update>Punch through</update>
+        </field>
+        <field>
+          <name>WARD</name>
+          <lookup>WARD</lookup>
+          <update>Punch through</update>
+        </field>
+        <field>
+          <name>state_code</name>
+          <lookup>state_abbreviation</lookup>
+          <update>Punch through</update>
+        </field>
+        <field>
+          <name>state</name>
+          <lookup>state_name</lookup>
+          <update>Punch through</update>
+        </field>
+        <return>
+          <name>precinct_id</name>
+          <rename/>
+          <creation_method>autoinc</creation_method>
+          <use_autoinc>Y</use_autoinc>
+          <version>version</version>
+        </return>
+      </fields>
+      <sequence/>
+      <min_year>1900</min_year>
+      <max_year>2199</max_year>
+      <cache_size>5000</cache_size>
+      <preload_cache>N</preload_cache>
+      <use_start_date_alternative>N</use_start_date_alternative>
+      <start_date_alternative>none</start_date_alternative>
+      <start_date_field_name/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>880</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Strings cut</name>
+    <type>StringCut</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
     <fields>
       <field>
-        <name>SOS_VOTERID</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>12</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>COUNTY_NUMBER</name>
-        <type>Integer</type>
-        <format>&#x23;</format>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>15</length>
-        <precision>0</precision>
-      </field>
-      <field>
-        <name>COUNTY_ID</name>
-        <type>Integer</type>
-        <format>&#x23;</format>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>15</length>
-        <precision>0</precision>
-      </field>
-      <field>
-        <name>LAST_NAME</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>11</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>FIRST_NAME</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>10</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>MIDDLE_NAME</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>9</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>SUFFIX</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>3</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>DATE_OF_BIRTH</name>
-        <type>Date</type>
-        <format>yyyy-MM-dd</format>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>REGISTRATION_DATE</name>
-        <type>Date</type>
-        <format>yyyy-MM-dd</format>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>VOTER_STATUS</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>12</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>PARTY_AFFILIATION</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>RESIDENTIAL_ADDRESS1</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>30</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>RESIDENTIAL_SECONDARY_ADDR</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>10</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>RESIDENTIAL_CITY</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>16</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>RESIDENTIAL_STATE</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>2</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>RESIDENTIAL_ZIP</name>
-        <type>Integer</type>
-        <format>&#x23;</format>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>15</length>
-        <precision>0</precision>
-      </field>
-      <field>
-        <name>RESIDENTIAL_ZIP_PLUS4</name>
-        <type>Integer</type>
-        <format>&#x23;</format>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>15</length>
-        <precision>0</precision>
-      </field>
-      <field>
-        <name>RESIDENTIAL_COUNTRY</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>0</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>RESIDENTIAL_POSTALCODE</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>0</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>MAILING_ADDRESS1</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>21</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>MAILING_SECONDARY_ADDRESS</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>0</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>MAILING_CITY</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>10</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>MAILING_STATE</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>2</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>MAILING_ZIP</name>
-        <type>Integer</type>
-        <format>&#x23;</format>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>15</length>
-        <precision>0</precision>
-      </field>
-      <field>
-        <name>MAILING_ZIP_PLUS4</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>0</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>MAILING_COUNTRY</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>0</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>MAILING_POSTAL_CODE</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>0</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>CAREER_CENTER</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>32</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>CITY</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>17</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>CITY_SCHOOL_DISTRICT</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>31</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>COUNTY_COURT_DISTRICT</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>0</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>CONGRESSIONAL_DISTRICT</name>
-        <type>Integer</type>
-        <format>&#x23;</format>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>15</length>
-        <precision>0</precision>
-      </field>
-      <field>
-        <name>COURT_OF_APPEALS</name>
-        <type>Integer</type>
-        <format>&#x23;</format>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>15</length>
-        <precision>0</precision>
-      </field>
-      <field>
-        <name>EDU_SERVICE_CENTER_DISTRICT</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>32</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>EXEMPTED_VILL_SCHOOL_DISTRICT</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>26</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>LIBRARY</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>0</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>LOCAL_SCHOOL_DISTRICT</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>31</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>MUNICIPAL_COURT_DISTRICT</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>16</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>PRECINCT_NAME</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>31</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>PRECINCT_CODE</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>8</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>STATE_BOARD_OF_EDUCATION</name>
-        <type>Integer</type>
-        <format>&#x23;</format>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>15</length>
-        <precision>0</precision>
-      </field>
-      <field>
-        <name>STATE_REPRESENTATIVE_DISTRICT</name>
-        <type>Integer</type>
-        <format>&#x23;</format>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>15</length>
-        <precision>0</precision>
-      </field>
-      <field>
-        <name>STATE_SENATE_DISTRICT</name>
-        <type>Integer</type>
-        <format>&#x23;</format>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>15</length>
-        <precision>0</precision>
-      </field>
-      <field>
-        <name>TOWNSHIP</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>19</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>VILLAGE</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>23</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>WARD</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>23</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>PRIMARY_03&#x2f;07&#x2f;2000</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>GENERAL_11&#x2f;07&#x2f;2000</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>SPECIAL_05&#x2f;08&#x2f;2001</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>GENERAL_11&#x2f;06&#x2f;2001</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>PRIMARY_05&#x2f;07&#x2f;2002</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>GENERAL_11&#x2f;05&#x2f;2002</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>SPECIAL_05&#x2f;06&#x2f;2003</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>GENERAL_11&#x2f;04&#x2f;2003</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>PRIMARY_03&#x2f;02&#x2f;2004</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>GENERAL_11&#x2f;02&#x2f;2004</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>SPECIAL_02&#x2f;08&#x2f;2005</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>PRIMARY_05&#x2f;03&#x2f;2005</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>PRIMARY_09&#x2f;13&#x2f;2005</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>0</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>GENERAL_11&#x2f;08&#x2f;2005</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>SPECIAL_02&#x2f;07&#x2f;2006</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>0</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>PRIMARY_05&#x2f;02&#x2f;2006</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>GENERAL_11&#x2f;07&#x2f;2006</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>PRIMARY_05&#x2f;08&#x2f;2007</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>PRIMARY_09&#x2f;11&#x2f;2007</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>0</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>GENERAL_11&#x2f;06&#x2f;2007</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>PRIMARY_11&#x2f;06&#x2f;2007</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>0</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>GENERAL_12&#x2f;11&#x2f;2007</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>0</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>PRIMARY_03&#x2f;04&#x2f;2008</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>PRIMARY_10&#x2f;14&#x2f;2008</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>0</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>GENERAL_11&#x2f;04&#x2f;2008</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>GENERAL_11&#x2f;18&#x2f;2008</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>0</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>PRIMARY_05&#x2f;05&#x2f;2009</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>PRIMARY_09&#x2f;08&#x2f;2009</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>PRIMARY_09&#x2f;15&#x2f;2009</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>0</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>PRIMARY_09&#x2f;29&#x2f;2009</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>0</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>GENERAL_11&#x2f;03&#x2f;2009</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>PRIMARY_05&#x2f;04&#x2f;2010</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>PRIMARY_07&#x2f;13&#x2f;2010</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>PRIMARY_09&#x2f;07&#x2f;2010</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>GENERAL_11&#x2f;02&#x2f;2010</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>PRIMARY_05&#x2f;03&#x2f;2011</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>PRIMARY_09&#x2f;13&#x2f;2011</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>0</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>GENERAL_11&#x2f;08&#x2f;2011</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>PRIMARY_03&#x2f;06&#x2f;2012</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>GENERAL_11&#x2f;06&#x2f;2012</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>PRIMARY_05&#x2f;07&#x2f;2013</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>PRIMARY_09&#x2f;10&#x2f;2013</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>0</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>PRIMARY_10&#x2f;01&#x2f;2013</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>0</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>GENERAL_11&#x2f;05&#x2f;2013</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>PRIMARY_05&#x2f;06&#x2f;2014</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>GENERAL_11&#x2f;04&#x2f;2014</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>PRIMARY_05&#x2f;05&#x2f;2015</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>PRIMARY_09&#x2f;15&#x2f;2015</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>0</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>GENERAL_11&#x2f;03&#x2f;2015</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>PRIMARY_03&#x2f;15&#x2f;2016</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>GENERAL_06&#x2f;07&#x2f;2016</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>1</length>
-        <precision>-1</precision>
+        <in_stream_name>COUNTY_COURT_DISTRICT</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>3</cut_to>
       </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>528</xloc>
+      <xloc>384</xloc>
+      <yloc>176</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Add constants</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>state</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>Ohio</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>state_code</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>OH</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>480</xloc>
       <yloc>160</yloc>
       <draw>Y</draw>
       </GUI>
