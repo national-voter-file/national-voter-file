@@ -1646,7 +1646,7 @@
         <repeat>N</repeat>
       </field>
     </fields>
-    <limit>10</limit>
+    <limit>0</limit>
     <error_ignored>N</error_ignored>
     <skip_bad_files>N</skip_bad_files>
     <file_error_field/>
