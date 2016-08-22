@@ -1791,7 +1791,7 @@
       <schema/>
       <table>precinct_dim</table>
       <connection>Voter</connection>
-      <commit>1</commit>
+      <commit>100</commit>
       <update>Y</update>
       <fields>
         <key>
