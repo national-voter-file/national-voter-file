@@ -1,4 +1,7 @@
-#National Voter File
+![National Voter File](https://d3vv6lp55qjaqc.cloudfront.net/items/231s0n30283j2W2S0u1L/NVF%20small.png?X-CloudApp-Visitor-Id=1336043&v=dfe5cf15)
+
+# National Voter File
+
 This project will build a database containing voter files for all fifty state. It uses a data model that represents a national voter files and associated campaign measures in a shared data warehouse. 
 
 This model is based on standard data warehouse modelling techniques with an aim of making useful queries easy to generate while preserving history of the data. If you are unfamiliar with dimensional data modelling, you may enjoy [this article](https://dwbi.org/data-modelling/dimensional-model/1-dimensional-modeling-guide).
