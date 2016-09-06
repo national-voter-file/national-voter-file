@@ -139,7 +139,11 @@ with open(inputFile, encoding='latin-1') as csvfile, \
 		errWriter.writeheader()	
 
 		i = 0;
-		for row in reader:			  
+		for row in reader:	
+			# Skip blank lines
+			if not row['RCITY']:
+				continue
+				
 			outrow = constructVoterRegOutrow(row)	
 					
 			try:
