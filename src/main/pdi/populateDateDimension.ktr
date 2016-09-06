@@ -79,10 +79,10 @@
     <name>Voter</name>
     <server>localhost</server>
     <type>POSTGRESQL</type>
-    <access>Native</access>
-    <database>VOTER</database>
+    <access>JNDI</access>
+    <database>DevVoter</database>
     <port>54321</port>
-    <username>postgres</username>
+    <username/>
     <password>Encrypted </password>
     <servername/>
     <data_tablespace/>

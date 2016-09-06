@@ -7,4 +7,4 @@
 echo "attaching to container. Press ctrl-C to stop the service."
 docker attach nvf_postgis || \
 docker start nvf_postgis && docker attach nvf_postgis || \
-docker run --name nvf_postgis -p 54321:5432 voterfile/postgis
+docker run --name nvf_postgis -e POSTGRES_PASSWORD=foobar -p 54321:5432 voterfile/postgis

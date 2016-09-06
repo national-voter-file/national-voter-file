@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>updateHouseholdDimension</name>
+    <name>UpdatePreparedHouseholdDimension</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -11,17 +11,17 @@
     <parameters>
         <parameter>
             <name>reportDate</name>
-            <default_value>2016-05-31</default_value>
+            <default_value>2016-08-12</default_value>
             <description/>
         </parameter>
         <parameter>
             <name>reportFile</name>
-            <default_value>C&#x3a;&#x5c;dev&#x5c;GitHub&#x5c;getmovement&#x5c;national-voter-file&#x5c;data&#x5c;Washington&#x5c;201605_VRDB_ExtractSAMPLE.txt</default_value>
+            <default_value>C&#x3a;&#x5c;dev&#x5c;GitHub&#x5c;getmovement&#x5c;national-voter-file&#x5c;data&#x5c;Ohio&#x5c;SWVF_1_44_OUT.csv</default_value>
             <description/>
         </parameter>
         <parameter>
             <name>reporterKey</name>
-            <default_value>1</default_value>
+            <default_value>2</default_value>
             <description/>
         </parameter>
     </parameters>
@@ -91,11 +91,11 @@
   <notepads>
   </notepads>
   <connection>
-    <name>Voter</name>
+    <name>Localhost</name>
     <server>localhost</server>
     <type>POSTGRESQL</type>
     <access>JNDI</access>
-    <database>DevVoter</database>
+    <database>Voter</database>
     <port>5432</port>
     <username/>
     <password>Encrypted </password>
@@ -117,72 +117,10 @@
   <order>
   <hop> <from>Get Variables</from><to>Lookup report date key</to><enabled>Y</enabled> </hop>
   <hop> <from>Lookup report date key</from><to>Text file input</to><enabled>Y</enabled> </hop>
-  <hop> <from>Text file input</from><to>Select values</to><enabled>Y</enabled> </hop>
-  <hop> <from>Select values</from><to>Lookup or Add Housholds 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Text file input</from><to>Lookup or Add Housholds 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Lookup or Add Housholds 2</from><to>Lookup or Add Mailing Addrs</to><enabled>Y</enabled> </hop>
   <hop> <from>Lookup or Add Housholds 2</from><to>Write to log</to><enabled>Y</enabled> </hop>
-  <hop> <from>Lookup or Add Housholds 2</from><to>Determine Mailing Address</to><enabled>Y</enabled> </hop>
-  <hop> <from>Determine Mailing Address</from><to>Lookup or Add Mailing Addrs</to><enabled>Y</enabled> </hop>
   </order>
-  <step>
-    <name>Determine Mailing Address</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>      <jsScript>        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>var ADDRESS_LINE1&#x3b;&#xd;&#xa;var ADDRESS_LINE2&#x3b;&#xd;&#xa;var CITY&#x3b;&#xd;&#xa;var STATE&#x3b;&#xd;&#xa;var MAILING_ZIP_CODE&#x3b;&#xd;&#xa;var COUNTRY&#x3b;&#xd;&#xa;&#xd;&#xa;if&#x28;&#x21;Mail1 &#x7c;&#x7c; &#x21;MailCity &#x7c;&#x7c; &#x21;MailState &#x7c;&#x7c; &#x21;MailZip&#x29;&#x7b;&#xd;&#xa;	ADDRESS_LINE1&#x3d;&#x28;address_number&#x3f;address_number&#x2b;&#x22; &#x22;&#x3a;&#x22;&#x22;&#x29;&#x2b; &#xd;&#xa;		&#x28;address_number_suffix&#x3f;address_number_suffix&#x2b;&#x22; &#x22;&#x3a;&#x22;&#x22;&#x29;&#x2b;&#xd;&#xa;		&#x28;street_name_pre_directional&#x3f;street_name_pre_directional&#x2b;&#x22; &#x22;&#x3a;&#x22;&#x22;&#x29;&#x2b; &#xd;&#xa;		&#x28;street_name&#x3f;street_name&#x2b;&#x22; &#x22;&#x3a;&#x22;&#x22;&#x29;&#x2b;&#xd;&#xa;		&#x28;street_name_post_type&#x3f;street_name_post_type&#x2b;&#x22; &#x22;&#x3a;&#x22;&#x22;&#x29;&#x2b;&#xd;&#xa;		&#x28;street_name_post_directional&#x3f;street_name_post_directional&#x2b;&#x22; &#x22;&#x3a;&#x22;&#x22;&#x29;&#x3b;&#xd;&#xa;&#xd;&#xa;	ADDRESS_LINE2&#x3d; &#x28;occupancy_type&#x3f;occupancy_type &#x2b;&#x22; &#x22;&#x3a;&#x22;&#x22;&#x29;&#x2b;&#xd;&#xa;					&#x28;occupancy_identifier&#x3f;occupancy_identifier&#x3a;&#x22;&#x22;&#x29;&#x3b;&#xd;&#xa;&#xd;&#xa;	CITY &#x3d; place_name&#x3b;&#xd;&#xa;	STATE &#x3d; state_name&#x3b;&#xd;&#xa;	MAILING_ZIP_CODE &#x3d; zip_code&#x3b;&#xd;&#xa;	COUNTRY &#x3d; &#x22;USA&#x22;&#x3b;&#xd;&#xa;&#xd;&#xa;&#x7d;else&#x7b;&#xd;&#xa;	ADDRESS_LINE1 &#x3d; Mail1&#x3b;&#xd;&#xa;	ADDRESS_LINE2 &#x3d; Mail2&#x3b;&#xd;&#xa;&#xd;&#xa;	CITY &#x3d; MailCity&#x3b;&#xd;&#xa;	STATE &#x3d; MailState&#x3b;&#xd;&#xa;	MAILING_ZIP_CODE &#x3d; MailZip&#x3b;&#xd;&#xa;	COUNTRY &#x3d; &#x28;MailCountry &#x3f; MailCountry &#x3a; &#x22;USA&#x22;&#x29;&#x3b;&#xd;&#xa;&#x7d;&#xd;&#xa;&#xd;&#xa;&#xd;&#xa;</jsScript_script>
-      </jsScript>    </jsScripts>    <fields>      <field>        <name>ADDRESS_LINE1</name>
-        <rename>ADDRESS_LINE1</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>ADDRESS_LINE2</name>
-        <rename>ADDRESS_LINE2</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>CITY</name>
-        <rename>CITY</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>STATE</name>
-        <rename>STATE</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>MAILING_ZIP_CODE</name>
-        <rename>MAILING_ZIP_CODE</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>      <field>        <name>COUNTRY</name>
-        <rename>COUNTRY</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>688</xloc>
-      <yloc>192</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
   <step>
     <name>Get Variables</name>
     <type>GetVariable</type>
@@ -253,7 +191,7 @@
            </partitioning>
       <schema/>
       <table>household_dim</table>
-      <connection>Voter</connection>
+      <connection>Localhost</connection>
       <commit>1000</commit>
       <cache_size>0</cache_size>
       <replace>N</replace>
@@ -262,47 +200,47 @@
       <crcfield>hashcode</crcfield>
       <fields>
         <key>
-          <name>address_number</name>
+          <name>ADDRESS_NUMBER</name>
           <lookup>address_number</lookup>
         </key>
         <key>
-          <name>address_number_suffix</name>
+          <name>ADDRESS_NUMBER_SUFFIX</name>
           <lookup>address_number_suffix</lookup>
         </key>
         <key>
-          <name>street_name</name>
+          <name>STREET_NAME</name>
           <lookup>street_name</lookup>
         </key>
         <key>
-          <name>street_name_post_type</name>
+          <name>STREET_NAME_POST_TYPE</name>
           <lookup>street_name_post_type</lookup>
         </key>
         <key>
-          <name>occupancy_type</name>
+          <name>OCCUPANCY_TYPE</name>
           <lookup>occupancy_type</lookup>
         </key>
         <key>
-          <name>street_name_pre_directional</name>
+          <name>STREET_NAME_PRE_DIRECTIONAL</name>
           <lookup>street_name_pre_directional</lookup>
         </key>
         <key>
-          <name>street_name_post_directional</name>
+          <name>STREET_NAME_POST_DIRECTIONAL</name>
           <lookup>street_name_post_directional</lookup>
         </key>
         <key>
-          <name>occupancy_identifier</name>
+          <name>OCCUPANCY_IDENTIFIER</name>
           <lookup>occupancy_identifier</lookup>
         </key>
         <key>
-          <name>place_name</name>
+          <name>PLACE_NAME</name>
           <lookup>place_name</lookup>
         </key>
         <key>
-          <name>state_name</name>
+          <name>STATE_NAME</name>
           <lookup>state_name</lookup>
         </key>
         <key>
-          <name>zip_code</name>
+          <name>ZIP_CODE</name>
           <lookup>zip_code</lookup>
         </key>
         <return>
@@ -334,7 +272,7 @@
            </partitioning>
       <schema/>
       <table>mailing_address_dim</table>
-      <connection>Voter</connection>
+      <connection>Localhost</connection>
       <commit>100</commit>
       <cache_size>0</cache_size>
       <replace>N</replace>
@@ -343,27 +281,27 @@
       <crcfield>hashcode</crcfield>
       <fields>
         <key>
-          <name>ADDRESS_LINE1</name>
+          <name>MAIL_ADDRESS_LINE1</name>
           <lookup>ADDRESS_LINE1</lookup>
         </key>
         <key>
-          <name>ADDRESS_LINE2</name>
+          <name>MAIL_ADDRESS_LINE2</name>
           <lookup>ADDRESS_LINE2</lookup>
         </key>
         <key>
-          <name>CITY</name>
+          <name>MAIL_CITY</name>
           <lookup>CITY</lookup>
         </key>
         <key>
-          <name>STATE</name>
+          <name>MAIL_STATE</name>
           <lookup>STATE</lookup>
         </key>
         <key>
-          <name>MAILING_ZIP_CODE</name>
+          <name>MAIL_ZIP_CODE</name>
           <lookup>ZIP_CODE</lookup>
         </key>
         <key>
-          <name>COUNTRY</name>
+          <name>MAIL_COUNTRY</name>
           <lookup>COUNTRY</lookup>
         </key>
         <return>
@@ -376,7 +314,7 @@
       <last_update_field/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>976</xloc>
+      <xloc>704</xloc>
       <yloc>192</yloc>
       <draw>Y</draw>
       </GUI>
@@ -393,7 +331,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>Voter</connection>
+    <connection>Localhost</connection>
     <cache>N</cache>
     <cache_load_all>N</cache_load_all>
     <cache_size>0</cache_size>
@@ -425,178 +363,6 @@
     </step>
 
   <step>
-    <name>Select values</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>      <field>        <name>StateVoterID</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>CountyVoterID</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>Title</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>FName</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>MName</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>LName</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>NameSuffix</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>Birthdate</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>Gender</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>RegStNum</name>
-        <rename>address_number</rename>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>RegStFrac</name>
-        <rename>address_number_suffix</rename>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>RegStName</name>
-        <rename>street_name</rename>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>RegStType</name>
-        <rename>street_name_post_type</rename>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>RegUnitType</name>
-        <rename>occupancy_type</rename>
-        <length>20</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>RegStPreDirection</name>
-        <rename>street_name_pre_directional</rename>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>RegStPostDirection</name>
-        <rename>street_name_post_directional</rename>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>RegUnitNum</name>
-        <rename>occupancy_identifier</rename>
-        <length>20</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>RegCity</name>
-        <rename>place_name</rename>
-        <length>20</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>RegState</name>
-        <rename>state_name</rename>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>RegZipCode</name>
-        <rename>zip_code</rename>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>CountyCode</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>PrecinctCode</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>PrecinctPart</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>LegislativeDistrict</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>CongressionalDistrict</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>Mail1</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>Mail2</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>Mail3</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>Mail4</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>MailCity</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>MailZip</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>MailState</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>MailCountry</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>Registrationdate</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>AbsenteeType</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>LastVoted</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>StatusCode</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>      <field>        <name>Dflag</name>
-        <rename/>
-        <length>-2</length>
-        <precision>-2</precision>
-      </field>        <select_unspecified>Y</select_unspecified>
-    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>208</xloc>
-      <yloc>192</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
     <name>Text file input</name>
     <type>TextFileInput</type>
     <description/>
@@ -611,7 +377,7 @@
     <passing_through_fields>Y</passing_through_fields>
     <accept_field>reportFile</accept_field>
     <accept_stepname>Lookup report date key</accept_stepname>
-    <separator>	</separator>
+    <separator>,</separator>
     <enclosure>&#x22;</enclosure>
     <enclosure_breaks>N</enclosure_breaks>
     <escapechar/>
@@ -634,7 +400,7 @@
     <encoding/>
     <add_to_result_filenames>Y</add_to_result_filenames>
     <file>
-      <name>C&#x3a;&#x5c;dev&#x5c;GitHub&#x5c;getmovement&#x5c;national-voter-file&#x5c;data&#x5c;Washington&#x5c;201605_VRDB_ExtractSAMPLE.txt</name>
+      <name>C&#x3a;&#x5c;dev&#x5c;GitHub&#x5c;getmovement&#x5c;national-voter-file&#x5c;data&#x5c;Ohio&#x5c;SWVF_1_44_OUT.csv</name>
       <filemask/>
       <exclude_filemask/>
       <file_required>N</file_required>
@@ -646,24 +412,9 @@
     </filters>
     <fields>
       <field>
-        <name>StateVoterID</name>
+        <name>ADDRESS_NUMBER</name>
         <type>String</type>
-        <format/>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif>-</nullif>
-        <ifnull/>
-        <position>-1</position>
-        <length>11</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>CountyVoterID</name>
-        <type>String</type>
-        <format>&#x23;.&#x23;</format>
+        <format>&#x23;</format>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -672,11 +423,11 @@
         <position>-1</position>
         <length>15</length>
         <precision>0</precision>
-        <trim_type>both</trim_type>
+        <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
       <field>
-        <name>Title</name>
+        <name>ADDRESS_NUMBER_PREFIX</name>
         <type>String</type>
         <format/>
         <currency>&#x24;</currency>
@@ -691,7 +442,7 @@
         <repeat>N</repeat>
       </field>
       <field>
-        <name>FName</name>
+        <name>ADDRESS_NUMBER_SUFFIX</name>
         <type>String</type>
         <format/>
         <currency>&#x24;</currency>
@@ -700,13 +451,418 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>11</length>
+        <length>0</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
       <field>
-        <name>MName</name>
+        <name>BUILDING_NAME</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>0</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>CORNER_OF</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>0</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>INTERSECTION_SEPARATOR</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>0</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>LANDMARK_NAME</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>0</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>NOT_ADDRESS</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>0</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>OCCUPANCY_TYPE</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>3</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>OCCUPANCY_IDENTIFIER</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>5</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>PLACE_NAME</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>16</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>STATE_NAME</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>2</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>STREET_NAME</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>22</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>STREET_NAME_PRE_DIRECTIONAL</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>4</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>STREET_NAME_PRE_MODIFIER</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>0</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>STREET_NAME_PRE_TYPE</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>5</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>STREET_NAME_POST_DIRECTIONAL</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>5</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>STREET_NAME_POST_MODIFIER</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>0</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>STREET_NAME_POST_TYPE</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>4</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>SUBADDRESS_IDENTIFIER</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>0</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>SUBADDRESS_TYPE</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>0</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>USPS_BOX_GROUP_ID</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>0</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>USPS_BOX_GROUP_TYPE</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>0</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>USPS_BOX_ID</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>0</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>USPS_BOX_TYPE</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>0</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>ZIP_CODE</name>
+        <type>String</type>
+        <format>&#x23;</format>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>STATE_VOTER_REF</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>12</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>COUNTY_VOTER_REF</name>
+        <type>String</type>
+        <format>&#x23;</format>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>TITLE</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>0</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>FIRST_NAME</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>10</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>MIDDLE_NAME</name>
         <type>String</type>
         <format/>
         <currency>&#x24;</currency>
@@ -721,7 +877,7 @@
         <repeat>N</repeat>
       </field>
       <field>
-        <name>LName</name>
+        <name>LAST_NAME</name>
         <type>String</type>
         <format/>
         <currency>&#x24;</currency>
@@ -730,13 +886,28 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>13</length>
+        <length>11</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
       <field>
-        <name>NameSuffix</name>
+        <name>NAME_SUFFIX</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>3</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>GENDER</name>
         <type>String</type>
         <format/>
         <currency>&#x24;</currency>
@@ -751,9 +922,9 @@
         <repeat>N</repeat>
       </field>
       <field>
-        <name>Birthdate</name>
+        <name>BIRTHDATE</name>
         <type>Date</type>
-        <format>MM&#x2f;dd&#x2f;yyyy</format>
+        <format>yyyy-MM-dd</format>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -766,7 +937,52 @@
         <repeat>N</repeat>
       </field>
       <field>
-        <name>Gender</name>
+        <name>REGISTRATION_DATE</name>
+        <type>Date</type>
+        <format>yyyy-MM-dd</format>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>REGISTRATION_STATUS</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>12</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>ABSTENTEE_TYPE</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>0</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>PARTY</name>
         <type>String</type>
         <format/>
         <currency>&#x24;</currency>
@@ -781,67 +997,7 @@
         <repeat>N</repeat>
       </field>
       <field>
-        <name>RegStNum</name>
-        <type>String</type>
-        <format>&#x23;.&#x23;</format>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif>-</nullif>
-        <ifnull/>
-        <position>-1</position>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>right</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>RegStFrac</name>
-        <type>String</type>
-        <format/>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif>-</nullif>
-        <ifnull/>
-        <position>-1</position>
-        <length>2</length>
-        <precision>-1</precision>
-        <trim_type>right</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>RegStName</name>
-        <type>String</type>
-        <format/>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif>-</nullif>
-        <ifnull/>
-        <position>-1</position>
-        <length>13</length>
-        <precision>-1</precision>
-        <trim_type>right</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>RegStType</name>
-        <type>String</type>
-        <format/>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif>-</nullif>
-        <ifnull/>
-        <position>-1</position>
-        <length>4</length>
-        <precision>-1</precision>
-        <trim_type>right</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>RegUnitType</name>
+        <name>EMAIL</name>
         <type>String</type>
         <format/>
         <currency>&#x24;</currency>
@@ -851,192 +1007,12 @@
         <ifnull/>
         <position>-1</position>
         <length>0</length>
-        <precision>-1</precision>
-        <trim_type>right</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>RegStPreDirection</name>
-        <type>String</type>
-        <format/>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif>-</nullif>
-        <ifnull/>
-        <position>-1</position>
-        <length>0</length>
-        <precision>-1</precision>
-        <trim_type>right</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>RegStPostDirection</name>
-        <type>String</type>
-        <format/>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif>-</nullif>
-        <ifnull/>
-        <position>-1</position>
-        <length>0</length>
-        <precision>-1</precision>
-        <trim_type>right</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>RegUnitNum</name>
-        <type>String</type>
-        <format/>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif>-</nullif>
-        <ifnull/>
-        <position>-1</position>
-        <length>0</length>
-        <precision>-1</precision>
-        <trim_type>right</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>RegCity</name>
-        <type>String</type>
-        <format/>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif>-</nullif>
-        <ifnull/>
-        <position>-1</position>
-        <length>13</length>
-        <precision>-1</precision>
-        <trim_type>right</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>RegState</name>
-        <type>String</type>
-        <format/>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif>-</nullif>
-        <ifnull/>
-        <position>-1</position>
-        <length>2</length>
-        <precision>-1</precision>
-        <trim_type>right</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>RegZipCode</name>
-        <type>String</type>
-        <format>&#x23;.&#x23;</format>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif>-</nullif>
-        <ifnull/>
-        <position>-1</position>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>right</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>CountyCode</name>
-        <type>String</type>
-        <format/>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif>-</nullif>
-        <ifnull/>
-        <position>-1</position>
-        <length>2</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
       <field>
-        <name>PrecinctCode</name>
-        <type>String</type>
-        <format>&#x23;.&#x23;</format>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif>-</nullif>
-        <ifnull/>
-        <position>-1</position>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>both</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>PrecinctPart</name>
-        <type>String</type>
-        <format>&#x23;.&#x23;</format>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif>-</nullif>
-        <ifnull/>
-        <position>-1</position>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>both</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>LegislativeDistrict</name>
-        <type>String</type>
-        <format>&#x23;.&#x23;</format>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif>-</nullif>
-        <ifnull/>
-        <position>-1</position>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>both</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>CongressionalDistrict</name>
-        <type>String</type>
-        <format>&#x23;.&#x23;</format>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif>-</nullif>
-        <ifnull/>
-        <position>-1</position>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>both</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>Mail1</name>
-        <type>String</type>
-        <format/>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif>-</nullif>
-        <ifnull/>
-        <position>-1</position>
-        <length>13</length>
-        <precision>-1</precision>
-        <trim_type>right</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>Mail2</name>
+        <name>PHONE</name>
         <type>String</type>
         <format/>
         <currency>&#x24;</currency>
@@ -1047,11 +1023,11 @@
         <position>-1</position>
         <length>0</length>
         <precision>-1</precision>
-        <trim_type>both</trim_type>
+        <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
       <field>
-        <name>Mail3</name>
+        <name>DO_NOT_CALL_STATUS</name>
         <type>String</type>
         <format/>
         <currency>&#x24;</currency>
@@ -1062,11 +1038,11 @@
         <position>-1</position>
         <length>0</length>
         <precision>-1</precision>
-        <trim_type>both</trim_type>
+        <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
       <field>
-        <name>Mail4</name>
+        <name>LANGUAGE_CHOICE</name>
         <type>String</type>
         <format/>
         <currency>&#x24;</currency>
@@ -1077,11 +1053,26 @@
         <position>-1</position>
         <length>0</length>
         <precision>-1</precision>
-        <trim_type>both</trim_type>
+        <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
       <field>
-        <name>MailCity</name>
+        <name>MAIL_ADDRESS_LINE1</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>30</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>MAIL_ADDRESS_LINE2</name>
         <type>String</type>
         <format/>
         <currency>&#x24;</currency>
@@ -1092,26 +1083,26 @@
         <position>-1</position>
         <length>10</length>
         <precision>-1</precision>
-        <trim_type>both</trim_type>
+        <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
       <field>
-        <name>MailZip</name>
+        <name>MAIL_CITY</name>
         <type>String</type>
-        <format>&#x23;.&#x23;</format>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>both</trim_type>
+        <length>16</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
       <field>
-        <name>MailState</name>
+        <name>MAIL_STATE</name>
         <type>String</type>
         <format/>
         <currency>&#x24;</currency>
@@ -1122,11 +1113,26 @@
         <position>-1</position>
         <length>2</length>
         <precision>-1</precision>
-        <trim_type>both</trim_type>
+        <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
       <field>
-        <name>MailCountry</name>
+        <name>MAIL_ZIP_CODE</name>
+        <type>String</type>
+        <format>&#x23;</format>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>MAIL_COUNTRY</name>
         <type>String</type>
         <format/>
         <currency>&#x24;</currency>
@@ -1135,89 +1141,14 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>0</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>Registrationdate</name>
-        <type>Date</type>
-        <format>MM&#x2f;dd&#x2f;yyyy</format>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif>-</nullif>
-        <ifnull/>
-        <position>-1</position>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>AbsenteeType</name>
-        <type>String</type>
-        <format/>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif>-</nullif>
-        <ifnull/>
-        <position>-1</position>
-        <length>1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>LastVoted</name>
-        <type>Date</type>
-        <format>MM&#x2f;dd&#x2f;yyyy</format>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif>-</nullif>
-        <ifnull/>
-        <position>-1</position>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>StatusCode</name>
-        <type>String</type>
-        <format/>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif>-</nullif>
-        <ifnull/>
-        <position>-1</position>
-        <length>1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>Dflag</name>
-        <type>String</type>
-        <format/>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif>-</nullif>
-        <ifnull/>
-        <position>-1</position>
-        <length>0</length>
+        <length>3</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
     </fields>
     <limit>0</limit>
-    <error_ignored>Y</error_ignored>
+    <error_ignored>N</error_ignored>
     <skip_bad_files>N</skip_bad_files>
     <file_error_field/>
     <file_error_message_field/>
