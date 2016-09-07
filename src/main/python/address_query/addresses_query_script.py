@@ -23,46 +23,49 @@ def connect_to_db(connection_database_name):
 
 # Runs single query using a database cursor and query text
 def run_query(db_cursor, query):
+  # Query the DB
   db_cursor.execute(query)
   results = db_cursor.fetchall()
+  # Convert into a Pandas Dataframe
   colnames = [desc[0] for desc in db_cursor.description]
   dataframe = pandas.DataFrame(results, columns = colnames)
 
-  pdb.set_trace()
   return(dataframe)
 
+# fetch address records to query.  Limit = number of rows requested
+def get_unmatched_address_records(limit = 1):
 
-# Script begins.  Selection process is far from finished
+# TODO:  Add geo_match_status to table and uncomment
+  query_address = '''
+    select
+      ADDRESS_NUMBER_PREFIX,
+      ADDRESS_NUMBER,
+      ADDRESS_NUMBER_SUFFIX,
+      STREET_NAME_PRE_DIRECTIONAL,
+      STREET_NAME_PRE_MODIFIER,
+      STREET_NAME_PRE_TYPE,
+      STREET_NAME,
+      STREET_NAME_POST_TYPE,
+      STREET_NAME_POST_MODIFIER,
+      STREET_NAME_POST_DIRECTIONAL,
+      OCCUPANCY_TYPE,
+      OCCUPANCY_IDENTIFIER
+    from household_dim
+    /* where geo_match_status <> 'success' */
+    limit %s
+    ''' % limit
 
-lower_id = 1
-upper_id = 10
+  # Get the database cursor
+  db_cursor = connect_to_db(connection_database_name)
 
-query_address = '''
-  select
-    ADDRESS_NUMBER_PREFIX,
-    ADDRESS_NUMBER,
-    ADDRESS_NUMBER_SUFFIX,
-    STREET_NAME_PRE_DIRECTIONAL,
-    STREET_NAME_PRE_MODIFIER,
-    STREET_NAME_PRE_TYPE,
-    STREET_NAME,
-    STREET_NAME_POST_TYPE,
-    STREET_NAME_POST_MODIFIER,
-    STREET_NAME_POST_DIRECTIONAL,
-    OCCUPANCY_TYPE,
-    OCCUPANCY_IDENTIFIER
-  from household_dim
-  where household_id between %s and %s
-  /* and geo_match_status <> 'success' */
-  limit 10
-  ''' % (lower_id, upper_id)
+  # Run the address query
+  result = run_query(db_cursor, query_address)
 
-# Get the database cursor
-db_cursor = connect_to_db(connection_database_name)
+  # Convert to JSON for output
+  result = result.to_json(orient = 'records')
+  return(result)
 
-# Run the address query
-result = run_query(db_cursor, query_address)
+#print(get_unmatched_address_records(1))
 
-print(result)
 
 
