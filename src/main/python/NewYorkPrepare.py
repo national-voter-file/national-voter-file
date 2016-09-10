@@ -141,8 +141,10 @@ with open(inputFile, encoding='latin-1') as csvfile, \
 		i = 0;
 		for row in reader:	
 			# Skip blank lines
-			if not row['RCITY']:
-				continue
+			if row['MAILADD4'] is None:
+				for key in row:
+					print(key +":"+row[key] if row[key] is not None else 'NONE')
+				sys.exit('Bad Row---->')
 				
 			outrow = constructVoterRegOutrow(row)	
 					
