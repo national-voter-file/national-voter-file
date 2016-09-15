@@ -3,6 +3,7 @@ import csv
 import sys
 import re
 import collections
+from datetime import datetime
 
 import PrepareUtils
 
@@ -62,7 +63,10 @@ def constructInputFieldList():
 		'PURGE_DATE',
 		'SBOEID',
 		'VoterHistory'])
-			
+		
+def prepareDate(nyDate):
+	return datetime.strptime(nyDate, "%Y%m%d").strftime("%Y-%m-%d")
+	
 def appendMailingAddress(outrow, row):
 	try:
 		tagged_address, address_type = usaddress.tag(' '.join([
@@ -105,8 +109,8 @@ def constructVoterRegOutrow(row):
 		'MIDDLE_NAME':row['MIDDLENAME'],
 		'LAST_NAME':row['LASTNAME'],
 		'NAME_SUFFIX':row['NAMESUFFIX'],
-		'BIRTHDATE':row['DOB'],
-		'REGISTRATION_DATE':row['REGDATE'],
+		'BIRTHDATE':prepareDate(row['DOB']),
+		'REGISTRATION_DATE':prepareDate(row['REGDATE']),
 		'REGISTRATION_STATUS':row['STATUS'],
 		'PARTY':(row['ENROLLMENT'] if row['ENROLLMENT'] != 'OTH'  else row['OTHERPARTY']),
 		'PLACE_NAME':row['RCITY'].upper(),
