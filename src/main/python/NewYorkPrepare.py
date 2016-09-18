@@ -127,7 +127,7 @@ if len(sys.argv) != 2:
 inputFile = sys.argv[1]
 outputFile = re.sub('\\..*$', '_OUT.csv',inputFile, count=1)	
 errorFileName = re.sub('\\..*$', '_ERR.csv',inputFile, count=1)	
-print("Reading from "+inputFile)
+print("Reading from "+inputFile+"-->"+outputFile)
 with open(inputFile, encoding='latin-1') as csvfile, \
 	open(outputFile, 'w') as outfile, open(errorFileName, 'w') as errorFile:
 		reader = csv.DictReader(csvfile, dialect='excel', fieldnames=constructInputFieldList())

@@ -11,17 +11,17 @@
     <parameters>
         <parameter>
             <name>reportDate</name>
-            <default_value>2016-08-12</default_value>
+            <default_value>2016-08-31</default_value>
             <description/>
         </parameter>
         <parameter>
             <name>reportFile</name>
-            <default_value>C&#x3a;&#x5c;dev&#x5c;GitHub&#x5c;getmovement&#x5c;national-voter-file&#x5c;data&#x5c;Ohio&#x5c;SWVF_1_44_OUT.csv</default_value>
+            <default_value>C&#x3a;&#x5c;dev&#x5c;GitHub&#x5c;getmovement&#x5c;national-voter-file&#x5c;data&#x5c;NewYork&#x5c;AllNYSVoters20160831_OUT.csv</default_value>
             <description/>
         </parameter>
         <parameter>
             <name>reporterKey</name>
-            <default_value>2</default_value>
+            <default_value>3</default_value>
             <description/>
         </parameter>
     </parameters>
@@ -117,9 +117,13 @@
   <order>
   <hop> <from>Get Variables</from><to>Lookup report date key</to><enabled>Y</enabled> </hop>
   <hop> <from>Lookup report date key</from><to>Text file input</to><enabled>Y</enabled> </hop>
-  <hop> <from>Text file input</from><to>Lookup or Add Housholds 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Lookup or Add Housholds 2</from><to>Lookup or Add Mailing Addrs</to><enabled>Y</enabled> </hop>
   <hop> <from>Lookup or Add Housholds 2</from><to>Write to log</to><enabled>Y</enabled> </hop>
+  <hop> <from>Lookup or Add Mailing Addrs</from><to>Write Mailing Address Errors</to><enabled>Y</enabled> </hop>
+  <hop> <from>Text file input</from><to>Filter rows</to><enabled>Y</enabled> </hop>
+  <hop> <from>Lookup or Add Housholds 2</from><to>Strings cut</to><enabled>Y</enabled> </hop>
+  <hop> <from>Strings cut</from><to>Lookup or Add Mailing Addrs</to><enabled>Y</enabled> </hop>
+  <hop> <from>Filter rows</from><to>Trim bad Post Type</to><enabled>Y</enabled> </hop>
+  <hop> <from>Trim bad Post Type</from><to>Lookup or Add Housholds 2</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Get Variables</name>
@@ -192,7 +196,7 @@
       <schema/>
       <table>household_dim</table>
       <connection>Localhost</connection>
-      <commit>1000</commit>
+      <commit>1</commit>
       <cache_size>0</cache_size>
       <replace>N</replace>
       <preloadCache>N</preloadCache>
@@ -253,7 +257,7 @@
       <last_update_field/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>432</xloc>
+      <xloc>560</xloc>
       <yloc>192</yloc>
       <draw>Y</draw>
       </GUI>
@@ -273,7 +277,7 @@
       <schema/>
       <table>mailing_address_dim</table>
       <connection>Localhost</connection>
-      <commit>100</commit>
+      <commit>1</commit>
       <cache_size>0</cache_size>
       <replace>N</replace>
       <preloadCache>N</preloadCache>
@@ -314,7 +318,7 @@
       <last_update_field/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>704</xloc>
+      <xloc>944</xloc>
       <yloc>192</yloc>
       <draw>Y</draw>
       </GUI>
@@ -1181,6 +1185,62 @@
     </step>
 
   <step>
+    <name>Write Mailing Address Errors</name>
+    <type>WriteToLog</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <loglevel>log_level_basic</loglevel>
+      <displayHeader>Y</displayHeader>
+      <limitRows>Y</limitRows>
+      <limitRowsNumber>10</limitRowsNumber>
+      <logmessage>Mailing Address Error</logmessage>
+    <fields>
+      <field>
+        <name>reportDate</name>
+        </field>
+      <field>
+        <name>reportFile</name>
+        </field>
+      <field>
+        <name>reporterKey</name>
+        </field>
+      <field>
+        <name>date_key</name>
+        </field>
+      <field>
+        <name>MAIL_ADDRESS_LINE1</name>
+        </field>
+      <field>
+        <name>MAIL_ADDRESS_LINE2</name>
+        </field>
+      <field>
+        <name>MAIL_CITY</name>
+        </field>
+      <field>
+        <name>MAIL_STATE</name>
+        </field>
+      <field>
+        <name>MAIL_ZIP_CODE</name>
+        </field>
+      <field>
+        <name>MAIL_COUNTRY</name>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>944</xloc>
+      <yloc>288</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Write to log</name>
     <type>WriteToLog</type>
     <description/>
@@ -1193,15 +1253,98 @@
            </partitioning>
       <loglevel>log_level_basic</loglevel>
       <displayHeader>Y</displayHeader>
-      <limitRows>N</limitRows>
-      <limitRowsNumber>1000</limitRowsNumber>
+      <limitRows>Y</limitRows>
+      <limitRowsNumber>10</limitRowsNumber>
       <logmessage/>
     <fields>
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>432</xloc>
+      <xloc>560</xloc>
       <yloc>304</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Filter rows</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Trim bad Post Type</send_true_to>
+<send_false_to/>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>REGISTRATION_STATUS</leftvalue>
+ <function>&#x3d;</function>
+ <rightvalue/>
+ <value><name>constant</name><type>String</type><text>ACTIVE</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>256</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Strings cut</name>
+    <type>StringCut</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>MAIL_STATE</in_stream_name>
+        <out_stream_name/>
+        <cut_from>20</cut_from>
+        <cut_to/>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>768</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Trim bad Post Type</name>
+    <type>StringCut</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>STREET_NAME_POST_TYPE</in_stream_name>
+        <out_stream_name/>
+        <cut_from>20</cut_from>
+        <cut_to/>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>400</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1210,6 +1353,18 @@
       <error>
         <source_step>Lookup or Add Housholds 2</source_step>
         <target_step>Write to log</target_step>
+        <is_enabled>Y</is_enabled>
+        <nr_valuename/>
+        <descriptions_valuename/>
+        <fields_valuename/>
+        <codes_valuename/>
+        <max_errors/>
+        <max_pct_errors/>
+        <min_pct_rows/>
+      </error>
+      <error>
+        <source_step>Lookup or Add Mailing Addrs</source_step>
+        <target_step>Write Mailing Address Errors</target_step>
         <is_enabled>Y</is_enabled>
         <nr_valuename/>
         <descriptions_valuename/>
