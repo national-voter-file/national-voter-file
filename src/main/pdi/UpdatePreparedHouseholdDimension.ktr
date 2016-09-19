@@ -119,13 +119,42 @@
   <hop> <from>Lookup report date key</from><to>Text file input</to><enabled>Y</enabled> </hop>
   <hop> <from>Lookup or Add Housholds 2</from><to>Write to log</to><enabled>Y</enabled> </hop>
   <hop> <from>Lookup or Add Mailing Addrs</from><to>Write Mailing Address Errors</to><enabled>Y</enabled> </hop>
-  <hop> <from>Text file input</from><to>Filter rows</to><enabled>Y</enabled> </hop>
-  <hop> <from>Lookup or Add Housholds 2</from><to>Strings cut</to><enabled>Y</enabled> </hop>
-  <hop> <from>Strings cut</from><to>Lookup or Add Mailing Addrs</to><enabled>Y</enabled> </hop>
+  <hop> <from>Text file input</from><to>Only active status</to><enabled>Y</enabled> </hop>
+  <hop> <from>Lookup or Add Housholds 2</from><to>Trim bad international fields</to><enabled>Y</enabled> </hop>
+  <hop> <from>Trim bad international fields</from><to>Lookup or Add Mailing Addrs</to><enabled>Y</enabled> </hop>
   <hop> <from>Trim bad Post Type</from><to>Lookup or Add Housholds 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Filter rows</from><to>Populate State with NY</to><enabled>Y</enabled> </hop>
-  <hop> <from>Populate State with NY</from><to>Trim bad Post Type</to><enabled>Y</enabled> </hop>
+  <hop> <from>Only active status</from><to>Populate Null State with NY</to><enabled>Y</enabled> </hop>
+  <hop> <from>Populate Null State with NY</from><to>Trim bad Post Type</to><enabled>Y</enabled> </hop>
   </order>
+  <step>
+    <name>Only active status</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Populate Null State with NY</send_true_to>
+<send_false_to/>
+    <compare>
+<condition>
+ <negated>N</negated>
+ <leftvalue>REGISTRATION_STATUS</leftvalue>
+ <function>&#x3d;</function>
+ <rightvalue/>
+ <value><name>constant</name><type>String</type><text>ACTIVE</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>256</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
   <step>
     <name>Get Variables</name>
     <type>GetVariable</type>
@@ -197,7 +226,7 @@
       <schema/>
       <table>household_dim</table>
       <connection>Localhost</connection>
-      <commit>1</commit>
+      <commit>1000</commit>
       <cache_size>0</cache_size>
       <replace>N</replace>
       <preloadCache>N</preloadCache>
@@ -278,7 +307,7 @@
       <schema/>
       <table>mailing_address_dim</table>
       <connection>Localhost</connection>
-      <commit>1</commit>
+      <commit>1000</commit>
       <cache_size>0</cache_size>
       <replace>N</replace>
       <preloadCache>N</preloadCache>
@@ -363,6 +392,85 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>208</xloc>
       <yloc>48</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Populate Null State with NY</name>
+    <type>IfNull</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <replaceAllByValue>NY</replaceAllByValue>
+      <replaceAllMask/>
+      <selectFields>Y</selectFields>
+      <selectValuesType>N</selectValuesType>
+      <setEmptyStringAll>N</setEmptyStringAll>
+    <valuetypes>
+      </valuetypes>
+    <fields>
+      <field>
+        <name>MAIL_STATE</name>
+        <value>NY</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>STATE_NAME</name>
+        <value>NY</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>384</xloc>
+      <yloc>112</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Trim bad international fields</name>
+    <type>StringCut</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>MAIL_STATE</in_stream_name>
+        <out_stream_name/>
+        <cut_from>10</cut_from>
+        <cut_to/>
+      </field>
+      <field>
+        <in_stream_name>MAIL_ZIP_CODE</in_stream_name>
+        <out_stream_name/>
+        <cut_from>10</cut_from>
+        <cut_to/>
+      </field>
+      <field>
+        <in_stream_name>ZIP_CODE</in_stream_name>
+        <out_stream_name/>
+        <cut_from>10</cut_from>
+        <cut_to/>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>928</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1186,6 +1294,33 @@
     </step>
 
   <step>
+    <name>Trim bad Post Type</name>
+    <type>StringCut</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>STREET_NAME_POST_TYPE</in_stream_name>
+        <out_stream_name/>
+        <cut_from>10</cut_from>
+        <cut_to/>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>704</xloc>
+      <yloc>112</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Write Mailing Address Errors</name>
     <type>WriteToLog</type>
     <description/>
@@ -1198,7 +1333,7 @@
            </partitioning>
       <loglevel>log_level_basic</loglevel>
       <displayHeader>Y</displayHeader>
-      <limitRows>Y</limitRows>
+      <limitRows>N</limitRows>
       <limitRowsNumber>10</limitRowsNumber>
       <logmessage>Mailing Address Error</logmessage>
     <fields>
@@ -1254,150 +1389,99 @@
            </partitioning>
       <loglevel>log_level_basic</loglevel>
       <displayHeader>Y</displayHeader>
-      <limitRows>Y</limitRows>
-      <limitRowsNumber>10</limitRowsNumber>
+      <limitRows>N</limitRows>
+      <limitRowsNumber>0</limitRowsNumber>
       <logmessage/>
     <fields>
+      <field>
+        <name>reportDate</name>
+        </field>
+      <field>
+        <name>reportFile</name>
+        </field>
+      <field>
+        <name>reporterKey</name>
+        </field>
+      <field>
+        <name>date_key</name>
+        </field>
+      <field>
+        <name>ADDRESS_NUMBER</name>
+        </field>
+      <field>
+        <name>ADDRESS_NUMBER_PREFIX</name>
+        </field>
+      <field>
+        <name>ADDRESS_NUMBER_SUFFIX</name>
+        </field>
+      <field>
+        <name>BUILDING_NAME</name>
+        </field>
+      <field>
+        <name>CORNER_OF</name>
+        </field>
+      <field>
+        <name>INTERSECTION_SEPARATOR</name>
+        </field>
+      <field>
+        <name>LANDMARK_NAME</name>
+        </field>
+      <field>
+        <name>NOT_ADDRESS</name>
+        </field>
+      <field>
+        <name>OCCUPANCY_TYPE</name>
+        </field>
+      <field>
+        <name>OCCUPANCY_IDENTIFIER</name>
+        </field>
+      <field>
+        <name>PLACE_NAME</name>
+        </field>
+      <field>
+        <name>STATE_NAME</name>
+        </field>
+      <field>
+        <name>STREET_NAME</name>
+        </field>
+      <field>
+        <name>STREET_NAME_PRE_DIRECTIONAL</name>
+        </field>
+      <field>
+        <name>STREET_NAME_PRE_MODIFIER</name>
+        </field>
+      <field>
+        <name>STREET_NAME_PRE_TYPE</name>
+        </field>
+      <field>
+        <name>STREET_NAME_POST_DIRECTIONAL</name>
+        </field>
+      <field>
+        <name>STREET_NAME_POST_MODIFIER</name>
+        </field>
+      <field>
+        <name>STREET_NAME_POST_TYPE</name>
+        </field>
+      <field>
+        <name>SUBADDRESS_IDENTIFIER</name>
+        </field>
+      <field>
+        <name>SUBADDRESS_TYPE</name>
+        </field>
+      <field>
+        <name>ZIP_CODE</name>
+        </field>
+      <field>
+        <name>STATE_VOTER_REF</name>
+        </field>
+      <field>
+        <name>COUNTY_VOTER_REF</name>
+        </field>
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>704</xloc>
       <yloc>304</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Filter rows</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to>Populate State with NY</send_true_to>
-<send_false_to/>
-    <compare>
-<condition>
- <negated>N</negated>
- <leftvalue>REGISTRATION_STATUS</leftvalue>
- <function>&#x3d;</function>
- <rightvalue/>
- <value><name>constant</name><type>String</type><text>ACTIVE</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>256</xloc>
-      <yloc>192</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Strings cut</name>
-    <type>StringCut</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <in_stream_name>MAIL_STATE</in_stream_name>
-        <out_stream_name/>
-        <cut_from>10</cut_from>
-        <cut_to/>
-      </field>
-      <field>
-        <in_stream_name>MAIL_ZIP_CODE</in_stream_name>
-        <out_stream_name/>
-        <cut_from>10</cut_from>
-        <cut_to/>
-      </field>
-      <field>
-        <in_stream_name>ZIP_CODE</in_stream_name>
-        <out_stream_name/>
-        <cut_from>10</cut_from>
-        <cut_to/>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>912</xloc>
-      <yloc>192</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Trim bad Post Type</name>
-    <type>StringCut</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <in_stream_name>STREET_NAME_POST_TYPE</in_stream_name>
-        <out_stream_name/>
-        <cut_from>10</cut_from>
-        <cut_to/>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>544</xloc>
-      <yloc>192</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Populate State with NY</name>
-    <type>IfNull</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <replaceAllByValue>NY</replaceAllByValue>
-      <replaceAllMask/>
-      <selectFields>Y</selectFields>
-      <selectValuesType>N</selectValuesType>
-      <setEmptyStringAll>N</setEmptyStringAll>
-    <valuetypes>
-      </valuetypes>
-    <fields>
-      <field>
-        <name>MAIL_STATE</name>
-        <value>NY</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-        </field>
-      <field>
-        <name>STATE_NAME</name>
-        <value>NY</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>384</xloc>
-      <yloc>192</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
