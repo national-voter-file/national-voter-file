@@ -122,8 +122,9 @@
   <hop> <from>Text file input</from><to>Filter rows</to><enabled>Y</enabled> </hop>
   <hop> <from>Lookup or Add Housholds 2</from><to>Strings cut</to><enabled>Y</enabled> </hop>
   <hop> <from>Strings cut</from><to>Lookup or Add Mailing Addrs</to><enabled>Y</enabled> </hop>
-  <hop> <from>Filter rows</from><to>Trim bad Post Type</to><enabled>Y</enabled> </hop>
   <hop> <from>Trim bad Post Type</from><to>Lookup or Add Housholds 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Filter rows</from><to>Populate State with NY</to><enabled>Y</enabled> </hop>
+  <hop> <from>Populate State with NY</from><to>Trim bad Post Type</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Get Variables</name>
@@ -257,7 +258,7 @@
       <last_update_field/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>560</xloc>
+      <xloc>704</xloc>
       <yloc>192</yloc>
       <draw>Y</draw>
       </GUI>
@@ -318,7 +319,7 @@
       <last_update_field/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>944</xloc>
+      <xloc>1088</xloc>
       <yloc>192</yloc>
       <draw>Y</draw>
       </GUI>
@@ -1234,7 +1235,7 @@
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>944</xloc>
+      <xloc>1088</xloc>
       <yloc>288</yloc>
       <draw>Y</draw>
       </GUI>
@@ -1260,7 +1261,7 @@
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>560</xloc>
+      <xloc>704</xloc>
       <yloc>304</yloc>
       <draw>Y</draw>
       </GUI>
@@ -1277,7 +1278,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-<send_true_to>Trim bad Post Type</send_true_to>
+<send_true_to>Populate State with NY</send_true_to>
 <send_false_to/>
     <compare>
 <condition>
@@ -1316,7 +1317,7 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>768</xloc>
+      <xloc>912</xloc>
       <yloc>192</yloc>
       <draw>Y</draw>
       </GUI>
@@ -1337,13 +1338,53 @@
       <field>
         <in_stream_name>STREET_NAME_POST_TYPE</in_stream_name>
         <out_stream_name/>
-        <cut_from>20</cut_from>
+        <cut_from>10</cut_from>
         <cut_to/>
       </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>400</xloc>
+      <xloc>544</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Populate State with NY</name>
+    <type>IfNull</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <replaceAllByValue>NY</replaceAllByValue>
+      <replaceAllMask/>
+      <selectFields>Y</selectFields>
+      <selectValuesType>N</selectValuesType>
+      <setEmptyStringAll>N</setEmptyStringAll>
+    <valuetypes>
+      </valuetypes>
+    <fields>
+      <field>
+        <name>MAIL_STATE</name>
+        <value>NY</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      <field>
+        <name>STATE_NAME</name>
+        <value>NY</value>
+        <mask/>
+        <set_empty_string>N</set_empty_string>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>384</xloc>
       <yloc>192</yloc>
       <draw>Y</draw>
       </GUI>
