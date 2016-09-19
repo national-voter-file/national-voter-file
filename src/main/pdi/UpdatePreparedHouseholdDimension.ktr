@@ -1311,7 +1311,19 @@
       <field>
         <in_stream_name>MAIL_STATE</in_stream_name>
         <out_stream_name/>
-        <cut_from>20</cut_from>
+        <cut_from>10</cut_from>
+        <cut_to/>
+      </field>
+      <field>
+        <in_stream_name>MAIL_ZIP_CODE</in_stream_name>
+        <out_stream_name/>
+        <cut_from>10</cut_from>
+        <cut_to/>
+      </field>
+      <field>
+        <in_stream_name>ZIP_CODE</in_stream_name>
+        <out_stream_name/>
+        <cut_from>10</cut_from>
         <cut_to/>
       </field>
     </fields>
