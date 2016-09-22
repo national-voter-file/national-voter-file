@@ -1,0 +1,22 @@
+1. Public Voter Registry (politicalstrategies.com/VoterIndex.aspx)
+2. intellius.com
+3. data.gov
+4. Google Maps API
+5. Facebook API
+6. Twitter API
+7. LinkedIn API
+8. Instagram API
+9. Pinterest API
+10. YouTube API
+11. Votersaurus API
+12. Google+ API
+13. OpenSecrets API
+14. BallotPedia API
+15. WhitePages API
+16. FullContact API
+17. Gravatar API
+18. Open Supporter Data Interface API
+19. OpenFEC API (https://api.open.fec.gov/developers)
+20. Plaid API
+21. Yodlee API
+22. WikiPedia API
