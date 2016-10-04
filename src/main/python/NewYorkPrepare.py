@@ -90,7 +90,18 @@ def appendMailingAddress(outrow, row):
 			'MAIL_COUNTRY':'USA'
 			})
 	
-		 
+	
+def appendJurisdiction(outrow, row):
+		outrow.update({
+		row['COUNTYCODE'],
+		row['ED'],
+		row['LD'],
+		row['TOWNCITY'],
+		row['WARD'],
+		row['CD'],
+		row['SD'],
+		row['AD']})
+		
 def constructResidenceAddress(row):
 	aptField = row['RAPARTMENT'].strip();
 	return ' '.join([row['RADDNUMBER'], 
@@ -158,6 +169,7 @@ with open(inputFile, encoding='latin-1') as csvfile, \
 				PrepareUtils.appendParsedFields(outrow, tagged_address)
 				
 				appendMailingAddress(outrow, row)
+				appendJurisdiction(outrow, row)
 
 				writer.writerow(outrow)				
 
