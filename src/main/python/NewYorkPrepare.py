@@ -93,15 +93,17 @@ def appendMailingAddress(outrow, row):
 	
 def appendJurisdiction(outrow, row):
 		outrow.update({
-		row['COUNTYCODE'],
-		row['ED'],
-		row['LD'],
-		row['TOWNCITY'],
-		row['WARD'],
-		row['CD'],
-		row['SD'],
-		row['AD']})
+		'COUNTYCODE':row['COUNTYCODE'],
+		'ELECTORAL_DIST':row['ED'],
+		'LEGISLATIVE_DIST':row['LD'],
+		'TOWNCITY':row['TOWNCITY'],
+		'WARD':row['WARD'],
+		'CONGRESSIONAL_DIST':row['CD'],
+		'UPPER_HOUSE_DIST':row['SD'],
+		'LOWER_HOUSE_DIST':row['AD']})
 		
+			
+			
 def constructResidenceAddress(row):
 	aptField = row['RAPARTMENT'].strip();
 	return ' '.join([row['RADDNUMBER'], 
