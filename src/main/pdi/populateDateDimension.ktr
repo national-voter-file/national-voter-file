@@ -80,7 +80,7 @@
     <server>localhost</server>
     <type>POSTGRESQL</type>
     <access>JNDI</access>
-    <database>DevVoter</database>
+    <database>Voter</database>
     <port>54321</port>
     <username/>
     <password>Encrypted </password>

@@ -73,3 +73,13 @@ select * from VOTER_REPORT_FACT
    
    
    SELECT STATE_VOTER_REF, COUNT(*) FROM VOTER_DIM GROUP BY STATE_VOTER_REF HAVING COUNT(*) > 1 LIMIT 100;
+   
+   
+-- Look at slicing voters by county/gender and pct of county's pop
+with male_voters as 
+  (select county_key, count(*) male_voter_count from voter_report_fact join voter_dim on voter_id=voter_key where gender='M' and reporter_key=3 group by county_key),
+female_voters as 
+  (select county_key, count(*) female_voter_count from voter_report_fact join voter_dim on voter_id=voter_key where gender='F' and reporter_key=3 group by county_key)
+select * from county_dim
+  join male_voters m on m.county_key=county_id
+  join female_voters f on f.county_key=county_id;

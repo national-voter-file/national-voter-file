@@ -10,4 +10,6 @@
 
    etl:
           build: ./etl
+          volumes:
+            - ..:/national-voter-file
           
