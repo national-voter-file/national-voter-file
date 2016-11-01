@@ -31,6 +31,8 @@ Typically, you will invoke commands in this container as
 ## Running ETL Scripts
 We've provided a shell script for loading in a 1,000 row sample of Washington state data. Take a look at buildWashington.sh for setting up a simple warehouse, or as guidance for running your own ETL jobs. It assumes that the voter file can be found in the data directory of this repo (which is in .gitignore so you have to construct your own local version)
 
+You can get samples of this data in our [private dropbox](https://www.dropbox.com/work/getmovement%20Team%20Folder) message us on the slack channel to get access.
+
 ### populateDateDimension.ktr
 This transform creates records in the date dimension that has a row for every single date going out twenty years. This is required before loading any records into the warehouse.
 
