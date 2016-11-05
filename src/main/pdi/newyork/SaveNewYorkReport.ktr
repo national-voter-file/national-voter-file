@@ -16,7 +16,7 @@
         </parameter>
         <parameter>
             <name>reportFile</name>
-            <default_value>C&#x3a;&#x5c;dev&#x5c;GitHub&#x5c;getmovement&#x5c;national-voter-file&#x5c;data&#x5c;NewYork&#x5c;nys.txt</default_value>
+            <default_value>C&#x3a;&#x5c;dev&#x5c;GitHub&#x5c;getmovement&#x5c;national-voter-file&#x5c;data&#x5c;NewYork&#x5c;AllNYSVoters20160831SAMPLE_OUT.csv</default_value>
             <description/>
         </parameter>
         <parameter>
@@ -610,7 +610,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-<send_true_to/>
+<send_true_to>Lookup County</send_true_to>
 <send_false_to/>
     <compare>
 <condition>
@@ -1334,7 +1334,7 @@
         <position>-1</position>
         <length>8</length>
         <precision>-1</precision>
-        <trim_type>none</trim_type>
+        <trim_type>right</trim_type>
         <repeat>N</repeat>
       </field>
       <field>

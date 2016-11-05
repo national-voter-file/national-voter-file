@@ -75,7 +75,7 @@ def appendMailingAddress(outrow, row):
 			row['MAILADD3'],
 			row['MAILADD4']]))
 	except usaddress.RepeatedLabelError as e :
-		print('Can\'t parse mailing address. Falling back to res')
+		print('Warn: Can\'t parse mailing address. Falling back to residential (%s)' % (e.parsed_string))
 		tagged_address = {}
 
 	if(len(tagged_address) > 0):
