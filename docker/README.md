@@ -2,7 +2,7 @@
 This directory contains docker resources to bring up your
 very own national voter file.
 
-We use [docker-compose](https://docs.docker.com/compose/) to manage interactions between the containers.
+We use [docker-compose](https://docs.docker.com/compose/) to manage interactions between the containers.  The apt repository may give you a different version of docker-compose that is incompatible with the configuration file, so be sure to get it from the link above.
 
 To use this environment cd to this docker directory
 
