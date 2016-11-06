@@ -28,6 +28,9 @@ docker-compose run etl python3 /national-voter-file/src/main/python/NewYorkPrepa
 
 ###################
 ## Run job to process sample voter file
-docker-compose run etl /opt/pentaho/data-integration/pan.sh -file /national-voter-file/src/main/pdi/newyork/SaveNewYorkReport.ktr -param:reportDate=2016-08-31 -param:reportFile=/national-voter-file/data/NewYork/AllNYSVoters20160831SAMPLE_OUT.csv -param:reporterKey=3
+docker-compose run etl /opt/pentaho/data-integration/.sh -file /national-voter-file/src/main/pdi/newyork/SaveNewYorkReport.ktr -param:reportDate=2016-08-31 -param:reportFile=/national-voter-file/data/NewYork/AllNYSVoters20160831SAMPLE_OUT.csv -param:reporterKey=3
 
+###################
+## Run job to process sample voter file
+docker-compose run etl /opt/pentaho/data-integration/kitchen.sh -file /national-voter-file/src/main/pdi/newyork/ProcessNewYorkFile.kjb -param:reportDate=2016-08-31 -param:reportFile=/national-voter-file/data/NewYork/AllNYSVoters20160831SAMPLE_OUT.csv -param:reporterKey=3
 

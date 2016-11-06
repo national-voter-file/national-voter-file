@@ -198,7 +198,7 @@
       <table>household_dim</table>
       <connection>Localhost</connection>
       <commit>1000</commit>
-      <cache_size>0</cache_size>
+      <cache_size>25</cache_size>
       <replace>N</replace>
       <preloadCache>N</preloadCache>
       <crc>Y</crc>
@@ -279,7 +279,7 @@
       <table>mailing_address_dim</table>
       <connection>Localhost</connection>
       <commit>1000</commit>
-      <cache_size>0</cache_size>
+      <cache_size>25</cache_size>
       <replace>N</replace>
       <preloadCache>N</preloadCache>
       <crc>Y</crc>
