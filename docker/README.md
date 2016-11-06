@@ -29,7 +29,10 @@ Typically, you will invoke commands in this container as
 `% docker-compose run etl` 
 
 ## Running ETL Scripts
-We've provided a shell script for loading in a 1,000 row sample of Washington state data. Take a look at buildWashington.sh for setting up a simple warehouse, or as guidance for running your own ETL jobs. It assumes that the voter file can be found in the data directory of this repo (which is in .gitignore so you have to construct your own local version)
+We've provided a shell script for loading in a 1,000 row sample of Washington state data. Take a look at buildWashington.sh for setting up a simple warehouse, or as guidance for running your own ETL jobs. It assumes that the voter file can be found in the data directory of this repo
+(which is in .gitignore so you have to construct your own local version)
+
+Copy those files into data/Washington directory of the national-voter-file repo
 
 You can get samples of this data in our [private dropbox](https://www.dropbox.com/work/getmovement%20Team%20Folder) message us on the slack channel to get access.
 
