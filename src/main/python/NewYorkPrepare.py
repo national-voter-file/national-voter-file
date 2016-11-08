@@ -13,7 +13,7 @@ import PrepareUtils
 ## This script pre-processes the New York voter file to use usaddress module
 ## to break the address string into standard parts
 ## Also uses the residential address if no mailing address is provided
-## 
+##
 ## Outputs lines that fail the address parser to an error log file
 ###########################################################
 def constructInputFieldList():
@@ -63,10 +63,10 @@ def constructInputFieldList():
 		'PURGE_DATE',
 		'SBOEID',
 		'VoterHistory'])
-		
+
 def prepareDate(nyDate):
 	return datetime.strptime(nyDate, "%Y%m%d").strftime("%Y-%m-%d")
-	
+
 def appendMailingAddress(outrow, row):
 	try:
 		tagged_address, address_type = usaddress.tag(' '.join([
@@ -89,8 +89,8 @@ def appendMailingAddress(outrow, row):
 			'MAIL_ZIP_CODE':outrow['ZIP_CODE'],
 			'MAIL_COUNTRY':'USA'
 			})
-	
-	
+
+
 def appendJurisdiction(outrow, row):
 		outrow.update({
 		'COUNTYCODE':row['COUNTYCODE'],
@@ -101,18 +101,18 @@ def appendJurisdiction(outrow, row):
 		'CONGRESSIONAL_DIST':row['CD'],
 		'UPPER_HOUSE_DIST':row['SD'],
 		'LOWER_HOUSE_DIST':row['AD']})
-		
-			
-			
+
+
+
 def constructResidenceAddress(row):
 	aptField = row['RAPARTMENT'].strip();
-	return ' '.join([row['RADDNUMBER'], 
-							 row['RHALFCODE'],						
+	return ' '.join([row['RADDNUMBER'],
+							 row['RHALFCODE'],
 							 row['RPREDIRECTION'],
-							 row['RSTREETNAME'], 
+							 row['RSTREETNAME'],
 							 row['RPOSTDIRECTION'],
 							 'Apt '+row['RAPARTMENT'] if aptField and aptField != 'APT' else ''
-						])			
+						])
 
 def constructVoterRegOutrow(row):
 	return {
@@ -123,57 +123,58 @@ def constructVoterRegOutrow(row):
 		'LAST_NAME':row['LASTNAME'],
 		'NAME_SUFFIX':row['NAMESUFFIX'],
 		'BIRTHDATE':prepareDate(row['DOB']),
+		'GENDER': row['GENDER'],
 		'REGISTRATION_DATE':prepareDate(row['REGDATE']),
 		'REGISTRATION_STATUS':row['STATUS'],
 		'PARTY':(row['ENROLLMENT'] if row['ENROLLMENT'] != 'OTH'  else row['OTHERPARTY']),
 		'PLACE_NAME':row['RCITY'].upper(),
 		'STATE_NAME':'NY',
-		'ZIP_CODE':row['RZIP5']									
+		'ZIP_CODE':row['RZIP5']
 	}
-			
+
 if len(sys.argv) != 2:
-	print('Usage: New York Prepare <inputfile>');
+	print('Usage: NewYorkPrepare.py <inputfile>');
 	quit()
 
 
 	
 inputFile = sys.argv[1]
-outputFile = re.sub('\\..*$', '_OUT.csv',inputFile, count=1)	
-errorFileName = re.sub('\\..*$', '_ERR.csv',inputFile, count=1)	
+outputFile = re.sub('\\..*$', '_OUT.csv',inputFile, count=1)
+errorFileName = re.sub('\\..*$', '_ERR.csv',inputFile, count=1)
 print("Reading from "+inputFile+"-->"+outputFile)
 with open(inputFile, encoding='latin-1') as csvfile, \
 	open(outputFile, 'w') as outfile, open(errorFileName, 'w') as errorFile:
 		reader = csv.DictReader(csvfile, dialect='excel', fieldnames=constructInputFieldList())
-		
+
 		writer = csv.DictWriter(outfile, fieldnames=PrepareUtils.constructOutputFieldNames())
 		writer.writeheader()
-		
-		
-		# Create a file for writing addresses that don't parse		
+
+
+		# Create a file for writing addresses that don't parse
 		errnames = list(PrepareUtils.constructOutputFieldNames())
 		errnames.extend(['PARSED_STRING',"ORIGINAL_TEXT"])
 		errWriter = csv.DictWriter(errorFile, fieldnames=errnames)
-		errWriter.writeheader()	
+		errWriter.writeheader()
 
 		i = 0;
-		for row in reader:	
+		for row in reader:
 			# Skip blank lines
 			if row['MAILADD4'] is None:
 				for key in row:
 					print(key +":"+row[key] if row[key] is not None else 'NONE')
 				sys.exit('Bad Row---->')
-				
-			outrow = constructVoterRegOutrow(row)	
-					
+
+			outrow = constructVoterRegOutrow(row)
+
 			try:
 				addr = constructResidenceAddress(row)
-				tagged_address, address_type = usaddress.tag(addr)						
+				tagged_address, address_type = usaddress.tag(addr)
 				PrepareUtils.appendParsedFields(outrow, tagged_address)
-				
+
 				appendMailingAddress(outrow, row)
 				appendJurisdiction(outrow, row)
 
-				writer.writerow(outrow)				
+				writer.writerow(outrow)
 
 			### Gets thrown when the US Address parser gets hopelesly confused. Write this out to the errorFile
 			### for manual training later
@@ -183,11 +184,11 @@ with open(inputFile, encoding='latin-1') as csvfile, \
 					'PARSED_STRING':e.parsed_string,
 					'ORIGINAL_TEXT':e.original_string
 				})
-				
-				errWriter.writerow(outrow)					
-				
+
+				errWriter.writerow(outrow)
+
 			# if i > 1000:
 				# break
 			# i += 1
-			
+
 
