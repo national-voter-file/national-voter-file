@@ -21,7 +21,7 @@
         </parameter>
         <parameter>
             <name>reportFile</name>
-            <default_value>C&#x3a;&#x5c;dev&#x5c;GitHub&#x5c;getmovement&#x5c;national-voter-file&#x5c;data&#x5c;NewYork&#x5c;AllNYSVoters20160831_OUT.csv</default_value>
+            <default_value>C&#x3a;&#x5c;dev&#x5c;GitHub&#x5c;getmovement&#x5c;national-voter-file&#x5c;data&#x5c;NewYork&#x5c;AllNYSVoters20160831SAMPLE_OUT.csv</default_value>
             <description/>
         </parameter>
         <parameter>
@@ -1170,6 +1170,11 @@
         <field>
           <name>PARTY</name>
           <lookup>party</lookup>
+          <update>Insert</update>
+        </field>
+        <field>
+          <name>GENDER</name>
+          <lookup>gender</lookup>
           <update>Insert</update>
         </field>
         <return>

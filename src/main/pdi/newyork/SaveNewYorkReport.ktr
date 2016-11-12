@@ -1808,6 +1808,11 @@
           <lookup>party</lookup>
           <update>Insert</update>
         </field>
+        <field>
+          <name>GENDER</name>
+          <lookup>gender</lookup>
+          <update>Insert</update>
+        </field>
         <return>
           <name>voter_id</name>
           <rename/>
