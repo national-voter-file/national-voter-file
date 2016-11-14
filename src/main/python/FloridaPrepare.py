@@ -57,24 +57,20 @@ def constructInputFieldList():
 		'Daytime Phone Extension',
 		'Email address'])
 
-def prepareDate(nyDate):
-	return datetime.strptime(nyDate, "%m/%d/%Y").strftime("%Y-%m-%d")
+def prepareDate(voterFileDate):
+	return datetime.strptime(voterFileDate, "%m/%d/%Y").strftime("%Y-%m-%d") if voterFileDate else ''
 
 def appendMailingAddress(outrow, row):
-	try:
-		tagged_address, address_type = usaddress.tag(' '.join([
-			row['Mailing Address Line 1'],
-			row['Mailing Address Line 2'],
-			row['Mailing Address Line 3'],
-			row['Mailing City'],
-		row['Mailing State'],
-		row['Mailing Zipcode']]))
-	except usaddress.RepeatedLabelError as e :
-		print('Warn: Can\'t parse mailing address. Falling back to residential (%s)' % (e.parsed_string))
-		tagged_address = {}
-
-	if(len(tagged_address) > 0):
-		PrepareUtils.appendMailingAddressFromTaggedFields(outrow, tagged_address, address_type)
+	if(row['Mailing Address Line 1'].strip()):
+		outrow.update({
+			'MAIL_ADDRESS_LINE1':row['Mailing Address Line 1'],
+			'MAIL_ADDRESS_LINE2':row['Mailing Address Line 2'],
+			# Note: Throwing away mailing address line 3
+			'MAIL_CITY':row['Mailing City'],
+			'MAIL_STATE':row['Mailing State'],
+			'MAIL_ZIP_CODE':row['Mailing Zipcode'],
+			'MAIL_COUNTRY':row['Mailing Country']
+		})
 	else:
 		outrow.update({
 			'MAIL_ADDRESS_LINE1':PrepareUtils.constructMailAddr1FromOutRow(outrow),
@@ -87,15 +83,27 @@ def appendMailingAddress(outrow, row):
 
 
 def appendJurisdiction(outrow, row):
+
+		# Precinct split will be our actual key to the voter's precinct
+		# sometimes field is blank so fall back to precinct.
+		precinctSplit = row['Precinct Split'].strip() if row['Precinct Split'].strip() else row['Precinct'].strip()
+		
+		# Get rid of the useless trailing dot
+		precinctSplit = re.sub("\.$", "", precinctSplit)
+
+
+		print("Split[%s] precinct[%s] guess[%s]"%(row['Precinct Split'], row['Precinct'],precinctSplit))
+		
 		outrow.update({
 		'COUNTYCODE':row['County Code'],
-		'ELECTORAL_DIST':row['Precinct'],
-#		'LEGISLATIVE_DIST':row['LD'],
-#		'TOWNCITY':row['TOWNCITY'],
-#		'WARD':row['WARD'],
+		'PRECINCT':row['Precinct'],
 		'CONGRESSIONAL_DIST':row['Congressional District'],
 		'UPPER_HOUSE_DIST':row['Senate District'],
-		'LOWER_HOUSE_DIST':row['House District']})
+		'LOWER_HOUSE_DIST':row['House District'],
+		'COUNTY_BOARD_DIST':row['County Commission District'],
+		'SCHOOL_BOARD_DIST':row['School Board District'],
+		'PRECINCT_SPLIT':precinctSplit
+		})
 
 
 
@@ -104,9 +112,12 @@ def constructResidenceAddress(row):
 							 row['Residence Address Line 2']])
 
 def constructVoterRegOutrow(row):
+	phone = row['Daytime Phone Number'].strip()
+	
+	phoneStr = '(%s) %s-%s'%(row['Daytime Area Code'], phone[:3],phone[3:]) if phone else ''
+
 	return {
-		'STATE_VOTER_REF':row['Voter ID'],
-#		'COUNTY_VOTER_REF':row['COUNTYVRNUMBER'],
+		'STATE_VOTER_REF':"FL"+row['Voter ID'],
 		'FIRST_NAME':row['Name First'],
 		'MIDDLE_NAME':row['Name Middle'],
 		'LAST_NAME':row['Name Last'],
@@ -118,7 +129,9 @@ def constructVoterRegOutrow(row):
 		'PARTY':row['Party Affiliation'],
 		'PLACE_NAME':row['Residence City (USPS)'].upper(),
 		'STATE_NAME':'FL',
-		'ZIP_CODE':row['Residence Zipcode']
+		'ZIP_CODE':row['Residence Zipcode'],
+		'EMAIL':row['Email address'],
+		'PHONE':phoneStr
 	}
 
 if len(sys.argv) != 2:
@@ -153,7 +166,6 @@ with open(inputFile, encoding='latin-1') as csvfile, \
 #					print(key +":"+row[key] if row[key] is not None else 'NONE')
 #				sys.exit('Bad Row---->')
 
-			print(row)
 			outrow = constructVoterRegOutrow(row)
 
 			try:

@@ -1,4 +1,4 @@
--- National Voter File Database Tables
+  -- National Voter File Database Tables
 -- This file contains the DDL for creating the tables, views, and indexes for
 -- the national voter file data warehouse
 
@@ -77,7 +77,7 @@ CREATE TABLE VOTER_DIM
     ABSTENTEE_TYPE      	VARCHAR (1) NULL,
     PARTY               	VARCHAR (6) NULL,
     EMAIL               	VARCHAR (50) NULL,
-    PHONE               	VARCHAR (12) NULL,
+    PHONE               	VARCHAR (15) NULL,
     DO_NOT_CALL_STATUS  	VARCHAR (1) NULL,
     LANGUAGE_CHOICE     	VARCHAR (3) NULL,
     VERSION		INTEGER NOT NULL DEFAULT(0),

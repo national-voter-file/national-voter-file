@@ -1,0 +1,1 @@
+alter table voter_dim alter column     PHONE     type          	VARCHAR (15);
