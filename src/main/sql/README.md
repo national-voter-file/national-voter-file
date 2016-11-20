@@ -2,7 +2,14 @@ This directory contains the logical and physical data model for the voter file w
 
 The data models are maintained using Oracle's [SQL Data Modeler Tool](http://www.oracle.com/technetwork/developer-tools/datamodeler/overview/index.html).
 
+This model is based on standard data warehouse modelling techniques with an aim of making useful queries easy to generate while preserving history of the data. If you are unfamiliar with dimensional data modelling, you may enjoy [this article](https://dwbi.org/data-modelling/dimensional-model/1-dimensional-modeling-guide).
+
+We assume that the movement app will maintain an Operational Data Store for transactional data related to administering and operating the application. This Online Analytic Processing database will perform the heavy lifting of historic analysis and voter identification.
+
+We have a document describing the data architecture available as a [Google document](https://docs.google.com/document/d/169mIkiIdl4OetbGvnbVCzq9Srw9PKCsB6U1CErTD9aI/edit?usp=sharing).
+
 # Setting up the Postgres Database (the hard way)
+
 This ddl has been tested against Postgres version 9.5 with postgis extensions installed.
 
 1. Execute create_database.sql to create the voter database instance

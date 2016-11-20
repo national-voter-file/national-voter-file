@@ -12,21 +12,23 @@ We use [docker-compose](https://docs.docker.com/compose/) to manage interactions
 
 4. Use your favorite (postgres-supporting) SQLing tool to connect (just fill in the ones your tool requires):
 
-* URL: `jdbc:postgresql://postgis:5432/VOTER`
-* Driver: `org.postgresql.Driver`
+   * URL: `jdbc:postgresql://postgis:5432/VOTER` 
+   * Driver: `org.postgresql.Driver`
+   * Host: `localhost`
+   * Port: `5432`
+   * Database: `VOTER`
+   * User: `postgres`
+   * Password: blank
 
-* Host: `localhost` from your workstation, `postgis` when accessed from inside the ETL docker container
-* Port: `5432`
-* Database: `VOTER`
-* User: `postgres`
-* Password: blank
+Note: The host should be `postgis` when accessed from inside the ETL docker container.
 
-## ETL
+## Extracting, transforming, and loading (ETL)
 
 This container is intended to run [Pentaho Data Integration](http://community.pentaho.com/projects/data-integration/) transforms and python scripts with some handy modules. These scripts and transforms are how we enrich, clean, and load data into the postgres database.
 
 Typically, you will invoke commands in this container as 
-`% docker-compose run etl` 
+
+`docker-compose run etl` 
 
 ## Running ETL Scripts
 

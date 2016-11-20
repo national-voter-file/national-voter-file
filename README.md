@@ -14,27 +14,17 @@ We want to pull politics into the 21st century, and we're starting from the grou
 
 * And for thousands to use our voter file to power their campaigns' donation, canvassing, and phonebanking efforts!
 
-## About the architecture
+## How can I help?
 
-This model is based on standard data warehouse modelling techniques with an aim of making useful queries easy to generate while preserving history of the data. If you are unfamiliar with dimensional data modelling, you may enjoy [this article](https://dwbi.org/data-modelling/dimensional-model/1-dimensional-modeling-guide).
+* First, join us on [Slack](http://goo.gl/forms/8SJRDlo7Lx2rUsan1).
+* Then, take a look at [our todo list](http://waffle.io/getmovement/national-voter-file), and see where you'd like to contribute.
+* Finally, learn how to [view and modify the relational model itself](https://github.com/getmovement/national-voter-file/tree/master/docker), the core of our work.
 
-We assume that the movement app will maintain an Operational Data Store for transactional data related to administering and operating the application. This Online Analytic Processing database will perform the heavy lifting of historic analysis and voter identification.
-
-We have a document describing the data architecture available as a [Google document](https://docs.google.com/document/d/169mIkiIdl4OetbGvnbVCzq9Srw9PKCsB6U1CErTD9aI/edit?usp=sharing).
-
-Take a look inside [the SQL folder](https://github.com/getmovement/national-voter-file/tree/master/src/main/sql) to see how you can view and modify the relational model.
-
-## How we get things done
-
-* We write in Python. See a list of the tools we use [here](https://github.com/getmovement/national-voter-file/tree/master/tools).
-* We are on [#Slack](http://goo.gl/forms/8SJRDlo7Lx2rUsan1)!
-* We use Waffle.io (built on top of Issues) to stay on top of stuff. [Join us!](http://waffle.io/getmovement/national-voter-file)
-
-## FAQ
+## Often asked
 
 *How are we supposed to get all the voter files we need?*
 
-You're in luck. We have a [Google document](https://docs.google.com/spreadsheets/d/1CtNePb4LQSz-pk8UF58wwuVoBIc_YDAsBJZnIk7hKso/edit?usp=sharing) with information on how to obtain each voter file we need.
+You're in luck. We have a [Google document](https://docs.google.com/spreadsheets/d/1CtNePb4LQSz-pk8UF58wwuVoBIc_YDAsBJZnIk7hKso/edit?usp=sharing) with information on how to catch them all.
 
 *Is this legal?!*
 
