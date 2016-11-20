@@ -12,7 +12,7 @@ The data models are maintained using Oracle's [SQL Data Modeler Tool](http://www
 
    This script will first try to attach to the running container. If the container isn't running, it will start it. When you run this script, the terminal window shows the running output of the postgres server. To exit the server, press `ctrl-C`.
 
-3. Connect via Psql: `dockerResources/psql-connect.sh`
+3. Connect via Psql: `% dockerResources/psql-connect.sh`
 
 ## Connection settings:
 
