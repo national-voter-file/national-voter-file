@@ -6,11 +6,11 @@ The data models are maintained using Oracle's [SQL Data Modeler Tool](http://www
 
 1. Build the container: `% dockerResources/docker-build.sh`
 
-This command builds the container from the Dockerfile and names it `nvf_postgis`. If you rename the container, the other scripts in this folder won't work. 
+   This command builds the container from the Dockerfile and names it `nvf_postgis`. If you rename the container, the other scripts in this folder won't work. 
 
 2. Run the container: `% dockerResources/docker-run.sh`
 
-This scripts first tries attaching to the running container. If the container isn't running, it will start it. When you run this script, the terminal window shows the running output of the postgres server. To exit the server, press `ctrl-C`.
+   This scripts first tries attaching to the running container. If the container isn't running, it will start it. When you run this script, the terminal window shows the running output of the postgres server. To exit the server, press `ctrl-C`.
 
 3. Connect via Psql: `dockerResources/psql-connect.sh`
 
