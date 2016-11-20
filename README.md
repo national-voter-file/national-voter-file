@@ -34,7 +34,7 @@ The database can be built and launched in one step using Docker. See the README 
 
 ## How we work
 
-* We write in Python. See a list of the tools we use [here](https://github.com/getmovement/national-voter-file/tree/master/src/tools).
+* We write in Python. See a list of the tools we use [here](https://github.com/getmovement/national-voter-file/tree/master/tools).
 * We are on [#Slack](http://goo.gl/forms/8SJRDlo7Lx2rUsan1)!
 * We use Waffle.io (built on top of Issues) to stay on top of stuff. [Join us!](http://waffle.io/getmovement/national-voter-file)
 
