@@ -8,7 +8,8 @@ This model is based on standard data warehouse modelling techniques with an aim 
 
 We assume that the movement app will maintain an Operational Data Store for transactional data related to administering and operating the application. This Online Analytic Processing database will perform the heavy lifting of historic analysis and voter identification.
 
-##Design Objectives
+## Design Objectives
+
 This model was created with the following objectives in mind:
 
 1. We will receive voter data from a variety of sources, not all of which are reliable
@@ -24,6 +25,7 @@ Some of the data will be exposed as an open-source resource for any political ca
 The voter file will be leveraged to power campaign donation, canvassing and other campaign interactions.
 
 ## Database Architecture
+
 We have a document describing the data architecture available as a [google doc](https://docs.google.com/document/d/169mIkiIdl4OetbGvnbVCzq9Srw9PKCsB6U1CErTD9aI/edit?usp=sharing)
 
 Take a look inside [SQL Folder](https://github.com/getmovement/national-voter-file/tree/master/src/main/sql) in the GitHub to see how to view and modify the relational model.
@@ -31,15 +33,17 @@ Take a look inside [SQL Folder](https://github.com/getmovement/national-voter-fi
 The database can be built and launched in one step using Docker. See the README inside /src/main/sql for instructions.
 
 ## How we work
-We will use Pentaho's Opensource Extract Transform Load tool [Pentaho Data Integration](http://community.pentaho.com/projects/data-integration/) (also known as kettle) for the straightforward data load processes. More complex transformations may be coded in python as needed.
 
-To learn how to install Pentaho data integration please refer to [this page](https://github.com/getmovement/national-voter-file/tree/master/src/tools)
+* We write in Python. See a list of the tools we use [here](https://github.com/getmovement/national-voter-file/tree/master/src/tools).
+* We are on [#Slack](http://goo.gl/forms/8SJRDlo7Lx2rUsan1)!
+* We use Waffle.io (built on top of Issues) to stay on top of stuff. [Join us!](http://waffle.io/getmovement/national-voter-file)
 
-Join our slack [#national-voter-file] (http://goo.gl/forms/8SJRDlo7Lx2rUsan1)
+## FAQ
 
-We have a [google doc](https://docs.google.com/spreadsheets/d/1CtNePb4LQSz-pk8UF58wwuVoBIc_YDAsBJZnIk7hKso/edit?usp=sharing) with information on obtaining each of the voter files
+*How are we supposed to get all the voter files we need?*
 
-This site from  [The Election Project](http://voterlist.electproject.org/home) is a handy resource on each state's policies on obtaining and using their file.
+You're in luck. We have a [Google document](https://docs.google.com/spreadsheets/d/1CtNePb4LQSz-pk8UF58wwuVoBIc_YDAsBJZnIk7hKso/edit?usp=sharing) with information on how to obtain each voter file we need.
 
-We use Waffle.io to keep track of tasks that are ready for development:
-[![Stories in Ready](https://badge.waffle.io/getmovement/national-voter-file.svg?label=ready&title=Ready)](http://waffle.io/getmovement/national-voter-file)
+*Is this legal?!*
+
+[The Election Project](http://voterlist.electproject.org/home) is a handy resource on every state's policies regarding their voter file.
