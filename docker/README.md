@@ -6,9 +6,9 @@ We use [docker-compose](https://docs.docker.com/compose/) to manage interactions
 
 ## Getting started:
 
-1. Move to the docker directory: `% cd docker`
-2. Build the docker containers: `% docker-compose build`
-3. Launch the warehouse with the command `% docker-compose up`
+1. Move to the docker directory: `cd docker`
+2. Build the docker containers: `docker-compose build`
+3. Launch the warehouse with the command `docker-compose up`
 
 4. Use your favorite (postgres-supporting) SQLing tool to connect (just fill in the ones your tool requires):
 
