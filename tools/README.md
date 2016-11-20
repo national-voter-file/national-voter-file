@@ -1,9 +1,8 @@
-#The Tools we Use
-This document explains how to install the tools you need to work on the national voter file project.
+Note: This document explains how to install each of the tools we use to work on NVF.
 
-## Pentaho Data Integration
-Pentaho Data Integration (PDI) is also know as Kettle. It's an opensource Extract/Transform/Load tool that 
-allows us to be productive in developing scripts to load the data into the warehouse.
+## Pentaho Data Integration (aka Kettle)
+
+PDI is an opensource Extract/Transform/Load tool that makes it faster to develop scripts that load data into the warehouse.
 
 ### Windows Instructions
 1. Make sure you have a copy of Java installed on your workstation.
