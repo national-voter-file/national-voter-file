@@ -15,7 +15,7 @@ We use [docker-compose](https://docs.docker.com/compose/) to manage interactions
 * URL: `jdbc:postgresql://postgis:5432/VOTER`
 * Driver: `org.postgresql.Driver`
 
-* Host: `localhost`
+* Host: `localhost` from your workstation, `postgis` when accessed from inside the ETL docker container
 * Port: `5432`
 * Database: `VOTER`
 * User: `postgres`
