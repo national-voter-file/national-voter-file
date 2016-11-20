@@ -1,34 +1,35 @@
-# National Voter File Docker Compose
-This directory contains docker resources to bring up your
-very own national voter file.
+# NVF with Docker
 
-We use [docker-compose](https://docs.docker.com/compose/) to manage interactions between the containers.  The apt repository may give you a different version of docker-compose that is incompatible with the configuration file, so be sure to get it from the link above.
+This directory contains docker resources to bring up a local national voter file.
 
-To use this environment cd to this docker directory
+We use [docker-compose](https://docs.docker.com/compose/) to manage interactions between the containers. This is already installed with Docker if you are using Windows or Mac.
 
-1. Build the images with the command `% docker-compose build`
-2. Launch the warehouse with the command `% docker-compose up`
+## Getting started:
 
-## postgis
-This container brings up an postgres instance with the postgis 
-additions for GIS analysis. Once the database is up, it runs a startup script that creates the tables and loads some static data in. Finally, it exposes the postgres server through port 5432.
+1. Move to the docker directory: `% cd docker`
+2. Build the docker containers: `% docker-compose build`
+3. Launch the warehouse with the command `% docker-compose up`
 
-You can bind this port to your host and use your favorite SQL query tool to connect through this port.
+4. Use your favorite (postgres-supporting) SQLing tool to connect (just fill in the ones your tool requires):
 
-Connection Information is as follows:
+* URL: `jdbc:postgresql://postgis:5432/VOTER`
+* Driver: `org.postgresql.Driver`
 
-* driver=org.postgresql.Driver
-* url=jdbc:postgresql://postgis:5432/VOTER
-* user=postgres
-* password=
+* Host: `localhost`
+* Port: `5432`
+* Database: `VOTER`
+* User: `postgres`
+* Password: blank
 
 ## ETL
+
 This container is intended to run [Pentaho Data Integration](http://community.pentaho.com/projects/data-integration/) transforms and python scripts with some handy modules. These scripts and transforms are how we enrich, clean, and load data into the postgres database.
 
 Typically, you will invoke commands in this container as 
 `% docker-compose run etl` 
 
 ## Running ETL Scripts
+
 We've provided a shell script for loading in a 1,000 row sample of Washington state data. Take a look at buildWashington.sh for setting up a simple warehouse, or as guidance for running your own ETL jobs. It assumes that the voter file can be found in the data directory of this repo
 (which is in .gitignore so you have to construct your own local version)
 
