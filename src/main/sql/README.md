@@ -1,31 +1,20 @@
-# What is this?
-
 This directory contains the logical and physical data model for the voter file warehouse as well as the generated DDL.
 
-The data models are maintained using Oracle's SQL Data Modeler Tool [Download a copy here](http://www.oracle.com/technetwork/developer-tools/datamodeler/overview/index.html).
+The data models are maintained using Oracle's [SQL Data Modeler Tool](http://www.oracle.com/technetwork/developer-tools/datamodeler/overview/index.html).
 
-# Steps to get setup:
+## Getting started:
 
-## Building the Container
-```
-dockerResources/docker-build.sh
-```
+1. Build the container: `% dockerResources/docker-build.sh`
+
 This command builds the container from the Dockerfile and names it `nvf_postgis`. If you rename the container, the other scripts in this folder won't work. 
 
-## Running the Container 
-```
-dockerResources/docker-run.sh
-```
+2. Run the container: `% dockerResources/docker-run.sh`
+
 This scripts first tries attaching to the running container. If the container isn't running, it will start it. When you run this script, the terminal window shows the running output of the postgres server. To exit the server, press `ctrl-C`.
 
-## Connecting via PSQL
-```
-dockerResources/psql-connect.sh
-```
-Simply a convenience script to the running database via psql.
+3. Connect via Psql: `dockerResources/psql-connect.sh`
 
-## Connection Settings
-The settings for connecting to the database while the container runs are as follows. Use these for connecting from Pentaho, PgAdmin, or whatever else you may enjoy:
+## Connection settings:
 
 ```
 host: localhost
@@ -34,10 +23,8 @@ user: postgres
 database: VOTER
 ```
 
-
-
-
 # Setting up the Postgres Database (the hard way)
+
 This ddl has been tested against Postgres version 9.5 with postgis extensions installed.
 
 1. Execute create_database.sql to create the voter database instance
