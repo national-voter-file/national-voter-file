@@ -1,12 +1,10 @@
-# SQL Database Definition
-This directory contains the logical and physical data model for the voter file warehouse as well as generated DDL.
+# What is this?
+
+This directory contains the logical and physical data model for the voter file warehouse as well as the generated DDL.
 
 The data models are maintained using Oracle's SQL Data Modeler Tool [Download a copy here](http://www.oracle.com/technetwork/developer-tools/datamodeler/overview/index.html).
 
-# Setting up the Postgres Database (the easy way)
-If you're into [Docker][docker], we have written a Dockerfile to build the database service. The following instructions assume you've installed Docker, and are familiar with the basics of it. If you're not using Docker, see the next section for how to build your database manually.
-
-[docker]: https://docker.com
+# Steps to get setup:
 
 ## Building the Container
 ```
