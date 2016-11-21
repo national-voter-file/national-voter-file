@@ -9,41 +9,402 @@
     <trans_status>0</trans_status>
     <directory>&#x2f;</directory>
     <parameters>
-        <parameter>
-            <name>fileName</name>
-            <default_value/>
-            <description/>
-        </parameter>
+      <parameter>
+        <name>fileName</name>
+        <default_value/>
+        <description/>
+      </parameter>
     </parameters>
     <log>
-<trans-log-table><connection/>
-<schema/>
-<table/>
-<size_limit_lines/>
-<interval/>
-<timeout_days/>
-<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STATUS</id><enabled>Y</enabled><name>STATUS</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name><subject/></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name><subject/></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name><subject/></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name><subject/></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name><subject/></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name><subject/></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>STARTDATE</id><enabled>Y</enabled><name>STARTDATE</name></field><field><id>ENDDATE</id><enabled>Y</enabled><name>ENDDATE</name></field><field><id>LOGDATE</id><enabled>Y</enabled><name>LOGDATE</name></field><field><id>DEPDATE</id><enabled>Y</enabled><name>DEPDATE</name></field><field><id>REPLAYDATE</id><enabled>Y</enabled><name>REPLAYDATE</name></field><field><id>LOG_FIELD</id><enabled>Y</enabled><name>LOG_FIELD</name></field><field><id>EXECUTING_SERVER</id><enabled>N</enabled><name>EXECUTING_SERVER</name></field><field><id>EXECUTING_USER</id><enabled>N</enabled><name>EXECUTING_USER</name></field><field><id>CLIENT</id><enabled>N</enabled><name>CLIENT</name></field></trans-log-table>
-<perf-log-table><connection/>
-<schema/>
-<table/>
-<interval/>
-<timeout_days/>
-<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>SEQ_NR</id><enabled>Y</enabled><name>SEQ_NR</name></field><field><id>LOGDATE</id><enabled>Y</enabled><name>LOGDATE</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STEPNAME</id><enabled>Y</enabled><name>STEPNAME</name></field><field><id>STEP_COPY</id><enabled>Y</enabled><name>STEP_COPY</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>INPUT_BUFFER_ROWS</id><enabled>Y</enabled><name>INPUT_BUFFER_ROWS</name></field><field><id>OUTPUT_BUFFER_ROWS</id><enabled>Y</enabled><name>OUTPUT_BUFFER_ROWS</name></field></perf-log-table>
-<channel-log-table><connection/>
-<schema/>
-<table/>
-<timeout_days/>
-<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>LOG_DATE</id><enabled>Y</enabled><name>LOG_DATE</name></field><field><id>LOGGING_OBJECT_TYPE</id><enabled>Y</enabled><name>LOGGING_OBJECT_TYPE</name></field><field><id>OBJECT_NAME</id><enabled>Y</enabled><name>OBJECT_NAME</name></field><field><id>OBJECT_COPY</id><enabled>Y</enabled><name>OBJECT_COPY</name></field><field><id>REPOSITORY_DIRECTORY</id><enabled>Y</enabled><name>REPOSITORY_DIRECTORY</name></field><field><id>FILENAME</id><enabled>Y</enabled><name>FILENAME</name></field><field><id>OBJECT_ID</id><enabled>Y</enabled><name>OBJECT_ID</name></field><field><id>OBJECT_REVISION</id><enabled>Y</enabled><name>OBJECT_REVISION</name></field><field><id>PARENT_CHANNEL_ID</id><enabled>Y</enabled><name>PARENT_CHANNEL_ID</name></field><field><id>ROOT_CHANNEL_ID</id><enabled>Y</enabled><name>ROOT_CHANNEL_ID</name></field></channel-log-table>
-<step-log-table><connection/>
-<schema/>
-<table/>
-<timeout_days/>
-<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>LOG_DATE</id><enabled>Y</enabled><name>LOG_DATE</name></field><field><id>TRANSNAME</id><enabled>Y</enabled><name>TRANSNAME</name></field><field><id>STEPNAME</id><enabled>Y</enabled><name>STEPNAME</name></field><field><id>STEP_COPY</id><enabled>Y</enabled><name>STEP_COPY</name></field><field><id>LINES_READ</id><enabled>Y</enabled><name>LINES_READ</name></field><field><id>LINES_WRITTEN</id><enabled>Y</enabled><name>LINES_WRITTEN</name></field><field><id>LINES_UPDATED</id><enabled>Y</enabled><name>LINES_UPDATED</name></field><field><id>LINES_INPUT</id><enabled>Y</enabled><name>LINES_INPUT</name></field><field><id>LINES_OUTPUT</id><enabled>Y</enabled><name>LINES_OUTPUT</name></field><field><id>LINES_REJECTED</id><enabled>Y</enabled><name>LINES_REJECTED</name></field><field><id>ERRORS</id><enabled>Y</enabled><name>ERRORS</name></field><field><id>LOG_FIELD</id><enabled>N</enabled><name>LOG_FIELD</name></field></step-log-table>
-<metrics-log-table><connection/>
-<schema/>
-<table/>
-<timeout_days/>
-<field><id>ID_BATCH</id><enabled>Y</enabled><name>ID_BATCH</name></field><field><id>CHANNEL_ID</id><enabled>Y</enabled><name>CHANNEL_ID</name></field><field><id>LOG_DATE</id><enabled>Y</enabled><name>LOG_DATE</name></field><field><id>METRICS_DATE</id><enabled>Y</enabled><name>METRICS_DATE</name></field><field><id>METRICS_CODE</id><enabled>Y</enabled><name>METRICS_CODE</name></field><field><id>METRICS_DESCRIPTION</id><enabled>Y</enabled><name>METRICS_DESCRIPTION</name></field><field><id>METRICS_SUBJECT</id><enabled>Y</enabled><name>METRICS_SUBJECT</name></field><field><id>METRICS_TYPE</id><enabled>Y</enabled><name>METRICS_TYPE</name></field><field><id>METRICS_VALUE</id><enabled>Y</enabled><name>METRICS_VALUE</name></field></metrics-log-table>
+      <trans-log-table>
+        <connection/>
+        <schema/>
+        <table/>
+        <size_limit_lines/>
+        <interval/>
+        <timeout_days/>
+        <field>
+          <id>ID_BATCH</id>
+          <enabled>Y</enabled>
+          <name>ID_BATCH</name>
+        </field>
+        <field>
+          <id>CHANNEL_ID</id>
+          <enabled>Y</enabled>
+          <name>CHANNEL_ID</name>
+        </field>
+        <field>
+          <id>TRANSNAME</id>
+          <enabled>Y</enabled>
+          <name>TRANSNAME</name>
+        </field>
+        <field>
+          <id>STATUS</id>
+          <enabled>Y</enabled>
+          <name>STATUS</name>
+        </field>
+        <field>
+          <id>LINES_READ</id>
+          <enabled>Y</enabled>
+          <name>LINES_READ</name>
+          <subject/>
+        </field>
+        <field>
+          <id>LINES_WRITTEN</id>
+          <enabled>Y</enabled>
+          <name>LINES_WRITTEN</name>
+          <subject/>
+        </field>
+        <field>
+          <id>LINES_UPDATED</id>
+          <enabled>Y</enabled>
+          <name>LINES_UPDATED</name>
+          <subject/>
+        </field>
+        <field>
+          <id>LINES_INPUT</id>
+          <enabled>Y</enabled>
+          <name>LINES_INPUT</name>
+          <subject/>
+        </field>
+        <field>
+          <id>LINES_OUTPUT</id>
+          <enabled>Y</enabled>
+          <name>LINES_OUTPUT</name>
+          <subject/>
+        </field>
+        <field>
+          <id>LINES_REJECTED</id>
+          <enabled>Y</enabled>
+          <name>LINES_REJECTED</name>
+          <subject/>
+        </field>
+        <field>
+          <id>ERRORS</id>
+          <enabled>Y</enabled>
+          <name>ERRORS</name>
+        </field>
+        <field>
+          <id>STARTDATE</id>
+          <enabled>Y</enabled>
+          <name>STARTDATE</name>
+        </field>
+        <field>
+          <id>ENDDATE</id>
+          <enabled>Y</enabled>
+          <name>ENDDATE</name>
+        </field>
+        <field>
+          <id>LOGDATE</id>
+          <enabled>Y</enabled>
+          <name>LOGDATE</name>
+        </field>
+        <field>
+          <id>DEPDATE</id>
+          <enabled>Y</enabled>
+          <name>DEPDATE</name>
+        </field>
+        <field>
+          <id>REPLAYDATE</id>
+          <enabled>Y</enabled>
+          <name>REPLAYDATE</name>
+        </field>
+        <field>
+          <id>LOG_FIELD</id>
+          <enabled>Y</enabled>
+          <name>LOG_FIELD</name>
+        </field>
+        <field>
+          <id>EXECUTING_SERVER</id>
+          <enabled>N</enabled>
+          <name>EXECUTING_SERVER</name>
+        </field>
+        <field>
+          <id>EXECUTING_USER</id>
+          <enabled>N</enabled>
+          <name>EXECUTING_USER</name>
+        </field>
+        <field>
+          <id>CLIENT</id>
+          <enabled>N</enabled>
+          <name>CLIENT</name>
+        </field>
+      </trans-log-table>
+      <perf-log-table>
+        <connection/>
+        <schema/>
+        <table/>
+        <interval/>
+        <timeout_days/>
+        <field>
+          <id>ID_BATCH</id>
+          <enabled>Y</enabled>
+          <name>ID_BATCH</name>
+        </field>
+        <field>
+          <id>SEQ_NR</id>
+          <enabled>Y</enabled>
+          <name>SEQ_NR</name>
+        </field>
+        <field>
+          <id>LOGDATE</id>
+          <enabled>Y</enabled>
+          <name>LOGDATE</name>
+        </field>
+        <field>
+          <id>TRANSNAME</id>
+          <enabled>Y</enabled>
+          <name>TRANSNAME</name>
+        </field>
+        <field>
+          <id>STEPNAME</id>
+          <enabled>Y</enabled>
+          <name>STEPNAME</name>
+        </field>
+        <field>
+          <id>STEP_COPY</id>
+          <enabled>Y</enabled>
+          <name>STEP_COPY</name>
+        </field>
+        <field>
+          <id>LINES_READ</id>
+          <enabled>Y</enabled>
+          <name>LINES_READ</name>
+        </field>
+        <field>
+          <id>LINES_WRITTEN</id>
+          <enabled>Y</enabled>
+          <name>LINES_WRITTEN</name>
+        </field>
+        <field>
+          <id>LINES_UPDATED</id>
+          <enabled>Y</enabled>
+          <name>LINES_UPDATED</name>
+        </field>
+        <field>
+          <id>LINES_INPUT</id>
+          <enabled>Y</enabled>
+          <name>LINES_INPUT</name>
+        </field>
+        <field>
+          <id>LINES_OUTPUT</id>
+          <enabled>Y</enabled>
+          <name>LINES_OUTPUT</name>
+        </field>
+        <field>
+          <id>LINES_REJECTED</id>
+          <enabled>Y</enabled>
+          <name>LINES_REJECTED</name>
+        </field>
+        <field>
+          <id>ERRORS</id>
+          <enabled>Y</enabled>
+          <name>ERRORS</name>
+        </field>
+        <field>
+          <id>INPUT_BUFFER_ROWS</id>
+          <enabled>Y</enabled>
+          <name>INPUT_BUFFER_ROWS</name>
+        </field>
+        <field>
+          <id>OUTPUT_BUFFER_ROWS</id>
+          <enabled>Y</enabled>
+          <name>OUTPUT_BUFFER_ROWS</name>
+        </field>
+      </perf-log-table>
+      <channel-log-table>
+        <connection/>
+        <schema/>
+        <table/>
+        <timeout_days/>
+        <field>
+          <id>ID_BATCH</id>
+          <enabled>Y</enabled>
+          <name>ID_BATCH</name>
+        </field>
+        <field>
+          <id>CHANNEL_ID</id>
+          <enabled>Y</enabled>
+          <name>CHANNEL_ID</name>
+        </field>
+        <field>
+          <id>LOG_DATE</id>
+          <enabled>Y</enabled>
+          <name>LOG_DATE</name>
+        </field>
+        <field>
+          <id>LOGGING_OBJECT_TYPE</id>
+          <enabled>Y</enabled>
+          <name>LOGGING_OBJECT_TYPE</name>
+        </field>
+        <field>
+          <id>OBJECT_NAME</id>
+          <enabled>Y</enabled>
+          <name>OBJECT_NAME</name>
+        </field>
+        <field>
+          <id>OBJECT_COPY</id>
+          <enabled>Y</enabled>
+          <name>OBJECT_COPY</name>
+        </field>
+        <field>
+          <id>REPOSITORY_DIRECTORY</id>
+          <enabled>Y</enabled>
+          <name>REPOSITORY_DIRECTORY</name>
+        </field>
+        <field>
+          <id>FILENAME</id>
+          <enabled>Y</enabled>
+          <name>FILENAME</name>
+        </field>
+        <field>
+          <id>OBJECT_ID</id>
+          <enabled>Y</enabled>
+          <name>OBJECT_ID</name>
+        </field>
+        <field>
+          <id>OBJECT_REVISION</id>
+          <enabled>Y</enabled>
+          <name>OBJECT_REVISION</name>
+        </field>
+        <field>
+          <id>PARENT_CHANNEL_ID</id>
+          <enabled>Y</enabled>
+          <name>PARENT_CHANNEL_ID</name>
+        </field>
+        <field>
+          <id>ROOT_CHANNEL_ID</id>
+          <enabled>Y</enabled>
+          <name>ROOT_CHANNEL_ID</name>
+        </field>
+      </channel-log-table>
+      <step-log-table>
+        <connection/>
+        <schema/>
+        <table/>
+        <timeout_days/>
+        <field>
+          <id>ID_BATCH</id>
+          <enabled>Y</enabled>
+          <name>ID_BATCH</name>
+        </field>
+        <field>
+          <id>CHANNEL_ID</id>
+          <enabled>Y</enabled>
+          <name>CHANNEL_ID</name>
+        </field>
+        <field>
+          <id>LOG_DATE</id>
+          <enabled>Y</enabled>
+          <name>LOG_DATE</name>
+        </field>
+        <field>
+          <id>TRANSNAME</id>
+          <enabled>Y</enabled>
+          <name>TRANSNAME</name>
+        </field>
+        <field>
+          <id>STEPNAME</id>
+          <enabled>Y</enabled>
+          <name>STEPNAME</name>
+        </field>
+        <field>
+          <id>STEP_COPY</id>
+          <enabled>Y</enabled>
+          <name>STEP_COPY</name>
+        </field>
+        <field>
+          <id>LINES_READ</id>
+          <enabled>Y</enabled>
+          <name>LINES_READ</name>
+        </field>
+        <field>
+          <id>LINES_WRITTEN</id>
+          <enabled>Y</enabled>
+          <name>LINES_WRITTEN</name>
+        </field>
+        <field>
+          <id>LINES_UPDATED</id>
+          <enabled>Y</enabled>
+          <name>LINES_UPDATED</name>
+        </field>
+        <field>
+          <id>LINES_INPUT</id>
+          <enabled>Y</enabled>
+          <name>LINES_INPUT</name>
+        </field>
+        <field>
+          <id>LINES_OUTPUT</id>
+          <enabled>Y</enabled>
+          <name>LINES_OUTPUT</name>
+        </field>
+        <field>
+          <id>LINES_REJECTED</id>
+          <enabled>Y</enabled>
+          <name>LINES_REJECTED</name>
+        </field>
+        <field>
+          <id>ERRORS</id>
+          <enabled>Y</enabled>
+          <name>ERRORS</name>
+        </field>
+        <field>
+          <id>LOG_FIELD</id>
+          <enabled>N</enabled>
+          <name>LOG_FIELD</name>
+        </field>
+      </step-log-table>
+      <metrics-log-table>
+        <connection/>
+        <schema/>
+        <table/>
+        <timeout_days/>
+        <field>
+          <id>ID_BATCH</id>
+          <enabled>Y</enabled>
+          <name>ID_BATCH</name>
+        </field>
+        <field>
+          <id>CHANNEL_ID</id>
+          <enabled>Y</enabled>
+          <name>CHANNEL_ID</name>
+        </field>
+        <field>
+          <id>LOG_DATE</id>
+          <enabled>Y</enabled>
+          <name>LOG_DATE</name>
+        </field>
+        <field>
+          <id>METRICS_DATE</id>
+          <enabled>Y</enabled>
+          <name>METRICS_DATE</name>
+        </field>
+        <field>
+          <id>METRICS_CODE</id>
+          <enabled>Y</enabled>
+          <name>METRICS_CODE</name>
+        </field>
+        <field>
+          <id>METRICS_DESCRIPTION</id>
+          <enabled>Y</enabled>
+          <name>METRICS_DESCRIPTION</name>
+        </field>
+        <field>
+          <id>METRICS_SUBJECT</id>
+          <enabled>Y</enabled>
+          <name>METRICS_SUBJECT</name>
+        </field>
+        <field>
+          <id>METRICS_TYPE</id>
+          <enabled>Y</enabled>
+          <name>METRICS_TYPE</name>
+        </field>
+        <field>
+          <id>METRICS_VALUE</id>
+          <enabled>Y</enabled>
+          <name>METRICS_VALUE</name>
+        </field>
+      </metrics-log-table>
     </log>
     <maxdate>
       <connection/>
@@ -71,10 +432,10 @@
     </slaveservers>
     <clusterschemas>
     </clusterschemas>
-  <created_user>-</created_user>
-  <created_date>2016&#x2f;09&#x2f;28 18&#x3a;38&#x3a;06.234</created_date>
-  <modified_user>-</modified_user>
-  <modified_date>2016&#x2f;09&#x2f;28 18&#x3a;38&#x3a;06.234</modified_date>
+    <created_user>-</created_user>
+    <created_date>2016&#x2f;09&#x2f;28 18&#x3a;38&#x3a;06.234</created_date>
+    <modified_user>-</modified_user>
+    <modified_date>2016&#x2f;09&#x2f;28 18&#x3a;38&#x3a;06.234</modified_date>
     <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA&#x3d;</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
@@ -105,10 +466,16 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Add constants</from><to>Table output</to><enabled>Y</enabled> </hop>
-  <hop> <from>Regex Evaluation</from><to>Calculator</to><enabled>Y</enabled> </hop>
-  <hop> <from>Calculator</from><to>Add constants</to><enabled>Y</enabled> </hop>
-  <hop> <from>CSV file input</from><to>Regex Evaluation</to><enabled>Y</enabled> </hop>
+    <hop>
+      <from>Add constants</from>
+      <to>Table output</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>CSV file input</from>
+      <to>Add constants</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
   <step>
     <name>Add constants</name>
@@ -117,10 +484,10 @@
     <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
     <fields>
       <field>
         <name>VERSION</name>
@@ -159,12 +526,18 @@
         <set_empty_string>N</set_empty_string>
       </field>
     </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
       <xloc>672</xloc>
       <yloc>64</yloc>
       <draw>Y</draw>
-      </GUI>
+    </GUI>
     </step>
 
   <step>
@@ -174,11 +547,11 @@
     <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <filename>&#x24;&#x7b;fileName&#x7d;</filename>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <filename>&#x2f;national-voter-file&#x2f;dimensionaldata&#x2f;stateSenate.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -217,12 +590,12 @@
       <field>
         <name>GEOID</name>
         <type>String</type>
-        <format>&#x23;</format>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>15</length>
-        <precision>0</precision>
+        <length>5</length>
+        <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
@@ -232,7 +605,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>24</length>
+        <length>50</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -276,8 +649,8 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>19</length>
-        <precision>17</precision>
+        <length>20</length>
+        <precision>18</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
@@ -298,8 +671,30 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>18</length>
+        <length>19</length>
         <precision>14</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>STATEFP</name>
+        <type>Integer</type>
+        <format>&#x23;</format>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>distFips</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>3</length>
+        <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
       <field>
@@ -309,7 +704,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>28</length>
+        <length>54</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -375,7 +770,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -386,7 +781,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -397,7 +792,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -408,7 +803,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -507,7 +902,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -518,7 +913,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -529,7 +924,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -540,7 +935,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -551,7 +946,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -562,7 +957,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -573,7 +968,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -584,7 +979,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -639,7 +1034,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -650,7 +1045,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -661,7 +1056,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -672,7 +1067,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -771,7 +1166,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -782,7 +1177,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -793,7 +1188,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -804,7 +1199,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -815,7 +1210,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -826,7 +1221,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -837,7 +1232,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -848,7 +1243,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -914,7 +1309,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>8</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -936,7 +1331,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>5</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -980,7 +1375,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1035,7 +1430,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>5</length>
+        <length>6</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1046,7 +1441,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>5</length>
+        <length>6</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1079,7 +1474,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1134,7 +1529,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>7</length>
+        <length>8</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1178,7 +1573,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>7</length>
+        <length>8</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1211,7 +1606,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1244,7 +1639,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>7</length>
+        <length>8</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1255,7 +1650,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>7</length>
+        <length>8</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1266,7 +1661,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1288,7 +1683,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1321,7 +1716,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1332,7 +1727,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1376,7 +1771,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>7</length>
+        <length>8</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1409,7 +1804,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1464,7 +1859,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1475,7 +1870,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1486,7 +1881,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1497,7 +1892,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1508,7 +1903,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1519,7 +1914,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1530,7 +1925,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1651,7 +2046,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1662,7 +2057,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>5</length>
+        <length>6</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1673,7 +2068,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1706,7 +2101,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1717,7 +2112,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1728,7 +2123,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1750,7 +2145,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1761,7 +2156,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1805,7 +2200,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1827,7 +2222,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -1838,7 +2233,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2091,7 +2486,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2168,7 +2563,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2190,7 +2585,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2201,7 +2596,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>4</length>
+        <length>5</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2212,7 +2607,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2223,7 +2618,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2234,7 +2629,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>5</length>
+        <length>6</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2245,7 +2640,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2256,7 +2651,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2278,7 +2673,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>3</length>
+        <length>4</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2311,7 +2706,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>5</length>
+        <length>6</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2333,7 +2728,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2344,7 +2739,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2366,7 +2761,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2377,7 +2772,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2388,7 +2783,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>5</length>
+        <length>6</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2399,7 +2794,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2410,7 +2805,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2421,7 +2816,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2432,7 +2827,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2443,7 +2838,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>5</length>
+        <length>6</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2454,7 +2849,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2465,7 +2860,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2509,7 +2904,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2597,7 +2992,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2608,7 +3003,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>5</length>
+        <length>6</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2619,7 +3014,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2652,7 +3047,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2663,7 +3058,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2674,7 +3069,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2685,7 +3080,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>5</length>
+        <length>6</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2696,7 +3091,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2707,7 +3102,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2751,7 +3146,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2773,7 +3168,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2784,7 +3179,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2883,7 +3278,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2916,7 +3311,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>4</length>
+        <length>5</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2960,7 +3355,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -2993,7 +3388,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>4</length>
+        <length>5</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -3037,7 +3432,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -3070,7 +3465,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>4</length>
+        <length>5</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -3114,7 +3509,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -3136,7 +3531,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -3158,7 +3553,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -3169,7 +3564,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -3180,7 +3575,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>5</length>
+        <length>6</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -3191,7 +3586,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -3202,7 +3597,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -3224,7 +3619,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>3</length>
+        <length>4</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -3279,7 +3674,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -3290,7 +3685,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -3312,7 +3707,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -3345,7 +3740,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -3400,7 +3795,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -3411,7 +3806,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -3455,7 +3850,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -3532,7 +3927,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>7</length>
+        <length>8</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -3554,7 +3949,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>7</length>
+        <length>8</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -3587,7 +3982,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -3598,7 +3993,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -3609,7 +4004,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -3631,7 +4026,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>7</length>
+        <length>8</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -3675,7 +4070,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -3686,7 +4081,7 @@
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
       </field>
@@ -3713,102 +4108,18 @@
         <trim_type>none</trim_type>
       </field>
     </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
       <xloc>80</xloc>
       <yloc>80</yloc>
       <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Calculator</name>
-    <type>Calculator</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-       <calculation><field_name>district</field_name>
-<calc_type>COPY_FIELD</calc_type>
-<field_a>distFips</field_a>
-<field_b/>
-<field_c/>
-<value_type>Integer</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<remove>N</remove>
-<conversion_mask/>
-<decimal_symbol/>
-<grouping_symbol/>
-<currency_symbol/>
-</calculation>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>592</xloc>
-      <yloc>192</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Regex Evaluation</name>
-    <type>RegexEval</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <script><![CDATA[(..)(...)]]></script>    <matcher>GEOID</matcher>
-    <resultfieldname>result</resultfieldname>
-    <usevar>N</usevar>
-    <allowcapturegroups>Y</allowcapturegroups>
-    <replacefields>Y</replacefields>
-    <canoneq>N</canoneq>
-    <caseinsensitive>N</caseinsensitive>
-    <comment>N</comment>
-    <dotall>N</dotall>
-    <multiline>N</multiline>
-    <unicode>N</unicode>
-    <unix>N</unix>
-    <fields>
-      <field>
-        <name>stateFIPS</name>
-        <type>String</type>
-        <format/>
-        <group/>
-        <decimal/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <nullif/>
-        <ifnull/>
-        <trimtype>none</trimtype>
-      </field>
-      <field>
-        <name>distFips</name>
-        <type>String</type>
-        <format/>
-        <group/>
-        <decimal/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <nullif/>
-        <ifnull/>
-        <trimtype>none</trimtype>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>480</xloc>
-      <yloc>80</yloc>
-      <draw>Y</draw>
-      </GUI>
+    </GUI>
     </step>
 
   <step>
@@ -3818,10 +4129,10 @@
     <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
     <connection>Voter</connection>
     <schema/>
     <table>UPPER_HOUSE_DIST_DIM</table>
@@ -4982,7 +5293,7 @@
         </field>
         <field>
           <column_name>state_fips</column_name>
-          <stream_name>stateFIPS</stream_name>
+          <stream_name>stateFP</stream_name>
         </field>
         <field>
           <column_name>UPPER_HOUSE_DIST_FIPS</column_name>
@@ -4994,25 +5305,30 @@
         </field>
         <field>
           <column_name>district_name_full</column_name>
-          <stream_name>name_1</stream_name>
+          <stream_name>name</stream_name>
         </field>
         <field>
           <column_name>district_number</column_name>
-          <stream_name>district</stream_name>
+          <stream_name>distFips</stream_name>
         </field>
     </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
       <xloc>960</xloc>
       <yloc>64</yloc>
       <draw>Y</draw>
-      </GUI>
+    </GUI>
     </step>
 
   <step_error_handling>
   </step_error_handling>
-   <slave-step-copy-partition-distribution>
-</slave-step-copy-partition-distribution>
-   <slave_transformation>N</slave_transformation>
-
+  <slave-step-copy-partition-distribution>
+  </slave-step-copy-partition-distribution>
+  <slave_transformation>N</slave_transformation>
 </transformation>

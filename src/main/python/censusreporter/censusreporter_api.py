@@ -4,6 +4,7 @@ import csv
 import sys
 import re
 import collections
+from jsonmerge import merge
 
 API_URL="http://api.censusreporter.org/1.0/data/show/{release}?table_ids={table_ids}&geo_ids={geoids}"
 
@@ -14,6 +15,16 @@ def _clean_list_arg(arg,default):
     if isinstance(arg,str):
         arg = [arg]
     return arg
+
+def get_url_response(tables, geoids, release):
+    url = API_URL.format(table_ids=','.join(tables).upper(), 
+                         geoids=','.join(geoids), 
+                         release=release)
+
+    response = requests.get(url)
+
+    return response.json()
+
 
 def json_data(tables=None, geoids=None, release='latest'):
     """Make a basic API request for data for a given table, geoid, and/or release.
@@ -27,13 +38,24 @@ def json_data(tables=None, geoids=None, release='latest'):
     """
     geoids = _clean_list_arg(geoids,'040|01000US')
     tables = _clean_list_arg(tables,'B01001')
- 
-    url = API_URL.format(table_ids=','.join(tables).upper(), 
-                         geoids=','.join(geoids), 
-                         release=release)
 
-    response = requests.get(url)
-    return response.json()
+    #If the URL is too big it will fail, estimating the size here and if it is too big we'll break this up
+    #Each table uses 7 characters and each geoid uses 13 characters
+    maxURLSize = 4020
+    urlSize = (len(tables) * 7) + (len(geoids) * 13)
+
+    if urlSize > maxURLSize:
+        tableSize = len(tables) * 7
+        maxGeos = int((maxURLSize - tableSize) / 13)
+
+        resp = get_url_response(tables, geoids[:maxGeos], release)
+        if "error" in resp:
+            raise Exception(resp['error'])
+
+        return merge(resp, json_data(tables, geoids[maxGeos:], release))
+
+    return get_url_response(tables, geoids, release)
+
  
 
 
@@ -85,7 +107,9 @@ def get_dataframe(tables=None, geoids=None, release='latest',level=None,place_na
     place_names -- specify False to omit a 'name' column for each geography row
     column_names -- specify False to preserve the coded column names instead of using verbal labels
     """
+
     response = json_data(tables, geoids, release)
+
     if 'error' in response:
         raise Exception(response['error'])
     df = pd.DataFrame.from_dict(_prep_data_for_pandas(response),orient='index')
