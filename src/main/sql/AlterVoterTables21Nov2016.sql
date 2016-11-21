@@ -1,6 +1,6 @@
---County Changes
+﻿--County Changes
 
-ALTER TABLE public.county_dim ALTER COLUMN county_name character TYPE character varying(75);
+ALTER TABLE public.county_dim ALTER COLUMN county_name TYPE character varying(75);
 
 --Congress Changes
 
