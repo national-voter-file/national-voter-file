@@ -37,7 +37,7 @@ We've provided a shell script for loading in a 1,000 row sample of Washington st
 
 Copy those files into data/Washington directory of the national-voter-file repo
 
-You can get samples of this data in our [private dropbox](https://www.dropbox.com/work/getmovement%20Team%20Folder) message us on the slack channel to get access.
+You can get samples of this data in our [private Dropbox](https://www.dropbox.com/work/getmovement%20Team%20Folder). Message us on Slack to get access.
 
 ### populateDateDimension.ktr
 This transform creates records in the date dimension that has a row for every single date going out twenty years. This is required before loading any records into the warehouse.
