@@ -2,37 +2,29 @@
 
 # National Voter File
 
-This project will build a database containing voter files for all fifty states. It uses a data model that represents a national voter file as well as associated campaign measures in a shared data warehouse. 
+We provide an easy-to-use, modern-era database with voter files for each of the fifty states. It uses a data model that represents a national voter file as well as associated campaign measures in a shared data warehouse.
+
+We want to pull politics into the 21st century, and we're starting from the ground up.
+
+## Our goals
+
+* Reliable, up-to-date voter data for every state in the country (including address changes, and redrawn districts)
+* Per-household insights, done by grouping voters together based on address
+* Per-voter insights, such as when people change their names and genders
+
+* And for thousands to use our voter file to power their campaigns' donation, canvassing, and phonebanking efforts!
+
+## About the architecture
 
 This model is based on standard data warehouse modelling techniques with an aim of making useful queries easy to generate while preserving history of the data. If you are unfamiliar with dimensional data modelling, you may enjoy [this article](https://dwbi.org/data-modelling/dimensional-model/1-dimensional-modeling-guide).
 
 We assume that the movement app will maintain an Operational Data Store for transactional data related to administering and operating the application. This Online Analytic Processing database will perform the heavy lifting of historic analysis and voter identification.
 
-## Design Objectives
+We have a document describing the data architecture available as a [Google document](https://docs.google.com/document/d/169mIkiIdl4OetbGvnbVCzq9Srw9PKCsB6U1CErTD9aI/edit?usp=sharing).
 
-This model was created with the following objectives in mind:
+Take a look inside [the SQL folder](https://github.com/getmovement/national-voter-file/tree/master/src/main/sql) to see how you can view and modify the relational model.
 
-1. We will receive voter data from a variety of sources, not all of which are reliable
-2. People change addresses
-3. Electoral boundaries change over time
-4. People live together in households
-5. People change their names and genders
-
-The model will be used for maintaining a national voter file that can be enriched with private data sources as well as crowd-sourced edits. Over time this voter file database will accumulate history of voter location and affiliation. 
-
-Some of the data will be exposed as an open-source resource for any political campaign. An authorization model will be developed to allow campaigns to create private resources with data sharing between allied campaigns.
-
-The voter file will be leveraged to power campaign donation, canvassing and other campaign interactions.
-
-## Database Architecture
-
-We have a document describing the data architecture available as a [google doc](https://docs.google.com/document/d/169mIkiIdl4OetbGvnbVCzq9Srw9PKCsB6U1CErTD9aI/edit?usp=sharing)
-
-Take a look inside [SQL Folder](https://github.com/getmovement/national-voter-file/tree/master/src/main/sql) in the GitHub to see how to view and modify the relational model.
-
-The database can be built and launched in one step using Docker. See the README inside /src/main/sql for instructions.
-
-## How we work
+## How we get things done
 
 * We write in Python. See a list of the tools we use [here](https://github.com/getmovement/national-voter-file/tree/master/tools).
 * We are on [#Slack](http://goo.gl/forms/8SJRDlo7Lx2rUsan1)!
