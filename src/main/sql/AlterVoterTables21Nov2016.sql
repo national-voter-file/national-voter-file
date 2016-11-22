@@ -1,4 +1,4 @@
-﻿--County Changes
+--County Changes
 
 ALTER TABLE public.county_dim ALTER COLUMN county_name TYPE character varying(75);
 
