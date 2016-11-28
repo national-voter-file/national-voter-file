@@ -1,5 +1,3 @@
-![National Voter File](https://d3vv6lp55qjaqc.cloudfront.net/items/231s0n30283j2W2S0u1L/NVF%20small.png?X-CloudApp-Visitor-Id=1336043&v=dfe5cf15)
-
 # National Voter File
 
 We provide an easy-to-use, modern-era database with voter files for each of the fifty states. It uses a data model that represents a national voter file as well as associated campaign measures in a shared data warehouse.
