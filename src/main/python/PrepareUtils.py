@@ -51,13 +51,13 @@ def constructOutputFieldNames():
 			'MAIL_ZIP_CODE',
 			'MAIL_COUNTRY',
 			'COUNTYCODE',
-			'ELECTORAL_DIST',
-			'LEGISLATIVE_DIST',
-			'TOWNCITY',
-			'WARD',
 			'CONGRESSIONAL_DIST',
 			'UPPER_HOUSE_DIST',
-			'LOWER_HOUSE_DIST']
+			'LOWER_HOUSE_DIST',
+			'PRECINCT',
+			'COUNTY_BOARD_DIST',
+			'SCHOOL_BOARD_DIST',
+			'PRECINCT_SPLIT']
 		)
 
 # Transfer values to defaultdict so we can get nulls for missing fields

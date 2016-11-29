@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>SaveNewYorkReport</name>
+    <name>SaveFloridaReport</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -116,22 +116,23 @@
   </connection>
   <order>
   <hop> <from>Lookup County</from><to>Lookup Congressional District</to><enabled>Y</enabled> </hop>
-  <hop> <from>Lookup Congressional District</from><to>Lookup State Senate Dist</to><enabled>Y</enabled> </hop>
-  <hop> <from>Lookup State Senate Dist</from><to>Lookup Assembly Dist</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Variables</from><to>Lookup report date key</to><enabled>Y</enabled> </hop>
   <hop> <from>Lookup report date key</from><to>Text file input</to><enabled>Y</enabled> </hop>
   <hop> <from>Text file input</from><to>Add constants</to><enabled>Y</enabled> </hop>
   <hop> <from>Add constants</from><to>Only active status</to><enabled>Y</enabled> </hop>
-  <hop> <from>Only active status</from><to>Lookup County</to><enabled>Y</enabled> </hop>
   <hop> <from>Lookup or Add Housholds 2</from><to>Trim bad international fields</to><enabled>Y</enabled> </hop>
   <hop> <from>Lookup or Add Housholds 2</from><to>Write to log</to><enabled>Y</enabled> </hop>
   <hop> <from>Lookup or Add Mailing Addrs</from><to>Write Mailing Address Errors</to><enabled>Y</enabled> </hop>
   <hop> <from>Trim bad Post Type</from><to>Lookup or Add Housholds 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Trim bad international fields</from><to>Lookup or Add Mailing Addrs</to><enabled>Y</enabled> </hop>
-  <hop> <from>Lookup Assembly Dist</from><to>Trim bad Post Type</to><enabled>Y</enabled> </hop>
   <hop> <from>Strings cut</from><to>Voter Lookup&#x2f;Update</to><enabled>Y</enabled> </hop>
   <hop> <from>Lookup or Add Mailing Addrs</from><to>Strings cut</to><enabled>Y</enabled> </hop>
   <hop> <from>Voter Lookup&#x2f;Update</from><to>Table output</to><enabled>Y</enabled> </hop>
+  <hop> <from>Only active status</from><to>Lookup County</to><enabled>Y</enabled> </hop>
+  <hop> <from>Lookup Congressional District</from><to>Lookup Upper House Dist</to><enabled>Y</enabled> </hop>
+  <hop> <from>Lookup Upper House Dist</from><to>State House Dist Lookup</to><enabled>Y</enabled> </hop>
+  <hop> <from>State House Dist Lookup</from><to>Lookup Precint</to><enabled>Y</enabled> </hop>
+  <hop> <from>Lookup Precint</from><to>Trim bad Post Type</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add constants</name>
@@ -152,7 +153,7 @@
         <currency/>
         <decimal/>
         <group/>
-        <nullif>NY</nullif>
+        <nullif>FL</nullif>
         <length>-1</length>
         <precision>-1</precision>
         <set_empty_string>N</set_empty_string>
@@ -219,54 +220,6 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>32</xloc>
       <yloc>48</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Lookup Assembly Dist</name>
-    <type>DBLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>Voter</connection>
-    <cache>Y</cache>
-    <cache_load_all>N</cache_load_all>
-    <cache_size>0</cache_size>
-    <lookup>
-      <schema/>
-      <table>lower_house_dist_dim</table>
-      <orderby/>
-      <fail_on_multiple>N</fail_on_multiple>
-      <eat_row_on_failure>N</eat_row_on_failure>
-      <key>
-        <name>LOWER_HOUSE_DIST</name>
-        <field>district_number</field>
-        <condition>&#x3d;</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>STATE_NAME</name>
-        <field>state_name</field>
-        <condition>&#x3d;</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>lower_house_dist_id</name>
-        <rename>lower_house_dist_id</rename>
-        <default/>
-        <type>Integer</type>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1040</xloc>
-      <yloc>384</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -362,54 +315,6 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>432</xloc>
-      <yloc>384</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Lookup State Senate Dist</name>
-    <type>DBLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <connection>Voter</connection>
-    <cache>Y</cache>
-    <cache_load_all>N</cache_load_all>
-    <cache_size>0</cache_size>
-    <lookup>
-      <schema/>
-      <table>upper_house_dist_dim</table>
-      <orderby/>
-      <fail_on_multiple>N</fail_on_multiple>
-      <eat_row_on_failure>N</eat_row_on_failure>
-      <key>
-        <name>UPPER_HOUSE_DIST</name>
-        <field>district_number</field>
-        <condition>&#x3d;</condition>
-        <name2/>
-      </key>
-      <key>
-        <name>STATE_NAME</name>
-        <field>state_name</field>
-        <condition>&#x3d;</condition>
-        <name2/>
-      </key>
-      <value>
-        <name>upper_house_dist_id</name>
-        <rename>upper_house_dist_id</rename>
-        <default/>
-        <type>Integer</type>
-      </value>
-    </lookup>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>848</xloc>
       <yloc>384</yloc>
       <draw>Y</draw>
       </GUI>
@@ -618,7 +523,7 @@
  <leftvalue>REGISTRATION_STATUS</leftvalue>
  <function>&#x3d;</function>
  <rightvalue/>
- <value><name>constant</name><type>String</type><text>ACTIVE</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
+ <value><name>constant</name><type>String</type><text>ACT</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
@@ -724,10 +629,14 @@
           <column_name>reporter_key</column_name>
           <stream_name>reporterKey</stream_name>
         </field>
+        <field>
+          <column_name>precinct_key</column_name>
+          <stream_name>precinct_id</stream_name>
+        </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1376</xloc>
+      <xloc>1424</xloc>
       <yloc>672</yloc>
       <draw>Y</draw>
       </GUI>
@@ -771,7 +680,7 @@
     <encoding/>
     <add_to_result_filenames>Y</add_to_result_filenames>
     <file>
-      <name>C&#x3a;&#x5c;dev&#x5c;GitHub&#x5c;getmovement&#x5c;national-voter-file&#x5c;data&#x5c;NewYork&#x5c;AllNYSVoters20160831SAMPLE_OUT.csv</name>
+      <name>C&#x3a;&#x5c;dev&#x5c;GitHub&#x5c;getmovement&#x5c;national-voter-file&#x5c;data&#x5c;Florida&#x5c;AllFLSample20160908_OUT.csv</name>
       <filemask/>
       <exclude_filemask/>
       <file_required>N</file_required>
@@ -785,15 +694,15 @@
       <field>
         <name>ADDRESS_NUMBER</name>
         <type>String</type>
-        <format/>
+        <format>&#x23;</format>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>6</length>
-        <precision>-1</precision>
+        <length>15</length>
+        <precision>0</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
@@ -912,7 +821,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>3</length>
+        <length>4</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -927,7 +836,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>3</length>
+        <length>5</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -942,7 +851,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>14</length>
+        <length>12</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -972,7 +881,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>14</length>
+        <length>16</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -987,7 +896,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>4</length>
+        <length>2</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -1017,7 +926,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>12</length>
+        <length>0</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -1032,7 +941,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>-1</length>
+        <length>2</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -1062,7 +971,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>7</length>
+        <length>8</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -1182,7 +1091,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>20</length>
+        <length>11</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -1197,7 +1106,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>7</length>
+        <length>0</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -1242,7 +1151,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>8</length>
+        <length>16</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -1257,7 +1166,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>10</length>
+        <length>13</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -1272,7 +1181,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>2</length>
+        <length>3</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -1332,7 +1241,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>8</length>
+        <length>3</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -1377,7 +1286,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>0</length>
+        <length>27</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -1392,7 +1301,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>0</length>
+        <length>14</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -1437,7 +1346,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>31</length>
+        <length>29</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -1452,7 +1361,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>7</length>
+        <length>8</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -1467,7 +1376,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>14</length>
+        <length>26</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -1490,6 +1399,21 @@
       <field>
         <name>MAIL_ZIP_CODE</name>
         <type>String</type>
+        <format>&#x23;.&#x23;</format>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>both</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>MAIL_COUNTRY</name>
+        <type>String</type>
         <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
@@ -1497,13 +1421,13 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>10</length>
+        <length>4</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
       <field>
-        <name>MAIL_COUNTRY</name>
+        <name>COUNTYCODE</name>
         <type>String</type>
         <format/>
         <currency>&#x24;</currency>
@@ -1518,24 +1442,9 @@
         <repeat>N</repeat>
       </field>
       <field>
-        <name>COUNTYCODE</name>
-        <type>String</type>
-        <format>&#x23;</format>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif>-</nullif>
-        <ifnull/>
-        <position>-1</position>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
         <name>CONGRESSIONAL_DIST</name>
         <type>String</type>
-        <format>&#x23;</format>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1550,7 +1459,7 @@
       <field>
         <name>UPPER_HOUSE_DIST</name>
         <type>String</type>
-        <format>&#x23;</format>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1565,6 +1474,36 @@
       <field>
         <name>LOWER_HOUSE_DIST</name>
         <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>left</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>PRECINCT</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>15</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>COUNTY_BOARD_DIST</name>
+        <type>String</type>
         <format>&#x23;</format>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
@@ -1578,47 +1517,17 @@
         <repeat>N</repeat>
       </field>
       <field>
-        <name>PRECINCT</name>
-        <type>String</type>
-        <format/>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif>-</nullif>
-        <ifnull/>
-        <position>-1</position>
-        <length>0</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>COUNTY_BOARD_DIST</name>
-        <type>String</type>
-        <format/>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif>-</nullif>
-        <ifnull/>
-        <position>-1</position>
-        <length>0</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
         <name>SCHOOL_BOARD_DIST</name>
         <type>String</type>
-        <format/>
+        <format>&#x23;</format>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>0</length>
-        <precision>-1</precision>
+        <length>15</length>
+        <precision>0</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
@@ -1632,7 +1541,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>0</length>
+        <length>4</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -1999,6 +1908,144 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>464</xloc>
       <yloc>784</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Lookup Upper House Dist</name>
+    <type>DBLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Voter</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema>public</schema>
+      <table>upper_house_dist_dim</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>UPPER_HOUSE_DIST</name>
+        <field>district_number</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>STATE_NAME</name>
+        <field>state_name</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>upper_house_dist_id</name>
+        <rename>upper_house_dist_id</rename>
+        <default/>
+        <type>None</type>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>848</xloc>
+      <yloc>384</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>State House Dist Lookup</name>
+    <type>DBLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Voter</connection>
+    <cache>N</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema/>
+      <table>lower_house_dist_dim</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>LOWER_HOUSE_DIST</name>
+        <field>district_number</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>lower_house_dist_id</name>
+        <rename>lower_house_dist_id</rename>
+        <default/>
+        <type>None</type>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1024</xloc>
+      <yloc>384</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Lookup Precint</name>
+    <type>DBLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Voter</connection>
+    <cache>Y</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema/>
+      <table>precinct_dim</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>PRECINCT_SPLIT</name>
+        <field>precinct_code</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>STATE_NAME</name>
+        <field>state_name</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>precinct_id</name>
+        <rename>precinct_id</rename>
+        <default/>
+        <type>None</type>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>704</xloc>
+      <yloc>480</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

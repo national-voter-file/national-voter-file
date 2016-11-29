@@ -94,10 +94,6 @@ def appendMailingAddress(outrow, row):
 def appendJurisdiction(outrow, row):
 		outrow.update({
 		'COUNTYCODE':row['COUNTYCODE'],
-		'ELECTORAL_DIST':row['ED'],
-		'LEGISLATIVE_DIST':row['LD'],
-		'TOWNCITY':row['TOWNCITY'],
-		'WARD':row['WARD'],
 		'CONGRESSIONAL_DIST':row['CD'],
 		'UPPER_HOUSE_DIST':row['SD'],
 		'LOWER_HOUSE_DIST':row['AD']})
@@ -125,7 +121,7 @@ def constructVoterRegOutrow(row):
 		'BIRTHDATE':prepareDate(row['DOB']),
 		'GENDER': row['GENDER'],
 		'REGISTRATION_DATE':prepareDate(row['REGDATE']),
-		'REGISTRATION_STATUS':row['STATUS'],
+		'REGISTRATION_STATUS':row['STATUS'].strip(),
 		'PARTY':(row['ENROLLMENT'] if row['ENROLLMENT'] != 'OTH'  else row['OTHERPARTY']),
 		'PLACE_NAME':row['RCITY'].upper(),
 		'STATE_NAME':'NY',
