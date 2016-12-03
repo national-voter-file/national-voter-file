@@ -20,10 +20,11 @@ We want to pull politics into the 21st century, and we're starting from the grou
 
 Here's the bulk of the work:
 
-1. [Collect voter files for every state](https://trello.com/b/IlZkwYc0/national-voter-file-states-pipeline).
+1. [Collect voter files for every state](https://trello.com/b/IlZkwYc0/national-voter-file-states-pipeline) and store them securely.
 2. Write state-specific Python scripts to turn them into a standardized input file (SIF).
-3. Load that data into a queryable database using Pentaho.
-4. Building a simple, accessible, easy-to-vend API for consumers.
+3. Make sure that data is clean and consistent nationally.
+4. Load that data into a queryable database using Pentaho.
+5. Build a simple, accessible, easy-to-vend API for consumers.
 
 ## Often asked
 
