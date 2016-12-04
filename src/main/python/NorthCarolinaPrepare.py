@@ -8,9 +8,9 @@ import datetime as dt
 import PrepareUtils
 
 ###########################################################
-## New York Prepare.py
+## North Carolina Prepare.py
 ##
-## This script pre-processes the New York voter file to use usaddress module
+## This script pre-processes the North Carolina voter file to use usaddress module
 ## to break the address string into standard parts
 ## Also uses the residential address if no mailing address is provided
 ##
@@ -57,7 +57,7 @@ def constructInputFieldList():
 		'BIRTHSTATE',
 		'DRIVER_YN', #If they have a license
 		'REGDATE',
-		'ED', #Presinct code
+		'PRECINCT', #Presinct code
 		'PRECINTDESC',
 		'LD', #Municipality code
 		'MUNIDESC',
@@ -102,9 +102,6 @@ def prepareDate(ncDate):
 
 def appendMailingAddress(outrow, row):
 	try:
-	#NC already gives us ADD2 broken up, but until I understand how this part works better I'm just going to fake it and rebuild add2.
-		row['MAILADD2'] = row['MAILCITY'] + ", " + row['MAILSTATE'] + " " + row['MAILZIP']
-
 		tagged_address, address_type = usaddress.tag(' '.join([
 			row['MAILADD1'],
 			row['MAILADD2'],
@@ -119,7 +116,7 @@ def appendMailingAddress(outrow, row):
 	else:
 		outrow.update({
 			'MAIL_ADDRESS_LINE1':PrepareUtils.constructMailAddr1FromOutRow(outrow),
-	#Doesn't look like we need this part, since NC already has city, state, and zip in seperate fields. But for now I'll just reconstruct the add2 line.	'MAIL_ADDRESS_LINE2':PrepareUtils.constructMailAddr2FromOutRow(outrow),
+			'MAIL_ADDRESS_LINE2':PrepareUtils.constructMailAddr2FromOutRow(outrow),
 			'MAIL_CITY':outrow['PLACE_NAME'],
 			'MAIL_STATE':outrow['STATE_NAME'],
 			'MAIL_ZIP_CODE':outrow['ZIP_CODE'],
@@ -130,10 +127,9 @@ def appendMailingAddress(outrow, row):
 def appendJurisdiction(outrow, row):
 		outrow.update({
 		'COUNTYCODE':row['COUNTYCODE'],
-		'ELECTORAL_DIST':row['ED'], 
-		'LEGISLATIVE_DIST':row['LD'], 
-		'TOWNCITY':row['RCITY'],
-		'WARD':row['WARDDESC'],
+		'PRECINCT':row['PRECINCT'], 
+		#'LEGISLATIVE_DIST':row['LD'], 
+		#'WARD':row['WARDDESC'],
 		'CONGRESSIONAL_DIST':row['CD'],
 		'UPPER_HOUSE_DIST':row['SD'],
 		'LOWER_HOUSE_DIST':row['AD']})
@@ -193,7 +189,7 @@ with open(inputFile, encoding='latin-1') as csvfile, \
 		else:
 			#We don't, so reset back to the start.
 			csvfile.seek(0)
-		reader = csv.DictReader(csvfile, dialect='excel', fieldnames=constructInputFieldList())
+		reader = csv.DictReader(csvfile, dialect='excel', fieldnames=constructInputFieldList(), delimiter='\t')
 
 		writer = csv.DictWriter(outfile, fieldnames=PrepareUtils.constructOutputFieldNames())
 		writer.writeheader()
@@ -209,6 +205,9 @@ with open(inputFile, encoding='latin-1') as csvfile, \
 		for row in reader:
 			# Skip blank lines
 			if row['MAILADD1'] is None:
+				#if row['STATUS'] != 'A': #This is either an inactive or removed voter, we don't care
+				#	print("Skipping bad row for inactive user: " + row['STATUS'])
+				#	continue
 				for key in row:
 					print(key +":"+row[key] if row[key] is not None else 'NONE')
 				sys.exit('Bad Row---->')
@@ -240,5 +239,3 @@ with open(inputFile, encoding='latin-1') as csvfile, \
 			# if i > 1000:
 				# break
 			# i += 1
-
-
