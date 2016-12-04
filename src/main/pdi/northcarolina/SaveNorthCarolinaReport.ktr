@@ -16,12 +16,12 @@
       </parameter>
       <parameter>
         <name>reportFile</name>
-        <default_value>&#x2f;national-voter-file&#x2f;data&#x2f;NorthCarolina&#x2f;nc_test_list_OUT.csv</default_value>
+        <default_value>&#x2f;national-voter-file&#x2f;data&#x2f;NorthCarolina&#x2f;ncvoter_StatewideSAMPLE_OUT.csv</default_value>
         <description/>
       </parameter>
       <parameter>
         <name>reporterKey</name>
-        <default_value>3</default_value>
+        <default_value>5</default_value>
         <description/>
       </parameter>
     </parameters>
@@ -561,11 +561,6 @@
       <to>Lookup State Senate Dist</to>
       <enabled>Y</enabled>
     </hop>
-    <hop>
-      <from>Cast Upper House to String</from>
-      <to>Lookup State Senate Dist</to>
-      <enabled>N</enabled>
-    </hop>
   </order>
   <step>
     <name>Add constants</name>
@@ -896,7 +891,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-      <schema/>
+      <schema>public</schema>
       <table>household_dim</table>
       <connection>Voter</connection>
       <commit>1000</commit>
@@ -1167,7 +1162,7 @@
       <schema_name/>
     </partitioning>
     <connection>Voter</connection>
-    <schema/>
+    <schema>public</schema>
     <table>voter_report_fact</table>
     <commit>1000</commit>
     <truncate>N</truncate>
@@ -1277,7 +1272,7 @@
     <encoding/>
     <add_to_result_filenames>Y</add_to_result_filenames>
     <file>
-      <name>&#x2f;national-voter-file&#x2f;data&#x2f;NorthCarolina&#x2f;nc_test_list_OUT.csv</name>
+      <name>&#x2f;national-voter-file&#x2f;data&#x2f;NorthCarolina&#x2f;ncvoter_StatewideSAMPLE_OUT.csv</name>
       <filemask/>
       <exclude_filemask/>
       <file_required>N</file_required>
@@ -1290,8 +1285,8 @@
     <fields>
       <field>
         <name>ADDRESS_NUMBER</name>
-        <type>Integer</type>
-        <format>&#x23;</format>
+        <type>String</type>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1665,7 +1660,7 @@
       </field>
       <field>
         <name>ZIP_CODE</name>
-        <type>Integer</type>
+        <type>String</type>
         <format>&#x23;</format>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
@@ -1680,7 +1675,7 @@
       </field>
       <field>
         <name>STATE_VOTER_REF</name>
-        <type>Integer</type>
+        <type>String</type>
         <format>&#x23;</format>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
@@ -1695,7 +1690,7 @@
       </field>
       <field>
         <name>COUNTY_VOTER_REF</name>
-        <type>Integer</type>
+        <type>String</type>
         <format>&#x23;</format>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
@@ -1995,7 +1990,7 @@
       </field>
       <field>
         <name>MAIL_ZIP_CODE</name>
-        <type>Integer</type>
+        <type>String</type>
         <format>&#x23;</format>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
@@ -2039,66 +2034,6 @@
         <repeat>N</repeat>
       </field>
       <field>
-        <name>ELECTORAL_DIST</name>
-        <type>String</type>
-        <format/>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif>-</nullif>
-        <ifnull/>
-        <position>-1</position>
-        <length>3</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>LEGISLATIVE_DIST</name>
-        <type>String</type>
-        <format/>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif>-</nullif>
-        <ifnull/>
-        <position>-1</position>
-        <length>3</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>TOWNCITY</name>
-        <type>String</type>
-        <format/>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif>-</nullif>
-        <ifnull/>
-        <position>-1</position>
-        <length>11</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>WARD</name>
-        <type>String</type>
-        <format/>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif>-</nullif>
-        <ifnull/>
-        <position>-1</position>
-        <length>0</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
         <name>CONGRESSIONAL_DIST</name>
         <type>Integer</type>
         <format>&#x23;</format>
@@ -2124,7 +2059,7 @@
         <ifnull/>
         <position>-1</position>
         <length>15</length>
-        <precision>-1</precision>
+        <precision>0</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
@@ -2139,7 +2074,7 @@
         <ifnull/>
         <position>-1</position>
         <length>15</length>
-        <precision>-1</precision>
+        <precision>0</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
@@ -2158,21 +2093,81 @@
         <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
+      <field>
+        <name>PRECINCT</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>3</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>COUNTY_BOARD_DIST</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>0</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>SCHOOL_BOARD_DIST</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>0</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>PRECINCT_SPLIT</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>0</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
     </fields>
     <limit>0</limit>
-    <error_ignored>N</error_ignored>
-    <skip_bad_files>N</skip_bad_files>
+    <error_ignored>Y</error_ignored>
+    <skip_bad_files>Y</skip_bad_files>
     <file_error_field/>
     <file_error_message_field/>
     <error_line_skipped>Y</error_line_skipped>
     <error_count_field/>
     <error_fields_field/>
     <error_text_field/>
-    <bad_line_files_destination_directory/>
+    <bad_line_files_destination_directory>&#x2f;national-voter-file&#x2f;data&#x2f;NorthCarolina</bad_line_files_destination_directory>
     <bad_line_files_extension>warning</bad_line_files_extension>
-    <error_line_files_destination_directory/>
+    <error_line_files_destination_directory>&#x2f;national-voter-file&#x2f;data&#x2f;NorthCarolina</error_line_files_destination_directory>
     <error_line_files_extension>error</error_line_files_extension>
-    <line_number_files_destination_directory/>
+    <line_number_files_destination_directory>&#x2f;national-voter-file&#x2f;data&#x2f;NorthCarolina</line_number_files_destination_directory>
     <line_number_files_extension>line</line_number_files_extension>
     <date_format_lenient>Y</date_format_lenient>
     <date_format_locale>en_US</date_format_locale>
@@ -2552,47 +2547,6 @@
     <GUI>
       <xloc>464</xloc>
       <yloc>784</yloc>
-      <draw>Y</draw>
-    </GUI>
-    </step>
-
-  <step>
-    <name>Cast Upper House to String</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>        <select_unspecified>N</select_unspecified>
-      <meta>        <name>UPPER_HOUSE_DIST</name>
-        <rename>UPPER_STR</rename>
-        <type>String</type>
-        <length>-2</length>
-        <precision>-2</precision>
-        <conversion_mask/>
-        <date_format_lenient>false</date_format_lenient>
-        <date_format_locale/>
-        <date_format_timezone/>
-        <lenient_string_to_number>false</lenient_string_to_number>
-        <encoding/>
-        <decimal_symbol/>
-        <grouping_symbol/>
-        <currency_symbol/>
-        <storage_type/>
-      </meta>    </fields>    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>736</xloc>
-      <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
     </step>

@@ -1,63 +1,101 @@
-COUNTY NAME,COUNTY CODE,COUNTYFP,CLASSFP
-Albany,1,1,H1
-Allegany,2,3,H1
-Bronx,3,5,H6
-Broome,4,7,H1
-Cattaraugus,5,9,H1
-Cayuga,6,11,H1
-Chautauqua,7,13,H1
-Chemung,8,15,H1
-Chenango,9,17,H1
-Clinton,10,19,H1
-Columbia,11,21,H1
-Cortland,12,23,H1
-Delaware,13,25,H1
-Dutchess,14,27,H1
-Erie,15,29,H1
-Essex,16,31,H1
-Franklin,17,33,H1
-Fulton,18,35,H1
-Genesee,19,37,H1
-Greene,20,39,H1
-Hamilton,21,41,H1
-Herkimer,22,43,H1
-Jefferson,23,45,H1
-Kings,24,47,H6
-Lewis,25,49,H1
-Livingston,26,51,H1
-Madison,27,53,H1
-Monroe,28,55,H1
-Montgomery,29,57,H1
-Nassau,30,59,H1
-New York,31,61,H6
-Niagara,32,63,H1
-Oneida,33,65,H1
-Onondaga,34,67,H1
-Ontario,35,69,H1
-Orange,36,71,H1
-Orleans,37,73,H1
-Oswego,38,75,H1
-Otsego,39,77,H1
-Putnam,40,79,H1
-Queens,41,81,H6
-Rensselaer,42,83,H1
-Richmond,43,85,H6
-Rockland,44,87,H1
-Saratoga,45,89,H1
-Schenectady,46,91,H1
-Schoharie,47,93,H1
-Schuyler,48,95,H1
-Seneca,49,97,H1
-St.Lawrence,50,99,H1
-Steuben,51,101,H1
-Suffolk,52,103,H1
-Sullivan,53,105,H1
-Tioga,54,107,H1
-Tompkins,55,109,H1
-Ulster,56,111,H1
-Warren,57,113,H1
-Washington,58,115,H1
-Wayne,59,117,H1
-Westchester,60,119,H1
-Wyoming,61,121,H1
-Yates,62,123,H1
+COUNTY_NAME,COUNTY_CODE,COUNTYFP,CLASSFP
+Alamance County,1,001,H1
+Alexander County,2,003,H1
+Alleghany County,3,005,H1
+Anson County,4,007,H1
+Ashe County,5,009,H1
+Avery County,6,011,H1
+Beaufort County,7,013,H1
+Bertie County,8,015,H1
+Bladen County,9,017,H1
+Brunswick County,10,019,H1
+Buncombe County,11,021,H1
+Burke County,12,023,H1
+Cabarrus County,13,025,H1
+Caldwell County,14,027,H1
+Camden County,15,029,H1
+Carteret County,16,031,H1
+Caswell County,17,033,H1
+Catawba County,18,035,H1
+Chatham County,19,037,H1
+Cherokee County,20,039,H1
+Chowan County,21,041,H1
+Clay County,22,043,H1
+Cleveland County,23,045,H1
+Columbus County,24,047,H1
+Craven County,25,049,H1
+Cumberland County,26,051,H1
+Currituck County,27,053,H1
+Dare County,28,055,H1
+Davidson County,29,057,H1
+Davie County,30,059,H1
+Duplin County,31,061,H1
+Durham County,32,063,H1
+Edgecombe County,33,065,H1
+Forsyth County,34,067,H1
+Franklin County,35,069,H1
+Gaston County,36,071,H1
+Gates County,37,073,H1
+Graham County,38,075,H1
+Granville County,39,077,H1
+Greene County,40,079,H1
+Guilford County,41,081,H1
+Halifax County,42,083,H1
+Harnett County,43,085,H1
+Haywood County,44,087,H1
+Henderson County,45,089,H1
+Hertford County,46,091,H1
+Hoke County,47,093,H1
+Hyde County,48,095,H1
+Iredell County,49,097,H1
+Jackson County,50,099,H1
+Johnston County,51,101,H1
+Jones County,52,103,H1
+Lee County,53,105,H1
+Lenoir County,54,107,H1
+Lincoln County,55,109,H1
+McDowell County,56,111,H1
+Macon County,57,113,H1
+Madison County,58,115,H1
+Martin County,59,117,H1
+Mecklenburg County,60,119,H1
+Mitchell County,61,121,H1
+Montgomery County,62,123,H1
+Moore County,63,125,H1
+Nash County,64,127,H1
+New Hanover County,65,129,H1
+Northampton County,66,131,H1
+Onslow County,67,133,H1
+Orange County,68,135,H1
+Pamlico County,69,137,H1
+Pasquotank County,70,139,H1
+Pender County,71,141,H1
+Perquimans County,72,143,H1
+Person County,73,145,H1
+Pitt County,74,147,H1
+Polk County,75,149,H1
+Randolph County,76,151,H1
+Richmond County,77,153,H1
+Robeson County,78,155,H1
+Rockingham County,79,157,H1
+Rowan County,80,159,H1
+Rutherford County,81,161,H1
+Sampson County,82,163,H1
+Scotland County,83,165,H1
+Stanly County,84,167,H1
+Stokes County,85,169,H1
+Surry County,86,171,H1
+Swain County,87,173,H1
+Transylvania County,88,175,H1
+Tyrrell County,89,177,H1
+Union County,90,179,H1
+Vance County,91,181,H1
+Wake County,92,183,H1
+Warren County,93,185,H1
+Washington County,94,187,H1
+Watauga County,95,189,H1
+Wayne County,96,191,H1
+Wilkes County,97,193,H1
+Wilson County,98,195,H1
+Yadkin County,99,197,H1
+Yancey County,0,199,H1
