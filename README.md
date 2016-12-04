@@ -17,13 +17,3 @@ We want to pull politics into the 21st century, and we're starting from the grou
 * First, join us on [Slack](http://goo.gl/forms/8SJRDlo7Lx2rUsan1).
 * Then, take a look at [our todo list](http://waffle.io/getmovement/national-voter-file), and see where you'd like to contribute.
 * Finally, learn how to [view and modify the relational model itself](https://github.com/getmovement/national-voter-file/tree/master/docker), the core of our work.
-
-## Often asked
-
-*How are we supposed to get all the voter files we need?*
-
-You're in luck. We have a [Google document](https://docs.google.com/spreadsheets/d/1CtNePb4LQSz-pk8UF58wwuVoBIc_YDAsBJZnIk7hKso/edit?usp=sharing) with information on how to catch them all.
-
-*Is this legal?!*
-
-[The Election Project](http://voterlist.electproject.org/home) is a handy resource on every state's policies regarding their voter file.
