@@ -14,25 +14,13 @@ We want to pull politics into the 21st century, and we're starting from the grou
 
 ## How can I help?
 
-* Join us on [Slack](http://goo.gl/forms/8SJRDlo7Lx2rUsan1).
-* Take a look at [our todo list](http://waffle.io/getmovement/national-voter-file).
-* Learn about [the code](https://github.com/getmovement/national-voter-file/tree/master/docker) itself!
+* We chat on Slack. [Join us!](http://goo.gl/forms/8SJRDlo7Lx2rUsan1)
+* Take a look at our [Issues](http://waffle.io/getmovement/national-voter-file) to see where you can fit in.
 
 Here's the bulk of the work:
 
 1. [Collect voter files for every state](https://trello.com/b/IlZkwYc0/national-voter-file-states-pipeline) and store them securely.
-2. Write state-specific Python scripts to turn them into a standardized input file (SIF).
-3. Make sure that data is clean and consistent nationally.
-4. Load that data into a queryable database using Pentaho.
-5. Build a simple, accessible, easy-to-vend API for consumers.
-
-## Often asked
-
-*How are we supposed to get all the voter files we need?*
-
-You're in luck. We have a [Google document](https://docs.google.com/spreadsheets/d/1CtNePb4LQSz-pk8UF58wwuVoBIc_YDAsBJZnIk7hKso/edit?usp=sharing) with information on how to catch them all.
-
-*Is this legal?!*
-
-[The Election Project](http://voterlist.electproject.org/home) is a handy resource on every state's policies regarding their voter file.
->>>>>>> Update README.md
+2. Write [state-specific Python scripts](https://github.com/getmovement/national-voter-file/blob/master/src/main/python/NewYorkPrepare.py) to turn them into a [standardized input file](https://docs.google.com/spreadsheets/d/e/2PACX-1vTkv4Js43Wl_I0mpqt7FnFMt1pOTy1GwTZfPCW--TufdUzepSEHBAxsQTV3Ic_u9t5TY28OqSy-I28L/pubhtml).
+3. Make sure that [data is clean and consistent](https://github.com/getmovement/national-voter-file/issues/56) nationally.
+4. Load that data into [a queryable database](https://github.com/getmovement/national-voter-file/tree/master/docker) using [Pentaho](https://github.com/getmovement/national-voter-file/blob/master/tools/README.md).
+5. Build [a simple, accessible, easy-to-vend API](https://github.com/getmovement/national-voter-file/issues/59) for consumers.
