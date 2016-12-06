@@ -15,5 +15,20 @@ starting SQL data definitions (although we have to add some
 PostgreSQL-specific things).
 
 
+Specifications for some columns:
+
+| Table | Column | type | description |
+| ----- | ------ | ----:| ----------- |
+| `public.census_dim` | `entity_fips` | varchar(5) | The FIPS code. |
+| `public.census_dim` | `entity_type` | varchar(10) | The type identifier to make the FIPS code unique (1) |
+| `public.census_dim` | `entity_name` | varchar(64) | The actual place name (e.g. 'alabama') |
+
+
+(1) The categories of FIPS identifier are
+'STATEFP', 'CD', 'SLDU', 'SLDL', 'VTD', 'SDELM', 'SDSEC', 'SDUNI',
+'INCPLACEFP', 'CDPFP', 'AIANNHCE', or 'COUNTYFP' ([described here][nlt]).
+
+
 [erdplus]: https://erdplus.com
 [diagrams]: https://erdplus.com/#/diagrams
+[nlt]: https://www.census.gov/geo/maps-data/data/nlt_description.html
