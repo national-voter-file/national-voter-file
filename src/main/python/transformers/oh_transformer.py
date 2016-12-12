@@ -188,18 +188,43 @@ class OHTransformer(BaseTransformer):
                 input_dict['MAILING_COUNTRY'],
             ] if x is not None
         ])
-        # TODO: default to residential address?
-        usaddress_dict, usaddress_type = self.usaddress_tag(mail_str)
+
+        # If mailing address provided, parse, otherwise default to residential
+        # strip() required because input_dict vals are spaces
+        # May want to make this default behavior
+        if len(mail_str.strip()) > 0:
+            usaddress_dict, usaddress_type = self.usaddress_tag(mail_str)
+            mail_city = input_dict['MAILING_CITY']
+            mail_zip = input_dict['MAILING_ZIP']
+            mail_state = input_dict['MAILING_STATE']
+            mail_country = input_dict['MAILING_COUNTRY']
+        else:
+            address_components = [
+                'RESIDENTIAL_ADDRESS1',
+                'RESIDENTIAL_SECONDARY_ADDR',
+                'RESIDENTIAL_CITY',
+                'RESIDENTIAL_STATE',
+                'RESIDENTIAL_ZIP'
+            ]
+            address_str = ' '.join([
+                input_dict[x] for x in address_components if input_dict[x] is not None
+            ])
+            usaddress_dict, usaddress_type = self.usaddress_tag(address_str)
+            mail_city = input_dict['RESIDENTIAL_CITY']
+            mail_zip = input_dict['RESIDENTIAL_ZIP']
+            mail_state = input_dict['RESIDENTIAL_STATE']
+            mail_country = 'USA'
+
         return {
             'MAIL_ADDRESS_LINE1': self.construct_mail_address_1(
                 usaddress_dict,
                 usaddress_type,
             ),
             'MAIL_ADDRESS_LINE2': self.construct_mail_address_2(usaddress_dict),
-            'MAIL_CITY': input_dict['MAILING_CITY'],
-            'MAIL_ZIP_CODE': input_dict['MAILING_ZIP'],
-            'MAIL_STATE': input_dict['MAILING_STATE'],
-            'MAIL_COUNTRY': input_dict['MAILING_COUNTRY'],
+            'MAIL_CITY': mail_city,
+            'MAIL_ZIP_CODE': mail_zip,
+            'MAIL_STATE': mail_state,
+            'MAIL_COUNTRY': mail_country,
         }
 
     #### Political methods #####################################################
