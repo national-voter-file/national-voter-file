@@ -54,6 +54,7 @@ def constructOutputFieldNames():
 			'CONGRESSIONAL_DIST',
 			'UPPER_HOUSE_DIST',
 			'LOWER_HOUSE_DIST',
+			'BIRTHDATE_IS_ESTIMATE',
 			'PRECINCT',
 			'COUNTY_BOARD_DIST',
 			'SCHOOL_BOARD_DIST',
@@ -88,6 +89,10 @@ def appendMailingAddressFromTaggedFields(outrow, tagged_address, address_type):
 
 def appendParsedFields(outrow, tagged_address):
 	addressValues = createDefaultDict(tagged_address)
+	
+	#We need to check for the BIRTHDATE_IS_ESTIMATE and give a default here
+	if outrow.get('BIRTHDATE_IS_ESTIMATE') is None:
+		outrow['BIRTHDATE_IS_ESTIMATE'] = 0
 		
 	# Construct the output
 	outrow.update({
