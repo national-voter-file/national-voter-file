@@ -187,10 +187,6 @@ CREATE TABLE PRECINCT_DIM(
 ;
 
 
-
-
-
-
 DROP TABLE IF EXISTS STAFFER_DIM;
 CREATE TABLE STAFFER_DIM
   (
@@ -215,7 +211,7 @@ CREATE TABLE ELECTION_DIM
 DROP TABLE IF EXISTS JURISDICTION_DIM;
 CREATE TABLE public.JURISDICTION_DIM
 (
-  jurisdiction_id integer NOT NULL DEFAULT nextval('jurisdiction_dim_jurisdiction_id_seq'::regclass),
+  jurisdiction_id SERIAL NOT NULL PRIMARY KEY,
   geoid character varying(12),
   fips character varying(5),
   voter_file_id character varying(5),
@@ -506,8 +502,7 @@ CREATE TABLE public.JURISDICTION_DIM
   median_value_dollars integer,
   version integer,
   valid_from date,
-  valid_to date,
-  CONSTRAINT jurisdiction_dim_pkey PRIMARY KEY (jurisdiction_id));
+  valid_to date);
 
 
 
