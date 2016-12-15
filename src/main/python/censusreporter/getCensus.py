@@ -60,16 +60,17 @@ def get_county(countyURL, stateList):
 		chunk = chunk[chunk['USPS'].isin(stateList)]
 		if len(chunk) > 0:
 			chunk['FIPS']=chunk.apply(lambda row:"05000US{0:0=5d}".format(int(row['GEOID'])),axis=1)
-			c = c.append(chunk.set_index('FIPS'))
+			c = c.append(chunk)
+			chunk = chunk.set_index('FIPS')
 
-			data = get_combinedData(c, tables=['B01001','B01003','B03002','B06008','B23001','B19001','B25009','B25077'])
+			data = get_combinedData(chunk, tables=['B01001','B01003','B03002','B06008','B23001','B19001','B25009','B25077'])
 			df = df.append(data)
 
 	c['STATEFP']=c.apply(lambda row:str(row['GEOID'])[:-3].zfill(2),axis=1)
 	c['ENTITYFP']=c.apply(lambda row:str(row['GEOID'])[-3:].zfill(3),axis=1)
 	c['ENTITYTYPE'] = "county"
 
-
+	c = c.set_index('FIPS')
 	data = pd.concat([c, df],axis=1, join_axes=[c.index])
 	return data
 
@@ -88,16 +89,17 @@ def get_congress(congressURL, stateList):
 		chunk = chunk[chunk['USPS'].isin(stateList)] #Filter only the states we want
 		if len(chunk) > 0:
 			chunk['FIPS']=chunk.apply(lambda row:"50000US" + str(row['GEOID']).zfill(4),axis=1)
-			c = c.append(chunk.set_index('FIPS'))
+			c = c.append(chunk)
+			chunk = chunk.set_index('FIPS')
 
-			data = get_combinedData(c, tables=['B01001','B01003','B03002','B06008','B23001','B19001','B25009','B25077'])
+			data = get_combinedData(chunk, tables=['B01001','B01003','B03002','B06008','B23001','B19001','B25009','B25077'])
 			df = df.append(data)
 
 	c['STATEFP']=c.apply(lambda row:str(row['GEOID'])[:-2].zfill(2),axis=1)
 	c['ENTITYFP']=c.apply(lambda row:str(row['GEOID'])[-2:].zfill(2),axis=1)
 	c['ENTITYTYPE'] = "congress"
 
-
+	c = c.set_index('FIPS')
 	data = pd.concat([c, df],axis=1, join_axes=[c.index])
 	return data
 
@@ -117,16 +119,17 @@ def get_stateHouse(houseURL, stateList):
 		chunk = chunk[chunk['USPS'].isin(stateList)] #Filter only the states we want
 		if len(chunk) > 0:
 			chunk['FIPS']=chunk.apply(lambda row:"62000US" + str(row['GEOID']).zfill(5),axis=1)
-			c = c.append(chunk.set_index('FIPS'))
+			c = c.append(chunk)
+			chunk = chunk.set_index('FIPS')
 
-			data = get_combinedData(c, tables=['B01001','B01003','B03002','B06008','B23001','B19001','B25009','B25077'])
+			data = get_combinedData(chunk, tables=['B01001','B01003','B03002','B06008','B23001','B19001','B25009','B25077'])
 			df = df.append(data)
 
 	c['STATEFP']=c.apply(lambda row:str(row['GEOID'])[:-3].zfill(2),axis=1)
 	c['ENTITYFP']=c.apply(lambda row:str(row['GEOID'])[-3:].zfill(3),axis=1)
 	c['ENTITYTYPE'] = "lower house"
 
-
+	c = c.set_index('FIPS')
 	data = pd.concat([c, df],axis=1, join_axes=[c.index])
 	return data
 
@@ -214,11 +217,8 @@ def get_state(stateList, stateCodes):
 	c['ENTITYFP']=c.apply(lambda row:str(stateCodes[state]),axis=1)
 	c['ENTITYTYPE'] = "state"
 
-	print("C Size: " + str(len(c)))
-	print(c.info())
-	print(df.info())
 	data = pd.concat([c, df],axis=1, join_axes=[c.index])
-	print("Data Size: " + str(len(data)))
+
 	return data
 
 #########
