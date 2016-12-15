@@ -64,7 +64,7 @@ class BaseTransformer(object):
         'LAST_NAME': set([str]),
         'NAME_SUFFIX': set([str]),
         'GENDER': set([str]),
-        'BIRTHDATE': set([datetime.datetime]),
+        'BIRTHDATE': set([datetime.date]),
         'LANGUAGE_CHOICE': set([str, type(None)]),
         'EMAIL': set([str, type(None)]),
         'PHONE': set([str, type(None)]),
@@ -104,7 +104,7 @@ class BaseTransformer(object):
         'COUNTYCODE': set([str]),
         'STATE_VOTER_REF': set([str]),
         'COUNTY_VOTER_REF': set([str]),
-        'REGISTRATION_DATE': set([datetime.datetime]),
+        'REGISTRATION_DATE': set([datetime.date]),
         'REGISTRATION_STATUS': set([str]),
         'ABSENTEE_TYPE': set([str]),
         'PARTY': set([str, type(None)]),
@@ -120,7 +120,7 @@ class BaseTransformer(object):
     # some columns can only have certain values
     limited_value_dict = {
         'PARTY': set(['DEM', 'REP']),
-        'GENDER': set(['M', 'F']),
+        'GENDER': set(['M', 'F', 'U']),
     }
 
     usaddress_to_standard_colnames_dict = {
@@ -276,7 +276,7 @@ class BaseTransformer(object):
         Outputs:
             A datetime object created according to self.date_format
         """
-        return datetime.datetime.strptime(date_str, self.date_format)
+        return datetime.datetime.strptime(date_str, self.date_format).date()
 
     def usaddress_tag(self, address_str):
         """

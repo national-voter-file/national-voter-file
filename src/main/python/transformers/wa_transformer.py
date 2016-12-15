@@ -92,8 +92,9 @@ class WATransformer(BaseTransformer):
 
     def extract_registration_address(self, input_dict):
         """
-        Relies on the usaddress package.
 
+        Washington state data is beautifully parsed into the same fields
+        that we require, so an easy mapping.
         Inputs:
             input_dict: dictionary of form {colname: value} from raw data
         Outputs:
@@ -125,24 +126,36 @@ class WATransformer(BaseTransformer):
                 'USPS_BOX_TYPE'
                 'ZIP_CODE'
         """
-        address_components = [
-            'RegStNum',
-            'RegStFrac',
-            'RegStName',
-            'RegStType',
-            'RegUnitType',
-            'RegStPreDirection',
-            'RegStPostDirection',
-            'RegUnitNum',
-            'RegCity',
-            'RegState',
-            'RegZipCode',
-        ]
-        address_str = ' '.join([
-            input_dict[x] for x in address_components if input_dict[x] is not None
-        ])
-        usaddress_dict, usaddress_type = self.usaddress_tag(address_str)
-        return self.convert_usaddress_dict(usaddress_dict)
+        output_dict = {
+            'ADDRESS_NUMBER':input_dict['RegStNum'],
+            'ADDRESS_NUMBER_PREFIX':None,
+            'ADDRESS_NUMBER_SUFFIX':input_dict['RegStFrac'],
+            'BUILDING_NAME':None,
+            'CORNER_OF':None,
+            'INTERSECTION_SEPARATOR':None,
+            'LANDMARK_NAME':None,
+            'NOT_ADDRESS':None,
+            'OCCUPANCY_TYPE':input_dict['RegUnitType'],
+            'OCCUPANCY_IDENTIFIER':input_dict['RegUnitNum'],
+            'PLACE_NAME':input_dict['RegCity'],
+            'STATE_NAME':input_dict['RegState'],
+            'STREET_NAME':input_dict['RegStName'],
+            'STREET_NAME_PRE_DIRECTIONAL':input_dict['RegStPreDirection'],
+            'STREET_NAME_PRE_MODIFIER':None,
+            'STREET_NAME_PRE_TYPE':None,
+            'STREET_NAME_POST_DIRECTIONAL':input_dict['RegStPostDirection'],
+            'STREET_NAME_POST_MODIFIER':None,
+            'STREET_NAME_POST_TYPE':input_dict['RegStType'],
+            'SUBADDRESS_IDENTIFIER':None,
+            'SUBADDRESS_TYPE':None,
+            'USPS_BOX_GROUP_ID':None,
+            'USPS_BOX_GROUP_TYPE':None,
+            'USPS_BOX_ID':None,
+            'USPS_BOX_TYPE':None,
+            'ZIP_CODE':input_dict['RegZipCode']
+        }
+        return output_dict
+
 
     def extract_county_code(self, input_dict):
         """
@@ -153,6 +166,11 @@ class WATransformer(BaseTransformer):
                 'COUNTYCODE'
         """
         return {'COUNTYCODE': input_dict['CountyCode']}
+
+
+    def _val(self, val):
+        return val.strip()+" " if(val.strip()) else ''
+
 
     def extract_mailing_address(self, input_dict):
         """
@@ -171,30 +189,31 @@ class WATransformer(BaseTransformer):
                 'MAIL_ZIP_CODE'
                 'MAIL_COUNTRY'
         """
-        mail_str = ' '.join([
-            x for x in [
-                input_dict['Mail1'],
-                input_dict['Mail2'],
-                input_dict['Mail3'],
-                input_dict['Mail4'],
-                input_dict['MailCity'],
-                input_dict['MailZip'],
-                input_dict['MailState'],
-                input_dict['MailCountry'],
-            ] if x is not None
-        ])
-        usaddress_dict, usaddress_type = self.usaddress_tag(mail_str)
-        return {
-            'MAIL_ADDRESS_LINE1': self.construct_mail_address_1(
-                usaddress_dict,
-                usaddress_type,
-            ),
-            'MAIL_ADDRESS_LINE2': self.construct_mail_address_2(usaddress_dict),
-            'MAIL_CITY': input_dict['MailCity'],
-            'MAIL_ZIP_CODE': input_dict['MailZip'],
-            'MAIL_STATE': input_dict['MailState'],
-            'MAIL_COUNTRY': input_dict['MailCountry'],
-        }
+
+        if( input_dict['Mail1'].strip() and input_dict['MailCity'].strip()):
+            return {
+                'MAIL_ADDRESS_LINE1': input_dict['Mail1'],
+                'MAIL_ADDRESS_LINE2': " ".join([input_dict['Mail2'], input_dict['Mail3'], input_dict['Mail4']]),
+                'MAIL_CITY': input_dict['MailCity'],
+                'MAIL_STATE': input_dict['MailState'],
+                'MAIL_ZIP_CODE': input_dict['MailZip'],
+                'MAIL_COUNTRY': input_dict['MailCountry'] if input_dict['MailCountry']  else "USA"
+            }
+        else:
+            return {
+                'MAIL_ADDRESS_LINE1': self._val(input_dict['RegStNum']) +
+                    self._val(input_dict['RegStFrac'])+
+                    self._val(input_dict['RegStPreDirection'])+
+                    self._val(input_dict['RegStName'])+
+                    self._val(input_dict['RegStType'])+
+                    self._val(input_dict['RegStPostDirection']),
+                'MAIL_ADDRESS_LINE2': self._val(input_dict['RegUnitType'])+self._val(input_dict['RegUnitNum']),
+                'MAIL_CITY': input_dict['RegCity'],
+                'MAIL_STATE': input_dict['RegState'],
+                'MAIL_ZIP_CODE': input_dict['RegZipCode'],
+                'MAIL_COUNTRY': "USA"
+            }
+
 
     #### Political methods #####################################################
 
