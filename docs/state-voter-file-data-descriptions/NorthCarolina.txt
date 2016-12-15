@@ -1,0 +1,221 @@
+* purpose: Instruction file with file layout
+* file name: layout_ncvoter_ncvhis.txt
+* date effective: November 2012
+* files: 
+   -- 1) ncvhis#.zip  # is the county id of the county in that file (id list is below)
+   -- 2) ncvoter#.zip  # is the county id of the county in that file
+   -- 3) ncvhis_Statewide.zip statewide voter history file
+   -- 4) ncvoter_Statewide.zip statewide voter file
+
+
+* instructions: 
+   -- To use voter and/or voter history data, download the compressed file  
+   -- and extract text file with a compression program like WinZip.  
+
+-- -----------------------------------------------------------------------------------------------------
+
+1) Voter History File (ncvhis#.txt):
+	county_id          int       4
+	county_desc        char      60
+	voter_reg_num      char      12
+	election_lbl       char      10 
+	election_desc      char      230 
+	voting_method      char      10  
+	voted_party_cd     char      3 
+	voted_party_desc   char      60 
+	pct_label          char      6 
+	pct_description    char      60 
+	ncid               char      12 
+	voted_county_id    char      3 
+	voted_county_desc  char      60 
+	vtd_label          char      6 
+	vtd_description    char      60 
+
+2) Voter & Pre-registrations Files (ncvoter#.txt):
+	county_id		    smallint	2
+	county_desc		    varchar	15
+	voter_reg_num	            char	12
+	status_cd		    char	2
+	voter_status_desc	    varchar	25
+	reason_cd		    char	2
+	voter_status_reason_desc    varchar	60
+	absent_ind		    char	1
+	name_prefx_cd	            char	4
+	last_name		    char	25
+	first_name		    char	20
+	midl_name		    char	20
+	name_sufx_cd	            char	3
+	res_street_address	    varchar	63
+	res_city_desc	            varchar	60
+	state_cd		    char	2
+	zip_code		    char	9
+	mail_addr1		    varchar	40
+	mail_addr2		    varchar	40
+	mail_addr3		    varchar	40
+	mail_addr4		    varchar	40
+	mail_city		    varchar	30
+	mail_state		    char	2
+	mail_zipcode	            char	9
+	full_phone_number	    varchar	12
+	race_code		    char	3
+	ethnic_code		    char	3
+	party_cd		    char	3
+	gender_code		    varchar	1
+	birth_age		    int         4
+	birth_place		    char	30
+	drivers_lic		    char        1 	(Y/N)
+	registr_dt		    char	10
+	precinct_abbrv	            char	6
+	precinct_desc	            varchar	60
+	municipality_abbrv	    char	6
+	municipality_desc	    varchar	60
+	ward_abbrv		    char	6
+	ward_desc		    varchar	60
+	cong_dist_abbrv	            char	6
+	super_court_abbrv	    char	6
+	judic_dist_abbrv	    char	6
+	nc_senate_abbrv	            char	6
+	nc_house_abbrv	            char	6
+	county_commiss_abbrv        char	6
+	county_commiss_desc	    varchar	60
+	township_abbrv	            char	6
+	township_desc	            varchar	60
+	school_dist_abbrv	    char	6
+	school_dist_desc	    varchar	60
+	fire_dist_abbrv	            char	6
+	fire_dist_desc	            varchar	60
+	water_dist_abbrv	    char	6
+	water_dist_desc	            varchar	60
+	sewer_dist_abbrv	    char	6
+	sewer_dist_desc	            varchar	60
+	sanit_dist_abbrv	    char	6
+	sanit_dist_desc	            varchar	60
+	rescue_dist_abbrv	    char	6
+	rescue_dist_desc	    varchar	60
+	munic_dist_abbrv	    char	6
+	munic_dist_desc	            varchar	60
+	dist_1_abbrv	            char	6
+	dist_1_desc		    varchar	60
+	dist_2_abbrv	            char	6
+	dist_2_desc		    varchar	60
+	Confidential_ind	    char	1
+	age			    int         4
+	ncid 		            char 	12 
+	vtd_abbrv 		    char 	6 
+	vtd_desc 		    char 	60
+
+
+-- -----------------------------------------------------------------------------------------------------
+County Names & ids
+	county         	county_id  
+	ALAMANCE       	1
+	ALEXANDER      	2
+	ALLEGHANY      	3
+	ANSON          	4
+	ASHE           	5
+	AVERY          	6
+	BEAUFORT       	7
+	BERTIE         	8
+	BLADEN         	9
+	BRUNSWICK      	10
+	BUNCOMBE       	11
+	BURKE          	12
+	CABARRUS       	13
+	CALDWELL       	14
+	CAMDEN         	15
+	CARTERET       	16
+	CASWELL        	17
+	CATAWBA        	18
+	CHATHAM        	19
+	CHEROKEE       	20
+	CHOWAN         	21
+	CLAY           	22
+	CLEVELAND      	23
+	COLUMBUS       	24
+	CRAVEN         	25
+	CUMBERLAND     	26
+	CURRITUCK      	27
+	DARE           	28
+	DAVIDSON       	29
+	DAVIE          	30
+	DUPLIN         	31
+	DURHAM         	32
+	EDGECOMBE      	33
+	FORSYTH		34
+	FRANKLIN       	35
+	GASTON         	36
+	GATES          	37
+	GRAHAM         	38
+	GRANVILLE      	39
+	GREENE         	40
+	GUILFORD       	41
+	HALIFAX        	42
+	HARNETT        	43
+	HAYWOOD        	44
+	HENDERSON      	45
+	HERTFORD       	46
+	HOKE           	47
+	HYDE           	48
+	IREDELL        	49
+	JACKSON        	50
+	JOHNSTON       	51
+	JONES          	52
+	LEE            	53
+	LENOIR         	54
+	LINCOLN        	55
+	MACON          	56
+	MADISON        	57
+	MARTIN         	58
+	MCDOWELL       	59
+	MECKLENBURG    	60
+	MITCHELL       	61
+	MONTGOMERY     	62
+	MOORE          	63
+	NASH           	64
+	NEWHANOVER	65
+	NORTHAMPTON    	66
+	ONSLOW         	67
+	ORANGE         	68
+	PAMLICO        	69
+	PASQUOTANK     	70
+	PENDER         	71
+	PERQUIMANS	72
+	PERSON         	73
+	PITT           	74
+	POLK           	75
+	RANDOLPH       	76
+	RICHMOND       	77
+	ROBESON        	78
+	ROCKINGHAM     	79
+	ROWAN          	80
+	RUTHERFORD     	81
+	SAMPSON		82
+	SCOTLAND       	83
+	STANLY         	84
+	STOKES         	85
+	SURRY          	86
+	SWAIN          	87
+	TRANSYLVANIA   	88
+	TYRRELL        	89
+	UNION        	90
+	VANCE          	91
+	WAKE           	92
+	WARREN         	93
+	WASHINGTON     	94
+	WATAUGA        	95
+	WAYNE          	96
+	WILKES         	97
+	WILSON         	98
+	YADKIN         	99
+	YANCEY         	00
+
+-- -----------------------------------------------------------------------------------------------------
+Race Description
+	B  	BLACK or AFRICAN AMERICAN                                   
+	I  	AMERICAN INDIAN or ALASKA NATIVE                            
+	O  	OTHER                                                       
+	W  	WHITE                                                       
+	U  	UNDESIGNATED                                                
+	A  	ASIAN                                                       
+	M  	TWO or MORE RACES                                           
+-- -----------------------------------------------------------------------------------------------------
