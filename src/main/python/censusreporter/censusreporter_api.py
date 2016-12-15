@@ -22,7 +22,8 @@ def get_url_response(tables, geoids, release):
                          release=release)
 
     response = requests.get(url)
-
+    #print(response)
+    #print(url)
     return response.json()
 
 
@@ -40,21 +41,33 @@ def json_data(tables=None, geoids=None, release='latest'):
     tables = _clean_list_arg(tables,'B01001')
 
     #If the URL is too big it will fail, estimating the size here and if it is too big we'll break this up
-    #Each table uses 7 characters and each geoid uses 13 characters
+    #Each table uses 7 characters and each geoid uses up to 14 characters.
+    #This should never happen, but we're going to check just to make sure
     maxURLSize = 4020
-    urlSize = (len(tables) * 7) + (len(geoids) * 13)
+    urlSize = (len(tables) * 7) + (len(geoids) * 14)
 
     if urlSize > maxURLSize:
         tableSize = len(tables) * 7
-        maxGeos = int((maxURLSize - tableSize) / 13)
-
+        maxGeos = int((maxURLSize - tableSize) / 14)
+        print("URL maybe too big, breaking up.")
         resp = get_url_response(tables, geoids[:maxGeos], release)
         if "error" in resp:
             raise Exception(resp['error'])
 
         return merge(resp, json_data(tables, geoids[maxGeos:], release))
 
-    return get_url_response(tables, geoids, release)
+    response = get_url_response(tables, geoids, release)
+
+    if "error" in response and "release doesn't include GeoID(s) " in response['error']:
+        geoList = re.findall(r'(\d+US\w+)\W/', response['error'])
+
+        geoids = [x for x in geoids if x not in geoList]
+        if len(geoids) == 0:
+            return None
+
+        response = get_url_response(tables, geoids, release)
+
+    return response
 
  
 
