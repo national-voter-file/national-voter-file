@@ -119,7 +119,28 @@ class BaseTransformer(object):
 
     # some columns can only have certain values
     limited_value_dict = {
-        'PARTY': set(['DEM', 'REP']),
+        'PARTY': set(['DEM', #Democrat
+                      'REP', #Republican
+                      "AI", #American Independant
+                      "PF", #Peace and Freedom
+                      "AMC", #American Constitution
+                      "GRN", #Green
+                      "LIB", #Libretarian
+                      "ECO", #Ecology
+                      "IDP", #Independence Party
+                      "PSL", #Party for socialism and Liberation
+                      "REF", #Reform Party
+                      "SAP", #Sapient
+                      "CON", #Conservative
+                      "WOR", #Working Families
+                      "WEP", #Womens Equality
+                      "SCC", #Stop Common Core
+                      "NLP", #Natural Law
+                      "SP", #Socialist
+                      "UTY", #Unity
+                      "OTH", #otherwise
+                      "UN" #Unaffiliated
+        ]),
         'GENDER': set(['M', 'F', 'U']),
     }
 
