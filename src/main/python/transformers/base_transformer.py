@@ -173,7 +173,7 @@ class BaseTransformer(object):
         'ZipCode': 'ZIP_CODE',
     }
 
-    def __init__(self, date_format, sep=','):
+    def __init__(self, date_format, sep=',', input_fields = None):
         """
         Inputs:
             date_format: the strptime format to translate dates
@@ -181,6 +181,7 @@ class BaseTransformer(object):
         """
         self.date_format = date_format
         self.sep = sep
+        self.input_fields = input_fields
 
     def __call__(self, input_path, output_path):
         """
@@ -190,7 +191,7 @@ class BaseTransformer(object):
         similar check on all data created
         """
         with open(input_path, 'r') as infile, open(output_path, 'w') as outfile:
-            reader = csv.DictReader(infile, delimiter=self.sep)
+            reader = csv.DictReader(infile, delimiter=self.sep,  fieldnames=self.input_fields)
             writer = csv.DictWriter(
                 outfile,
                 fieldnames = sorted(self.col_type_dict.keys()),
@@ -407,13 +408,16 @@ class BaseTransformer(object):
                 'USPSBoxType',
                 'USPSBoxID',
             ]
+        elif usaddress_type == 'Ambiguous':
+            return " "
+
         output_vals = [
             usaddress_dict[x] for x in cols if x in usaddress_dict
         ]
         if len(output_vals) > 0:
             return ' '.join(output_vals)
         else:
-            return None
+            return " "
 
     def construct_mail_address_2(self, usaddress_dict):
         """
@@ -431,7 +435,7 @@ class BaseTransformer(object):
         if len(output_vals) > 0:
             return ' '.join(output_vals)
         else:
-            return None
+            return " "
 
     #### Contact methods #######################################################
 
