@@ -40,7 +40,7 @@ def get_zip(file_url):
 	zipfile = ZipFile(BytesIO(url.content), 'r')
 	zip_names = zipfile.namelist()
 	if len(zip_names) == 1:
-		file_name = zip_names.pop()	
+		file_name = zip_names.pop()
 		extracted_file = zipfile.open(file_name).read()
 		return extracted_file
 
@@ -199,7 +199,7 @@ def get_state(stateList, stateCodes):
 	print("Starting State")
 
 	df = pd.DataFrame()
-	
+
 	cTemp = [] #I know there is a better way, but this works for me
 	for state in stateList:
 		cTemp.append([state, stateCodes[state]])
@@ -221,6 +221,22 @@ def get_state(stateList, stateCodes):
 
 	return data
 
+def rename_columns(df):
+	all_cols = df.columns.values.tolist()
+	count_totals = 0
+	for col in all_cols:
+		if col == 'Total':
+			count_totals += 1
+			all_cols[idx] = 'TOTAL_{}'.format(count_totals)
+		else:
+			clean_col = re.sub('[^0-9a-zA-Z_]+', '', col.strip().replace(' ', '_')).upper()
+			if clean_col in all_cols:
+				col = clean_col + '_1'
+			else:
+				col = clean_col
+	df.columns = all_cols
+	return df
+
 #########
 
 parser = argparse.ArgumentParser()
@@ -229,7 +245,7 @@ parser.add_argument("-s", "--states", help="State Abbreviation List, space seper
 parser.add_argument("-t", "--type", help="ALL|County|Upper|Lower|Congress|City|State space seperated", nargs="*")
 
 args = parser.parse_args()
-	
+
 if args.states is None:
 	stateList = [ 'AL','AK','AZ','AR','CA','CO','CT','DE','DC','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY','PR']
 else:
@@ -263,6 +279,7 @@ outData = pd.DataFrame()
 
 if types == 'ALL' or "COUNTY" in types:
 	outData = outData.append(get_county(fileBaseURL + "counties_national.zip", stateList))
+	outData = rename_columns(outData)
 
 if types == 'ALL' or "CONGRESS" in types:
 
@@ -278,28 +295,33 @@ if types == 'ALL' or "CONGRESS" in types:
 		congress -= 1
 		conYearURL = fileBaseURL + str(congress) + "CDs_national.zip"
 
-
-	outData = outData.append(get_congress(conYearURL, stateList))
+	congress_df = rename_columns(get_congress(conYearURL, stateList))
+	# outData = rename_columns(outData)
+	outData = pd.concat([outData, congress_df])
 
 
 if types == 'ALL' or "LOWER" in types:
 #Next we'll do lower house (State House)
-	outData = outData.append(get_stateHouse(fileBaseURL + "sldl_national.zip", stateList))
+	state_house_df = rename_columns(get_stateHouse(fileBaseURL + "sldl_national.zip", stateList))
+	outData = pd.concat([outData, state_house_df])
 
 
 if types == 'ALL' or "UPPER" in types:
 #Next we'll do upper house (State Senate)
-	outData = outData.append(get_stateSenate(fileBaseURL + "sldu_national.zip", stateList))
+	upper_house_df = rename_columns(get_stateSenate(fileBaseURL + "sldu_national.zip", stateList))
+	outData = pd.concat([outData, upper_house_df])
 
 #School Districts: high school pattern is: 96000US0400450, elementary school district pattern is: 95000US0400005
 
 if "CITY" in types:
 #Now we do cities, this one is failing on append inside get_city, no idea why (Something about managers... and we all know managers suck
-	outData = outData.append(get_city(gazYearURL + str(year), stateList, stateCodes))
+	city_df = rename_columns(get_city(gazYearURL + str(year), stateList, stateCodes))
+	outData = pd.concat([outData, city_df])
 
 if "STATE" in types:
 #Now we do states, this one gets different columns, so the append here fails.  Every column in state exists in outData, but not every column in outData exists in state.  One would think it would just null the missing columns, but apparently not.
-	outData = outData.append(get_state(stateList, stateCodes))
+	state_df = rename_columns(get_state(stateList, stateCodes))
+	outData = pd.concat([outData, state_df])
 
 
 outData.to_csv(directory+"/census.csv")
