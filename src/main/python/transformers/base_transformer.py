@@ -198,6 +198,7 @@ class BaseTransformer(object):
             writer.writeheader()
             for input_dict in reader:
                 output_dict = self.process_row(input_dict)
+                output_dict = self.fix_missing_mailing_addr(output_dict)
                 self.validate_output_row(output_dict) # validate here
                 writer.writerow(output_dict)
 
@@ -223,6 +224,40 @@ class BaseTransformer(object):
         for func in extract_funcs:
             output_dict.update(func(input_dict))
         return output_dict
+
+    #### Use the registerd address if no mailing address provided
+    def fix_missing_mailing_addr(self, orig_dict):
+        """
+            If there is no mailing address provided in the file then copy over
+            the residential address. This has already been broken into constiuant
+            parts so we have to glue it back together for the mailing address fields
+        """
+        if('MAIL_CITY' not in orig_dict):
+            copied_addr =  {
+                    'MAIL_ADDRESS_LINE1': self._construct_val(orig_dict, [
+                        'ADDRESS_NUMBER_PREFIX', 'ADDRESS_NUMBER', 'ADDRESS_NUMBER_SUFFIX',
+                        'STREET_NAME_PRE_DIRECTIONAL','STREET_NAME_PRE_MODIFIER', 'STREET_NAME_PRE_TYPE',
+                        'STREET_NAME',
+                        'STREET_NAME_POST_DIRECTIONAL','STREET_NAME_POST_MODIFIER', 'STREET_NAME_POST_TYPE'
+                    ]),
+
+                    'MAIL_ADDRESS_LINE2': self._construct_val(orig_dict, [
+                    'OCCUPANCY_TYPE', 'OCCUPANCY_IDENTIFIER']),
+                    'MAIL_CITY': orig_dict['PLACE_NAME'],
+                    'MAIL_STATE': orig_dict['STATE_NAME'],
+                    'MAIL_ZIP_CODE': orig_dict['ZIP_CODE'],
+                    'MAIL_COUNTRY': "USA"
+            }
+            orig_dict.update(copied_addr)
+        return orig_dict
+
+    ### Construct an address line from specified peices
+    def _construct_val(self, aDir, fields):
+        result = ""
+        for aField in fields:
+            if(aDir[aField]):
+                result = result + aDir[aField].strip()+" " if aDir[aField].strip() else ''
+        return result
 
     #### Output validation methods #############################################
 

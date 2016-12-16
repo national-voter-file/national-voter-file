@@ -168,9 +168,6 @@ class WATransformer(BaseTransformer):
         return {'COUNTYCODE': input_dict['CountyCode']}
 
 
-    def _val(self, val):
-        return val.strip()+" " if(val.strip()) else ''
-
 
     def extract_mailing_address(self, input_dict):
         """
@@ -200,20 +197,7 @@ class WATransformer(BaseTransformer):
                 'MAIL_COUNTRY': input_dict['MailCountry'] if input_dict['MailCountry']  else "USA"
             }
         else:
-            return {
-                'MAIL_ADDRESS_LINE1': self._val(input_dict['RegStNum']) +
-                    self._val(input_dict['RegStFrac'])+
-                    self._val(input_dict['RegStPreDirection'])+
-                    self._val(input_dict['RegStName'])+
-                    self._val(input_dict['RegStType'])+
-                    self._val(input_dict['RegStPostDirection']),
-                'MAIL_ADDRESS_LINE2': self._val(input_dict['RegUnitType'])+self._val(input_dict['RegUnitNum']),
-                'MAIL_CITY': input_dict['RegCity'],
-                'MAIL_STATE': input_dict['RegState'],
-                'MAIL_ZIP_CODE': input_dict['RegZipCode'],
-                'MAIL_COUNTRY': "USA"
-            }
-
+            return { }
 
     #### Political methods #####################################################
 

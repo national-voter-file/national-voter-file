@@ -12,9 +12,19 @@ class OHTransformer(BaseTransformer):
     col_type_dict = BaseTransformer.col_type_dict.copy()
     col_type_dict['TITLE'] = set([str, type(None)])
     col_type_dict['GENDER'] = set([str, type(None)])
-    col_type_dict['COUNTYCODE'] = set([str, type(None)])
     col_type_dict['ABSENTEE_TYPE'] = set([str, type(None)])
     col_type_dict['PRECINCT_SPLIT'] = set([str, type(None)])
+
+    ohio_party_map = {
+        "C": "AMC",
+        "D":"DEM",
+        "G":"GRN",
+        "L":"LIB",
+        "N":"NLP",
+        "R":"REP",
+        "S":"SP",
+        " ":"UN"
+    }
 
     #### Contact methods #######################################################
 
@@ -140,16 +150,23 @@ class OHTransformer(BaseTransformer):
         """
         address_components = [
             'RESIDENTIAL_ADDRESS1',
-            'RESIDENTIAL_SECONDARY_ADDR',
-            'RESIDENTIAL_CITY',
-            'RESIDENTIAL_STATE',
-            'RESIDENTIAL_ZIP'
+            'RESIDENTIAL_SECONDARY_ADDR'
         ]
         address_str = ' '.join([
             input_dict[x] for x in address_components if input_dict[x] is not None
         ])
         usaddress_dict, usaddress_type = self.usaddress_tag(address_str)
-        return self.convert_usaddress_dict(usaddress_dict)
+
+        converted_addr = self.convert_usaddress_dict(usaddress_dict)
+
+        converted_addr.update({'PLACE_NAME':input_dict['RESIDENTIAL_CITY'],
+                                'STATE_NAME':input_dict['RESIDENTIAL_STATE'],
+                                'ZIP_CODE':input_dict['RESIDENTIAL_ZIP']
+        })
+
+
+
+        return converted_addr
 
     def extract_county_code(self, input_dict):
         """
@@ -159,7 +176,7 @@ class OHTransformer(BaseTransformer):
             Dictionary with following keys
                 'COUNTYCODE'
         """
-        return {'COUNTYCODE': None}
+        return {'COUNTYCODE': input_dict['COUNTY_NUMBER']}
 
     def extract_mailing_address(self, input_dict):
         """
@@ -178,54 +195,19 @@ class OHTransformer(BaseTransformer):
                 'MAIL_ZIP_CODE'
                 'MAIL_COUNTRY'
         """
-        mail_str = ' '.join([
-            x for x in [
-                input_dict['MAILING_ADDRESS1'],
-                input_dict['MAILING_SECONDARY_ADDRESS'],
-                input_dict['MAILING_CITY'],
-                input_dict['MAILING_STATE'],
-                input_dict['MAILING_ZIP'],
-                input_dict['MAILING_COUNTRY'],
-            ] if x is not None
-        ])
 
-        # If mailing address provided, parse, otherwise default to residential
-        # strip() required because input_dict vals are spaces
-        # May want to make this default behavior
-        if len(mail_str.strip()) > 0:
-            usaddress_dict, usaddress_type = self.usaddress_tag(mail_str)
-            mail_city = input_dict['MAILING_CITY']
-            mail_zip = input_dict['MAILING_ZIP']
-            mail_state = input_dict['MAILING_STATE']
-            mail_country = input_dict['MAILING_COUNTRY']
+        if( input_dict['MAILING_ADDRESS1'].strip() and input_dict['MAILING_CITY'].strip()):
+            return {
+                'MAIL_ADDRESS_LINE1': input_dict['MAILING_ADDRESS1'],
+                'MAIL_ADDRESS_LINE2': input_dict['MAILING_SECONDARY_ADDRESS'],
+                'MAIL_CITY': input_dict['MAILING_CITY'],
+                'MAIL_STATE': input_dict['MAILING_STATE'],
+                'MAIL_ZIP_CODE': input_dict['MAILING_ZIP'],
+                'MAIL_COUNTRY': input_dict['MAILING_COUNTRY'] if input_dict['MAILING_COUNTRY']  else "USA"
+            }
         else:
-            address_components = [
-                'RESIDENTIAL_ADDRESS1',
-                'RESIDENTIAL_SECONDARY_ADDR',
-                'RESIDENTIAL_CITY',
-                'RESIDENTIAL_STATE',
-                'RESIDENTIAL_ZIP'
-            ]
-            address_str = ' '.join([
-                input_dict[x] for x in address_components if input_dict[x] is not None
-            ])
-            usaddress_dict, usaddress_type = self.usaddress_tag(address_str)
-            mail_city = input_dict['RESIDENTIAL_CITY']
-            mail_zip = input_dict['RESIDENTIAL_ZIP']
-            mail_state = input_dict['RESIDENTIAL_STATE']
-            mail_country = 'USA'
+            return {}
 
-        return {
-            'MAIL_ADDRESS_LINE1': self.construct_mail_address_1(
-                usaddress_dict,
-                usaddress_type,
-            ),
-            'MAIL_ADDRESS_LINE2': self.construct_mail_address_2(usaddress_dict),
-            'MAIL_CITY': mail_city,
-            'MAIL_ZIP_CODE': mail_zip,
-            'MAIL_STATE': mail_state,
-            'MAIL_COUNTRY': mail_country,
-        }
 
     #### Political methods #####################################################
 
@@ -289,14 +271,7 @@ class OHTransformer(BaseTransformer):
                 'PARTY'
         """
         party = input_dict['PARTY_AFFILIATION']
-        if party == 'R':
-            party = 'REP'
-        elif party == 'D':
-            party = 'DEM'
-        else:
-            party = None
-
-        return {'PARTY': party}
+        return {'PARTY': self.ohio_party_map[party]}
 
     def extract_congressional_dist(self, input_dict):
         """
