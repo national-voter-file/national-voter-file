@@ -8,6 +8,7 @@ _daemon.conf_.
 """
 import logging
 import time
+from mapzen_geocoder import *
 
 log = logging.getLogger()
 
@@ -25,4 +26,5 @@ def run(config, sleep_duration=2.9):
         tamu_config = config['tamu']
         log.info('Tamu configuration:\n{}'.format(tamu_config))
 
+        run_geocoder(config, log)
         time.sleep(sleep_duration)
