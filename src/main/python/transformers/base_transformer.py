@@ -408,7 +408,8 @@ class BaseTransformer(object):
                 'USPSBoxType',
                 'USPSBoxID',
             ]
-        elif usaddress_type == 'Ambiguous':
+        # Apparently Intersection another option, handling like Ambiguous
+        elif usaddress_type in ['Ambiguous', 'Intersection']:
             return " "
 
         output_vals = [
