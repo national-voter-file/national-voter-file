@@ -4,9 +4,10 @@
 from __future__ import print_function, unicode_literals
 import psycopg2
 import requests
+import os
+from datetime import datetime, timedelta
 import time
-import logging
-from secret import DATABASES, MAPZEN_KEY
+
 
 GEOCODE_STATUS_CODES = {
     1: 'Pending',
@@ -18,27 +19,8 @@ GEOCODE_STATUS_CODES = {
 
 # Requires a secret.py file in the same directory containing database connection info
 
-connection_database_name = 'DevVoter'
-MAPZEN_URL = 'https://search.mapzen.com/v1/search/structured?api_key=' + MAPZEN_KEY
-
-logger = logging.getLogger('geocode_logging')
-# create formatter and add it to the handlers
-formatter = logging.Formatter('%(asctime)s - %(message)s')
-logger.setLevel(logging.INFO)
-fh = logging.FileHandler('geocode.log')
-fh.setLevel(logging.INFO)
-fh.setFormatter(formatter)
-logger.addHandler(fh)
-
-# Connect to database and return a cursor, which can be used for querying
-# Database name is the name of the database as specified in the secret.py file
-def connect_to_db(connection_database_name):
-  try:
-    conn = psycopg2.connect(**DATABASES[connection_database_name])
-    cur = conn.cursor()
-  except Exception as ex:
-    print('Connection error with {}: {}'.format(connection_database_name, ex))
-  return conn, cur
+# connection_database_name = 'DevVoter'
+MAPZEN_URL = 'https://search.mapzen.com/v1/search/structured?api_key='
 
 # fetch address records to query.  Limit = number of rows requested
 def get_unmatched_address_records(cur, limit=1):
@@ -68,8 +50,8 @@ def get_unmatched_address_records(cur, limit=1):
     return cur.fetchall()
 
 # Request Mapzen, check status
-def request_from_mapzen(addr_row):
-    query_string = MAPZEN_URL
+def request_from_mapzen(addr_row, mapzen_url):
+    query_string = mapzen_url
     household_id = addr_row[0]
     address_dict = dict(
         # Join all non-empty items for address itself
@@ -99,13 +81,9 @@ def request_from_mapzen(addr_row):
 
         return household_id, geom_dict
 
-    # Notifies that you've gone past rate limit, could be per second though
-    # TODO: When daemonizing, figure out how to use this
     elif response.status_code == 429:
         time.sleep(0.3)
     else:
-        logger.info('ID: {} failed'.format(household_id))
-        # Not sure if should just return failed state here
         return household_id, None
 
 # Either update record to coordinates or change status to failed
@@ -131,21 +109,36 @@ def update_address_record(cur, household_id, addr_dict):
             '''.format(g_status=status, h_id=household_id)
 
     cur.execute(update_statement)
-    logger.info(
-        '{h_id} updated with status {g_status}'.format(h_id=household_id, g_status=status)
-        )
 
-if __name__ == '__main__':
-    # Get the database cursor
-    conn, cur = connect_to_db(connection_database_name)
+def run_geocoder(config, log):
+    # Check env var set to postpone execution if hitting rate limits
+    wait_time = os.environ.get('WAIT_TIME', None)
+    if wait_time:
+        wait_dt = datetime.strptime(wait_time, '%Y-%m-%d %H:%M')
+        if wait_dt > datetime.now():
+            return
+
+    try:
+        conn = psycopg2.connect(**config['databases']['DevVoter'])
+        cur = conn.cursor()
+    except Exception as ex:
+        log.error('Connection error with {}: {}'.format(config['databases']['DevVoter']['database'], ex))
+
     results = get_unmatched_address_records(cur, limit=5)
 
+    mapzen_url = MAPZEN_URL + config['mapzen']['apikey']
     for row in results:
-        h_id, geom = request_from_mapzen(row)
+        h_id, geom = request_from_mapzen(row, mapzen_url)
         if h_id:
             update_address_record(cur, h_id, geom)
+            log.info('Updated address with household id: {}'.format(h_id))
+        else:
+            time_wait = (datetime.now() + timedelta(hours=1))
+            os.environ['WAIT_TIME'] = time_wait.strftime('%Y-%m-%d %H:%M')
+            log.info('Setting wait time to {}'.format(os.environ['WAIT_TIME']))
+            break
         time.sleep(0.2)
-        
+
     conn.commit()
     cur.close()
     conn.close()
