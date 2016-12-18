@@ -78,16 +78,26 @@ class NCTransformer(BaseTransformer):
             Dictionary with following keys
                 'BIRTHDATE'
         """
-	#We don't have birthdate, so we'll guess
-	by = int(datetime.now().year) - int(input_columns['AGE'])
-	bd = str(dt.date(by, 1, 1))
+        #We don't have birthdate, so we'll guess
+        by = int(datetime.now().year) - int(input_columns['birth_age'])
+        bd = dt.date(by, 1, 1)
 
-	output_dict = {
-            'BIRTHDATE': self.convert_date(bd),
-            'BIRTHDATE_IS_ESTIMATE': True
+        output_dict = {
+            'BIRTHDATE': bd,
+            'BIRTHDATE_IS_ESTIMATE': True,
         }
 
         return output_dict
+
+    def extract_birth_state(self, input_columns):
+        """
+        Inputs:
+            input_columns: name or list of columns
+        Outputs:
+            Dictionary with following keys
+                'BIRTH_STATE'
+        """
+        return {'BIRTH_STATE' : input_columns['birth_state']}
 
     def extract_language_choice(self, input_columns):
         """
@@ -98,6 +108,16 @@ class NCTransformer(BaseTransformer):
                 'LANGUAGE_CHOICE'
         """
         return {'LANGUAGE_CHOICE': None}
+
+    def extract_race(self, input_columns):
+        """
+        Inputs:
+            input_columns: name or list of columns
+        Outputs:
+            Dictionary with following keys
+                'RACE'
+        """
+        return {'RACE' : input_columns['race_code']}
 
     #### Address methods #######################################################
 
@@ -139,7 +159,7 @@ class NCTransformer(BaseTransformer):
                 'USPS_BOX_TYPE'
                 'ZIP_CODE'
         """
-       address_components = [
+        address_components = [
             'res_street_address',
             'res_city_desc',
             'state_cd',
@@ -150,10 +170,16 @@ class NCTransformer(BaseTransformer):
             input_dict[x] for x in address_components if input_dict[x] is not None
         ])
         # use the usaddress_tag method to handle errors
-        usaddress_dict = self.usaddress_tag(address_str)
-        # use the convert_usaddress_dict to get correct column names
-        # and fill in missing values
-        return self.convert_usaddress_dict(usaddress_dict)
+        usaddress_dict, usaddress_type = self.usaddress_tag(address_str)
+
+        converted_addr = self.convert_usaddress_dict(usaddress_dict)
+
+        converted_addr.update({'PLACE_NAME':input_dict['res_city_desc'],
+                                'STATE_NAME':input_dict['state_cd'],
+                                'ZIP_CODE':input_dict['zip_code']
+        })
+
+        return converted_addr
 
     def extract_county_code(self, input_dict):
         """
@@ -191,7 +217,7 @@ class NCTransformer(BaseTransformer):
                 input_dict['mail_zipcode']
             ] if x is not None
         ])
-        mail_str = ' '.join([x for x in columns])
+        
         usaddress_dict, usaddress_type = self.usaddress_tag(mail_str)
         return {
             'MAIL_ADDRESS_LINE1': self.construct_mail_address_1(
@@ -199,10 +225,10 @@ class NCTransformer(BaseTransformer):
                 usaddress_type,
             ),
             'MAIL_ADDRESS_LINE2': self.construct_mail_address_2(usaddress_dict),
-            'MAIL_CITY': input_dict['MAIL_CITY'],
-            'MAIL_ZIP_CODE': input_dict['MAIL_ZIP'],
-            'MAIL_STATE': input_dict['MAIL_STATE'],
-            'MAIL_COUNTRY': input_dict['MAIL_COUNTRY'],
+            'MAIL_CITY': input_dict['mail_city'],
+            'MAIL_ZIP_CODE': input_dict['mail_zipcode'],
+            'MAIL_STATE': input_dict['mail_state'],
+            'MAIL_COUNTRY': 'USA',
         }
 
     #### Political methods #####################################################
@@ -266,7 +292,7 @@ class NCTransformer(BaseTransformer):
             Dictionary with following keys
                 'PARTY'
         """
-        if input_columns['party_cd'] == 'UNA'
+        if input_columns['party_cd'] == 'UNA':
                 party = 'UN'
         else:
                 party = input_columns['party_cd']
@@ -340,4 +366,4 @@ class NCTransformer(BaseTransformer):
             Dictionary with following keys
                 'PRECINCT_SPLIT'
         """
-        return {'PRECINCT_SPLIT': None}
+        return {'PRECINCT_SPLIT': ""}

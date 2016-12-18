@@ -65,7 +65,10 @@ class BaseTransformer(object):
         'NAME_SUFFIX': set([str]),
         'GENDER': set([str]),
         'BIRTHDATE': set([datetime.datetime]),
-	'BIRTHDATE_IS_ESTIMATE', :set([bool]),
+	'BIRTHDATE_IS_ESTIMATE':set([bool]),
+        'RACE':set([str]),
+	'BIRTH_STATE':set([str]),
+        'BIRTHDATE': set([datetime.date]),
         'LANGUAGE_CHOICE': set([str, type(None)]),
         'EMAIL': set([str, type(None)]),
         'PHONE': set([str, type(None)]),
@@ -105,7 +108,7 @@ class BaseTransformer(object):
         'COUNTYCODE': set([str]),
         'STATE_VOTER_REF': set([str]),
         'COUNTY_VOTER_REF': set([str]),
-        'REGISTRATION_DATE': set([datetime.datetime]),
+        'REGISTRATION_DATE': set([datetime.date]),
         'REGISTRATION_STATUS': set([str]),
         'ABSENTEE_TYPE': set([str]),
         'PARTY': set([str, type(None)]),
@@ -120,8 +123,39 @@ class BaseTransformer(object):
 
     # some columns can only have certain values
     limited_value_dict = {
-        'PARTY': set(['DEM', 'REP', 'UNA']),
+        'PARTY': set(['DEM', #Democrat
+                      'REP', #Republican
+                      "AI", #American Independant
+                      "PF", #Peace and Freedom
+                      "AMC", #American Constitution
+                      "GRN", #Green
+                      "LIB", #Libretarian
+                      "ECO", #Ecology
+                      "IDP", #Independence Party
+                      "PSL", #Party for socialism and Liberation
+                      "REF", #Reform Party
+                      "SAP", #Sapient
+                      "CON", #Conservative
+                      "WOR", #Working Families
+                      "WEP", #Womens Equality
+                      "SCC", #Stop Common Core
+                      "NLP", #Natural Law
+                      "SP", #Socialist
+                      "UTY", #Unity
+                      "OTH", #otherwise
+                      "UN" #Unaffiliated
+        ]),
         'GENDER': set(['M', 'F', 'U']),
+        'RACE':set([
+        'I', #American Indian or Alaskan Native
+        'A', #Asian Or Pacific Islander
+        'B', #Black, Not Hispanic
+        'H', #Hispanic
+        'W', #White, not Hispanic
+        'O', #other
+        'M', #Multi-racial
+        "U" #Unknown
+        ])
     }
 
     usaddress_to_standard_colnames_dict = {
@@ -153,7 +187,7 @@ class BaseTransformer(object):
         'ZipCode': 'ZIP_CODE',
     }
 
-    def __init__(self, date_format, sep=','):
+    def __init__(self, date_format, sep=',', input_fields = None):
         """
         Inputs:
             date_format: the strptime format to translate dates
@@ -161,6 +195,7 @@ class BaseTransformer(object):
         """
         self.date_format = date_format
         self.sep = sep
+        self.input_fields = input_fields
 
     def __call__(self, input_path, output_path):
         """
@@ -169,8 +204,8 @@ class BaseTransformer(object):
         Should not be overwritten in the subclass, this method enforces a
         similar check on all data created
         """
-        with open(input_path, 'r') as infile, open(output_path, 'w') as outfile:
-            reader = csv.DictReader(infile, delimiter=self.sep)
+        with open(input_path, 'r', errors='ignore') as infile, open(output_path, 'w') as outfile:
+            reader = csv.DictReader(infile, delimiter=self.sep,  fieldnames=self.input_fields)
             writer = csv.DictWriter(
                 outfile,
                 fieldnames = sorted(self.col_type_dict.keys()),
@@ -178,6 +213,7 @@ class BaseTransformer(object):
             writer.writeheader()
             for input_dict in reader:
                 output_dict = self.process_row(input_dict)
+                output_dict = self.fix_missing_mailing_addr(output_dict)
                 self.validate_output_row(output_dict) # validate here
                 writer.writerow(output_dict)
 
@@ -203,6 +239,40 @@ class BaseTransformer(object):
         for func in extract_funcs:
             output_dict.update(func(input_dict))
         return output_dict
+
+    #### Use the registerd address if no mailing address provided
+    def fix_missing_mailing_addr(self, orig_dict):
+        """
+            If there is no mailing address provided in the file then copy over
+            the residential address. This has already been broken into constiuant
+            parts so we have to glue it back together for the mailing address fields
+        """
+        if('MAIL_CITY' not in orig_dict):
+            copied_addr =  {
+                    'MAIL_ADDRESS_LINE1': self._construct_val(orig_dict, [
+                        'ADDRESS_NUMBER_PREFIX', 'ADDRESS_NUMBER', 'ADDRESS_NUMBER_SUFFIX',
+                        'STREET_NAME_PRE_DIRECTIONAL','STREET_NAME_PRE_MODIFIER', 'STREET_NAME_PRE_TYPE',
+                        'STREET_NAME',
+                        'STREET_NAME_POST_DIRECTIONAL','STREET_NAME_POST_MODIFIER', 'STREET_NAME_POST_TYPE'
+                    ]),
+
+                    'MAIL_ADDRESS_LINE2': self._construct_val(orig_dict, [
+                    'OCCUPANCY_TYPE', 'OCCUPANCY_IDENTIFIER']),
+                    'MAIL_CITY': orig_dict['PLACE_NAME'],
+                    'MAIL_STATE': orig_dict['STATE_NAME'],
+                    'MAIL_ZIP_CODE': orig_dict['ZIP_CODE'],
+                    'MAIL_COUNTRY': "USA"
+            }
+            orig_dict.update(copied_addr)
+        return orig_dict
+
+    ### Construct an address line from specified peices
+    def _construct_val(self, aDir, fields):
+        result = ""
+        for aField in fields:
+            if(aDir[aField]):
+                result = result + aDir[aField].strip()+" " if aDir[aField].strip() else ''
+        return result
 
     #### Output validation methods #############################################
 
@@ -277,7 +347,7 @@ class BaseTransformer(object):
         Outputs:
             A datetime object created according to self.date_format
         """
-        return datetime.datetime.strptime(date_str, self.date_format)
+        return datetime.datetime.strptime(date_str, self.date_format).date()
 
     def usaddress_tag(self, address_str):
         """
@@ -352,13 +422,16 @@ class BaseTransformer(object):
                 'USPSBoxType',
                 'USPSBoxID',
             ]
+        elif usaddress_type == 'Ambiguous':
+            return " "
+
         output_vals = [
             usaddress_dict[x] for x in cols if x in usaddress_dict
         ]
         if len(output_vals) > 0:
             return ' '.join(output_vals)
         else:
-            return None
+            return " "
 
     def construct_mail_address_2(self, usaddress_dict):
         """
@@ -376,7 +449,7 @@ class BaseTransformer(object):
         if len(output_vals) > 0:
             return ' '.join(output_vals)
         else:
-            return None
+            return " "
 
     #### Contact methods #######################################################
 
@@ -437,6 +510,27 @@ class BaseTransformer(object):
                 'GENDER'
         """
         raise NotImplementedError('Must implement extract_gender method')
+
+    def extract_race(self, input_columns):
+        """
+        Inputs:
+            input_columns: name or list of columns
+        Outputs:
+            Dictionary with following keys
+                'RACE'
+        """
+        raise NotImplementedError('Must implement extract_race method')
+		
+    def extract_birth_state(self, input_columns):
+        """
+        Inputs:
+            input_columns: name or list of columns
+        Outputs:
+            Dictionary with following keys
+                'BIRTH_STATE'
+        """
+        raise NotImplementedError('Must implement extract_birth_state method')
+		
 
     def extract_birthdate(self, input_columns):
         """
