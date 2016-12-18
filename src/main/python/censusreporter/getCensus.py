@@ -153,7 +153,6 @@ def get_stateSenate(senateURL, stateList):
 			chunk = chunk.set_index('FIPS')
 
 			data = get_combinedData(chunk, tables=['B01001','B01003','B03002','B06008','B23001','B19001','B25009','B25077'])
-			print("data Size: " + str(len(data)))
 			df = df.append(data)
 
 	c['STATEFP']=c.apply(lambda row:str(row['GEOID'])[:-3].zfill(2),axis=1)
@@ -168,14 +167,15 @@ def get_city(baseURL, stateList, stateCodes):
 	print("Starting City")
 
 	data = pd.DataFrame()
+	df = pd.DataFrame()
+	c = pd.DataFrame()
 	for state in stateList:
 		URL = baseURL + "_gaz_place_" + stateCodes[state] + ".txt"
 		if requests.get(URL).status_code != 200:
 			raise ValueError("City file not found at URL: " + URL)
 
 		reader = pd.read_csv(URL, delimiter='\t', iterator=True, chunksize=100)
-		df = pd.DataFrame()
-		c = pd.DataFrame()
+		
 		for chunk in reader:
 			chunk = chunk[chunk['USPS'].isin(stateList)] #Filter only the states we want
 			if len(chunk) > 0:
@@ -186,14 +186,17 @@ def get_city(baseURL, stateList, stateCodes):
 				data = get_combinedData(chunk, tables=['B01001','B01003','B03002','B06008','B23001','B19001','B25009','B25077'])
 				df = df.append(data)
 
-		c['STATEFP']=c.apply(lambda row:str(row['GEOID'])[:-2].zfill(2),axis=1)
-		c['ENTITYFP']=c.apply(lambda row:str(row['GEOID'])[-2:].zfill(5),axis=1) #Check to make sure this is right
-		c['ENTITYTYPE'] = "city"
+	c['STATEFP']=c.apply(lambda row:str(row['GEOID'])[:-2].zfill(2),axis=1)
+	c['ENTITYFP']=c.apply(lambda row:str(row['GEOID'])[-2:].zfill(5),axis=1) #Check to make sure this is right
+	c['ENTITYTYPE'] = "city"
 
-		c = c.set_index('FIPS')
-		data.append(pd.concat([c, df],axis=1, join_axes=[c.index]))
+	c = c.set_index('FIPS')
+	renamed_concat = rename_columns(pd.concat([c, df], axis=1, join_axes=[c.index]))
+	data = rename_columns(data)
+	data.append(renamed_concat)
 
 	return data
+
 
 def get_state(stateList, stateCodes):
 	print("Starting State")
@@ -206,12 +209,12 @@ def get_state(stateList, stateCodes):
 
 	c = pd.DataFrame(cTemp, columns=['USPS', 'GEOID'])
 	c['FIPS']=c.apply(lambda row:"04000US" + str(row['GEOID']).zfill(2),axis=1)
-	print(c)
+
 	c = c.set_index('FIPS')
 
 	data = get_combinedData(c, tables=['B01001','B01003','B03002','B06008','B23001','B19001','B25009','B25077'])
 	print("data Size: " + str(len(data)))
-	df = df.append(data)
+	df = df.append(data)	
 
 	c['STATEFP']=c.apply(lambda row:str(stateCodes[state]),axis=1)
 	c['ENTITYFP']=c.apply(lambda row:str(stateCodes[state]),axis=1)
@@ -222,26 +225,26 @@ def get_state(stateList, stateCodes):
 	return data
 
 def rename_columns(df):
-	all_cols = df.columns.values.tolist()
-	count_totals = 0
-	for col in all_cols:
-		if col == 'Total':
-			count_totals += 1
-			all_cols[idx] = 'TOTAL_{}'.format(count_totals)
-		else:
-			clean_col = re.sub('[^0-9a-zA-Z_]+', '', col.strip().replace(' ', '_')).upper()
-			if clean_col in all_cols:
-				col = clean_col + '_1'
-			else:
-				col = clean_col
-	df.columns = all_cols
-	return df
+        all_cols = df.columns.values.tolist()
+        count_totals = 0
+        for idx, col in enumerate(all_cols):
+                if col == 'Total':
+                        count_totals += 1
+                        all_cols[idx] = 'TOTAL_{}'.format(count_totals)
+                else:
+                       clean_col = re.sub('[^0-9a-zA-Z_]+', '', col.strip().replace(' ', '_')).upper()
+                       if clean_col in all_cols and clean_col != col:
+                               all_cols[idx] = clean_col + '_1'
+                       else:
+                               all_cols[idx] = clean_col
+        df.columns = all_cols
+        return df
 
 #########
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument("-s", "--states", help="State Abbreviation List, space seperated ie NY, AK", nargs="*")
+parser.add_argument("-s", "--states", help="State Abbreviation List, space seperated ie NY AK", nargs="*")
 parser.add_argument("-t", "--type", help="ALL|County|Upper|Lower|Congress|City|State space seperated", nargs="*")
 
 args = parser.parse_args()
@@ -314,14 +317,14 @@ if types == 'ALL' or "UPPER" in types:
 #School Districts: high school pattern is: 96000US0400450, elementary school district pattern is: 95000US0400005
 
 if "CITY" in types:
-#Now we do cities, this one is failing on append inside get_city, no idea why (Something about managers... and we all know managers suck
+#Now we do cities
 	city_df = rename_columns(get_city(gazYearURL + str(year), stateList, stateCodes))
 	outData = pd.concat([outData, city_df])
 
-if "STATE" in types:
-#Now we do states, this one gets different columns, so the append here fails.  Every column in state exists in outData, but not every column in outData exists in state.  One would think it would just null the missing columns, but apparently not.
+if types == 'ALL' or "STATE" in types:
+#Now we do states
 	state_df = rename_columns(get_state(stateList, stateCodes))
 	outData = pd.concat([outData, state_df])
 
 
-outData.to_csv(directory+"/census.csv")
+outData.to_csv(directory+"/census.csv", index_label="FIPS")
