@@ -98,9 +98,9 @@ def get_census_data(geo_type, geo_url, state_list, fips_func,
 	reader = pd.read_csv(file_source,
 						 delimiter='\t',
 						 iterator=True,
-						 chunksize=100)
-	context_df = pd.DataFrame()
-	census_df = pd.DataFrame()
+						 chunksize=250)
+	context_df_list = []
+	census_df_list = []
 
 	for chunk in reader:
 		chunk = chunk.loc[chunk['USPS'].isin(state_list)]
@@ -109,10 +109,13 @@ def get_census_data(geo_type, geo_url, state_list, fips_func,
 			chunk = chunk.loc[chunk['GEOID'].str.find('ZZ') == -1]
 		if len(chunk) > 0:
 			chunk['FIPS'] = chunk['GEOID'].apply(fips_func)
-			context_df = context_df.append(chunk)
+			context_df_list.append(chunk)
 			chunk = chunk.set_index('FIPS')
 			data = get_combinedData(chunk, tables=census_tables)
-			census_df = census_df.append(data)
+			census_df_list.append(data)
+
+	context_df = pd.concat(context_df_list)
+	census_df = pd.concat(census_df_list)
 
 	context_df['STATEFP'] = context_df['GEOID'].apply(
 		lambda x: str(x)[:state_idx[0]].zfill(state_idx[1])
