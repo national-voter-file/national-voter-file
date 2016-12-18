@@ -17,13 +17,11 @@ def _clean_list_arg(arg,default):
     return arg
 
 def get_url_response(tables, geoids, release):
-    url = API_URL.format(table_ids=','.join(tables).upper(), 
-                         geoids=','.join(geoids), 
+    url = API_URL.format(table_ids=','.join(tables).upper(),
+                         geoids=','.join(geoids),
                          release=release)
 
     response = requests.get(url)
-    #print(response)
-    #print(url)
     return response.json()
 
 
@@ -69,42 +67,6 @@ def json_data(tables=None, geoids=None, release='latest'):
 
     return response
 
- 
-
-
-def _prep_data_for_pandas(json_data,include_moe=False):
-    """Given a dict of dicts as they come from a Census Reporter API call, set it up to be amenable to pandas.DataFrame.from_dict"""
-    result = {}
-    for geoid, tables in json_data['data'].items():
-        flat = {}
-        for table,values in tables.items():
-            for kind, columns in values.items():
-                if kind == 'estimate':
-                    flat.update(columns)
-                elif kind == 'error' and include_moe:
-                    renamed = dict((k+"_moe",v) for k,v in columns.items())
-                    flat.update(renamed)
-        result[geoid] = flat
-    return result
-
-def _prep_headers_for_pandas(json_data,separator=":", level=None):
-    headers = {}
-    for table in json_data['tables']:
-        stack = [ None ] * 10 # pretty sure no columns are nested deeper than this.
-        for column in sorted(json_data['tables'][table]['columns']):
-            col_md = json_data['tables'][table]['columns'][column]
-            indent = col_md['indent']
-            name = col_md['name'].strip(separator)
-            stack[indent] = name
-            parts = []
-            if indent > 0:
-                for i in range(1,indent+1):
-                    if stack[i] is not None:
-                        parts.append(stack[i].strip(separator))
-                name = separator.join(parts)
-            if level is None or indent <= level:
-                headers[column] = name
-    return headers
 
 def get_dataframe(tables=None, geoids=None, release='latest',level=None,place_names=True,column_names=True):
     """Return a pandas DataFrame object for the given tables and geoids.
@@ -125,17 +87,18 @@ def get_dataframe(tables=None, geoids=None, release='latest',level=None,place_na
 
     if 'error' in response:
         raise Exception(response['error'])
-    df = pd.DataFrame.from_dict(_prep_data_for_pandas(response),orient='index')
-    df = df.reindex_axis(sorted(df.columns), axis=1)
-    if column_names or level is not None:
-        headers = _prep_headers_for_pandas(response, level=level)
-        if level is not None:
-            df = df.select(lambda x: x in headers,axis=1)
-        if column_names:
-            df = df.rename(columns=headers)
-    if place_names:
-        name_frame = pd.DataFrame.from_dict(response['geography'],orient='index')
-        df.insert(0, 'name', name_frame.name) 
+
+    result_list = []
+    for geoid, tables in response['data'].items():
+        result = {
+            'GEOID': geoid
+        }
+        for table, table_data in tables.items():
+            result.update(table_data['estimate'])
+
+        result_list.append(result)
+
+    df = pd.DataFrame(result_list)
     return df
 
 
@@ -152,5 +115,5 @@ def fixColName(col):
     col = col.translate(deltable)
     fmtcol = col
     fmtcol = col.lower()
-	
+
     return fmtcol
