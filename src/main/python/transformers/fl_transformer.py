@@ -13,6 +13,8 @@ class FLTransformer(BaseTransformer):
     col_type_dict['TITLE'] = set([str, type(None)])
     col_type_dict['ABSENTEE_TYPE'] = set([str, type(None)])
     col_type_dict['PRECINCT_SPLIT'] = set([str, type(None)])
+    col_type_dict['BIRTH_STATE'] = set([str, type(None)])
+    
 
     florida_party_map = {
         'AIP':'AMP',
@@ -124,6 +126,16 @@ class FLTransformer(BaseTransformer):
         """
         race = input_dict['Race'].strip()
         return {'RACE': self.florida_race_map[race]}
+
+    def extract_birth_state(self, input_columns):
+        """
+        Inputs:
+            input_columns: name or list of columns
+        Outputs:
+            Dictionary with following keys
+                'BIRTH_STATE'
+        """
+        return {'BIRTH_STATE': None}
 
     def extract_birthdate(self, input_dict):
         """

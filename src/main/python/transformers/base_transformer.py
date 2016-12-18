@@ -65,6 +65,7 @@ class BaseTransformer(object):
         'NAME_SUFFIX': set([str]),
         'GENDER': set([str]),
         'RACE':set([str]),
+		'BIRTH_STATE':set([str]),
         'BIRTHDATE': set([datetime.date]),
         'LANGUAGE_CHOICE': set([str, type(None)]),
         'EMAIL': set([str, type(None)]),
@@ -517,6 +518,17 @@ class BaseTransformer(object):
                 'RACE'
         """
         raise NotImplementedError('Must implement extract_race method')
+		
+    def extract_birth_state(self, input_columns):
+        """
+        Inputs:
+            input_columns: name or list of columns
+        Outputs:
+            Dictionary with following keys
+                'BIRTH_STATE'
+        """
+        raise NotImplementedError('Must implement extract_birth_state method')
+		
 
     def extract_birthdate(self, input_columns):
         """

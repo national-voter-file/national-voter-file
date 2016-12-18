@@ -2,6 +2,9 @@ from base_transformer import BaseTransformer
 import usaddress
 
 class WATransformer(BaseTransformer):
+    col_type_dict = BaseTransformer.col_type_dict.copy()
+    col_type_dict['BIRTH_STATE'] = set([str, type(None)])
+    col_type_dict['RACE'] = set([str, type(None)])
 
     #### Contact methods #######################################################
 
@@ -68,6 +71,26 @@ class WATransformer(BaseTransformer):
         """
         return {'GENDER': input_dict['Gender']}
 
+    def extract_race(self, input_columns):
+        """
+        Inputs:
+            input_columns: name or list of columns
+        Outputs:
+            Dictionary with following keys
+                'RACE'
+        """
+        return {'RACE': None}
+		
+    def extract_birth_state(self, input_columns):
+        """
+        Inputs:
+            input_columns: name or list of columns
+        Outputs:
+            Dictionary with following keys
+                'BIRTH_STATE'
+        """
+        return {'BIRTH_STATE': None}		
+		
     def extract_birthdate(self, input_dict):
         """
         Inputs:
