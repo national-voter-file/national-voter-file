@@ -292,7 +292,10 @@ class BaseTransformer(object):
         # check to make sure columns are of the correct type
         type_errors = []
         for colname, value in output_dict.items():
-            value_type = type(value)
+            if type(value) == str:
+                value_type = str if len(value.strip()) > 0 else None
+            else:
+                value_type = type(value)
             acceptable_types = self.col_type_dict[colname]
             if value_type not in acceptable_types:
                 type_errors.append(
