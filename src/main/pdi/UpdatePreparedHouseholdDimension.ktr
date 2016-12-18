@@ -91,9 +91,9 @@
   <notepads>
   </notepads>
   <connection>
-    <name>Localhost</name>
+    <name>Voter</name>
     <server>localhost</server>
-    <type>SQLITE</type>
+    <type>POSTGRESQL</type>
     <access>JNDI</access>
     <database>Voter</database>
     <port>5432</port>
@@ -119,6 +119,8 @@
   <hop> <from>Lookup report date key</from><to>Text file input</to><enabled>Y</enabled> </hop>
   <hop> <from>Lookup or Add Housholds 2</from><to>Write to log</to><enabled>Y</enabled> </hop>
   <hop> <from>Lookup or Add Mailing Addrs</from><to>Write Mailing Address Errors</to><enabled>Y</enabled> </hop>
+  <hop> <from>Text file input</from><to>Lookup or Add Housholds 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Lookup or Add Housholds 2</from><to>Lookup or Add Mailing Addrs</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Get Variables</name>
@@ -190,7 +192,7 @@
            </partitioning>
       <schema/>
       <table>household_dim</table>
-      <connection>Localhost</connection>
+      <connection>Voter</connection>
       <commit>1000</commit>
       <cache_size>25</cache_size>
       <replace>N</replace>
@@ -271,7 +273,7 @@
            </partitioning>
       <schema/>
       <table>mailing_address_dim</table>
-      <connection>Localhost</connection>
+      <connection>Voter</connection>
       <commit>1000</commit>
       <cache_size>25</cache_size>
       <replace>N</replace>
@@ -330,7 +332,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <connection>Localhost</connection>
+    <connection>Voter</connection>
     <cache>N</cache>
     <cache_load_all>N</cache_load_all>
     <cache_size>0</cache_size>
@@ -372,8 +374,8 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <accept_filenames>N</accept_filenames>
-    <passing_through_fields>N</passing_through_fields>
+    <accept_filenames>Y</accept_filenames>
+    <passing_through_fields>Y</passing_through_fields>
     <accept_field>reportFile</accept_field>
     <accept_stepname>Lookup report date key</accept_stepname>
     <separator>,</separator>
@@ -481,6 +483,21 @@
         <ifnull/>
         <position>-1</position>
         <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>BIRTH_STATE</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>0</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -720,7 +737,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>27</length>
+        <length>22</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -922,7 +939,7 @@
       </field>
       <field>
         <name>PRECINCT</name>
-        <type>Number</type>
+        <type>String</type>
         <format>&#x23;.&#x23;</format>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
@@ -937,7 +954,7 @@
       </field>
       <field>
         <name>PRECINCT_SPLIT</name>
-        <type>Number</type>
+        <type>String</type>
         <format>&#x23;.&#x23;</format>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
@@ -948,6 +965,21 @@
         <length>15</length>
         <precision>0</precision>
         <trim_type>both</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>RACE</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>0</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
       <field>
@@ -1252,7 +1284,7 @@
       </field>
       <field>
         <name>ZIP_CODE</name>
-        <type>Number</type>
+        <type>String</type>
         <format>&#x23;.&#x23;</format>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
