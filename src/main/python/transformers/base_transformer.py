@@ -65,6 +65,7 @@ class BaseTransformer(object):
         'NAME_SUFFIX': set([str]),
         'GENDER': set([str]),
         'BIRTHDATE': set([datetime.datetime]),
+	'BIRTHDATE_IS_ESTIMATE', :set([bool]),
         'LANGUAGE_CHOICE': set([str, type(None)]),
         'EMAIL': set([str, type(None)]),
         'PHONE': set([str, type(None)]),
@@ -119,8 +120,8 @@ class BaseTransformer(object):
 
     # some columns can only have certain values
     limited_value_dict = {
-        'PARTY': set(['DEM', 'REP']),
-        'GENDER': set(['M', 'F']),
+        'PARTY': set(['DEM', 'REP', 'UNA']),
+        'GENDER': set(['M', 'F', 'U']),
     }
 
     usaddress_to_standard_colnames_dict = {
