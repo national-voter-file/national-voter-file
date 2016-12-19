@@ -13,6 +13,8 @@ class COTransformer(BaseTransformer):
     col_type_dict = BaseTransformer.col_type_dict.copy()
     col_type_dict['TITLE'] = set([str, type(None)])
     col_type_dict['GENDER'] = set([str, type(None)])
+    col_type_dict['RACE'] = set([str, type(None)])
+    col_type_dict['BIRTH_STATE'] = set([str, type(None)])
     col_type_dict['ABSENTEE_TYPE'] = set([str, type(None)])
     col_type_dict['COUNTY_VOTER_REF'] = set([str, type(None)])
 
@@ -95,6 +97,26 @@ class COTransformer(BaseTransformer):
                 'GENDER'
         """
         return {'GENDER': self.co_gender_map.get(input_dict['GENDER'], None)}
+
+    def extract_race(self, input_dict):
+        """
+        Inputs:
+            input_columns: name or list of columns
+        Outputs:
+            Dictionary with following keys
+                'RACE'
+        """
+        return {'RACE': None}
+
+    def extract_birth_state(self, input_columns):
+        """
+        Inputs:
+            input_columns: name or list of columns
+        Outputs:
+            Dictionary with following keys
+                'BIRTH_STATE'
+        """
+        return {'BIRTH_STATE': None}
 
     def extract_birthdate(self, input_dict):
         """
