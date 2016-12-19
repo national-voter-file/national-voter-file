@@ -64,6 +64,8 @@ class BaseTransformer(object):
         'LAST_NAME': set([str]),
         'NAME_SUFFIX': set([str]),
         'GENDER': set([str]),
+        'RACE':set([str]),
+		'BIRTH_STATE':set([str]),
         'BIRTHDATE': set([datetime.date]),
         'LANGUAGE_CHOICE': set([str, type(None)]),
         'EMAIL': set([str, type(None)]),
@@ -142,6 +144,16 @@ class BaseTransformer(object):
                       "UN" #Unaffiliated
         ]),
         'GENDER': set(['M', 'F', 'U']),
+        'RACE':set([
+        'I', #American Indian or Alaskan Native
+        'A', #Asian Or Pacific Islander
+        'B', #Black, Not Hispanic
+        'H', #Hispanic
+        'W', #White, not Hispanic
+        'O', #other
+        'M', #Multi-racial
+        "U" #Unknown
+        ])
     }
 
     usaddress_to_standard_colnames_dict = {
@@ -497,6 +509,27 @@ class BaseTransformer(object):
                 'GENDER'
         """
         raise NotImplementedError('Must implement extract_gender method')
+
+    def extract_race(self, input_columns):
+        """
+        Inputs:
+            input_columns: name or list of columns
+        Outputs:
+            Dictionary with following keys
+                'RACE'
+        """
+        raise NotImplementedError('Must implement extract_race method')
+		
+    def extract_birth_state(self, input_columns):
+        """
+        Inputs:
+            input_columns: name or list of columns
+        Outputs:
+            Dictionary with following keys
+                'BIRTH_STATE'
+        """
+        raise NotImplementedError('Must implement extract_birth_state method')
+		
 
     def extract_birthdate(self, input_columns):
         """
