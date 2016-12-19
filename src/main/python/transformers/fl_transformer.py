@@ -14,7 +14,8 @@ class FLTransformer(BaseTransformer):
     col_type_dict['ABSENTEE_TYPE'] = set([str, type(None)])
     col_type_dict['PRECINCT_SPLIT'] = set([str, type(None)])
     col_type_dict['BIRTH_STATE'] = set([str, type(None)])
-    
+
+
 
     florida_party_map = {
         'AIP':'AMP',
@@ -31,7 +32,7 @@ class FLTransformer(BaseTransformer):
         'REP':'REP',
         ' ':'UN'
     }
-    
+
     florida_race_map = {
         '1':'I',
         '2':'A',
@@ -40,7 +41,7 @@ class FLTransformer(BaseTransformer):
         '5':'W',
         '6':'O',
         '7':'M',
-        '9':'U'   
+        '9':'U'
     }
 
 
@@ -145,7 +146,10 @@ class FLTransformer(BaseTransformer):
             Dictionary with following keys
                 'BIRTHDATE'
         """
-        return {'BIRTHDATE': self.convert_date(input_dict['Birth Date'])}
+        return {
+        'BIRTHDATE': self.convert_date(input_dict['Birth Date']),
+        'BIRTHDATE_IS_ESTIMATE':'N'
+        }
 
     def extract_language_choice(self, input_dict):
         """

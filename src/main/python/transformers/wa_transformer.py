@@ -4,6 +4,7 @@ import usaddress
 class WATransformer(BaseTransformer):
     col_type_dict = BaseTransformer.col_type_dict.copy()
     col_type_dict['BIRTH_STATE'] = set([str, type(None)])
+    col_type_dict['BIRTHDATE_IS_ESTIMATE'] = set([str, type(None)])
     col_type_dict['RACE'] = set([str, type(None)])
 
     #### Contact methods #######################################################
@@ -80,7 +81,7 @@ class WATransformer(BaseTransformer):
                 'RACE'
         """
         return {'RACE': None}
-		
+
     def extract_birth_state(self, input_columns):
         """
         Inputs:
@@ -89,8 +90,8 @@ class WATransformer(BaseTransformer):
             Dictionary with following keys
                 'BIRTH_STATE'
         """
-        return {'BIRTH_STATE': None}		
-		
+        return {'BIRTH_STATE': None}
+
     def extract_birthdate(self, input_dict):
         """
         Inputs:
@@ -100,6 +101,16 @@ class WATransformer(BaseTransformer):
                 'BIRTHDATE'
         """
         return {'BIRTHDATE': self.convert_date(input_dict['Birthdate'])}
+
+    def extract_birthdate_is_estimate(self, input_columns):
+        """
+        Inputs:
+            input_columns: name or list of columns
+        Outputs:
+            Dictionary with following keys
+                'BIRTHDATE_IS_ESTIMATE'
+        """
+        return {'BIRTHDATE_IS_ESTIMATE': None}
 
     def extract_language_choice(self, input_dict):
         """

@@ -65,8 +65,9 @@ class BaseTransformer(object):
         'NAME_SUFFIX': set([str]),
         'GENDER': set([str]),
         'RACE':set([str]),
-		'BIRTH_STATE':set([str]),
         'BIRTHDATE': set([datetime.date]),
+        'BIRTHDATE_IS_ESTIMATE':set([str]),
+        'BIRTH_STATE':set([str]),
         'LANGUAGE_CHOICE': set([str, type(None)]),
         'EMAIL': set([str, type(None)]),
         'PHONE': set([str, type(None)]),
@@ -202,7 +203,7 @@ class BaseTransformer(object):
         Should not be overwritten in the subclass, this method enforces a
         similar check on all data created
         """
-        with open(input_path, 'r') as infile, open(output_path, 'w') as outfile:
+        with open(input_path, 'r', errors='ignore') as infile, open(output_path, 'w') as outfile:
             reader = csv.DictReader(infile, delimiter=self.sep,  fieldnames=self.input_fields)
             writer = csv.DictWriter(
                 outfile,
@@ -519,7 +520,7 @@ class BaseTransformer(object):
                 'RACE'
         """
         raise NotImplementedError('Must implement extract_race method')
-		
+
     def extract_birth_state(self, input_columns):
         """
         Inputs:
@@ -527,9 +528,9 @@ class BaseTransformer(object):
         Outputs:
             Dictionary with following keys
                 'BIRTH_STATE'
+                'BIRTHDATE_IS_ESTIMATE'
         """
         raise NotImplementedError('Must implement extract_birth_state method')
-		
 
     def extract_birthdate(self, input_columns):
         """
