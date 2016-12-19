@@ -85,7 +85,7 @@
   <created_date>2016&#x2f;08&#x2f;03 15&#x3a;03&#x3a;59.218</created_date>
   <modified_user>-</modified_user>
   <modified_date>2016&#x2f;08&#x2f;03 15&#x3a;03&#x3a;59.218</modified_date>
-    <key_for_session_key/>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA&#x3d;</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -115,25 +115,662 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Split Fields</from><to>Filter out place records</to><enabled>Y</enabled> </hop>
+  <hop> <from>Deompose OCD-ID</from><to>Filter out place records</to><enabled>Y</enabled> </hop>
   <hop> <from>Filter out place records</from><to>Extract County Name</to><enabled>Y</enabled> </hop>
-  <hop> <from>Row denormaliser</from><to>Merge Join</to><enabled>Y</enabled> </hop>
   <hop> <from>Sort rows</from><to>String operations 2</to><enabled>Y</enabled> </hop>
   <hop> <from>String operations 2</from><to>Row denormaliser</to><enabled>Y</enabled> </hop>
   <hop> <from>Extract County Name</from><to>Extract Precinct</to><enabled>Y</enabled> </hop>
   <hop> <from>Extract Precinct</from><to>Uppercase</to><enabled>Y</enabled> </hop>
-  <hop> <from>Uppercase</from><to>Merge Join</to><enabled>Y</enabled> </hop>
-  <hop> <from>CSV file input 2</from><to>String operations</to><enabled>Y</enabled> </hop>
-  <hop> <from>String operations</from><to>Split Fields</to><enabled>Y</enabled> </hop>
-  <hop> <from>Merge Join</from><to>Add constants</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get Variables</from><to>CSV file input</to><enabled>Y</enabled> </hop>
-  <hop> <from>CSV file input</from><to>Get Variables 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Read OCD-ID File</from><to>Copy OCD-ID</to><enabled>Y</enabled> </hop>
+  <hop> <from>Copy OCD-ID</from><to>Deompose OCD-ID</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Variables</from><to>Read WA Precinct File</to><enabled>Y</enabled> </hop>
+  <hop> <from>Read WA Precinct File</from><to>Get Variables 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Variables 2</from><to>Sort rows</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Variables 3</from><to>Read OCD-ID File</to><enabled>Y</enabled> </hop>
   <hop> <from>Add constants</from><to>Dimension lookup&#x2f;update</to><enabled>Y</enabled> </hop>
-  <hop> <from>Get Variables 3</from><to>CSV file input 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Uppercase</from><to>Stream lookup</to><enabled>Y</enabled> </hop>
+  <hop> <from>Row denormaliser</from><to>Stream lookup</to><enabled>Y</enabled> </hop>
+  <hop> <from>Stream lookup</from><to>Add constants</to><enabled>Y</enabled> </hop>
   </order>
   <step>
-    <name>CSV file input</name>
+    <name>Add constants</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>stateName</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>Washington</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>stateAbbreviation</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>WA</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1520</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Copy OCD-ID</name>
+    <type>StringOperations</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>ocd_id</in_stream_name>
+        <out_stream_name>OpenCivicID</out_stream_name>
+        <trim_type>none</trim_type>
+        <lower_upper>none</lower_upper>
+        <padding_type>none</padding_type>
+        <pad_char/>
+        <pad_len/>
+        <init_cap>no</init_cap>
+        <mask_xml>none</mask_xml>
+        <digits>none</digits>
+        <remove_special_characters>none</remove_special_characters>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>352</xloc>
+      <yloc>80</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Deompose OCD-ID</name>
+    <type>FieldSplitter</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+   <splitfield>ocd_id</splitfield>
+   <delimiter>&#x2f;</delimiter>
+   <enclosure/>
+    <fields>      <field>        <name>junk</name>
+        <id/>
+        <idrem>N</idrem>
+        <type>String</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <currency/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>      <field>        <name>country</name>
+        <id/>
+        <idrem>N</idrem>
+        <type>String</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <currency/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>      <field>        <name>state</name>
+        <id/>
+        <idrem>N</idrem>
+        <type>String</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <currency/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>      <field>        <name>county</name>
+        <id/>
+        <idrem>N</idrem>
+        <type>String</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <currency/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>      <field>        <name>precinct</name>
+        <id/>
+        <idrem>N</idrem>
+        <type>String</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <currency/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>496</xloc>
+      <yloc>80</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Dimension lookup&#x2f;update</name>
+    <type>DimensionLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <schema/>
+      <table>precinct_dim</table>
+      <connection>Voter</connection>
+      <commit>100</commit>
+      <update>Y</update>
+      <fields>
+        <key>
+          <name>PrecinctCode</name>
+          <lookup>precinct_code</lookup>
+        </key>
+        <date>
+          <name>reportDate</name>
+          <from>VALID_FROM</from>
+          <to>VALID_TO</to>
+        </date>
+        <field>
+          <name>CountyCode</name>
+          <lookup>county_code</lookup>
+          <update>Insert</update>
+        </field>
+        <field>
+          <name>DistrictCode</name>
+          <lookup>district_code</lookup>
+          <update>Insert</update>
+        </field>
+        <field>
+          <name>PrecinctName</name>
+          <lookup>precinct_name</lookup>
+          <update>Insert</update>
+        </field>
+        <field>
+          <name>countyName</name>
+          <lookup>county_name</lookup>
+          <update>Insert</update>
+        </field>
+        <field>
+          <name>CountyDistrictName</name>
+          <lookup>county_district_name</lookup>
+          <update>Insert</update>
+        </field>
+        <field>
+          <name>EMSDistrictName</name>
+          <lookup>ems_district_name</lookup>
+          <update>Insert</update>
+        </field>
+        <field>
+          <name>FireDistrictName</name>
+          <lookup>fire_district_name</lookup>
+          <update>Insert</update>
+        </field>
+        <field>
+          <name>JudicialDistrictName</name>
+          <lookup>judicial_district_name</lookup>
+          <update>Insert</update>
+        </field>
+        <field>
+          <name>LegislativeDistrictName</name>
+          <lookup>legislative_district_name</lookup>
+          <update>Insert</update>
+        </field>
+        <field>
+          <name>LibraryDistrictName</name>
+          <lookup>library_district_name</lookup>
+          <update>Insert</update>
+        </field>
+        <field>
+          <name>OtherDistrictName</name>
+          <lookup>other_district_name</lookup>
+          <update>Insert</update>
+        </field>
+        <field>
+          <name>PCODistrictName</name>
+          <lookup>pco_district_name</lookup>
+          <update>Insert</update>
+        </field>
+        <field>
+          <name>Park and RecDistrictName</name>
+          <lookup>park_and_rec_district_name</lookup>
+          <update>Insert</update>
+        </field>
+        <field>
+          <name>PortDistrictName</name>
+          <lookup>port_district_name</lookup>
+          <update>Insert</update>
+        </field>
+        <field>
+          <name>Public HospitalDistrictName</name>
+          <lookup>public_hospital_district_name</lookup>
+          <update>Insert</update>
+        </field>
+        <field>
+          <name>PublicUtilityDistrictName</name>
+          <lookup>public_utility_district_name</lookup>
+          <update>Insert</update>
+        </field>
+        <field>
+          <name>SchoolDistrictName</name>
+          <lookup>school_district_name</lookup>
+          <update>Insert</update>
+        </field>
+        <field>
+          <name>SewerDistrictName</name>
+          <lookup>sewer_district_name</lookup>
+          <update>Insert</update>
+        </field>
+        <field>
+          <name>StateDistrictName</name>
+          <lookup>state_district_name</lookup>
+          <update>Insert</update>
+        </field>
+        <field>
+          <name>TaxDistrictName</name>
+          <lookup>tax_district_name</lookup>
+          <update>Insert</update>
+        </field>
+        <field>
+          <name>WaterDistrictName</name>
+          <lookup>water_district_name</lookup>
+          <update>Insert</update>
+        </field>
+        <field>
+          <name>TransportationDistrictName</name>
+          <lookup>transportation_district_name</lookup>
+          <update>Insert</update>
+        </field>
+        <field>
+          <name>OpenCivicID</name>
+          <lookup>ocd_id</lookup>
+          <update>Insert</update>
+        </field>
+        <field>
+          <name>ocd-name</name>
+          <lookup>ocd_name</lookup>
+          <update>Insert</update>
+        </field>
+        <field>
+          <name>stateName</name>
+          <lookup>state_name</lookup>
+          <update>Insert</update>
+        </field>
+        <field>
+          <name>stateAbbreviation</name>
+          <lookup>state_abbreviation</lookup>
+          <update>Insert</update>
+        </field>
+        <field>
+          <name>DistrictID</name>
+          <lookup>district_id</lookup>
+          <update>Insert</update>
+        </field>
+        <return>
+          <name>precinct_id</name>
+          <rename/>
+          <creation_method>autoinc</creation_method>
+          <use_autoinc>Y</use_autoinc>
+          <version>version</version>
+        </return>
+      </fields>
+      <sequence/>
+      <min_year>1900</min_year>
+      <max_year>2199</max_year>
+      <cache_size>-1</cache_size>
+      <preload_cache>N</preload_cache>
+      <use_start_date_alternative>N</use_start_date_alternative>
+      <start_date_alternative>none</start_date_alternative>
+      <start_date_field_name/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1712</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Extract County Name</name>
+    <type>RegexEval</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <script><![CDATA[county\:(.*)]]></script>    <matcher>county</matcher>
+    <resultfieldname>result</resultfieldname>
+    <usevar>N</usevar>
+    <allowcapturegroups>Y</allowcapturegroups>
+    <replacefields>Y</replacefields>
+    <canoneq>N</canoneq>
+    <caseinsensitive>N</caseinsensitive>
+    <comment>N</comment>
+    <dotall>N</dotall>
+    <multiline>N</multiline>
+    <unicode>N</unicode>
+    <unix>N</unix>
+    <fields>
+      <field>
+        <name>countyName</name>
+        <type>String</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>832</xloc>
+      <yloc>112</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Extract Precinct</name>
+    <type>RegexEval</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <script><![CDATA[precinct\:([0-9]*)-.*]]></script>    <matcher>precinct</matcher>
+    <resultfieldname>result</resultfieldname>
+    <usevar>N</usevar>
+    <allowcapturegroups>Y</allowcapturegroups>
+    <replacefields>Y</replacefields>
+    <canoneq>N</canoneq>
+    <caseinsensitive>N</caseinsensitive>
+    <comment>N</comment>
+    <dotall>N</dotall>
+    <multiline>N</multiline>
+    <unicode>N</unicode>
+    <unix>N</unix>
+    <fields>
+      <field>
+        <name>precinctNum</name>
+        <type>Integer</type>
+        <format/>
+        <group/>
+        <decimal/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <nullif/>
+        <ifnull/>
+        <trimtype>none</trimtype>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>992</xloc>
+      <yloc>112</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Filter out place records</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<send_true_to>Extract County Name</send_true_to>
+<send_false_to/>
+    <compare>
+<condition>
+ <negated>Y</negated>
+ <leftvalue>county</leftvalue>
+ <function>STARTS WITH</function>
+ <rightvalue/>
+ <value><name>constant</name><type>String</type><text>place&#x3a;</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
+    </compare>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>624</xloc>
+      <yloc>112</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get Variables</name>
+    <type>GetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>reportFile</name>
+        <variable>&#x24;&#x7b;reportFile&#x7d;</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>0</xloc>
+      <yloc>336</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get Variables 2</name>
+    <type>GetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>reportDate</name>
+        <variable>&#x24;&#x7b;reportDate&#x7d;</variable>
+        <type>Date</type>
+        <format>yyyy-MM-dd</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>reportFile</name>
+        <variable>&#x24;&#x7b;reportFile&#x7d;</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>336</xloc>
+      <yloc>208</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get Variables 3</name>
+    <type>GetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>ocdFile</name>
+        <variable>&#x24;&#x7b;ocdFile&#x7d;</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>48</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Read OCD-ID File</name>
+    <type>CsvInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <filename>C&#x3a;&#x5c;dev&#x5c;GitHub&#x5c;ocd-division-ids&#x5c;identifiers&#x5c;country-us&#x5c;state-wa-precincts.csv</filename>
+    <filename_field>ocdFile</filename_field>
+    <rownum_field/>
+    <include_filename>N</include_filename>
+    <separator>,</separator>
+    <enclosure>&#x22;</enclosure>
+    <header>N</header>
+    <buffer_size>50000</buffer_size>
+    <lazy_conversion>Y</lazy_conversion>
+    <add_filename_result>N</add_filename_result>
+    <parallel>N</parallel>
+    <newline_possible>N</newline_possible>
+    <encoding/>
+    <fields>
+      <field>
+        <name>ocd_id</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>77</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>ocd-name</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <length>47</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>176</xloc>
+      <yloc>80</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Read WA Precinct File</name>
     <type>CsvInput</type>
     <description/>
     <distribute>Y</distribute>
@@ -225,7 +862,7 @@
       </field>
       <field>
         <name>PrecinctCode</name>
-        <type>Integer</type>
+        <type>String</type>
         <format>&#x23;</format>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
@@ -541,8 +1178,8 @@
         </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>704</xloc>
-      <yloc>224</yloc>
+      <xloc>1104</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -581,289 +1218,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>368</xloc>
-      <yloc>224</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>CSV file input 2</name>
-    <type>CsvInput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <filename>C&#x3a;&#x5c;dev&#x5c;GitHub&#x5c;ocd-division-ids&#x5c;identifiers&#x5c;country-us&#x5c;state-wa-precincts.csv</filename>
-    <filename_field>ocdFile</filename_field>
-    <rownum_field/>
-    <include_filename>N</include_filename>
-    <separator>,</separator>
-    <enclosure>&#x22;</enclosure>
-    <header>N</header>
-    <buffer_size>50000</buffer_size>
-    <lazy_conversion>Y</lazy_conversion>
-    <add_filename_result>N</add_filename_result>
-    <parallel>N</parallel>
-    <newline_possible>N</newline_possible>
-    <encoding/>
-    <fields>
-      <field>
-        <name>ocd_id</name>
-        <type>String</type>
-        <format/>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>77</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>ocd-name</name>
-        <type>String</type>
-        <format/>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <length>47</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>192</xloc>
-      <yloc>112</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Split Fields</name>
-    <type>FieldSplitter</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-   <splitfield>ocd_id</splitfield>
-   <delimiter>&#x2f;</delimiter>
-   <enclosure/>
-    <fields>      <field>        <name>junk</name>
-        <id/>
-        <idrem>N</idrem>
-        <type>String</type>
-        <format/>
-        <group/>
-        <decimal/>
-        <currency/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <nullif/>
-        <ifnull/>
-        <trimtype>none</trimtype>
-      </field>      <field>        <name>country</name>
-        <id/>
-        <idrem>N</idrem>
-        <type>String</type>
-        <format/>
-        <group/>
-        <decimal/>
-        <currency/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <nullif/>
-        <ifnull/>
-        <trimtype>none</trimtype>
-      </field>      <field>        <name>state</name>
-        <id/>
-        <idrem>N</idrem>
-        <type>String</type>
-        <format/>
-        <group/>
-        <decimal/>
-        <currency/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <nullif/>
-        <ifnull/>
-        <trimtype>none</trimtype>
-      </field>      <field>        <name>county</name>
-        <id/>
-        <idrem>N</idrem>
-        <type>String</type>
-        <format/>
-        <group/>
-        <decimal/>
-        <currency/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <nullif/>
-        <ifnull/>
-        <trimtype>none</trimtype>
-      </field>      <field>        <name>precinct</name>
-        <id/>
-        <idrem>N</idrem>
-        <type>String</type>
-        <format/>
-        <group/>
-        <decimal/>
-        <currency/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <nullif/>
-        <ifnull/>
-        <trimtype>none</trimtype>
-      </field>    </fields>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>384</xloc>
-      <yloc>112</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Filter out place records</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<send_true_to>Extract County Name</send_true_to>
-<send_false_to/>
-    <compare>
-<condition>
- <negated>Y</negated>
- <leftvalue>county</leftvalue>
- <function>STARTS WITH</function>
- <rightvalue/>
- <value><name>constant</name><type>String</type><text>place&#x3a;</text><length>-1</length><precision>-1</precision><isnull>N</isnull><mask/></value> </condition>
-    </compare>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>560</xloc>
-      <yloc>112</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Extract County Name</name>
-    <type>RegexEval</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <script><![CDATA[county\:(.*)]]></script>    <matcher>county</matcher>
-    <resultfieldname>result</resultfieldname>
-    <usevar>N</usevar>
-    <allowcapturegroups>Y</allowcapturegroups>
-    <replacefields>Y</replacefields>
-    <canoneq>N</canoneq>
-    <caseinsensitive>N</caseinsensitive>
-    <comment>N</comment>
-    <dotall>N</dotall>
-    <multiline>N</multiline>
-    <unicode>N</unicode>
-    <unix>N</unix>
-    <fields>
-      <field>
-        <name>countyName</name>
-        <type>String</type>
-        <format/>
-        <group/>
-        <decimal/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <nullif/>
-        <ifnull/>
-        <trimtype>none</trimtype>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>768</xloc>
-      <yloc>112</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Merge Join</name>
-    <type>MergeJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<join_type>LEFT OUTER</join_type>
-<step1>Row denormaliser</step1>
-<step2>Uppercase</step2>
-    <keys_1>
-      <key>countyName</key>
-      <key>PrecinctCode</key>
-    </keys_1>
-    <keys_2>
-      <key>countyName</key>
-      <key>precinctNum</key>
-    </keys_2>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1312</xloc>
-      <yloc>192</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Uppercase</name>
-    <type>StringOperations</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <in_stream_name>countyName</in_stream_name>
-        <out_stream_name/>
-        <trim_type>none</trim_type>
-        <lower_upper>upper</lower_upper>
-        <padding_type>none</padding_type>
-        <pad_char/>
-        <pad_len/>
-        <init_cap>no</init_cap>
-        <mask_xml>none</mask_xml>
-        <digits>none</digits>
-        <remove_special_characters>none</remove_special_characters>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1072</xloc>
-      <yloc>112</yloc>
+      <xloc>448</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -896,59 +1252,14 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>528</xloc>
+      <xloc>592</xloc>
       <yloc>208</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Extract Precinct</name>
-    <type>RegexEval</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <script><![CDATA[precinct\:([0-9]*)-.*]]></script>    <matcher>precinct</matcher>
-    <resultfieldname>result</resultfieldname>
-    <usevar>N</usevar>
-    <allowcapturegroups>Y</allowcapturegroups>
-    <replacefields>Y</replacefields>
-    <canoneq>N</canoneq>
-    <caseinsensitive>N</caseinsensitive>
-    <comment>N</comment>
-    <dotall>N</dotall>
-    <multiline>N</multiline>
-    <unicode>N</unicode>
-    <unix>N</unix>
-    <fields>
-      <field>
-        <name>precinctNum</name>
-        <type>Integer</type>
-        <format/>
-        <group/>
-        <decimal/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <nullif/>
-        <ifnull/>
-        <trimtype>none</trimtype>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>928</xloc>
-      <yloc>112</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>String operations</name>
+    <name>Uppercase</name>
     <type>StringOperations</type>
     <description/>
     <distribute>Y</distribute>
@@ -960,10 +1271,10 @@
            </partitioning>
     <fields>
       <field>
-        <in_stream_name>ocd_id</in_stream_name>
-        <out_stream_name>OpenCivicID</out_stream_name>
+        <in_stream_name>countyName</in_stream_name>
+        <out_stream_name/>
         <trim_type>none</trim_type>
-        <lower_upper>none</lower_upper>
+        <lower_upper>upper</lower_upper>
         <padding_type>none</padding_type>
         <pad_char/>
         <pad_len/>
@@ -975,349 +1286,98 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>288</xloc>
-      <yloc>144</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Add constants</name>
-    <type>Constant</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <name>stateName</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>Washington</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-      <field>
-        <name>stateAbbreviation</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>WA</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1440</xloc>
-      <yloc>192</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Dimension lookup&#x2f;update</name>
-    <type>DimensionLookup</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <schema/>
-      <table>precinct_dim</table>
-      <connection>Voter</connection>
-      <commit>100</commit>
-      <update>Y</update>
-      <fields>
-        <key>
-          <name>PrecinctCode</name>
-          <lookup>precinct_code</lookup>
-        </key>
-        <date>
-          <name>reportDate</name>
-          <from>VALID_FROM</from>
-          <to>VALID_TO</to>
-        </date>
-        <field>
-          <name>CountyCode</name>
-          <lookup>county_code</lookup>
-          <update>Insert</update>
-        </field>
-        <field>
-          <name>DistrictCode</name>
-          <lookup>district_code</lookup>
-          <update>Insert</update>
-        </field>
-        <field>
-          <name>PrecinctName</name>
-          <lookup>precinct_name</lookup>
-          <update>Insert</update>
-        </field>
-        <field>
-          <name>countyName</name>
-          <lookup>county_name</lookup>
-          <update>Insert</update>
-        </field>
-        <field>
-          <name>CountyDistrictName</name>
-          <lookup>county_district_name</lookup>
-          <update>Insert</update>
-        </field>
-        <field>
-          <name>EMSDistrictName</name>
-          <lookup>ems_district_name</lookup>
-          <update>Insert</update>
-        </field>
-        <field>
-          <name>FireDistrictName</name>
-          <lookup>fire_district_name</lookup>
-          <update>Insert</update>
-        </field>
-        <field>
-          <name>JudicialDistrictName</name>
-          <lookup>judicial_district_name</lookup>
-          <update>Insert</update>
-        </field>
-        <field>
-          <name>LegislativeDistrictName</name>
-          <lookup>legislative_district_name</lookup>
-          <update>Insert</update>
-        </field>
-        <field>
-          <name>LibraryDistrictName</name>
-          <lookup>library_district_name</lookup>
-          <update>Insert</update>
-        </field>
-        <field>
-          <name>OtherDistrictName</name>
-          <lookup>other_district_name</lookup>
-          <update>Insert</update>
-        </field>
-        <field>
-          <name>PCODistrictName</name>
-          <lookup>pco_district_name</lookup>
-          <update>Insert</update>
-        </field>
-        <field>
-          <name>Park and RecDistrictName</name>
-          <lookup>park_and_rec_district_name</lookup>
-          <update>Insert</update>
-        </field>
-        <field>
-          <name>PortDistrictName</name>
-          <lookup>port_district_name</lookup>
-          <update>Insert</update>
-        </field>
-        <field>
-          <name>Public HospitalDistrictName</name>
-          <lookup>public_hospital_district_name</lookup>
-          <update>Insert</update>
-        </field>
-        <field>
-          <name>PublicUtilityDistrictName</name>
-          <lookup>public_utility_district_name</lookup>
-          <update>Insert</update>
-        </field>
-        <field>
-          <name>SchoolDistrictName</name>
-          <lookup>school_district_name</lookup>
-          <update>Insert</update>
-        </field>
-        <field>
-          <name>SewerDistrictName</name>
-          <lookup>sewer_district_name</lookup>
-          <update>Insert</update>
-        </field>
-        <field>
-          <name>StateDistrictName</name>
-          <lookup>state_district_name</lookup>
-          <update>Insert</update>
-        </field>
-        <field>
-          <name>TaxDistrictName</name>
-          <lookup>tax_district_name</lookup>
-          <update>Insert</update>
-        </field>
-        <field>
-          <name>WaterDistrictName</name>
-          <lookup>water_district_name</lookup>
-          <update>Insert</update>
-        </field>
-        <field>
-          <name>TransportationDistrictName</name>
-          <lookup>transportation_district_name</lookup>
-          <update>Insert</update>
-        </field>
-        <field>
-          <name>OpenCivicID</name>
-          <lookup>ocd_id</lookup>
-          <update>Insert</update>
-        </field>
-        <field>
-          <name>ocd-name</name>
-          <lookup>ocd_name</lookup>
-          <update>Insert</update>
-        </field>
-        <field>
-          <name>stateName</name>
-          <lookup>state_name</lookup>
-          <update>Insert</update>
-        </field>
-        <field>
-          <name>stateAbbreviation</name>
-          <lookup>state_abbreviation</lookup>
-          <update>Insert</update>
-        </field>
-        <field>
-          <name>DistrictID</name>
-          <lookup>district_id</lookup>
-          <update>Insert</update>
-        </field>
-        <return>
-          <name>precinct_id</name>
-          <rename/>
-          <creation_method>autoinc</creation_method>
-          <use_autoinc>Y</use_autoinc>
-          <version>version</version>
-        </return>
-      </fields>
-      <sequence/>
-      <min_year>1900</min_year>
-      <max_year>2199</max_year>
-      <cache_size>-1</cache_size>
-      <preload_cache>N</preload_cache>
-      <use_start_date_alternative>N</use_start_date_alternative>
-      <start_date_alternative>none</start_date_alternative>
-      <start_date_field_name/>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1648</xloc>
-      <yloc>192</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Get Variables</name>
-    <type>GetVariable</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <name>reportFile</name>
-        <variable>&#x24;&#x7b;reportFile&#x7d;</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>48</xloc>
-      <yloc>224</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Get Variables 2</name>
-    <type>GetVariable</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <name>reportDate</name>
-        <variable>&#x24;&#x7b;reportDate&#x7d;</variable>
-        <type>Date</type>
-        <format>yyyy-MM-dd</format>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>reportFile</name>
-        <variable>&#x24;&#x7b;reportFile&#x7d;</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>272</xloc>
-      <yloc>208</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Get Variables 3</name>
-    <type>GetVariable</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <name>ocdFile</name>
-        <variable>&#x24;&#x7b;ocdFile&#x7d;</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>64</xloc>
+      <xloc>1136</xloc>
       <yloc>112</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Stream lookup</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <from>Uppercase</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>PrecinctCode</name>
+        <field>precinctNum</field>
+      </key>
+      <value>
+        <name>junk</name>
+        <rename>junk</rename>
+        <default/>
+        <type>String</type>
+      </value>
+      <value>
+        <name>country</name>
+        <rename>country</rename>
+        <default/>
+        <type>String</type>
+      </value>
+      <value>
+        <name>state</name>
+        <rename>state</rename>
+        <default/>
+        <type>String</type>
+      </value>
+      <value>
+        <name>county</name>
+        <rename>county</rename>
+        <default/>
+        <type>String</type>
+      </value>
+      <value>
+        <name>precinct</name>
+        <rename>precinct</rename>
+        <default/>
+        <type>String</type>
+      </value>
+      <value>
+        <name>ocd-name</name>
+        <rename>ocd-name</rename>
+        <default/>
+        <type>String</type>
+      </value>
+      <value>
+        <name>OpenCivicID</name>
+        <rename>OpenCivicID</rename>
+        <default/>
+        <type>String</type>
+      </value>
+      <value>
+        <name>result</name>
+        <rename>result</rename>
+        <default/>
+        <type>Boolean</type>
+      </value>
+      <value>
+        <name>countyName</name>
+        <rename>countyName</rename>
+        <default/>
+        <type>String</type>
+      </value>
+      <value>
+        <name>precinctNum</name>
+        <rename>precinctNum</rename>
+        <default/>
+        <type>Integer</type>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1360</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
