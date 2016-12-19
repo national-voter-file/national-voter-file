@@ -58,7 +58,7 @@ if __name__ == '__main__':
     ]
 
     # Fieldnames listed, but can be omitted because they're the column names
-    oh_transformer = OHTransformer(date_format='%Y-%m-%d', sep=',')
+    oh_transformer = OHTransformer(date_format='%m/%d/%Y', sep=',')
     oh_transformer(
         os.path.join(DATA_DIR, 'Ohio', 'SWVF_1_44_SAMPLE.csv'),
         os.path.join(DATA_DIR, 'Ohio', 'SWVF_1_44_SAMPLE_OUT.csv'),
