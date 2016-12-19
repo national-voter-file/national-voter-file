@@ -84,7 +84,7 @@ class NCTransformer(BaseTransformer):
 
         output_dict = {
             'BIRTHDATE': bd,
-            'BIRTHDATE_IS_ESTIMATE': True,
+            'BIRTHDATE_IS_ESTIMATE': "Y"",
         }
 
         return output_dict
@@ -217,7 +217,7 @@ class NCTransformer(BaseTransformer):
                 input_dict['mail_zipcode']
             ] if x is not None
         ])
-        
+
         usaddress_dict, usaddress_type = self.usaddress_tag(mail_str)
         return {
             'MAIL_ADDRESS_LINE1': self.construct_mail_address_1(

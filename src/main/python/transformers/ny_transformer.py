@@ -13,6 +13,9 @@ class NYTransformer(BaseTransformer):
     col_type_dict['TITLE'] = set([str, type(None)])
     col_type_dict['ABSENTEE_TYPE'] = set([str, type(None)])
     col_type_dict['PRECINCT_SPLIT'] = set([str, type(None)])
+    col_type_dict['RACE'] = set([str, type(None)])
+    col_type_dict['BIRTH_STATE'] = set([str, type(None)])
+    
 
     ny_party_map = {
         "DEM":"DEM",
@@ -105,7 +108,30 @@ class NYTransformer(BaseTransformer):
             Dictionary with following keys
                 'BIRTHDATE'
         """
-        return {'BIRTHDATE': self.convert_date(input_dict['DOB'])}
+        return {
+            'BIRTHDATE': self.convert_date(input_dict['DOB']),
+            'BIRTHDATE_IS_ESTIMATE':'N'
+        }
+
+    def extract_birth_state(self, input_columns):
+        """
+        Inputs:
+            input_columns: name or list of columns
+        Outputs:
+            Dictionary with following keys
+                'BIRTH_STATE'
+        """
+        return {'BIRTH_STATE': None}
+
+    def extract_race(self, input_dict):
+        """
+        Inputs:
+            input_columns: name or list of columns
+        Outputs:
+            Dictionary with following keys
+                'RACE'
+        """
+        return {'RACE': None}
 
     def extract_language_choice(self, input_dict):
         """

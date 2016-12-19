@@ -127,7 +127,10 @@ class COTransformer(BaseTransformer):
                 'BIRTHDATE'
         """
         # TODO: Putting Jan 1 of birth year, need to figure out how to handle
-        return {'BIRTHDATE': date(int(input_dict['BIRTH_YEAR']), 1, 1)}
+        return {
+            'BIRTHDATE': date(int(input_dict['BIRTH_YEAR']), 1, 1),
+            'BIRTHDATE_IS_ESTIMATE':'Y'
+            }
 
     def extract_language_choice(self, input_dict):
         """

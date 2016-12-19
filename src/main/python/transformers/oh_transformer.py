@@ -114,6 +114,8 @@ class OHTransformer(BaseTransformer):
         """
         return {'BIRTH_STATE': None}
 
+
+
     def extract_birthdate(self, input_dict):
         """
         Inputs:
@@ -122,7 +124,10 @@ class OHTransformer(BaseTransformer):
             Dictionary with following keys
                 'BIRTHDATE'
         """
-        return {'BIRTHDATE': self.convert_date(input_dict['DATE_OF_BIRTH'])}
+        return {
+        'BIRTHDATE': self.convert_date(input_dict['DATE_OF_BIRTH']),
+        'BIRTHDATE_IS_ESTIMATE':'N'
+        }
 
     def extract_language_choice(self, input_dict):
         """
