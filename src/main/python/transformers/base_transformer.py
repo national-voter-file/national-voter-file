@@ -64,8 +64,10 @@ class BaseTransformer(object):
         'LAST_NAME': set([str]),
         'NAME_SUFFIX': set([str]),
         'GENDER': set([str]),
+        'BIRTHDATE': set([datetime.datetime]),
+	'BIRTHDATE_IS_ESTIMATE':set([bool]),
         'RACE':set([str]),
-		'BIRTH_STATE':set([str]),
+	'BIRTH_STATE':set([str]),
         'BIRTHDATE': set([datetime.date]),
         'LANGUAGE_CHOICE': set([str, type(None)]),
         'EMAIL': set([str, type(None)]),
@@ -202,7 +204,7 @@ class BaseTransformer(object):
         Should not be overwritten in the subclass, this method enforces a
         similar check on all data created
         """
-        with open(input_path, 'r') as infile, open(output_path, 'w') as outfile:
+        with open(input_path, 'r', errors='ignore') as infile, open(output_path, 'w') as outfile:
             reader = csv.DictReader(infile, delimiter=self.sep,  fieldnames=self.input_fields)
             writer = csv.DictWriter(
                 outfile,
