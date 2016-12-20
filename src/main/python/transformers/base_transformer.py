@@ -141,6 +141,7 @@ class BaseTransformer(object):
                       "NLP", #Natural Law
                       "SP", #Socialist
                       "UTY", #Unity
+                      "AE", #Americans Elect
                       "OTH", #otherwise
                       "UN" #Unaffiliated
         ]),
