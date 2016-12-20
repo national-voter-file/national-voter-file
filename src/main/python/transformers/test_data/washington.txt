@@ -1,0 +1,1001 @@
+StateVoterID	CountyVoterID	Title	FName	MName	LName	NameSuffix	Birthdate	Gender	RegStNum	RegStFrac	RegStName	RegStType	RegUnitType	RegStPreDirection	RegStPostDirection	RegUnitNum	RegCity	RegState	RegZipCode	CountyCode	PrecinctCode	PrecinctPart	LegislativeDistrict	CongressionalDistrict	Mail1	Mail2	Mail3	Mail4	MailCity	MailZip	MailState	MailCountry	Registrationdate	AbsenteeType	LastVoted	StatusCode	Dflag
+WA0001	1000	Mrs	Anne		Chapman	Jr	12/24/1923	F	80		Waywood	Alley					Syracuse	WA	13224	CR	61	65	19	17									04/02/1965	V	7/15/2016	A	
+WA0002	1010		Anne	Laura	Bowman	III	09/16/1951	F	8762		Jana	Street	Apt			56	Las Vegas	WA	89160	AS	61	41	15	17	5 Nevada Center				San Jose	95155	NV	United States	09/27/1967	U	2/4/2016	A	
+WA0003	1020		Bonnie		Webb		08/23/1970	F	18506		Tennyson	Point					Boca Raton	WA	33499	CR	53	73	2	19									08/06/2006	P	10/10/2015	A	
+WA0004	1030	Dr	Robert	Michael	Cruz		02/07/1951	M	89717		Harbort	Drive					Amarillo	WA	79105	SN	34	40	7	17									04/03/1962	P		A	
+WA0005	1040	Dr	Kelly	Gloria	Williamson		08/15/1955	F	31400		Londonderry	Crossing	#			58	Los Angeles	WA	90050	PI	81	82	10	9									01/23/2008	P	11/29/2015	A	
+WA0006	1050		Jean		Lawson		04/03/1950	F	38	1/3	3rd	Point			SW		Salt Lake City	WA	84130	CR	14	85	3	16	23 Homewood Place				Baton Rouge	70815	UT	United States	10/11/1956	V	11/14/2015	I	
+WA0007	1060		Kimberly		Ross		11/15/1999	F	0581		Monument	Alley					Gainesville	WA	32610	SN	39	78	11	2	05471 Charing Cross Trail				Scranton	18514	FL	United States	05/19/1973	N	7/29/2016	I	
+WA0008	1070	Honor	Carlos	Antonio	Larson		11/26/1975	M	2		Melvin	Terrace	#		N	85	El Paso	WA	88584	SN	30	97	3	20									06/10/1972	V	11/20/2015	A	
+WA0009	1080	Mr	Cynthia	Kathleen	Hill		01/21/1993	F	91580		Roth	Plaza					Dallas	WA	75221	PI	98	83	1	8									02/19/1950	P	9/15/2015	I	
+WA00010	1090		Gary	Robert	Greene		05/15/1966	M	1		Lyons	Terrace					Corpus Christi	WA	78415	PI	58	32	1	14									06/27/1931	U	11/13/2015	A	
+WA00011	1100		Gregory	Kevin	Wood		09/09/1931	M	6		Wayridge	Lane					Greenville	WA	29610	AS	90	18	9	4									07/16/1931	U	5/19/2016	A	
+WA00012	1110		Chris		Coleman	IV	06/30/1996	M	4142	3/4	Commercial	Street					Salt Lake City	WA	84140	SN	57	16	3	16									08/07/1971	P	8/30/2015	I	
+WA00013	1120		Kathy	Sara	Hart		05/04/1997	F	99		Sugar	Place					Detroit	WA	48267	PI	99	34	2	16	87395 Melody Road				Pittsburgh	15230	MI	United States	09/30/1980	V	5/19/2016	I	
+WA00014	1130	Ms	Peter	Richard	Fernandez	III	07/26/1986	M	06		Magdeline	Point					Youngstown	WA	44555	AS	64	99	15	10									06/10/1934	V		I	
+WA00015	1140	Dr	Robert		Ortiz		07/23/1958	M	4	1/3	Old Shore	Drive	#			76	Dallas	WA	75358	PI	9	35	4	9									04/14/1952	V	11/7/2015	A	
+WA00016	1150	Mr	John		Day		10/06/1985	M	1		Knutson	Place			NW		South Lake Tahoe	WA	96154	CR	59	96	16	4									04/27/2012	U	1/23/2016	I	
+WA00017	1160		Roger		Ellis		05/12/1991	M	22		Morning	Park					Birmingham	WA	35236	AS	67	33	12	10	184 Lakewood Gardens Parkway				Washington	20540	AL	United States	12/27/1958	U	9/28/2015	A	
+WA00018	1170		Earl		Hughes		02/20/1973	M	6		Chive	Pass					Boise	WA	83705	PI	80	16	2	16	90394 Trailsway Way				Chicago	60604	ID	United States	08/21/1965	P	6/21/2016	I	
+WA00019	1180	Rev	Irene		Hall		10/17/1949	F	658	3/4	Old Gate	Circle			NW		Chattanooga	WA	37416	PI	64	30	6	22	21 Sundown Road				Boynton Beach	33436	TN	United States	02/29/1952	N	5/24/2016	I	
+WA00020	1190		Ruth	Paula	Gardner		07/05/1983	F	59546		Pearson	Park					Fredericksburg	WA	22405	CR	34	94	4	4	12656 Erie Terrace				Dallas	75236	VA	United States	02/16/1995	U	9/17/2015	I	
+WA00021	1200	Mr	Jeremy	Justin	Reid		03/27/1928	M	40	3/4	Elgar	Court	Apt	NW		29	Young America	WA	55573	AS	15	6	13	7									12/07/1934	V	8/24/2015	A	
+WA00022	1210		Rose	Anna	Montgomery		11/23/1936	F	418		Burrows	Park					Peoria	WA	61656	SN	42	14	5	4									09/11/1991	V		A	
+WA00023	1220		Carolyn		Medina		03/10/1943	F	80		Lakewood	Drive					Hollywood	WA	33028	AS	12	70	9	15									07/27/1931	P		I	
+WA00024	1230	Mrs	Ryan	Keith	Burns		03/06/1963	M	9004		Hollow Ridge	Court			SE		Austin	WA	78789	CR	40	60	8	5	11 Tony Place				West Palm Beach	33411	TX	United States	07/04/2015	N	10/2/2015	A	
+WA00025	1240	Mrs	Bonnie		Hunter		12/30/1979	F	43976		High Crossing	Drive		SE			Dayton	WA	45470	PI	14	12	14	19									02/17/1954	P	12/24/2015	I	
+WA00026	1250		Kathy	Linda	Vasquez		04/26/1921	F	69984		Roxbury	Terrace	#			26	Vienna	WA	22184	AS	37	39	2	11									06/23/2011	N	10/21/2015	I	
+WA00027	1260		Karen		Gomez		09/08/1974	F	65598		Southridge	Lane					Irving	WA	75062	CR	62	28	19	22	0 Kenwood Terrace				Fredericksburg	22405	TX	United States	08/02/1961	P	9/26/2015	A	
+WA00028	1270		Sarah		Patterson		06/04/1962	F	942		Havey	Avenue					Waterloo	WA	50706	SN	62	44	18	14									04/06/2010	V	1/11/2016	A	
+WA00029	1280	Mr	Virginia	Karen	Matthews	Jr	06/13/1964	F	5980		Milwaukee	Terrace					Milwaukee	WA	53234	PI	49	40	19	13	087 Barnett Plaza				Milwaukee	53215	WI	United States	01/06/1983	N	7/20/2016	A	
+WA00030	1290		Lillian	Melissa	Banks		04/11/1925	F	8		Mifflin	Center					Dearborn	WA	48126	PI	7	44	7	12	489 Amoth Trail				Minneapolis	55402	MI	United States	11/06/2014	V	8/5/2016	A	
+WA00031	1300		Willie		Knight	Sr	11/29/1962	M	195		John Wall	Junction					Fort Lauderdale	WA	33305	CR	52	74	2	1									09/19/1999	V	6/11/2016	I	
+WA00032	1310	Rev	Mary	Betty	Parker		06/08/1966	F	2246		Del Mar	Hill	Apt	NW		66	Wichita Falls	WA	76310	CR	55	19	5	9									03/10/2004	U	11/11/2015	I	
+WA00033	1320		Joan	Ashley	Cook		03/18/1992	F	78		Grasskamp	Pass	Apt			13	Fort Myers	WA	33906	SN	6	98	2	1									04/04/1952	V	4/9/2016	A	
+WA00034	1330		Ralph	Roger	Bell		01/25/1932	M	51		Dottie	Way	Apt			34	Stamford	WA	06912	PI	31	27	3	20									03/07/1981	V	5/20/2016	I	
+WA00035	1340		Catherine	Mildred	Scott	Sr	04/08/1948	F	8467		Spenser	Terrace	Apt		NW	46	Sacramento	WA	94297	CR	99	95	15	16									02/06/1963	N	11/8/2015	I	
+WA00036	1350		Norma		Hall		09/20/1976	F	3		Chive	Circle	#			1	Columbus	WA	43231	SN	44	83	18	23	61806 Ilene Alley				Abilene	79605	OH	United States	05/04/1955	U	3/14/2016	I	
+WA00037	1360		Raymond	Richard	Mcdonald		03/18/1931	M	5		Stang	Pass	Apt			75	Olympia	WA	98506	SN	100	14	5	4									12/02/2003	V	3/8/2016	A	
+WA00038	1370	Mrs	Jose	Louis	White		07/02/1991	M	7612	3/4	Roxbury	Parkway		NW			Flushing	WA	11355	SN	54	4	6	8	9656 Sheridan Alley				Dallas	75379	NY	United States	02/15/1997	N	11/7/2015	I	
+WA00039	1380		Jesse		Webb		08/30/1947	M	418	1/3	Trailsway	Alley			NW		Washington	WA	20337	SN	71	27	19	22									01/30/2010	V	2/9/2016	I	
+WA00040	1390	Ms	Daniel	Jesse	Bradley		07/17/1965	M	41953		Old Gate	Lane	#			19	Pittsburgh	WA	15230	PI	44	74	5	3	8 Surrey Parkway				Albuquerque	87110	PA	United States	06/01/1938	V	6/24/2016	A	
+WA00041	1400		Evelyn	Louise	Medina		02/17/1983	F	2		Tomscot	Alley	#	NW		94	Philadelphia	WA	19160	PI	68	6	17	9	4 Monica Circle				Los Angeles	90005	PA	United States	02/18/1957	N		A	
+WA00042	1410	Mr	Betty	Rose	Peterson		08/18/1930	F	35		Hauk	Plaza					Carol Stream	WA	60158	AS	79	62	8	4									08/07/1935	V	3/15/2016	A	
+WA00043	1420		Phyllis	Anne	Foster		11/14/1930	F	19	3/4	Quincy	Drive					Kalamazoo	WA	49048	SN	42	1	9	12	1 Anzinger Lane				Columbus	43204	MI	United States	03/23/1979	P	7/17/2016	A	
+WA00044	1430		Craig	Peter	Franklin		11/18/1933	M	3796		Quincy	Pass	#			84	San Angelo	WA	76905	SN	34	81	19	3									04/19/1993	N		I	
+WA00045	1440	Honor	Karen	Janet	Freeman		04/05/1988	F	0		West	Circle					Washington	WA	20392	PI	29	14	21	7									02/02/1965	U	4/18/2016	I	
+WA00046	1450		Sharon	Kimberly	Holmes		04/21/1998	F	88		Green	Avenue					Garden Grove	WA	92645	PI	77	28	6	16									11/29/2001	P	10/4/2015	I	
+WA00047	1460		Nicole	Paula	Romero		10/07/1921	F	3816		Northview	Place			W		Saint Louis	WA	63104	SN	83	4	10	16	78 Farmco Road				Des Moines	50305	MO	United States	08/15/1992	U	11/23/2015	A	
+WA00048	1470		Kevin	Roy	Patterson		02/25/1942	M	2		Barby	Crossing		SE			Stockton	WA	95219	SN	74	83	11	19	2484 Burning Wood Alley				Anchorage	99507	CA	United States	04/20/1999	U	7/8/2016	I	
+WA00049	1480		Marie		Griffin		08/23/1936	F	017	1/3	Cottonwood	Trail		SW			San Jose	WA	95133	SN	35	44	12	23	187 Bunker Hill Lane				Lincoln	68510	CA	United States	12/08/1963	P	4/21/2016	I	
+WA00050	1490		Sharon	Anne	Gibson		12/13/1936	F	877		Butterfield	Trail	#			12	Kansas City	WA	64142	CR	98	55	5	3									08/22/2010	V	9/19/2015	I	
+WA00051	1500	Honor	James		Lynch		04/21/1957	M	9062		Carpenter	Park					Lakeland	WA	33811	PI	95	5	8	21									09/27/1993	P	9/11/2015	I	
+WA00052	1510	Ms	Julie		Clark		02/18/1933	F	3223	1/3	Mccormick	Avenue		SE	N		Corona	WA	92878	CR	54	38	10	3									06/10/2016	N	11/18/2015	I	
+WA00053	1520		Jean		Lee		01/20/1965	F	98479		Fisk	Junction					Houston	WA	77293	CR	91	11	2	4									04/25/1987	U		A	
+WA00054	1530		Marie	Elizabeth	Carter		05/19/1989	F	8408		Thackeray	Terrace					Tacoma	WA	98481	CR	36	60	20	12	03 Hansons Drive				Inglewood	90310	WA	United States	11/26/1989	U	4/16/2016	A	
+WA00055	1540	Honor	Brenda		Nelson		01/29/1923	F	49246		Crest Line	Junction					Bowie	WA	20719	SN	43	4	10	8									06/28/1969	N		I	
+WA00056	1550		Robin	Robin	Gonzales		08/19/1981	F	24	1/3	Maywood	Avenue					Port Charlotte	WA	33954	AS	87	57	8	10									02/04/1990	N	8/29/2015	A	
+WA00057	1560		Scott	Antonio	Wood		06/01/1991	M	587		Prairieview	Pass		N			Boise	WA	83727	CR	15	100	3	14									11/09/1968	U		I	
+WA00058	1570		Keith	Clarence	Butler	Sr	08/18/1964	M	0581		Erie	Avenue		NW			Huntington	WA	25775	SN	97	23	9	3									03/16/1933	N	11/3/2015	I	
+WA00059	1580		Jack	Samuel	Watkins		03/09/1953	M	3		Goodland	Court	Apt			97	Frederick	WA	21705	CR	4	98	14	18	48314 Main Court				Syracuse	13205	MD	United States	03/19/1994	V	7/18/2016	I	
+WA00060	1590		Gary	Justin	Weaver		07/24/1968	M	913		Crowley	Plaza	#			44	Colorado Springs	WA	80925	AS	63	43	9	14									05/12/1936	V	2/29/2016	A	
+WA00061	1600		Jessica		Rice		09/30/1950	F	63312		Utah	Center	#			64	Peoria	WA	85383	SN	49	83	17	20									09/17/2000	U	7/23/2016	A	
+WA00062	1610	Dr	Dennis	Andrew	Sims		05/21/1939	M	67412		Autumn Leaf	Junction					Oakland	WA	94622	CR	74	40	5	5	022 Summit Park				Beaverton	97075	CA	United States	03/06/1951	N	5/24/2016	A	
+WA00063	1620		Richard	Larry	Harper		04/21/1988	M	797		Calypso	Street	Apt		SW	31	Kansas City	WA	64101	CR	56	5	10	2									01/18/1985	P	10/17/2015	I	
+WA00064	1630	Mr	Deborah	Diana	Jones		02/09/1978	F	83949		Kim	Parkway					Decatur	WA	30033	SN	42	92	3	22									10/24/2009	U	2/17/2016	A	
+WA00065	1640	Ms	Bonnie	Shirley	Fowler		03/01/1969	F	67		Browning	Hill	#			33	Kent	WA	98042	PI	77	14	18	21									06/04/1995	N		I	
+WA00066	1650		Martha		Clark		12/10/1940	F	051		School	Point	Apt			11	Tacoma	WA	98447	SN	18	66	15	9	4 Independence Alley				Memphis	38143	WA	United States	06/22/1952	V	8/17/2015	A	
+WA00067	1660		Walter		Meyer		01/11/1962	M	26		Eagle Crest	Lane			N		Tampa	WA	33680	SN	44	84	21	20									03/16/1967	U	1/19/2016	A	
+WA00068	1670		Barbara	Doris	Robinson		05/28/1943	F	9173		Maywood	Road					Portland	WA	97201	PI	61	30	13	5	18822 Morningstar Hill				Colorado Springs	80940	OR	United States	07/22/1993	U	1/17/2016	A	
+WA00069	1680		Janice	Jean	Taylor		07/13/1979	F	22534		Forest Dale	Avenue	#	N		2	Washington	WA	20430	PI	64	54	5	19									06/19/1994	V	5/21/2016	A	
+WA00070	1690		Juan	Samuel	Davis		07/29/1936	M	0		Fairview	Center	Apt			7	El Paso	WA	79977	SN	98	84	3	21									10/28/1980	P	4/8/2016	A	
+WA00071	1700		Sharon	Kathleen	Ramirez		12/06/1987	F	68902		North	Junction		SE			Boston	WA	02216	SN	30	66	12	7									01/12/1961	V	10/14/2015	I	
+WA00072	1710		Betty	Paula	Watkins		03/09/1973	F	1876	1/3	Myrtle	Drive					Tucson	WA	85715	AS	37	100	13	6									04/09/1938	P	8/3/2016	I	
+WA00073	1720		Dorothy	Ruby	Mendoza		10/28/1952	F	8	3/4	Harper	Drive		N			Jacksonville	WA	32220	SN	99	79	8	14	375 Vermont Trail				Philadelphia	19136	FL	United States	03/22/1985	P	3/6/2016	A	
+WA00074	1730		Beverly		Ruiz		06/29/1955	F	4592		Bartillon	Crossing	#		W	29	Largo	WA	34643	CR	65	48	6	5	44 Logan Hill				Indianapolis	46239	FL	United States	09/24/1990	U	4/2/2016	I	
+WA00075	1740		Sharon	Frances	Hayes		01/11/1946	F	9538		Corry	Way	Apt			47	Chicago	WA	60604	AS	59	11	3	19	8 Ryan Point				Salt Lake City	84105	IL	United States	07/11/2014	V	5/6/2016	I	
+WA00076	1750		Debra	Jacqueline	Robinson		04/06/1929	F	98386		Sunnyside	Terrace		W			Worcester	WA	01610	AS	9	5	13	6									04/19/1939	N	9/29/2015	A	
+WA00077	1760		Edward		Clark		10/19/1991	M	7772		Northwestern	Street	#			94	Pasadena	WA	77505	SN	83	66	13	1									03/14/1966	U	2/16/2016	I	
+WA00078	1770		Roy	Joshua	Gilbert		07/15/1940	M	05636		Fallview	Hill					Naples	WA	33961	SN	77	21	15	19	90 Shasta Crossing				Flushing	11388	FL	United States	05/09/1958	V	3/9/2016	A	
+WA00079	1780		Elizabeth		Henry		08/21/1930	F	477	3/4	Blue Bill Park	Place			SE		Huntington	WA	25770	PI	59	60	17	3									10/23/1930	V		I	
+WA00080	1790		Katherine	Dorothy	Nelson		02/16/1973	F	29		Jenifer	Place	#			29	Lynchburg	WA	24503	SN	26	22	18	21	4330 Bunting Avenue				Dallas	75397	VA	United States	12/24/1936	V	12/25/2015	A	
+WA00081	1800		Rose		Ellis		04/15/1982	F	752		Manley	Circle		W			San Francisco	WA	94105	AS	60	82	17	10									02/18/1983	V	8/30/2015	I	
+WA00082	1810		Bobby		Harris		09/20/1973	M	82		Homewood	Crossing					Hartford	WA	06152	PI	60	59	19	8									03/23/1961	P	9/23/2015	A	
+WA00083	1820		Jane	Deborah	Day		05/20/1943	F	7	1/3	Kropf	Crossing			SW		Saint Louis	WA	63196	CR	35	76	19	20	87017 Stang Point				Stockton	95298	MO	United States	06/11/2004	U	9/3/2015	I	
+WA00084	1830		Arthur	James	Sanders		03/23/1922	M	1548		Graedel	Hill	#			25	Tuscaloosa	WA	35405	AS	68	84	17	14									05/24/1937	V	3/25/2016	A	
+WA00085	1840		Carolyn		Woods		05/11/1929	F	937		Westport	Crossing					Dallas	WA	75392	CR	35	18	21	21									11/06/1974	N	3/27/2016	I	
+WA00086	1850		Clarence	Fred	Cox		05/16/1976	M	3621		Waywood	Lane		N			Houston	WA	77201	CR	7	45	6	7	3 Bartillon Junction				Reston	22096	TX	United States	12/05/2001	P	3/25/2016	I	
+WA00087	1860	Honor	Robert	Brian	Smith		07/17/1922	M	9207		Kropf	Center					Long Beach	WA	90847	SN	26	17	7	10	0 Corben Alley				Richmond	23272	CA	United States	03/20/1982	V	11/26/2015	I	
+WA00088	1870		Charles	Carlos	Owens		03/18/1973	M	96431		Stoughton	Drive			N		Melbourne	WA	32941	AS	40	64	1	22	1 Logan Avenue				Houston	77050	FL	United States	02/19/1991	N	12/28/2015	I	
+WA00089	1880		Andrea	Frances	Ortiz		01/26/1987	F	7		Gateway	Place		SW			Pittsburgh	WA	15230	CR	71	38	13	7									07/19/1938	P	8/7/2016	I	
+WA00090	1890		Walter		Black		04/26/1941	M	40		Nova	Center					Portland	WA	97211	AS	40	12	19	16									02/16/1951	V	2/9/2016	I	
+WA00091	1900		Johnny	Gerald	Cruz		10/07/1930	M	2371	1/3	Brickson Park	Place		NW			New Orleans	WA	70116	AS	73	40	19	18	92 Southridge Court				Modesto	95354	LA	United States	09/19/1995	P		A	
+WA00092	1910		Bruce	Jeffrey	Jordan		05/30/1968	M	7454		Sloan	Court	Apt	SE		36	Bronx	WA	10454	SN	8	52	10	15	77 Leroy Trail				Sacramento	94237	NY	United States	09/12/1948	V	6/16/2016	I	
+WA00093	1920		Gloria	Cynthia	Richards	IV	08/29/1923	F	21		Mcguire	Crossing		SE			Seattle	WA	98127	PI	89	65	19	5	50 Dovetail Pass				Brea	92822	WA	United States	09/17/1947	N	11/2/2015	I	
+WA00094	1930		Willie		Medina		04/15/1981	M	1		Artisan	Way					Trenton	WA	08608	CR	19	75	17	4									11/06/2013	V	6/19/2016	I	
+WA00095	1940	Mr	Sarah		Sullivan		02/27/1953	F	47541		Walton	Crossing	Apt			66	Eugene	WA	97405	SN	12	60	1	4									01/06/1948	V	8/31/2015	A	
+WA00096	1950		Rose	Karen	Richardson	Jr	10/08/1922	F	21		Coleman	Hill	Apt			18	Rochester	WA	55905	PI	64	84	4	19	86599 Warbler Pass				Topeka	66606	MN	United States	07/18/1999	N	12/14/2015	I	
+WA00097	1960		Catherine	Frances	Owens		05/29/1975	F	7675		Granby	Alley	Apt			36	Clearwater	WA	33763	PI	15	63	18	15	5 Judy Hill				Nashville	37215	FL	United States	10/14/2007	N	3/31/2016	I	
+WA00098	1970	Mr	Sandra	Dorothy	Carter		06/28/1981	F	8		Dryden	Trail	Apt	SW		36	Omaha	WA	68110	AS	54	76	10	10	66674 Springview Pass				Columbus	43220	NE	United States	12/30/1932	P	4/20/2016	A	
+WA00099	1980		Teresa		Peterson		10/23/1947	F	055	3/4	Transport	Park					Houston	WA	77015	PI	91	7	21	7									11/22/1931	P	6/24/2016	I	
+WA000100	1990		Aaron		Frazier		09/10/1998	M	8		Shopko	Road	#	NW		34	Grand Rapids	WA	49518	AS	73	33	7	5									05/16/1946	U	10/24/2015	I	
+WA000101	2000		Teresa	Teresa	Garza		11/16/1922	F	8		Shelley	Place					San Bernardino	WA	92410	CR	51	98	1	23									08/03/1960	U	10/21/2015	I	
+WA000102	2010		Gloria	Elizabeth	Williams		02/20/1988	F	238		Becker	Place	Apt			59	San Jose	WA	95133	CR	50	8	15	23	81272 Gerald Alley				Houston	77050	CA	United States	07/08/1977	P	4/15/2016	A	
+WA000103	2020	Dr	Raymond	Bruce	Bishop		08/21/1931	M	35626		Ridge Oak	Park					Honolulu	WA	96825	CR	5	94	9	8									06/17/1974	P	5/21/2016	A	
+WA000104	2030		Michelle	Annie	Palmer		04/17/1944	F	8		Acker	Point		SE			Norwalk	WA	06854	SN	50	80	18	15	47908 East Parkway				Oklahoma City	73167	CT	United States	07/15/1951	N	7/17/2016	I	
+WA000105	2040		Michael		Phillips		01/25/1950	M	734		Blackbird	Pass					Corpus Christi	WA	78415	AS	100	34	10	1	0341 Meadow Ridge Crossing				Houston	77090	TX	United States	02/08/1982	P	10/28/2015	I	
+WA000106	2050	Mr	Anne	Dorothy	Freeman		05/04/1943	F	6	3/4	Moulton	Place					Greensboro	WA	27455	SN	63	61	18	13									06/26/2002	U	7/13/2016	I	
+WA000107	2060	Rev	Richard	Harry	Reynolds		01/09/1963	M	16		4th	Pass	#			9	Lynchburg	WA	24515	PI	39	6	6	14									12/22/1970	U	10/31/2015	I	
+WA000108	2070	Mr	Amy	Diana	Willis		10/11/1926	F	95865	1/3	Truax	Center	#		N	95	Fresno	WA	93709	CR	87	90	13	11	4668 Fair Oaks Center				Cincinnati	45296	CA	United States	12/11/1994	V	8/14/2015	A	
+WA000109	2080	Ms	Irene	Emily	Adams		11/12/1958	F	67142		Carioca	Road	Apt			45	Stockton	WA	95298	SN	10	92	5	23	86098 Sunfield Road				Topeka	66667	CA	United States	11/25/1946	P	11/29/2015	A	
+WA000110	2090		Bobby		Gonzalez		11/01/1959	M	07	1/3	Declaration	Drive	#			97	Phoenix	WA	85099	CR	19	39	13	17	1064 Ludington Drive				Memphis	38119	AZ	United States	03/08/2000	P	7/21/2016	A	
+WA000111	2100		Carl	Peter	Burns		01/23/1981	M	95		Hallows	Point	Apt	N		97	Migrate	WA	41905	AS	3	52	14	9	156 Declaration Circle				London	40745	KY	United States	08/15/1984	U	12/22/2015	I	
+WA000112	2110		Joseph		Pierce		11/05/1983	M	00		Bunker Hill	Terrace			SW		Jackson	WA	39282	CR	72	81	16	4	11747 Coleman Alley				Denver	80228	MS	United States	12/15/1941	V	9/14/2015	I	
+WA000113	2120		Benjamin	Christopher	Martinez		03/15/1995	M	7759		Hoffman	Center	Apt			34	Sacramento	WA	94273	CR	22	78	5	10									07/03/1933	V	10/30/2015	I	
+WA000114	2130		Robert	Ryan	Harper		03/29/1991	M	1358		Ruskin	Street					Washington	WA	20456	PI	88	96	5	21									08/19/2015	P	1/7/2016	A	
+WA000115	2140		Mildred	Rebecca	Morgan		05/17/1929	F	446		Upham	Terrace					Worcester	WA	01610	PI	52	21	18	6	9605 Coolidge Terrace				Kansas City	64130	MA	United States	08/22/1947	V	2/29/2016	A	
+WA000116	2150		Earl		Cole		06/28/1964	M	866		Gerald	Point			NW		Richmond	WA	23228	PI	28	99	18	8	26905 Clemons Pass				Oakland	94611	VA	United States	01/04/1999	P	2/19/2016	A	
+WA000117	2160		Joe	Ryan	Bailey		12/17/1982	M	10		Kensington	Court					Milwaukee	WA	53263	PI	57	2	1	8	79 Chinook Parkway				New York City	10260	WI	United States	01/03/1957	N	6/5/2016	I	
+WA000118	2170		Anna	Maria	Baker		09/19/1923	F	3	3/4	Melby	Drive	#			81	Grand Rapids	WA	49544	AS	27	93	19	22	12 Golf View Parkway				Spokane	99252	MI	United States	04/07/1969	U	7/16/2016	I	
+WA000119	2180		Barbara	Angela	Gray		01/09/1965	F	8356		Mallory	Alley					Washington	WA	20370	AS	33	7	11	13	553 Rusk Circle				Evansville	47732	DC	United States	03/02/1964	N	12/1/2015	A	
+WA000120	2190		Mary	Patricia	Cole		12/16/1997	F	52737	1/3	Steensland	Drive	#	W		5	Battle Creek	WA	49018	CR	94	77	19	15									04/27/1949	N	5/22/2016	A	
+WA000121	2200		Margaret		Webb		05/16/1963	F	287	3/4	Lawn	Court	#			26	Birmingham	WA	35295	PI	89	32	7	18									02/10/1940	N	8/26/2015	I	
+WA000122	2210	Mr	Laura		Pierce		02/03/1921	F	06814		Shopko	Way	#	NW	W	84	Panama City	WA	32405	CR	26	92	4	11									06/26/1970	N	2/8/2016	A	
+WA000123	2220		Heather		Tucker		05/21/1941	F	5	1/3	Mariners Cove	Drive					Charlotte	WA	28205	SN	29	8	1	15									06/30/1978	V	11/4/2015	I	
+WA000124	2230		Joshua	David	Gomez		04/09/1951	M	55152	3/4	Bultman	Lane		W			Nashville	WA	37205	CR	82	84	1	5									05/13/1992	P		A	
+WA000125	2240	Honor	Mary	Rebecca	Phillips		01/28/1942	F	909		Vermont	Drive		NW			Lansing	WA	48912	CR	64	83	15	10									07/22/1986	U	6/19/2016	A	
+WA000126	2250		Thomas	Steven	Wallace		11/21/1981	M	4		Kennedy	Pass		SW			Long Beach	WA	90847	AS	86	47	18	18									12/05/1966	U	5/5/2016	I	
+WA000127	2260		Adam	Sean	Russell		10/14/1973	M	2556	3/4	Doe Crossing	Lane		N			San Jose	WA	95133	PI	15	55	14	11									05/07/1998	V	3/11/2016	I	
+WA000128	2270		Christopher	Andrew	Thompson		09/10/1976	M	7		Mccormick	Plaza	Apt			15	Arlington	WA	76016	AS	37	77	13	10	993 Elka Hill				Olympia	98506	TX	United States	02/10/1932	P	2/1/2016	I	
+WA000129	2280		Jeffrey	Larry	Gutierrez		03/05/1934	M	6	3/4	Moland	Terrace		W			Anaheim	WA	92805	AS	14	6	18	16									05/12/1978	P	8/12/2015	A	
+WA000130	2290	Rev	Teresa		Anderson		05/13/1987	F	5		South	Pass					Washington	WA	20530	CR	11	29	8	19									10/27/1970	N	1/27/2016	A	
+WA000131	2300		Amanda	Andrea	Grant		10/08/1945	F	824		Cottonwood	Street	#	SW		67	Sacramento	WA	94286	AS	5	41	6	10	78 Mayfield Place				Washington	20575	CA	United States	09/08/2010	U	3/5/2016	I	
+WA000132	2310		David	Donald	Moreno	II	06/19/1983	M	4	3/4	Calypso	Hill					Dallas	WA	75216	AS	15	46	4	22	593 Sutherland Terrace				Pensacola	32526	TX	United States	12/07/2000	U		I	
+WA000133	2320		Kelly		Wallace		06/05/1998	F	90045		Stone Corner	Alley					Asheville	WA	28805	AS	39	38	15	12	5192 Warrior Terrace				Fort Wayne	46825	NC	United States	12/19/2006	P	10/21/2015	A	
+WA000134	2330	Dr	Beverly		Nelson		07/25/1929	F	8		Knutson	Road					Las Vegas	WA	89193	CR	9	64	15	16									05/16/1946	U	5/23/2016	A	
+WA000135	2340	Ms	Ashley	Lori	Cook		10/27/1935	F	84943		Nelson	Center					Peoria	WA	61635	AS	21	55	16	8									08/05/1987	N	11/23/2015	A	
+WA000136	2350		Charles	Todd	Sanchez		10/03/1961	M	98		David	Plaza					Little Rock	WA	72204	AS	99	22	12	2									04/20/1988	U	8/15/2015	A	
+WA000137	2360	Mr	Eugene		Banks		05/10/1990	M	87		Algoma	Pass	Apt	NW		77	Winston Salem	WA	27105	SN	63	53	16	20									10/03/1996	V	12/13/2015	A	
+WA000138	2370		Annie		Dunn		03/24/1974	F	1		Cottonwood	Junction			W		Pensacola	WA	32505	SN	30	86	8	15									01/13/1952	P	2/27/2016	A	
+WA000139	2380		Jimmy	Carlos	Kelley		10/17/1937	M	47914		Mariners Cove	Trail	#			58	Corpus Christi	WA	78465	AS	85	53	14	15									09/09/2007	V	10/13/2015	I	
+WA000140	2390		Barbara		Montgomery		03/29/1989	F	2858	1/3	Monica	Plaza					Des Moines	WA	50315	CR	55	35	5	16	62 Eggendart Point				Milwaukee	53215	IA	United States	04/12/1982	V	8/15/2015	I	
+WA000141	2400		Mildred		Green		05/21/1971	F	16		Huxley	Point	#			23	Fresno	WA	93740	PI	33	91	9	6	367 Crescent Oaks Court				Cheyenne	82007	CA	United States	02/09/1991	U	10/26/2015	A	
+WA000142	2410		Evelyn		Boyd		04/06/1935	F	553		Sherman	Center		W			Orlando	WA	32830	CR	27	72	18	17									11/14/1938	N	11/3/2015	I	
+WA000143	2420	Ms	Philip	Dennis	Hawkins		10/07/1927	M	086		Forest Dale	Point					Miami	WA	33129	AS	52	92	2	16	51837 Maywood Junction				Merrifield	22119	FL	United States	04/14/1957	P	5/27/2016	I	
+WA000144	2430		Jonathan	Billy	Adams		05/24/1976	M	97		Jenna	Alley	Apt			80	Helena	WA	59623	PI	20	49	13	13	5 Mendota Street				Birmingham	35263	MT	United States	06/27/2012	P	12/6/2015	A	
+WA000145	2440		Lori		Gomez		11/18/1932	F	20		Cambridge	Avenue			SE		El Paso	WA	79984	PI	37	19	8	19	96189 Tennessee Crossing				Port Washington	11054	TX	United States	12/31/2001	U	10/17/2015	I	
+WA000146	2450	Honor	Patrick		Burns		09/15/1978	M	80098		Toban	Court					Johnson City	WA	37605	PI	77	27	16	9									09/20/1994	V	1/30/2016	A	
+WA000147	2460		Jose		Ramos		03/12/1983	M	7279		Reindahl	Pass	Apt		N	48	Manchester	WA	03105	CR	91	75	7	11									05/16/1954	U	5/18/2016	I	
+WA000148	2470	Rev	Ruby	Elizabeth	Taylor		07/14/1926	F	78		Crownhardt	Circle					Memphis	WA	38161	AS	12	7	18	9	823 Hoard Road				Arlington	22212	TN	United States	01/07/2014	N	7/8/2016	I	
+WA000149	2480		Marilyn	Debra	Fowler		06/14/1967	F	6	1/3	Declaration	Road		SE			Saint Paul	WA	55115	AS	100	95	11	22	0 Londonderry Parkway				Pittsburgh	15250	MN	United States	09/26/2013	V	5/4/2016	A	
+WA000150	2490		Mary		Bishop		09/24/1979	F	42999		Oakridge	Terrace	Apt	NW		30	Montgomery	WA	36114	SN	12	91	8	14									09/26/2008	P	12/14/2015	I	
+WA000151	2500	Ms	Angela	Jane	Perkins		12/29/1944	F	65781	3/4	Little Fleur	Pass	Apt			43	Jackson	WA	39282	PI	71	65	6	21	4553 Laurel Center				Allentown	18105	MS	United States	07/14/1935	V	2/11/2016	A	
+WA000152	2510		Marie		Jenkins		12/18/1943	F	0		Crescent Oaks	Hill					Denton	WA	76205	CR	69	55	1	7									06/08/1981	P	12/25/2015	I	
+WA000153	2520		Kimberly	Barbara	Hamilton		03/23/1997	F	4620		Talisman	Parkway					Seattle	WA	98104	CR	35	76	15	15									04/15/1998	P	12/22/2015	A	
+WA000154	2530		Paula	Robin	Carter		04/20/1979	F	245		Vera	Lane					Raleigh	WA	27626	AS	85	35	7	8									03/03/1990	N	3/21/2016	I	
+WA000155	2540		Brian		Gardner		10/17/1945	M	332		Village Green	Place					Indianapolis	WA	46266	CR	18	87	7	2	44888 Ruskin Court				Glendale	91205	IN	United States	11/19/2009	N	8/22/2015	I	
+WA000156	2550		Anne	Rebecca	Reed		09/09/1957	F	8203	3/4	Milwaukee	Point	#			86	Jacksonville	WA	32209	CR	93	18	6	18									01/26/1945	V	9/15/2015	A	
+WA000157	2560		Richard	Phillip	Wilson		11/30/1983	M	4		Scofield	Road					Orlando	WA	32825	SN	2	44	14	9									09/07/1993	P	4/10/2016	I	
+WA000158	2570		Ralph	Paul	Little		04/21/1994	M	427		Green Ridge	Drive	#			21	Panama City	WA	32405	AS	44	43	5	19									02/26/1944	U		I	
+WA000159	2580		Christine	Ruth	Taylor		10/07/1948	F	0		Jenna	Court		W	SW		Baton Rouge	WA	70883	CR	52	96	3	12	3 Rigney Street				Pasadena	91117	LA	United States	03/22/1981	U	4/27/2016	A	
+WA000160	2590		Nicole	Doris	Wright		08/11/1999	F	09	3/4	Division	Avenue					Colorado Springs	WA	80925	PI	84	8	12	13									08/03/1978	U	4/15/2016	A	
+WA000161	2600		Jason	Charles	Stewart		01/03/1964	M	8		Mccormick	Crossing	Apt		N	63	Flint	WA	48550	SN	69	26	11	22									03/08/1971	P	2/22/2016	A	
+WA000162	2610		Eugene	Timothy	Burns		12/12/1956	M	1669		7th	Road					Cleveland	WA	44177	CR	12	80	7	3									11/30/1944	V	6/2/2016	I	
+WA000163	2620		Wayne	Phillip	Rogers		02/16/1936	M	1845		Northwestern	Park					Tampa	WA	33610	SN	96	74	11	13									03/12/2013	U	4/15/2016	I	
+WA000164	2630		Anthony	Peter	Stevens		09/19/1936	M	26		Shelley	Parkway					Milwaukee	WA	53263	SN	1	80	20	16									03/21/1933	U	4/2/2016	A	
+WA000165	2640		Catherine	Judith	Little		02/22/1968	F	40		Drewry	Pass	Apt	W		34	Chattanooga	WA	37450	SN	6	25	3	2									03/12/1996	P	12/24/2015	A	
+WA000166	2650		Lisa		Young		11/30/1928	F	2292		Briar Crest	Parkway		SE	N		Jacksonville	WA	32259	SN	39	97	20	16	8 Vera Road				Chicago	60657	FL	United States	04/01/1935	V	9/8/2015	A	
+WA000167	2660		Ann	Janet	Sims	III	07/13/1997	F	92987		Steensland	Circle					Providence	WA	02905	PI	92	1	21	22									11/20/1937	V	8/19/2015	A	
+WA000168	2670		David		Morales		07/30/1946	M	450		Eagle Crest	Park					Denver	WA	80243	CR	74	79	13	20	173 Manufacturers Circle				Austin	78754	CO	United States	03/21/1988	V	2/21/2016	A	
+WA000169	2680		Katherine	Paula	Hicks		03/05/1987	F	943		Maple Wood	Pass					San Bernardino	WA	92415	AS	14	4	12	5	55 Melrose Court				Cleveland	44125	CA	United States	06/09/1945	U	9/8/2015	I	
+WA000170	2690	Dr	Cynthia	Angela	Anderson		07/13/2000	F	930		Nevada	Hill	#			91	Bethesda	WA	20816	SN	76	83	8	19									07/02/2003	U	6/20/2016	A	
+WA000171	2700		Christine	Debra	Anderson		09/12/1966	F	2484		Michigan	Road	Apt	SE		7	Roanoke	WA	24029	SN	47	40	16	1	57 Birchwood Pass				Dallas	75216	VA	United States	10/22/1934	U	3/13/2016	I	
+WA000172	2710	Rev	Gregory	Christopher	Warren		08/22/1928	M	33683		Aberg	Crossing		W			Wilmington	WA	19810	PI	60	87	21	4	06 Hintze Junction				Saint Louis	63169	DE	United States	07/07/1951	N	11/4/2015	I	
+WA000173	2720	Mrs	Chris		Parker		08/22/1948	M	4593		North	Court	Apt		NW	9	El Paso	WA	79940	PI	21	65	21	13									11/12/1995	U		A	
+WA000174	2730	Dr	Carlos	Andrew	Bryant		03/21/1989	M	17		Roxbury	Center	Apt			50	Redwood City	WA	94064	PI	64	28	6	23									11/09/2014	U	2/17/2016	I	
+WA000175	2740		Carol	Sandra	Johnston		01/06/1974	F	913		Jenifer	Lane					Salt Lake City	WA	84115	CR	79	46	6	9									02/19/1983	P	4/2/2016	A	
+WA000176	2750		Arthur	Antonio	Matthews	III	08/14/1999	M	2427	3/4	Maryland	Park					Charleston	WA	25321	CR	91	71	9	14	3555 Forest Center				Madison	53716	WV	United States	06/02/1990	U	10/5/2015	A	
+WA000177	2760		Peter	Chris	Patterson	Jr	07/08/1943	M	66		Paget	Parkway	Apt			38	Mobile	WA	36641	CR	38	88	11	4	37 Spohn Plaza				San Diego	92137	AL	United States	02/14/1992	P		I	
+WA000178	2770		Roy	Clarence	Brown		08/07/1925	M	08484		Merrick	Street	Apt			6	Carlsbad	WA	92013	AS	17	94	10	14	6639 Bluejay Way				Richmond	23285	CA	United States	08/02/1936	P	5/16/2016	I	
+WA000179	2780		Peter		Murphy	II	10/21/1932	M	50362		Pine View	Trail					Charlotte	WA	28235	PI	58	20	13	6									01/16/1986	U	2/19/2016	I	
+WA000180	2790		Patrick	Clarence	Thompson		05/30/1956	M	3328		Northview	Drive	Apt			82	San Jose	WA	95138	CR	11	72	12	20	8893 American Ash Way				Phoenix	85083	CA	United States	09/11/1956	N	9/15/2015	A	
+WA000181	2800		Lillian	Wanda	Simpson		11/25/1958	F	4958		Gerald	Way					Montgomery	WA	36104	PI	31	61	17	14	52796 Donald Pass				Arlington	76011	AL	United States	02/02/1935	N	4/4/2016	I	
+WA000182	2810		Jason	Sean	Alexander		08/15/1956	M	4249		Sauthoff	Terrace	Apt	SW		70	Madison	WA	53726	PI	47	22	12	4	86 Eggendart Street				Bronx	10474	WI	United States	09/11/2005	N	4/16/2016	A	
+WA000183	2820	Mr	Lawrence	Phillip	Reed		10/21/1962	M	23788		Calypso	Drive	Apt			83	Glendale	WA	85311	AS	61	82	17	7									03/22/1962	V	7/6/2016	A	
+WA000184	2830	Mrs	Teresa	Heather	Davis		04/30/1939	F	673		Barnett	Junction					Racine	WA	53405	PI	43	82	4	14									06/10/1998	P	11/28/2015	A	
+WA000185	2840	Honor	Frances		Perry		02/05/1953	F	1824		Blaine	Junction	Apt			95	Tulsa	WA	74149	SN	66	48	17	17									08/21/1954	N		I	
+WA000186	2850	Mr	Marilyn		Moore		08/01/1967	F	43	3/4	Washington	Parkway					Glendale	WA	91205	CR	43	95	5	8	08 Mesta Road				Pompano Beach	33064	CA	United States	01/30/1933	P	12/10/2015	I	
+WA000187	2860		Benjamin	Robert	King		03/28/1978	M	51196	3/4	Carioca	Way	Apt			35	Pittsburgh	WA	15215	AS	5	33	11	2	6966 Chive Terrace				Pittsburgh	15235	PA	United States	04/04/1945	P	7/3/2016	I	
+WA000188	2870		Christopher	Anthony	Powell	Sr	04/21/1979	M	0	3/4	Ridge Oak	Pass	Apt	NW		27	Tucson	WA	85725	AS	23	3	11	18	714 Mandrake Avenue				Las Vegas	89145	AZ	United States	05/18/1998	U	10/30/2015	I	
+WA000189	2880		Jacqueline		Stanley		04/09/1959	F	60148		Everett	Street	#			64	Tucson	WA	85715	SN	67	79	11	23									03/10/1953	P	1/3/2016	A	
+WA000190	2890	Ms	Timothy	Eric	Miller		10/25/1935	M	48		Lakeland	Hill					Lincoln	WA	68510	CR	6	88	17	6									02/20/1953	N	3/4/2016	I	
+WA000191	2900		Donna	Stephanie	Richardson		02/26/1943	F	6809		Ridgeview	Avenue					Atlanta	WA	30311	CR	14	50	8	17	962 Grayhawk Avenue				Cincinnati	45249	GA	United States	12/19/1936	N	6/13/2016	I	
+WA000192	2910		Daniel		Owens		06/12/1964	M	9		Porter	Street		W			Anniston	WA	36205	PI	94	78	10	7	9 Kingsford Parkway				Norman	73071	AL	United States	12/06/2003	V	11/28/2015	I	
+WA000193	2920	Rev	Edward		Stewart		07/01/1954	M	4		Aberg	Crossing	Apt			10	Lake Worth	WA	33467	CR	91	29	7	13	14 Randy Place				Charleston	25336	FL	United States	10/30/1989	U	11/22/2015	A	
+WA000194	2930		Ernest	Terry	Richardson		10/24/1932	M	637		Dakota	Way					Roanoke	WA	24029	AS	13	78	14	7	0979 Buell Court				Memphis	38143	VA	United States	11/20/1997	P	1/14/2016	I	
+WA000195	2940		Rebecca		Gonzales		10/12/1942	F	30561		Kennedy	Hill			SW		Omaha	WA	68124	PI	59	98	20	4									08/21/2009	N	9/17/2015	A	
+WA000196	2950		Jessica	Joyce	Foster		02/09/1990	F	57		Caliangt	Circle	Apt	N		96	San Jose	WA	95150	AS	20	73	5	16									06/18/1998	V	10/23/2015	A	
+WA000197	2960		Nicole	Ruth	Armstrong		01/08/1935	F	64145		Johnson	Court	Apt			78	Port Charlotte	WA	33954	SN	32	67	14	14									04/01/1975	U	4/19/2016	I	
+WA000198	2970		Joyce	Denise	Ryan		11/15/1994	F	79497		Derek	Junction					Durham	WA	27717	PI	17	52	12	23									12/27/1931	V	4/4/2016	I	
+WA000199	2980		Ashley		Myers		08/12/1984	F	263		Glacier Hill	Trail					Houston	WA	77245	SN	85	67	5	12	9228 Talmadge Drive				Laurel	20709	TX	United States	12/10/1995	U	8/26/2015	A	
+WA000200	2990		Jerry	Robert	Elliott		08/13/1931	M	45		Hollow Ridge	Hill					Vancouver	WA	98664	AS	100	13	10	6									02/14/1939	P	8/2/2016	A	
+WA000201	3000		Scott	Robert	Hicks		04/11/1966	M	154		Jackson	Pass		W			New Orleans	WA	70187	CR	33	46	16	22									07/17/1975	P	5/26/2016	I	
+WA000202	3010		Anthony	Jeffrey	Flores		04/16/1941	M	31		Upham	Pass					New York City	WA	10014	CR	32	7	11	19									10/11/1933	U	11/14/2015	A	
+WA000203	3020		Ernest	Henry	Dean		03/09/1965	M	2830		Sunfield	Crossing		NW			Vienna	WA	22184	AS	29	25	20	13	3546 Becker Center				Wichita	67260	VA	United States	06/22/1941	U	7/20/2016	A	
+WA000204	3030		Harry		Gutierrez		09/13/1950	M	44		Spohn	Parkway					Rochester	WA	14683	PI	31	95	10	21	99 Commercial Center				Shawnee Mission	66225	NY	United States	12/23/1973	U	7/5/2016	I	
+WA000205	3040		Eugene	Benjamin	Reed		09/30/1931	M	19404		Corry	Center		N			San Diego	WA	92115	AS	50	2	9	20									02/27/2016	V	11/12/2015	I	
+WA000206	3050		Lori		Cole	III	03/11/1955	F	27828		Boyd	Park	#			56	Canton	WA	44720	CR	12	60	4	3	6 Glacier Hill Avenue				Mobile	36628	OH	United States	07/03/1974	P	10/23/2015	I	
+WA000207	3060		Roger		Barnes		02/01/1984	M	05		Mosinee	Road					Anchorage	WA	99522	PI	95	27	19	1									05/04/1964	U	4/22/2016	I	
+WA000208	3070		Ashley	Dorothy	Medina		02/16/1998	F	729	1/3	Muir	Road	Apt			78	Salt Lake City	WA	84120	SN	19	18	13	20	5 Declaration Street				Omaha	68117	UT	United States	03/18/1967	N	12/17/2015	A	
+WA000209	3080	Mr	Amanda	Andrea	Clark		09/01/1920	F	9		Gale	Avenue					San Jose	WA	95138	SN	97	100	6	14									10/16/1970	V	3/5/2016	I	
+WA000210	3090		Sharon	Annie	Reyes		10/20/1975	F	9347		Carberry	Lane					Baton Rouge	WA	70883	SN	32	39	19	13									09/03/2010	N	1/24/2016	A	
+WA000211	3100		Mary	Susan	Fowler	IV	08/22/1991	F	948	3/4	Clemons	Pass		W			Fort Lauderdale	WA	33315	SN	81	13	19	13									10/23/1939	N	7/17/2016	A	
+WA000212	3110		Kelly	Jean	Richards		10/16/1961	F	9029	3/4	Anthes	Place					Oklahoma City	WA	73109	SN	62	5	21	10									05/28/1995	P	8/31/2015	I	
+WA000213	3120	Honor	Justin	Wayne	Fowler		09/16/1997	M	9		Veith	Parkway					Little Rock	WA	72204	CR	11	10	11	13									01/27/2010	U	7/20/2016	I	
+WA000214	3130		Dennis	Kenneth	Simpson		09/19/1971	M	6	3/4	West	Center					Chicago	WA	60604	CR	1	1	7	19									02/28/2006	V	11/3/2015	A	
+WA000215	3140		Timothy		Torres		02/28/2000	M	25		Cherokee	Circle					Brea	WA	92822	PI	39	100	15	1	74 Troy Pass				Oakland	94611	CA	United States	01/12/1977	P	6/16/2016	A	
+WA000216	3150		Patricia	Evelyn	Ramirez		12/29/1920	F	21		Becker	Parkway		W			Vienna	WA	22184	PI	18	30	19	3									04/22/2015	V	7/3/2016	A	
+WA000217	3160		Joe	Juan	Wallace		03/13/1969	M	07	3/4	Little Fleur	Avenue					Chicago	WA	60691	PI	80	83	13	1	68400 Shasta Road				Trenton	08650	IL	United States	10/27/1934	N	5/20/2016	I	
+WA000218	3170		Maria	Robin	Grant		01/12/1925	F	58583		Upham	Avenue					San Francisco	WA	94169	SN	80	49	2	20	26395 Macpherson Court				Tallahassee	32399	CA	United States	07/01/1975	U	6/30/2016	I	
+WA000219	3180		Laura	Martha	Gilbert		02/15/1985	F	198		Messerschmidt	Plaza					Boston	WA	02124	AS	25	9	13	7									03/01/1998	N	3/24/2016	I	
+WA000220	3190		Jose	Robert	Bryant		07/15/1989	M	51		Oneill	Parkway					Saint Louis	WA	63136	PI	36	32	5	23									05/06/1978	U	5/19/2016	A	
+WA000221	3200		Diane		Daniels		04/09/1951	F	44	3/4	Arrowood	Pass					Miami	WA	33147	AS	86	30	8	2	5 Kinsman Plaza				Tallahassee	32399	FL	United States	04/23/1937	P	12/28/2015	I	
+WA000222	3210		Brian	Paul	Schmidt		03/10/1977	M	151		Manley	Court	Apt			19	Atlanta	WA	30306	PI	67	98	19	9	633 Northridge Park				San Antonio	78240	GA	United States	04/23/1947	U	6/6/2016	I	
+WA000223	3220		Peter	Peter	Medina		01/20/1982	M	296		Sunbrook	Circle			NW		Philadelphia	WA	19172	PI	1	89	19	11	6731 Charing Cross Plaza				Amarillo	79165	PA	United States	02/06/1939	U	10/12/2015	I	
+WA000224	3230		Robin	Marilyn	Dunn		01/04/1926	F	05441	3/4	Victoria	Pass					Des Moines	WA	50347	SN	78	12	21	1									07/29/1996	P	10/16/2015	I	
+WA000225	3240		Gregory	Joshua	White		10/19/1949	M	62		La Follette	Junction	#			96	Des Moines	WA	50981	CR	90	6	20	8									01/30/1967	U	12/7/2015	A	
+WA000226	3250		Willie	Bruce	Thompson		11/14/1983	M	9		Reinke	Avenue		W			Albany	WA	12247	CR	11	10	8	17	9 Coleman Parkway				Schenectady	12305	NY	United States	07/01/1936	U	1/31/2016	A	
+WA000227	3260		Gary		Barnes		04/17/1949	M	10559		Charing Cross	Place		N			Montpelier	WA	05609	CR	19	28	19	23									02/17/1962	P	6/8/2016	A	
+WA000228	3270		Marie	Tina	Coleman		05/07/1982	F	5		Maywood	Pass	Apt			7	New Orleans	WA	70179	PI	99	90	14	4	62 Hollow Ridge Trail				Memphis	38188	LA	United States	06/01/1994	U		A	
+WA000229	3280	Ms	Jesse		Peters		03/25/1995	M	44549		Shelley	Avenue					El Paso	WA	88574	CR	61	27	2	17	67862 Esch Hill				Richmond	23272	TX	United States	10/07/1999	P	11/28/2015	I	
+WA000230	3290		Pamela	Alice	Ross		02/12/1976	F	9		Sutteridge	Alley	Apt			10	Albany	WA	12242	SN	39	92	6	9									08/22/2006	P	12/1/2015	I	
+WA000231	3300		Alan		Mitchell	IV	05/08/1981	M	4		North	Parkway		NW			Asheville	WA	28805	AS	6	18	19	12									05/28/1965	V	1/23/2016	A	
+WA000232	3310		Lois		Powell		11/15/1930	F	1		Ridgeway	Pass					Birmingham	WA	35225	AS	36	68	3	23									12/30/1935	U	4/18/2016	I	
+WA000233	3320	Honor	Amy	Lisa	Vasquez		03/28/1928	F	2459	1/3	Esch	Hill	Apt			63	Tacoma	WA	98411	PI	70	57	21	9	3142 Drewry Pass				Washington	20319	WA	United States	06/03/1953	P	3/3/2016	A	
+WA000234	3330		Anthony	Joe	Simmons		08/12/1933	M	2933		Superior	Drive	Apt			40	Riverside	WA	92505	CR	58	48	15	5									11/10/1937	N	5/30/2016	I	
+WA000235	3340		Linda	Linda	Smith		08/04/1947	F	11		Schlimgen	Circle					Garland	WA	75044	PI	59	68	5	18									09/14/2011	U	8/13/2015	I	
+WA000236	3350		Jesse		Turner		10/14/1977	M	98705		Northland	Avenue					Richmond	WA	23225	AS	41	47	5	12	4 Roth Terrace				Flint	48505	VA	United States	04/30/1949	P	8/12/2015	I	
+WA000237	3360	Rev	Dennis	Brian	Wright		04/16/1994	M	47		Hintze	Park			SW		Albuquerque	WA	87180	AS	37	67	16	13	49240 Esch Road				Kingsport	37665	NM	United States	08/18/2012	N	1/17/2016	I	
+WA000238	3370		Denise	Sandra	Fernandez		09/29/1965	F	3		Warbler	Way	#	SW		1	Orlando	WA	32803	AS	37	73	12	12	63 Daystar Terrace				Lakewood	98498	FL	United States	07/02/1989	N	5/13/2016	I	
+WA000239	3380		Ruby		Webb		12/23/1972	F	29	1/3	Kipling	Circle					Fort Lauderdale	WA	33355	AS	79	77	15	11	210 Fuller Road				New York City	10270	FL	United States	12/21/1979	U	8/4/2016	A	
+WA000240	3390		Andrew	Michael	Williamson		09/17/1922	M	47458		8th	Hill					Atlanta	WA	31119	CR	35	53	3	3									12/23/1938	N	7/7/2016	I	
+WA000241	3400	Mr	Scott	Raymond	Clark		11/27/1946	M	052		Derek	Road					Evansville	WA	47732	AS	4	88	21	17									11/11/2014	P		A	
+WA000242	3410		Judy		Garcia		08/25/1978	F	3530		Forster	Terrace			N		New York City	WA	10019	AS	47	5	17	17	3 Mendota Crossing				Eugene	97405	NY	United States	03/17/1998	V	10/13/2015	I	
+WA000243	3420		Louis	Paul	Boyd		05/19/1972	M	899	3/4	Anthes	Alley	Apt	SW		8	Miami	WA	33190	SN	56	74	15	13	37 Hayes Trail				Laurel	20709	FL	United States	10/15/1959	V	2/6/2016	I	
+WA000244	3430	Honor	Katherine		Alvarez		07/07/1937	F	37	1/3	Blue Bill Park	Terrace					Sacramento	WA	94273	SN	73	37	20	3	3532 Harbort Junction				Charlotte	28215	CA	United States	02/02/1976	U	3/25/2016	I	
+WA000245	3440		Denise	Patricia	Harvey		03/06/1946	F	8		Carberry	Terrace	#			85	Roanoke	WA	24020	CR	37	33	7	11	8031 Village Green Center				Alexandria	71307	VA	United States	07/30/1953	P	3/15/2016	I	
+WA000246	3450		Douglas	Matthew	Porter		09/23/1997	M	57514		Valley Edge	Junction	#			19	New York City	WA	10039	SN	39	68	12	20									10/03/1979	V	2/29/2016	A	
+WA000247	3460		Margaret	Elizabeth	King	Sr	08/29/1921	F	28674		Shopko	Park	Apt			71	Rochester	WA	14609	CR	19	76	16	19	738 Mallard Point				Philadelphia	19191	NY	United States	01/15/1981	P	3/22/2016	I	
+WA000248	3470	Ms	Brenda	Ashley	Wright		09/29/1940	F	61589	1/3	Dexter	Center					San Antonio	WA	78210	SN	4	25	9	15									01/05/1988	V	5/19/2016	A	
+WA000249	3480		Peter	Brandon	Banks		02/14/1938	M	4735		Pierstorff	Way	Apt			16	Pocatello	WA	83206	AS	43	37	16	7	1429 Helena Drive				Chicago	60624	ID	United States	01/20/1938	U	4/13/2016	A	
+WA000250	3490		Teresa	Kelly	Ramos		05/26/1948	F	3		Union	Circle					Simi Valley	WA	93094	AS	21	31	6	15	6 Evergreen Drive				Littleton	80127	CA	United States	01/03/1980	P	6/23/2016	I	
+WA000251	3500		Philip		Warren		04/16/1969	M	812	3/4	Fremont	Crossing					Atlanta	WA	30351	PI	12	42	2	16	250 Corry Avenue				Mobile	36670	GA	United States	04/27/1974	V	6/1/2016	I	
+WA000252	3510		Gregory	Brandon	Peterson		09/21/1925	M	224		Sutherland	Crossing					Naples	WA	34102	SN	24	34	6	6	53752 Farwell Drive				Charlotte	28242	FL	United States	12/13/1987	N	4/3/2016	A	
+WA000253	3520		Angela		Olson	II	06/23/1945	F	7753		Calypso	Pass			W		Tulsa	WA	74141	SN	34	63	6	18	0 Sutherland Alley				Baltimore	21275	OK	United States	11/21/1973	N	12/28/2015	A	
+WA000254	3530		Carl		Hill		03/03/1981	M	3		Miller	Alley					Akron	WA	44321	AS	41	95	20	18	109 Sheridan Drive				White Plains	10606	OH	United States	08/16/1961	V	3/18/2016	A	
+WA000255	3540	Ms	Maria	Amy	Lewis		03/18/1956	F	36		Macpherson	Place	Apt			8	Salt Lake City	WA	84152	PI	73	67	20	4	9 Eliot Place				Pueblo	81010	UT	United States	03/16/1980	V	6/2/2016	A	
+WA000256	3550		Rebecca		Perkins		12/21/1999	F	74533	1/3	Roxbury	Terrace			N		Madison	WA	53705	SN	41	17	15	15	65279 Steensland Avenue				Atlanta	30306	WI	United States	09/06/1964	U	11/18/2015	I	
+WA000257	3560	Ms	Clarence	Larry	West		08/10/1956	M	607		Melby	Parkway					Durham	WA	27717	AS	22	7	4	9	7 Granby Way				Berkeley	94712	NC	United States	12/08/1976	N	12/12/2015	A	
+WA000258	3570	Dr	Phillip	Phillip	Palmer		08/09/1921	M	12		Starling	Park					Boise	WA	83757	AS	84	68	6	13									03/06/1976	V	4/23/2016	A	
+WA000259	3580		Tina	Rose	Mitchell		10/15/1952	F	89600	1/3	Lien	Drive	#			89	Lafayette	WA	47905	PI	87	95	5	19									03/20/1989	U	3/7/2016	A	
+WA000260	3590		Alice	Mary	Stone		04/18/1966	F	84536		Sugar	Circle	Apt	SW		71	Austin	WA	78726	AS	54	60	15	19	93538 Elgar Road				Dayton	45426	TX	United States	10/31/1956	N	6/6/2016	I	
+WA000261	3600		Philip	Terry	Sanders		11/23/1921	M	6		Macpherson	Plaza		N			Lawrenceville	WA	30245	SN	84	92	21	9	79738 Forest Junction				Fresno	93715	GA	United States	04/24/2012	V	7/21/2016	A	
+WA000262	3610		Tina		Lane		10/28/1934	F	4		Linden	Point			SW		Erie	WA	16550	AS	32	15	4	20									01/18/1955	P	8/18/2015	A	
+WA000263	3620		Scott		Cox		04/06/1922	M	26309	1/3	Doe Crossing	Lane					Chattanooga	WA	37405	SN	43	33	21	10									10/06/1995	V	6/14/2016	I	
+WA000264	3630		Amy	Tammy	Chapman		10/11/1991	F	1077		Maywood	Terrace	#			68	Canton	WA	44710	PI	83	69	11	18	5915 Shelley Road				Sioux Falls	57105	OH	United States	04/09/1970	V	9/5/2015	I	
+WA000265	3640		Sharon		Crawford		11/16/1979	F	6325		Dakota	Crossing	#	N		45	Harrisburg	WA	17126	PI	25	2	19	23									05/18/1973	P	6/27/2016	A	
+WA000266	3650	Ms	Sean	Joseph	Bryant		10/01/1971	M	97547		East	Court	#		NW	79	Bridgeport	WA	06606	SN	72	50	8	23	2991 Golf Course Road				Vancouver	98687	CT	United States	09/02/2002	V	5/21/2016	A	
+WA000267	3660		Carl	Edward	Palmer		11/20/1971	M	1679		Fairfield	Place					Portland	WA	97206	SN	13	42	16	4	150 Longview Pass				Hartford	06120	OR	United States	07/26/1994	P	7/5/2016	I	
+WA000268	3670	Mr	Andrea		Garza		02/09/1958	F	6		Pierstorff	Pass			SE		Brooklyn	WA	11236	SN	22	32	10	8	81886 Melrose Crossing				Lubbock	79415	NY	United States	04/13/1936	U	5/20/2016	I	
+WA000269	3680		Carlos	Eugene	Robertson		09/17/1970	M	1737		Butterfield	Terrace					Phoenix	WA	85077	PI	78	74	21	16	3399 Lindbergh Center				Little Rock	72231	AZ	United States	03/19/1976	V		A	
+WA000270	3690		George	Justin	White		10/20/1997	M	16		Upham	Pass					Jacksonville	WA	32255	AS	27	86	4	4									05/03/1989	P	5/29/2016	I	
+WA000271	3700		Betty	Dorothy	Patterson		04/27/1946	F	8		Straubel	Point					New Orleans	WA	70129	PI	43	82	21	6									12/20/1965	P	8/8/2016	A	
+WA000272	3710		Gerald	Lawrence	Wheeler		01/14/1977	M	885		7th	Alley					Los Angeles	WA	90005	PI	23	70	3	17									04/04/1945	P	10/6/2015	I	
+WA000273	3720		Bobby	Mark	Sims		02/16/1924	M	856		Sachtjen	Pass	Apt			29	Huntington	WA	25770	PI	82	65	4	20	8 Mallard Pass				Miami	33196	WV	United States	01/04/1958	N	8/11/2015	I	
+WA000274	3730		Andrea	Cynthia	Black		01/12/1952	F	15222		Hooker	Avenue					Hagerstown	WA	21747	PI	4	88	13	2	76849 Dennis Crossing				New York City	10270	MD	United States	12/02/1931	V	1/24/2016	A	
+WA000275	3740		Daniel	Andrew	Dixon		12/20/1951	M	5201		Commercial	Pass					Washington	WA	20580	PI	29	27	6	16									09/17/2015	N	8/1/2016	A	
+WA000276	3750		Donald	Louis	Lynch		07/24/1953	M	64429		Havey	Point					Carol Stream	WA	60158	AS	42	78	19	14									10/22/1987	N	3/12/2016	A	
+WA000277	3760		Harold	Harold	Peterson		05/20/1972	M	2260	3/4	Milwaukee	Street					Chicago	WA	60619	SN	91	2	21	10	521 Main Parkway				Pasadena	91117	IL	United States	06/19/1977	V	4/1/2016	I	
+WA000278	3770		Shirley		Hayes		02/23/1929	F	05		Roxbury	Park			N		Washington	WA	20414	PI	67	94	7	6	98 Barby Crossing				Winston Salem	27110	DC	United States	11/07/1981	V	11/17/2015	A	
+WA000279	3780		Cheryl	Christine	Wells		08/09/1991	F	3		5th	Plaza		W			Phoenix	WA	85040	AS	97	3	2	13									11/13/1993	P	2/27/2016	I	
+WA000280	3790	Mrs	Emily		Reed		11/30/1932	F	3		Rusk	Road		W			Nashville	WA	37228	AS	95	51	3	19									08/11/1970	V	11/27/2015	A	
+WA000281	3800		Roger		Hudson		12/30/1965	M	7		Graceland	Parkway					Hartford	WA	06120	PI	20	65	12	11									07/01/1998	P		A	
+WA000282	3810	Honor	Douglas		Walker		12/17/1991	M	63		Forster	Place					Glendale	WA	91205	AS	39	27	14	22									03/15/1983	P	10/27/2015	I	
+WA000283	3820		Ronald		Hunt		10/22/1959	M	08952		Hazelcrest	Circle		SE			Chicago	WA	60681	CR	76	67	7	12									06/09/1961	P	2/8/2016	I	
+WA000284	3830		Victor	Wayne	Carr		11/20/1928	M	11		Morning	Circle					Jersey City	WA	07310	PI	23	57	15	23									12/07/2001	U	10/25/2015	I	
+WA000285	3840		Jack	Albert	Lane	III	05/22/1978	M	487		Buell	Crossing	Apt			8	Tulsa	WA	74184	SN	8	12	10	1									02/08/1958	N	3/1/2016	A	
+WA000286	3850		Gary	Peter	Hansen		06/24/1984	M	8980	1/3	Gulseth	Way		N			Boise	WA	83716	PI	27	41	21	14									11/24/1967	U	5/26/2016	A	
+WA000287	3860		Eugene		Flores		05/22/1958	M	88		Transport	Hill					Spokane	WA	99205	SN	8	18	13	4									11/01/1994	V		I	
+WA000288	3870		Kelly	Kathy	Carter		06/21/1987	F	65		Waubesa	Center					Lawrenceville	WA	30245	SN	42	64	4	11	9 Rockefeller Court				Irving	75062	GA	United States	11/23/1944	N	2/10/2016	A	
+WA000289	3880	Ms	Daniel	Philip	Pierce		10/02/1964	M	7		Jenna	Lane		SE	N		Washington	WA	20430	PI	36	27	13	13	4 Waubesa Center				Amarillo	79116	DC	United States	07/12/1988	P	7/10/2016	I	
+WA000290	3890		Virginia	Ruby	Wilson		12/09/1986	F	3050		Grover	Drive					Honolulu	WA	96805	AS	5	22	8	21	13 Hazelcrest Pass				Peoria	85383	HI	United States	10/12/1954	P	3/1/2016	I	
+WA000291	3900		Shirley		Carr		06/27/1973	F	89		Hansons	Place					Miami Beach	WA	33141	SN	66	27	1	22									12/10/1959	P	5/18/2016	I	
+WA000292	3910		Mildred		Webb		02/08/1960	F	9344	1/3	Corscot	Lane	#			34	Northridge	WA	91328	CR	37	32	9	13	0132 Magdeline Circle				Oklahoma City	73104	CA	United States	11/23/1985	U	5/21/2016	A	
+WA000293	3920		Diane		Burns		05/08/1985	F	87		Mosinee	Court	Apt			27	Bakersfield	WA	93305	AS	85	100	1	17	9 Thompson Trail				Omaha	68117	CA	United States	01/25/1954	P	7/7/2016	A	
+WA000294	3930	Ms	Gloria	Deborah	Reyes		09/23/1934	F	13818		Hagan	Avenue					Greensboro	WA	27409	PI	61	91	4	21									07/04/1971	V	1/19/2016	I	
+WA000295	3940		Kathy	Jennifer	Daniels		04/07/1962	F	08243		Transport	Court		NW	SE		Boulder	WA	80328	PI	65	75	5	20	99950 Homewood Circle				Tuscaloosa	35487	CO	United States	11/25/1992	P	3/27/2016	A	
+WA000296	3950		Russell		Russell		06/10/1929	M	7797		Artisan	Place	#	N		50	Columbus	WA	43204	SN	79	90	1	2	8 Fisk Terrace				Huntington	25709	OH	United States	09/14/1992	P	9/8/2015	I	
+WA000297	3960		Randy		Hughes		11/28/1933	M	834		Homewood	Plaza	#	SW		63	Maple Plain	WA	55572	AS	24	24	18	9									11/05/1992	N	5/2/2016	I	
+WA000298	3970		Joyce	Mary	Romero		04/11/1970	F	216		John Wall	Pass					Brockton	WA	02305	PI	57	46	6	17									09/26/1954	P	3/22/2016	I	
+WA000299	3980		Larry		Kennedy		08/15/1966	M	21205		Hoard	Terrace	#			90	San Rafael	WA	94913	CR	35	74	21	18									02/24/1997	N	6/16/2016	I	
+WA000300	3990		Diana	Ann	Marshall		10/30/1950	F	65838		Manufacturers	Drive			W		Memphis	WA	38109	CR	57	31	16	13									12/07/1971	V	12/14/2015	I	
+WA000301	4000		Johnny	Patrick	Gutierrez		06/03/2000	M	11466		Garrison	Alley					Fort Worth	WA	76110	PI	92	11	20	7	836 Morningstar Place				North Las Vegas	89036	TX	United States	11/10/1969	N	7/23/2016	A	
+WA000302	4010		Benjamin	Howard	Clark		12/20/1932	M	70		Forster	Pass	#	SE	SE	87	Valdosta	WA	31605	AS	95	32	19	14									05/19/2008	P	11/27/2015	A	
+WA000303	4020		Amy	Kathryn	Jenkins		12/16/1966	F	7205		Jenifer	Hill					Pueblo	WA	81015	SN	97	5	14	17	2766 Miller Plaza				Saint Louis	63126	CO	United States	10/24/1935	V	6/26/2016	A	
+WA000304	4030		Steven		Anderson		04/09/1935	M	6109		Ridge Oak	Plaza					Bloomington	WA	47405	SN	3	70	21	22									09/09/1987	U	10/29/2015	A	
+WA000305	4040		Patrick	Craig	Richardson		08/26/1937	M	716		Eastwood	Lane		N			Tampa	WA	33694	SN	51	78	1	20	2299 Oakridge Point				Roanoke	24048	FL	United States	12/26/1982	U	9/7/2015	I	
+WA000306	4050		Todd	Daniel	Morrison		12/22/1991	M	5825	1/3	Brentwood	Way					Philadelphia	WA	19120	SN	50	57	10	4	8578 Evergreen Parkway				Colorado Springs	80951	PA	United States	05/31/1950	P	1/28/2016	A	
+WA000307	4060		Wayne	Victor	Burke	IV	07/19/1956	M	75532		Harbort	Crossing			W		Jacksonville	WA	32225	CR	95	62	14	9	354 Clemons Lane				Houston	77228	FL	United States	03/01/1937	N	11/22/2015	I	
+WA000308	4070		Lori	Dorothy	Johnson		07/21/1947	F	610		Algoma	Road			N		Macon	WA	31205	PI	26	4	3	10	71191 Barby Park				Valdosta	31605	GA	United States	11/27/1957	P	2/2/2016	I	
+WA000309	4080		Louis	Shawn	Fox		02/04/1998	M	64678		Moose	Road					Salt Lake City	WA	84140	CR	46	51	11	3	597 Utah Hill				Buffalo	14210	UT	United States	03/29/2003	U	2/17/2016	I	
+WA000310	4090		Harry		Bennett		11/06/1995	M	158		2nd	Hill	Apt			45	Salt Lake City	WA	84199	PI	74	34	15	18									09/03/1977	V	2/29/2016	I	
+WA000311	4100		Christine		Welch		06/21/1973	F	777		Fordem	Hill					Charlotte	WA	28247	PI	7	14	3	21									07/02/1960	U	5/1/2016	I	
+WA000312	4110		Patricia	Sara	Armstrong		12/26/1933	F	59		Bunting	Place					Pittsburgh	WA	15279	PI	99	39	15	15									09/07/1997	V	9/11/2015	I	
+WA000313	4120		Robert	Howard	Olson		12/10/1928	M	5		1st	Lane	Apt			64	Newport Beach	WA	92662	PI	22	19	15	1	9947 Delaware Street				Port Washington	11054	CA	United States	08/27/1986	P		A	
+WA000314	4130		Raymond	Henry	Burns		11/05/1970	M	2234		Donald	Circle	Apt	W	SW	39	Battle Creek	WA	49018	AS	48	75	3	10									05/19/2001	V	5/4/2016	I	
+WA000315	4140		Susan	Ann	Hunter		01/25/1993	F	38	3/4	Welch	Place		NW	SW		Dayton	WA	45426	AS	43	99	12	8	6 Lighthouse Bay Lane				Beaumont	77705	OH	United States	10/05/2014	U	11/7/2015	A	
+WA000316	4150		Thomas	Charles	Simpson		11/01/1948	M	95		Doe Crossing	Center					Des Moines	WA	50305	AS	98	9	6	15									11/16/1942	U	12/15/2015	A	
+WA000317	4160		Clarence		Wright		11/13/1955	M	13		Eagle Crest	Street					Concord	WA	94522	CR	83	96	7	17									12/28/2013	P	10/5/2015	I	
+WA000318	4170		Mark	Nicholas	Rogers		03/04/1942	M	39426		Ludington	Avenue	#			89	Roanoke	WA	24004	AS	55	70	1	7									06/23/2014	P	12/11/2015	I	
+WA000319	4180		Larry	Bruce	Wagner		04/02/1929	M	33973		Harbort	Park	#			16	Laredo	WA	78044	PI	83	68	12	16									02/24/2012	V	1/16/2016	A	
+WA000320	4190		Debra		Brown		12/30/1998	F	12989		Clove	Circle	Apt			50	Trenton	WA	08695	SN	71	37	14	13									04/14/1961	V	3/23/2016	A	
+WA000321	4200	Ms	Raymond	Roger	Ward		03/17/1959	M	686		Sauthoff	Park	#			45	Tucson	WA	85732	PI	25	65	4	4									03/20/1945	P	7/16/2016	A	
+WA000322	4210		Billy	Richard	Fields		09/02/1936	M	2		Talisman	Junction	Apt			62	Concord	WA	94522	SN	8	29	14	13	59927 Alpine Avenue				New York City	10009	CA	United States	08/30/1987	P	8/22/2015	I	
+WA000323	4220	Mr	Ashley	Judith	Peterson		01/16/1944	F	161		Onsgard	Court					Milwaukee	WA	53234	SN	83	17	18	9									10/15/1977	P	11/28/2015	A	
+WA000324	4230		Paul		Thomas		12/10/1986	M	39		Brickson Park	Pass	Apt	SW		2	Fresno	WA	93740	CR	71	2	7	18	88288 Brown Way				Washington	20205	CA	United States	05/07/1977	P	11/9/2015	I	
+WA000325	4240	Rev	Lisa	Amy	Perkins		04/14/1944	F	63328		Leroy	Hill			NW		Garland	WA	75044	CR	88	41	16	16									03/07/1984	N	12/14/2015	I	
+WA000326	4250		Roy	Shawn	Powell		07/10/1977	M	99		Jenna	Circle					Saint Paul	WA	55127	AS	23	1	6	19									06/05/1951	U	8/22/2015	I	
+WA000327	4260		Laura	Martha	Martin		04/01/1988	F	0916		Cody	Way	Apt			96	Kansas City	WA	64142	AS	47	24	8	20									09/09/1991	U	8/19/2015	A	
+WA000328	4270		Howard	Donald	Parker		05/20/1968	M	0	3/4	Raven	Parkway		N			New York City	WA	10090	AS	36	69	10	3	8482 Monument Terrace				Pittsburgh	15220	NY	United States	07/28/1951	N	5/5/2016	I	
+WA000329	4280	Ms	Justin		Owens		09/15/1947	M	8		Miller	Plaza					Birmingham	WA	35254	CR	63	90	7	10									12/10/1958	V	9/14/2015	A	
+WA000330	4290		Amy		Rose		02/18/1983	F	507		Dakota	Center					Garden Grove	WA	92645	PI	69	77	2	21									05/03/1934	P	12/17/2015	I	
+WA000331	4300	Ms	Billy		Wells		05/11/1953	M	4	3/4	6th	Court	Apt			1	Garden Grove	WA	92844	AS	78	22	9	19									01/02/1975	U	8/16/2015	I	
+WA000332	4310		Bruce		Schmidt		08/11/1945	M	74318	1/3	Artisan	Parkway					Fort Smith	WA	72916	CR	72	29	20	3	62965 Gina Alley				Colorado Springs	80910	AR	United States	06/05/1940	N	10/15/2015	I	
+WA000333	4320		David		Wagner		02/08/1956	M	4221		Kings	Terrace		W			Madison	WA	53790	AS	99	76	14	17									03/24/1978	P	9/20/2015	A	
+WA000334	4330		Mildred		Torres		09/11/1965	F	74406		Barnett	Parkway					Birmingham	WA	35279	PI	62	93	13	14									01/03/1991	P	10/22/2015	A	
+WA000335	4340	Honor	Joshua	William	Lane		05/15/1954	M	02	1/3	Jay	Drive	Apt			39	Madison	WA	53705	AS	75	81	2	19									06/01/1992	V	9/27/2015	I	
+WA000336	4350		Ronald	Brian	Brown		11/20/1931	M	43037		Londonderry	Pass					Chicago	WA	60630	SN	58	23	21	23	59 Eggendart Park				Saint Petersburg	33710	IL	United States	07/19/1940	N	3/6/2016	I	
+WA000337	4360	Honor	Nicholas	Richard	Rodriguez		07/06/1990	M	349		West	Parkway	#	NW		99	Chula Vista	WA	91913	PI	67	49	15	22									01/01/1937	V	12/2/2015	I	
+WA000338	4370		Thomas	George	Hayes		07/06/1937	M	12		Hoffman	Drive	#			3	Seattle	WA	98140	AS	28	16	17	22									03/22/1953	N	9/2/2015	I	
+WA000339	4380		Jennifer	Lisa	Wallace		05/06/1973	F	193		Westport	Road					Columbus	WA	43231	PI	4	20	9	2	83383 Mallory Trail				Milwaukee	53277	OH	United States	05/26/1952	V	6/15/2016	A	
+WA000340	4390		Nicholas	Eric	Howard		06/12/1952	M	603		Lindbergh	Crossing					Lincoln	WA	68510	AS	6	96	4	3									04/21/2001	U	4/26/2016	I	
+WA000341	4400		Amy		Burke		11/20/1920	F	6		Welch	Avenue					Springfield	WA	62723	AS	43	59	17	5									05/02/1950	U	5/20/2016	A	
+WA000342	4410		Billy	Terry	Garcia	Sr	09/30/1989	M	5		Ludington	Center	Apt			33	West Palm Beach	WA	33416	SN	99	3	1	12									09/23/1986	P	2/24/2016	I	
+WA000343	4420		Jacqueline		Harrison		11/09/1968	F	2386	3/4	Spaight	Parkway	#			79	Washington	WA	20337	PI	9	13	3	4									02/04/2012	V	7/31/2016	A	
+WA000344	4430		Catherine		Nichols		12/17/1970	F	97		Sommers	Avenue					Duluth	WA	30096	SN	87	35	3	16	16 4th Avenue				Lakeland	33811	GA	United States	01/02/1955	N	7/8/2016	A	
+WA000345	4440		Ruby	Alice	Lopez		12/24/1947	F	4	1/3	Fieldstone	Terrace					El Paso	WA	79994	SN	83	81	19	11									05/26/1940	U	5/10/2016	I	
+WA000346	4450	Rev	Howard		Grant		04/23/1959	M	49		Bultman	Hill		W			Rochester	WA	14646	PI	92	76	15	17	0 Mallard Trail				Milwaukee	53215	NY	United States	07/24/1963	U	11/11/2015	A	
+WA000347	4460		Donald		Barnes		08/27/1960	M	6		Schurz	Lane					Fort Lauderdale	WA	33345	CR	33	93	19	18									06/14/1973	N	1/7/2016	I	
+WA000348	4470		Pamela		Richards		05/15/1954	F	30687	3/4	Springs	Crossing					Philadelphia	WA	19104	CR	18	70	15	21									11/29/1986	N	5/28/2016	A	
+WA000349	4480		Elizabeth	Kathleen	Young		09/23/1952	F	553	1/3	Talisman	Hill		N			Brooklyn	WA	11225	CR	70	61	1	21									08/23/1936	V	7/5/2016	A	
+WA000350	4490	Dr	Philip	Nicholas	Kelley		11/06/1936	M	8393		Prentice	Court					Topeka	WA	66642	AS	38	38	17	16									04/11/2007	N	10/5/2015	I	
+WA000351	4500		Michael		Pierce		08/19/1932	M	757		Roxbury	Place					Boston	WA	02109	AS	77	51	17	11									10/27/1939	P	1/8/2016	A	
+WA000352	4510		Joshua	Bruce	Hall		04/20/1961	M	55		Veith	Park					Fort Smith	WA	72916	AS	16	27	16	11									03/26/1940	U	6/12/2016	A	
+WA000353	4520	Ms	Lillian	Helen	Robertson		08/20/1965	F	335		Hallows	Drive		SE			Cincinnati	WA	45999	CR	39	39	15	14									05/26/2001	P	7/29/2016	I	
+WA000354	4530	Mr	Steve	Bruce	Martin		08/27/1992	M	93		Saint Paul	Pass		NW			Buffalo	WA	14210	AS	58	57	8	20	74413 Ridgeway Avenue				Minneapolis	55402	NY	United States	02/10/1997	P	7/31/2016	I	
+WA000355	4540		George		Welch		11/26/1968	M	0		Northwestern	Road	#	SE	NW	12	Charleston	WA	25321	SN	77	78	21	23									03/20/2008	U	4/18/2016	I	
+WA000356	4550	Honor	Irene	Nancy	Williams		03/24/1933	F	11870	3/4	Mockingbird	Street		N			Phoenix	WA	85062	PI	56	90	4	15	4 Stoughton Terrace				Nashville	37245	AZ	United States	03/22/1994	V	1/10/2016	A	
+WA000357	4560		Mary	Elizabeth	Hill		10/09/1970	F	55	1/3	Stang	Park	#		W	7	Milwaukee	WA	53215	PI	38	26	14	17									10/31/2002	U	3/14/2016	A	
+WA000358	4570		Carl		Ryan		07/05/1994	M	03892		Wayridge	Street					Santa Rosa	WA	95405	PI	85	4	18	6									07/16/1975	V	10/20/2015	I	
+WA000359	4580		Eugene	Antonio	King		11/22/1983	M	41		Hayes	Circle		NW			Jacksonville	WA	32220	PI	82	86	15	10									12/14/1938	N	11/1/2015	I	
+WA000360	4590		Bruce	Samuel	Dunn		01/17/1965	M	71843	1/3	Gateway	Junction					Cincinnati	WA	45208	CR	20	32	20	20	08732 Melrose Lane				Sioux Falls	57188	OH	United States	09/15/1962	N	9/5/2015	A	
+WA000361	4600	Dr	Justin	Arthur	Wells		08/08/1999	M	45422		Coolidge	Drive	#			91	Tucson	WA	85725	CR	65	28	12	11									07/20/1964	P	10/5/2015	I	
+WA000362	4610	Honor	Albert	Lawrence	Lane		06/28/1989	M	4476		Grayhawk	Alley					Anchorage	WA	99522	CR	56	61	7	11									09/04/1962	N	12/20/2015	A	
+WA000363	4620		Aaron	Howard	Long		09/08/1968	M	94050		Continental	Park					Minneapolis	WA	55470	CR	85	95	1	20									09/23/1954	V		A	
+WA000364	4630		Jason		Johnson		01/10/1986	M	61		Blue Bill Park	Hill		NW			Hartford	WA	06145	AS	85	47	1	6	1059 Esker Street				El Paso	88574	CT	United States	07/12/1972	V	8/14/2015	I	
+WA000365	4640	Dr	Kimberly	Nicole	Reid		11/05/1934	F	095		Center	Drive					Pittsburgh	WA	15250	AS	77	30	10	21	396 Westend Road				Brooklyn	11225	PA	United States	02/12/1974	P	7/2/2016	A	
+WA000366	4650		Wanda	Judy	Gibson		04/16/1982	F	339		Aberg	Alley					Gainesville	WA	30506	AS	60	96	2	2	7210 Ridgeway Hill				Henderson	89012	GA	United States	03/03/1992	V	6/28/2016	I	
+WA000367	4660		Bonnie	Kathleen	Daniels		12/29/1927	F	37130		Butternut	Way					Bronx	WA	10474	AS	41	31	11	15	339 Nelson Avenue				Miami	33129	NY	United States	01/26/1971	U	1/7/2016	A	
+WA000368	4670	Honor	Heather	Frances	Tucker		04/30/1984	F	4375		Canary	Lane	Apt		W	100	Riverside	WA	92519	AS	69	17	10	15									05/10/1982	U	9/18/2015	I	
+WA000369	4680		Phillip	Keith	Perkins		03/02/1980	M	8		Randy	Crossing	#	SE	SW	18	Sacramento	WA	95894	PI	16	28	4	3	5 Banding Point				Shreveport	71166	CA	United States	06/19/1934	N	3/11/2016	A	
+WA000370	4690	Rev	Kevin	Jimmy	Burke		03/17/1926	M	52		Derek	Junction	#			12	Waterbury	WA	06721	PI	25	90	18	20									10/31/1989	P	3/2/2016	I	
+WA000371	4700	Ms	Tammy		Harris		07/26/1985	F	77	1/3	Thackeray	Park	Apt			70	Salem	WA	97312	PI	32	72	14	7									10/30/1947	P	11/25/2015	A	
+WA000372	4710		Patrick	Douglas	Parker	III	04/13/1994	M	7		Alpine	Place					Shawnee Mission	WA	66215	AS	7	37	17	18									07/20/1947	U	11/23/2015	A	
+WA000373	4720	Ms	Matthew		Henry		01/02/1965	M	002	1/3	Dottie	Drive					Fort Worth	WA	76121	SN	84	20	16	10	175 Anzinger Drive				Los Angeles	90035	TX	United States	04/18/1952	N	11/5/2015	A	
+WA000374	4730		Mildred	Nancy	Payne	II	04/14/1977	F	64693	1/3	Claremont	Trail					Anaheim	WA	92812	SN	28	19	6	9									04/09/1933	U	10/17/2015	I	
+WA000375	4740		Anna	Norma	Castillo		04/04/1988	F	47433	3/4	Beilfuss	Parkway	#			80	Amarillo	WA	79188	CR	65	9	14	12	54768 Brickson Park Drive				Birmingham	35205	TX	United States	07/14/1998	P	5/23/2016	A	
+WA000376	4750	Rev	Arthur	James	Gonzales		01/19/1928	M	88		Monterey	Alley					Salt Lake City	WA	84170	AS	72	28	8	15									01/01/1983	V	9/10/2015	A	
+WA000377	4760		Sara		Andrews		05/10/1955	F	675	3/4	Grover	Park					Daytona Beach	WA	32128	SN	79	63	16	5									11/24/1939	V	10/22/2015	A	
+WA000378	4770		James	Jerry	Black		12/17/1946	M	802		Miller	Place					Des Moines	WA	50310	PI	67	93	16	8	40154 Milwaukee Street				York	17405	IA	United States	12/26/1992	V	1/13/2016	A	
+WA000379	4780		Tina	Marie	Carpenter		10/10/1955	F	45669		Shelley	Terrace	#			57	Miami	WA	33261	PI	51	11	9	7									06/15/1940	N	10/23/2015	I	
+WA000380	4790		Nicole	Elizabeth	Gilbert		04/11/1992	F	2112		Manufacturers	Terrace	#	SE		13	Cincinnati	WA	45233	SN	60	8	7	12	80279 5th Terrace				Reno	89550	OH	United States	09/22/2012	V	1/23/2016	A	
+WA000381	4800		Jesse	Joe	Butler		11/28/1964	M	49		Vernon	Court	Apt	SE		81	Lansing	WA	48919	SN	56	99	17	19									10/22/2014	P	5/7/2016	A	
+WA000382	4810		Shawn	Harold	Lawson	III	03/14/1953	M	3		3rd	Hill			W		Spring Hill	WA	34611	AS	56	2	15	10	4 Barnett Crossing				Salt Lake City	84120	FL	United States	12/05/1975	U	3/11/2016	A	
+WA000383	4820		Phyllis	Rebecca	Webb		07/05/1981	F	28200		Oneill	Crossing					Virginia Beach	WA	23464	AS	85	62	6	8									03/30/1993	U	11/5/2015	A	
+WA000384	4830	Rev	Susan	Beverly	Griffin		11/02/1983	F	4		Gulseth	Parkway	#			10	Saint Louis	WA	63143	SN	8	94	12	6									11/19/1954	P	11/23/2015	A	
+WA000385	4840	Mr	Charles	Dennis	Payne		12/02/1959	M	88		Warbler	Way					Columbus	WA	43240	CR	78	31	3	7									08/17/2003	V	1/13/2016	A	
+WA000386	4850		Billy		Richards		12/17/1931	M	82902	3/4	Melrose	Lane					Jamaica	WA	11499	PI	61	98	3	14									01/25/2000	P	3/8/2016	A	
+WA000387	4860		Julie	Evelyn	Sanchez		06/25/1957	F	865	3/4	Brentwood	Pass	#			46	Birmingham	WA	35225	PI	92	71	5	8									03/08/1955	V	1/17/2016	I	
+WA000388	4870		Aaron	Michael	Rose	II	11/27/1997	M	021		Loomis	Alley			N		Saint Paul	WA	55123	AS	34	98	18	4	593 Farragut Junction				Loretto	55598	MN	United States	07/28/2004	V	3/21/2016	A	
+WA000389	4880	Mrs	Jose		Wilson		07/20/1963	M	610		Forest Dale	Alley					Los Angeles	WA	90055	AS	67	83	6	9									07/22/1995	V	1/13/2016	I	
+WA000390	4890		Dorothy		Black		04/08/1951	F	2		Moose	Terrace					Saint Cloud	WA	56372	PI	83	5	7	17	8 Petterle Terrace				Cleveland	44185	MN	United States	05/25/1947	V	9/3/2015	A	
+WA000391	4900		Donna	Ashley	Cook		02/18/1984	F	70		Logan	Plaza			SE		Buffalo	WA	14210	AS	52	16	10	8									11/22/1951	V	10/21/2015	I	
+WA000392	4910		Louise		Jackson		09/04/1984	F	33		Brentwood	Street	#			73	Reston	WA	22096	SN	92	58	2	17									10/13/1957	V	10/5/2015	A	
+WA000393	4920		Eric		Morgan		01/01/1990	M	899	1/3	Carpenter	Alley					El Paso	WA	79928	AS	15	89	20	21									03/12/1965	P	12/2/2015	A	
+WA000394	4930		James	Jose	James		05/04/1925	M	21778		Clyde Gallagher	Pass					Cincinnati	WA	45203	AS	27	37	7	4	778 Coleman Crossing				Dallas	75323	OH	United States	11/11/1989	V	6/17/2016	A	
+WA000395	4940	Mrs	Brandon	Phillip	Wilson		10/15/1922	M	5		Oak Valley	Hill	#			80	Washington	WA	20041	SN	48	56	21	16									06/08/2003	V	7/24/2016	A	
+WA000396	4950		Raymond		Harrison		05/10/1952	M	877		Hazelcrest	Avenue			NW		Los Angeles	WA	90076	AS	81	14	10	3									10/21/1974	N	6/23/2016	I	
+WA000397	4960		Jonathan	Martin	Johnson		06/07/1998	M	62001		Drewry	Crossing		NW	N		Houston	WA	77070	CR	9	43	1	6	6 Forster Pass				Newport News	23605	TX	United States	02/08/1960	U	4/19/2016	I	
+WA000398	4970	Rev	Brandon	Shawn	White		08/25/1935	M	673	1/3	Hansons	Plaza	Apt			83	San Antonio	WA	78205	CR	61	50	12	13									11/29/1954	U	8/14/2015	A	
+WA000399	4980		Teresa		Arnold	IV	06/15/1934	F	118	3/4	Tony	Trail	Apt	SE		50	Sacramento	WA	94297	SN	72	9	14	14	851 Judy Park				Nashville	37245	CA	United States	11/19/1945	N	3/4/2016	A	
+WA000400	4990		Marie	Christine	Arnold		04/13/1960	F	22840		Forest Dale	Hill					Lubbock	WA	79491	CR	50	6	16	11									04/22/1961	U	11/16/2015	A	
+WA000401	5000		Diane		Chavez		08/10/1988	F	57		Lakeland	Point					Inglewood	WA	90398	CR	28	99	8	6									04/11/1940	U	12/23/2015	I	
+WA000402	5010		Matthew	Kenneth	Castillo		11/04/1959	M	6708		Glacier Hill	Crossing		N			Washington	WA	20420	PI	46	22	21	8									03/25/1966	V	1/8/2016	A	
+WA000403	5020		Martha	Phyllis	Webb		06/22/1933	F	906		Pearson	Plaza	#		NW	8	Tucson	WA	85754	SN	53	58	1	6	279 Springview Junction				Bradenton	34282	AZ	United States	05/13/1999	N	9/5/2015	I	
+WA000404	5030		Annie		Lee		07/18/1946	F	2252		Garrison	Crossing					Miami	WA	33283	SN	57	89	12	8									01/02/1983	U	4/8/2016	I	
+WA000405	5040		Lillian	Susan	Robinson		06/15/1991	F	39	3/4	Bluejay	Avenue	#			42	New Orleans	WA	70187	SN	49	66	6	4									07/05/2012	V	6/9/2016	I	
+WA000406	5050		Raymond	Ryan	Hawkins	III	10/13/1986	M	21		American	Crossing	Apt			68	Pittsburgh	WA	15255	AS	82	41	7	16	864 Longview Place				Terre Haute	47812	PA	United States	03/07/1971	U	1/31/2016	I	
+WA000407	5060		Jane	Lisa	Gomez		06/08/1963	F	3067		Green Ridge	Trail					Pensacola	WA	32575	SN	59	50	9	17	06436 Stephen Way				New York City	10270	FL	United States	11/26/1965	V	4/2/2016	A	
+WA000408	5070	Mr	Sharon		Wells	II	04/10/1937	F	3		Hallows	Center	#			29	Washington	WA	20220	PI	52	11	19	19									08/25/1959	U	10/9/2015	A	
+WA000409	5080		Jerry		Morales		04/22/1921	M	587		Little Fleur	Road			NW		Lafayette	WA	47905	SN	84	100	6	7	71850 Truax Junction				Denver	80209	IN	United States	01/01/1986	U	7/1/2016	A	
+WA000410	5090		Shawn	Frank	Foster		04/12/1956	M	3	1/3	Clyde Gallagher	Street		SW			Fort Lauderdale	WA	33336	PI	46	71	5	16									08/10/1990	P	9/30/2015	A	
+WA000411	5100		Howard		Garza		07/13/1982	M	0296		Toban	Circle	Apt	SE		80	Fort Lauderdale	WA	33325	CR	95	39	8	23	571 American Alley				Denver	80223	FL	United States	06/15/2004	P	11/23/2015	I	
+WA000412	5110	Mr	Steve	Arthur	Lawrence		07/13/1929	M	8		Grayhawk	Alley			SW		Richmond	WA	23272	AS	76	57	19	23	42488 Maywood Alley				Sioux Falls	57188	VA	United States	02/13/1981	P	9/25/2015	A	
+WA000413	5120	Mr	Norma		Rogers		03/29/1960	F	3422	3/4	Cascade	Way					Brooklyn	WA	11247	AS	16	19	14	20									12/28/1948	N	9/19/2015	A	
+WA000414	5130		Gregory	Jeremy	Watson	Sr	05/17/1964	M	33	1/3	Caliangt	Way	Apt	W		65	Des Moines	WA	50330	SN	9	57	13	4									06/30/2007	N	7/19/2016	I	
+WA000415	5140		Patricia	Annie	Armstrong		05/08/1953	F	05314		Pawling	Alley			SW		Manassas	WA	22111	SN	62	24	20	21	11 Oakridge Park				Houston	77060	VA	United States	03/21/2011	P	8/26/2015	I	
+WA000416	5150		Louise	Gloria	Fisher		03/04/1961	F	42602		Kipling	Crossing					Boulder	WA	80328	PI	69	57	6	20	14953 Morningstar Terrace				Miami	33180	CO	United States	12/24/1978	N	4/20/2016	A	
+WA000417	5160		Marie		Garcia		03/24/1982	F	75967		Roxbury	Place					Charlotte	WA	28289	PI	64	82	8	21	41471 Eliot Park				Lansing	48956	NC	United States	06/21/2000	N	4/22/2016	A	
+WA000418	5170		Antonio	Jason	Perkins		04/07/1958	M	1060		South	Place					Waterloo	WA	50706	PI	43	93	5	22	9 John Wall Court				Phoenix	85045	IA	United States	03/07/1982	V	3/5/2016	I	
+WA000419	5180		Eric		Vasquez		09/04/1963	M	274		Mariners Cove	Court					Springfield	WA	62723	CR	30	17	11	2	9055 Darwin Drive				Vancouver	98664	IL	United States	08/20/1949	P	4/2/2016	A	
+WA000420	5190		Russell	Patrick	Murphy		06/26/1963	M	447		Golf View	Pass		W	N		New York City	WA	10110	CR	88	7	5	7									12/12/2011	P	5/13/2016	I	
+WA000421	5200		Andrew	Jack	Lynch		01/08/2000	M	4	3/4	Mandrake	Drive					Peoria	WA	61605	SN	31	11	3	19	87134 Butterfield Parkway				El Paso	79955	IL	United States	07/11/1937	U	4/10/2016	A	
+WA000422	5210		Steven	Timothy	Marshall		05/27/1925	M	55	3/4	Banding	Court	Apt			86	Jefferson City	WA	65105	PI	78	86	14	23	10388 Crowley Plaza				Greensboro	27455	MO	United States	08/19/1992	P	2/22/2016	I	
+WA000423	5220		Janet		Hernandez		01/25/1974	F	263		Hanover	Road					Nashville	WA	37240	CR	67	21	21	21									06/18/1963	V	1/8/2016	I	
+WA000424	5230		Michael		Medina		08/31/1942	M	26		Morningstar	Court					Saint Louis	WA	63167	AS	76	94	6	18									03/15/1990	P	11/27/2015	A	
+WA000425	5240	Honor	Brian	Ryan	Bailey		07/31/1931	M	13819	3/4	Forest	Alley		SE	SW		Greensboro	WA	27404	AS	76	25	6	22	21 Homewood Center				Richmond	23213	NC	United States	08/06/1955	P	9/26/2015	A	
+WA000426	5250		Ashley		Kelly		04/17/1954	F	317		Bay	Plaza					Columbus	WA	43268	AS	5	1	5	2									11/04/2003	N	6/23/2016	A	
+WA000427	5260		Doris	Kimberly	Knight		10/05/1935	F	1		Cody	Junction					Honolulu	WA	96805	CR	64	63	12	13	1070 Eastwood Avenue				Chicago	60630	HI	United States	07/25/2010	V	6/21/2016	A	
+WA000428	5270		Emily	Robin	Howell		10/16/1958	F	4080	1/3	Summit	Circle	#	SW		43	Macon	WA	31210	CR	92	44	20	22									04/05/1997	P	11/27/2015	A	
+WA000429	5280	Mr	Larry	Jack	Andrews	Sr	11/26/1936	M	9913		Grover	Crossing		SW			Dallas	WA	75241	CR	85	59	21	4	22924 Fuller Place				Kansas City	64179	TX	United States	02/27/1947	N	7/16/2016	A	
+WA000430	5290		Samuel	Anthony	Burns		05/02/1982	M	82655		Lerdahl	Point	#	NW		64	Midland	WA	48670	PI	31	85	21	13									06/29/2000	N	5/11/2016	I	
+WA000431	5300		Patricia	Lillian	Harvey		04/18/1945	F	96830		Lerdahl	Point					Oklahoma City	WA	73190	SN	55	83	14	18									11/21/1987	P	2/19/2016	A	
+WA000432	5310	Ms	Robin	Martha	Willis	IV	05/14/1932	F	51872		Columbus	Lane	#	SW	NW	57	El Paso	WA	88584	CR	57	47	3	4									03/03/1952	P	6/8/2016	I	
+WA000433	5320		Patricia		Cooper		09/12/1996	F	8		Elmside	Park					Beaufort	WA	29905	SN	51	94	17	17									02/02/1976	N	6/29/2016	A	
+WA000434	5330	Dr	Earl	Timothy	Bishop		02/17/1978	M	3		Forest	Court		SW			San Jose	WA	95138	SN	7	76	1	4	01613 Randy Court				Baton Rouge	70826	CA	United States	12/18/1973	N	9/5/2015	A	
+WA000435	5340		Betty	Christine	Stewart	II	05/21/1979	F	268		Scott	Lane		NW			Fort Worth	WA	76147	AS	68	63	3	18									10/01/1988	V	12/11/2015	I	
+WA000436	5350		Jeffrey	Jose	Weaver		09/28/1980	M	9735		Express	Center					Pueblo	WA	81015	SN	69	95	17	21									03/27/1987	V	5/18/2016	I	
+WA000437	5360		Donna	Amy	Harris		02/28/1931	F	29852		Basil	Junction		SE			Cleveland	WA	44177	CR	6	91	4	19									11/21/1965	P	5/24/2016	I	
+WA000438	5370	Rev	Annie		Ferguson		04/02/1939	F	395	3/4	Oriole	Lane	#			34	Denver	WA	80204	PI	55	48	6	15									02/18/2000	N	11/15/2015	I	
+WA000439	5380	Honor	Louise	Ruby	Andrews		04/22/1967	F	412	3/4	Dovetail	Center					Denver	WA	80299	CR	31	28	7	1	9067 Farwell Crossing				Staten Island	10310	CO	United States	09/28/1998	P	8/30/2015	A	
+WA000440	5390		Justin	Gregory	Dixon		03/19/1970	M	70668		Calypso	Circle					Long Beach	WA	90840	AS	40	9	6	13									12/22/1940	U		I	
+WA000441	5400		Lisa	Amanda	Ramirez		04/01/1962	F	3010		Browning	Pass	Apt	N		87	Cincinnati	WA	45208	CR	27	33	16	21									08/10/1982	N	5/27/2016	A	
+WA000442	5410		Johnny	Howard	Rose		01/15/1940	M	7		Buell	Place					Modesto	WA	95397	PI	94	12	12	23									07/07/1956	P	1/1/2016	I	
+WA000443	5420		Rachel	Teresa	Wheeler		07/16/1988	F	11		Tennessee	Pass					Long Beach	WA	90847	CR	83	35	11	11	93894 Schurz Trail				Erie	16522	CA	United States	07/02/1944	N	8/22/2015	I	
+WA000444	5430	Mrs	Russell	William	Fuller		07/30/1942	M	37		Utah	Terrace	Apt		SE	100	Washington	WA	20260	CR	67	79	6	2	5 Luster Hill				Bakersfield	93381	DC	United States	11/25/1996	N		A	
+WA000445	5440		Judy		Ramos	Sr	03/08/1975	F	49		East	Way					Winston Salem	WA	27150	AS	95	54	10	19									07/31/1998	N	9/19/2015	I	
+WA000446	5450		Jimmy		Gonzalez		02/19/1975	M	240		Merry	Drive	#	SW		3	Saint Louis	WA	63169	PI	24	35	21	13									10/20/1992	N	11/21/2015	I	
+WA000447	5460		Lawrence		Cruz		11/06/1957	M	771		Oxford	Drive	Apt			81	Panama City	WA	32405	CR	89	32	8	8	18326 Sheridan Place				Los Angeles	90076	FL	United States	11/27/1964	P	12/26/2015	I	
+WA000448	5470		Ashley	Nicole	Parker		01/29/1989	F	07573		Thierer	Parkway					Tulsa	WA	74141	PI	22	8	5	14									04/11/1989	U	3/14/2016	A	
+WA000449	5480		Ruth	Ann	George		09/17/1952	F	785		Valley Edge	Pass					Denver	WA	80204	SN	52	23	4	4									04/14/1985	U	9/8/2015	A	
+WA000450	5490		Mildred	Nancy	Morris		04/03/1969	F	142		Cottonwood	Court					Spokane	WA	99215	SN	11	32	7	10									05/15/1982	N	10/6/2015	I	
+WA000451	5500	Honor	Jacqueline	Robin	Ross		07/15/1987	F	1		Bellgrove	Crossing	Apt			27	Merrifield	WA	22119	AS	73	77	5	19	4026 7th Junction				Minneapolis	55436	VA	United States	08/31/1934	U	8/30/2015	I	
+WA000452	5510		David		Banks		05/15/1966	M	63650	1/3	Vermont	Center		W			Irvine	WA	92717	AS	86	98	2	21									11/21/1937	N	9/28/2015	A	
+WA000453	5520	Mr	Phillip	Jack	Stevens		06/25/1948	M	3929		2nd	Terrace		SE			Houston	WA	77035	CR	69	72	12	5									03/14/1973	N	5/8/2016	A	
+WA000454	5530		Ralph	Roy	Chapman		06/30/1974	M	11887	3/4	Dakota	Avenue		SW			Madison	WA	53716	CR	25	73	12	17	85 Goodland Trail				Wichita	67220	WI	United States	05/01/1973	U	3/18/2016	I	
+WA000455	5540		Ryan	Ralph	Marshall	III	08/07/1930	M	975		Ronald Regan	Court					Lake Worth	WA	33462	CR	84	79	3	17									08/10/2006	N	7/22/2016	A	
+WA000456	5550	Rev	Eugene		Stone		04/01/1959	M	8449		Karstens	Junction					Atlanta	WA	31165	PI	25	3	10	22	46 Upham Center				Huntington	25726	GA	United States	09/07/2000	V	6/7/2016	I	
+WA000457	5560		Annie	Ashley	Olson		08/26/1945	F	1		Debra	Way		W			Santa Monica	WA	90405	PI	14	85	21	13									07/07/1984	V	12/8/2015	I	
+WA000458	5570		Charles		Williams		02/28/1984	M	785		Oneill	Pass	#			31	Cleveland	WA	44125	PI	58	47	14	23	0 Mayer Court				Washington	20220	OH	United States	09/02/1996	U	1/28/2016	I	
+WA000459	5580		Nicholas		Dixon		09/08/1991	M	90		Village Green	Park			NW		Tucson	WA	85705	AS	20	31	8	10									07/28/2014	V	2/18/2016	A	
+WA000460	5590		Theresa	Kathryn	Edwards		07/11/1973	F	789	3/4	Corscot	Center		W	SW		Albany	WA	12210	PI	39	22	19	9	57610 Havey Trail				Washington	20220	NY	United States	05/17/1946	P	1/29/2016	A	
+WA000461	5600	Mrs	Brenda		Olson		04/07/1941	F	786	3/4	Lighthouse Bay	Court	Apt			86	Staten Island	WA	10310	PI	88	1	19	5									02/12/1998	P	4/27/2016	A	
+WA000462	5610		Christine	Julia	Henry		08/19/1939	F	9308	3/4	Stephen	Plaza	#			46	Richmond	WA	23208	SN	40	88	14	15									02/11/1942	U	5/10/2016	I	
+WA000463	5620		John		Hanson		04/10/1948	M	4700		Ryan	Point					Atlanta	WA	31190	SN	41	63	3	16	501 Thierer Plaza				Phoenix	85067	GA	United States	12/16/2009	P	3/25/2016	A	
+WA000464	5630		Kathy	Carolyn	Hernandez		09/02/1976	F	64		Kensington	Hill					Las Vegas	WA	89193	SN	55	21	19	5	51604 Dakota Parkway				Colorado Springs	80951	NV	United States	02/15/1932	N	4/17/2016	I	
+WA000465	5640		Norma	Judith	Morgan		11/03/1993	F	6953		Annamark	Drive					Boulder	WA	80310	SN	33	23	11	19									12/15/1980	U	4/19/2016	I	
+WA000466	5650		Daniel	Douglas	Chapman		06/16/1969	M	855	3/4	Waywood	Place	#			71	Phoenix	WA	85040	SN	3	89	13	10	4 Daystar Alley				Jacksonville	32230	AZ	United States	11/13/1992	P	5/26/2016	A	
+WA000467	5660		Judy	Sandra	Schmidt		03/02/1962	F	1983		Dawn	Place		W			Houston	WA	77212	CR	63	98	2	8									07/13/1937	V	5/13/2016	A	
+WA000468	5670		Phillip	Raymond	Peters		06/26/1983	M	5		Center	Crossing					Pensacola	WA	32505	CR	45	91	2	13									05/13/2009	N	12/10/2015	A	
+WA000469	5680		Frances	Katherine	Graham		03/08/1943	F	914		Tennyson	Center		N			Cumming	WA	30130	PI	48	1	15	11	7 Kipling Alley				Madison	53726	GA	United States	07/16/1963	N	5/27/2016	A	
+WA000470	5690		Brian	Charles	Ford		05/28/1925	M	97		Linden	Trail					Boulder	WA	80310	CR	83	18	7	1	07 Carioca Park				Houston	77293	CO	United States	12/21/2002	N	12/2/2015	A	
+WA000471	5700	Ms	Willie	Larry	Snyder		10/20/1944	M	5		Lyons	Circle					Columbia	WA	29203	SN	58	25	3	2									06/15/1941	V	3/3/2016	A	
+WA000472	5710	Honor	Charles	Jeffrey	Price		12/22/1927	M	2427	3/4	Sunfield	Parkway		N			Dayton	WA	45490	AS	70	5	17	16									04/16/1989	V		A	
+WA000473	5720		Anne	Doris	Edwards		05/05/1987	F	995		Surrey	Alley					Sacramento	WA	95865	PI	20	64	19	19	6008 Doe Crossing Place				Katy	77493	CA	United States	06/17/1995	N	3/20/2016	A	
+WA000474	5730		Paula		Mason		11/29/1986	F	9		Gulseth	Crossing	Apt			15	Madison	WA	53790	CR	73	35	13	1									07/19/1947	N	1/11/2016	I	
+WA000475	5740		Robert	Brandon	Knight		12/19/1933	M	91051		Pine View	Park	#			26	Hartford	WA	06152	SN	76	81	2	3									07/22/1995	P		A	
+WA000476	5750		Michelle	Diana	Rivera		02/24/1942	F	8141		Dryden	Plaza					New York City	WA	10019	PI	38	32	2	8	724 Anhalt Road				Washington	20442	NY	United States	05/29/1984	P	5/11/2016	I	
+WA000477	5760		Eric	Robert	Fisher		02/05/1950	M	4632		Bunker Hill	Parkway	Apt			59	Boulder	WA	80305	AS	61	15	7	15	284 Oriole Plaza				Sioux Falls	57105	CO	United States	04/08/2008	P	3/5/2016	I	
+WA000478	5770		Jennifer		Gordon		09/28/1993	F	9009		Summerview	Lane					Springfield	WA	01114	SN	68	31	19	12	83 Loomis Terrace				Saint Louis	63167	MA	United States	09/19/1943	V	7/24/2016	I	
+WA000479	5780	Honor	Joe	Gerald	Sims		08/04/1967	M	9091		Lien	Lane		W			Minneapolis	WA	55470	SN	72	19	9	16									11/28/1985	N	8/21/2015	A	
+WA000480	5790		Laura	Carolyn	Black		09/09/1937	F	3346	3/4	Superior	Hill	Apt			10	Inglewood	WA	90398	SN	97	93	19	22	7358 Scoville Terrace				Miami	33164	CA	United States	08/01/2008	V	3/31/2016	A	
+WA000481	5800		Ashley	Tammy	Cunningham		02/23/2000	F	86393		Farwell	Lane	Apt	N		77	Boynton Beach	WA	33436	SN	72	11	5	5	7572 Ridge Oak Pass				Charlotte	28256	FL	United States	03/27/1978	P	3/26/2016	I	
+WA000482	5810		Helen		Jacobs		04/28/1939	F	90		Scoville	Junction	#			85	Indianapolis	WA	46202	CR	3	31	21	3	598 Bartelt Pass				Flushing	11355	IN	United States	07/14/2013	U	11/22/2015	A	
+WA000483	5820		Michael	Carl	Reynolds		09/12/1926	M	0	3/4	Manufacturers	Pass					Monticello	WA	55585	AS	48	18	1	4									06/15/2010	U		I	
+WA000484	5830		George	Jerry	Kelly	II	07/08/1936	M	9396		Morningstar	Park					Birmingham	WA	35254	PI	37	23	11	22									10/15/1989	N	3/18/2016	A	
+WA000485	5840		Gloria	Joyce	Harvey		07/05/1991	F	6840		Claremont	Pass					Detroit	WA	48275	CR	71	80	4	2	78281 Fair Oaks Hill				Marietta	30066	MI	United States	11/12/1945	V	10/23/2015	I	
+WA000486	5850		Fred	Sean	Carr		12/17/1983	M	19		Carey	Alley	Apt	SW		67	Lincoln	WA	68531	SN	58	36	7	18	4 Steensland Court				Saint Louis	63116	NE	United States	05/10/2006	N	11/16/2015	A	
+WA000487	5860		Jonathan		Cole		08/18/1925	M	247		Merry	Pass	Apt		NW	19	New York City	WA	10165	CR	29	51	5	23									07/31/2012	V	10/2/2015	I	
+WA000488	5870		Howard	Peter	Garcia		03/22/1995	M	2655		Hansons	Alley					Des Moines	WA	50315	PI	93	48	15	15	896 8th Alley				Dallas	75236	IA	United States	07/18/2015	V	2/5/2016	A	
+WA000489	5880		Eric	Nicholas	Mendoza	Jr	04/15/1971	M	43		Sutherland	Lane		N			Abilene	WA	79605	AS	50	26	17	23	7 Lotheville Lane				Philadelphia	19160	TX	United States	06/26/1942	N	10/16/2015	I	
+WA000490	5890		James		Kim		06/26/1967	M	285	1/3	Independence	Pass		N	NW		Pittsburgh	WA	15240	AS	63	94	6	23									08/12/1940	U	3/31/2016	I	
+WA000491	5900		Ryan		Wood		10/23/1920	M	6		Monterey	Terrace	Apt	W	N	78	Idaho Falls	WA	83405	SN	87	62	3	7	45 Eliot Avenue				Dallas	75287	ID	United States	04/21/1996	U	2/7/2016	A	
+WA000492	5910	Mrs	Joe	Kevin	Miller		01/17/1983	M	38684	1/3	Carpenter	Road	#			3	Denver	WA	80299	PI	64	90	11	18									08/31/2003	P	1/25/2016	A	
+WA000493	5920	Dr	Juan	Lawrence	Hill		04/14/1921	M	8329		Mosinee	Crossing					Jackson	WA	39216	CR	45	72	15	1	9026 Independence Lane				Lakeland	33805	MS	United States	02/09/1932	P	2/14/2016	A	
+WA000494	5930		Arthur		Wagner		02/27/1975	M	34947	3/4	Morrow	Way					Atlanta	WA	30380	SN	67	69	4	21									11/30/2003	N	11/27/2015	I	
+WA000495	5940	Rev	Benjamin		Lane		05/06/1927	M	504	1/3	Moland	Park					Albuquerque	WA	87110	SN	71	1	21	11									03/31/1975	N	1/16/2016	A	
+WA000496	5950		Walter		Russell		12/18/1977	M	408		Spenser	Plaza					Valley Forge	WA	19495	CR	2	11	8	5									07/13/1971	P		I	
+WA000497	5960		Michael	Justin	Porter		06/29/1990	M	5	1/3	Cottonwood	Park	#			55	Sacramento	WA	94245	SN	33	38	19	20									06/28/2015	V	10/28/2015	I	
+WA000498	5970		James		Garza		03/31/1975	M	28114		Old Gate	Hill	Apt			95	Boston	WA	02104	CR	26	83	18	1	8087 Armistice Center				Birmingham	35210	MA	United States	02/01/1939	P	6/16/2016	I	
+WA000499	5980		Phyllis	Gloria	Holmes		07/07/1925	F	01178		Brown	Trail	Apt			25	Houston	WA	77266	CR	58	44	16	5									04/11/1952	P	5/27/2016	I	
+WA000500	5990		Betty	Marilyn	Ford	II	02/26/1995	F	229		Pennsylvania	Crossing	Apt		SW	83	Birmingham	WA	35220	AS	10	86	19	3									12/02/1950	N	1/27/2016	A	
+WA000501	6000	Mr	Craig	John	Austin		01/12/1977	M	72516	1/3	North	Parkway					Birmingham	WA	35263	SN	50	97	1	15	7413 Warrior Alley				Washington	20557	AL	United States	05/06/1989	P	1/14/2016	I	
+WA000502	6010		Michael	Carl	Carroll		08/28/1959	M	22		Troy	Lane					New Haven	WA	06533	CR	72	35	9	10									04/06/1980	P	2/19/2016	I	
+WA000503	6020		Michael		Mills		01/04/1977	M	1		Darwin	Hill		W	SW		Charleston	WA	25356	CR	56	6	11	2									09/20/1985	U	4/1/2016	A	
+WA000504	6030		Michael	Eugene	Jackson		04/29/2000	M	1256	1/3	Monterey	Park					Indianapolis	WA	46207	PI	52	8	18	23									10/15/1967	P	12/19/2015	A	
+WA000505	6040		Jean	Angela	Evans		09/03/1960	F	1		Cody	Street					Wilmington	WA	19805	SN	68	23	4	14									07/10/1963	P	1/4/2016	A	
+WA000506	6050		Jerry		Cunningham		08/30/1978	M	32186		Hovde	Lane					El Paso	WA	88535	PI	54	16	14	6	05 Laurel Drive				El Paso	79905	TX	United States	08/29/1935	N	5/15/2016	I	
+WA000507	6060	Mrs	Christina	Lori	Spencer		06/02/1972	F	29133		Atwood	Circle		SW	SE		Saint Paul	WA	55146	AS	13	48	11	12	6511 Crownhardt Plaza				Houston	77245	MN	United States	04/03/2005	V	7/3/2016	I	
+WA000508	6070		Sandra	Anne	Hall		07/03/1984	F	274		Katie	Junction					Buffalo	WA	14263	CR	41	98	10	12									01/30/1937	N	12/31/2015	A	
+WA000509	6080	Rev	William		Fuller		05/04/1925	M	9		5th	Circle	#	N		64	Fayetteville	WA	28305	PI	58	96	20	13									01/27/1972	P		I	
+WA000510	6090		Kimberly	Mary	Powell		11/09/1956	F	46504		Lyons	Way					El Paso	WA	79994	CR	67	51	16	20									10/23/1969	N		I	
+WA000511	6100		Scott		Banks		02/06/1989	M	489	1/3	Porter	Terrace			N		Harrisburg	WA	17121	AS	54	98	1	3	23 Holmberg Parkway				Littleton	80127	PA	United States	04/28/2010	V	12/5/2015	I	
+WA000512	6110		Larry		Moreno		11/09/1969	M	78560		Carioca	Road	Apt			30	Wilmington	WA	19897	CR	57	19	4	16									05/30/1966	U	4/26/2016	A	
+WA000513	6120		Arthur		Bradley	IV	06/04/1966	M	7		Mccormick	Street			SW		Birmingham	WA	35285	SN	20	56	13	14	5 Artisan Drive				Omaha	68197	AL	United States	07/28/2013	N	2/19/2016	I	
+WA000514	6130		Anthony	Christopher	Parker		07/24/1959	M	2359		Karstens	Avenue			NW		Carson City	WA	89714	PI	84	68	17	8									09/03/2007	N	4/11/2016	A	
+WA000515	6140		Johnny	Steve	Robertson		03/28/1970	M	704		Weeping Birch	Crossing			SW		Glendale	WA	91210	CR	53	28	8	19	7302 Northfield Park				Humble	77346	CA	United States	05/09/1989	P	10/6/2015	A	
+WA000516	6150	Rev	Kenneth		Bell	II	10/22/1963	M	6		Lotheville	Place	Apt			40	Saint Louis	WA	63110	SN	62	74	4	1									02/18/1945	N	6/8/2016	I	
+WA000517	6160		Christine	Rose	Mendoza		01/27/1998	F	7		Sachs	Plaza					Charleston	WA	25331	SN	51	73	11	17	25 Macpherson Center				Raleigh	27690	WV	United States	05/29/1947	U	5/20/2016	A	
+WA000518	6170	Honor	Irene	Sara	Cunningham		07/21/1960	F	74		Esker	Court	#			77	Phoenix	WA	85083	AS	78	41	8	5	95096 Chive Street				Hot Springs National Park	71914	AZ	United States	10/15/1977	P	12/1/2015	I	
+WA000519	6180		Donna		Cook		08/14/1976	F	13		Sycamore	Street					Saint Paul	WA	55127	PI	45	72	20	18	014 Cardinal Lane				Detroit	48258	MN	United States	10/29/2000	V	4/21/2016	A	
+WA000520	6190		Joseph		Gray		12/10/1973	M	4387		Weeping Birch	Alley					Austin	WA	78703	AS	55	8	18	7									03/10/1970	U	7/3/2016	A	
+WA000521	6200		Donald	Harry	Rodriguez		08/08/1958	M	5		Schiller	Place		N	NW		Mesa	WA	85210	SN	36	74	7	13	4 Fordem Terrace				Kansas City	64109	AZ	United States	12/30/1998	N	5/9/2016	A	
+WA000522	6210	Honor	Susan	Virginia	Dean		05/22/1986	F	580		Rieder	Court	Apt			14	Waco	WA	76711	CR	43	81	17	10									05/20/2016	V	11/4/2015	I	
+WA000523	6220		Scott	Christopher	Ward		01/09/1960	M	2		Old Gate	Hill					Flint	WA	48550	PI	10	90	10	4	8 Tony Terrace				Killeen	76544	MI	United States	11/09/2011	P	7/4/2016	I	
+WA000524	6230		Jeffrey	Arthur	Ramirez		11/20/1925	M	50714		Grasskamp	Drive	#	W		51	Pensacola	WA	32575	CR	50	74	14	1	0510 Warrior Drive				Cincinnati	45233	FL	United States	06/23/1971	N	4/1/2016	I	
+WA000525	6240	Ms	Jessica		Ross		08/28/1987	F	1586		Lakewood Gardens	Place		SE			Columbia	WA	29215	AS	10	82	13	21									12/25/2003	N	1/24/2016	I	
+WA000526	6250	Ms	Billy		Robinson		01/19/1965	M	2484		John Wall	Drive		N			San Jose	WA	95108	PI	95	38	2	20									01/27/1937	P	11/8/2015	I	
+WA000527	6260		Judith	Jacqueline	Fisher		11/27/1998	F	69955		Maryland	Hill					Washington	WA	20244	CR	98	27	17	23									03/28/1993	U	2/26/2016	I	
+WA000528	6270		Billy	Larry	Duncan		07/25/1977	M	643		Armistice	Terrace	Apt			90	Fort Worth	WA	76198	CR	10	83	14	10									09/07/1945	P	3/25/2016	I	
+WA000529	6280		Brandon		Wheeler		10/17/1957	M	957		Arkansas	Hill					New York City	WA	10292	AS	70	79	16	5	7 Di Loreto Pass				Pasadena	77505	NY	United States	03/17/1938	N	6/10/2016	A	
+WA000530	6290		Eric	Timothy	Anderson		07/02/1933	M	84		Evergreen	Trail					Los Angeles	WA	90065	AS	80	68	14	9									07/13/1981	V	7/9/2016	A	
+WA000531	6300	Mr	Aaron	Phillip	Ramos		12/29/1982	M	99251		Weeping Birch	Way					Sacramento	WA	95894	PI	12	69	8	14									03/14/1978	V	7/23/2016	I	
+WA000532	6310		Juan	Edward	Castillo		06/11/1992	M	4		Eliot	Road	#		W	66	Odessa	WA	79769	CR	19	13	2	18									11/12/2009	U	2/26/2016	A	
+WA000533	6320		Gregory		Crawford	III	11/09/1998	M	9166		Kedzie	Avenue	#			83	Columbus	WA	31904	SN	3	91	15	20	478 Garrison Pass				Denver	80291	GA	United States	03/13/1989	P	2/25/2016	A	
+WA000534	6330	Honor	Rachel	Ashley	Berry	Jr	03/10/1960	F	1	3/4	Dovetail	Park			SW		Ogden	WA	84409	PI	17	30	6	14									02/26/1949	N	8/11/2015	A	
+WA000535	6340		Sara	Anne	Green		11/07/1950	F	555		Boyd	Center	#			91	Dallas	WA	75310	SN	46	34	11	12									12/15/2006	N	7/12/2016	I	
+WA000536	6350		Gerald	Charles	Williamson		11/09/1962	M	43		Blue Bill Park	Way					Murfreesboro	WA	37131	SN	39	26	17	6	089 Pierstorff Street				Anaheim	92812	TN	United States	10/13/2006	N	6/14/2016	I	
+WA000537	6360	Ms	Scott		Porter		09/07/1955	M	45		Becker	Parkway	#			49	Saint Paul	WA	55146	AS	21	77	19	13	86 Londonderry Junction				Charleston	25362	MN	United States	02/11/1993	V	3/7/2016	I	
+WA000538	6370		Howard		Kennedy		03/08/1991	M	169	1/3	Clyde Gallagher	Court					Wilmington	WA	19892	PI	84	97	4	3	18 Center Place				Springfield	62718	DE	United States	11/15/1974	N	10/14/2015	A	
+WA000539	6380		Christina	Bonnie	Warren		04/01/1995	F	37		Oneill	Terrace					Billings	WA	59105	SN	28	100	15	2	670 Mcguire Point				Minneapolis	55470	MT	United States	03/19/1967	V		A	
+WA000540	6390		Dorothy		Robinson		05/16/1921	F	43		Chinook	Court					Louisville	WA	40225	SN	28	62	21	12									03/12/1943	N	3/9/2016	A	
+WA000541	6400		Karen	Mary	Berry		07/11/1956	F	73		Algoma	Point					Clearwater	WA	33763	SN	22	98	21	4	7 Superior Junction				Louisville	40256	FL	United States	01/13/1950	V	8/19/2015	A	
+WA000542	6410		Craig		Carroll		05/05/1976	M	340		Kings	Center					Phoenix	WA	85035	SN	50	7	3	2									09/28/2014	P	2/2/2016	I	
+WA000543	6420		Lillian		Hunt		01/28/1998	F	580	3/4	Towne	Way					Seattle	WA	98109	AS	19	71	18	8									10/02/2015	U	3/11/2016	A	
+WA000544	6430	Ms	Rachel		Ray		05/16/1938	F	5081	3/4	Columbus	Drive					Phoenix	WA	85030	CR	71	78	19	3	71 Portage Parkway				Houston	77020	AZ	United States	07/08/1948	P	11/3/2015	A	
+WA000545	6440		Karen	Kathleen	Perry		08/24/1926	F	2978		Tony	Circle	#		SW	55	Jackson	WA	39204	AS	41	17	19	18	437 Blackbird Road				Richmond	23260	MS	United States	04/04/2010	N	2/19/2016	I	
+WA000546	6450		Frank	Harold	Anderson		07/23/1964	M	76078		North	Park					Birmingham	WA	35225	AS	1	11	8	19									04/23/2004	P	12/23/2015	I	
+WA000547	6460		Lori		Owens		11/14/1951	F	64		Continental	Road					Honolulu	WA	96850	PI	84	88	16	2									01/02/2003	N	12/26/2015	A	
+WA000548	6470		Tina	Jacqueline	Johnson		12/14/1985	F	9		Daystar	Parkway	Apt			82	Pittsburgh	WA	15205	SN	37	9	21	13									09/17/1949	P	12/15/2015	I	
+WA000549	6480		Sarah	Martha	Nelson		03/17/1934	F	81171	1/3	School	Parkway		W			Knoxville	WA	37919	SN	98	62	12	10	185 John Wall Point				Clearwater	34620	TN	United States	09/22/1961	U	12/20/2015	A	
+WA000550	6490		Randy	Richard	Scott	III	11/15/1997	M	7		Messerschmidt	Junction		N			Wilkes Barre	WA	18763	PI	67	98	18	12	5438 Melby Drive				Tampa	33694	PA	United States	10/12/1991	V	6/10/2016	I	
+WA000551	6500		Kimberly	Amanda	Boyd		12/28/1977	F	43		Bunting	Alley			SE		San Angelo	WA	76905	AS	44	89	4	21									12/29/1938	U	11/15/2015	A	
+WA000552	6510	Mrs	James	Carlos	Burns		08/27/1989	M	281	3/4	Mallard	Drive					Las Vegas	WA	89115	SN	93	66	12	13									07/19/1980	U	3/21/2016	A	
+WA000553	6520		Heather	Christina	Knight		01/24/1949	F	45		Eastlawn	Avenue	Apt	NW		62	Yonkers	WA	10705	PI	69	100	15	11									05/22/2006	U	6/21/2016	I	
+WA000554	6530		Russell	Daniel	Kelley		02/01/1929	M	86		Oneill	Way	#	NW	NW	95	Columbia	WA	29203	SN	18	9	13	7	3 Aberg Point				Fresno	93773	SC	United States	08/25/1959	U	3/18/2016	A	
+WA000555	6540	Mrs	Harry	Christopher	Medina		04/27/1979	M	83		Barnett	Terrace	Apt			88	Arlington	WA	76011	AS	52	54	15	22									05/21/1969	N	3/29/2016	A	
+WA000556	6550		Kathleen	Joan	Bell		01/31/1990	F	2932		Macpherson	Circle	#			42	Orlando	WA	32891	CR	54	19	16	20	0864 Twin Pines Circle				Springfield	01105	FL	United States	04/06/1940	N	4/9/2016	A	
+WA000557	6560		Lisa		Oliver		11/08/1948	F	177		Chive	Center	Apt	SE		15	New York City	WA	10034	CR	70	82	9	2									03/22/2013	U	6/9/2016	A	
+WA000558	6570		Julie	Lillian	Garrett		05/25/1988	F	85		Hanover	Center					Las Vegas	WA	89155	AS	56	20	3	23	554 Bunker Hill Road				San Francisco	94105	NV	United States	12/11/1961	V	12/1/2015	I	
+WA000559	6580		Brenda		Fernandez		09/14/1987	F	39		Eastlawn	Avenue			W		Spring	WA	77388	PI	6	51	6	20	0 Magdeline Plaza				Alexandria	22309	TX	United States	02/27/1970	N	11/18/2015	A	
+WA000560	6590		Mark		Lee	III	04/07/1924	M	82027	3/4	Fairview	Way	Apt		W	31	Monticello	WA	55590	PI	79	81	15	15	76501 Rockefeller Street				Youngstown	44505	MN	United States	05/24/1938	U	9/3/2015	A	
+WA000561	6600		Phillip		Spencer		08/10/1953	M	82		Randy	Center					Scottsdale	WA	85260	CR	67	71	21	15	9518 Oneill Street				Jefferson City	65105	AZ	United States	07/07/1963	N	2/23/2016	A	
+WA000562	6610	Honor	Kathleen	Jennifer	Castillo		10/31/1961	F	34391		Saint Paul	Center			SE		Midland	WA	48670	PI	71	97	9	23	34 Scoville Road				Salt Lake City	84145	MI	United States	02/14/1948	U	12/9/2015	A	
+WA000563	6620		Adam		Henderson		02/26/1955	M	78	3/4	Weeping Birch	Point					Kissimmee	WA	34745	CR	47	98	15	14	414 Dovetail Street				Saint Paul	55172	FL	United States	04/12/2008	N	12/2/2015	I	
+WA000564	6630		Gerald	Richard	Stephens		04/26/1930	M	04822		Bunker Hill	Plaza	#			71	Charleston	WA	29424	SN	58	82	21	21									08/12/1960	V	9/15/2015	I	
+WA000565	6640		Kathleen	Julia	Austin		11/10/1930	F	4		Ruskin	Point	#			87	Boston	WA	02119	PI	46	3	1	20									05/19/1933	V	9/2/2015	I	
+WA000566	6650		Ralph	Gerald	Morales		10/05/1923	M	628		Arrowood	Parkway	#			48	Washington	WA	20073	PI	7	50	18	11									04/21/1951	V	9/21/2015	A	
+WA000567	6660		Gary	Adam	Chavez		09/11/1923	M	49		Kensington	Park	#			10	Saint Petersburg	WA	33710	CR	20	3	7	21									07/31/1972	U	11/14/2015	I	
+WA000568	6670		William	Billy	Watson		12/30/1935	M	38658		Mayfield	Center			SW		Trenton	WA	08650	PI	32	39	7	6	8 Heffernan Court				Hartford	06145	NJ	United States	09/27/1945	U	1/19/2016	I	
+WA000569	6680		Jack	Fred	Cruz		06/22/1977	M	8269	1/3	Rockefeller	Avenue	Apt			97	Orange	WA	92867	PI	50	43	4	3									06/22/1941	U	7/8/2016	I	
+WA000570	6690	Mr	Earl		Simmons		01/04/1937	M	224		Manley	Crossing	Apt			81	Corona	WA	92878	SN	68	81	16	7	633 Stone Corner Park				Oklahoma City	73167	CA	United States	10/30/1985	U	6/5/2016	A	
+WA000571	6700		Roger		Fernandez		05/08/1980	M	8101		Autumn Leaf	Park					Fort Pierce	WA	34981	SN	27	66	13	6									08/04/1983	U	6/28/2016	I	
+WA000572	6710		Christina	Amanda	Garrett		02/16/1989	F	674		Mitchell	Junction		N			San Diego	WA	92105	CR	56	57	1	23	400 Cottonwood Street				New York City	10019	CA	United States	07/30/1951	N	10/8/2015	A	
+WA000573	6720		Virginia		Bradley		12/23/1966	F	3299		New Castle	Street					Jamaica	WA	11470	PI	15	82	6	23									02/25/1951	V	7/30/2016	A	
+WA000574	6730		Donald	Frank	Reyes		03/15/1990	M	5002		Eggendart	Drive	#			4	Naperville	WA	60567	CR	12	59	16	17	5 Sauthoff Plaza				Houston	77271	IL	United States	03/11/1933	N	2/2/2016	A	
+WA000575	6740		Joe	Thomas	Payne		11/10/1950	M	149		Hintze	Lane	Apt	SW	SW	6	Sandy	WA	84093	CR	31	78	19	20	5 Old Gate Crossing				Lawrenceville	30045	UT	United States	08/11/2012	P	5/15/2016	A	
+WA000576	6750		Gregory	Harry	Arnold	Jr	09/21/1925	M	13469		Blaine	Street	#			17	Saint Louis	WA	63167	CR	41	53	12	2									10/17/2009	P	9/28/2015	I	
+WA000577	6760		Roy		Edwards		07/24/1946	M	0657	1/3	Fairview	Crossing	#			2	Huntington	WA	25775	SN	3	39	10	10									12/26/1932	U	3/4/2016	I	
+WA000578	6770		Ryan	William	Tucker		11/05/1979	M	1		Kings	Parkway	#	SW		76	Cleveland	WA	44191	CR	93	92	8	1	895 Farwell Parkway				Cumming	30130	OH	United States	09/18/1943	V	10/5/2015	I	
+WA000579	6780	Ms	Jason	Andrew	Hall		09/16/1981	M	22674	1/3	Glendale	Street	#			78	Scranton	WA	18505	AS	45	3	6	16									10/17/1970	V	2/1/2016	I	
+WA000580	6790		Jonathan	Brian	Henderson	IV	11/29/1978	M	3875		Sloan	Terrace					Baltimore	WA	21211	PI	54	27	14	11									12/24/1966	N	6/30/2016	I	
+WA000581	6800		Amanda	Jacqueline	Mitchell	Sr	02/24/1956	F	1842		Old Shore	Parkway		N			Flint	WA	48505	SN	31	41	19	21	74355 Heath Street				El Paso	79984	MI	United States	08/26/2015	U		I	
+WA000582	6810		Catherine	Sandra	Hudson		06/28/1939	F	1375	1/3	Paget	Way					San Diego	WA	92137	SN	44	38	9	17									05/03/1941	V	6/19/2016	I	
+WA000583	6820	Mr	Anthony	Thomas	Marshall		03/02/1959	M	7	3/4	Waywood	Center	Apt			81	Indianapolis	WA	46247	SN	31	38	16	20	590 Kingsford Park				Winston Salem	27116	IN	United States	06/29/1993	V	9/3/2015	A	
+WA000584	6830		Carl	Kenneth	Jacobs		12/27/1994	M	802		Autumn Leaf	Crossing		W	NW		Marietta	WA	30061	PI	41	71	19	10									02/14/2016	N	10/19/2015	I	
+WA000585	6840		Joe	Steve	Carr		01/13/1928	M	953		Moulton	Road		SW			Denver	WA	80243	CR	38	7	5	12	2 Hanson Plaza				Levittown	19058	CO	United States	11/29/1941	P	12/16/2015	A	
+WA000586	6850	Rev	Joan	Melissa	Russell		09/13/1945	F	146		Meadow Vale	Parkway					Saint Louis	WA	63167	SN	96	60	9	19									10/12/1963	N	10/5/2015	A	
+WA000587	6860		Julia	Kathy	Cole		11/07/1984	F	4784		Swallow	Way		NW			Harrisburg	WA	17121	PI	87	4	19	4									04/26/1991	P	4/16/2016	I	
+WA000588	6870		Craig	Samuel	Hayes		04/22/1990	M	554		Dwight	Trail		N			Shawnee Mission	WA	66215	AS	38	32	3	18	9 Grover Pass				Richmond	23242	KS	United States	02/02/1999	U	8/28/2015	I	
+WA000589	6880		Harold	Stephen	Sims		04/18/1942	M	8215		3rd	Pass					Jefferson City	WA	65105	SN	39	99	13	17									06/16/1962	U	2/4/2016	I	
+WA000590	6890		Ashley		Stephens		09/15/1952	F	6		Anzinger	Alley	Apt			87	San Jose	WA	95118	AS	93	75	19	8	622 Towne Trail				Newport News	23612	CA	United States	04/11/1983	N	1/2/2016	A	
+WA000591	6900		Bobby	Michael	Gonzales		01/05/1986	M	65014		Alpine	Plaza	Apt			35	College Station	WA	77844	SN	100	30	18	8									02/11/2007	V	3/8/2016	I	
+WA000592	6910	Ms	Carol	Tammy	Rodriguez		08/23/1982	F	9	1/3	Schurz	Way					New Orleans	WA	70129	CR	19	24	17	20	563 Jackson Circle				Daytona Beach	32128	LA	United States	03/19/1958	V	4/15/2016	A	
+WA000593	6920		Frances	Anna	Woods		10/21/1967	F	0		Anderson	Place					Fort Lauderdale	WA	33325	SN	50	45	4	13									10/02/1992	U	11/18/2015	I	
+WA000594	6930		James	Kenneth	Murphy	Jr	12/04/1999	M	5	3/4	Southridge	Drive					Washington	WA	20067	CR	21	46	15	21	6 Aberg Circle				Washington	20073	DC	United States	03/26/2002	N	5/29/2016	I	
+WA000595	6940		Jane	Judy	Ellis		09/05/1972	F	19		5th	Avenue	Apt			59	Knoxville	WA	37939	AS	5	41	3	5									11/05/2001	U	4/11/2016	I	
+WA000596	6950	Mr	Christine		Gonzalez		03/01/1933	F	9		Ramsey	Trail			NW		Philadelphia	WA	19191	PI	38	68	21	22	36860 Fairfield Alley				Phoenix	85035	PA	United States	05/18/1947	U	12/23/2015	I	
+WA000597	6960		Shawn		Mccoy	IV	11/18/1920	M	7092		Barnett	Drive	Apt			88	Duluth	WA	30195	SN	21	85	5	18	02 Judy Circle				Dallas	75231	GA	United States	05/24/1951	P	3/22/2016	I	
+WA000598	6970		Lois		Jackson		04/23/1979	F	57896		Rowland	Road	#		SE	32	Houston	WA	77095	PI	85	92	21	3	5 Merchant Circle				Duluth	30195	TX	United States	05/14/1961	N	4/19/2016	I	
+WA000599	6980		Jack	Thomas	Kim		09/17/1999	M	87		Lukken	Street					Rockford	WA	61105	AS	47	58	6	5									06/12/2011	P	10/20/2015	I	
+WA000600	6990		Marie	Patricia	Davis	II	09/17/1926	F	2		Pawling	Way	Apt			46	Terre Haute	WA	47812	PI	84	67	19	18									06/27/1937	V	6/4/2016	A	
+WA000601	7000		Russell		Spencer		06/29/1997	M	7		Maywood	Park					Cleveland	WA	44177	CR	38	18	18	23									08/24/1973	P	9/22/2015	A	
+WA000602	7010		Dennis		Cox		12/16/1989	M	524		Dryden	Avenue			N		Richmond	WA	23285	PI	76	10	19	18									12/23/1962	P		A	
+WA000603	7020		Russell	Jose	Ellis		03/31/2000	M	9618		Mifflin	Lane		SW	SW		San Francisco	WA	94126	SN	37	27	19	2									12/05/1973	N	8/1/2016	I	
+WA000604	7030	Mrs	Peter	Donald	Thomas		06/15/1949	M	50420		Heffernan	Park		N			Las Cruces	WA	88006	CR	92	64	17	7	0 Burrows Circle				Honolulu	96805	NM	United States	11/14/1995	V	8/21/2015	I	
+WA000605	7040		Roger	Carlos	Spencer		01/20/1981	M	2		Westridge	Junction	#			72	Washington	WA	20260	AS	76	65	17	9	9 West Place				Burbank	91520	DC	United States	07/26/1961	N	3/15/2016	I	
+WA000606	7050		Russell	Aaron	Gonzalez		08/13/1979	M	27		Algoma	Way	#			36	Scottsdale	WA	85260	CR	10	86	16	8									01/21/2014	N	2/1/2016	A	
+WA000607	7060		George	Mark	Watkins		05/01/1959	M	01831		Lindbergh	Street					Beaufort	WA	29905	CR	85	46	14	21	31294 3rd Place				Oklahoma City	73119	SC	United States	05/20/1952	U	8/12/2015	A	
+WA000608	7070		Katherine		Miller		11/28/1972	F	22594	1/3	Vahlen	Plaza					Chula Vista	WA	91913	PI	60	39	18	22	3 Brentwood Terrace				Charlotte	28278	CA	United States	11/18/1986	N	1/9/2016	A	
+WA000609	7080		Janet	Ashley	Bradley		03/19/1938	F	39		Burrows	Circle					Birmingham	WA	35295	SN	20	54	13	18	2250 Union Terrace				Alexandria	71307	AL	United States	02/02/1946	U	11/6/2015	A	
+WA000610	7090	Mr	Betty		White		06/24/1975	F	34		Green Ridge	Center					Tuscaloosa	WA	35487	PI	79	66	5	11									11/26/1997	N	5/19/2016	I	
+WA000611	7100		Bobby		Cole		06/11/1937	M	949		Corscot	Plaza		SW	SW		Denver	WA	80235	SN	79	6	5	11									12/05/1934	U	11/23/2015	I	
+WA000612	7110		Betty	Marie	Burton		04/22/1963	F	06521	1/3	Mifflin	Plaza					Madison	WA	53785	SN	63	30	7	9	739 Larry Street				Monticello	55590	WI	United States	01/02/1962	V	9/16/2015	I	
+WA000613	7120		Arthur	Raymond	Hawkins		03/07/1936	M	141		Merry	Trail	Apt		SW	99	Washington	WA	20546	CR	4	63	14	16									06/22/1945	U	1/8/2016	I	
+WA000614	7130	Rev	Jesse	Jeremy	Martinez		02/04/1979	M	1974		Lindbergh	Street					Washington	WA	20205	PI	73	1	4	20									12/29/1976	U	5/8/2016	I	
+WA000615	7140		Maria	Lillian	Welch		09/16/1958	F	79466		Esch	Court					Philadelphia	WA	19131	CR	36	59	18	5	355 Kingsford Hill				Springfield	62711	PA	United States	01/13/1997	V	12/21/2015	I	
+WA000616	7150		Ronald		Hansen		03/03/1993	M	24		Lyons	Terrace		SW			Colorado Springs	WA	80951	PI	50	15	5	9									04/23/1948	V	6/2/2016	I	
+WA000617	7160		Maria		Watkins		02/02/1957	F	76453		Blackbird	Junction	Apt	SW		47	Davenport	WA	52804	SN	75	65	1	17									08/07/1952	P	12/8/2015	A	
+WA000618	7170	Honor	Paul	Justin	Hamilton		11/04/1968	M	275		Fuller	Court	Apt			15	Washington	WA	20073	PI	74	51	5	18	018 Burrows Road				Chicago	60686	DC	United States	12/10/1994	N	1/6/2016	A	
+WA000619	7180		Beverly	Marilyn	Hayes		05/19/2000	F	69	3/4	Coleman	Junction	Apt	SW		72	Warren	WA	44485	PI	5	39	18	2									05/14/2000	N	2/24/2016	I	
+WA000620	7190	Ms	Russell		Murray		07/24/1971	M	4		Calypso	Crossing		N			Fort Smith	WA	72916	CR	75	63	19	19	6 Kipling Parkway				Concord	94522	AR	United States	07/07/1958	N	4/7/2016	I	
+WA000621	7200		Elizabeth	Christina	Webb		06/02/1962	F	31		Nelson	Way			NW		Boston	WA	02216	PI	87	45	8	12									07/09/1941	V	1/13/2016	I	
+WA000622	7210		Wanda	Emily	Wallace		01/06/1944	F	35		Center	Plaza			W		Young America	WA	55551	SN	83	50	1	21									06/29/1950	U	3/21/2016	A	
+WA000623	7220	Rev	Ralph		Garza		02/07/1946	M	92		Talisman	Parkway	Apt			28	Columbus	WA	43210	SN	23	35	7	17	724 Gerald Road				Denton	76205	OH	United States	01/19/1967	V		I	
+WA000624	7230	Ms	Nicole	Beverly	Reynolds		07/21/1955	F	41418		Logan	Pass			N		Cleveland	WA	44197	SN	26	63	11	12									11/06/2013	V	7/29/2016	I	
+WA000625	7240		Dennis	Henry	Knight		09/17/1933	M	563		Independence	Plaza			SW		Tacoma	WA	98424	CR	95	76	16	2									10/05/1987	P	8/8/2016	I	
+WA000626	7250		Elizabeth	Mary	Fuller		12/21/1973	F	8		Green Ridge	Drive					Duluth	WA	30096	CR	3	89	15	2	21 Johnson Circle				Levittown	19058	GA	United States	04/21/2005	V		I	
+WA000627	7260		Dennis	Christopher	Murphy		07/22/1966	M	8	1/3	Arapahoe	Trail					Des Moines	WA	50981	AS	56	52	13	18	4569 Colorado Place				Columbus	43284	IA	United States	05/09/1954	P	5/28/2016	I	
+WA000628	7270	Honor	Ryan	Jesse	Hanson		12/18/1934	M	2464		Commercial	Crossing	#			82	Kansas City	WA	64125	AS	79	51	7	20	5 Hintze Hill				Des Moines	50315	MO	United States	11/10/1941	V	2/24/2016	I	
+WA000629	7280		Michael	Aaron	Long	Sr	07/14/1997	M	75		Holmberg	Trail	Apt	W		80	Saint Paul	WA	55115	PI	4	60	13	20	94570 Summer Ridge Circle				Milwaukee	53220	MN	United States	05/30/1959	P	10/28/2015	A	
+WA000630	7290		Terry		Allen		11/06/1980	M	12595		Warner	Point					Los Angeles	WA	90065	CR	94	34	1	8									10/03/1949	P	7/5/2016	I	
+WA000631	7300		Annie	Louise	Phillips		07/06/1979	F	77	3/4	Del Sol	Street					Winston Salem	WA	27116	AS	66	98	16	23									09/15/1998	V	7/20/2016	A	
+WA000632	7310		Gerald	Donald	Powell		10/12/1932	M	25643		Corry	Court					Oklahoma City	WA	73173	PI	69	44	10	1	9696 Sullivan Street				Baton Rouge	70836	OK	United States	12/03/1994	U	8/19/2015	A	
+WA000633	7320		Carl	Robert	Dunn		08/13/1986	M	8	3/4	Gerald	Point					Atlanta	WA	30311	CR	12	84	21	14	722 Lukken Hill				New York City	10131	GA	United States	01/17/1987	U		I	
+WA000634	7330		Phillip	Harold	Oliver		05/02/1987	M	03795		Katie	Center		NW			Baton Rouge	WA	70820	AS	77	10	7	20	33536 Melody Point				Orlando	32819	LA	United States	02/10/2004	N	8/12/2015	I	
+WA000635	7340	Rev	Jeffrey	Howard	Roberts		04/06/1928	M	838		Bunting	Way		SW			Olympia	WA	98516	AS	55	81	8	8									11/24/1944	U	11/20/2015	I	
+WA000636	7350		Sarah	Heather	Garza		09/13/1947	F	3867	3/4	Crownhardt	Way					Salt Lake City	WA	84145	CR	34	90	12	2	7300 Paget Street				Santa Ana	92705	UT	United States	02/08/1939	V	9/26/2015	A	
+WA000637	7360	Mrs	Joshua		Fernandez		03/09/1950	M	6	1/3	Graedel	Street					Syracuse	WA	13251	AS	51	63	13	20									12/05/1944	P		I	
+WA000638	7370		Antonio	Ronald	Campbell		06/22/1946	M	903	1/3	Comanche	Trail	Apt			21	Maple Plain	WA	55572	CR	61	8	12	20									11/10/1998	U	1/24/2016	I	
+WA000639	7380		Daniel		Bradley	III	09/20/1933	M	28487		Park Meadow	Trail	#			13	Cincinnati	WA	45208	PI	90	34	8	3									12/11/1991	U	11/15/2015	A	
+WA000640	7390	Mrs	Randy	Clarence	Mills		03/19/1954	M	07		Shasta	Plaza					San Antonio	WA	78245	AS	84	33	11	13									07/17/1947	N	11/24/2015	A	
+WA000641	7400		Donald	Patrick	Collins		01/11/1934	M	1	3/4	Continental	Alley			NW		Minneapolis	WA	55402	CR	78	73	12	5	8 Sunbrook Plaza				San Diego	92153	MN	United States	07/07/1956	N	12/27/2015	A	
+WA000642	7410	Rev	Nicole	Diane	Rogers		08/07/1930	F	02798		Northport	Place					Hicksville	WA	11854	PI	1	98	1	16									04/16/1982	V	3/30/2016	A	
+WA000643	7420	Mrs	Billy		Black		07/02/1996	M	50		Mosinee	Terrace					Pittsburgh	WA	15225	CR	65	32	21	3									04/11/2007	V	6/3/2016	I	
+WA000644	7430		Harold	Juan	Gonzalez		07/10/1979	M	39233		Upham	Circle			N		Amarillo	WA	79188	SN	34	9	1	21									12/27/1977	N	4/17/2016	A	
+WA000645	7440	Rev	Betty	Melissa	Howard		12/18/1976	F	44754		Melody	Way	#			56	Spring Hill	WA	34611	CR	98	23	10	12									09/24/1931	U	9/28/2015	I	
+WA000646	7450	Rev	Dennis		Edwards		10/22/1922	M	289		Melody	Way	Apt			37	Stamford	WA	06905	AS	64	7	6	17									04/18/1977	V	6/16/2016	A	
+WA000647	7460		Martin		Patterson		09/07/1959	M	3		Melrose	Street	#			100	Pittsburgh	WA	15274	PI	43	94	10	4	34315 Harper Point				Sacramento	95833	PA	United States	12/13/1989	U	11/24/2015	I	
+WA000648	7470		Cynthia		Fields		07/07/1938	F	710	3/4	Stang	Point					Davenport	WA	52809	SN	6	72	7	22									08/10/1994	U	10/4/2015	I	
+WA000649	7480		Clarence		Ellis		01/01/1961	M	1		Shopko	Road					Houston	WA	77060	CR	89	60	11	10									08/22/1940	P	9/5/2015	A	
+WA000650	7490		Richard		Frazier		03/08/1993	M	799		Troy	Hill					Tucson	WA	85748	AS	72	4	5	10									02/01/1995	V	7/25/2016	I	
+WA000651	7500		Eric		Ray		03/16/1921	M	07		Clarendon	Road					Galveston	WA	77554	CR	29	29	12	14	879 Rockefeller Pass				Richmond	23220	TX	United States	06/20/2005	P	7/11/2016	I	
+WA000652	7510		Anne		Lewis		03/05/1994	F	6	1/3	Forest	Way					Burbank	WA	91520	CR	74	77	14	19									10/24/1954	U	4/7/2016	A	
+WA000653	7520		Diane		Taylor	III	04/16/1936	F	81		Kennedy	Avenue	#	SE		45	New Orleans	WA	70142	SN	20	64	14	22									06/25/1984	N	5/9/2016	I	
+WA000654	7530		Carlos		Perkins		09/22/1964	M	054		Shelley	Terrace					Kansas City	WA	64160	CR	59	58	10	15									04/24/1951	P	6/17/2016	I	
+WA000655	7540		Thomas	Joseph	Hill		02/26/1987	M	031	3/4	Eggendart	Street					Stockton	WA	95219	PI	42	3	10	22									04/06/1980	V	10/25/2015	A	
+WA000656	7550	Mrs	Benjamin		Richardson		09/17/1984	M	18		Crowley	Center					Jamaica	WA	11447	SN	55	13	15	3	5004 Haas Court				Sarasota	34276	NY	United States	07/10/1942	V	6/15/2016	I	
+WA000657	7560	Rev	Sandra	Bonnie	Lynch		05/22/1936	F	471		Summerview	Trail			N		Saint Paul	WA	55127	PI	8	50	2	22	61 Pierstorff Way				West Palm Beach	33416	MN	United States	12/25/2002	N	4/16/2016	A	
+WA000658	7570	Honor	Karen	Jacqueline	Hunt		07/15/1967	F	5	1/3	Saint Paul	Court			N		Pittsburgh	WA	15274	CR	63	70	19	1									01/29/1952	U	4/19/2016	A	
+WA000659	7580		Walter		Reid		10/31/1980	M	0732		Center	Park	Apt		N	22	Kalamazoo	WA	49048	CR	3	56	12	11									10/11/2003	P	12/25/2015	A	
+WA000660	7590	Ms	James	Robert	Richardson		12/16/1971	M	59356	3/4	Kinsman	Circle	#			39	Saint Cloud	WA	56372	AS	57	79	20	19									11/07/1944	U	1/15/2016	I	
+WA000661	7600		Paul		Wright		02/18/1991	M	16		Kinsman	Road	#		SE	92	Seattle	WA	98185	SN	86	29	5	8									08/23/1985	P	12/20/2015	A	
+WA000662	7610	Rev	William	Joshua	Price		12/25/1988	M	59013		6th	Lane					Buffalo	WA	14233	PI	22	7	1	10									04/26/1977	V	7/22/2016	I	
+WA000663	7620		Andrew		Baker		08/12/1942	M	454		Myrtle	Road					Roanoke	WA	24004	SN	46	54	17	20									05/15/1945	P	6/14/2016	A	
+WA000664	7630		Joseph	Steven	Rogers		01/07/1930	M	84594		Bashford	Circle	Apt			46	Austin	WA	78764	AS	62	99	19	10									12/24/1982	V	9/15/2015	I	
+WA000665	7640		Amy		Flores		03/14/1938	F	16256		Lighthouse Bay	Crossing	#			30	Lafayette	WA	70593	CR	2	2	3	13	90649 Calypso Place				San Diego	92110	LA	United States	08/21/2003	P	5/13/2016	A	
+WA000666	7650		Eric	Carlos	Gutierrez	Jr	08/03/1931	M	93173		Meadow Valley	Drive	Apt			82	Las Vegas	WA	89115	AS	8	69	10	20									11/21/1998	V	5/27/2016	I	
+WA000667	7660		Teresa	Alice	Wright		03/31/1962	F	1	3/4	Lighthouse Bay	Circle					Tulsa	WA	74141	AS	4	33	12	16									06/26/1960	U	7/28/2016	A	
+WA000668	7670		Debra		Banks		09/02/1944	F	1		Melody	Street					Birmingham	WA	35220	PI	41	22	8	19									08/19/1955	U	3/13/2016	A	
+WA000669	7680		Willie	Jerry	Wells		06/03/1935	M	86772		Spohn	Hill	#			24	Fairbanks	WA	99790	CR	38	11	8	4									06/25/1971	P		I	
+WA000670	7690		Gloria	Katherine	Graham		06/30/1977	F	9		Vernon	Crossing			SE		Toledo	WA	43615	AS	50	37	4	18									09/17/1986	N	2/23/2016	I	
+WA000671	7700		Keith	Sean	Vasquez	III	01/07/1923	M	494	3/4	Graceland	Park	Apt			64	Minneapolis	WA	55458	SN	97	24	14	10	03439 Dunning Park				Aurora	80045	MN	United States	09/25/1939	V	2/23/2016	I	
+WA000672	7710		Philip	Aaron	Oliver		06/16/1962	M	3052		Fairview	Pass			W		Salt Lake City	WA	84189	PI	13	67	20	20	5 Trailsway Hill				Roanoke	24014	UT	United States	02/15/1945	N	4/11/2016	I	
+WA000673	7720		Gregory	Ralph	Simmons		07/16/1931	M	3133	1/3	Warbler	Center	Apt			77	Houston	WA	77218	PI	47	40	4	19									04/20/1957	P	6/13/2016	A	
+WA000674	7730		Brian		Willis		05/21/1977	M	882		Kropf	Junction	Apt		NW	35	Schenectady	WA	12325	PI	96	2	2	4	6 Gerald Road				Nashville	37250	NY	United States	03/19/1938	N	5/12/2016	I	
+WA000675	7740		Jack	Juan	Foster		04/28/1957	M	99		Esker	Trail	#	SW	SW	29	Chicago	WA	60681	PI	33	93	5	10									12/01/1971	N	12/14/2015	A	
+WA000676	7750		Gerald	Phillip	Welch		09/30/1950	M	5		Kedzie	Center					Austin	WA	78769	CR	5	73	5	23									04/12/1984	P	6/2/2016	A	
+WA000677	7760		Justin		Willis		09/02/1959	M	5001	3/4	Bartillon	Plaza					Houston	WA	77075	PI	75	75	5	3									07/28/1943	P	8/30/2015	I	
+WA000678	7770		Kathleen		Arnold		05/20/1937	F	2309		Eastwood	Park		SW	SE		Sunnyvale	WA	94089	CR	5	45	7	14									04/23/1972	U	5/6/2016	A	
+WA000679	7780		Mildred	Lillian	Hill		01/27/1961	F	6966		Oak Valley	Park		W			Minneapolis	WA	55402	PI	43	96	7	21									01/23/1949	N	11/6/2015	I	
+WA000680	7790		Jack		Nelson		04/08/1930	M	93	1/3	Logan	Court					Dallas	WA	75205	CR	82	67	2	14									02/28/1989	U	11/30/2015	A	
+WA000681	7800		Andrew		Jackson		12/30/1928	M	3074		Gulseth	Center					Clearwater	WA	33763	SN	74	73	13	10	354 Dottie Hill				Rochester	14646	FL	United States	05/29/1974	U	1/10/2016	A	
+WA000682	7810		Carl	Carl	Knight		05/14/1982	M	5767		Forest Run	Park					Corpus Christi	WA	78405	PI	90	90	21	9									08/09/1943	V		A	
+WA000683	7820		Anne	Barbara	Day		03/30/1953	F	27		Linden	Terrace					Austin	WA	78754	CR	82	58	21	11	55717 Weeping Birch Pass				Huntington	25775	TX	United States	01/23/1952	V	5/8/2016	I	
+WA000684	7830		Gerald	Billy	Lynch		07/03/1931	M	2		Declaration	Terrace		SW			Denver	WA	80223	PI	55	50	17	14	8 Thierer Way				Alexandria	22301	CO	United States	10/02/1995	U		A	
+WA000685	7840		Victor	Victor	Hall		04/13/1969	M	399		Nova	Court					Burbank	WA	91520	SN	26	72	18	21									11/11/2008	V	1/18/2016	I	
+WA000686	7850		Kathy		Romero		03/06/1981	F	4068		Bunker Hill	Drive					Houston	WA	77223	SN	17	93	11	4									04/10/1954	N	7/26/2016	A	
+WA000687	7860		Christina		Reid		08/26/1973	F	2	3/4	Myrtle	Road					Hamilton	WA	45020	PI	41	81	10	9	919 Morrow Lane				New York City	10115	OH	United States	05/21/1936	U	12/16/2015	A	
+WA000688	7870	Honor	George	Anthony	Nelson		07/10/1952	M	3	3/4	Dayton	Avenue	#			53	Sacramento	WA	94297	CR	45	59	10	22									06/11/1985	U	11/11/2015	I	
+WA000689	7880		David	Craig	Parker		03/24/1929	M	408	3/4	Mayer	Center		NW			Terre Haute	WA	47812	CR	64	92	10	11	42925 Dahle Drive				Jacksonville	32236	IN	United States	01/31/1965	N	12/12/2015	A	
+WA000690	7890		Stephen		Meyer		07/05/1959	M	9		Lerdahl	Crossing					Bradenton	WA	34282	CR	43	29	3	6									03/02/1931	N	12/25/2015	A	
+WA000691	7900	Mr	Randy	Philip	Hanson		10/04/1977	M	46		Morning	Terrace	Apt	W		14	Nashville	WA	37235	CR	6	38	14	18	9197 Mallory Alley				Las Vegas	89110	TN	United States	06/15/1958	N	8/8/2016	A	
+WA000692	7910		Douglas	David	Ortiz		06/24/1940	M	896		Forster	Drive			SE		Salt Lake City	WA	84115	PI	22	13	5	4									05/12/2002	V	8/1/2016	A	
+WA000693	7920		Randy	Matthew	Nguyen		03/11/1977	M	06		Di Loreto	Way					San Diego	WA	92153	AS	46	2	11	12	05 Autumn Leaf Road				Huntsville	35815	CA	United States	12/22/1975	N	7/19/2016	A	
+WA000694	7930		Terry		Davis		08/14/1938	M	73187		Ramsey	Lane	#			72	Irvine	WA	92710	AS	70	79	8	18	4621 Karstens Place				Tucson	85748	CA	United States	08/06/1998	U	11/25/2015	A	
+WA000695	7940		Alice		Stone		11/08/1935	F	7		Kensington	Street			NW		Dayton	WA	45419	AS	31	51	15	7									12/26/1988	N	7/31/2016	A	
+WA000696	7950		Scott	Henry	Garrett		02/08/1963	M	6447		Coolidge	Center			SE		Topeka	WA	66699	CR	90	54	1	10									06/22/1942	N	3/11/2016	A	
+WA000697	7960		Robin	Rebecca	Turner	Jr	02/16/1999	F	494		Corry	Way					Anaheim	WA	92805	CR	18	40	19	15	01 Anzinger Center				Anaheim	92805	CA	United States	05/03/1955	N	12/11/2015	A	
+WA000698	7970		Doris		Phillips		04/04/1942	F	09788		Shelley	Center		SW			Los Angeles	WA	90030	AS	20	4	13	11									09/23/2006	U	9/8/2015	I	
+WA000699	7980		Howard	George	Coleman	II	05/16/1934	M	671		Judy	Parkway					Montgomery	WA	36119	SN	20	38	16	11	36647 Sunfield Trail				Minneapolis	55428	AL	United States	02/04/1941	P	5/13/2016	I	
+WA000700	7990		Anna		Holmes		04/07/1952	F	84		Dayton	Parkway		N			Norfolk	WA	23509	PI	78	18	11	12									04/05/1934	N	10/3/2015	A	
+WA000701	8000		Benjamin	Jack	Oliver		07/27/1997	M	667		Nova	Crossing	Apt			46	Kansas City	WA	66105	CR	63	3	4	17	15 Coleman Court				New Orleans	70116	KS	United States	01/01/1983	U	8/16/2015	I	
+WA000702	8010	Mr	Barbara	Susan	Andrews		09/01/1975	F	56		Tony	Center					Las Vegas	WA	89145	AS	63	36	3	8									07/27/1953	U	8/6/2016	A	
+WA000703	8020		Betty		Wells		04/29/1961	F	8064		Mockingbird	Hill					Schaumburg	WA	60193	CR	46	70	18	7	73658 Hoepker Point				Montgomery	36109	IL	United States	08/17/1976	U	3/20/2016	I	
+WA000704	8030		Ryan	Steve	Rose		06/03/1933	M	753		Orin	Street					Norwalk	WA	06859	AS	42	75	16	1									08/15/1959	P	3/27/2016	A	
+WA000705	8040		Jose	Jimmy	Bishop		12/14/1981	M	8		Moose	Circle	Apt			15	Charlotte	WA	28242	AS	87	69	6	12	573 Dunning Parkway				Mesa	85215	NC	United States	04/03/1942	U	6/21/2016	I	
+WA000706	8050	Mrs	Martha		Jordan		01/07/1961	F	97195		Westport	Avenue			W		Bridgeport	WA	06606	CR	65	49	18	5									01/08/2004	V	4/30/2016	A	
+WA000707	8060		Raymond		Lynch		02/11/1921	M	06		Manitowish	Circle					South Bend	WA	46699	CR	94	76	2	7									03/19/1963	N		I	
+WA000708	8070		Ashley	Margaret	Gardner		09/05/1931	F	52		Nevada	Terrace			SW		Reston	WA	22096	AS	93	4	15	13	9 Lakeland Lane				Las Vegas	89155	VA	United States	02/01/1991	U	3/22/2016	A	
+WA000709	8080	Mrs	Brenda	Katherine	Nelson		09/02/1926	F	6093		Pankratz	Lane	Apt			35	New York City	WA	10105	PI	49	21	3	21	9 Aberg Junction				El Paso	79989	NY	United States	11/06/2003	U	6/1/2016	I	
+WA000710	8090		Dorothy	Beverly	Foster		09/01/1946	F	09926	3/4	Ridge Oak	Street					Salt Lake City	WA	84110	AS	34	5	13	5	780 Prentice Terrace				Oklahoma City	73119	UT	United States	11/08/2001	N	6/25/2016	I	
+WA000711	8100		Linda	Paula	Reyes		06/14/1977	F	31215		Pawling	Avenue	#	NW		69	Charlotte	WA	28272	PI	23	89	9	6	4653 Lyons Road				Worcester	01605	NC	United States	06/15/1985	P	11/17/2015	A	
+WA000712	8110		Kathryn	Amanda	Bowman		06/21/1981	F	9847		Scoville	Circle					Colorado Springs	WA	80920	PI	28	39	20	4	499 Eggendart Circle				Reading	19605	CO	United States	12/27/2015	P	11/17/2015	I	
+WA000713	8120		Kathy		Sanders		03/29/1944	F	889		Upham	Terrace					Houston	WA	77223	AS	90	11	9	8	8 Elgar Street				Trenton	08608	TX	United States	08/15/1961	U	3/10/2016	A	
+WA000714	8130		Richard	Billy	Banks		02/04/1929	M	738		Old Gate	Drive					Birmingham	WA	35205	AS	37	10	2	21	149 Village Parkway				Mesa	85215	AL	United States	12/25/1947	N	1/5/2016	I	
+WA000715	8140		Virginia		Martin	III	12/30/1952	F	9301		Maple	Hill					Hialeah	WA	33013	AS	41	21	4	18									06/14/2016	N	3/26/2016	A	
+WA000716	8150		Roy	Russell	Chavez		08/10/1922	M	89		Morningstar	Crossing	Apt			1	Amarillo	WA	79165	PI	16	39	5	7									03/17/1986	P	7/6/2016	I	
+WA000717	8160	Ms	Raymond	Richard	Carroll		03/28/1964	M	92440		Park Meadow	Drive		SE			Tacoma	WA	98411	AS	100	92	21	17	97 Huxley Crossing				Lancaster	17622	WA	United States	05/07/1975	N	1/11/2016	I	
+WA000718	8170	Honor	Carlos	Jerry	Reed		01/19/1976	M	77		Harper	Plaza					Tyler	WA	75710	CR	6	23	2	2									03/30/1953	U	9/1/2015	A	
+WA000719	8180		George		Bell		05/16/1923	M	09		Alpine	Circle		SW			Boise	WA	83711	AS	2	68	3	11									03/25/1953	N	3/30/2016	A	
+WA000720	8190		Andrew		Gardner		10/29/1962	M	621		Prairieview	Court	#			63	Los Angeles	WA	90065	SN	33	38	17	17									02/23/1963	N	7/24/2016	A	
+WA000721	8200		Lori	Kathy	Pierce		06/14/1937	F	9		Hayes	Drive					Wichita Falls	WA	76310	SN	32	66	7	1	254 Grayhawk Park				Birmingham	35225	TX	United States	12/29/1959	V		A	
+WA000722	8210		Kathy		George		02/12/2000	F	73395		Mesta	Avenue		SE			Tacoma	WA	98481	AS	10	93	4	18									02/23/1983	V	8/6/2016	I	
+WA000723	8220	Honor	Scott	Henry	Thompson		12/30/1926	M	2791	1/3	Buena Vista	Circle	Apt		N	65	Cincinnati	WA	45243	CR	81	38	15	16									08/15/1994	U		A	
+WA000724	8230		Julie		Fowler	Sr	12/24/1935	F	1		Eliot	Terrace		SW	N		Louisville	WA	40210	PI	99	87	5	15	6389 Ridgeview Parkway				San Francisco	94137	KY	United States	05/26/1994	P	6/24/2016	I	
+WA000725	8240	Rev	Joan		Payne		04/07/1973	F	259		Wayridge	Pass					Toledo	WA	43666	SN	84	29	6	6	00455 High Crossing Pass				Saint Joseph	64504	OH	United States	08/15/1998	U	3/12/2016	A	
+WA000726	8250		Howard		Watson		03/27/1986	M	9		Rigney	Plaza					Round Rock	WA	78682	SN	58	36	11	22									08/09/1934	U	4/13/2016	I	
+WA000727	8260		Jean	Ruth	Walker		12/18/1921	F	5		Elmside	Street					San Jose	WA	95173	PI	41	26	18	6	923 Ilene Street				Columbia	65218	CA	United States	03/14/1993	N	3/22/2016	I	
+WA000728	8270		Jason	Ralph	Morales		02/05/1965	M	9265		Ridgeview	Terrace			NW		Pensacola	WA	32590	SN	87	71	16	6									02/03/1969	P	3/20/2016	A	
+WA000729	8280		Michelle		Thomas		12/22/1983	F	36205		Golf View	Terrace		W	SE		Jacksonville	WA	32220	SN	7	21	13	23									10/31/1980	N	2/27/2016	I	
+WA000730	8290		Emily		Long		05/02/1936	F	30		Maple	Place		N			Omaha	WA	68105	SN	64	64	20	2									10/25/1966	V	11/15/2015	A	
+WA000731	8300	Mr	Melissa		Lewis		04/23/1927	F	40		Vahlen	Way			SE		Boston	WA	02203	SN	23	23	7	23	61734 Dryden Alley				San Antonio	78210	MA	United States	01/06/1985	V	8/27/2015	I	
+WA000732	8310		Sara		Howell		01/13/1984	F	01		Iowa	Circle	#		NW	25	Decatur	WA	30033	SN	15	89	21	21									02/09/1998	V	4/25/2016	I	
+WA000733	8320		Joshua	Juan	Harper		08/29/1953	M	287		Florence	Pass		SW			Carlsbad	WA	92013	SN	66	31	12	23									12/31/1961	U	10/19/2015	I	
+WA000734	8330		Maria	Joan	Fowler		10/13/1950	F	06480		Sommers	Terrace			SW		Syracuse	WA	13251	AS	63	29	15	3									03/22/2003	U	2/21/2016	A	
+WA000735	8340		Robert	Edward	Torres		10/22/1976	M	094	1/3	Lerdahl	Place	#			14	Irvine	WA	92619	CR	52	61	12	19									05/15/1958	V	11/10/2015	I	
+WA000736	8350		Thomas		Riley		01/20/1989	M	20804	1/3	Carioca	Alley	Apt	N		46	Boston	WA	02119	CR	73	46	4	9	11 Anderson Street				Austin	78703	MA	United States	01/10/2012	P	4/12/2016	A	
+WA000737	8360	Honor	Steven	Donald	Carpenter		06/29/1984	M	92817	1/3	Farragut	Hill					San Antonio	WA	78265	PI	86	7	11	16									09/06/1968	P	4/18/2016	I	
+WA000738	8370	Dr	Debra		Nguyen		03/28/1926	F	0	3/4	Eastlawn	Pass					Knoxville	WA	37924	PI	70	74	9	21									02/28/1963	N	1/14/2016	I	
+WA000739	8380		Arthur	Eric	Fuller		02/05/1959	M	857	3/4	Bashford	Trail					Tacoma	WA	98424	AS	66	60	15	10	298 Scott Parkway				Richmond	23242	WA	United States	11/26/1973	P	1/24/2016	I	
+WA000740	8390	Dr	Jean		Ryan		02/18/1984	F	82		Sunbrook	Way	Apt			36	Ogden	WA	84409	AS	46	3	8	1									08/01/2001	N	2/1/2016	A	
+WA000741	8400	Mrs	Brandon		Garrett		09/17/1959	M	97306		Pearson	Circle			W		Dayton	WA	45408	CR	76	93	14	19	41 Sunbrook Place				Minneapolis	55423	OH	United States	02/23/1934	P	6/22/2016	I	
+WA000742	8410	Mrs	Andrew	Ryan	Sullivan		12/11/1925	M	5918		Corscot	Lane	Apt			25	Cheyenne	WA	82007	SN	36	27	7	3									09/17/1952	N	3/22/2016	A	
+WA000743	8420		Julie		Cook		08/02/1941	F	333		Independence	Lane	Apt			65	Albany	WA	12237	CR	98	77	17	16	210 Maryland Trail				Austin	78754	NY	United States	01/19/1967	P	2/26/2016	A	
+WA000744	8430	Honor	Nancy		Cook		03/13/1929	F	2960		Homewood	Street	Apt			28	Evansville	WA	47719	SN	8	95	10	10	180 Maple Wood Parkway				Albany	12232	IN	United States	12/25/1943	V	1/23/2016	I	
+WA000745	8440		Janice	Amanda	Berry		04/24/1959	F	804		Roth	Parkway	#	N		66	Greensboro	WA	27425	AS	47	6	9	19	7 Spohn Hill				Los Angeles	90040	NC	United States	04/12/1952	V	9/4/2015	A	
+WA000746	8450		Michael	Craig	Watkins		03/18/1943	M	7		Lakewood Gardens	Alley	Apt	N		43	Grand Rapids	WA	49518	CR	5	4	21	1	54400 Norway Maple Plaza				El Paso	79905	MI	United States	10/27/1932	V		I	
+WA000747	8460		Carl	Scott	Washington		12/22/1986	M	9431		Lighthouse Bay	Park					Fort Pierce	WA	34981	SN	82	6	3	19	654 Merry Place				New York City	10024	FL	United States	07/24/1954	V	8/4/2016	A	
+WA000748	8470	Mrs	Katherine	Diana	Bailey		02/05/1992	F	23931	1/3	Dovetail	Road	#	N		49	Richmond	WA	23220	AS	61	41	1	17									03/03/1936	P	6/20/2016	A	
+WA000749	8480		Pamela		Pierce		04/26/1938	F	93627		Fulton	Center			W		Springfield	WA	62776	SN	50	41	14	18	280 Hallows Park				Fullerton	92835	IL	United States	11/18/1978	P	5/20/2016	A	
+WA000750	8490		Samuel	John	Pierce		10/30/1945	M	7376		Warbler	Alley	#			25	Indianapolis	WA	46278	SN	52	99	17	21	27635 Lotheville Place				Evansville	47719	IN	United States	05/04/2001	P	10/26/2015	A	
+WA000751	8500		Peter	Ralph	Lynch		04/22/1956	M	6		School	Court	#			15	Toledo	WA	43610	SN	6	62	2	11									04/12/2011	V	9/25/2015	A	
+WA000752	8510	Honor	Aaron		Alvarez		09/13/1935	M	54		Luster	Pass		SE			Buffalo	WA	14205	PI	5	100	17	6									06/08/1941	V	10/6/2015	A	
+WA000753	8520		Fred	Joseph	Stephens		09/21/1982	M	99281		Briar Crest	Park		SW			Stockton	WA	95219	SN	60	36	15	4									10/19/2007	U	12/7/2015	I	
+WA000754	8530	Ms	Edward		Jenkins		09/22/1940	M	2		Redwing	Avenue					Pittsburgh	WA	15220	CR	68	31	20	4	9 Everett Center				Arlington	76096	PA	United States	08/07/1966	U	8/19/2015	I	
+WA000755	8540		Jerry	Chris	Burke		08/13/1981	M	03		Spaight	Way					San Antonio	WA	78230	SN	76	81	2	21									09/20/1962	P	10/7/2015	I	
+WA000756	8550	Dr	Margaret		Daniels		08/22/1945	F	120		Truax	Center	Apt			63	Miami	WA	33169	AS	2	33	3	23	8 Trailsway Court				Madison	53716	FL	United States	11/15/1947	U	7/17/2016	A	
+WA000757	8560		Laura	Bonnie	Hart	IV	06/19/1951	F	262		Farmco	Park	#	W	W	94	Sacramento	WA	94280	CR	63	10	15	22									05/17/1966	P	7/24/2016	I	
+WA000758	8570		Steven	Russell	Reed		01/31/1989	M	951	3/4	Spaight	Lane					New Orleans	WA	70129	SN	17	73	6	22	5 International Road				Pittsburgh	15215	LA	United States	11/09/1992	V	5/4/2016	A	
+WA000759	8580		Peter	Jonathan	Chapman		09/20/1946	M	90		Esch	Terrace	#			76	Austin	WA	78710	SN	70	60	4	5									05/04/1967	V	4/28/2016	A	
+WA000760	8590		Jennifer		Hernandez		12/17/1997	F	56969		Birchwood	Way	Apt			88	Beaumont	WA	77705	AS	15	13	12	5									10/20/1938	N	8/16/2015	I	
+WA000761	8600	Mrs	Carl		Bishop		11/17/1976	M	370		Schiller	Road	Apt	SE	SW	5	Sacramento	WA	94207	CR	95	80	20	15									12/22/2015	P	4/18/2016	I	
+WA000762	8610		Kathy	Carol	Robertson	Sr	02/26/1949	F	82		Esker	Park	Apt		NW	44	Dallas	WA	75392	CR	75	21	5	14	9 Elgar Trail				Phoenix	85062	TX	United States	09/26/1983	V	1/2/2016	I	
+WA000763	8620		Linda	Phyllis	Holmes		08/06/1996	F	4		Golf	Avenue					Texarkana	WA	75507	CR	1	61	21	3									12/30/1991	N	1/19/2016	A	
+WA000764	8630		Gary	Andrew	West		02/14/1927	M	7	3/4	Park Meadow	Alley			SE		Albany	WA	12210	PI	88	42	21	6									07/21/1973	N	3/25/2016	I	
+WA000765	8640		Sean	Harold	Perry		02/07/1987	M	59271		Comanche	Junction	Apt			66	Syracuse	WA	13205	AS	79	76	8	18	942 Del Sol Circle				Fort Worth	76110	NY	United States	07/11/2010	P		A	
+WA000766	8650		Alan	Jeremy	Bennett		05/13/1969	M	4923		Onsgard	Plaza	#			91	Fort Myers	WA	33906	AS	12	54	10	23									12/06/1969	U	8/25/2015	A	
+WA000767	8660		Jane		Watson		12/04/1965	F	4178		Nevada	Way	#			44	Arlington	WA	22217	CR	93	77	14	23									07/18/1995	P	11/1/2015	I	
+WA000768	8670	Rev	Theresa		Peters		08/09/1939	F	97957		Hudson	Circle	Apt			47	Harrisburg	WA	17105	CR	97	40	13	1									05/13/1981	N	7/30/2016	A	
+WA000769	8680		Norma		Williams		05/19/1956	F	7		Talmadge	Place			N		Sacramento	WA	94257	AS	38	4	5	1									03/12/1964	U	9/1/2015	I	
+WA000770	8690	Mr	Gary	Andrew	Gardner		10/27/1923	M	24		Pawling	Park	Apt			10	Savannah	WA	31410	AS	70	8	15	13									10/18/1983	N	3/2/2016	A	
+WA000771	8700		Carolyn		Gonzalez		08/18/1966	F	3	3/4	Memorial	Junction	Apt		NW	49	Washington	WA	20397	SN	77	81	14	17	666 Dorton Trail				Kent	98042	DC	United States	08/14/1943	V	3/27/2016	A	
+WA000772	8710		Earl	Roy	Morris		12/26/1993	M	3		Marquette	Point					Austin	WA	78778	SN	21	34	5	20	2 Nancy Junction				Anaheim	92805	TX	United States	04/26/2014	V	9/20/2015	A	
+WA000773	8720	Mr	George		Tucker		12/20/1990	M	30448		Calypso	Parkway					Orlando	WA	32891	SN	69	81	21	12									07/09/1982	P	10/8/2015	I	
+WA000774	8730		Carl	Adam	Matthews		09/26/1949	M	0357	1/3	John Wall	Trail	Apt			98	Houston	WA	77260	AS	6	53	18	18	34 Vidon Point				Cincinnati	45203	TX	United States	05/10/1977	N	10/17/2015	A	
+WA000775	8740		Anne		Reed		11/01/1996	F	26887	1/3	Rockefeller	Place	#		SW	16	Salt Lake City	WA	84135	AS	22	24	14	5									10/24/1985	V		A	
+WA000776	8750		Sean	Samuel	Taylor		08/04/1978	M	1683		Tennessee	Drive					Silver Spring	WA	20910	CR	68	52	19	22									10/11/1957	U	6/16/2016	A	
+WA000777	8760	Dr	Craig		Perkins	II	03/09/1980	M	523		Nancy	Hill	Apt			81	Louisville	WA	40210	PI	27	75	8	4	65191 Mandrake Center				San Francisco	94154	KY	United States	03/30/1942	V	5/10/2016	A	
+WA000778	8770		John	Ryan	Watkins		08/25/1997	M	5		Forest Dale	Pass	Apt	SW	W	100	Mesa	WA	85210	CR	39	82	10	11									01/05/1938	U	9/20/2015	I	
+WA000779	8780		Gary	Jesse	Riley		11/05/1964	M	1		Crownhardt	Hill					Cincinnati	WA	45999	SN	88	46	16	14									07/20/1982	N		I	
+WA000780	8790		Kathryn	Martha	Howell		04/03/1996	F	889		Arrowood	Drive					Atlanta	WA	30311	SN	78	56	15	18									11/24/1991	U	8/24/2015	I	
+WA000781	8800		Ralph	Kenneth	Kelly	II	11/04/1970	M	31853		Goodland	Point	#			82	Sioux City	WA	51105	SN	95	79	15	2	5 Jenna Way				Rochester	14639	IA	United States	05/29/2003	U	2/16/2016	A	
+WA000782	8810		George	Jonathan	Watson		10/22/1960	M	14		Cherokee	Junction					Evansville	WA	47747	AS	53	11	6	1	11 Beilfuss Terrace				Peoria	61656	IN	United States	02/28/1985	P	4/14/2016	A	
+WA000783	8820		Christopher	Jonathan	Hayes		07/15/1969	M	76123	3/4	Ramsey	Point			SE		Saint Paul	WA	55115	PI	20	87	18	14									11/21/2000	U	10/23/2015	A	
+WA000784	8830		Ann		Ryan		03/26/1974	F	9		Sundown	Park	Apt			8	Roanoke	WA	24004	CR	16	29	4	8									12/24/1961	N	2/4/2016	I	
+WA000785	8840		Bobby	Juan	Fernandez		03/23/1923	M	21	1/3	John Wall	Place					Chicago	WA	60636	AS	35	36	16	13	6 Pepper Wood Circle				Wilmington	19810	IL	United States	12/10/1970	N	7/7/2016	I	
+WA000786	8850	Mr	Robin		Hill		07/01/1951	F	8558	3/4	Victoria	Court					Appleton	WA	54915	SN	47	40	20	6									11/08/1983	U	3/9/2016	I	
+WA000787	8860	Ms	Virginia		Wallace		09/16/1983	F	80		Stoughton	Parkway					New York City	WA	10165	SN	18	26	10	5									04/14/1998	N	3/13/2016	I	
+WA000788	8870		Norma		Fowler		07/01/1949	F	33311		Larry	Plaza	#			9	Rochester	WA	14646	AS	95	80	2	14									03/20/1985	N	6/9/2016	I	
+WA000789	8880	Rev	Patrick	Ernest	Warren		08/25/1962	M	2652		Thackeray	Circle					Knoxville	WA	37995	PI	52	94	20	6	00549 Anderson Center				Charleston	25321	TN	United States	02/02/1971	U	12/22/2015	A	
+WA000790	8890		Henry		Murphy		11/06/1993	M	11931	3/4	Jenna	Alley		W			Houston	WA	77281	SN	78	31	16	4	3 Kedzie Point				Wichita	67205	TX	United States	07/06/1972	N	5/19/2016	A	
+WA000791	8900		Julie	Amanda	Bailey		06/23/1945	F	8307		Aberg	Lane					Schenectady	WA	12305	CR	77	8	14	21									05/23/2013	U	7/18/2016	I	
+WA000792	8910		Martin	Randy	Marshall	Jr	06/13/1950	M	108		Reinke	Road					Houston	WA	77080	CR	13	84	8	11									04/14/1985	N	5/14/2016	A	
+WA000793	8920	Mrs	Craig	Howard	Hunt		06/10/1951	M	5059		Summer Ridge	Circle		SW			Memphis	WA	38181	PI	59	10	10	15	54090 Ilene Trail				Fullerton	92835	TN	United States	03/22/1938	V	6/28/2016	I	
+WA000794	8930	Mrs	Daniel	Patrick	Owens		03/08/1967	M	91		Truax	Terrace	#		NW	44	Honolulu	WA	96815	SN	96	18	9	23	3 Forster Park				Corpus Christi	78415	HI	United States	04/11/1937	N	12/5/2015	I	
+WA000795	8940		Joe	Craig	Long		06/01/1976	M	6	1/3	Division	Way	Apt	SE		22	Austin	WA	78715	PI	12	100	6	2									07/24/2012	N	3/20/2016	A	
+WA000796	8950		Bonnie	Nicole	Ford		01/20/1978	F	75		Eagle Crest	Terrace					Huntsville	WA	35810	CR	25	4	2	10	05 Quincy Circle				Akron	44315	AL	United States	08/19/2012	V	7/5/2016	A	
+WA000797	8960		Carolyn	Nancy	Stevens		12/21/1996	F	5		Claremont	Circle	#			20	Amarillo	WA	79105	CR	10	86	2	8									06/15/2016	V	10/21/2015	I	
+WA000798	8970		Elizabeth		Chavez		01/01/1982	F	6244	1/3	Pepper Wood	Park					Pueblo	WA	81015	CR	61	41	21	17									04/20/1958	P	12/31/2015	I	
+WA000799	8980		Phyllis	Donna	Johnson		06/11/1959	F	80		Butternut	Plaza					Memphis	WA	38131	SN	77	15	10	12									05/17/1936	V	3/9/2016	I	
+WA000800	8990		Sean	Frank	Rivera		04/25/1976	M	0		Westerfield	Place	#			44	College Station	WA	77844	SN	67	37	11	3	3 Sutteridge Road				High Point	27264	TX	United States	06/24/1948	P	12/25/2015	A	
+WA000801	9000	Mrs	Martha	Deborah	Oliver		03/23/1964	F	15520	3/4	Shasta	Junction	Apt			31	Ashburn	WA	22093	SN	54	41	2	15									06/21/2016	N	5/24/2016	A	
+WA000802	9010	Mrs	Nicholas		Phillips		07/14/1959	M	7764	3/4	Caliangt	Road					Sacramento	WA	94297	AS	62	14	11	16									04/23/1944	N	8/26/2015	A	
+WA000803	9020		Jesse	Bruce	Morales		02/05/1940	M	15768		Waywood	Drive	#			7	New York City	WA	10203	CR	100	12	19	19									06/26/1975	V	10/3/2015	I	
+WA000804	9030		Harold		Henderson		07/01/1980	M	37688	1/3	Hermina	Crossing	Apt			34	Charleston	WA	29424	PI	11	96	20	2									12/04/1955	V	7/16/2016	A	
+WA000805	9040		Shawn	Peter	Hansen		09/21/1944	M	3858		Valley Edge	Center		N			Colorado Springs	WA	80915	CR	80	28	19	15	64 Mockingbird Way				Atlanta	30358	CO	United States	11/28/1974	N	5/1/2016	I	
+WA000806	9050		Roy	Justin	Watson		09/05/1989	M	586		Carpenter	Crossing					Charlotte	WA	28247	SN	70	18	14	13	8967 Iowa Junction				Colorado Springs	80951	NC	United States	10/22/1955	P	8/8/2016	I	
+WA000807	9060	Mr	Ashley	Kathryn	Torres		08/20/1951	F	18455	1/3	Homewood	Hill	#			78	Dayton	WA	45432	CR	11	72	19	13									07/02/1936	P	3/5/2016	I	
+WA000808	9070		Rebecca		Jacobs		01/31/1976	F	5	1/3	Thierer	Alley			W		Pompano Beach	WA	33069	SN	6	29	4	14									06/30/1987	V	3/5/2016	A	
+WA000809	9080	Honor	Jane	Stephanie	Reid		11/25/1961	F	054		Main	Lane	#			43	Sioux Falls	WA	57105	AS	92	99	10	3									01/14/2002	P	2/1/2016	I	
+WA000810	9090	Ms	Annie		Berry		12/01/1991	F	93		Vera	Lane	Apt			43	New York City	WA	10120	SN	69	85	15	18	71272 Manitowish Park				Portsmouth	03804	NY	United States	02/05/1980	N	3/1/2016	A	
+WA000811	9100		Theresa	Sharon	Vasquez	Jr	04/24/1983	F	114		Blue Bill Park	Place		NW			Temple	WA	76505	SN	89	39	18	22	855 3rd Drive				Corpus Christi	78475	TX	United States	06/27/1981	P	2/29/2016	A	
+WA000812	9110		Linda		Wallace		04/10/1959	F	912		Ronald Regan	Point	Apt			23	Battle Creek	WA	49018	SN	35	63	21	6									07/11/1948	U	8/13/2015	A	
+WA000813	9120		Kimberly	Christine	Bailey		11/25/1984	F	318		Cody	Lane					San Francisco	WA	94154	AS	7	13	21	8	866 3rd Terrace				London	40745	CA	United States	04/04/1978	U	7/10/2016	I	
+WA000814	9130	Mrs	Diane	Emily	Porter		03/07/2000	F	7444		Dovetail	Plaza		W	N		Cincinnati	WA	45228	SN	90	47	9	3	4022 Macpherson Way				Memphis	38188	OH	United States	12/16/2005	P	10/26/2015	I	
+WA000815	9140		George	Howard	Parker		04/06/1974	M	498	3/4	Oak Valley	Road	Apt			98	Seattle	WA	98158	SN	44	89	10	13	7313 Kedzie Drive				Charlotte	28210	WA	United States	10/28/1935	N	1/15/2016	A	
+WA000816	9150	Mrs	Jason	Edward	Sims	IV	08/01/1927	M	28	3/4	Cambridge	Trail	#		N	98	Oklahoma City	WA	73129	AS	6	82	15	18									09/16/2015	V	9/21/2015	I	
+WA000817	9160		Larry		Bell		09/27/1996	M	22	3/4	Clyde Gallagher	Point		W	NW		Portsmouth	WA	03804	CR	49	10	2	22									06/08/1937	U	12/9/2015	A	
+WA000818	9170		Amy	Michelle	Black		11/02/1991	F	71496		Derek	Junction	#		SE	26	Chicago	WA	60669	PI	20	36	7	15	4 Banding Pass				Gilbert	85297	IL	United States	05/04/1990	V	4/16/2016	A	
+WA000819	9180	Dr	Aaron	Martin	Price		06/10/1978	M	9		Twin Pines	Court			SW		Des Moines	WA	50330	CR	61	37	21	23									11/07/1947	U	3/18/2016	I	
+WA000820	9190		Shawn	Louis	Smith		01/10/1962	M	9		Lake View	Road	Apt	W		30	Washington	WA	20456	PI	75	69	20	2	8802 Jackson Street				New Haven	06505	DC	United States	09/18/1993	N	3/15/2016	I	
+WA000821	9200		Rose	Rachel	Ross		03/23/1936	F	926		Valley Edge	Parkway					Charlotte	WA	28284	PI	73	8	5	9	068 Charing Cross Terrace				San Diego	92132	NC	United States	02/11/1964	P	1/30/2016	A	
+WA000822	9210	Dr	George		Nguyen		03/02/1938	M	80		Heffernan	Alley	Apt			66	Kansas City	WA	64136	CR	97	71	14	19	30868 Mayer Hill				Cincinnati	45238	MO	United States	03/05/1937	U	4/6/2016	A	
+WA000823	9220		Ernest	Mark	Romero		02/02/1982	M	4	1/3	Novick	Drive					Charleston	WA	25356	SN	3	96	6	14									12/27/1967	P	5/22/2016	I	
+WA000824	9230		Michelle		James		10/12/1979	F	3		Sage	Trail					Pasadena	WA	91125	CR	27	60	17	9									09/26/1978	V	5/25/2016	A	
+WA000825	9240		James		Washington		05/12/1961	M	1		Monica	Park	Apt			52	Concord	WA	94522	SN	34	49	3	22									12/28/1968	N	10/23/2015	I	
+WA000826	9250		Debra	Evelyn	Lynch		09/02/1983	F	18696		Prairieview	Center					Saint Paul	WA	55103	SN	26	93	21	14									08/16/1930	P	4/5/2016	A	
+WA000827	9260		Alan	Douglas	Andrews		06/03/1940	M	714		Goodland	Court			SW		Hialeah	WA	33013	AS	87	61	2	13									05/23/1935	N	5/22/2016	A	
+WA000828	9270		Anthony		Diaz		01/04/1940	M	3790		Hollow Ridge	Plaza		SE			Laurel	WA	20709	SN	21	74	20	9	143 Claremont Circle				Springfield	01105	MD	United States	08/17/2012	V	11/30/2015	I	
+WA000829	9280	Rev	Betty	Stephanie	Hawkins		03/28/1936	F	8448		Tony	Place					Washington	WA	20414	PI	29	96	17	13									10/29/1974	N	11/15/2015	A	
+WA000830	9290	Rev	Anna	Betty	Bradley		10/19/1935	F	38		Bay	Drive					Los Angeles	WA	90035	AS	20	71	8	22	4 Moose Street				Denver	80204	CA	United States	05/09/1972	N	1/17/2016	I	
+WA000831	9300		Amy	Ruby	Williamson		12/31/1925	F	99669	1/3	Pine View	Road					Plano	WA	75074	CR	26	32	2	6	77 Mcguire Avenue				Baton Rouge	70894	TX	United States	04/21/1980	U	10/9/2015	I	
+WA000832	9310	Rev	Jonathan	Daniel	Weaver		07/10/1978	M	76		Londonderry	Lane					Dallas	WA	75251	PI	68	66	12	11									05/18/1976	P	5/4/2016	I	
+WA000833	9320		Frank		Williamson		04/19/1977	M	2031		Schmedeman	Junction	#			18	Washington	WA	20503	PI	26	19	6	17	911 Loomis Road				Chicago	60624	DC	United States	08/07/1956	U	9/25/2015	A	
+WA000834	9330	Mrs	Steven	Stephen	Stephens		04/02/1980	M	6006		Muir	Plaza	#		SW	100	Charlotte	WA	28225	SN	4	55	4	9									10/29/1987	U		I	
+WA000835	9340		Robert	David	Knight		06/08/1985	M	3		Eliot	Way	#			72	Anchorage	WA	99522	CR	10	32	20	12									08/22/2002	N	4/17/2016	I	
+WA000836	9350		Gary	Donald	Diaz		03/31/1971	M	8		Milwaukee	Court					San Francisco	WA	94169	AS	79	97	5	11									01/11/1965	U	6/9/2016	I	
+WA000837	9360		Wanda	Denise	Grant	II	08/13/1974	F	3302		Anzinger	Lane	Apt			23	Minneapolis	WA	55448	SN	90	80	9	22									10/15/1941	U	3/15/2016	I	
+WA000838	9370	Mrs	Gary		Berry	IV	07/31/1995	M	2		Monterey	Pass					Youngstown	WA	44555	AS	17	89	18	18	720 Autumn Leaf Plaza				Cincinnati	45223	OH	United States	02/10/1946	U	1/5/2016	A	
+WA000839	9380		Maria		Webb		12/07/1949	F	31179	1/3	Sugar	Plaza	#			32	Miami	WA	33245	CR	78	43	1	10									01/18/1953	P	3/28/2016	A	
+WA000840	9390	Rev	Patricia	Kathy	Washington	III	04/18/1926	F	9		Fairview	Street	#	SW		78	Salem	WA	97312	SN	34	6	21	3									05/03/1949	N	9/11/2015	I	
+WA000841	9400		Kelly	Annie	Knight	Sr	08/27/1926	F	325	3/4	Packers	Alley		N			Louisville	WA	40280	CR	92	39	16	14									08/17/1958	U	7/7/2016	A	
+WA000842	9410	Mrs	Andrea	Christina	Greene		03/11/1936	F	92608		Ridgeview	Crossing					Clearwater	WA	34629	CR	25	80	12	2	11578 Clyde Gallagher Junction				Shawnee Mission	66220	FL	United States	03/09/1967	N	10/19/2015	I	
+WA000843	9420		Richard		Carpenter		11/05/1987	M	41		Erie	Junction					Honolulu	WA	96805	SN	95	35	18	7									11/20/1937	P	11/16/2015	I	
+WA000844	9430	Dr	Lillian		Morales		05/24/1938	F	7946	3/4	Packers	Terrace	#	SW		56	Houston	WA	77260	CR	86	64	3	21	9864 Calypso Plaza				Dallas	75342	TX	United States	09/28/2004	N	3/15/2016	I	
+WA000845	9440		Pamela	Julia	Watkins		05/28/1930	F	74501		Larry	Drive	#			99	Louisville	WA	40266	AS	69	68	15	10	79203 Hagan Avenue				Stamford	06905	KY	United States	11/13/1944	N	12/20/2015	A	
+WA000846	9450		Stephanie	Lillian	Coleman		12/10/1958	F	0	3/4	Eastlawn	Point					Washington	WA	20260	CR	52	46	21	14									11/10/1981	P	9/10/2015	A	
+WA000847	9460		Billy		Fuller		01/13/1976	M	44956		Rowland	Terrace	Apt			78	Dallas	WA	75277	SN	6	85	1	21	19 Waxwing Trail				Kalamazoo	49006	TX	United States	09/16/1985	V	3/16/2016	A	
+WA000848	9470		Kathryn	Kimberly	Lee		04/03/1925	F	1		Myrtle	Plaza	Apt	N		29	Salt Lake City	WA	84135	CR	38	12	14	13	00 Troy Drive				Elmira	14905	UT	United States	01/17/1987	N	2/25/2016	A	
+WA000849	9480	Rev	Craig	Jose	Crawford		06/15/1965	M	0		Schiller	Alley	Apt		NW	81	Fredericksburg	WA	22405	SN	10	76	18	7									04/17/1989	V	3/30/2016	I	
+WA000850	9490		Julia	Deborah	Garcia	IV	03/20/1993	F	42	1/3	Tony	Plaza		SE	NW		Wilkes Barre	WA	18706	SN	95	67	3	2									07/05/2016	N	10/30/2015	A	
+WA000851	9500		Joe	Andrew	Shaw		12/30/1963	M	61	1/3	Badeau	Alley	#			35	Saint Paul	WA	55103	CR	9	29	15	15									02/26/1954	V	12/1/2015	A	
+WA000852	9510		Michelle		Sanders	IV	01/20/1985	F	75	3/4	Hooker	Way	Apt	NW		58	Erie	WA	16565	CR	43	79	4	23	07212 Transport Lane				Salt Lake City	84135	PA	United States	05/07/1931	V	12/25/2015	I	
+WA000853	9520	Mr	Jimmy		Henderson		01/12/1947	M	7129		Northwestern	Center		N			Spokane	WA	99260	SN	47	58	10	9									08/12/1978	U	4/1/2016	I	
+WA000854	9530	Rev	William	Terry	Castillo		12/27/1994	M	5455		Bellgrove	Crossing	Apt			1	San Diego	WA	92132	SN	20	58	14	18									11/17/2007	U	8/19/2015	A	
+WA000855	9540		Michelle	Emily	Campbell		02/25/1964	F	791	3/4	Kenwood	Street					Pasadena	WA	91199	SN	56	41	3	1	3730 Shoshone Hill				Duluth	30096	CA	United States	02/15/1973	V	7/12/2016	A	
+WA000856	9550		Elizabeth	Helen	Hayes	Jr	02/18/1954	F	07053		Messerschmidt	Plaza	Apt			11	Baltimore	WA	21265	CR	61	66	21	21									12/06/1958	N		I	
+WA000857	9560		Emily		Franklin	Sr	08/19/1971	F	5084		Sage	Road	Apt			6	Garden Grove	WA	92844	SN	99	16	21	17	64 Ridgeway Way				New Haven	06510	CA	United States	06/09/1979	V	5/27/2016	I	
+WA000858	9570		Barbara		Vasquez		09/16/1996	F	773	1/3	Veith	Pass		SE			Tampa	WA	33647	CR	32	41	7	17	06354 Thackeray Plaza				Washington	20599	FL	United States	03/11/1969	U	10/1/2015	I	
+WA000859	9580		Harry	Randy	Tucker		02/02/1942	M	4		Stuart	Street			N		Longview	WA	75605	SN	53	80	3	22									04/07/1978	V	12/29/2015	I	
+WA000860	9590		Jimmy	Samuel	Ruiz		12/09/1963	M	84367	1/3	Luster	Point	#	NW		71	Mobile	WA	36670	CR	14	30	13	14									10/14/2000	P	4/13/2016	A	
+WA000861	9600		Heather		Harvey		10/19/1928	F	3628		Holmberg	Plaza		N			Cincinnati	WA	45203	AS	96	64	3	4	3162 Stoughton Terrace				White Plains	10633	OH	United States	10/11/1998	P	3/29/2016	A	
+WA000862	9610		Michelle	Betty	Olson		12/07/1991	F	735		Del Mar	Way	Apt			41	Tallahassee	WA	32314	CR	76	80	16	3	4 Sachs Trail				Kansas City	64114	FL	United States	08/02/1987	P	5/15/2016	I	
+WA000863	9620	Ms	Debra	Shirley	Howell		01/20/1957	F	662		Meadow Vale	Lane					Albuquerque	WA	87201	PI	43	2	16	14	17119 Northport Drive				Durham	27710	NM	United States	09/29/1959	N	8/31/2015	A	
+WA000864	9630	Ms	Eric	Dennis	Bailey	III	10/02/1965	M	75	3/4	Dorton	Crossing					Grand Rapids	WA	49505	CR	55	80	3	6									03/12/1981	U	11/22/2015	A	
+WA000865	9640		Ruth	Lillian	Edwards	Jr	03/16/1933	F	02878	1/3	Coleman	Parkway	#			26	Hollywood	WA	33028	PI	42	31	13	9	595 Forster Hill				Englewood	80150	FL	United States	09/30/2000	U	12/25/2015	I	
+WA000866	9650		Kathryn	Emily	Freeman		04/18/1987	F	805		Dapin	Circle	Apt			100	Erie	WA	16510	PI	52	81	13	3	8 Brentwood Hill				Huntington	25705	PA	United States	04/06/1962	P	11/28/2015	I	
+WA000867	9660		Marilyn		Duncan		08/10/1974	F	228		Londonderry	Lane	#		NW	38	Texarkana	WA	75507	AS	80	10	5	17									05/11/1948	V	7/18/2016	A	
+WA000868	9670	Mrs	Cynthia	Patricia	Davis		05/21/1976	F	1		Bunting	Terrace					Scranton	WA	18514	PI	48	79	8	9									08/11/2003	N	10/7/2015	A	
+WA000869	9680		Willie	Anthony	Cole		10/06/1997	M	60735		Boyd	Trail	Apt			14	Minneapolis	WA	55417	AS	69	4	9	3	1 Loomis Street				Green Bay	54313	MN	United States	12/31/1997	V	11/24/2015	A	
+WA000870	9690	Dr	Deborah		Mitchell		09/27/1965	F	9		Jenifer	Center	Apt			9	Columbia	WA	29203	AS	92	7	5	21	49982 Red Cloud Trail				Canton	44710	SC	United States	04/04/1958	V	4/25/2016	A	
+WA000871	9700		Janet	Julie	Mason		11/27/1953	F	78		Ohio	Alley					Fresno	WA	93715	SN	32	9	20	12									07/22/1992	V		A	
+WA000872	9710		Carl		Peterson		06/16/1983	M	6	1/3	Thompson	Trail					Raleigh	WA	27690	AS	71	50	5	21	08271 Heath Court				Washington	20016	NC	United States	12/23/1937	U		I	
+WA000873	9720		Gerald	George	Payne		09/12/1937	M	440		Kedzie	Place	Apt	W	SW	55	Long Beach	WA	90810	CR	1	62	5	17	0269 Helena Crossing				Tampa	33605	CA	United States	08/04/1941	N	10/22/2015	I	
+WA000874	9730		Brenda	Margaret	Gomez		01/12/1933	F	9066		Tennyson	Pass	Apt			35	Portland	WA	97206	CR	86	53	1	1	969 1st Drive				Modesto	95354	OR	United States	04/30/1934	V	8/16/2015	I	
+WA000875	9740		Pamela	Marie	Ramirez		05/25/1947	F	4		Petterle	Junction	Apt	N		98	San Bernardino	WA	92405	PI	68	91	15	13									10/05/2004	U	5/15/2016	A	
+WA000876	9750		Anthony	Justin	Rice		02/17/1942	M	65		Jana	Junction					Lexington	WA	40524	CR	8	85	10	3	09195 Fulton Trail				Cincinnati	45218	KY	United States	12/27/1937	V	12/16/2015	A	
+WA000877	9760		John	Thomas	Garrett		07/18/1993	M	22	3/4	Stuart	Alley	#			47	New Castle	WA	16107	AS	18	36	9	16									11/25/1989	U	3/23/2016	I	
+WA000878	9770		Ann	Rachel	Lewis		05/16/1930	F	9151		Morningstar	Place	Apt	SW		75	Jamaica	WA	11480	PI	51	74	17	18	949 Hooker Junction				Long Beach	90840	NY	United States	10/14/1930	P	8/23/2015	A	
+WA000879	9780	Mrs	Anthony		Reid		08/11/1951	M	133	1/3	Cardinal	Street		W			Amarillo	WA	79116	CR	96	79	15	2									11/29/1937	V	8/7/2016	A	
+WA000880	9790		Gary	Harold	Gilbert		10/07/1920	M	8		Karstens	Hill					Atlanta	WA	30328	CR	98	8	11	16									10/08/2008	V	1/28/2016	A	
+WA000881	9800		Sandra	Rose	Long		04/16/1931	F	6574		Tony	Drive		W			Tampa	WA	33680	SN	82	3	19	4	2 Schlimgen Alley				Anaheim	92812	FL	United States	07/31/1972	U	5/17/2016	I	
+WA000882	9810	Rev	Linda	Joyce	Bowman		05/03/1997	F	1124	3/4	Gina	Hill	Apt			52	Washington	WA	20470	CR	57	62	3	20									02/17/1994	N	9/15/2015	I	
+WA000883	9820		Alan	Jason	Lynch		11/11/1995	M	65		Farragut	Center	Apt			86	Washington	WA	20456	PI	17	80	14	8	41975 Northridge Place				Houston	77080	DC	United States	09/12/2012	U	3/10/2016	I	
+WA000884	9830		Anna	Alice	Gutierrez		09/05/1971	F	7475		Summit	Plaza	#			18	Saint Paul	WA	55108	CR	25	65	6	14									06/19/1968	N	2/14/2016	I	
+WA000885	9840		Jane	Kathleen	Fox		05/13/1957	F	49395		Fremont	Place					Greensboro	WA	27425	CR	82	72	18	21	95 Del Mar Hill				Atlanta	30392	NC	United States	01/01/1933	P	4/30/2016	I	
+WA000886	9850	Dr	Billy	Lawrence	Green		05/27/1954	M	3836		Rieder	Alley					Jamaica	WA	11499	AS	79	69	13	13	5 Gina Terrace				Pensacola	32505	NY	United States	06/04/1941	P	12/4/2015	A	
+WA000887	9860		Brian	Thomas	Peters		07/10/1922	M	3	1/3	Reindahl	Road					Columbus	WA	43268	PI	56	96	10	7									05/21/1984	N	7/3/2016	A	
+WA000888	9870		Michelle	Paula	Howard		02/19/1992	F	5	1/3	6th	Street					Bradenton	WA	34282	SN	93	71	10	5	3809 Tony Alley				Montgomery	36109	FL	United States	07/13/1968	N	11/15/2015	I	
+WA000889	9880		Sarah	Pamela	Wallace	Jr	12/06/1986	F	2936		Onsgard	Hill	Apt			19	Fairbanks	WA	99709	SN	4	65	10	9									07/27/1954	U	1/6/2016	A	
+WA000890	9890		Ruby	Sara	Turner		04/27/1942	F	52		Holy Cross	Court					Columbus	WA	43210	AS	26	46	17	4	6 David Junction				Tucson	85715	OH	United States	02/19/1956	P	5/13/2016	A	
+WA000891	9900		Daniel		Wagner		03/25/1922	M	31549		6th	Plaza	#		SE	99	Sioux Falls	WA	57110	SN	89	65	2	1									09/02/1949	P	8/28/2015	I	
+WA000892	9910		Ruth	Anne	Vasquez		04/01/1953	F	226		Monument	Court					Louisville	WA	40266	AS	74	33	3	12									04/24/2012	V		I	
+WA000893	9920	Honor	Lori	Julie	Hansen		11/27/1943	F	7		Green	Lane	#			44	Miami	WA	33233	AS	44	46	21	9	2037 Hooker Drive				Naples	34108	FL	United States	08/04/1973	U	10/18/2015	I	
+WA000894	9930		Stephanie		Ramos		12/02/1962	F	5273		Artisan	Park		SW			Santa Cruz	WA	95064	CR	43	61	21	7	6839 Tennessee Road				Kent	98042	CA	United States	03/20/1988	P	9/28/2015	I	
+WA000895	9940		Susan		Romero		10/23/1942	F	2		Prairieview	Way	Apt	SW		65	Springfield	WA	01105	CR	74	16	21	19									02/12/1946	U	3/11/2016	I	
+WA000896	9950		Cynthia	Virginia	Johnston		02/17/2000	F	327		Prairie Rose	Lane	Apt			90	Springfield	WA	65898	AS	52	49	4	8	66761 Hallows Trail				Augusta	30905	MO	United States	09/20/1937	N		A	
+WA000897	9960	Mr	Charles	Terry	Harper		04/29/1999	M	4308		Darwin	Point					Albany	WA	12227	PI	67	93	21	17									05/20/1981	P	10/21/2015	A	
+WA000898	9970		Todd		Graham		03/23/1926	M	54	3/4	Dovetail	Road	Apt			86	Cleveland	WA	44111	PI	1	48	8	19									07/04/2014	P	9/11/2015	I	
+WA000899	9980		David	Paul	Diaz		01/23/1938	M	89		Namekagon	Plaza	#			42	Utica	WA	13505	AS	69	96	14	4									09/10/1939	P	11/29/2015	I	
+WA000900	9990		Billy	Ronald	Arnold		07/09/1991	M	09		Dexter	Point					Dulles	WA	20189	SN	74	15	17	7	7779 Fremont Trail				Charlotte	28210	VA	United States	08/08/1937	V	2/8/2016	A	
+WA000901	10000		Terry	Fred	Romero		11/03/1927	M	061		Ohio	Drive					Spring	WA	77386	AS	93	42	12	3	70 Basil Crossing				Evansville	47732	TX	United States	05/16/1944	U	5/31/2016	A	
+WA000902	10010	Mr	Nicholas		Palmer		02/27/1989	M	3688		Eastwood	Hill					Chico	WA	95973	PI	35	79	16	17									11/21/1951	V	4/1/2016	I	
+WA000903	10020		Joe	Ernest	Owens		07/05/1946	M	700	3/4	Ohio	Point					Tampa	WA	33673	SN	75	89	15	6									06/01/1987	N	11/3/2015	I	
+WA000904	10030		Jennifer		Allen		12/11/1978	F	78919	3/4	Sutherland	Parkway					Port Saint Lucie	WA	34985	AS	40	92	2	10	34 Marcy Drive				Pittsburgh	15279	FL	United States	02/11/1951	U	9/9/2015	A	
+WA000905	10040		Ruth	Jean	Franklin		02/23/1960	F	465		Hanson	Junction	Apt			79	Anchorage	WA	99522	PI	21	75	16	15	99 Rowland Street				Saint Louis	63143	AK	United States	10/23/2015	N	5/21/2016	A	
+WA000906	10050		Norma	Michelle	Edwards		06/17/1985	F	7		New Castle	Alley	Apt			82	Oklahoma City	WA	73197	CR	36	50	19	16	98 Ryan Alley				Wichita Falls	76310	OK	United States	09/12/1950	V		A	
+WA000907	10060		Christine	Lori	Hart		10/08/1953	F	872		Summer Ridge	Plaza					San Jose	WA	95123	AS	55	95	18	13	515 Dorton Drive				Helena	59623	CA	United States	06/30/1952	U	12/5/2015	A	
+WA000908	10070	Rev	Laura	Diana	Fowler	Jr	08/20/1922	F	394		Petterle	Hill					Phoenix	WA	85025	CR	17	29	19	13									12/17/2012	V	8/8/2016	A	
+WA000909	10080		Frank	John	Knight		10/15/1992	M	85787		Sommers	Junction			W		Oklahoma City	WA	73147	PI	39	41	21	16									09/12/1953	P	1/5/2016	A	
+WA000910	10090		Deborah	Tina	Hanson		12/31/1959	F	0		Memorial	Plaza					Greensboro	WA	27499	SN	42	2	7	14									12/23/1964	U	2/2/2016	I	
+WA000911	10100		Ruth	Kathryn	Alexander		06/08/1946	F	8362	1/3	Manley	Drive		N			Boise	WA	83705	AS	92	83	9	23									09/14/1964	U	5/2/2016	I	
+WA000912	10110		Jane	Jane	Patterson		01/11/1943	F	75		Fair Oaks	Terrace					Topeka	WA	66617	CR	79	35	14	13									12/22/2002	U	12/29/2015	I	
+WA000913	10120		Amanda	Pamela	Harvey		12/03/1954	F	115		Summer Ridge	Parkway		NW			Reno	WA	89510	AS	95	65	14	4	92 Golf View Crossing				Huntsville	35805	NV	United States	04/03/2004	U	4/14/2016	A	
+WA000914	10130		Lawrence		Austin	Sr	05/22/1922	M	3325		Killdeer	Way					Los Angeles	WA	90040	CR	53	82	21	2									10/03/1951	N	12/15/2015	I	
+WA000915	10140		Douglas	Kevin	Spencer		08/29/1964	M	6250		Jackson	Pass					Tampa	WA	33673	CR	79	78	18	14									05/15/1983	N	2/14/2016	A	
+WA000916	10150		Amy	Judith	Clark		05/16/1956	F	37	3/4	Spohn	Drive			W		Fort Lauderdale	WA	33336	SN	93	86	12	21	59600 Mcguire Terrace				Kansas City	64114	FL	United States	10/24/1992	V	4/17/2016	I	
+WA000917	10160	Mrs	Emily		Stephens		06/18/1970	F	4		Esker	Center		N			Louisville	WA	40266	CR	25	59	18	21									09/05/1967	U	1/14/2016	I	
+WA000918	10170		Scott	Raymond	Harrison		09/15/1952	M	0884		Farwell	Circle		SW			Washington	WA	20397	AS	54	80	14	2	4 Hintze Point				Mesa	85205	DC	United States	06/25/1933	V	7/19/2016	A	
+WA000919	10180		Brandon	Howard	Griffin		08/17/1995	M	69963		Welch	Park					Dallas	WA	75231	CR	32	14	16	2									05/19/1950	V	9/14/2015	I	
+WA000920	10190		Paul		Fox		04/28/1922	M	4630	3/4	Manufacturers	Center					Honolulu	WA	96845	AS	85	33	6	12	36 Muir Plaza				Prescott	86305	HI	United States	10/11/2014	V	4/25/2016	I	
+WA000921	10200		Lori		Richards		07/06/1979	F	71		Muir	Alley			N		Concord	WA	94522	CR	77	5	13	10									12/01/1941	V	6/9/2016	I	
+WA000922	10210		Frances	Michelle	Jackson		10/14/1978	F	7834		Trailsway	Crossing	Apt			32	Manchester	WA	03105	AS	96	89	4	17									11/08/1963	V	2/8/2016	I	
+WA000923	10220	Rev	Evelyn	Kathy	Morgan		04/10/1996	F	086	3/4	Merrick	Crossing					Bronx	WA	10474	CR	66	53	19	7									09/02/1952	N	7/5/2016	I	
+WA000924	10230		Kimberly	Julia	Fernandez		10/12/1998	F	66249		Hayes	Place		NW			Boise	WA	83727	CR	97	66	2	22									10/08/1952	P	7/21/2016	A	
+WA000925	10240		Richard	Matthew	Clark		05/25/1980	M	56900		Debra	Center					Birmingham	WA	35205	CR	97	22	15	2									06/12/1936	V	8/3/2016	I	
+WA000926	10250	Honor	Aaron		Lawson		12/29/1960	M	38665		Ruskin	Point	#			90	Albany	WA	12255	AS	21	36	2	20									02/03/1951	V	9/23/2015	I	
+WA000927	10260		Harry		Montgomery		01/14/1990	M	0	1/3	Coolidge	Avenue					Norcross	WA	30092	SN	98	39	18	19	9 Glendale Alley				Los Angeles	90189	GA	United States	05/17/1975	N	9/22/2015	A	
+WA000928	10270	Honor	Melissa	Melissa	Mason		08/30/1927	F	959		2nd	Parkway					Fort Worth	WA	76192	SN	19	62	14	9									08/19/1985	V		A	
+WA000929	10280	Honor	Denise	Kathy	Thompson		10/02/1972	F	9719		Browning	Road	#		NW	11	Ashburn	WA	22093	PI	62	27	11	14	4145 Susan Crossing				El Paso	88546	VA	United States	08/08/1941	U	3/11/2016	A	
+WA000930	10290		Phyllis	Linda	Boyd		07/10/1977	F	41260	1/3	Cody	Alley	#		SW	39	Kansas City	WA	64125	AS	23	57	5	7	53 Corscot Way				Herndon	22070	MO	United States	03/28/1950	P	1/21/2016	I	
+WA000931	10300		Kathy	Jane	Schmidt		10/10/1984	F	9		Schmedeman	Avenue					Pasadena	WA	91103	SN	14	89	13	13									05/01/1989	U	10/21/2015	I	
+WA000932	10310		Sandra		Turner		11/04/1930	F	0		Manley	Lane	Apt	SW		51	Houston	WA	77201	AS	64	51	17	10	252 Clemons Hill				Charlotte	28235	TX	United States	05/27/1967	U	1/13/2016	A	
+WA000933	10320	Ms	George	Ralph	Andrews	II	01/06/1943	M	5565	1/3	Village	Crossing	#			64	Santa Ana	WA	92705	AS	7	44	17	10	0 Eagle Crest Street				Burbank	91505	CA	United States	12/10/1955	N	8/23/2015	A	
+WA000934	10330		Rose	Joan	Alexander		09/19/1937	F	71	3/4	Pierstorff	Plaza	#		W	52	San Francisco	WA	94110	SN	97	47	10	16	4161 Fuller Circle				Flint	48505	CA	United States	06/06/1962	V	2/21/2016	I	
+WA000935	10340		Jessica	Norma	Howard		03/29/1964	F	4	3/4	Kensington	Crossing	Apt			13	San Diego	WA	92137	PI	12	66	5	7	91 Dwight Trail				Phoenix	85005	CA	United States	04/20/1988	U	11/12/2015	A	
+WA000936	10350	Dr	Douglas		Adams	II	01/23/1970	M	40635		Waubesa	Alley					Savannah	WA	31405	SN	59	48	12	14									10/23/1951	V	3/10/2016	A	
+WA000937	10360		Ann	Robin	Gilbert		04/10/1947	F	169		Merrick	Hill					Amarillo	WA	79182	PI	71	32	7	6									06/17/2002	P	9/16/2015	A	
+WA000938	10370		Kelly		Ramos		08/13/1984	F	02635		Montana	Street	#			23	Falls Church	WA	22047	PI	45	21	4	12									06/08/1962	N		I	
+WA000939	10380		Eric	Willie	Cunningham		04/13/1963	M	62		Hoard	Center					Rochester	WA	14639	PI	70	51	11	19									02/01/1933	U	2/7/2016	A	
+WA000940	10390	Honor	Albert	Louis	Ramirez		12/29/1972	M	5		Merrick	Lane					Tulsa	WA	74103	SN	80	16	9	13									09/27/1999	N	8/27/2015	A	
+WA000941	10400		Lori	Robin	Kelley		04/05/1942	F	4		Westport	Crossing					Milwaukee	WA	53210	AS	11	63	14	11	2 Hallows Terrace				Duluth	55811	WI	United States	10/09/1980	P	10/11/2015	A	
+WA000942	10410		Harold	Howard	Austin		10/25/1925	M	373		Northview	Plaza					Evanston	WA	60208	PI	75	25	2	13									01/22/1947	P		A	
+WA000943	10420		Steve	Paul	Mitchell		10/31/1927	M	2	1/3	Lindbergh	Alley					El Paso	WA	88530	CR	8	68	1	21									06/06/1935	P	7/21/2016	A	
+WA000944	10430		Charles		Bell		04/20/1955	M	988	3/4	Forster	Road		SE			Kansas City	WA	66160	SN	40	66	11	9	64024 Lerdahl Parkway				Miami	33142	KS	United States	12/05/1969	V	6/29/2016	A	
+WA000945	10440		Willie	Johnny	Stevens		07/07/1997	M	347		Anzinger	Parkway	Apt			67	San Antonio	WA	78250	CR	43	35	1	10	0712 Maryland Lane				Jackson	39236	TX	United States	09/06/2014	P	1/31/2016	I	
+WA000946	10450		Judy		Evans		01/17/1943	F	29271		Monica	Plaza					Punta Gorda	WA	33982	CR	76	65	16	6	050 Karstens Lane				Washington	20067	FL	United States	01/30/1953	N	7/22/2016	A	
+WA000947	10460		Aaron	Nicholas	George	III	12/19/1944	M	68719		Hudson	Pass					Baltimore	WA	21265	CR	33	94	3	6	61 Clyde Gallagher Center				Alhambra	91841	MD	United States	04/26/1988	V	7/18/2016	A	
+WA000948	10470		Tina	Mildred	Scott		05/30/1926	F	10		Mallard	Hill			NW		Charlotte	WA	28289	PI	70	84	20	9									01/17/1954	P	8/22/2015	I	
+WA000949	10480		Samuel	Willie	George		06/11/1985	M	531		Wayridge	Parkway	#			69	Nashville	WA	37215	PI	65	42	16	10	9597 Milwaukee Terrace				Manchester	03105	TN	United States	01/23/1979	V	4/18/2016	I	
+WA000950	10490	Honor	Joe	Charles	Jackson		07/21/1987	M	50500	3/4	Claremont	Pass		W	NW		Detroit	WA	48258	CR	91	74	10	12									05/28/2000	V	9/16/2015	I	
+WA000951	10500		Kathy	Jessica	Gray		01/26/1987	F	0		Harbort	Avenue			SW		Omaha	WA	68124	PI	38	87	19	23	9706 1st Crossing				Tuscaloosa	35405	NE	United States	08/21/1935	N	11/22/2015	I	
+WA000952	10510		Kelly	Christine	Peters		02/15/1983	F	77781	3/4	Marquette	Street	#			74	Florence	WA	29505	PI	84	70	19	22									09/27/1980	P		A	
+WA000953	10520	Dr	Margaret		Duncan		01/25/1994	F	86		Brown	Center	#	NW		28	New York City	WA	10060	PI	71	96	1	1									10/10/1968	U	12/5/2015	I	
+WA000954	10530	Honor	Judy	Jean	Foster		03/07/1957	F	236		Arkansas	Center	Apt			86	Katy	WA	77493	SN	95	26	5	2									09/30/1962	V	8/20/2015	I	
+WA000955	10540		William	Harry	Harper		10/12/1939	M	01404		Dryden	Point	Apt			41	El Paso	WA	88553	CR	58	3	11	18	6 Washington Plaza				Fresno	93740	TX	United States	11/16/1979	P	5/18/2016	I	
+WA000956	10550		Carol	Robin	Willis		03/05/1976	F	006	3/4	Lotheville	Circle					Round Rock	WA	78682	CR	27	84	15	15									11/05/1938	V	12/31/2015	I	
+WA000957	10560		Rebecca	Martha	Gonzalez		06/03/1922	F	46		Lake View	Alley	#			30	Bethesda	WA	20892	PI	89	12	1	6									06/11/2015	U	1/20/2016	A	
+WA000958	10570		Albert	Matthew	Perkins		01/20/1968	M	68		Bashford	Avenue	#		N	33	Buffalo	WA	14220	AS	94	77	18	15									10/23/1995	P	11/22/2015	I	
+WA000959	10580		Jane		Turner	Jr	02/11/1934	F	7	1/3	Dovetail	Street	Apt			9	Mobile	WA	36616	SN	97	90	2	22									03/29/1940	V	1/2/2016	A	
+WA000960	10590		Judith	Jean	Carr		06/17/1928	F	2084	1/3	Bluejay	Hill			NW		Portland	WA	97296	AS	46	61	14	19	55258 Kim Court				Philadelphia	19191	OR	United States	10/31/1935	U	6/15/2016	A	
+WA000961	10600	Mr	Chris	James	Schmidt	III	07/09/1984	M	6890		Springs	Way					Sacramento	WA	94297	PI	75	30	7	23	92 Westerfield Plaza				Harrisburg	17121	CA	United States	02/23/1979	N	8/24/2015	I	
+WA000962	10610		Matthew	Edward	Bishop		06/11/1953	M	8		Coleman	Park			SE		Pittsburgh	WA	15225	SN	85	9	8	13	44132 Warrior Way				London	40745	PA	United States	04/07/1995	V	4/30/2016	I	
+WA000963	10620	Rev	Russell	Paul	Howell		11/30/1964	M	638		Lakewood Gardens	Crossing					Minneapolis	WA	55436	AS	28	27	20	18									04/01/1995	U	2/11/2016	A	
+WA000964	10630	Ms	Ashley	Nicole	Harvey		05/10/1938	F	07		Golf View	Street		W			Vancouver	WA	98682	CR	97	86	8	14									10/27/1935	U	7/22/2016	I	
+WA000965	10640	Mr	Anne		Robertson		01/09/1939	F	2	1/3	David	Parkway			SE		Austin	WA	78764	CR	92	5	5	11									02/03/1971	V	12/8/2015	I	
+WA000966	10650		Kelly	Christine	Hansen		09/27/1940	F	208		Hooker	Drive					New York City	WA	10165	AS	52	56	9	17	21 Sunfield Plaza				El Paso	88530	NY	United States	11/04/1987	U	6/25/2016	A	
+WA000967	10660		Ruth		Bishop		01/16/1993	F	71	3/4	Towne	Crossing					Chicago	WA	60681	AS	44	35	8	19	2059 Lake View Plaza				New York City	10160	IL	United States	04/11/2008	U	3/10/2016	A	
+WA000968	10670		Justin		Myers		07/15/1927	M	97		Miller	Crossing					Atlanta	WA	30311	AS	24	59	15	8	996 Almo Crossing				Tampa	33620	GA	United States	04/25/2015	P	7/25/2016	A	
+WA000969	10680		Diane		Stanley		08/22/1969	F	5921		Lighthouse Bay	Street					Hollywood	WA	33028	CR	30	50	11	16	4 Brown Road				Grand Rapids	49518	FL	United States	04/14/1944	N	12/28/2015	I	
+WA000970	10690		Ruby	Ruby	Rice		05/08/1985	F	928		Mallory	Road			NW		Akron	WA	44305	AS	35	71	15	4									04/30/1954	P		A	
+WA000971	10700	Mrs	Amy	Mary	Alvarez		06/30/1924	F	58		Bluestem	Hill	Apt		N	24	Richmond	WA	23293	AS	67	27	4	11	4111 Memorial Parkway				Charlotte	28230	VA	United States	12/27/1968	V	12/3/2015	A	
+WA000972	10710		Walter		Mason		04/22/1936	M	4		Di Loreto	Street			NW		Buffalo	WA	14269	SN	46	18	13	23									12/11/1948	U	2/10/2016	I	
+WA000973	10720	Mr	Scott	Matthew	Weaver		04/10/1995	M	244		Maywood	Terrace	Apt			77	Atlanta	WA	30336	PI	8	100	12	3									12/05/1935	V	11/14/2015	A	
+WA000974	10730		Carolyn	Laura	Jacobs	IV	02/03/1938	F	6		Melby	Crossing	#	N	NW	86	Watertown	WA	02472	CR	83	6	6	8									08/27/2013	U	11/9/2015	A	
+WA000975	10740		Aaron	Bruce	Bryant		10/22/1931	M	9028	3/4	Fordem	Pass					El Paso	WA	79977	CR	31	59	21	20	89 Prentice Trail				Corpus Christi	78410	TX	United States	09/27/1950	U	9/20/2015	A	
+WA000976	10750	Honor	Mary	Judith	Jordan		05/28/1990	F	3698		Veith	Pass	Apt	W	W	85	Greensboro	WA	27425	AS	63	48	21	4	49522 Magdeline Alley				Madison	53790	NC	United States	02/22/1977	P	8/11/2015	I	
+WA000977	10760		Kimberly	Catherine	Burns		10/21/1978	F	13662		Marcy	Junction					Peoria	WA	61651	CR	75	41	18	10									09/21/1995	N	7/11/2016	A	
+WA000978	10770	Mrs	Anthony	Walter	Montgomery		05/18/1974	M	8847		Miller	Street			N		Anchorage	WA	99599	PI	52	37	14	16									01/14/1961	V	8/26/2015	I	
+WA000979	10780		Pamela	Lois	Wood	Sr	08/08/1972	F	25571		Tony	Circle	#	W		44	Portland	WA	97206	CR	47	91	12	8									11/21/2000	U	3/28/2016	A	
+WA000980	10790	Mr	Kathleen		Henderson		12/27/1980	F	8		South	Alley					Saint Paul	WA	55114	PI	25	90	12	15	28 Arkansas Drive				Buffalo	14220	MN	United States	07/07/1944	V	4/22/2016	I	
+WA000981	10800		Eric	Juan	Hunt		08/10/1998	M	2		Summerview	Junction					Bronx	WA	10474	AS	26	29	13	9									03/12/1971	P	7/27/2016	I	
+WA000982	10810		Randy	Jason	Alvarez		08/04/1975	M	99639		Chinook	Hill	Apt			96	Santa Clara	WA	95054	AS	32	77	2	14	156 Mayer Street				El Paso	79916	CA	United States	06/20/1984	N	12/25/2015	A	
+WA000983	10820	Ms	Martha		Carter		10/28/1986	F	3		Roth	Court	#			9	Las Vegas	WA	89135	AS	76	13	20	23									09/21/2000	U	6/15/2016	I	
+WA000984	10830		Bobby	John	Simpson		05/11/1983	M	9126		American	Court					Hartford	WA	06105	SN	75	89	17	4	32101 Thackeray Way				Duluth	30195	CT	United States	09/27/1939	N	4/1/2016	I	
+WA000985	10840		Bruce	Carlos	Armstrong		06/09/1955	M	247		Mayfield	Court	Apt			46	Birmingham	WA	35279	CR	45	88	12	3	3881 Dakota Park				Boston	02104	AL	United States	01/13/1972	V	10/16/2015	I	
+WA000986	10850		Irene		Mason		03/27/1999	F	001		Schurz	Way	#			83	Scranton	WA	18514	AS	35	15	4	13	3 Pierstorff Circle				Waco	76796	PA	United States	12/18/1975	V	8/26/2015	A	
+WA000987	10860		Keith	Bobby	Palmer		07/26/1962	M	0		Corscot	Alley					Chicago	WA	60641	CR	41	97	8	23	30 8th Trail				Independence	64054	IL	United States	12/12/1974	U	6/6/2016	I	
+WA000988	10870		Steven	Todd	Gomez		12/25/1920	M	55561		Mifflin	Avenue	#			62	Olympia	WA	98516	AS	32	92	18	8	08 Helena Way				Washington	20029	WA	United States	07/14/1960	P	6/20/2016	I	
+WA000989	10880		Susan		Daniels		04/04/1933	F	78943		Maple	Point	#			75	Houston	WA	77223	AS	42	37	10	15									11/09/1941	N	2/6/2016	A	
+WA000990	10890	Mr	Edward	Larry	Arnold		06/03/1951	M	8252		Pennsylvania	Trail					Lexington	WA	40510	SN	50	92	11	1	4 Melody Court				Lubbock	79452	KY	United States	02/21/1999	N	7/8/2016	I	
+WA000991	10900		Craig		Ramirez		01/08/1964	M	89		Cody	Park			SW		Clearwater	WA	34615	SN	11	97	14	5									03/29/1979	U	3/4/2016	I	
+WA000992	10910	Honor	Michael	John	Parker	IV	07/15/1991	M	122		Pawling	Trail	#	NW		96	Kansas City	WA	64144	SN	86	76	6	14									06/06/1977	P	12/13/2015	A	
+WA000993	10920		Maria		Russell		12/24/1922	F	345		Lawn	Place	Apt			78	Peoria	WA	61651	AS	51	21	8	14	99878 Pond Drive				Austin	78789	IL	United States	01/02/1939	V	11/18/2015	A	
+WA000994	10930		Deborah	Rachel	Coleman		04/14/1937	F	38		Darwin	Road					Stockton	WA	95210	CR	17	25	5	7	851 Hermina Trail				Philadelphia	19131	CA	United States	01/02/1967	V	1/18/2016	I	
+WA000995	10940	Honor	Jeremy		Thompson		07/18/1985	M	60	3/4	Mallory	Park	#		SW	26	Miami	WA	33142	PI	69	94	20	14									06/26/1986	V	12/3/2015	I	
+WA000996	10950		Helen		Wheeler		12/30/1920	F	6075		Claremont	Hill			SW		Fresno	WA	93794	SN	12	70	11	22									10/17/1953	U	3/10/2016	I	
+WA000997	10960	Mrs	Brian	Henry	Bennett		11/19/1924	M	719		Parkside	Parkway	#			97	San Francisco	WA	94110	PI	57	45	9	5	068 Springview Circle				Sioux Falls	57105	CA	United States	02/23/1983	P	9/22/2015	I	
+WA000998	10970		Lori	Kathleen	Gordon		01/25/1970	F	99989		Lighthouse Bay	Crossing					Sioux Falls	WA	57198	SN	32	94	8	14	245 Hovde Way				Oakland	94627	SD	United States	05/29/1977	P	8/29/2015	I	
+WA000999	10980		Dennis	Carl	Murray		12/19/1923	M	2		Prairie Rose	Court	Apt			52	Glendale	WA	91210	SN	35	21	14	1	9649 Bashford Place				Fresno	93704	CA	United States	08/04/1950	P	5/1/2016	A	
+WA0001000	10990		Marie	Robin	Larson		09/07/1931	F	827	3/4	Fisk	Place		SE			Philadelphia	WA	19160	AS	76	11	15	10	1 Luster Way				El Paso	88530	PA	United States	02/16/1935	U	5/24/2016	A	
