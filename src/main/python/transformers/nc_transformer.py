@@ -84,7 +84,7 @@ class NCTransformer(BaseTransformer):
 
         output_dict = {
             'BIRTHDATE': bd,
-            'BIRTHDATE_IS_ESTIMATE': "Y"",
+            'BIRTHDATE_IS_ESTIMATE': "Y",
         }
 
         return output_dict
