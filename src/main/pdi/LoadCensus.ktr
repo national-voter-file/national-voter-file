@@ -513,11 +513,11 @@
     </hop>
     <hop>
       <from>Text file input</from>
-      <to>If not filtering by state</to>
+      <to>If not filtering by state add dummy value</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>If not filtering by state</from>
+      <from>If not filtering by state add dummy value</from>
       <to>Check if State Filtering</to>
       <enabled>Y</enabled>
     </hop>
@@ -528,11 +528,11 @@
     </hop>
     <hop>
       <from>Add constants</from>
-      <to>Formula</to>
+      <to>Calculate CountyFP</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Formula</from>
+      <from>Calculate CountyFP</from>
       <to>Stream lookup</to>
       <enabled>Y</enabled>
     </hop>
@@ -594,8 +594,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>816</xloc>
-      <yloc>272</yloc>
+      <xloc>880</xloc>
+      <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
@@ -628,8 +628,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>384</xloc>
-      <yloc>480</yloc>
+      <xloc>592</xloc>
+      <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
@@ -661,8 +661,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>688</xloc>
-      <yloc>272</yloc>
+      <xloc>752</xloc>
+      <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
@@ -696,14 +696,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>496</xloc>
-      <yloc>272</yloc>
+      <xloc>704</xloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
 
   <step>
-    <name>Formula</name>
+    <name>Calculate CountyFP</name>
     <type>Formula</type>
     <description/>
     <distribute>Y</distribute>
@@ -728,8 +728,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1040</xloc>
-      <yloc>432</yloc>
+      <xloc>992</xloc>
+      <yloc>336</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
@@ -779,8 +779,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>96</xloc>
-      <yloc>256</yloc>
+      <xloc>80</xloc>
+      <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
@@ -849,7 +849,7 @@
     </step>
 
   <step>
-    <name>If not filtering by state</name>
+    <name>If not filtering by state add dummy value</name>
     <type>IfNull</type>
     <description/>
     <distribute>N</distribute>
@@ -882,8 +882,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>224</xloc>
-      <yloc>400</yloc>
+      <xloc>400</xloc>
+      <yloc>320</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
@@ -1111,8 +1111,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1152</xloc>
-      <yloc>144</yloc>
+      <xloc>992</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
@@ -2327,8 +2327,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1472</xloc>
-      <yloc>144</yloc>
+      <xloc>1216</xloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
     </step>
@@ -7276,7 +7276,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>368</xloc>
+      <xloc>208</xloc>
       <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
