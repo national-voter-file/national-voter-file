@@ -80,7 +80,6 @@ def strip_colnames(df):
 
 def get_census_data(geo_type, geo_url, state_list, fips_func,
 					state_idx=(0, 0),
-					entity_idx=(0, 0),
 					census_tables=DATA_TABLES,
 					find_zz=False):
 	print("Starting " + geo_type)
@@ -120,9 +119,6 @@ def get_census_data(geo_type, geo_url, state_list, fips_func,
 	context_df['STATEFP'] = context_df['GEOID'].apply(
 		lambda x: str(x)[:state_idx[0]].zfill(state_idx[1])
 	)
-	context_df['ENTITYFP'] = context_df['GEOID'].apply(
-		lambda x: str(x)[entity_idx[0]:].zfill(entity_idx[1])
-	)
 	context_df['ENTITYTYPE'] = geo_type.lower()
 
 	# Check if no census data returned, then just return context info
@@ -157,7 +153,6 @@ def get_state(state_list, state_codes, census_tables=DATA_TABLES):
 	df = df.append(data)
 
 	c['STATEFP'] = state_codes[state]
-	c['ENTITYFP'] = state_codes[state]
 	c['ENTITYTYPE'] = "state"
 
 	df = df.rename(columns={'GEOID': 'FIPS'})
@@ -197,8 +192,7 @@ if __name__ == '__main__':
 			FILE_BASE_URL + 'counties_national.zip',
 			state_list,
 			lambda x: "05000US{0:0=5d}".format(int(x)),
-			state_idx=(-3, 2),
-			entity_idx=(-3, 3)
+			state_idx=(-3, 2)
 		)
 		output_df = output_df.append(county_df)
 
@@ -225,8 +219,7 @@ if __name__ == '__main__':
 			conYearURL,
 			state_list,
 			lambda x: "50000US" + str(x).zfill(4),
-			state_idx=(-2, 2),
-			entity_idx=(-2, 2)
+			state_idx=(-2, 2)
 		)
 		output_df = pd.concat([output_df, congress_df])
 
@@ -237,7 +230,6 @@ if __name__ == '__main__':
 			state_list,
 			lambda x: "62000US" + str(x).zfill(5),
 			state_idx=(-3, 2),
-			entity_idx=(-3, 3),
 			find_zz=True
 		)
 		output_df = pd.concat([output_df, state_house_df])
@@ -249,7 +241,6 @@ if __name__ == '__main__':
 			state_list,
 			lambda x: "61000US" + str(x).zfill(5),
 			state_idx=(-3, 2),
-			entity_idx=(-3, 3),
 			find_zz=True
 		)
 		output_df = pd.concat([output_df, upper_house_df])
@@ -272,8 +263,7 @@ if __name__ == '__main__':
 				city_url,
 				[state],
 				lambda x: "16000US" + str(x).zfill(7),
-				state_idx=(-2, 2),
-				entity_idx=(-2, 5)
+				state_idx=(-5, 2)
 			)
 			city_df_list.append(state_city_df)
 		city_df = pd.concat(city_df_list)
