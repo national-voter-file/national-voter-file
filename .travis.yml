@@ -1,0 +1,6 @@
+language: python
+python:
+     - "3.4"
+     - "3.5"
+install: "pip install -r src/main/python/transformers/requirements.txt"
+script: nosetests src/main/python/transformers

@@ -1,8 +1,9 @@
 from base_transformer import BaseTransformer
+import datetime
 import usaddress
 
-class FLTransformer(BaseTransformer):
 
+class OKTransformer(BaseTransformer):
     """
     A few required columns in the BaseTransformer did not have values in the
     Ohio data. Not sure what the best way of updating those on a case by case
@@ -11,39 +12,25 @@ class FLTransformer(BaseTransformer):
     """
     col_type_dict = BaseTransformer.col_type_dict.copy()
     col_type_dict['TITLE'] = set([str, type(None)])
-    col_type_dict['ABSENTEE_TYPE'] = set([str, type(None)])
-    col_type_dict['PRECINCT_SPLIT'] = set([str, type(None)])
+    col_type_dict['GENDER'] = set([str, type(None)])
+    col_type_dict['RACE'] = set([str, type(None)])
     col_type_dict['BIRTH_STATE'] = set([str, type(None)])
+    col_type_dict['ABSENTEE_TYPE'] = set([str, type(None)])
+    col_type_dict['COUNTY_VOTER_REF'] = set([str, type(None)])
+    col_type_dict['CONGRESSIONAL_DIST'] = set([str, type(None)])
+    col_type_dict['COUNTYCODE'] = set([str, type(None)])
+    col_type_dict['PRECINCT_SPLIT'] = set([str, type(None)])
+    # OK is different in having missing values for birth and reg dates
+    col_type_dict['BIRTHDATE'] = set([datetime.date, type(None)])
+    col_type_dict['REGISTRATION_DATE'] = set([datetime.date, type(None)])
 
-
-
-    florida_party_map = {
-        'AIP':'AMP',
-        'CPF':'AMC',
-        'DEM':'DEM',
-        'ECO':'ECO',
-        'GRE':'GRN',
-        'IDP':'IDP',
-        'INT':'AI',
-        'LPF':'LIB',
-        'NPA':'UN',
-        'PSL':'PSL',
-        'REF':'REF',
-        'REP':'REP',
-        ' ':'UN'
+    ok_party_map = {
+        "DEM": "DEM",
+        "REP": "REP",
+        "IND": "UN",
+        "LIB": "LIB",
+        "AE": "AE"
     }
-
-    florida_race_map = {
-        '1':'I',
-        '2':'A',
-        '3':'B',
-        '4':'H',
-        '5':'W',
-        '6':'O',
-        '7':'M',
-        '9':'U'
-    }
-
 
     #### Contact methods #######################################################
 
@@ -61,10 +48,10 @@ class FLTransformer(BaseTransformer):
         """
         output_dict = {
             'TITLE': None,
-            'FIRST_NAME': input_dict['Name First'],
-            'MIDDLE_NAME': input_dict['Name Middle'],
-            'LAST_NAME': input_dict['Name Last'],
-            'NAME_SUFFIX': input_dict['Name Suffix'],
+            'FIRST_NAME': input_dict['FirstName'],
+            'MIDDLE_NAME': input_dict['MiddleName'],
+            'LAST_NAME': input_dict['LastName'],
+            'NAME_SUFFIX': input_dict['Suffix'],
         }
         return output_dict
 
@@ -76,7 +63,7 @@ class FLTransformer(BaseTransformer):
             Dictionary with following keys
                 'EMAIL'
         """
-        return {'EMAIL': input_dict['Email address']}
+        return {'EMAIL': None}
 
     def extract_phone_number(self, input_dict):
         """
@@ -86,14 +73,7 @@ class FLTransformer(BaseTransformer):
             Dictionary with following keys
                 'PHONE'
         """
-        if input_dict['Daytime Phone Number'].strip():
-            phone = "("+input_dict['Daytime Area Code']+") "+input_dict['Daytime Phone Number']
-            if input_dict['Daytime Phone Extension'].strip():
-                phone = phone + " x "+input_dict['Daytime Phone Extension'].strip()
-
-            return {'PHONE': phone}
-        else:
-            return {'PHONE': ""}
+        return {'PHONE': None}
 
     def extract_do_not_call_status(self, input_dict):
         """
@@ -115,7 +95,7 @@ class FLTransformer(BaseTransformer):
             Dictionary with following keys
                 'GENDER'
         """
-        return {'GENDER': input_dict['Gender']}
+        return {'GENDER': None}
 
     def extract_race(self, input_dict):
         """
@@ -125,8 +105,7 @@ class FLTransformer(BaseTransformer):
             Dictionary with following keys
                 'RACE'
         """
-        race = input_dict['Race'].strip()
-        return {'RACE': self.florida_race_map[race]}
+        return {'RACE': None}
 
     def extract_birth_state(self, input_columns):
         """
@@ -146,10 +125,11 @@ class FLTransformer(BaseTransformer):
             Dictionary with following keys
                 'BIRTHDATE'
         """
-        return {
-        'BIRTHDATE': self.convert_date(input_dict['Birth Date']),
-        'BIRTHDATE_IS_ESTIMATE':'N'
-        }
+        if len(input_dict['DateOfBirth']) > 0:
+            date = self.convert_date(input_dict['DateOfBirth'])
+        else:
+            date = None
+        return {'BIRTHDATE': date, 'BIRTHDATE_IS_ESTIMATE': 'N'}
 
     def extract_language_choice(self, input_dict):
         """
@@ -198,23 +178,23 @@ class FLTransformer(BaseTransformer):
                 'USPS_BOX_TYPE'
                 'ZIP_CODE'
             """
-        address_components = [
-            'Residence Address Line 1',
-            'Residence Address Line 2'
-        ]
+        # TODO: Currently parsing with usaddress, but CO has almost all fields,
+        # might be worth just taking as is
         address_str = ' '.join([
-            input_dict[x] for x in address_components if input_dict[x] is not None
+             input_dict['StreetNum'],
+             input_dict['StreetDir'],
+             input_dict['StreetName'],
+             input_dict['StreetType'],
+             input_dict['BldgNum']
         ])
+
         usaddress_dict, usaddress_type = self.usaddress_tag(address_str)
 
         converted_addr = self.convert_usaddress_dict(usaddress_dict)
 
-        converted_addr.update({'PLACE_NAME':input_dict['Residence City (USPS)'],
-                                'STATE_NAME':input_dict['Residence State'],
-                                'ZIP_CODE':input_dict['Residence Zipcode']
-        })
-
-
+        converted_addr.update({'PLACE_NAME': input_dict['City'],
+                               'STATE_NAME': 'OK',
+                               'ZIP_CODE': input_dict['Zip']})
 
         return converted_addr
 
@@ -226,11 +206,11 @@ class FLTransformer(BaseTransformer):
             Dictionary with following keys
                 'COUNTYCODE'
         """
-        return {'COUNTYCODE': input_dict['County Code']}
+        # Files are broken into county, so not in file itself, but can get
+        return {'COUNTYCODE': None}
 
     def extract_mailing_address(self, input_dict):
         """
-        Relies on the usaddress package.
 
         We provide template code.
 
@@ -246,17 +226,37 @@ class FLTransformer(BaseTransformer):
                 'MAIL_COUNTRY'
         """
 
-        if( input_dict['Mailing Address Line 1'].strip() and input_dict['Mailing City'].strip()):
-            return {
-                'MAIL_ADDRESS_LINE1': input_dict['Mailing Address Line 1'],
-                'MAIL_ADDRESS_LINE2': " ".join([
-                    input_dict['Mailing Address Line 2'],
-                    input_dict['Mailing Address Line 2']]),
-                'MAIL_CITY': input_dict['Mailing City'],
-                'MAIL_STATE': input_dict['Mailing State'],
-                'MAIL_ZIP_CODE': input_dict['Mailing Zipcode'],
-                'MAIL_COUNTRY': input_dict['Mailing Country'] if input_dict['Mailing Country']  else "USA"
-            }
+        if input_dict['MailStreet1'].strip():
+            try:
+                tagged_address, address_type = usaddress.tag(' '.join([
+                    input_dict['MailStreet1'],
+                    input_dict['MailStreet2'],
+                    input_dict['MailCity'],
+                    input_dict['MailState'],
+                    input_dict['MailZip']
+                ]))
+
+                if address_type == 'Ambiguous':
+                    print("Warn - %s: Ambiguous mailing address falling back to residential (%s)" % (address_type, input_dict['MailStreet1']))
+                    tagged_address = {}
+
+                if(len(tagged_address) > 0):
+                    return {
+                        'MAIL_ADDRESS_LINE1': self.construct_mail_address_1(
+                            tagged_address,
+                            address_type,
+                        ),
+                        'MAIL_ADDRESS_LINE2': self.construct_mail_address_2(tagged_address),
+                        'MAIL_CITY': tagged_address['PlaceName'] if 'PlaceName' in tagged_address else "",
+                        'MAIL_ZIP_CODE': tagged_address['ZipCode'] if 'ZipCode' in tagged_address else "",
+                        'MAIL_STATE': tagged_address['StateName'] if 'StateName' in tagged_address else "",
+                        'MAIL_COUNTRY': ""
+                    }
+                else:
+                    return {}
+            except usaddress.RepeatedLabelError as e:
+                print('Warn: Can\'t parse mailing address. Falling back to residential (%s)' % (e.parsed_string))
+                return {}
         else:
             return {}
 
@@ -270,7 +270,7 @@ class FLTransformer(BaseTransformer):
             Dictionary with following keys
                 'STATE_VOTER_REF'
         """
-        return {'STATE_VOTER_REF': "FL"+input_dict['Voter ID']}
+        return {'STATE_VOTER_REF': input_dict['VoterID']}
 
     def extract_county_voter_ref(self, input_dict):
         """
@@ -280,7 +280,7 @@ class FLTransformer(BaseTransformer):
             Dictionary with following keys
                 'COUNTY_VOTER_REF'
         """
-        return {'COUNTY_VOTER_REF': ' '}
+        return {'COUNTY_VOTER_REF': None}
 
     def extract_registration_date(self, input_dict):
         """
@@ -290,7 +290,11 @@ class FLTransformer(BaseTransformer):
             Dictionary with following keys
                 'REGISTRATION_DATE'
         """
-        date = self.convert_date(input_dict['Registration Date'])
+        # Oddly a large amount of voters don't have an original reg date
+        if len(input_dict['OriginalRegistration']) > 0:
+            date = self.convert_date(input_dict['OriginalRegistration'])
+        else:
+            date = None
         return {'REGISTRATION_DATE': date}
 
     def extract_registration_status(self, input_dict):
@@ -301,7 +305,7 @@ class FLTransformer(BaseTransformer):
             Dictionary with following keys
                 'REGISTRATION_STATUS'
         """
-        return {'REGISTRATION_STATUS': input_dict['Voter Status']}
+        return {'REGISTRATION_STATUS': input_dict['Status']}
 
     def extract_absentee_type(self, input_dict):
         """
@@ -309,7 +313,7 @@ class FLTransformer(BaseTransformer):
             input_dict: dictionary of form {colname: value} from raw data
         Outputs:
             Dictionary with following keys
-                'ABSTENTEE_TYPE'
+                'ABSENTEE_TYPE'
         """
         return {'ABSENTEE_TYPE': None}
 
@@ -321,9 +325,7 @@ class FLTransformer(BaseTransformer):
             Dictionary with following keys
                 'PARTY'
         """
-        party = input_dict['Party Affiliation']
-        return {'PARTY': self.florida_party_map[party]}
-
+        return {'PARTY': self.ok_party_map[input_dict['PolitalAff']]}
 
     def extract_congressional_dist(self, input_dict):
         """
@@ -333,7 +335,8 @@ class FLTransformer(BaseTransformer):
             Dictionary with following keys
                 'CONGRESSIONAL_DIST'
         """
-        return {'CONGRESSIONAL_DIST': input_dict['Congressional District']}
+        # Like county, contained in data structure, not in columns
+        return {'CONGRESSIONAL_DIST': None}
 
     def extract_upper_house_dist(self, input_dict):
         """
@@ -343,7 +346,7 @@ class FLTransformer(BaseTransformer):
             Dictionary with following keys
                 'UPPER_HOUSE_DIST'
         """
-        return {'UPPER_HOUSE_DIST': input_dict['Senate District']}
+        return {'UPPER_HOUSE_DIST': None}
 
     def extract_lower_house_dist(self, input_dict):
         """
@@ -353,7 +356,8 @@ class FLTransformer(BaseTransformer):
             Dictionary with following keys
                 'LOWER_HOUSE_DIST'
         """
-        return {'LOWER_HOUSE_DIST': input_dict['House District']}
+        # Starts with 12 chars of "State House ", skipping
+        return {'LOWER_HOUSE_DIST': None}
 
     def extract_precinct(self, input_dict):
         """
@@ -373,8 +377,7 @@ class FLTransformer(BaseTransformer):
             Dictionary with following keys
                 'COUNTY_BOARD_DIST'
         """
-        # Not sure if mapping exists, verify
-        return {'COUNTY_BOARD_DIST': None}
+        return {'COUNTY_BOARD_DIST': input_dict['CountyComm']}
 
     def extract_school_board_dist(self, input_dict):
         """
@@ -385,7 +388,7 @@ class FLTransformer(BaseTransformer):
                 'SCHOOL_BOARD_DIST'
         """
         # Not sure if mapping exists, verify
-        return {'SCHOOL_BOARD_DIST': None}
+        return {'SCHOOL_BOARD_DIST': input_dict['School']}
 
     def extract_precinct_split(self, input_dict):
         """
@@ -395,5 +398,4 @@ class FLTransformer(BaseTransformer):
             Dictionary with following keys
                 'PRECINCT_SPLIT'
         """
-        # Not sure if mapping exists, verify
-        return {'PRECINCT_SPLIT': input_dict['Precinct Split']}
+        return {'PRECINCT_SPLIT': None}
