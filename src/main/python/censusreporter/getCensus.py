@@ -31,7 +31,7 @@ DATA_TABLES = ['B01001','B03002','B06008','B23001','B19001','B25009','B25077']
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-s", "--states", help="State Abbreviation List, space seperated ie NY AK", nargs="*")
-parser.add_argument("-t", "--type", help="ALL|County|Upper|Lower|Congress|City|State space seperated", nargs="*")
+parser.add_argument("-t", "--type", help="ALL|County|Upper|Lower|Congress|City|State space separated", nargs="*")
 
 
 def get_combinedData(thePD=None, tables=None):
