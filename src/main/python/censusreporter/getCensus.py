@@ -26,6 +26,65 @@ if not os.path.exists(OUTPUT_DIR):
 
 STATE_LIST = [ 'AL','AK','AZ','AR','CA','CO','CT','DE','DC','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY','PR']
 STATE_CODES = {'AL': '01','AK': '02','AZ': '04','AR': '05','CA': '06','CO': '08','CT': '09','DE': '10','DC': '11','FL': '12','GA': '13','HI': '15','ID': '16','IL': '17','IN': '18','IA': '19','KS': '20','KY': '21','LA': '22','ME': '23','MD': '24','MA': '25','MI': '26','MN': '27','MS': '28','MO': '29','MT': '30','NE': '31','NV': '32','NH': '33','NJ': '34','NM': '35','NY': '36','NC': '37','ND': '38','OH': '39','OK': '40','OR':'41','PA': '42','RI': '44','SC': '45','SD': '46','TN': '47','TX': '48','UT': '49','VT': '50','VA': '51','WA': '53','WV': '54','WI': '55','WY': '56','PR':'72'}
+STATE_ABBREVS = {
+    'AK': 'Alaska',
+    'AL': 'Alabama',
+    'AR': 'Arkansas',
+    'AS': 'American Samoa',
+    'AZ': 'Arizona',
+    'CA': 'California',
+    'CO': 'Colorado',
+    'CT': 'Connecticut',
+    'DC': 'District of Columbia',
+    'DE': 'Delaware',
+    'FL': 'Florida',
+    'GA': 'Georgia',
+    'GU': 'Guam',
+    'HI': 'Hawaii',
+    'IA': 'Iowa',
+    'ID': 'Idaho',
+    'IL': 'Illinois',
+    'IN': 'Indiana',
+    'KS': 'Kansas',
+    'KY': 'Kentucky',
+    'LA': 'Louisiana',
+    'MA': 'Massachusetts',
+    'MD': 'Maryland',
+    'ME': 'Maine',
+    'MI': 'Michigan',
+    'MN': 'Minnesota',
+    'MO': 'Missouri',
+    'MP': 'Northern Mariana Islands',
+    'MS': 'Mississippi',
+    'MT': 'Montana',
+    'NA': 'National',
+    'NC': 'North Carolina',
+    'ND': 'North Dakota',
+    'NE': 'Nebraska',
+    'NH': 'New Hampshire',
+    'NJ': 'New Jersey',
+    'NM': 'New Mexico',
+    'NV': 'Nevada',
+    'NY': 'New York',
+    'OH': 'Ohio',
+    'OK': 'Oklahoma',
+    'OR': 'Oregon',
+    'PA': 'Pennsylvania',
+    'PR': 'Puerto Rico',
+    'RI': 'Rhode Island',
+    'SC': 'South Carolina',
+    'SD': 'South Dakota',
+    'TN': 'Tennessee',
+    'TX': 'Texas',
+    'UT': 'Utah',
+    'VA': 'Virginia',
+    'VI': 'Virgin Islands',
+    'VT': 'Vermont',
+    'WA': 'Washington',
+    'WI': 'Wisconsin',
+    'WV': 'West Virginia',
+    'WY': 'Wyoming'
+}
 
 DATA_TABLES = ['B01001','B03002','B06008','B23001','B19001','B25009','B25077']
 
@@ -253,6 +312,9 @@ if __name__ == '__main__':
             parse_voter_file_id,
             axis=1
         )
+        congress_df['NAME'] = congress_df['VOTER_FILE_ID'].apply(
+            lambda x: 'Congressional District {}'.format(x) if x else None
+        )
         output_df = pd.concat([output_df, congress_df])
 
     if types == 'ALL' or "LOWER" in types:
@@ -311,6 +373,7 @@ if __name__ == '__main__':
 
     if types == 'ALL' or "STATE" in types:
         state_df = get_state(state_list, STATE_CODES)
+        state_df['NAME'] = state_df['USPS'].apply(lambda x: STATE_ABBREVS[x])
         output_df = pd.concat([output_df, state_df])
 
     output_df.to_csv(os.path.join(OUTPUT_DIR, "census.csv"), index_label="FIPS")
