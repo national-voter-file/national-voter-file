@@ -237,7 +237,7 @@ CREATE TABLE public.JURISDICTION_DIM(
   jurisdiction_id SERIAL NOT NULL PRIMARY KEY,
   geoid character varying(15),
   fips character varying(15),
-  voter_file_id character varying(5),
+  voter_file_code character varying(5),
   state_name character varying(2),
   state_fips character varying(2),
   entity_name character varying(75),
@@ -528,6 +528,9 @@ CREATE TABLE public.JURISDICTION_DIM(
   version integer,
   valid_from date,
   valid_to date);
+
+DROP INDEX IF EXISTS JURISDICTION_LOOKUP_IDX;
+CREATE INDEX JURISDICTION_LOOKUP_IDX on JURISDICTION_DIM(ENTITY_TYPE, voter_file_code);
 
 
 DROP TABLE IF EXISTS VOTER_REPORT_FACT;

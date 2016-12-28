@@ -188,6 +188,7 @@ def get_state(state_list, state_codes, census_tables=DATA_TABLES):
 if __name__ == '__main__':
     args = parser.parse_args()
 
+    print("Writing to "+OUTPUT_DIR)
     if args.states is None:
         state_list = STATE_LIST
     else:

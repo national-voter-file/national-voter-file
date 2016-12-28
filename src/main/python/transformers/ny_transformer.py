@@ -15,7 +15,7 @@ class NYTransformer(BaseTransformer):
     col_type_dict['PRECINCT_SPLIT'] = set([str, type(None)])
     col_type_dict['RACE'] = set([str, type(None)])
     col_type_dict['BIRTH_STATE'] = set([str, type(None)])
-    
+
 
     ny_party_map = {
         "DEM":"DEM",
@@ -401,5 +401,5 @@ class NYTransformer(BaseTransformer):
             Dictionary with following keys
                 'PRECINCT_SPLIT'
         """
-        # Not sure if mapping exists, verify
-        return {'PRECINCT_SPLIT': None}
+        # There is no split, so copy the precinct
+        return {'PRECINCT_SPLIT': "%03d/%02d"%(int(input_dict['ED']), int(input_dict['AD']))}
