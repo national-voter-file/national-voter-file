@@ -316,7 +316,7 @@
       </key>
       <key>
         <name>CONGRESSIONAL_DIST</name>
-        <field>voter_file_id</field>
+        <field>voter_file_code</field>
         <condition>&#x3d;</condition>
         <name2/>
       </key>
@@ -370,7 +370,7 @@
       </key>
       <key>
         <name>COUNTYCODE</name>
-        <field>voter_file_id</field>
+        <field>voter_file_code</field>
         <condition>&#x3d;</condition>
         <name2/>
       </key>
@@ -424,7 +424,7 @@
       </key>
       <key>
         <name>LOWER_HOUSE_DIST</name>
-        <field>voter_file_id</field>
+        <field>voter_file_code</field>
         <condition>&#x3d;</condition>
         <name2/>
       </key>
@@ -574,7 +574,7 @@
       </key>
       <key>
         <name>UPPER_HOUSE_DIST</name>
-        <field>voter_file_id</field>
+        <field>voter_file_code</field>
         <condition>&#x3d;</condition>
         <name2/>
       </key>
