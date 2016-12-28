@@ -1230,11 +1230,6 @@
           <update>Insert</update>
         </field>
         <field>
-          <name>PARTY</name>
-          <lookup>party</lookup>
-          <update>Insert</update>
-        </field>
-        <field>
           <name>GENDER</name>
           <lookup>gender</lookup>
           <update>Insert</update>
