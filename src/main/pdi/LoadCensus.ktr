@@ -16,7 +16,7 @@
         </parameter>
         <parameter>
             <name>filterState</name>
-            <default_value/>
+            <default_value>NY</default_value>
             <description>State to filter off of</description>
         </parameter>
         <parameter>
@@ -119,13 +119,13 @@
   <hop> <from>Get Variables</from><to>Text file input</to><enabled>Y</enabled> </hop>
   <hop> <from>Get Variables For County</from><to>Read Lookup File</to><enabled>Y</enabled> </hop>
   <hop> <from>Read Lookup File</from><to>Stream lookup</to><enabled>Y</enabled> </hop>
-  <hop> <from>Stream lookup</from><to>Table output</to><enabled>Y</enabled> </hop>
-  <hop> <from>Check if State Filtering</from><to>Add constants</to><enabled>Y</enabled> </hop>
-  <hop> <from>Text file input</from><to>If not filtering by state add dummy value</to><enabled>Y</enabled> </hop>
-  <hop> <from>If not filtering by state add dummy value</from><to>Check if State Filtering</to><enabled>Y</enabled> </hop>
-  <hop> <from>Check if State Filtering</from><to>Filter rows</to><enabled>Y</enabled> </hop>
   <hop> <from>Add constants</from><to>Calculate CountyFP</to><enabled>Y</enabled> </hop>
   <hop> <from>Calculate CountyFP</from><to>Stream lookup</to><enabled>Y</enabled> </hop>
+  <hop> <from>Text file input</from><to>Filter rows</to><enabled>Y</enabled> </hop>
+  <hop> <from>Stream lookup</from><to>Switch &#x2f; Case</to><enabled>Y</enabled> </hop>
+  <hop> <from>Switch &#x2f; Case</from><to>Table output</to><enabled>Y</enabled> </hop>
+  <hop> <from>Switch &#x2f; Case</from><to>Set field value</to><enabled>Y</enabled> </hop>
+  <hop> <from>Set field value</from><to>Table output</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add constants</name>
@@ -178,7 +178,7 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>832</xloc>
+      <xloc>608</xloc>
       <yloc>288</yloc>
       <draw>Y</draw>
       </GUI>
@@ -204,35 +204,7 @@
 </formula>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>992</xloc>
-      <yloc>288</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Check if State Filtering</name>
-    <type>SwitchCase</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-<fieldname>filterState</fieldname>
-<use_contains>N</use_contains>
-<case_value_type>String</case_value_type>
-<case_value_format/>
-<case_value_decimal/>
-<case_value_group/>
-<default_target_step>Filter rows</default_target_step>
-<cases><case><value>XXX</value>
-<target_step>Add constants</target_step>
-</case></cases>     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>592</xloc>
+      <xloc>800</xloc>
       <yloc>288</yloc>
       <draw>Y</draw>
       </GUI>
@@ -249,20 +221,32 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-<send_true_to/>
+<send_true_to>Add constants</send_true_to>
 <send_false_to/>
     <compare>
 <condition>
  <negated>N</negated>
- <leftvalue>USPS</leftvalue>
- <function>&#x3d;</function>
- <rightvalue>filterState</rightvalue>
+ <conditions>
+  <condition>
+   <negated>N</negated>
+   <leftvalue>USPS</leftvalue>
+   <function>&#x3d;</function>
+   <rightvalue>filterState</rightvalue>
+   </condition>
+  <condition>
+   <negated>N</negated>
+   <operator>OR</operator>
+   <leftvalue>filterState</leftvalue>
+   <function>IS NULL</function>
+   <rightvalue/>
+   </condition>
+  </conditions>
  </condition>
     </compare>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>720</xloc>
-      <yloc>208</yloc>
+      <xloc>448</xloc>
+      <yloc>288</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -306,7 +290,7 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>80</xloc>
+      <xloc>128</xloc>
       <yloc>288</yloc>
       <draw>Y</draw>
       </GUI>
@@ -363,42 +347,8 @@
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>176</xloc>
-      <yloc>96</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>If not filtering by state add dummy value</name>
-    <type>IfNull</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <replaceAllByValue/>
-      <replaceAllMask/>
-      <selectFields>Y</selectFields>
-      <selectValuesType>N</selectValuesType>
-      <setEmptyStringAll>N</setEmptyStringAll>
-    <valuetypes>
-      </valuetypes>
-    <fields>
-      <field>
-        <name>filterState</name>
-        <value>XXX</value>
-        <mask/>
-        <set_empty_string>N</set_empty_string>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>400</xloc>
-      <yloc>320</yloc>
+      <xloc>416</xloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -469,7 +419,7 @@
       </field>
       <field>
         <name>COUNTY_CODE</name>
-        <type>Integer</type>
+        <type>String</type>
         <format>&#x23;</format>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
@@ -570,8 +520,33 @@
     <sizeFieldName/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>352</xloc>
+      <xloc>592</xloc>
       <yloc>112</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Set field value</name>
+    <type>SetValueField</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>VoterFileCountyCode</name>
+        <replaceby>VOTER_FILE_ID</replaceby>
+        </field>
+      </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1056</xloc>
+      <yloc>368</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -614,8 +589,36 @@
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>992</xloc>
+      <xloc>800</xloc>
       <yloc>112</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Switch &#x2f; Case</name>
+    <type>SwitchCase</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<fieldname>ENTITYTYPE</fieldname>
+<use_contains>N</use_contains>
+<case_value_type>String</case_value_type>
+<case_value_format/>
+<case_value_decimal/>
+<case_value_group/>
+<default_target_step>Set field value</default_target_step>
+<cases><case><value>county</value>
+<target_step>Table output</target_step>
+</case></cases>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>928</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -946,10 +949,6 @@
           <stream_name>B03002021</stream_name>
         </field>
         <field>
-          <column_name>total_married_over_15</column_name>
-          <stream_name>B06008001</stream_name>
-        </field>
-        <field>
           <column_name>never_married</column_name>
           <stream_name>B06008002</stream_name>
         </field>
@@ -1128,10 +1127,6 @@
         <field>
           <column_name>income_200000_or_more</column_name>
           <stream_name>B19001017</stream_name>
-        </field>
-        <field>
-          <column_name>male_over_16</column_name>
-          <stream_name>B23001002</stream_name>
         </field>
         <field>
           <column_name>male16_to_19_years</column_name>
@@ -1430,14 +1425,6 @@
           <stream_name>B23001087</stream_name>
         </field>
         <field>
-          <column_name>female_over_16</column_name>
-          <stream_name>B23001088</stream_name>
-        </field>
-        <field>
-          <column_name>female16_to_19_years</column_name>
-          <stream_name>B23001089</stream_name>
-        </field>
-        <field>
           <column_name>female16_to_19_yearsin_labor_force</column_name>
           <stream_name>B23001090</stream_name>
         </field>
@@ -1730,10 +1717,6 @@
           <stream_name>B23001173</stream_name>
         </field>
         <field>
-          <column_name>household_total</column_name>
-          <stream_name>B25009001</stream_name>
-        </field>
-        <field>
           <column_name>owner_occupied</column_name>
           <stream_name>B25009002</stream_name>
         </field>
@@ -1798,10 +1781,6 @@
           <stream_name>B25009017</stream_name>
         </field>
         <field>
-          <column_name>median_value_dollars_occupied_household</column_name>
-          <stream_name>B25077001</stream_name>
-        </field>
-        <field>
           <column_name>entity_type</column_name>
           <stream_name>ENTITYTYPE</stream_name>
         </field>
@@ -1818,14 +1797,14 @@
           <stream_name>NAME</stream_name>
         </field>
         <field>
-          <column_name>voter_file_county_code</column_name>
+          <column_name>voter_file_code</column_name>
           <stream_name>VoterFileCountyCode</stream_name>
         </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1216</xloc>
-      <yloc>224</yloc>
+      <xloc>1232</xloc>
+      <yloc>240</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1920,7 +1899,7 @@
         <ifnull/>
         <position>-1</position>
         <length>18</length>
-        <precision>15</precision>
+        <precision>14</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
@@ -1934,7 +1913,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>8</length>
+        <length>9</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -1964,8 +1943,8 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>19</length>
-        <precision>17</precision>
+        <length>18</length>
+        <precision>16</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
@@ -2774,7 +2753,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -2804,7 +2783,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -6359,7 +6338,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>7</length>
+        <length>8</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -6599,7 +6578,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>11</length>
+        <length>6</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -6659,7 +6638,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>18</length>
+        <length>19</length>
         <precision>14</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -6689,7 +6668,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>20</length>
+        <length>19</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -6724,6 +6703,21 @@
         <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
+      <field>
+        <name>VOTER_FILE_ID</name>
+        <type>String</type>
+        <format>&#x23;</format>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
     </fields>
     <limit>0</limit>
     <error_ignored>N</error_ignored>
@@ -6752,7 +6746,7 @@
     <sizeFieldName/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>208</xloc>
+      <xloc>256</xloc>
       <yloc>288</yloc>
       <draw>Y</draw>
       </GUI>
