@@ -16,7 +16,7 @@
         </parameter>
         <parameter>
             <name>filterState</name>
-            <default_value>NY</default_value>
+            <default_value>WA</default_value>
             <description>State to filter off of</description>
         </parameter>
         <parameter>
