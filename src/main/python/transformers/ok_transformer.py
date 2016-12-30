@@ -387,7 +387,6 @@ class OKTransformer(BaseTransformer):
             Dictionary with following keys
                 'SCHOOL_BOARD_DIST'
         """
-        # Not sure if mapping exists, verify
         return {'SCHOOL_BOARD_DIST': input_dict['School']}
 
     def extract_precinct_split(self, input_dict):
@@ -398,4 +397,5 @@ class OKTransformer(BaseTransformer):
             Dictionary with following keys
                 'PRECINCT_SPLIT'
         """
-        return {'PRECINCT_SPLIT': None}
+        # Defaulting to Precint, split doesn't exist
+        return {'PRECINCT_SPLIT': input_dict['Precinct']}
