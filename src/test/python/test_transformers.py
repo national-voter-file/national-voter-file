@@ -1,5 +1,5 @@
 from src.main.python.transformers import base_transformer, wa_transformer, \
-    co_transformer, ok_transformer
+    co_transformer, ok_transformer, oh_transformer
 import os
 import csv
 # Need to add test data
@@ -58,3 +58,16 @@ def test_ok_transformer():
 
     assert sorted(ok_dict_list[0].keys()) == BASE_TRANSFORMER_COLS
     assert len(ok_dict_list) > 1
+
+
+def test_oh_transformer():
+    oh_test = oh_transformer.OHTransformer(date_format='%m/%d/%Y', sep=',')
+    oh_test(
+        os.path.join(TEST_DATA_DIR, 'ohio.csv'),
+        os.path.join(TEST_DATA_DIR, 'ohio_test.csv'),
+    )
+    assert os.path.exists(os.path.join(TEST_DATA_DIR, 'ohio_test.csv'))
+    oh_dict_list = read_transformer_output('ohio_test.csv')
+
+    assert sorted(oh_dict_list[0].keys()) == BASE_TRANSFORMER_COLS
+    assert len(oh_dict_list) > 1
