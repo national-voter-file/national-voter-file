@@ -1,4 +1,4 @@
-from nc_transformer import NCTransformer
+from src.main.python.transformers.nc_transformer import NCTransformer
 
 if __name__ == '__main__':
     nc_transformer = NCTransformer(date_format="%m/%d/%Y", sep='\t')
