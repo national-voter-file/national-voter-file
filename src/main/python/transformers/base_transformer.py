@@ -58,11 +58,11 @@ class BaseTransformer(object):
 
     # Acceptable column output types
     col_type_dict = {
-        'TITLE': set([str]),
+        'TITLE': set([str, type(None)]),
         'FIRST_NAME': set([str]),
-        'MIDDLE_NAME': set([str]),
+        'MIDDLE_NAME': set([str, type(None)]),
         'LAST_NAME': set([str]),
-        'NAME_SUFFIX': set([str]),
+        'NAME_SUFFIX': set([str, type(None)]),
         'GENDER': set([str]),
         'RACE':set([str]),
         'BIRTHDATE': set([datetime.date]),
@@ -100,10 +100,10 @@ class BaseTransformer(object):
         'ZIP_CODE': set([str]),
         'MAIL_ADDRESS_LINE1': set([str, type(None)]),
         'MAIL_ADDRESS_LINE2': set([str, type(None)]),
-        'MAIL_CITY': set([str]),
-        'MAIL_STATE': set([str]),
-        'MAIL_ZIP_CODE': set([str]),
-        'MAIL_COUNTRY': set([str]),
+        'MAIL_CITY': set([str, type(None)]),
+        'MAIL_STATE': set([str, type(None)]),
+        'MAIL_ZIP_CODE': set([str, type(None)]),
+        'MAIL_COUNTRY': set([str, type(None)]),
         'COUNTYCODE': set([str]),
         'STATE_VOTER_REF': set([str]),
         'COUNTY_VOTER_REF': set([str]),
@@ -306,8 +306,10 @@ class BaseTransformer(object):
         # check to make sure columns are of the correct type
         type_errors = []
         for colname, value in output_dict.items():
+            # Strip strings, if empty strings set type to None
             if type(value) == str:
-                value_type = str if len(value.strip()) > 0 else None
+                output_dict[colname] = value.strip()
+                value_type = str if len(value.strip()) > 0 else type(None)
             else:
                 value_type = type(value)
             acceptable_types = self.col_type_dict[colname]

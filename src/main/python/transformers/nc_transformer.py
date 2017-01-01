@@ -4,6 +4,12 @@ from datetime import datetime
 import datetime as dt
 
 class NCTransformer(BaseTransformer):
+    col_type_dict = BaseTransformer.col_type_dict.copy()
+    col_type_dict['ABSENTEE_TYPE'] = set([str, type(None)])
+    col_type_dict['PRECINCT'] = set([str, type(None)])
+    col_type_dict['PRECINCT_SPLIT'] = set([str, type(None)])
+    col_type_dict['CONGRESSIONAL_DIST'] = set([str, type(None)])
+    col_type_dict['BIRTH_STATE'] = set([str, type(None)])
 
     #### Contact methods #######################################################
 
@@ -366,4 +372,4 @@ class NCTransformer(BaseTransformer):
             Dictionary with following keys
                 'PRECINCT_SPLIT'
         """
-        return {'PRECINCT_SPLIT': ""}
+        return {'PRECINCT_SPLIT': None}

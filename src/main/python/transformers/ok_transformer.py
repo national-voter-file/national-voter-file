@@ -14,6 +14,7 @@ class OKTransformer(BaseTransformer):
     col_type_dict['TITLE'] = set([str, type(None)])
     col_type_dict['GENDER'] = set([str, type(None)])
     col_type_dict['RACE'] = set([str, type(None)])
+    col_type_dict['ZIP_CODE'] = set([str, type(None)])
     col_type_dict['BIRTH_STATE'] = set([str, type(None)])
     col_type_dict['ABSENTEE_TYPE'] = set([str, type(None)])
     col_type_dict['COUNTY_VOTER_REF'] = set([str, type(None)])

@@ -1,4 +1,5 @@
 from src.main.python.transformers.base_transformer import BaseTransformer
+import datetime
 import usaddress
 
 class FLTransformer(BaseTransformer):
@@ -11,11 +12,12 @@ class FLTransformer(BaseTransformer):
     """
     col_type_dict = BaseTransformer.col_type_dict.copy()
     col_type_dict['TITLE'] = set([str, type(None)])
+    col_type_dict['GENDER'] = set([str, type(None)])
     col_type_dict['ABSENTEE_TYPE'] = set([str, type(None)])
+    col_type_dict['BIRTHDATE'] = set([datetime.date, type(None)])
+    col_type_dict['COUNTY_VOTER_REF'] = set([str, type(None)])
     col_type_dict['PRECINCT_SPLIT'] = set([str, type(None)])
     col_type_dict['BIRTH_STATE'] = set([str, type(None)])
-
-
 
     florida_party_map = {
         'AIP':'AMP',
@@ -43,7 +45,6 @@ class FLTransformer(BaseTransformer):
         '7':'M',
         '9':'U'
     }
-
 
     #### Contact methods #######################################################
 
@@ -115,7 +116,11 @@ class FLTransformer(BaseTransformer):
             Dictionary with following keys
                 'GENDER'
         """
-        return {'GENDER': input_dict['Gender']}
+        gender = input_dict['Gender'].strip()
+        if len(gender) == 0:
+            gender = None
+
+        return {'GENDER': gender}
 
     def extract_race(self, input_dict):
         """
@@ -146,9 +151,16 @@ class FLTransformer(BaseTransformer):
             Dictionary with following keys
                 'BIRTHDATE'
         """
+        # Some rows in FL have asterisks through them, empty birth date, so
+        # allowing blanks here
+        if len(input_dict['Birth Date'].strip()) > 0:
+            birth_date = self.convert_date(input_dict['Birth Date'])
+        else:
+            birth_date = None
+
         return {
-        'BIRTHDATE': self.convert_date(input_dict['Birth Date']),
-        'BIRTHDATE_IS_ESTIMATE':'N'
+            'BIRTHDATE': birth_date,
+            'BIRTHDATE_IS_ESTIMATE':'N'
         }
 
     def extract_language_choice(self, input_dict):
@@ -209,12 +221,15 @@ class FLTransformer(BaseTransformer):
 
         converted_addr = self.convert_usaddress_dict(usaddress_dict)
 
-        converted_addr.update({'PLACE_NAME':input_dict['Residence City (USPS)'],
-                                'STATE_NAME':input_dict['Residence State'],
-                                'ZIP_CODE':input_dict['Residence Zipcode']
+        # FL leaves state column blank frequently
+        state_name = input_dict['Residence State']
+        if len(state_name.strip()) == 0:
+            state_name = 'FL'
+
+        converted_addr.update({'PLACE_NAME': input_dict['Residence City (USPS)'],
+                               'STATE_NAME': state_name,
+                               'ZIP_CODE': input_dict['Residence Zipcode']
         })
-
-
 
         return converted_addr
 
@@ -280,7 +295,7 @@ class FLTransformer(BaseTransformer):
             Dictionary with following keys
                 'COUNTY_VOTER_REF'
         """
-        return {'COUNTY_VOTER_REF': ' '}
+        return {'COUNTY_VOTER_REF': None}
 
     def extract_registration_date(self, input_dict):
         """
