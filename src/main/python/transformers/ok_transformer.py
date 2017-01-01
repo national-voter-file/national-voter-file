@@ -1,8 +1,9 @@
 from src.main.python.transformers.base_transformer import BaseTransformer
+import datetime
 import usaddress
 
-class OHTransformer(BaseTransformer):
 
+class OKTransformer(BaseTransformer):
     """
     A few required columns in the BaseTransformer did not have values in the
     Ohio data. Not sure what the best way of updating those on a case by case
@@ -15,18 +16,20 @@ class OHTransformer(BaseTransformer):
     col_type_dict['RACE'] = set([str, type(None)])
     col_type_dict['BIRTH_STATE'] = set([str, type(None)])
     col_type_dict['ABSENTEE_TYPE'] = set([str, type(None)])
+    col_type_dict['COUNTY_VOTER_REF'] = set([str, type(None)])
+    col_type_dict['CONGRESSIONAL_DIST'] = set([str, type(None)])
+    col_type_dict['COUNTYCODE'] = set([str, type(None)])
     col_type_dict['PRECINCT_SPLIT'] = set([str, type(None)])
+    # OK is different in having missing values for birth and reg dates
+    col_type_dict['BIRTHDATE'] = set([datetime.date, type(None)])
+    col_type_dict['REGISTRATION_DATE'] = set([datetime.date, type(None)])
 
-    ohio_party_map = {
-        "C": "AMC",
-        "D": "DEM",
-        "G": "GRN",
-        "L": "LIB",
-        "N": "NLP",
-        "R": "REP",
-        "S": "SP",
-        " ": "UN",
-        "":  "UN"
+    ok_party_map = {
+        "DEM": "DEM",
+        "REP": "REP",
+        "IND": "UN",
+        "LIB": "LIB",
+        "AE": "AE"
     }
 
     #### Contact methods #######################################################
@@ -45,10 +48,10 @@ class OHTransformer(BaseTransformer):
         """
         output_dict = {
             'TITLE': None,
-            'FIRST_NAME': input_dict['FIRST_NAME'],
-            'MIDDLE_NAME': input_dict['MIDDLE_NAME'],
-            'LAST_NAME': input_dict['LAST_NAME'],
-            'NAME_SUFFIX': input_dict['SUFFIX'],
+            'FIRST_NAME': input_dict['FirstName'],
+            'MIDDLE_NAME': input_dict['MiddleName'],
+            'LAST_NAME': input_dict['LastName'],
+            'NAME_SUFFIX': input_dict['Suffix'],
         }
         return output_dict
 
@@ -114,8 +117,6 @@ class OHTransformer(BaseTransformer):
         """
         return {'BIRTH_STATE': None}
 
-
-
     def extract_birthdate(self, input_dict):
         """
         Inputs:
@@ -124,10 +125,11 @@ class OHTransformer(BaseTransformer):
             Dictionary with following keys
                 'BIRTHDATE'
         """
-        return {
-            'BIRTHDATE': self.convert_date(input_dict['DATE_OF_BIRTH']),
-            'BIRTHDATE_IS_ESTIMATE': 'N'
-        }
+        if len(input_dict['DateOfBirth']) > 0:
+            date = self.convert_date(input_dict['DateOfBirth'])
+        else:
+            date = None
+        return {'BIRTHDATE': date, 'BIRTHDATE_IS_ESTIMATE': 'N'}
 
     def extract_language_choice(self, input_dict):
         """
@@ -175,24 +177,24 @@ class OHTransformer(BaseTransformer):
                 'USPS_BOX_ID'
                 'USPS_BOX_TYPE'
                 'ZIP_CODE'
-        """
-        address_components = [
-            'RESIDENTIAL_ADDRESS1',
-            'RESIDENTIAL_SECONDARY_ADDR'
-        ]
+            """
+        # TODO: Currently parsing with usaddress, but CO has almost all fields,
+        # might be worth just taking as is
         address_str = ' '.join([
-            input_dict[x] for x in address_components if input_dict[x] is not None
+             input_dict['StreetNum'],
+             input_dict['StreetDir'],
+             input_dict['StreetName'],
+             input_dict['StreetType'],
+             input_dict['BldgNum']
         ])
+
         usaddress_dict, usaddress_type = self.usaddress_tag(address_str)
 
         converted_addr = self.convert_usaddress_dict(usaddress_dict)
 
-        converted_addr.update({'PLACE_NAME':input_dict['RESIDENTIAL_CITY'],
-                                'STATE_NAME':input_dict['RESIDENTIAL_STATE'],
-                                'ZIP_CODE':input_dict['RESIDENTIAL_ZIP']
-        })
-
-
+        converted_addr.update({'PLACE_NAME': input_dict['City'],
+                               'STATE_NAME': 'OK',
+                               'ZIP_CODE': input_dict['Zip']})
 
         return converted_addr
 
@@ -204,11 +206,11 @@ class OHTransformer(BaseTransformer):
             Dictionary with following keys
                 'COUNTYCODE'
         """
-        return {'COUNTYCODE': input_dict['COUNTY_NUMBER']}
+        # Files are broken into county, so not in file itself, but can get
+        return {'COUNTYCODE': None}
 
     def extract_mailing_address(self, input_dict):
         """
-        Relies on the usaddress package.
 
         We provide template code.
 
@@ -224,18 +226,39 @@ class OHTransformer(BaseTransformer):
                 'MAIL_COUNTRY'
         """
 
-        if( input_dict['MAILING_ADDRESS1'].strip() and input_dict['MAILING_CITY'].strip()):
-            return {
-                'MAIL_ADDRESS_LINE1': input_dict['MAILING_ADDRESS1'],
-                'MAIL_ADDRESS_LINE2': input_dict['MAILING_SECONDARY_ADDRESS'],
-                'MAIL_CITY': input_dict['MAILING_CITY'],
-                'MAIL_STATE': input_dict['MAILING_STATE'],
-                'MAIL_ZIP_CODE': input_dict['MAILING_ZIP'],
-                'MAIL_COUNTRY': input_dict['MAILING_COUNTRY'] if input_dict['MAILING_COUNTRY']  else "USA"
-            }
+        if input_dict['MailStreet1'].strip():
+            try:
+                tagged_address, address_type = usaddress.tag(' '.join([
+                    input_dict['MailStreet1'],
+                    input_dict['MailStreet2'],
+                    input_dict['MailCity'],
+                    input_dict['MailState'],
+                    input_dict['MailZip']
+                ]))
+
+                if address_type == 'Ambiguous':
+                    print("Warn - %s: Ambiguous mailing address falling back to residential (%s)" % (address_type, input_dict['MailStreet1']))
+                    tagged_address = {}
+
+                if(len(tagged_address) > 0):
+                    return {
+                        'MAIL_ADDRESS_LINE1': self.construct_mail_address_1(
+                            tagged_address,
+                            address_type,
+                        ),
+                        'MAIL_ADDRESS_LINE2': self.construct_mail_address_2(tagged_address),
+                        'MAIL_CITY': tagged_address['PlaceName'] if 'PlaceName' in tagged_address else "",
+                        'MAIL_ZIP_CODE': tagged_address['ZipCode'] if 'ZipCode' in tagged_address else "",
+                        'MAIL_STATE': tagged_address['StateName'] if 'StateName' in tagged_address else "",
+                        'MAIL_COUNTRY': ""
+                    }
+                else:
+                    return {}
+            except usaddress.RepeatedLabelError as e:
+                print('Warn: Can\'t parse mailing address. Falling back to residential (%s)' % (e.parsed_string))
+                return {}
         else:
             return {}
-
 
     #### Political methods #####################################################
 
@@ -247,7 +270,7 @@ class OHTransformer(BaseTransformer):
             Dictionary with following keys
                 'STATE_VOTER_REF'
         """
-        return {'STATE_VOTER_REF': input_dict['SOS_VOTERID']}
+        return {'STATE_VOTER_REF': input_dict['VoterID']}
 
     def extract_county_voter_ref(self, input_dict):
         """
@@ -257,7 +280,7 @@ class OHTransformer(BaseTransformer):
             Dictionary with following keys
                 'COUNTY_VOTER_REF'
         """
-        return {'COUNTY_VOTER_REF': input_dict['COUNTY_ID']}
+        return {'COUNTY_VOTER_REF': None}
 
     def extract_registration_date(self, input_dict):
         """
@@ -267,7 +290,11 @@ class OHTransformer(BaseTransformer):
             Dictionary with following keys
                 'REGISTRATION_DATE'
         """
-        date = self.convert_date(input_dict['REGISTRATION_DATE'])
+        # Oddly a large amount of voters don't have an original reg date
+        if len(input_dict['OriginalRegistration']) > 0:
+            date = self.convert_date(input_dict['OriginalRegistration'])
+        else:
+            date = None
         return {'REGISTRATION_DATE': date}
 
     def extract_registration_status(self, input_dict):
@@ -278,7 +305,7 @@ class OHTransformer(BaseTransformer):
             Dictionary with following keys
                 'REGISTRATION_STATUS'
         """
-        return {'REGISTRATION_STATUS': input_dict['VOTER_STATUS']}
+        return {'REGISTRATION_STATUS': input_dict['Status']}
 
     def extract_absentee_type(self, input_dict):
         """
@@ -286,7 +313,7 @@ class OHTransformer(BaseTransformer):
             input_dict: dictionary of form {colname: value} from raw data
         Outputs:
             Dictionary with following keys
-                'ABSTENTEE_TYPE'
+                'ABSENTEE_TYPE'
         """
         return {'ABSENTEE_TYPE': None}
 
@@ -298,8 +325,7 @@ class OHTransformer(BaseTransformer):
             Dictionary with following keys
                 'PARTY'
         """
-        party = input_dict['PARTY_AFFILIATION']
-        return {'PARTY': self.ohio_party_map[party]}
+        return {'PARTY': self.ok_party_map[input_dict['PolitalAff']]}
 
     def extract_congressional_dist(self, input_dict):
         """
@@ -309,7 +335,8 @@ class OHTransformer(BaseTransformer):
             Dictionary with following keys
                 'CONGRESSIONAL_DIST'
         """
-        return {'CONGRESSIONAL_DIST': input_dict['CONGRESSIONAL_DISTRICT']}
+        # Like county, contained in data structure, not in columns
+        return {'CONGRESSIONAL_DIST': None}
 
     def extract_upper_house_dist(self, input_dict):
         """
@@ -319,7 +346,7 @@ class OHTransformer(BaseTransformer):
             Dictionary with following keys
                 'UPPER_HOUSE_DIST'
         """
-        return {'UPPER_HOUSE_DIST': input_dict['STATE_SENATE_DISTRICT']}
+        return {'UPPER_HOUSE_DIST': None}
 
     def extract_lower_house_dist(self, input_dict):
         """
@@ -329,7 +356,8 @@ class OHTransformer(BaseTransformer):
             Dictionary with following keys
                 'LOWER_HOUSE_DIST'
         """
-        return {'LOWER_HOUSE_DIST': input_dict['STATE_REPRESENTATIVE_DISTRICT']}
+        # Starts with 12 chars of "State House ", skipping
+        return {'LOWER_HOUSE_DIST': None}
 
     def extract_precinct(self, input_dict):
         """
@@ -339,7 +367,7 @@ class OHTransformer(BaseTransformer):
             Dictionary with following keys
                 'PRECINCT'
         """
-        return {'PRECINCT': input_dict['PRECINCT_CODE']}
+        return {'PRECINCT': input_dict['Precinct']}
 
     def extract_county_board_dist(self, input_dict):
         """
@@ -349,8 +377,7 @@ class OHTransformer(BaseTransformer):
             Dictionary with following keys
                 'COUNTY_BOARD_DIST'
         """
-        # Not sure if mapping exists, verify
-        return {'COUNTY_BOARD_DIST': None}
+        return {'COUNTY_BOARD_DIST': input_dict['CountyComm']}
 
     def extract_school_board_dist(self, input_dict):
         """
@@ -360,18 +387,7 @@ class OHTransformer(BaseTransformer):
             Dictionary with following keys
                 'SCHOOL_BOARD_DIST'
         """
-        # Several different types of school districts, but seem mutually exclusive
-        # Using whichever has a value, but defaulting to None
-        school_board_dist = None
-
-        if len(input_dict['CITY_SCHOOL_DISTRICT'].strip()) > 0:
-            school_board_dist = input_dict['CITY_SCHOOL_DISTRICT'].strip()
-        elif len(input_dict['EXEMPTED_VILL_SCHOOL_DISTRICT'].strip()) > 0:
-            school_board_dist = input_dict['EXEMPTED_VILL_SCHOOL_DISTRICT'].strip()
-        elif len(input_dict['LOCAL_SCHOOL_DISTRICT'].strip()) > 0:
-            school_board_dist = input_dict['LOCAL_SCHOOL_DISTRICT'].strip()
-
-        return {'SCHOOL_BOARD_DIST': school_board_dist}
+        return {'SCHOOL_BOARD_DIST': input_dict['School']}
 
     def extract_precinct_split(self, input_dict):
         """
@@ -381,5 +397,5 @@ class OHTransformer(BaseTransformer):
             Dictionary with following keys
                 'PRECINCT_SPLIT'
         """
-        # No split, copying precinct
-        return {'PRECINCT_SPLIT': input_dict['PRECINCT_CODE']}
+        # Defaulting to Precint, split doesn't exist
+        return {'PRECINCT_SPLIT': input_dict['Precinct']}

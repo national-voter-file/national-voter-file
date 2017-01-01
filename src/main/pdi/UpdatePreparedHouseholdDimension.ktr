@@ -16,7 +16,7 @@
         </parameter>
         <parameter>
             <name>reportFile</name>
-            <default_value>C&#x3a;&#x5c;dev&#x5c;GitHub&#x5c;getmovement&#x5c;national-voter-file&#x5c;data&#x5c;Washington&#x5c;201605_VRDB_ExtractSAMPLE_OUT.csv</default_value>
+            <default_value>C&#x3a;&#x5c;dev&#x5c;GitHub&#x5c;national-voter-file&#x5c;national-voter-file&#x5c;data&#x5c;Washington&#x5c;201605_VRDB_ExtractSAMPLE_OUT.csv</default_value>
             <description/>
         </parameter>
         <parameter>
@@ -401,7 +401,12 @@
     <encoding/>
     <add_to_result_filenames>Y</add_to_result_filenames>
     <file>
-      <name>C&#x3a;&#x5c;dev&#x5c;GitHub&#x5c;getmovement&#x5c;national-voter-file&#x5c;data&#x5c;Washington&#x5c;201605_VRDB_ExtractSAMPLE_OUT.csv</name>
+      <name>C&#x3a;&#x5c;dev&#x5c;GitHub&#x5c;national-voter-file&#x5c;national-voter-file&#x5c;data&#x5c;Washington&#x5c;201605_VRDB_ExtractSAMPLE_OUT.csv</name>
+      <filemask/>
+      <exclude_filemask/>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+      <name/>
       <filemask/>
       <exclude_filemask/>
       <file_required>N</file_required>
@@ -488,6 +493,21 @@
         <repeat>N</repeat>
       </field>
       <field>
+        <name>BIRTHDATE_IS_ESTIMATE</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>0</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
         <name>BIRTH_STATE</name>
         <type>String</type>
         <format/>
@@ -519,7 +539,7 @@
       </field>
       <field>
         <name>CONGRESSIONAL_DIST</name>
-        <type>String</type>
+        <type>Number</type>
         <format>&#x23;.&#x23;</format>
         <currency>&#x24;</currency>
         <decimal>.</decimal>

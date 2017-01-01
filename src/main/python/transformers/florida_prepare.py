@@ -1,4 +1,4 @@
-from fl_transformer import FLTransformer
+from src.main.python.transformers.fl_transformer import FLTransformer
 
 if __name__ == '__main__':
     input_fields = [

@@ -1,7 +1,9 @@
 from src.main.python.transformers.base_transformer import BaseTransformer
 import usaddress
+from datetime import datetime
+import datetime as dt
 
-class StateTransformer(BaseTransformer):
+class NCTransformer(BaseTransformer):
 
     #### Contact methods #######################################################
 
@@ -17,7 +19,14 @@ class StateTransformer(BaseTransformer):
                 'LAST_NAME'
                 'NAME_SUFFIX'
         """
-        raise NotImplementedError('Must implement extract_name method.')
+        output_dict = {
+            'TITLE': input_columns['name_prefx_cd'],
+            'FIRST_NAME': input_columns['first_name'],
+            'MIDDLE_NAME': input_columns['middle_name'],
+            'LAST_NAME': input_columns['last_name'],
+            'NAME_SUFFIX': input_columns['name_suffix_lbl'],
+        }
+        return output_dict
 
     def extract_email(self, input_columns):
         """
@@ -27,7 +36,7 @@ class StateTransformer(BaseTransformer):
             Dictionary with following keys
                 'EMAIL'
         """
-        raise NotImplementedError('Must implement extract_email method')
+        return {'EMAIL': None}
 
     def extract_phone_number(self, input_columns):
         """
@@ -37,7 +46,7 @@ class StateTransformer(BaseTransformer):
             Dictionary with following keys
                 'PHONE'
         """
-        raise NotImplementedError('Must implement extract_phone_number method')
+        return {'PHONE': input_columns['full_phone_number']}
 
     def extract_do_not_call_status(self, input_columns):
         """
@@ -47,9 +56,7 @@ class StateTransformer(BaseTransformer):
             Dictionary with following keys
                 'DO_NOT_CALL_STATUS'
         """
-        raise NotImplementedError(
-            'Must implement extract_do_not_call_status method'
-        )
+        return {'DO_NOT_CALL_STATUS': None}
 
     #### Demographics methods ##################################################
 
@@ -61,7 +68,7 @@ class StateTransformer(BaseTransformer):
             Dictionary with following keys
                 'GENDER'
         """
-        raise NotImplementedError('Must implement extract_gender method')
+        return {'GENDER': input_columns['gender_code']}
 
     def extract_birthdate(self, input_columns):
         """
@@ -71,7 +78,26 @@ class StateTransformer(BaseTransformer):
             Dictionary with following keys
                 'BIRTHDATE'
         """
-        raise NotImplementedError('Must implement extract_birthdate method')
+        #We don't have birthdate, so we'll guess
+        by = int(datetime.now().year) - int(input_columns['birth_age'])
+        bd = dt.date(by, 1, 1)
+
+        output_dict = {
+            'BIRTHDATE': bd,
+            'BIRTHDATE_IS_ESTIMATE': "Y",
+        }
+
+        return output_dict
+
+    def extract_birth_state(self, input_columns):
+        """
+        Inputs:
+            input_columns: name or list of columns
+        Outputs:
+            Dictionary with following keys
+                'BIRTH_STATE'
+        """
+        return {'BIRTH_STATE' : input_columns['birth_state']}
 
     def extract_language_choice(self, input_columns):
         """
@@ -81,9 +107,17 @@ class StateTransformer(BaseTransformer):
             Dictionary with following keys
                 'LANGUAGE_CHOICE'
         """
-        raise NotImplementedError(
-            'Must implement extract_language_choice method'
-        )
+        return {'LANGUAGE_CHOICE': None}
+
+    def extract_race(self, input_columns):
+        """
+        Inputs:
+            input_columns: name or list of columns
+        Outputs:
+            Dictionary with following keys
+                'RACE'
+        """
+        return {'RACE' : input_columns['race_code']}
 
     #### Address methods #######################################################
 
@@ -125,20 +159,27 @@ class StateTransformer(BaseTransformer):
                 'USPS_BOX_TYPE'
                 'ZIP_CODE'
         """
-        raise NotImplementedError(
-            'Must implement extract_registration_address method'
-        )
-        # columns to create address, in order
-        address_components = []
+        address_components = [
+            'res_street_address',
+            'res_city_desc',
+            'state_cd',
+            'zip_code'
+        ]
         # create address string for usaddress.tag
         address_str = ' '.join([
             input_dict[x] for x in address_components if input_dict[x] is not None
         ])
         # use the usaddress_tag method to handle errors
-        usaddress_dict = self.usaddress_tag(address_str)
-        # use the convert_usaddress_dict to get correct column names
-        # and fill in missing values
-        return self.convert_usaddress_dict(usaddress_dict)
+        usaddress_dict, usaddress_type = self.usaddress_tag(address_str)
+
+        converted_addr = self.convert_usaddress_dict(usaddress_dict)
+
+        converted_addr.update({'PLACE_NAME':input_dict['res_city_desc'],
+                                'STATE_NAME':input_dict['state_cd'],
+                                'ZIP_CODE':input_dict['zip_code']
+        })
+
+        return converted_addr
 
     def extract_county_code(self, input_dict):
         """
@@ -148,9 +189,7 @@ class StateTransformer(BaseTransformer):
             Dictionary with following keys
                 'COUNTYCODE'
         """
-        raise NotImplementedError(
-            'Must implement extract_county_code method'
-        )
+        return {'COUNTYCODE': input_dict['county_id']}
 
     def extract_mailing_address(self, input_dict):
         """
@@ -167,10 +206,18 @@ class StateTransformer(BaseTransformer):
                 'MAIL_ZIP_CODE'
                 'MAIL_COUNTRY'
         """
-        raise NotImplementedError(
-            'Must implement extract_mailing_address method'
-        )
-        mail_str = ' '.join([x for x in columns])
+        mail_str = ' '.join([
+            x for x in [
+                input_dict['mail_addr1'],
+                input_dict['mail_addr2'],
+                input_dict['mail_addr3'],
+                input_dict['mail_addr4'],
+                input_dict['mail_city'],
+                input_dict['mail_state'],
+                input_dict['mail_zipcode']
+            ] if x is not None
+        ])
+
         usaddress_dict, usaddress_type = self.usaddress_tag(mail_str)
         return {
             'MAIL_ADDRESS_LINE1': self.construct_mail_address_1(
@@ -178,10 +225,10 @@ class StateTransformer(BaseTransformer):
                 usaddress_type,
             ),
             'MAIL_ADDRESS_LINE2': self.construct_mail_address_2(usaddress_dict),
-            'MAIL_CITY': input_dict['MAIL_CITY'],
-            'MAIL_ZIP_CODE': input_dict['MAIL_ZIP'],
-            'MAIL_STATE': input_dict['MAIL_STATE'],
-            'MAIL_COUNTRY': input_dict['MAIL_COUNTRY'],
+            'MAIL_CITY': input_dict['mail_city'],
+            'MAIL_ZIP_CODE': input_dict['mail_zipcode'],
+            'MAIL_STATE': input_dict['mail_state'],
+            'MAIL_COUNTRY': 'USA',
         }
 
     #### Political methods #####################################################
@@ -194,9 +241,7 @@ class StateTransformer(BaseTransformer):
             Dictionary with following keys
                 'STATE_VOTER_REF'
         """
-        raise NotImplementedError(
-            'Must implement extract_state_voter_ref method'
-        )
+        return {'STATE_VOTER_REF': input_columns['voter_reg_num']}
 
     def extract_county_voter_ref(self, input_columns):
         """
@@ -206,9 +251,7 @@ class StateTransformer(BaseTransformer):
             Dictionary with following keys
                 'COUNTY_VOTER_REF'
         """
-        raise NotImplementedError(
-            'Must implement extract_county_voter_ref method'
-        )
+        return {'COUNTY_VOTER_REF': input_columns['voter_reg_num']}
 
     def extract_registration_date(self, input_columns):
         """
@@ -218,9 +261,8 @@ class StateTransformer(BaseTransformer):
             Dictionary with following keys
                 'REGISTRATION_DATE'
         """
-        raise NotImplementedError(
-            'Must implement extract_registration_date method'
-        )
+        date = self.convert_date(input_columns['registr_dt'])
+        return {'REGISTRATION_DATE': date}
 
     def extract_registration_status(self, input_columns):
         """
@@ -230,9 +272,7 @@ class StateTransformer(BaseTransformer):
             Dictionary with following keys
                 'REGISTRATION_STATUS'
         """
-        raise NotImplementedError(
-            'Must implement extract_registration_status method'
-        )
+        return {'REGISTRATION_STATUS': input_columns['status_cd']}
 
     def extract_absentee_type(self, input_columns):
         """
@@ -242,9 +282,7 @@ class StateTransformer(BaseTransformer):
             Dictionary with following keys
                 'ABSTENTEE_TYPE'
         """
-        raise NotImplementedError(
-            'Must implement extract_absentee_type method'
-        )
+        return {'ABSENTEE_TYPE': input_columns['absent_ind']}
 
     def extract_party(self, input_columns):
         """
@@ -254,9 +292,11 @@ class StateTransformer(BaseTransformer):
             Dictionary with following keys
                 'PARTY'
         """
-        raise NotImplementedError(
-            'Must implement extract_party method'
-        )
+        if input_columns['party_cd'] == 'UNA':
+                party = 'UN'
+        else:
+                party = input_columns['party_cd']
+        return {'PARTY': party}
 
     def extract_congressional_dist(self, input_columns):
         """
@@ -266,9 +306,7 @@ class StateTransformer(BaseTransformer):
             Dictionary with following keys
                 'CONGRESSIONAL_DIST'
         """
-        raise NotImplementedError(
-            'Must implement extract_congressional_dist method'
-        )
+        return {'CONGRESSIONAL_DIST': input_columns['cong_dist_abbrv']}
 
     def extract_upper_house_dist(self, input_columns):
         """
@@ -278,9 +316,7 @@ class StateTransformer(BaseTransformer):
             Dictionary with following keys
                 'UPPER_HOUSE_DIST'
         """
-        raise NotImplementedError(
-            'Must implement extract_upper_house_dist method'
-        )
+        return {'UPPER_HOUSE_DIST': input_columns['nc_senate_abbrv']}
 
     def extract_lower_house_dist(self, input_columns):
         """
@@ -290,9 +326,7 @@ class StateTransformer(BaseTransformer):
             Dictionary with following keys
                 'LOWER_HOUSE_DIST'
         """
-        raise NotImplementedError(
-            'Must implement extract_lower_house_dist method'
-        )
+        return {'LOWER_HOUSE_DIST': input_columns['nc_house_abbrv']}
 
     def extract_precinct(self, input_columns):
         """
@@ -302,9 +336,7 @@ class StateTransformer(BaseTransformer):
             Dictionary with following keys
                 'PRECINCT'
         """
-        raise NotImplementedError(
-            'Must implement extract_precinct method'
-        )
+        return {'PRECINCT': input_columns['precinct_abbrv']}
 
     def extract_county_board_dist(self, input_columns):
         """
@@ -314,9 +346,7 @@ class StateTransformer(BaseTransformer):
             Dictionary with following keys
                 'COUNTY_BOARD_DIST'
         """
-        raise NotImplementedError(
-            'Must implement extract_county_board_dist method'
-        )
+        return {'COUNTY_BOARD_DIST': None}
 
     def extract_school_board_dist(self, input_columns):
         """
@@ -326,9 +356,7 @@ class StateTransformer(BaseTransformer):
             Dictionary with following keys
                 'SCHOOL_BOARD_DIST'
         """
-        raise NotImplementedError(
-            'Must implement extract_school_board_dist method'
-        )
+        return {'SCHOOL_BOARD_DIST': input_columns['school_dist_abbrv']} #I think...
 
     def extract_precinct_split(self, input_columns):
         """
@@ -338,6 +366,4 @@ class StateTransformer(BaseTransformer):
             Dictionary with following keys
                 'PRECINCT_SPLIT'
         """
-        raise NotImplementedError(
-            'Must implement extract_precinct_split method'
-        )
+        return {'PRECINCT_SPLIT': ""}

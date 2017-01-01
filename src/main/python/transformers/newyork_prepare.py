@@ -1,4 +1,10 @@
-from ny_transformer import NYTransformer
+from src.main.python.transformers.ny_transformer import NYTransformer
+import os
+
+DATA_DIR = os.path.join(
+    os.path.dirname(os.path.dirname((os.path.dirname(os.getcwd())))),
+    'data')
+
 
 if __name__ == '__main__':
     input_fields = [
@@ -48,8 +54,10 @@ if __name__ == '__main__':
 		'SBOEID',
 		'VoterHistory']
 
+    print("Data Dir "+DATA_DIR)
+
     ny_transformer = NYTransformer(date_format="%Y%m%d", sep=',', input_fields=input_fields)
     ny_transformer(
-        '../../../../data/NewYork/AllNYSVoters20160831SAMPLE.txt',
-        '../../../../data/NewYork/AllNYSVoters20160831SAMPLE_OUT.csv',
+        '/national-voter-file/data/NewYork/AllNYSVoters20160831SAMPLE.txt',
+        '/national-voter-file/data/NewYork/AllNYSVoters20160831SAMPLE_OUT.csv'
     )
