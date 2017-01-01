@@ -1,4 +1,4 @@
-from ok_transformer import OKTransformer
+from src.main.python.transformers.ok_transformer import OKTransformer
 import os
 
 DATA_DIR = os.path.join(

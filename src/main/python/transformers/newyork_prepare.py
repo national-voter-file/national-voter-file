@@ -1,4 +1,4 @@
-from ny_transformer import NYTransformer
+from src.main.python.transformers.ny_transformer import NYTransformer
 import os
 
 DATA_DIR = os.path.join(

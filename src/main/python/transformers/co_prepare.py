@@ -1,4 +1,4 @@
-from co_transformer import COTransformer
+from src.main.python.transformers.co_transformer import COTransformer
 import os
 
 DATA_DIR = os.path.join(

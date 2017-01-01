@@ -1,4 +1,4 @@
-from oh_transformer import OHTransformer
+from src.main.python.transformers.oh_transformer import OHTransformer
 import os
 
 DATA_DIR = os.path.join(

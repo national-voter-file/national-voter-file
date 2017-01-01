@@ -1,4 +1,4 @@
-from wa_transformer import WATransformer
+from src.main.python.transformers.wa_transformer import WATransformer
 
 if __name__ == '__main__':
     wa_transformer = WATransformer(date_format="%m/%d/%Y", sep='\t')
