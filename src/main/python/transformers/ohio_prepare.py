@@ -1,13 +1,9 @@
-from oh_transformer import OHTransformer
+from src.main.python.transformers.oh_transformer import OHTransformer
+from src.main.python.transformers import DATA_DIR
 import os
-
-DATA_DIR = os.path.join(
-    os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.getcwd())))),
-    'data')
 
 
 if __name__ == '__main__':
-    # Used Sandusky County data from https://www6.sos.state.oh.us/ords/f?p=111:1
     input_fields = [
         'SOS_VOTERID',
         'COUNTY_NUMBER',

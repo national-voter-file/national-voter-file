@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>sample</name>
+    <name>SampleWashington</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
     <directory>&#x2f;</directory>
     <parameters>
     </parameters>
@@ -139,7 +140,7 @@
     <encoding/>
     <add_to_result_filenames>Y</add_to_result_filenames>
     <file>
-      <name>C&#x3a;&#x5c;dev&#x5c;GitHub&#x5c;getmovement&#x5c;national-voter-file&#x5c;data&#x5c;Washington&#x5c;201605_VRDB_Extract.txt</name>
+      <name>C&#x3a;&#x5c;dev&#x5c;GitHub&#x5c;national-voter-file&#x5c;national-voter-file&#x5c;data&#x5c;Washington&#x5c;201605_VRDB_Extract.txt</name>
       <filemask/>
       <exclude_filemask/>
       <file_required>N</file_required>

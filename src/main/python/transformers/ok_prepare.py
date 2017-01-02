@@ -1,10 +1,7 @@
-from ok_transformer import OKTransformer
+from src.main.python.transformers.ok_transformer import OKTransformer
+from src.main.python.transformers import DATA_DIR
 import os
 
-DATA_DIR = os.path.join(
-    os.path.dirname(
-        os.path.dirname(os.path.dirname(os.path.dirname(os.getcwd())))),
-    'data')
 
 if __name__ == '__main__':
     input_fields = [
@@ -62,6 +59,6 @@ if __name__ == '__main__':
     # Fieldnames listed, but can be omitted because they're the column names
     ok_transformer = OKTransformer(date_format="%m/%d/%Y", sep=',')
     ok_transformer(
-        os.path.join(DATA_DIR, 'Oklahoma_Sample.csv'),
-        os.path.join(DATA_DIR, 'Oklahoma_Sample_OUT.csv'),
+        os.path.join(DATA_DIR, 'Oklahoma', 'Oklahoma_Sample.csv'),
+        os.path.join(DATA_DIR, 'Oklahoma', 'Oklahoma_Sample_OUT.csv'),
     )

@@ -1,4 +1,4 @@
-from base_transformer import BaseTransformer
+from src.main.python.transformers.base_transformer import BaseTransformer
 import usaddress
 
 class OHTransformer(BaseTransformer):
@@ -19,14 +19,14 @@ class OHTransformer(BaseTransformer):
 
     ohio_party_map = {
         "C": "AMC",
-        "D":"DEM",
-        "G":"GRN",
-        "L":"LIB",
-        "N":"NLP",
-        "R":"REP",
-        "S":"SP",
-        " ":"UN",
-        "": "UN"
+        "D": "DEM",
+        "G": "GRN",
+        "L": "LIB",
+        "N": "NLP",
+        "R": "REP",
+        "S": "SP",
+        " ": "UN",
+        "":  "UN"
     }
 
     #### Contact methods #######################################################
@@ -125,8 +125,8 @@ class OHTransformer(BaseTransformer):
                 'BIRTHDATE'
         """
         return {
-        'BIRTHDATE': self.convert_date(input_dict['DATE_OF_BIRTH']),
-        'BIRTHDATE_IS_ESTIMATE':'N'
+            'BIRTHDATE': self.convert_date(input_dict['DATE_OF_BIRTH']),
+            'BIRTHDATE_IS_ESTIMATE': 'N'
         }
 
     def extract_language_choice(self, input_dict):
@@ -360,8 +360,18 @@ class OHTransformer(BaseTransformer):
             Dictionary with following keys
                 'SCHOOL_BOARD_DIST'
         """
-        # Not sure if mapping exists, verify
-        return {'SCHOOL_BOARD_DIST': None}
+        # Several different types of school districts, but seem mutually exclusive
+        # Using whichever has a value, but defaulting to None
+        school_board_dist = None
+
+        if len(input_dict['CITY_SCHOOL_DISTRICT'].strip()) > 0:
+            school_board_dist = input_dict['CITY_SCHOOL_DISTRICT'].strip()
+        elif len(input_dict['EXEMPTED_VILL_SCHOOL_DISTRICT'].strip()) > 0:
+            school_board_dist = input_dict['EXEMPTED_VILL_SCHOOL_DISTRICT'].strip()
+        elif len(input_dict['LOCAL_SCHOOL_DISTRICT'].strip()) > 0:
+            school_board_dist = input_dict['LOCAL_SCHOOL_DISTRICT'].strip()
+
+        return {'SCHOOL_BOARD_DIST': school_board_dist}
 
     def extract_precinct_split(self, input_dict):
         """
@@ -371,5 +381,5 @@ class OHTransformer(BaseTransformer):
             Dictionary with following keys
                 'PRECINCT_SPLIT'
         """
-        # Not sure if mapping exists, verify
-        return {'PRECINCT_SPLIT': None}
+        # No split, copying precinct
+        return {'PRECINCT_SPLIT': input_dict['PRECINCT_CODE']}

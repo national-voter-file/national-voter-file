@@ -1,4 +1,4 @@
-from base_transformer import BaseTransformer
+from src.main.python.transformers.base_transformer import BaseTransformer
 import datetime
 import usaddress
 
@@ -14,6 +14,7 @@ class OKTransformer(BaseTransformer):
     col_type_dict['TITLE'] = set([str, type(None)])
     col_type_dict['GENDER'] = set([str, type(None)])
     col_type_dict['RACE'] = set([str, type(None)])
+    col_type_dict['ZIP_CODE'] = set([str, type(None)])
     col_type_dict['BIRTH_STATE'] = set([str, type(None)])
     col_type_dict['ABSENTEE_TYPE'] = set([str, type(None)])
     col_type_dict['COUNTY_VOTER_REF'] = set([str, type(None)])
@@ -387,7 +388,6 @@ class OKTransformer(BaseTransformer):
             Dictionary with following keys
                 'SCHOOL_BOARD_DIST'
         """
-        # Not sure if mapping exists, verify
         return {'SCHOOL_BOARD_DIST': input_dict['School']}
 
     def extract_precinct_split(self, input_dict):
@@ -398,4 +398,5 @@ class OKTransformer(BaseTransformer):
             Dictionary with following keys
                 'PRECINCT_SPLIT'
         """
-        return {'PRECINCT_SPLIT': None}
+        # Defaulting to Precint, split doesn't exist
+        return {'PRECINCT_SPLIT': input_dict['Precinct']}

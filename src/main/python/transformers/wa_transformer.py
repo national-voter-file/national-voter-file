@@ -1,4 +1,4 @@
-from base_transformer import BaseTransformer
+from src.main.python.transformers.base_transformer import BaseTransformer
 import usaddress
 
 class WATransformer(BaseTransformer):
@@ -324,7 +324,7 @@ class WATransformer(BaseTransformer):
             Dictionary with following keys
                 'LOWER_HOUSE_DIST'
         """
-        return {'LOWER_HOUSE_DIST': None}
+        return {'LOWER_HOUSE_DIST': input_dict['LegislativeDistrict']}
 
     def extract_precinct(self, input_dict):
         """
@@ -364,4 +364,4 @@ class WATransformer(BaseTransformer):
             Dictionary with following keys
                 'PRECINCT_SPLIT'
         """
-        return {'PRECINCT_SPLIT': input_dict['PrecinctPart']}
+        return {'PRECINCT_SPLIT': "%04d/%02d"%(int(input_dict['PrecinctCode']), int(input_dict['PrecinctPart']))}
