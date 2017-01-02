@@ -1,5 +1,5 @@
 from src.main.python.transformers import base_transformer, wa_transformer, \
-    co_transformer, ok_transformer, oh_transformer
+    co_transformer, ok_transformer, oh_transformer, ny_transformer
 import os
 import csv
 # Need to add test data
@@ -71,3 +71,65 @@ def test_oh_transformer():
 
     assert sorted(oh_dict_list[0].keys()) == BASE_TRANSFORMER_COLS
     assert len(oh_dict_list) > 1
+
+
+def test_ny_transformer():
+    input_fields = [
+		'LASTNAME',
+		'FIRSTNAME',
+		'MIDDLENAME',
+		'NAMESUFFIX',
+		'RADDNUMBER',
+		'RHALFCODE',
+		'RAPARTMENT',
+		'RPREDIRECTION',
+		'RSTREETNAME',
+		'RPOSTDIRECTION',
+		'RCITY',
+		'RZIP5',
+		'RZIP4',
+		'MAILADD1',
+		'MAILADD2',
+		'MAILADD3',
+		'MAILADD4',
+		'DOB',
+		'GENDER',
+		'ENROLLMENT',
+		'OTHERPARTY',
+		'COUNTYCODE',
+		'ED',
+		'LD',
+		'TOWNCITY',
+		'WARD',
+		'CD',
+		'SD',
+		'AD',
+		'LASTVOTEDDATE',
+		'PREVYEARVOTED',
+		'PREVCOUNTY',
+		'PREVADDRESS',
+		'PREVNAME',
+		'COUNTYVRNUMBER',
+		'REGDATE',
+		'VRSOURCE',
+		'IDREQUIRED',
+		'IDMET',
+		'STATUS',
+		'REASONCODE',
+		'INACT_DATE',
+		'PURGE_DATE',
+		'SBOEID',
+		'VoterHistory'
+    ]
+    ny_test = ny_transformer.NYTransformer(date_format='%Y%m%d',
+                                           sep=',',
+                                           input_fields=input_fields)
+    ny_test(
+        os.path.join(TEST_DATA_DIR, 'NewYork.csv'),
+        os.path.join(TEST_DATA_DIR, 'NewYork_test.csv'),
+    )
+    assert os.path.exists(os.path.join(TEST_DATA_DIR, 'NewYork_test.csv'))
+    ny_dict_list = read_transformer_output('NewYork_test.csv')
+
+    assert sorted(ny_dict_list[0].keys()) == BASE_TRANSFORMER_COLS
+    assert len(ny_dict_list) > 1
