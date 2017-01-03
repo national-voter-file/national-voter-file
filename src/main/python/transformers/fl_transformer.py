@@ -20,7 +20,8 @@ class FLTransformer(BaseTransformer):
     col_type_dict['BIRTH_STATE'] = set([str, type(None)])
 
     florida_party_map = {
-        'AIP':'AMP',
+        'AIP':'AI',
+        'AMP':'AMP',
         'CPF':'AMC',
         'DEM':'DEM',
         'ECO':'ECO',
@@ -32,7 +33,8 @@ class FLTransformer(BaseTransformer):
         'PSL':'PSL',
         'REF':'REF',
         'REP':'REP',
-        ' ':'UN'
+        ' ':'UN',
+        '':'UN'
     }
 
     florida_race_map = {

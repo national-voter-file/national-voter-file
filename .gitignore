@@ -3,3 +3,4 @@ data
 docker-compose-Linux-x86_64
 venv
 __pycache__
+*.pyc
