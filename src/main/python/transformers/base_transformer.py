@@ -118,6 +118,7 @@ class BaseTransformer(object):
         'COUNTY_BOARD_DIST': set([str, type(None)]),
         'SCHOOL_BOARD_DIST': set([str, type(None)]),
         'PRECINCT_SPLIT': set([str]),
+        'TOWN_CITY':set([str], type[None])
     }
 
     # some columns can only have certain values
@@ -818,3 +819,15 @@ class BaseTransformer(object):
         raise NotImplementedError(
             'Must implement extract_precinct_split method'
         )
+
+        def extract_town_city(self, input_columns):
+            """
+            Inputs:
+                input_columns: name or list of columns
+            Outputs:
+                Dictionary with following keys
+                    'TOWN_CITY'
+            """
+            raise NotImplementedError(
+                'Must implement extract_party method'
+            )
