@@ -143,6 +143,7 @@ class BaseTransformer(object):
                       "SP", #Socialist
                       "UTY", #Unity
                       "AE", #Americans Elect
+                      "AMP", # American Patriot Party
                       "OTH", #otherwise
                       "UN" #Unaffiliated
         ]),
