@@ -81,6 +81,9 @@ def test_oh_transformer():
     assert len(oh_dict_list) > 1
 
 
+def test_pa_transformer():
+    pass
+
 def test_ny_transformer():
     input_fields = [
 		'LASTNAME',

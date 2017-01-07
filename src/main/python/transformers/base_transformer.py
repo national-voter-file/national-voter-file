@@ -67,7 +67,7 @@ class BaseTransformer(object):
         'RACE':set([str]),
         'BIRTHDATE': set([datetime.date]),
         'BIRTHDATE_IS_ESTIMATE':set([str]),
-        'BIRTH_STATE':set([str]),
+        'BIRTH_STATE':set([str, type(None)]),
         'LANGUAGE_CHOICE': set([str, type(None)]),
         'EMAIL': set([str, type(None)]),
         'PHONE': set([str, type(None)]),
@@ -109,7 +109,7 @@ class BaseTransformer(object):
         'COUNTY_VOTER_REF': set([str]),
         'REGISTRATION_DATE': set([datetime.date]),
         'REGISTRATION_STATUS': set([str]),
-        'ABSENTEE_TYPE': set([str]),
+        'ABSENTEE_TYPE': set([str, type(None)]),
         'PARTY': set([str, type(None)]),
         'CONGRESSIONAL_DIST': set([str]),
         'UPPER_HOUSE_DIST': set([str, type(None)]),
@@ -205,7 +205,7 @@ class BaseTransformer(object):
         Should not be overwritten in the subclass, this method enforces a
         similar check on all data created
         """
-        with open(input_path, 'r', errors='ignore') as infile, open(output_path, 'w') as outfile:
+        with self.open(input_path) as infile, open(output_path, 'w') as outfile:
             reader = csv.DictReader(infile, delimiter=self.sep,  fieldnames=self.input_fields)
             writer = csv.DictWriter(
                 outfile,
@@ -215,8 +215,13 @@ class BaseTransformer(object):
             for input_dict in reader:
                 output_dict = self.process_row(input_dict)
                 output_dict = self.fix_missing_mailing_addr(output_dict)
+                if not output_dict.get('FIRST_NAME'):
+                    import pdb; pdb.set_trace()
                 self.validate_output_row(output_dict) # validate here
                 writer.writerow(output_dict)
+
+    def open(self, input_path):
+        return open(input_path, 'r', errors='ignore')
 
     #### Row processing methods ################################################
 
@@ -457,6 +462,18 @@ class BaseTransformer(object):
             return ' '.join(output_vals)
         else:
             return " "
+
+    @classmethod
+    def map_extract_by_keys(cls, *keys, defaults={}):
+        """
+        Convenience method to create a mapper for `keys` list to the output.
+        If you set defaults for one of the keys, then if the value is
+        None or false-y, like an empty string, then the default will be used.
+        """
+        def extract(self, input_columns):
+            return {key:(input_columns.get(key) or defaults.get(key))
+                    for key in keys}
+        return extract
 
     #### Contact methods #######################################################
 
