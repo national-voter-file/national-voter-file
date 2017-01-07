@@ -135,7 +135,7 @@ class StateTransformer(BaseTransformer):
             input_dict[x] for x in address_components if input_dict[x] is not None
         ])
         # use the usaddress_tag method to handle errors
-        usaddress_dict = self.usaddress_tag(address_str)
+        usaddress_dict, usaddress_type = self.usaddress_tag(address_str)
         # use the convert_usaddress_dict to get correct column names
         # and fill in missing values
         return self.convert_usaddress_dict(usaddress_dict)
@@ -240,7 +240,7 @@ class StateTransformer(BaseTransformer):
             input_columns: name or list of columns
         Outputs:
             Dictionary with following keys
-                'ABSTENTEE_TYPE'
+                'ABSENTEE_TYPE'
         """
         raise NotImplementedError(
             'Must implement extract_absentee_type method'
