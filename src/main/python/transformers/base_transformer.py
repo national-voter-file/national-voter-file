@@ -117,7 +117,7 @@ class BaseTransformer(object):
         'PRECINCT': set([str]),
         'COUNTY_BOARD_DIST': set([str, type(None)]),
         'SCHOOL_BOARD_DIST': set([str, type(None)]),
-        'PRECINCT_SPLIT': set([str]),
+        'PRECINCT_SPLIT': set([str])
     }
 
     # some columns can only have certain values
