@@ -1,5 +1,4 @@
 import csv
-from io import TextIOWrapper
 import os
 import re
 import sys
@@ -23,7 +22,8 @@ class StatePreparer:
        Maps district column to district type
     `MONTGOMERY Zone Codes 20170102.txt`:
        Maps codes found in FVE file to a description and column
-
+    `MONTGOMERY Election Map 20170102.txt`:
+       Maps elections for each Vote history column pair in FVE file
     """
 
     voter_file_re = re.compile(r'.+FVE.+\.txt')
@@ -55,13 +55,18 @@ class StatePreparer:
         'MAIL_STATE',
         'MAIL_ZIP_CODE',
         '_LASTVOTE',
-        '_PRECINCT_CODE',  # TODO: confirm this matches to extract_precinct
+        '_PRECINCT_CODE',
         'PRECINCT_SPLIT',
         '_LAST_CHANGE_DATE',
         '_LEGACY_SYSTEM_ID'] \
         + ['_DISTRICT%d' % (d+1) for d in range(40)] \
         + ['_VOTEHISTORY_%d' % (d+1) for d in range(80)] \
         + ['PHONE', 'COUNTYCODE', 'MAIL_COUNTRY']
+
+    # _VOTEHISTORY columns are 40 pairs of columns for
+    # Vote method ('AP','AB','P' ~ At Polls, Absentee, Provisional)
+    # and Party at the time of vote. These match the 40 elections listed
+    # in the corresponding "Election Map" county file.
 
     def __init__(self, voter_zip_file_path=None, output_path=None):
         from src.main.python.transformers import DATA_DIR
@@ -85,9 +90,14 @@ class StatePreparer:
     def voters(self, zip_file):
         county_files = [f for f in zip_file.namelist()
                         if self.voter_file_re.match(f)]
+
+        #one file here, so it doesn't get overwritten, per-county
+        output = open(self.output_path, 'w')
         for county in county_files:
             self.process_county_zones(zip_file, county)
-            self.transformer(zip_file.open(county), self.output_path)
+            self.transformer(zip_file.open(county), output)
+            output = open(self.output_path, 'a')
+        output.close()
 
     def process_county_zones(self, zip_handle, county_voter_filename):
         zonecode_file, zonetype_file = self.zone_files(county_voter_filename)
@@ -134,18 +144,7 @@ class StateTransformer(BaseTransformer):
         'precinct': 1,
         'precinct_split': 13,
     }
-
-    def open(self, input_path):
-        """
-        open() override to support zipfile handle being passed as `input_path`
-        when the transformer is called
-        """
-        if isinstance(input_path, zipfile.ZipExtFile):
-            return TextIOWrapper(input_path,
-                                 encoding='utf8',
-                                 errors='ignore', line_buffering=True)
-        else:
-            return BaseTransformer.open(self, input_path)
+    zip_cache = {}
 
     def _set_county_zonetype(self, zonedict, key):
         self.zonecode_column_by_county.setdefault(zonedict['county'], {}).update({
@@ -199,7 +198,8 @@ class StateTransformer(BaseTransformer):
     extract_birth_state = lambda self, i: {'BIRTH_STATE': None, 'BIRTHDATE_IS_ESTIMATE': 'N'}
 
     def extract_birthdate(self, input_dict):
-        return {'BIRTHDATE': self.convert_date(input_dict['BIRTHDATE'])}
+        return {'BIRTHDATE': self.convert_date(input_dict['BIRTHDATE'])
+                if input_dict['BIRTHDATE'] else None}
 
     extract_language_choice = lambda self, i: {'LANGUAGE_CHOICE': None}
 
@@ -263,9 +263,17 @@ class StateTransformer(BaseTransformer):
         # use the convert_usaddress_dict to get correct column names
         # and fill in missing values
         converted_addr = self.convert_usaddress_dict(usaddress_dict)
+        if input_dict['ZIP_CODE']:
+            # cache zip codes for empties
+            self.zip_cache.setdefault(input_dict['_REGISTRATION_CITY'],
+                                      set()).add(input_dict['ZIP_CODE'])
+        else:
+            backup_zips = self.zip_cache.get(input_dict['_REGISTRATION_CITY'])
+            if backup_zips and len(backup_zips) == 1:  #don't use zip if ambiguous
+                input_dict['ZIP_CODE'] = list(backup_zips)[0]
         converted_addr.update({
             'PLACE_NAME': input_dict['_REGISTRATION_CITY'],
-            'STATE_NAME': input_dict['STATE_NAME'],
+            'STATE_NAME': input_dict['STATE_NAME'] or 'PA',
             'ZIP_CODE': input_dict['ZIP_CODE']
         })
         return converted_addr
@@ -287,8 +295,8 @@ class StateTransformer(BaseTransformer):
         return {'COUNTY_VOTER_REF': input_dict['STATE_VOTER_REF']}
 
     def extract_registration_date(self, input_dict):
-        date = self.convert_date(input_dict['REGISTRATION_DATE'])
-        return {'REGISTRATION_DATE': date}
+        return {'REGISTRATION_DATE': self.convert_date(input_dict['REGISTRATION_DATE'])
+                if input_dict['REGISTRATION_DATE'] else None}
 
     extract_registration_status = BaseTransformer.map_extract_by_keys('REGISTRATION_STATUS')
     extract_absentee_type = lambda self, i: {'ABSENTEE_TYPE': ''}
@@ -308,8 +316,8 @@ class StateTransformer(BaseTransformer):
         gets the number out of a bunch of codes avoiding 0-prefix
         Examples: "CG14", "CON18TH", "CN04", "6USCD"
         """
-        return {'CONGRESSIONAL_DIST': re.search(r'[1-9]\d*',
-                                                input_dict['_DISTRICT8']).group(0)}
+        district = re.search(r'[1-9]\d*', input_dict['_DISTRICT8'] or '')
+        return {'CONGRESSIONAL_DIST': district.group(0) if district else input_dict['_DISTRICT8']}
 
     def extract_upper_house_dist(self, input_dict):
         """
@@ -318,12 +326,12 @@ class StateTransformer(BaseTransformer):
         and unintuitively "48SSGA" described as "48TH STATE SENATOR TO GENERAL ASSEMBLY"
         Even though it references the GA, it's still the *senator*
         """
-        return {'UPPER_HOUSE_DIST': re.search(r'[1-9]\d*',
-                                                input_dict['_DISTRICT7']).group(0)}
+        district = re.search(r'[1-9]\d*', input_dict['_DISTRICT7'] or '')
+        return {'UPPER_HOUSE_DIST': district.group(0) if district else input_dict['_DISTRICT7']}
 
     def extract_lower_house_dist(self, input_dict):
-        return {'LOWER_HOUSE_DIST': re.search(r'[1-9]\d*',
-                                                input_dict['_DISTRICT6']).group(0)}
+        district = re.search(r'[1-9]\d*', input_dict['_DISTRICT6'] or '')
+        return {'LOWER_HOUSE_DIST': district.group(0) if district else input_dict['_DISTRICT6']}
 
     def _zonecode_column(self, key, input_dict):
         """Gets the county-specific column for `key` with fallback to default column"""

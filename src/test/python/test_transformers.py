@@ -1,6 +1,6 @@
 from src.main.python.transformers import base_transformer, wa_transformer, \
     co_transformer, ok_transformer, oh_transformer, ny_transformer, \
-    fl_transformer, nc_transformer
+    fl_transformer, nc_transformer, pa
 import os
 import csv
 # Need to add test data
@@ -212,3 +212,14 @@ def test_nc_transformer():
 
     assert sorted(nc_dict_list[0].keys()) == BASE_TRANSFORMER_COLS
     assert len(nc_dict_list) > 1
+
+def test_pa_transformer():
+    state_test = pa.StateTransformer(date_format='%m/%d/%Y', sep='\t',
+                                     input_fields=pa.StatePreparer.input_fields)
+    state_test(
+        os.path.join(TEST_DATA_DIR, 'pennsylvania.csv'),
+        os.path.join(TEST_DATA_DIR, 'pennsylvania_test.csv'),
+    )
+    state_dict_list = read_transformer_output('pennsylvania_test.csv')
+    assert sorted(state_dict_list[0].keys()) == BASE_TRANSFORMER_COLS
+    assert len(state_dict_list) > 1
