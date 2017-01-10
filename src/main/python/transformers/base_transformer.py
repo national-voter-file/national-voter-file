@@ -1,6 +1,8 @@
 import csv
 import datetime
 from collections import defaultdict
+from io import TextIOWrapper
+import zipfile
 
 import usaddress
 
@@ -65,7 +67,7 @@ class BaseTransformer(object):
         'NAME_SUFFIX': set([str, type(None)]),
         'GENDER': set([str]),
         'RACE':set([str]),
-        'BIRTHDATE': set([datetime.date]),
+        'BIRTHDATE': set([datetime.date, type(None)]),
         'BIRTHDATE_IS_ESTIMATE':set([str]),
         'BIRTH_STATE':set([str, type(None)]),
         'LANGUAGE_CHOICE': set([str, type(None)]),
@@ -97,7 +99,7 @@ class BaseTransformer(object):
         'USPS_BOX_GROUP_TYPE': set([str, type(None)]),
         'USPS_BOX_ID': set([str, type(None)]),
         'USPS_BOX_TYPE': set([str, type(None)]),
-        'ZIP_CODE': set([str]),
+        'ZIP_CODE': set([str, type(None)]),
         'MAIL_ADDRESS_LINE1': set([str, type(None)]),
         'MAIL_ADDRESS_LINE2': set([str, type(None)]),
         'MAIL_CITY': set([str, type(None)]),
@@ -107,7 +109,7 @@ class BaseTransformer(object):
         'COUNTYCODE': set([str]),
         'STATE_VOTER_REF': set([str]),
         'COUNTY_VOTER_REF': set([str]),
-        'REGISTRATION_DATE': set([datetime.date]),
+        'REGISTRATION_DATE': set([datetime.date, type(None)]),
         'REGISTRATION_STATUS': set([str]),
         'ABSENTEE_TYPE': set([str, type(None)]),
         'PARTY': set([str, type(None)]),
@@ -205,7 +207,7 @@ class BaseTransformer(object):
         Should not be overwritten in the subclass, this method enforces a
         similar check on all data created
         """
-        with self.open(input_path) as infile, open(output_path, 'w') as outfile:
+        with self.open(input_path) as infile, self.open(output_path, 'w') as outfile:
             reader = csv.DictReader(infile, delimiter=self.sep,  fieldnames=self.input_fields)
             writer = csv.DictWriter(
                 outfile,
@@ -215,13 +217,23 @@ class BaseTransformer(object):
             for input_dict in reader:
                 output_dict = self.process_row(input_dict)
                 output_dict = self.fix_missing_mailing_addr(output_dict)
-                if not output_dict.get('FIRST_NAME'):
-                    import pdb; pdb.set_trace()
                 self.validate_output_row(output_dict) # validate here
                 writer.writerow(output_dict)
 
-    def open(self, input_path):
-        return open(input_path, 'r', errors='ignore')
+    def open(self, path_or_handle, mode='r'):
+        """
+        Don't re-open files that are passed as handles, but for easy
+        use-cases, this'll work normally with regular paths
+        """
+        if mode=='r' and isinstance(path_or_handle, zipfile.ZipExtFile):
+            # see pa.py for an example of needing zipfile support
+            return TextIOWrapper(path_or_handle,
+                                 encoding='utf8',
+                                 errors='ignore', line_buffering=True)
+        elif hasattr(path_or_handle, 'mode'): #py2/3 file/buffer type
+            return path_or_handle
+        else:
+            return open(path_or_handle, mode, errors='ignore')
 
     #### Row processing methods ################################################
 

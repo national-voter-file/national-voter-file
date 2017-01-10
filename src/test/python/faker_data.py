@@ -1,11 +1,12 @@
 from src.main.python.transformers import base_transformer, wa_transformer, \
     co_transformer, ok_transformer, oh_transformer, fl_transformer, \
-    ny_transformer
+    ny_transformer, pa
 from faker import Faker
 import random
 from random import randint
 import csv
 import os
+import sys
 
 
 TEST_DATA_DIR = os.path.join(os.path.dirname(__file__), 'test_data')
@@ -13,9 +14,12 @@ NUM_ROWS = 100
 
 fake = Faker()
 
-# Helper for making items empty easier
+# Helpers for making items empty easier
 def _empty(item):
     return random.choice([item, ' '])
+
+def _blank(item):
+    return random.choice([item, ''])
 
 
 OHIO_SCHEMA = {
@@ -323,6 +327,53 @@ NORTH_CAROLINA_SCHEMA = {
     'vtd_desc': lambda: random.choice(['CAR', '08N', '1/7'])
 }
 
+PENNSYLVANIA_SCHEMA = {
+    'STATE_VOTER_REF': lambda: str(randint(1, 1000000)),
+    'TITLE': lambda: fake.prefix(),
+    'LAST_NAME': lambda: fake.last_name().upper(),
+    'FIRST_NAME': lambda: _blank(fake.first_name().upper()),
+    'MIDDLE_NAME': lambda: _blank(fake.first_name().upper()),
+    'NAME_SUFFIX': lambda: _empty(fake.suffix()),
+    'GENDER': lambda: random.choice(['M', 'F', 'U', '']),
+    'BIRTHDATE': lambda: _blank(fake.date(pattern='%m/%d/%Y')),
+    'REGISTRATION_DATE': lambda: _blank(fake.date(pattern='%m/%d/%Y')),
+    'REGISTRATION_STATUS': lambda: random.choice(['I', 'A']),
+    '_STATUS_CHANGE_DATE': lambda: _blank(fake.date(pattern='%m/%d/%Y')),
+    '_PARTY_CODE': lambda: random.choice(['D', 'R', 'IND', "", "GR", "RANDOMOTHER"]),
+    'ADDRESS_NUMBER': lambda: _blank(fake.building_number()),
+    'ADDRESS_NUMBER_SUFFIX': lambda: _blank(fake.building_number()),
+    'STREET_NAME': lambda: fake.street_name().upper(),
+    '_ADDRESS_APARTMENT_NUM': lambda: _blank(fake.building_number()),
+    '_ADDRESS_LINE2': lambda: _blank(fake.secondary_address().upper()),
+    '_REGISTRATION_CITY': lambda: fake.city().upper(),
+    'STATE_NAME': lambda: _blank(fake.state_abbr().upper()),
+    'ZIP_CODE': lambda: _blank(fake.zipcode()),
+    'MAIL_ADDRESS_LINE1': lambda: _blank(fake.street_address().upper()),
+    'MAIL_ADDRESS_LINE2': lambda: _blank(fake.secondary_address().upper()),
+    'MAIL_CITY': lambda: fake.city().upper(),
+    'MAIL_STATE': lambda: _blank(fake.state_abbr().upper()),
+    'MAIL_ZIP_CODE': lambda: _blank(fake.zipcode()),
+    '_LASTVOTE': lambda: _blank(fake.date(pattern='%m/%d/%Y')),
+    '_PRECINCT_CODE': lambda: str(randint(1, 1000000)),
+    'PRECINCT_SPLIT': lambda: '%d-%d' % (randint(1, 1000000), randint(1,50)),
+    '_LAST_CHANGE_DATE': lambda: _blank(fake.date(pattern='%m/%d/%Y')),
+    '_LEGACY_SYSTEM_ID': lambda: str(randint(800000, 10000000)),
+    'PHONE': lambda: _blank(fake.phone_number().replace('-', '')),
+    'COUNTYCODE': lambda: fake.city().upper(),
+    'MAIL_COUNTRY': lambda: _blank(fake.state_abbr()),
+}
+
+def fakePAdistrict():
+    prefix = random.choice(['LG', 'SN', 'MN', 'CO', 'CN', 'SAN', randint(1,1000)])
+    return '%s%s%d' % (prefix, random.choice(['', '-']), randint(1,100000))
+
+for d in range(40):
+    PENNSYLVANIA_SCHEMA['_DISTRICT%d' % (d+1)] = fakePAdistrict
+
+for d in range(1,40):
+    PENNSYLVANIA_SCHEMA['_VOTEHISTORY_%d' % (2*d)] = lambda: random.choice(['','AP','AB','P'])
+    PENNSYLVANIA_SCHEMA['_VOTEHISTORY_%d' % (2*d+1)] = PENNSYLVANIA_SCHEMA['_PARTY_CODE']
+
 
 def make_state_data(state_name, state_schema,
                     sep=',', has_header=True, input_fields=None):
@@ -344,14 +395,25 @@ def make_state_data(state_name, state_schema,
 
 
 if __name__ == '__main__':
-    make_state_data('ohio', OHIO_SCHEMA)
-    make_state_data('florida',
-                    FLORIDA_SCHEMA,
-                    sep='\t',
-                    has_header=False,
-                    input_fields=FLORIDA_FIELDS)
-    make_state_data('new_york',
-                    NEW_YORK_SCHEMA,
-                    has_header=False,
-                    input_fields=NEW_YORK_FIELDS)
-    make_state_data('north_carolina', NORTH_CAROLINA_SCHEMA, sep='\t')
+    states = {'ohio': ([OHIO_SCHEMA],
+                       {}),
+              'florida': ([FLORIDA_SCHEMA],
+                          {'sep': '\t',
+                           'has_header': False,
+                           'input_fields': FLORIDA_FIELDS}),
+              'new_york': ([NEW_YORK_SCHEMA],
+                           {'has_header': False,
+                            'input_fields': NEW_YORK_FIELDS}),
+              'north_carolina': ([NORTH_CAROLINA_SCHEMA],
+                                 {'sep':'\t'}),
+              'pennsylvania': ([PENNSYLVANIA_SCHEMA],
+                               {'sep':'\t',
+                                'has_header': False,
+                                'input_fields': pa.StatePreparer.input_fields}),
+    }
+    keys = states.keys()
+    if len(sys.argv) > 1:
+        keys = sys.argv[1:]
+    for state in keys:
+        args, kwargs = states[state]
+        make_state_data(state, *args, **kwargs)
