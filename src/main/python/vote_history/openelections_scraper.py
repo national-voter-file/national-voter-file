@@ -41,15 +41,18 @@ def repo_election_files(repos, un, pw):
 if __name__ == '__main__':
     # Accepts 2 command line arguments, GitHub username and password for basic
     # auth, otherwise will hit the limit on unauthenticated requests
+    DIM_DATA_DIR = os.path.join(os.path.dirname(DATA_DIR), 'dimensionaldata')
     oe_resp = requests.get(GITHUB_API + 'orgs/openelections/repos?per_page=100',
                            auth=(sys.argv[1], sys.argv[2]))
-    oe_repos = [r['name'] for r in oe_resp.json() if isinstance(r, dict) and REPO_RE.match(r['name'])]
+
+    oe_repos = [r['name'] for r in oe_resp.json() if REPO_RE.match(r['name'])]
 
     el_files = repo_election_files(oe_repos, sys.argv[1], sys.argv[2])
-    with open(os.path.join(DATA_DIR, 'oe_files.csv'), 'w') as csvfile:
-        oe_writer = csv.writer(csvfile, delimiter=',')
-        oe_writer.writerow(['openelections_file_name'])
+    with open(os.path.join(DIM_DATA_DIR, 'openelections_data.csv'), 'w') as f:
+        oe_writer = csv.writer(f, delimiter=',')
+        oe_writer.writerow(['openelections_file_name', 'date', 'state', 'type'])
         for row in el_files:
-            oe_writer.writerow([row])
+            spl_row = row.split('__')
+            oe_writer.writerow([row, spl_row[0], spl_row[1], spl_row[2]])
 
     print(len(el_files))
