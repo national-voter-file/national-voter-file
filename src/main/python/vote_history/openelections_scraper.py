@@ -47,12 +47,22 @@ if __name__ == '__main__':
 
     oe_repos = [r['name'] for r in oe_resp.json() if REPO_RE.match(r['name'])]
 
+    # Misc items that were in the spot usually for type
+    misc_type_names = ['democrat', 'democratic', 'republican', 'fresno',
+                       'libertarian', 'natural_law']
+
     el_files = repo_election_files(oe_repos, sys.argv[1], sys.argv[2])
+
     with open(os.path.join(DIM_DATA_DIR, 'openelections_data.csv'), 'w') as f:
         oe_writer = csv.writer(f, delimiter=',')
         oe_writer.writerow(['openelections_file_name', 'date', 'state', 'type'])
         for row in el_files:
-            spl_row = row.split('__')
-            oe_writer.writerow([row, spl_row[0], spl_row[1], spl_row[2]])
+            spl_row = row[:-4].split('__')
+            date_str = spl_row[0][:4] + '-' + spl_row[0][4:6] + '-' + spl_row[0][6:]
+            type_str = spl_row[2]
+
+            if type_str in misc_type_names:
+                type_str = spl_row[3]
+            oe_writer.writerow([row, date_str, spl_row[1].upper(), type_str])
 
     print(len(el_files))
