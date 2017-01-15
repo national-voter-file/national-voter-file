@@ -1,6 +1,6 @@
 from src.main.python.transformers import base_transformer, wa_transformer, \
     co_transformer, ok_transformer, oh_transformer, fl_transformer, \
-    ny_transformer, pa
+    ny_transformer, pa, mi
 from faker import Faker
 import random
 from random import randint
@@ -363,6 +363,47 @@ PENNSYLVANIA_SCHEMA = {
     'MAIL_COUNTRY': lambda: _blank(fake.state_abbr()),
 }
 
+MICHIGAN_SCHEMA = {
+    'LAST_NAME': lambda: fake.last_name().upper(),
+    'FIRST_NAME': lambda: fake.first_name().upper(),
+    'MIDDLE_NAME': lambda: _blank(fake.first_name().upper()),
+    'NAME_SUFFIX': lambda: _empty(fake.suffix()),
+    'BIRTH_YEAR': lambda: fake.year(),
+    'GENDER': lambda: _blank(random.choice(['F', 'M', '1', '2'])),
+    'DATE_OF_REGISTRATION': lambda: fake.date(pattern='%m%d%Y'),
+    'HOUSE_NUM_CHARACTER': lambda: _empty(random.choice(['N', 'S', 'E', 'W'])),
+    'RESIDENCE_STREET_NUMBER': lambda: _blank(fake.building_number()),
+    'HOUSE_SUFFIX': lambda: _empty(random.choice(['1/2', '1/3'])),
+    'PRE_DIRECTION': lambda: _empty(random.choice(['N', 'S', 'E', 'W'])),
+    'STREET_NAME': lambda: fake.street_name().upper(),
+    'STREET_TYPE': lambda: fake.street_suffix().upper(),
+    'SUFFIX_DIRECTION': lambda: _empty(random.choice(['N', 'S', 'E', 'W'])),
+    'RESIDENCE_EXTENSION': lambda: _empty(random.choice(['APT', 'LOT'])),
+    'CITY': lambda: fake.city().upper(),
+    'STATE': lambda: fake.state_abbr(),
+    'ZIP': lambda: fake.zipcode(),
+    'MAIL_ADDR_1': lambda: _blank(fake.street_address().upper()),
+    'MAIL_ADDR_2': lambda: _blank(fake.secondary_address().upper()),
+    'MAIL_ADDR_3': lambda: fake.city().upper(),
+    'MAIL_ADDR_4': lambda: _blank(fake.state_abbr().upper()),
+    'MAIL_ADDR_5': lambda: _blank(fake.zipcode()),
+    'STATE_VOTER_REF': lambda: fake.numerify(text=('#'*13)),
+    'COUNTYCODE': lambda: fake.numerify(text='##'),
+    'JURISDICTION': lambda: fake.numerify(text='####'),
+    'WARD_PRECINCT': lambda: fake.numerify(text='####'),
+    'SCHOOL_CODE': lambda: fake.numerify(text='##'),
+    'LOWER_HOUSE_DIST': lambda: fake.numerify(text='##'),
+    'UPPER_HOUSE_DIST': lambda: fake.numerify(text='##'),
+    'CONGRESSIONAL_DIST': lambda: str(randint(1, 16)),
+    'COUNTY_BOARD_DIST': lambda: _empty(str(randint(1, 50))),
+    'VILLAGE_CODE': lambda: _empty(fake.numerify(text='####')),
+    'VILLAGE_PRECINCT': lambda: _empty(fake.numerify(text='###')),
+    'SCHOOL_PRECINCT': lambda: _empty(fake.numerify(text='###')),
+    'PERMANENT_ABSENTEE_IND': lambda: random.choice(['Y', 'N']),
+    'REGISTRATION_STATUS': lambda: random.choice(['A', 'V', 'C', 'R', 'CH']),
+    'UOCAVA_STATUS': lambda: random.choice(['M', 'C', 'N', 'O'])
+}
+
 def fakePAdistrict():
     prefix = random.choice(['LG', 'SN', 'MN', 'CO', 'CN', 'SAN', randint(1,1000)])
     return '%s%s%d' % (prefix, random.choice(['', '-']), randint(1,100000))
@@ -410,6 +451,9 @@ if __name__ == '__main__':
                                {'sep':'\t',
                                 'has_header': False,
                                 'input_fields': pa.StatePreparer.input_fields}),
+              'michigan': ([MICHIGAN_SCHEMA],
+                           {'has_header': False,
+                            'input_fields': mi.StatePreparer.input_fields})
     }
     keys = states.keys()
     if len(sys.argv) > 1:
