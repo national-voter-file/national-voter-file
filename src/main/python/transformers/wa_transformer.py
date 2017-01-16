@@ -186,7 +186,16 @@ class WATransformer(BaseTransformer):
             'USPS_BOX_GROUP_TYPE':None,
             'USPS_BOX_ID':None,
             'USPS_BOX_TYPE':None,
-            'ZIP_CODE':input_dict['RegZipCode']
+            'ZIP_CODE':input_dict['RegZipCode'],
+            'RAW_ADDR1':self.construct_val(input_dict, [
+                                'RegStNum', 'RegStFrac', 'RegStPreDirection',
+                                'RegStName','RegStType', 'RegStPostDirection'
+                            ]),
+            'RAW_ADDR2':self.construct_val(input_dict, ['RegUnitType', 'RegUnitNum']),
+            'RAW_CITY':input_dict['RegCity'],
+            'RAW_ZIP': input_dict['RegZipCode'],
+            'VALIDATION_STATUS': "2"
+
         }
         return output_dict
 

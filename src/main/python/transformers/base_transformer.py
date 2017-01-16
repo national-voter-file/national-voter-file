@@ -119,7 +119,12 @@ class BaseTransformer(object):
         'PRECINCT': set([str]),
         'COUNTY_BOARD_DIST': set([str, type(None)]),
         'SCHOOL_BOARD_DIST': set([str, type(None)]),
-        'PRECINCT_SPLIT': set([str])
+        'PRECINCT_SPLIT': set([str]),
+        'RAW_ADDR1': set([str, type(str)]),
+        'RAW_ADDR2': set([str, type(None)]),
+        'RAW_CITY': set([str, type(str)]),
+        'RAW_ZIP': set([str, type(str)]),
+        'VALIDATION_STATUS':set([str, type(str)])
     }
 
     # some columns can only have certain values
@@ -158,6 +163,13 @@ class BaseTransformer(object):
         'O', #other
         'M', #Multi-racial
         "U" #Unknown
+        ]),
+        'VALIDATION_STATUS':set([
+        '1', # Unparsable
+        '2', #Parsed by USAddress
+        '3', # Manual Override
+        '4', # Validated
+        '5' # Rejected
         ])
     }
 
@@ -267,14 +279,14 @@ class BaseTransformer(object):
         """
         if('MAIL_CITY' not in orig_dict):
             copied_addr =  {
-                    'MAIL_ADDRESS_LINE1': self._construct_val(orig_dict, [
+                    'MAIL_ADDRESS_LINE1': self.construct_val(orig_dict, [
                         'ADDRESS_NUMBER_PREFIX', 'ADDRESS_NUMBER', 'ADDRESS_NUMBER_SUFFIX',
                         'STREET_NAME_PRE_DIRECTIONAL','STREET_NAME_PRE_MODIFIER', 'STREET_NAME_PRE_TYPE',
                         'STREET_NAME',
                         'STREET_NAME_POST_DIRECTIONAL','STREET_NAME_POST_MODIFIER', 'STREET_NAME_POST_TYPE'
                     ]),
 
-                    'MAIL_ADDRESS_LINE2': self._construct_val(orig_dict, [
+                    'MAIL_ADDRESS_LINE2': self.construct_val(orig_dict, [
                     'OCCUPANCY_TYPE', 'OCCUPANCY_IDENTIFIER']),
                     'MAIL_CITY': orig_dict['PLACE_NAME'],
                     'MAIL_STATE': orig_dict['STATE_NAME'],
@@ -285,11 +297,11 @@ class BaseTransformer(object):
         return orig_dict
 
     ### Construct an address line from specified peices
-    def _construct_val(self, aDir, fields):
+    def construct_val(self, aDir, fields):
         result = ""
         for aField in fields:
             if(aDir[aField]):
-                result = result + aDir[aField].strip()+" " if aDir[aField].strip() else ''
+                result = result + (aDir[aField].strip()+" " if aDir[aField].strip() else '')
         return result
 
     #### Output validation methods #############################################

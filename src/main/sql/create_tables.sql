@@ -127,6 +127,11 @@ CREATE TABLE HOUSEHOLD_DIM
     USPS_BOX_ID                  VARCHAR(10) ,
     USPS_BOX_TYPE                VARCHAR(10) ,
     ZIP_CODE                     VARCHAR(10) ,
+    RAW_ADDR1                    VARCHAR(110),
+    RAW_ADDR2                    VARCHAR(50),
+    RAW_CITY                     VARCHAR(50),
+    RAW_ZIP                      VARCHAR(10),
+    VALIDATION_STATUS            SMALLINT NOT NULL DEFAULT(0),
     GEOM                         GEOMETRY(Point, 4326) ,
     GEOCODE_STATUS               SMALLINT NOT NULL DEFAULT(1) ,
     HASHCODE		   BIGINT NOT NULL
