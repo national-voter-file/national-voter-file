@@ -124,10 +124,10 @@
   <hop> <from>Lookup Congressional Dist</from><to>Lookup Lower House</to><enabled>Y</enabled> </hop>
   <hop> <from>Lookup Lower House</from><to>Lookup Upper House </to><enabled>Y</enabled> </hop>
   <hop> <from>Lookup Upper House </from><to>Lookup Precinct</to><enabled>Y</enabled> </hop>
-  <hop> <from>Lookup or Add Housholds 2</from><to>Lookup or Add Mailing Addrs</to><enabled>Y</enabled> </hop>
-  <hop> <from>Lookup or Add Housholds 2</from><to>Write to log</to><enabled>Y</enabled> </hop>
+  <hop> <from>Lookup Housholds</from><to>Lookup or Add Mailing Addrs</to><enabled>Y</enabled> </hop>
+  <hop> <from>Lookup Housholds</from><to>Write to log</to><enabled>Y</enabled> </hop>
   <hop> <from>Lookup or Add Mailing Addrs</from><to>Write Mailing Address Errors</to><enabled>Y</enabled> </hop>
-  <hop> <from>Voter Lookup&#x2f;Update</from><to>Lookup or Add Housholds 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Voter Lookup&#x2f;Update</from><to>Lookup Housholds</to><enabled>Y</enabled> </hop>
   <hop> <from>Lookup or Add Mailing Addrs</from><to>Table output</to><enabled>Y</enabled> </hop>
   <hop> <from>Lookup Precinct</from><to>Lookup Party</to><enabled>Y</enabled> </hop>
   <hop> <from>Lookup Party</from><to>Voter Lookup&#x2f;Update</to><enabled>Y</enabled> </hop>
@@ -637,7 +637,7 @@
     </step>
 
   <step>
-    <name>Lookup or Add Housholds 2</name>
+    <name>Lookup Housholds</name>
     <type>CombinationLookup</type>
     <description/>
     <distribute>Y</distribute>
@@ -658,48 +658,24 @@
       <crcfield>hashcode</crcfield>
       <fields>
         <key>
-          <name>ADDRESS_NUMBER</name>
-          <lookup>address_number</lookup>
+          <name>RAW_ADDR1</name>
+          <lookup>RAW_ADDR1</lookup>
         </key>
         <key>
-          <name>ADDRESS_NUMBER_SUFFIX</name>
-          <lookup>address_number_suffix</lookup>
+          <name>RAW_ADDR2</name>
+          <lookup>RAW_ADDR2</lookup>
         </key>
         <key>
-          <name>STREET_NAME</name>
-          <lookup>street_name</lookup>
+          <name>RAW_CITY</name>
+          <lookup>RAW_CITY</lookup>
         </key>
         <key>
-          <name>STREET_NAME_POST_TYPE</name>
-          <lookup>street_name_post_type</lookup>
-        </key>
-        <key>
-          <name>OCCUPANCY_TYPE</name>
-          <lookup>occupancy_type</lookup>
-        </key>
-        <key>
-          <name>STREET_NAME_PRE_DIRECTIONAL</name>
-          <lookup>street_name_pre_directional</lookup>
-        </key>
-        <key>
-          <name>STREET_NAME_POST_DIRECTIONAL</name>
-          <lookup>street_name_post_directional</lookup>
-        </key>
-        <key>
-          <name>OCCUPANCY_IDENTIFIER</name>
-          <lookup>occupancy_identifier</lookup>
-        </key>
-        <key>
-          <name>PLACE_NAME</name>
-          <lookup>place_name</lookup>
+          <name>RAW_ZIP</name>
+          <lookup>RAW_ZIP</lookup>
         </key>
         <key>
           <name>STATE_NAME</name>
-          <lookup>state_name</lookup>
-        </key>
-        <key>
-          <name>ZIP_CODE</name>
-          <lookup>zip_code</lookup>
+          <lookup>STATE_NAME</lookup>
         </key>
         <return>
           <name>household_id</name>
@@ -974,7 +950,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>0</length>
+        <length>1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -982,15 +958,15 @@
       <field>
         <name>ADDRESS_NUMBER</name>
         <type>String</type>
-        <format/>
+        <format>&#x23;</format>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>6</length>
-        <precision>-1</precision>
+        <length>15</length>
+        <precision>0</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
@@ -1019,7 +995,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>1</length>
+        <length>0</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -1041,7 +1017,7 @@
       </field>
       <field>
         <name>BIRTHDATE_IS_ESTIMATE</name>
-        <type>Boolean</type>
+        <type>String</type>
         <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
@@ -1049,7 +1025,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>-1</length>
+        <length>0</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -1096,7 +1072,7 @@
         <position>-1</position>
         <length>15</length>
         <precision>0</precision>
-        <trim_type>both</trim_type>
+        <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
       <field>
@@ -1117,15 +1093,15 @@
       <field>
         <name>COUNTYCODE</name>
         <type>String</type>
-        <format>&#x23;</format>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>15</length>
-        <precision>0</precision>
+        <length>2</length>
+        <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
@@ -1147,15 +1123,15 @@
       <field>
         <name>COUNTY_VOTER_REF</name>
         <type>String</type>
-        <format/>
+        <format>&#x23;</format>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>7</length>
-        <precision>-1</precision>
+        <length>15</length>
+        <precision>0</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
@@ -1274,7 +1250,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>10</length>
+        <length>13</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -1291,7 +1267,7 @@
         <position>-1</position>
         <length>15</length>
         <precision>0</precision>
-        <trim_type>both</trim_type>
+        <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
       <field>
@@ -1304,7 +1280,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>25</length>
+        <length>26</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -1334,7 +1310,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>14</length>
+        <length>13</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -1372,15 +1348,15 @@
       <field>
         <name>MAIL_ZIP_CODE</name>
         <type>String</type>
-        <format/>
+        <format>&#x23;</format>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>10</length>
-        <precision>-1</precision>
+        <length>15</length>
+        <precision>0</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
@@ -1394,7 +1370,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>8</length>
+        <length>9</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -1409,7 +1385,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>2</length>
+        <length>0</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -1439,7 +1415,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>3</length>
+        <length>4</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -1469,7 +1445,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>3</length>
+        <length>0</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -1499,7 +1475,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>14</length>
+        <length>13</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -1529,7 +1505,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>0</length>
+        <length>15</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -1546,6 +1522,66 @@
         <position>-1</position>
         <length>0</length>
         <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>RAW_ADDR1</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>26</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>RAW_ADDR2</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>8</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>RAW_CITY</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>13</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>RAW_ZIP</name>
+        <type>String</type>
+        <format>&#x23;</format>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>15</length>
+        <precision>0</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
@@ -1574,7 +1610,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>8</length>
+        <length>1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -1619,7 +1655,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>20</length>
+        <length>11</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -1634,7 +1670,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>14</length>
+        <length>13</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -1649,7 +1685,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>-1</length>
+        <length>2</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -1679,7 +1715,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>7</length>
+        <length>4</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -1694,7 +1730,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>4</length>
+        <length>2</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -1724,7 +1760,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>12</length>
+        <length>0</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -1777,16 +1813,16 @@
       <field>
         <name>UPPER_HOUSE_DIST</name>
         <type>String</type>
-        <format>&#x23;</format>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>15</length>
-        <precision>0</precision>
-        <trim_type>both</trim_type>
+        <length>0</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
       <field>
@@ -1846,6 +1882,21 @@
         <position>-1</position>
         <length>0</length>
         <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>VALIDATION_STATUS</name>
+        <type>String</type>
+        <format>&#x23;</format>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>15</length>
+        <precision>0</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
@@ -2161,7 +2212,7 @@
 
   <step_error_handling>
       <error>
-        <source_step>Lookup or Add Housholds 2</source_step>
+        <source_step>Lookup Housholds</source_step>
         <target_step>Write to log</target_step>
         <is_enabled>Y</is_enabled>
         <nr_valuename/>
