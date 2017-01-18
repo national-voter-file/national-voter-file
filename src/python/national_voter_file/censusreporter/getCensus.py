@@ -184,7 +184,11 @@ def get_census_data(geo_type, geo_url, state_list, fips_func,
     census_df_list = []
 
     for chunk in reader:
-        chunk = chunk.loc[chunk['USPS'].isin(state_list)]
+        if geo_type == "Tract":
+            chunk.rename(columns={'CODE': 'GEOID'}, inplace=True)
+            chunk['USPS'] = state_list[0] #Tracts are passed in one state at a time, but don't have this field
+        else:
+            chunk = chunk.loc[chunk['USPS'].isin(state_list)]
         if find_zz:
             chunk['GEOID'] = chunk['GEOID'].astype(str)
             chunk = chunk.loc[chunk['GEOID'].str.find('ZZ') == -1]
@@ -193,6 +197,7 @@ def get_census_data(geo_type, geo_url, state_list, fips_func,
             context_df_list.append(chunk)
             chunk = chunk.set_index('FIPS')
             data = get_combinedData(chunk, tables=census_tables)
+
             census_df_list.append(data)
 
     context_df = pd.concat(context_df_list)
@@ -209,7 +214,9 @@ def get_census_data(geo_type, geo_url, state_list, fips_func,
 
     census_df = census_df.rename(columns={'GEOID': 'FIPS'})
     census_df = strip_colnames(census_df.set_index('FIPS'))
+
     context_df = strip_colnames(context_df.set_index('FIPS'))
+
     data = context_df.join(census_df)
 
     return data
@@ -376,4 +383,36 @@ if __name__ == '__main__':
         state_df['NAME'] = state_df['USPS'].apply(lambda x: STATE_ABBREVS[x])
         output_df = pd.concat([output_df, state_df])
 
-    output_df.to_csv(os.path.join(OUTPUT_DIR, "census.csv"), index_label="FIPS")
+    if types == 'ALL' or "TRACT" in types:
+        tracts_df_list = []
+        div_tract_df_list = []
+        temp_tract_df_list = []
+        loop = 0
+        for state in state_list:
+            tract_url = 'http://www2.census.gov/geo/maps/dc10map/tract/st{}_{}'.format(STATE_CODES[state], state.lower())
+            if state == 'PR':
+                tract_url = tract_url + "_1" #PR Just had to be different
+            print(tract_url)
+
+            for division in getTractInfo(tract_url, "^[^#\.]+_"):
+                for tract_file in getTractInfo(division[:-1], "\.txt$"): #Just in case there are more than one
+                    print(tract_file)
+                    if "SP_" not in tract_file: #Some have Spanish langage copies, we don't need that
+                      temp_tract_df = get_census_data(
+                         'Tract',
+                         tract_file,
+                         [state],
+                         lambda x: "14000US" + str(x).zfill(11),
+                         state_idx=(-9, 2),
+                         delim=';',
+                         chunk_size=200
+                      )
+                      temp_tract_df_list.append(temp_tract_df)
+                div_tract_df_list.append(pd.concat(temp_tract_df_list))
+            tracts_df_list.append(pd.concat(div_tract_df_list))
+
+        tract_df = pd.concat(tracts_df_list)
+        output_df = pd.concat([output_df, tract_df])
+
+
+    output_df.to_csv(os.path.join(OUTPUT_DIR, "census.csv"), index_label="FIPS", sep=',')
