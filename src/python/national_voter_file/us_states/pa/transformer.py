@@ -261,9 +261,18 @@ class StateTransformer(BaseTransformer):
 
         # use the usaddress_tag method to handle errors
         usaddress_dict, usaddress_type = self.usaddress_tag(address_str)
+        converted_addr = dict([(k, '')
+                               for k in self.usaddress_to_standard_colnames_dict.values()])
+        converted_addr.update(dict([(k, input_dict[k])
+                               for k in address_components]
+                              + [('VALIDATION_STATUS', '3')]))
+
         # use the convert_usaddress_dict to get correct column names
         # and fill in missing values
-        converted_addr = self.convert_usaddress_dict(usaddress_dict)
+        if usaddress_dict:
+            converted_addr = self.convert_usaddress_dict(usaddress_dict)
+            converted_addr['VALIDATION_STATUS'] = '2'
+
         if input_dict['ZIP_CODE']:
             # cache zip codes for empties
             self.zip_cache.setdefault(input_dict['_REGISTRATION_CITY'],
@@ -276,11 +285,10 @@ class StateTransformer(BaseTransformer):
             'PLACE_NAME': input_dict['_REGISTRATION_CITY'],
             'RAW_ADDR1': address_str,
             'RAW_ADDR2': input_dict['_ADDRESS_LINE2'],
-            'RAW_CITY': input_dict['_REGISTRATION_CITY'] or '',
-            'RAW_ZIP': input_dict.get('ZIP_CODE') or '',
-            'VALIDATION_STATUS': '2',
+            'RAW_CITY': input_dict['_REGISTRATION_CITY'],
+            'RAW_ZIP': input_dict['ZIP_CODE'],
             'STATE_NAME': input_dict['STATE_NAME'] or 'PA',
-            'ZIP_CODE': input_dict.get('ZIP_CODE', input_dict.get('_MATCH_ZIP_CODE')) or ''
+            'ZIP_CODE': input_dict.get('ZIP_CODE') or input_dict.get('_MATCH_ZIP_CODE'),
         })
         return converted_addr
 

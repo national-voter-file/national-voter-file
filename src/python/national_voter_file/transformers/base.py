@@ -199,10 +199,10 @@ class BaseTransformer(object):
         'COUNTY_BOARD_DIST': set([str, type(None)]),
         'SCHOOL_BOARD_DIST': set([str, type(None)]),
         'PRECINCT_SPLIT': set([str]),
-        'RAW_ADDR1': set([str, type(str)]),
+        'RAW_ADDR1': set([str, type(None)]),
         'RAW_ADDR2': set([str, type(None)]),
-        'RAW_CITY': set([str, type(str)]),
-        'RAW_ZIP': set([str, type(str)]),
+        'RAW_CITY': set([str, type(None)]),
+        'RAW_ZIP': set([str, type(None)]),
         'VALIDATION_STATUS':set([str, type(str)])
     }
 
