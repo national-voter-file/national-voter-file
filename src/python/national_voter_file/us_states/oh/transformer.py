@@ -203,6 +203,9 @@ class StateTransformer(BaseTransformer):
             'RAW_ZIP': input_dict['RESIDENTIAL_ZIP']
         }
 
+        if(not raw_dict['RAW_ADDR1'].strip()):
+            raw_dict['RAW_ADDR1'] = '--Not provided--'
+
         usaddress_dict, usaddress_type = self.usaddress_tag(address_str)
 
         if(usaddress_dict):

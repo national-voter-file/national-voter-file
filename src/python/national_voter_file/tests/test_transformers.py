@@ -72,6 +72,27 @@ def test_oh_transformer():
     assert len(oh_dict_list) > 1
 
 
+def test_ny_transformer():
+
+    from national_voter_file.us_states.ny import transformer
+
+    input_fields = transformer.StatePreparer.input_fields
+
+    ny_test = transformer.StateTransformer(date_format='%Y%m%d',
+                                           sep=',',
+                                           input_fields=input_fields)
+    ny_test(
+        os.path.join(TEST_DATA_DIR, 'new_york.csv'),
+        os.path.join(TEST_DATA_DIR, 'new_york_test.csv'),
+    )
+    assert os.path.exists(os.path.join(TEST_DATA_DIR, 'new_york_test.csv'))
+    ny_dict_list = read_transformer_output('new_york_test.csv')
+
+    assert sorted(ny_dict_list[0].keys()) == BASE_TRANSFORMER_COLS
+    assert len(ny_dict_list) > 1
+
+
+
 
 # def test_co_transformer():
 #     co_test = co_transformer.COTransformer(date_format='%m/%d/%Y', sep=',')
@@ -113,68 +134,6 @@ def test_oh_transformer():
 #
 #     assert sorted(mi_dict_list[0].keys()) == BASE_TRANSFORMER_COLS
 #     assert len(mi_dict_list) > 1
-#
-#
-# def test_ny_transformer():
-#     input_fields = [
-# 		'LASTNAME',
-# 		'FIRSTNAME',
-# 		'MIDDLENAME',
-# 		'NAMESUFFIX',
-# 		'RADDNUMBER',
-# 		'RHALFCODE',
-# 		'RAPARTMENT',
-# 		'RPREDIRECTION',
-# 		'RSTREETNAME',
-# 		'RPOSTDIRECTION',
-# 		'RCITY',
-# 		'RZIP5',
-# 		'RZIP4',
-# 		'MAILADD1',
-# 		'MAILADD2',
-# 		'MAILADD3',
-# 		'MAILADD4',
-# 		'DOB',
-# 		'GENDER',
-# 		'ENROLLMENT',
-# 		'OTHERPARTY',
-# 		'COUNTYCODE',
-# 		'ED',
-# 		'LD',
-# 		'TOWNCITY',
-# 		'WARD',
-# 		'CD',
-# 		'SD',
-# 		'AD',
-# 		'LASTVOTEDDATE',
-# 		'PREVYEARVOTED',
-# 		'PREVCOUNTY',
-# 		'PREVADDRESS',
-# 		'PREVNAME',
-# 		'COUNTYVRNUMBER',
-# 		'REGDATE',
-# 		'VRSOURCE',
-# 		'IDREQUIRED',
-# 		'IDMET',
-# 		'STATUS',
-# 		'REASONCODE',
-# 		'INACT_DATE',
-# 		'PURGE_DATE',
-# 		'SBOEID',
-# 		'VoterHistory'
-#     ]
-#     ny_test = ny_transformer.NYTransformer(date_format='%Y%m%d',
-#                                            sep=',',
-#                                            input_fields=input_fields)
-#     ny_test(
-#         os.path.join(TEST_DATA_DIR, 'new_york.csv'),
-#         os.path.join(TEST_DATA_DIR, 'new_york_test.csv'),
-#     )
-#     assert os.path.exists(os.path.join(TEST_DATA_DIR, 'new_york_test.csv'))
-#     ny_dict_list = read_transformer_output('new_york_test.csv')
-#
-#     assert sorted(ny_dict_list[0].keys()) == BASE_TRANSFORMER_COLS
-#     assert len(ny_dict_list) > 1
 #
 #
 

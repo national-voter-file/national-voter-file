@@ -2,5 +2,5 @@ language: python
 python:
      - "3.4"
      - "3.5"
-install: "pip install -r src/test/python/requirements.txt"
-script: nosetests src/test/python
+install: "pip install -r src/python/national_voter_file/tests/requirements.txt"
+script: nosetests src/python/national_voter_file/tests

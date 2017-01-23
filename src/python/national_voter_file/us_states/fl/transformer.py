@@ -283,6 +283,9 @@ class StateTransformer(BaseTransformer):
             'RAW_CITY': input_dict['Residence City (USPS)'],
             'RAW_ZIP': input_dict['Residence Zipcode']
         }
+        
+        if(not raw_dict['RAW_ADDR1'].strip()):
+            raw_dict['RAW_ADDR1'] = '--Not provided--'
 
         # FL leaves state column blank frequently
         state_name = input_dict['Residence State']
