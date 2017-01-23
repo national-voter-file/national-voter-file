@@ -1,21 +1,33 @@
-from src.main.python.transformers.base_transformer import BaseTransformer
+import csv
+import os
+import re
+import sys
+
+from national_voter_file.transformers.base_transformer import BaseTransformer
 import usaddress
 
-class OHTransformer(BaseTransformer):
+class StatePreparer:
 
-    """
-    A few required columns in the BaseTransformer did not have values in the
-    Ohio data. Not sure what the best way of updating those on a case by case
-    basis is, but given how irregular some files are it might just be worth
-    allowing None for all columns
-    """
-    col_type_dict = BaseTransformer.col_type_dict.copy()
-    col_type_dict['TITLE'] = set([str, type(None)])
-    col_type_dict['GENDER'] = set([str, type(None)])
-    col_type_dict['RACE'] = set([str, type(None)])
-    col_type_dict['BIRTH_STATE'] = set([str, type(None)])
-    col_type_dict['ABSENTEE_TYPE'] = set([str, type(None)])
-    col_type_dict['PRECINCT_SPLIT'] = set([str, type(None)])
+    def __init__(self, voter_in_file_path=None, output_path=None):
+        from national_voter_file.transformers import DATA_DIR
+
+        self.voter_in_file_path = voter_in_file_path \
+                                   or os.path.join(DATA_DIR,
+                                                   'Ohio',
+                                                   'SWVF_1_44_SAMPLE.csv')
+        self.output_path = output_path \
+                           or os.path.join(DATA_DIR,
+                                           'Ohio',
+                                           'SWVF_1_44_SAMPLE_out.csv')
+
+        self.transformer = StateTransformer(date_format='%m/%d/%Y', sep=',',
+                                            input_fields=None)
+
+    def process(self):
+        self.transformer(self.voter_in_file_path, self.output_path)
+
+class StateTransformer(BaseTransformer):
+
 
     ohio_party_map = {
         "C": "AMC",
@@ -183,17 +195,32 @@ class OHTransformer(BaseTransformer):
         address_str = ' '.join([
             input_dict[x] for x in address_components if input_dict[x] is not None
         ])
+
+        raw_dict = {
+            'RAW_ADDR1': input_dict['RESIDENTIAL_ADDRESS1'],
+            'RAW_ADDR2': input_dict['RESIDENTIAL_SECONDARY_ADDR'],
+            'RAW_CITY': input_dict['RESIDENTIAL_CITY'],
+            'RAW_ZIP': input_dict['RESIDENTIAL_ZIP']
+        }
+
         usaddress_dict, usaddress_type = self.usaddress_tag(address_str)
 
-        converted_addr = self.convert_usaddress_dict(usaddress_dict)
+        if(usaddress_dict):
+            converted_addr = self.convert_usaddress_dict(usaddress_dict)
 
-        converted_addr.update({'PLACE_NAME':input_dict['RESIDENTIAL_CITY'],
-                                'STATE_NAME':input_dict['RESIDENTIAL_STATE'],
-                                'ZIP_CODE':input_dict['RESIDENTIAL_ZIP']
-        })
-
-
-
+            converted_addr.update({'PLACE_NAME':input_dict['RESIDENTIAL_CITY'],
+                                    'STATE_NAME':input_dict['RESIDENTIAL_STATE'],
+                                    'ZIP_CODE':input_dict['RESIDENTIAL_ZIP'],
+                                    'VALIDATION_STATUS': '2'
+            })
+            converted_addr.update(raw_dict)
+        else:
+            converted_addr = self.constructEmptyResidentialAddress()
+            converted_addr.update(raw_dict)
+            converted_addr.update({
+                'STATE_NAME': input_dict['RESIDENTIAL_STATE'],
+                'VALIDATION_STATUS': '1'
+            })
         return converted_addr
 
     def extract_county_code(self, input_dict):
@@ -383,3 +410,7 @@ class OHTransformer(BaseTransformer):
         """
         # No split, copying precinct
         return {'PRECINCT_SPLIT': input_dict['PRECINCT_CODE']}
+
+if __name__ == '__main__':
+    preparer = StatePreparer(*sys.argv[1:])
+    preparer.process()

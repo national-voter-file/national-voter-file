@@ -58,6 +58,21 @@ def test_fl_transformer():
     assert len(fl_dict_list) > 1
 
 
+def test_oh_transformer():
+    from national_voter_file.us_states.oh import transformer
+    oh_test = transformer.StateTransformer(date_format='%m/%d/%Y', sep=',')
+    oh_test(
+        os.path.join(TEST_DATA_DIR, 'ohio.csv'),
+        os.path.join(TEST_DATA_DIR, 'ohio_test.csv'),
+    )
+    assert os.path.exists(os.path.join(TEST_DATA_DIR, 'ohio_test.csv'))
+    oh_dict_list = read_transformer_output('ohio_test.csv')
+
+    assert sorted(oh_dict_list[0].keys()) == BASE_TRANSFORMER_COLS
+    assert len(oh_dict_list) > 1
+
+
+
 # def test_co_transformer():
 #     co_test = co_transformer.COTransformer(date_format='%m/%d/%Y', sep=',')
 #     co_test(
@@ -83,19 +98,6 @@ def test_fl_transformer():
 #
 #     assert sorted(ok_dict_list[0].keys()) == BASE_TRANSFORMER_COLS
 #     assert len(ok_dict_list) > 1
-#
-#
-# def test_oh_transformer():
-#     oh_test = oh_transformer.OHTransformer(date_format='%m/%d/%Y', sep=',')
-#     oh_test(
-#         os.path.join(TEST_DATA_DIR, 'ohio.csv'),
-#         os.path.join(TEST_DATA_DIR, 'ohio_test.csv'),
-#     )
-#     assert os.path.exists(os.path.join(TEST_DATA_DIR, 'ohio_test.csv'))
-#     oh_dict_list = read_transformer_output('ohio_test.csv')
-#
-#     assert sorted(oh_dict_list[0].keys()) == BASE_TRANSFORMER_COLS
-#     assert len(oh_dict_list) > 1
 #
 #
 # def test_mi_transformer():

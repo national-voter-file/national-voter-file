@@ -65,7 +65,7 @@ class BaseTransformer(object):
         'MIDDLE_NAME': set([str, type(None)]),
         'LAST_NAME': set([str]),
         'NAME_SUFFIX': set([str, type(None)]),
-        'GENDER': set([str]),
+        'GENDER': set([str, type(None)]),
         'RACE':set([str, type(None)]),
         'BIRTHDATE': set([datetime.date, type(None)]),
         'BIRTHDATE_IS_ESTIMATE':set([str]),
