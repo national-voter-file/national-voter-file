@@ -135,7 +135,7 @@ FLORIDA_SCHEMA = {
     'Mailing Zipcode': lambda: _empty(fake.zipcode()),
     'Mailing Country': lambda: _empty(fake.state_abbr()),
     'Gender': lambda: _empty(random.choice(['F', 'M', 'U'])),
-    'Race': lambda: random.choice(list(fl_transformer.FLTransformer.florida_race_map.keys())),
+    'Race': lambda: random.choice(list(national_voter_file.us_states.fl.StateTransformer.florida_race_map.keys())),
     'Birth Date': lambda: _empty(fake.date(pattern='%m/%d/%Y')),
     'Registration Date': lambda: fake.date(pattern='%m/%d/%Y'),
     'Party Affiliation': lambda: random.choice(list(fl_transformer.FLTransformer.florida_party_map.keys())),

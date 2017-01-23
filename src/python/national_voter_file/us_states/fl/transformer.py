@@ -1,23 +1,80 @@
-from src.main.python.transformers.base_transformer import BaseTransformer
-import datetime
+from national_voter_file.transformers.base_transformer import BaseTransformer
 import usaddress
 
-class FLTransformer(BaseTransformer):
+import csv
+import os
+import re
+import sys
+import datetime
 
-    """
-    A few required columns in the BaseTransformer did not have values in the
-    Ohio data. Not sure what the best way of updating those on a case by case
-    basis is, but given how irregular some files are it might just be worth
-    allowing None for all columns
-    """
+class StatePreparer:
     col_type_dict = BaseTransformer.col_type_dict.copy()
     col_type_dict['TITLE'] = set([str, type(None)])
-    col_type_dict['GENDER'] = set([str, type(None)])
     col_type_dict['ABSENTEE_TYPE'] = set([str, type(None)])
     col_type_dict['BIRTHDATE'] = set([datetime.date, type(None)])
     col_type_dict['COUNTY_VOTER_REF'] = set([str, type(None)])
-    col_type_dict['PRECINCT_SPLIT'] = set([str, type(None)])
     col_type_dict['BIRTH_STATE'] = set([str, type(None)])
+
+    input_fields = [
+        'County Code',
+        'Voter ID',
+		'Name Last',
+		'Name Suffix',
+		'Name First',
+		'Name Middle',
+		'Requested public records exemption',
+		'Residence Address Line 1',
+		'Residence Address Line 2',
+		'Residence City (USPS)',
+		'Residence State',
+		'Residence Zipcode',
+		'Mailing Address Line 1',
+		'Mailing Address Line 2',
+		'Mailing Address Line 3',
+		'Mailing City',
+		'Mailing State',
+		'Mailing Zipcode',
+		'Mailing Country',
+		'Gender',
+		'Race',
+		'Birth Date',
+		'Registration Date',
+		'Party Affiliation',
+		'Precinct',
+		'Precinct Group',
+		'Precinct Split',
+		'Precinct Suffix',
+		'Voter Status',
+		'Congressional District',
+		'House District',
+		'Senate District',
+		'County Commission District',
+		'School Board District',
+		'Daytime Area Code',
+		'Daytime Phone Number',
+		'Daytime Phone Extension',
+		'Email address'
+    ]
+
+    def __init__(self, voter_in_file_path=None, output_path=None):
+        from national_voter_file.transformers import DATA_DIR
+
+        self.voter_in_file_path = voter_in_file_path \
+                                   or os.path.join(DATA_DIR,
+                                                   'Florida',
+                                                   'AllFLSample20160908.txt')
+        self.output_path = output_path \
+                           or os.path.join(DATA_DIR,
+                                           'Florida',
+                                           'AllFLSample20160908_out.csv')
+
+        self.transformer = StateTransformer(date_format="%m/%d/%Y", sep='\t',
+                                            input_fields=self.input_fields)
+
+    def process(self):
+        self.transformer(self.voter_in_file_path, self.output_path)
+
+class StateTransformer(BaseTransformer):
 
     florida_party_map = {
         'AIP':'AI',
@@ -120,7 +177,7 @@ class FLTransformer(BaseTransformer):
         """
         gender = input_dict['Gender'].strip()
         if len(gender) == 0:
-            gender = None
+            gender = 'U'
 
         return {'GENDER': gender}
 
@@ -219,19 +276,38 @@ class FLTransformer(BaseTransformer):
         address_str = ' '.join([
             input_dict[x] for x in address_components if input_dict[x] is not None
         ])
-        usaddress_dict, usaddress_type = self.usaddress_tag(address_str)
 
-        converted_addr = self.convert_usaddress_dict(usaddress_dict)
+        raw_dict = {
+            'RAW_ADDR1': input_dict['Residence Address Line 1'],
+            'RAW_ADDR2': input_dict['Residence Address Line 2'],
+            'RAW_CITY': input_dict['Residence City (USPS)'],
+            'RAW_ZIP': input_dict['Residence Zipcode']
+        }
 
         # FL leaves state column blank frequently
         state_name = input_dict['Residence State']
         if len(state_name.strip()) == 0:
             state_name = 'FL'
 
-        converted_addr.update({'PLACE_NAME': input_dict['Residence City (USPS)'],
-                               'STATE_NAME': state_name,
-                               'ZIP_CODE': input_dict['Residence Zipcode']
-        })
+        usaddress_dict, usaddress_type = self.usaddress_tag(address_str)
+
+        if(usaddress_dict):
+            converted_addr = self.convert_usaddress_dict(usaddress_dict)
+
+            converted_addr.update({'PLACE_NAME': raw_dict['RAW_CITY'],
+                                   'STATE_NAME': state_name,
+                                   'ZIP_CODE': raw_dict['RAW_ZIP'],
+                                   'VALIDATION_STATUS':'2'
+            })
+
+            converted_addr.update(raw_dict)
+        else:
+            converted_addr = self.constructEmptyResidentialAddress()
+            converted_addr.update(raw_dict)
+            converted_addr.update({
+                'STATE_NAME': state_name,
+                'VALIDATION_STATUS': '1'
+            })
 
         return converted_addr
 
@@ -379,8 +455,16 @@ class FLTransformer(BaseTransformer):
         Outputs:
             Dictionary with following keys
                 'PRECINCT'
+                'PRECINCT_SPLIT'
+
         """
-        return {'PRECINCT': input_dict['Precinct']}
+        split = input_dict['Precinct Split'] if input_dict['Precinct Split'].strip() else input_dict['Precinct']
+
+        return {
+                'PRECINCT': input_dict['Precinct'],
+                'PRECINCT_SPLIT': split
+            }
+
 
     def extract_county_board_dist(self, input_dict):
         """
@@ -404,13 +488,6 @@ class FLTransformer(BaseTransformer):
         # Not sure if mapping exists, verify
         return {'SCHOOL_BOARD_DIST': None}
 
-    def extract_precinct_split(self, input_dict):
-        """
-        Inputs:
-            input_dict: dictionary of form {colname: value} from raw data
-        Outputs:
-            Dictionary with following keys
-                'PRECINCT_SPLIT'
-        """
-        # Not sure if mapping exists, verify
-        return {'PRECINCT_SPLIT': input_dict['Precinct Split']}
+if __name__ == '__main__':
+    preparer = StatePreparer(*sys.argv[1:])
+    preparer.process()
