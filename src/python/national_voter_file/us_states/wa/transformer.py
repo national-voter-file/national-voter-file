@@ -1,11 +1,35 @@
-from src.main.python.transformers.base_transformer import BaseTransformer
+import csv
+import os
+import re
+import sys
+
+from national_voter_file.transformers.base_transformer import BaseTransformer
 import usaddress
 
-class WATransformer(BaseTransformer):
+class StatePreparer:
     col_type_dict = BaseTransformer.col_type_dict.copy()
     col_type_dict['BIRTH_STATE'] = set([str, type(None)])
-    col_type_dict['BIRTHDATE_IS_ESTIMATE'] = set([str, type(None)])
     col_type_dict['RACE'] = set([str, type(None)])
+
+    def __init__(self, voter_in_file_path=None, output_path=None):
+        from national_voter_file.transformers import DATA_DIR
+
+        self.voter_in_file_path = voter_in_file_path \
+                                   or os.path.join(DATA_DIR,
+                                                   'Washington',
+                                                   '201605_VRDB_ExtractSAMPLE.txt')
+        self.output_path = output_path \
+                           or os.path.join(DATA_DIR,
+                                           'Washington',
+                                           '201605_VRDB_ExtractSAMPLE_out.csv')
+
+        self.transformer = StateTransformer(date_format="%m/%d/%Y", sep='\t',
+                                            input_fields=None)
+
+    def process(self):
+        self.transformer(self.voter_in_file_path, self.output_path)
+
+class StateTransformer(BaseTransformer):
 
     #### Contact methods #######################################################
 
@@ -100,17 +124,12 @@ class WATransformer(BaseTransformer):
             Dictionary with following keys
                 'BIRTHDATE'
         """
-        return {'BIRTHDATE': self.convert_date(input_dict['Birthdate'])}
 
-    def extract_birthdate_is_estimate(self, input_columns):
-        """
-        Inputs:
-            input_columns: name or list of columns
-        Outputs:
-            Dictionary with following keys
-                'BIRTHDATE_IS_ESTIMATE'
-        """
-        return {'BIRTHDATE_IS_ESTIMATE': None}
+        return {
+            'BIRTHDATE': self.convert_date(input_dict['Birthdate']),
+            'BIRTHDATE_IS_ESTIMATE': 'N'
+        }
+
 
     def extract_language_choice(self, input_dict):
         """
@@ -374,3 +393,7 @@ class WATransformer(BaseTransformer):
                 'PRECINCT_SPLIT'
         """
         return {'PRECINCT_SPLIT': "%04d/%02d"%(int(input_dict['PrecinctCode']), int(input_dict['PrecinctPart']))}
+
+if __name__ == '__main__':
+    preparer = StatePreparer(*sys.argv[1:])
+    preparer.process()

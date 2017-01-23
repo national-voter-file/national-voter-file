@@ -1,21 +1,81 @@
-from src.main.python.transformers.base_transformer import BaseTransformer
+from national_voter_file.transformers.base_transformer import BaseTransformer
 import usaddress
 
-class NYTransformer(BaseTransformer):
+import csv
+import os
+import re
+import sys
+import datetime
 
-    """
-    A few required columns in the BaseTransformer did not have values in the
-    Ohio data. Not sure what the best way of updating those on a case by case
-    basis is, but given how irregular some files are it might just be worth
-    allowing None for all columns
-    """
-    col_type_dict = BaseTransformer.col_type_dict.copy()
-    col_type_dict['TITLE'] = set([str, type(None)])
-    col_type_dict['ABSENTEE_TYPE'] = set([str, type(None)])
-    col_type_dict['PRECINCT_SPLIT'] = set([str, type(None)])
-    col_type_dict['RACE'] = set([str, type(None)])
-    col_type_dict['BIRTH_STATE'] = set([str, type(None)])
+class StatePreparer:
+    input_fields = [
+		'LASTNAME',
+		'FIRSTNAME',
+		'MIDDLENAME',
+		'NAMESUFFIX',
+		'RADDNUMBER',
+		'RHALFCODE',
+		'RAPARTMENT',
+		'RPREDIRECTION',
+		'RSTREETNAME',
+		'RPOSTDIRECTION',
+		'RCITY',
+		'RZIP5',
+		'RZIP4',
+		'MAILADD1',
+		'MAILADD2',
+		'MAILADD3',
+		'MAILADD4',
+		'DOB',
+		'GENDER',
+		'ENROLLMENT',
+		'OTHERPARTY',
+		'COUNTYCODE',
+		'ED',
+		'LD',
+		'TOWNCITY',
+		'WARD',
+		'CD',
+		'SD',
+		'AD',
+		'LASTVOTEDDATE',
+		'PREVYEARVOTED',
+		'PREVCOUNTY',
+		'PREVADDRESS',
+		'PREVNAME',
+		'COUNTYVRNUMBER',
+		'REGDATE',
+		'VRSOURCE',
+		'IDREQUIRED',
+		'IDMET',
+		'STATUS',
+		'REASONCODE',
+		'INACT_DATE',
+		'PURGE_DATE',
+		'SBOEID',
+		'VoterHistory']
 
+
+    def __init__(self, voter_in_file_path=None, output_path=None):
+        from national_voter_file.transformers import DATA_DIR
+
+        self.voter_in_file_path = voter_in_file_path \
+                                   or os.path.join(DATA_DIR,
+                                                   'NewYork',
+                                                   'AllNYSVoters20160831SAMPLE.txt')
+        self.output_path = output_path \
+                           or os.path.join(DATA_DIR,
+                                           'NewYork',
+                                           'AllNYSVoters20150316SAMPLE_out.csv')
+
+        self.transformer = StateTransformer(date_format="%Y%m%d",
+                                            sep=',',
+                                            input_fields=self.input_fields)
+
+    def process(self):
+        self.transformer(self.voter_in_file_path, self.output_path)
+
+class StateTransformer(BaseTransformer):
 
     ny_party_map = {
         "DEM":"DEM",
@@ -190,16 +250,35 @@ class NYTransformer(BaseTransformer):
              'Apt '+input_dict['RAPARTMENT'] if aptField and aptField != 'APT' else ''
         ])
 
+        raw_dict = {
+            'RAW_ADDR1':self.construct_val(input_dict, ['RADDNUMBER', 'RHALFCODE','RPREDIRECTION','RSTREETNAME', 'RPOSTDIRECTION']),
+            'RAW_ADDR2':input_dict['RAPARTMENT'].strip(),
+            'RAW_CITY': input_dict['RCITY'],
+            'RAW_ZIP': input_dict['RZIP5']
+        }
+
+        if(not raw_dict['RAW_ADDR1'].strip()):
+            raw_dict['RAW_ADDR1'] = '--Not provided--'
+            
         usaddress_dict, usaddress_type = self.usaddress_tag(address_str)
+        if(usaddress_dict):
+            converted_addr = self.convert_usaddress_dict(usaddress_dict)
 
-        converted_addr = self.convert_usaddress_dict(usaddress_dict)
+            converted_addr.update({'PLACE_NAME':input_dict['RCITY'],
+                                    'STATE_NAME':"NY",
+                                    'ZIP_CODE':input_dict['RZIP5'],
+                                    'VALIDATION_STATUS': '2'
+                                    })
 
-        converted_addr.update({'PLACE_NAME':input_dict['RCITY'],
-                                'STATE_NAME':"NY",
-                                'ZIP_CODE':input_dict['RZIP5']
-        })
+            converted_addr.update(raw_dict)
 
-
+        else:
+            converted_addr = self.constructEmptyResidentialAddress()
+            converted_addr.update(raw_dict)
+            converted_addr.update({
+                'STATE_NAME': 'NY',
+                'VALIDATION_STATUS': '1'
+            })
 
         return converted_addr
 
@@ -403,3 +482,7 @@ class NYTransformer(BaseTransformer):
         """
         # There is no split, so copy the precinct
         return {'PRECINCT_SPLIT': "%03d/%02d"%(int(input_dict['ED']), int(input_dict['AD']))}
+
+if __name__ == '__main__':
+    preparer = StatePreparer(*sys.argv[1:])
+    preparer.process()

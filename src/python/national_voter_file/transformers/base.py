@@ -144,8 +144,8 @@ class BaseTransformer(object):
         'MIDDLE_NAME': set([str, type(None)]),
         'LAST_NAME': set([str]),
         'NAME_SUFFIX': set([str, type(None)]),
-        'GENDER': set([str]),
-        'RACE':set([str]),
+        'GENDER': set([str, type(None)]),
+        'RACE':set([str, type(None)]),
         'BIRTHDATE': set([datetime.date, type(None)]),
         'BIRTHDATE_IS_ESTIMATE':set([str]),
         'BIRTH_STATE':set([str, type(None)]),
@@ -187,7 +187,7 @@ class BaseTransformer(object):
         'MAIL_COUNTRY': set([str, type(None)]),
         'COUNTYCODE': set([str]),
         'STATE_VOTER_REF': set([str]),
-        'COUNTY_VOTER_REF': set([str]),
+        'COUNTY_VOTER_REF': set([str, type(None)]),
         'REGISTRATION_DATE': set([datetime.date, type(None)]),
         'REGISTRATION_STATUS': set([str]),
         'ABSENTEE_TYPE': set([str, type(None)]),
@@ -316,21 +316,31 @@ class BaseTransformer(object):
             parts so we have to glue it back together for the mailing address fields
         """
         if('MAIL_CITY' not in orig_dict):
-            copied_addr =  {
-                    'MAIL_ADDRESS_LINE1': self.construct_val(orig_dict, [
-                        'ADDRESS_NUMBER_PREFIX', 'ADDRESS_NUMBER', 'ADDRESS_NUMBER_SUFFIX',
-                        'STREET_NAME_PRE_DIRECTIONAL','STREET_NAME_PRE_MODIFIER', 'STREET_NAME_PRE_TYPE',
-                        'STREET_NAME',
-                        'STREET_NAME_POST_DIRECTIONAL','STREET_NAME_POST_MODIFIER', 'STREET_NAME_POST_TYPE'
-                    ]),
+            if(orig_dict['STREET_NAME'] ):
+                copied_addr =  {
+                        'MAIL_ADDRESS_LINE1': self.construct_val(orig_dict, [
+                            'ADDRESS_NUMBER_PREFIX', 'ADDRESS_NUMBER', 'ADDRESS_NUMBER_SUFFIX',
+                            'STREET_NAME_PRE_DIRECTIONAL','STREET_NAME_PRE_MODIFIER', 'STREET_NAME_PRE_TYPE',
+                            'STREET_NAME',
+                            'STREET_NAME_POST_DIRECTIONAL','STREET_NAME_POST_MODIFIER', 'STREET_NAME_POST_TYPE'
+                        ]),
 
-                    'MAIL_ADDRESS_LINE2': self.construct_val(orig_dict, [
-                    'OCCUPANCY_TYPE', 'OCCUPANCY_IDENTIFIER']),
-                    'MAIL_CITY': orig_dict['PLACE_NAME'],
-                    'MAIL_STATE': orig_dict['STATE_NAME'],
-                    'MAIL_ZIP_CODE': orig_dict['ZIP_CODE'],
-                    'MAIL_COUNTRY': "USA"
-            }
+                        'MAIL_ADDRESS_LINE2': self.construct_val(orig_dict, [
+                            'OCCUPANCY_TYPE', 'OCCUPANCY_IDENTIFIER']),
+                        'MAIL_CITY': orig_dict['PLACE_NAME'],
+                        'MAIL_STATE': orig_dict['STATE_NAME'],
+                        'MAIL_ZIP_CODE': orig_dict['ZIP_CODE'],
+                        'MAIL_COUNTRY': "USA"
+                }
+            else:
+                copied_addr = {
+                    'MAIL_ADDRESS_LINE1':orig_dict['RAW_ADDR1'],
+                    'MAIL_ADDRESS_LINE2':orig_dict['RAW_ADDR2'],
+                        'MAIL_CITY': orig_dict['RAW_CITY'],
+                        'MAIL_STATE': orig_dict['STATE_NAME'],
+                        'MAIL_ZIP_CODE': orig_dict['RAW_ZIP'],
+                        'MAIL_COUNTRY': "USA"
+                }
             orig_dict.update(copied_addr)
         return orig_dict
 
@@ -341,6 +351,36 @@ class BaseTransformer(object):
             if(aDir[aField]):
                 result = result + (aDir[aField].strip()+" " if aDir[aField].strip() else '')
         return result
+
+    def constructEmptyResidentialAddress(self):
+        return {
+                'ADDRESS_NUMBER':None,
+                'ADDRESS_NUMBER_PREFIX':None,
+                'ADDRESS_NUMBER_SUFFIX':None,
+                'BUILDING_NAME':None,
+                'CORNER_OF':None,
+                'INTERSECTION_SEPARATOR':None,
+                'LANDMARK_NAME':None,
+                'NOT_ADDRESS':None,
+                'OCCUPANCY_TYPE':None,
+                'OCCUPANCY_IDENTIFIER':None,
+                'PLACE_NAME':None,
+                'STATE_NAME':None,
+                'STREET_NAME':None,
+                'STREET_NAME_PRE_DIRECTIONAL':None,
+                'STREET_NAME_PRE_MODIFIER':None,
+                'STREET_NAME_PRE_TYPE':None,
+                'STREET_NAME_POST_DIRECTIONAL':None,
+                'STREET_NAME_POST_MODIFIER':None,
+                'STREET_NAME_POST_TYPE':None,
+                'SUBADDRESS_IDENTIFIER':None,
+                'SUBADDRESS_TYPE':None,
+                'USPS_BOX_GROUP_ID':None,
+                'USPS_BOX_GROUP_TYPE':None,
+                'USPS_BOX_ID':None,
+                'USPS_BOX_TYPE':None,
+                'ZIP_CODE':None
+        }
 
     #### Output validation methods #############################################
 
@@ -439,16 +479,19 @@ class BaseTransformer(object):
         """
         try:
             usaddress_dict, usaddress_type = usaddress.tag(address_str)
+
+            # if contains a PO Box ID consider it a PO Box, else a Street Address
+            if 'USPSBoxID' in usaddress_dict:
+                usaddress_type = 'PO Box'
+            else:
+                usaddress_type = 'Street Address'
+            return usaddress_dict, usaddress_type
+
         except usaddress.RepeatedLabelError as e:
-            # this will use the second occurance of each tag
-            # there is probably a better rule
-            usaddress_dict = {k: v for v, k in e.parsed_string}
-        # if contains a PO Box ID consider it a PO Box, else a Street Address
-        if 'USPSBoxID' in usaddress_dict:
-            usaddress_type = 'PO Box'
-        else:
-            usaddress_type = 'Street Address'
-        return usaddress_dict, usaddress_type
+            # If USAddress fails then just return None to set the
+            # VALIDATION_STATUS appropriatly. We will have to manually fix the address later
+            return None, None
+
 
     def convert_usaddress_dict(self, usaddress_dict):
         """
@@ -859,6 +902,8 @@ class BaseTransformer(object):
         Outputs:
             Dictionary with following keys
                 'PRECINCT'
+                'PRECINCT_SPLIT'
+
         """
         raise NotImplementedError(
             'Must implement extract_precinct method'
@@ -886,16 +931,4 @@ class BaseTransformer(object):
         """
         raise NotImplementedError(
             'Must implement extract_school_board_dist method'
-        )
-
-    def extract_precinct_split(self, input_columns):
-        """
-        Inputs:
-            input_columns: name or list of columns
-        Outputs:
-            Dictionary with following keys
-                'PRECINCT_SPLIT'
-        """
-        raise NotImplementedError(
-            'Must implement extract_precinct_split method'
         )
