@@ -1,4 +1,4 @@
-from src.main.python.transformers.base_transformer import BaseTransformer
+from national_voter_file.transformers.base_transformer import BaseTransformer
 import usaddress
 
 class StateTransformer(BaseTransformer):

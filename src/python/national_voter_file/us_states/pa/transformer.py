@@ -4,11 +4,17 @@ import re
 import sys
 import zipfile
 
-from src.main.python.transformers.base_transformer import BaseTransformer
+
+from national_voter_file.transformers.base import (DATA_DIR,
+                                                   BasePreparer,
+                                                   BaseTransformer)
 import usaddress
 
+__all__ = ['default_file', 'StatePreparer', 'StateTransformer']
 
-class StatePreparer:
+default_file = 'Statewide.zip'
+
+class StatePreparer(BasePreparer):
     """
     This class prepares the data to be parsed by row by the StateTransformer
     based on the state's data file download defaults.
@@ -26,7 +32,55 @@ class StatePreparer:
        Maps elections for each Vote history column pair in FVE file
     """
 
+    state_path = 'pa'
+    sep = "\t"
     voter_file_re = re.compile(r'.+FVE.+\.txt')
+
+    # _VOTEHISTORY columns are 40 pairs of columns for
+    # Vote method ('AP','AB','P' ~ At Polls, Absentee, Provisional)
+    # and Party at the time of vote. These match the 40 elections listed
+    # in the corresponding "Election Map" county file.
+
+    def __init__(self, input_path, *args):
+        super(StatePreparer, self).__init__(input_path, *args)
+
+        self.voter_zip_file_path = self.input_path
+
+        if not self.transformer:
+            self.transformer = StateTransformer()
+
+    def process(self):
+        z = zipfile.ZipFile(self.voter_zip_file_path)
+        return self.voters(z)
+
+    def voters(self, zip_file):
+        county_files = [f for f in zip_file.namelist()
+                        if self.voter_file_re.match(f)]
+
+        #one file here, so it doesn't get overwritten, per-county
+        for county in county_files:
+            self.process_county_zones(zip_file, county)
+            reader = self.dict_iterator(self.open(zip_file.open(county)))
+            for row in reader:
+                yield row
+
+    def process_county_zones(self, zip_handle, county_voter_filename):
+        zonecode_file, zonetype_file = self.zone_files(county_voter_filename)
+        with self.open(zip_handle.open(zonetype_file)) as zonetypes:
+            reader = csv.DictReader(zonetypes,
+                                    delimiter=self.sep,
+                                    fieldnames=['county', 'column', 'prefix', 'zonetype'])
+            self.transformer.load_county_zones(reader)
+
+    def zone_files(self, voter_filename):
+        if 'FVE' in voter_filename:
+            return (re.sub(r' FVE ', ' Zone Codes ', voter_filename),
+                    re.sub(r' FVE ', ' Zone Types ', voter_filename))
+        else:
+            return None, None
+
+class StateTransformer(BaseTransformer):
+    date_format = "%m/%d/%Y"
 
     input_fields = [
         'STATE_VOTER_REF',
@@ -62,55 +116,6 @@ class StatePreparer:
         + ['_DISTRICT%d' % (d+1) for d in range(40)] \
         + ['_VOTEHISTORY_%d' % (d+1) for d in range(80)] \
         + ['PHONE', 'COUNTYCODE', 'MAIL_COUNTRY']
-
-    # _VOTEHISTORY columns are 40 pairs of columns for
-    # Vote method ('AP','AB','P' ~ At Polls, Absentee, Provisional)
-    # and Party at the time of vote. These match the 40 elections listed
-    # in the corresponding "Election Map" county file.
-
-    def __init__(self, voter_zip_file_path=None, output_path=None):
-        from src.main.python.transformers import DATA_DIR
-
-        self.voter_zip_file_path = voter_zip_file_path \
-                                   or os.path.join(DATA_DIR,
-                                                   'Pennsylvania',
-                                                   'Statewide.zip')
-        self.output_path = output_path \
-                           or os.path.join(DATA_DIR,
-                                           'Pennsylvania',
-                                           'voters_out.csv')
-
-        self.transformer = StateTransformer(date_format="%m/%d/%Y", sep="\t",
-                                            input_fields=self.input_fields)
-
-    def process(self):
-        z = zipfile.ZipFile(self.voter_zip_file_path)
-        self.voters(z)
-
-    def voters(self, zip_file):
-        county_files = [f for f in zip_file.namelist()
-                        if self.voter_file_re.match(f)]
-
-        #one file here, so it doesn't get overwritten, per-county
-        output = open(self.output_path, 'w')
-        for county in county_files:
-            self.process_county_zones(zip_file, county)
-            self.transformer(zip_file.open(county), output)
-            output = open(self.output_path, 'a')
-        output.close()
-
-    def process_county_zones(self, zip_handle, county_voter_filename):
-        zonecode_file, zonetype_file = self.zone_files(county_voter_filename)
-        self.transformer.load_county_zones(zip_handle.open(zonetype_file))
-
-    def zone_files(self, voter_filename):
-        if 'FVE' in voter_filename:
-            return (re.sub(r' FVE ', ' Zone Codes ', voter_filename),
-                    re.sub(r' FVE ', ' Zone Types ', voter_filename))
-        else:
-            return None, None
-
-class StateTransformer(BaseTransformer):
 
     #roughly all affiliations that have 1000+ registrants
     party_map = {
@@ -151,28 +156,24 @@ class StateTransformer(BaseTransformer):
             key: int(zonedict['column'])
         })
 
-    def load_county_zones(self, zonetype_input_path):
+    def load_county_zones(self, reader):
         """
         Loads county-specific "District" column # for district-type columns
         """
-        with self.open(zonetype_input_path) as zonetypes:
-            reader = csv.DictReader(zonetypes,
-                                    delimiter=self.sep,
-                                    fieldnames=['county', 'column', 'prefix', 'zonetype'])
-            for zonedict in reader:
-                # Avoiding test for 'senat(e)' and 'legislature' because
-                # there can be columns for US Senators, and not just
-                # state senators. State senators are reliably default column 7
-                if re.search('school', zonedict['zonetype'], re.I):
-                    self._set_county_zonetype(zonedict, 'school_board')
-                elif re.search('precinct split', zonedict['zonetype'], re.I):
-                    self._set_county_zonetype(zonedict, 'precinct_split')
-                elif re.search('precinct', zonedict['zonetype'], re.I):
-                    self._set_county_zonetype(zonedict, 'precinct')
-                elif re.search('^county$', zonedict['zonetype'], re.I):
-                    # more careful with county, since there can be:
-                    # "county wide" and "county council"
-                    self._set_county_zonetype(zonedict, 'county_board')
+        for zonedict in reader:
+            # Avoiding test for 'senat(e)' and 'legislature' because
+            # there can be columns for US Senators, and not just
+            # state senators. State senators are reliably default column 7
+            if re.search('school', zonedict['zonetype'], re.I):
+                self._set_county_zonetype(zonedict, 'school_board')
+            elif re.search('precinct split', zonedict['zonetype'], re.I):
+                self._set_county_zonetype(zonedict, 'precinct_split')
+            elif re.search('precinct', zonedict['zonetype'], re.I):
+                self._set_county_zonetype(zonedict, 'precinct')
+            elif re.search('^county$', zonedict['zonetype'], re.I):
+                # more careful with county, since there can be:
+                # "county wide" and "county council"
+                self._set_county_zonetype(zonedict, 'county_board')
 
 
     #### Contact methods ######################################################
@@ -270,11 +271,16 @@ class StateTransformer(BaseTransformer):
         else:
             backup_zips = self.zip_cache.get(input_dict['_REGISTRATION_CITY'])
             if backup_zips and len(backup_zips) == 1:  #don't use zip if ambiguous
-                input_dict['ZIP_CODE'] = list(backup_zips)[0]
+                input_dict['_MATCH_ZIP_CODE'] = list(backup_zips)[0]
         converted_addr.update({
             'PLACE_NAME': input_dict['_REGISTRATION_CITY'],
+            'RAW_ADDR1': address_str,
+            'RAW_ADDR2': input_dict['_ADDRESS_LINE2'],
+            'RAW_CITY': input_dict['_REGISTRATION_CITY'] or '',
+            'RAW_ZIP': input_dict.get('ZIP_CODE') or '',
+            'VALIDATION_STATUS': '2',
             'STATE_NAME': input_dict['STATE_NAME'] or 'PA',
-            'ZIP_CODE': input_dict['ZIP_CODE']
+            'ZIP_CODE': input_dict.get('ZIP_CODE', input_dict.get('_MATCH_ZIP_CODE')) or ''
         })
         return converted_addr
 
