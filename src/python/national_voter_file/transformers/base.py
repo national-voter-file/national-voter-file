@@ -5,6 +5,9 @@ from io import TextIOWrapper
 import zipfile
 
 import usaddress
+import os
+
+DATA_DIR = os.path.join(os.path.abspath(os.getcwd()), 'data')
 
 """
 # Raw voter data -> standardized data frame
@@ -32,6 +35,82 @@ from each extract method fits the correct type.
 
 You only need to modify methods beginning with `extract`
 """
+
+class BasePreparer(object):
+    """
+    This is the state file that knows how to take input files and iterate
+    over items to pass a dictionary iterator to the Transformer to process/validate.
+
+    Mostly, this is just opening the file and processing through csv.DictReader.
+    You'll most commonly change `sep` and `default_file` attributes
+
+    However, if you need to, e.g. open a zip file and match metadata across files,
+    then this is the class to override.  Basically, anything that involves file opens()
+    should be done here.  Then anything that processes dict input should be done in the
+    transformer.
+    """
+
+    sep = ','
+    default_file = 'input.csv'
+
+    def __init__(self, input_path, state_path=None, state_module=None, transformer=None):
+
+        if transformer:
+            self.transformer = transformer
+        if state_path:
+            self.state_path = state_path
+        else:
+            self.state_path = self.state_name
+        if state_module:
+            self.default_file = state_module.default_file
+        else:
+            self.default_file = default_file
+        filename = self.default_file
+
+        if os.path.isdir(input_path):
+            state_subdir_guess = os.path.join(input_path, self.state_path, filename)
+            state_file_guess = os.path.join(input_path, filename)
+            if os.path.isfile(state_subdir_guess):
+                input_path = state_subdir_guess
+            elif os.path.isfile(state_file_guess):
+                input_path = state_file_guess
+            else:
+                raise Exception("please include the input file path {}".format(
+                    (""" or make sure your file is called "{filename}" in {datadir} or in
+                    {datadir}/{state}/{filename}
+                    """.format(filename=filename,
+                               datadir=input_path,
+                               state=self.state_path)) if filename else ''
+                ))
+        self.input_path = input_path
+
+    def open(self, path_or_handle, mode='r'):
+        """
+        Don't re-open files that are passed as handles, but for easy
+        use-cases, this'll work normally with regular paths
+        """
+        #TODO: we have to be smarter here about whether we're being passed a file
+        # or whether we should hunt down for a particular filename
+        # based on what each state spits out
+        if mode=='r' and isinstance(path_or_handle, zipfile.ZipExtFile):
+            # see pa.py for an example of needing zipfile support
+            return TextIOWrapper(path_or_handle,
+                                 encoding='utf8',
+                                 errors='ignore', line_buffering=True)
+        elif hasattr(path_or_handle, 'mode'): #py2/3 file/buffer type
+            return path_or_handle
+        else:
+            return open(path_or_handle, mode, errors='ignore')
+
+
+    def process(self):
+        return self.dict_iterator(self.open(self.input_path))
+
+    def dict_iterator(self, infile):
+        reader = csv.DictReader(infile, delimiter=self.sep,
+                                fieldnames=self.transformer.input_fields)
+        return reader
+
 
 class BaseTransformer(object):
     """
@@ -120,10 +199,10 @@ class BaseTransformer(object):
         'COUNTY_BOARD_DIST': set([str, type(None)]),
         'SCHOOL_BOARD_DIST': set([str, type(None)]),
         'PRECINCT_SPLIT': set([str]),
-        'RAW_ADDR1': set([str, type(str)]),
+        'RAW_ADDR1': set([str, type(None)]),
         'RAW_ADDR2': set([str, type(None)]),
-        'RAW_CITY': set([str, type(str)]),
-        'RAW_ZIP': set([str, type(str)]),
+        'RAW_CITY': set([str, type(None)]),
+        'RAW_ZIP': set([str, type(None)]),
         'VALIDATION_STATUS':set([str, type(str)])
     }
 
@@ -202,50 +281,9 @@ class BaseTransformer(object):
         'ZipCode': 'ZIP_CODE',
     }
 
-    def __init__(self, date_format, sep=',', input_fields = None):
-        """
-        Inputs:
-            date_format: the strptime format to translate dates
-            sep: separator for input files
-        """
-        self.date_format = date_format
-        self.sep = sep
-        self.input_fields = input_fields
+    date_format = ''
+    input_fields = []
 
-    def __call__(self, input_path, output_path):
-        """
-        Set paths here
-        Fails if any methods aren't implemented
-        Should not be overwritten in the subclass, this method enforces a
-        similar check on all data created
-        """
-        with self.open(input_path) as infile, self.open(output_path, 'w') as outfile:
-            reader = csv.DictReader(infile, delimiter=self.sep,  fieldnames=self.input_fields)
-            writer = csv.DictWriter(
-                outfile,
-                fieldnames = sorted(self.col_type_dict.keys()),
-            )
-            writer.writeheader()
-            for input_dict in reader:
-                output_dict = self.process_row(input_dict)
-                output_dict = self.fix_missing_mailing_addr(output_dict)
-                self.validate_output_row(output_dict) # validate here
-                writer.writerow(output_dict)
-
-    def open(self, path_or_handle, mode='r'):
-        """
-        Don't re-open files that are passed as handles, but for easy
-        use-cases, this'll work normally with regular paths
-        """
-        if mode=='r' and isinstance(path_or_handle, zipfile.ZipExtFile):
-            # see pa.py for an example of needing zipfile support
-            return TextIOWrapper(path_or_handle,
-                                 encoding='utf8',
-                                 errors='ignore', line_buffering=True)
-        elif hasattr(path_or_handle, 'mode'): #py2/3 file/buffer type
-            return path_or_handle
-        else:
-            return open(path_or_handle, mode, errors='ignore')
 
     #### Row processing methods ################################################
 
@@ -346,11 +384,12 @@ class BaseTransformer(object):
 
     #### Output validation methods #############################################
 
-    def validate_output_row(self, output_dict):
+    @classmethod
+    def validate_output_row(cls, output_dict):
         """
         Ensures
-        - Output columns match those in self.col_type_dict
-        - Column value types match those in self.col_type_dict
+        - Output columns match those in cls.col_type_dict
+        - Column value types match those in cls.col_type_dict
 
         Inputs:
             output_dict: A dictionary of format {output_column_str: value}
@@ -358,7 +397,7 @@ class BaseTransformer(object):
             None
         """
         # Check to make sure correct columns are present
-        correct_output_col_set = set(self.col_type_dict.keys())
+        correct_output_col_set = set(cls.col_type_dict.keys())
         output_dict_col_set = set(output_dict.keys())
 
         missing_cols = correct_output_col_set - output_dict_col_set
@@ -382,7 +421,7 @@ class BaseTransformer(object):
                 value_type = str if len(value.strip()) > 0 else type(None)
             else:
                 value_type = type(value)
-            acceptable_types = self.col_type_dict[colname]
+            acceptable_types = cls.col_type_dict[colname]
             if value_type not in acceptable_types:
                 type_errors.append(
                     'Column {} requires type(s) {}, found {}.'.format(
@@ -397,10 +436,10 @@ class BaseTransformer(object):
 
         # check to make sure columns contain correct values
         value_errors = []
-        for col, vals in self.limited_value_dict.items():
+        for col, vals in cls.limited_value_dict.items():
             output_value = output_dict[col]
             # if we allow None, ignore None
-            if output_value is None and type(None) in self.col_type_dict[col]:
+            if output_value is None and type(None) in cls.col_type_dict[col]:
                 continue
             if output_value not in vals:
                 error_message = 'Column {} requires value(s) {}, found {}'.format(

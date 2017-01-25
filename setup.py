@@ -30,7 +30,7 @@ setup(
     """,
     entry_points={
         'console_scripts': [
-            'process_voter_files = national_voter_file.scripts.process_voter_files:main',
+            'process_voter_files = national_voter_file.transformers.csv_transformer:main',
         ],
     },
     install_requires=[
