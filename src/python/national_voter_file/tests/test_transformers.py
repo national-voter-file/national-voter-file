@@ -14,6 +14,7 @@ TEST_DATA_DIR = os.path.join(os.path.dirname(__file__), 'test_data')
 BASE_TRANSFORMER_COLS = sorted(
     BaseTransformer.col_type_dict.keys()
 )
+TEST_STATES = ['fl', 'ny', 'oh', 'wa']
 
 
 # Because tests assert for existence of files, remove any _test.csv before tests
@@ -33,102 +34,129 @@ def read_transformer_output(test_filename):
     return test_dict_list
 
 
-def test_wa_transformer():
+def run_state_transformer(state_test):
+    state_path = state_test.transformer.StatePreparer.state_path
+    input_path = os.path.join(TEST_DATA_DIR, '{}.csv'.format(state_path))
+    output_path = os.path.join(TEST_DATA_DIR, '{}_test.csv'.format(state_path))
 
-    wa_test = load_states(['wa'])[0]
-
-    input_path = os.path.join(TEST_DATA_DIR, 'washington.csv')
-    output_path = os.path.join(TEST_DATA_DIR, 'washington_test.csv')
-
-    state_transformer = wa_test.transformer.StateTransformer()
-    state_preparer = getattr(wa_test.transformer,
+    state_transformer = state_test.transformer.StateTransformer()
+    state_preparer = getattr(state_test.transformer,
                              'StatePreparer',
                              BasePreparer)(input_path,
-                                           'wa',
-                                           wa_test.transformer,
+                                           state_path,
+                                           state_test.transformer,
                                            state_transformer)
-
     writer = CsvOutput(state_transformer)
     writer(state_preparer.process(), output_path)
 
-    assert os.path.exists(os.path.join(TEST_DATA_DIR, 'washington_test.csv'))
-    wa_dict_list = read_transformer_output('washington_test.csv')
+    assert os.path.exists(os.path.join(TEST_DATA_DIR, '{}.csv'.format(state_path)))
 
-    assert sorted(wa_dict_list[0].keys()) == BASE_TRANSFORMER_COLS
-    assert len(wa_dict_list) > 1
-
-def test_fl_transformer():
-
-    fl_test = load_states(['fl'])[0]
-
-    input_path = os.path.join(TEST_DATA_DIR, 'florida.csv')
-    output_path = os.path.join(TEST_DATA_DIR, 'florida_test.csv')
-
-    state_transformer = fl_test.transformer.StateTransformer()
-    state_preparer = getattr(fl_test.transformer,
-                             'StatePreparer',
-                             BasePreparer)(input_path,
-                                           'fl',
-                                           fl_test.transformer,
-                                           state_transformer)
-
-    writer = CsvOutput(state_transformer)
-    writer(state_preparer.process(), output_path)
-
-    assert os.path.exists(os.path.join(TEST_DATA_DIR, 'florida_test.csv'))
-    fl_dict_list = read_transformer_output('florida_test.csv')
-
-    assert sorted(fl_dict_list[0].keys()) == BASE_TRANSFORMER_COLS
-    assert len(fl_dict_list) > 1
-
-def test_oh_transformer():
-
-    oh_test = load_states(['oh'])[0]
-
-    input_path = os.path.join(TEST_DATA_DIR, 'ohio.csv')
-    output_path = os.path.join(TEST_DATA_DIR, 'ohio_test.csv')
-
-    state_transformer = oh_test.transformer.StateTransformer()
-    state_preparer = getattr(oh_test.transformer,
-                             'StatePreparer',
-                             BasePreparer)(input_path,
-                                           'oh',
-                                           oh_test.transformer,
-                                           state_transformer)
-
-    writer = CsvOutput(state_transformer)
-    writer(state_preparer.process(), output_path)
-
-    assert os.path.exists(os.path.join(TEST_DATA_DIR, 'ohio_test.csv'))
-    oh_dict_list = read_transformer_output('ohio_test.csv')
-
-    assert sorted(oh_dict_list[0].keys()) == BASE_TRANSFORMER_COLS
-    assert len(oh_dict_list) > 1
+    state_dict_list = read_transformer_output('{}_test.csv'.format(state_path))
+    assert sorted(state_dict_list[0].keys()) == BASE_TRANSFORMER_COLS
+    assert len(state_dict_list) > 1
 
 
-def test_ny_transformer():
+def test_all_transformers():
+    for state_test in load_states(TEST_STATES):
+        run_state_transformer(state_test)
 
-    ny_test = load_states(['ny'])[0]
 
-    input_path = os.path.join(TEST_DATA_DIR, 'new_york.csv')
-    output_path = os.path.join(TEST_DATA_DIR, 'new_york_test.csv')
-
-    state_transformer = ny_test.transformer.StateTransformer()
-    state_preparer = getattr(ny_test.transformer,
-                             'StatePreparer',
-                             BasePreparer)(input_path,
-                                           'ny',
-                                           ny_test.transformer,
-                                           state_transformer)
-
-    writer = CsvOutput(state_transformer)
-    writer(state_preparer.process(), output_path)
-
-    assert os.path.exists(os.path.join(TEST_DATA_DIR, 'new_york_test.csv'))
-    ny_dict_list = read_transformer_output('new_york_test.csv')
-
-    assert sorted(ny_dict_list[0].keys()) == BASE_TRANSFORMER_COLS
-    assert len(ny_dict_list) > 1
+# def test_wa_transformer():
+#
+#     wa_test = load_states(['wa'])[0]
+#
+#     input_path = os.path.join(TEST_DATA_DIR, 'wa.csv')
+#     output_path = os.path.join(TEST_DATA_DIR, 'wa_test.csv')
+#
+#     state_transformer = wa_test.transformer.StateTransformer()
+#     state_preparer = getattr(wa_test.transformer,
+#                              'StatePreparer',
+#                              BasePreparer)(input_path,
+#                                            'wa',
+#                                            wa_test.transformer,
+#                                            state_transformer)
+#
+#     writer = CsvOutput(state_transformer)
+#     writer(state_preparer.process(), output_path)
+#
+#     assert os.path.exists(os.path.join(TEST_DATA_DIR, 'wa_test.csv'))
+#     wa_dict_list = read_transformer_output('wa_test.csv')
+#
+#     assert sorted(wa_dict_list[0].keys()) == BASE_TRANSFORMER_COLS
+#     assert len(wa_dict_list) > 1
+#
+# def test_fl_transformer():
+#
+#     fl_test = load_states(['fl'])[0]
+#
+#     input_path = os.path.join(TEST_DATA_DIR, 'fl.csv')
+#     output_path = os.path.join(TEST_DATA_DIR, 'fl_test.csv')
+#
+#     state_transformer = fl_test.transformer.StateTransformer()
+#     state_preparer = getattr(fl_test.transformer,
+#                              'StatePreparer',
+#                              BasePreparer)(input_path,
+#                                            'fl',
+#                                            fl_test.transformer,
+#                                            state_transformer)
+#
+#     writer = CsvOutput(state_transformer)
+#     writer(state_preparer.process(), output_path)
+#
+#     assert os.path.exists(os.path.join(TEST_DATA_DIR, 'fl_test.csv'))
+#     fl_dict_list = read_transformer_output('fl_test.csv')
+#
+#     assert sorted(fl_dict_list[0].keys()) == BASE_TRANSFORMER_COLS
+#     assert len(fl_dict_list) > 1
+#
+# def test_oh_transformer():
+#
+#     oh_test = load_states(['oh'])[0]
+#
+#     input_path = os.path.join(TEST_DATA_DIR, 'oh.csv')
+#     output_path = os.path.join(TEST_DATA_DIR, 'oh_test.csv')
+#
+#     state_transformer = oh_test.transformer.StateTransformer()
+#     state_preparer = getattr(oh_test.transformer,
+#                              'StatePreparer',
+#                              BasePreparer)(input_path,
+#                                            'oh',
+#                                            oh_test.transformer,
+#                                            state_transformer)
+#
+#     writer = CsvOutput(state_transformer)
+#     writer(state_preparer.process(), output_path)
+#
+#     assert os.path.exists(os.path.join(TEST_DATA_DIR, 'oh_test.csv'))
+#     oh_dict_list = read_transformer_output('oh_test.csv')
+#
+#     assert sorted(oh_dict_list[0].keys()) == BASE_TRANSFORMER_COLS
+#     assert len(oh_dict_list) > 1
+#
+#
+# def test_ny_transformer():
+#
+#     ny_test = load_states(['ny'])[0]
+#
+#     input_path = os.path.join(TEST_DATA_DIR, 'ny.csv')
+#     output_path = os.path.join(TEST_DATA_DIR, 'ny_test.csv')
+#
+#     state_transformer = ny_test.transformer.StateTransformer()
+#     state_preparer = getattr(ny_test.transformer,
+#                              'StatePreparer',
+#                              BasePreparer)(input_path,
+#                                            'ny',
+#                                            ny_test.transformer,
+#                                            state_transformer)
+#
+#     writer = CsvOutput(state_transformer)
+#     writer(state_preparer.process(), output_path)
+#
+#     assert os.path.exists(os.path.join(TEST_DATA_DIR, 'ny_test.csv'))
+#     ny_dict_list = read_transformer_output('ny_test.csv')
+#
+#     assert sorted(ny_dict_list[0].keys()) == BASE_TRANSFORMER_COLS
+#     assert len(ny_dict_list) > 1
 
 
 # def test_co_transformer():
