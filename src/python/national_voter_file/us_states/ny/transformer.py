@@ -1,13 +1,37 @@
-from national_voter_file.transformers.base_transformer import BaseTransformer
-import usaddress
-
 import csv
 import os
 import re
 import sys
-import datetime
 
-class StatePreparer:
+from national_voter_file.transformers.base import (DATA_DIR,
+                                                   BasePreparer,
+                                                   BaseTransformer)
+import usaddress
+
+__all__ = ['default_file', 'StatePreparer', 'StateTransformer']
+
+default_file = 'AllNYSVoters20160831SAMPLE.txt'
+
+class StatePreparer(BasePreparer):
+
+    state_path = 'ny'
+    state_name='NewYork'
+    sep=','
+
+    def __init__(self, input_path, *args):
+        super(StatePreparer, self).__init__(input_path, *args)
+
+        if not self.transformer:
+            self.transformer = StateTransformer()
+
+    def process(self):
+            reader = self.dict_iterator(self.open(self.input_path))
+            for row in reader:
+                yield row
+
+class StateTransformer(BaseTransformer):
+    date_format="%Y%m%d"
+
     input_fields = [
 		'LASTNAME',
 		'FIRSTNAME',
@@ -54,29 +78,7 @@ class StatePreparer:
 		'PURGE_DATE',
 		'SBOEID',
 		'VoterHistory']
-
-
-    def __init__(self, voter_in_file_path=None, output_path=None):
-        from national_voter_file.transformers import DATA_DIR
-
-        self.voter_in_file_path = voter_in_file_path \
-                                   or os.path.join(DATA_DIR,
-                                                   'NewYork',
-                                                   'AllNYSVoters20160831SAMPLE.txt')
-        self.output_path = output_path \
-                           or os.path.join(DATA_DIR,
-                                           'NewYork',
-                                           'AllNYSVoters20150316SAMPLE_out.csv')
-
-        self.transformer = StateTransformer(date_format="%Y%m%d",
-                                            sep=',',
-                                            input_fields=self.input_fields)
-
-    def process(self):
-        self.transformer(self.voter_in_file_path, self.output_path)
-
-class StateTransformer(BaseTransformer):
-
+        
     ny_party_map = {
         "DEM":"DEM",
         "REP":"REP",
@@ -259,7 +261,7 @@ class StateTransformer(BaseTransformer):
 
         if(not raw_dict['RAW_ADDR1'].strip()):
             raw_dict['RAW_ADDR1'] = '--Not provided--'
-            
+
         usaddress_dict, usaddress_type = self.usaddress_tag(address_str)
         if(usaddress_dict):
             converted_addr = self.convert_usaddress_dict(usaddress_dict)

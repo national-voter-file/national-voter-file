@@ -3,31 +3,35 @@ import os
 import re
 import sys
 
-from national_voter_file.transformers.base_transformer import BaseTransformer
+from national_voter_file.transformers.base import (DATA_DIR,
+                                                   BasePreparer,
+                                                   BaseTransformer)
 import usaddress
 
-class StatePreparer:
+__all__ = ['default_file', 'StatePreparer', 'StateTransformer']
 
-    def __init__(self, voter_in_file_path=None, output_path=None):
-        from national_voter_file.transformers import DATA_DIR
+default_file = 'SWVF_1_44_SAMPLE.csv'
 
-        self.voter_in_file_path = voter_in_file_path \
-                                   or os.path.join(DATA_DIR,
-                                                   'Ohio',
-                                                   'SWVF_1_44_SAMPLE.csv')
-        self.output_path = output_path \
-                           or os.path.join(DATA_DIR,
-                                           'Ohio',
-                                           'SWVF_1_44_SAMPLE_out.csv')
+class StatePreparer(BasePreparer):
 
-        self.transformer = StateTransformer(date_format='%m/%d/%Y', sep=',',
-                                            input_fields=None)
+    state_path = 'oh'
+    state_name='Ohio'
+    sep=','
+
+    def __init__(self, input_path, *args):
+        super(StatePreparer, self).__init__(input_path, *args)
+
+        if not self.transformer:
+            self.transformer = StateTransformer()
 
     def process(self):
-        self.transformer(self.voter_in_file_path, self.output_path)
+            reader = self.dict_iterator(self.open(self.input_path))
+            for row in reader:
+                yield row
 
 class StateTransformer(BaseTransformer):
-
+    date_format='%m/%d/%Y'
+    input_fields = None
 
     ohio_party_map = {
         "C": "AMC",

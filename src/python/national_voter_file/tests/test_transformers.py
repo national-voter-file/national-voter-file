@@ -1,11 +1,18 @@
-from national_voter_file.transformers import base_transformer
+from national_voter_file.transformers.base import (DATA_DIR,
+                                                   BasePreparer,
+                                                   BaseTransformer)
+from national_voter_file.us_states.all import load as load_states
+
+from national_voter_file.transformers.csv_transformer import CsvOutput
+
 import os
 import csv
+
 # Need to add test data
 
 TEST_DATA_DIR = os.path.join(os.path.dirname(__file__), 'test_data')
 BASE_TRANSFORMER_COLS = sorted(
-    base_transformer.BaseTransformer.col_type_dict.keys()
+    BaseTransformer.col_type_dict.keys()
 )
 
 
@@ -27,12 +34,23 @@ def read_transformer_output(test_filename):
 
 
 def test_wa_transformer():
-    from national_voter_file.us_states.wa import transformer
-    wa_test = transformer.StateTransformer(date_format="%m/%d/%Y", sep='\t')
-    wa_test(
-        os.path.join(TEST_DATA_DIR, 'washington.csv'),
-        os.path.join(TEST_DATA_DIR, 'washington_test.csv'),
-    )
+
+    wa_test = load_states(['wa'])[0]
+
+    input_path = os.path.join(TEST_DATA_DIR, 'washington.csv')
+    output_path = os.path.join(TEST_DATA_DIR, 'washington_test.csv')
+
+    state_transformer = wa_test.transformer.StateTransformer()
+    state_preparer = getattr(wa_test.transformer,
+                             'StatePreparer',
+                             BasePreparer)(input_path,
+                                           'wa',
+                                           wa_test.transformer,
+                                           state_transformer)
+
+    writer = CsvOutput(state_transformer)
+    writer(state_preparer.process(), output_path)
+
     assert os.path.exists(os.path.join(TEST_DATA_DIR, 'washington_test.csv'))
     wa_dict_list = read_transformer_output('washington_test.csv')
 
@@ -40,31 +58,47 @@ def test_wa_transformer():
     assert len(wa_dict_list) > 1
 
 def test_fl_transformer():
-    from national_voter_file.us_states.fl import transformer
 
-    input_fields = transformer.StatePreparer.input_fields
+    fl_test = load_states(['fl'])[0]
 
-    fl_test = transformer.StateTransformer(date_format='%m/%d/%Y',
-                                           sep='\t',
-                                           input_fields=input_fields)
-    fl_test(
-        os.path.join(TEST_DATA_DIR, 'florida.csv'),
-        os.path.join(TEST_DATA_DIR, 'florida_test.csv'),
-    )
+    input_path = os.path.join(TEST_DATA_DIR, 'florida.csv')
+    output_path = os.path.join(TEST_DATA_DIR, 'florida_test.csv')
+
+    state_transformer = fl_test.transformer.StateTransformer()
+    state_preparer = getattr(fl_test.transformer,
+                             'StatePreparer',
+                             BasePreparer)(input_path,
+                                           'fl',
+                                           fl_test.transformer,
+                                           state_transformer)
+
+    writer = CsvOutput(state_transformer)
+    writer(state_preparer.process(), output_path)
+
     assert os.path.exists(os.path.join(TEST_DATA_DIR, 'florida_test.csv'))
     fl_dict_list = read_transformer_output('florida_test.csv')
 
     assert sorted(fl_dict_list[0].keys()) == BASE_TRANSFORMER_COLS
     assert len(fl_dict_list) > 1
 
-
 def test_oh_transformer():
-    from national_voter_file.us_states.oh import transformer
-    oh_test = transformer.StateTransformer(date_format='%m/%d/%Y', sep=',')
-    oh_test(
-        os.path.join(TEST_DATA_DIR, 'ohio.csv'),
-        os.path.join(TEST_DATA_DIR, 'ohio_test.csv'),
-    )
+
+    oh_test = load_states(['oh'])[0]
+
+    input_path = os.path.join(TEST_DATA_DIR, 'ohio.csv')
+    output_path = os.path.join(TEST_DATA_DIR, 'ohio_test.csv')
+
+    state_transformer = oh_test.transformer.StateTransformer()
+    state_preparer = getattr(oh_test.transformer,
+                             'StatePreparer',
+                             BasePreparer)(input_path,
+                                           'oh',
+                                           oh_test.transformer,
+                                           state_transformer)
+
+    writer = CsvOutput(state_transformer)
+    writer(state_preparer.process(), output_path)
+
     assert os.path.exists(os.path.join(TEST_DATA_DIR, 'ohio_test.csv'))
     oh_dict_list = read_transformer_output('ohio_test.csv')
 
@@ -74,24 +108,27 @@ def test_oh_transformer():
 
 def test_ny_transformer():
 
-    from national_voter_file.us_states.ny import transformer
+    ny_test = load_states(['ny'])[0]
 
-    input_fields = transformer.StatePreparer.input_fields
+    input_path = os.path.join(TEST_DATA_DIR, 'new_york.csv')
+    output_path = os.path.join(TEST_DATA_DIR, 'new_york_test.csv')
 
-    ny_test = transformer.StateTransformer(date_format='%Y%m%d',
-                                           sep=',',
-                                           input_fields=input_fields)
-    ny_test(
-        os.path.join(TEST_DATA_DIR, 'new_york.csv'),
-        os.path.join(TEST_DATA_DIR, 'new_york_test.csv'),
-    )
+    state_transformer = ny_test.transformer.StateTransformer()
+    state_preparer = getattr(ny_test.transformer,
+                             'StatePreparer',
+                             BasePreparer)(input_path,
+                                           'ny',
+                                           ny_test.transformer,
+                                           state_transformer)
+
+    writer = CsvOutput(state_transformer)
+    writer(state_preparer.process(), output_path)
+
     assert os.path.exists(os.path.join(TEST_DATA_DIR, 'new_york_test.csv'))
     ny_dict_list = read_transformer_output('new_york_test.csv')
 
     assert sorted(ny_dict_list[0].keys()) == BASE_TRANSFORMER_COLS
     assert len(ny_dict_list) > 1
-
-
 
 
 # def test_co_transformer():

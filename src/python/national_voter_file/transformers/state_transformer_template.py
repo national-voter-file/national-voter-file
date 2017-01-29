@@ -1,7 +1,39 @@
-from national_voter_file.transformers.base_transformer import BaseTransformer
+import csv
+import os
+import re
+import sys
+
+from national_voter_file.transformers.base import (DATA_DIR,
+                                                   BasePreparer,
+                                                   BaseTransformer)
 import usaddress
 
+__all__ = ['default_file', 'StatePreparer', 'StateTransformer']
+
+default_file = 'some_good_sample_datafile.csv'
+
+class StatePreparer(BasePreparer):
+
+    state_path = 'xx' # Two letter code for state
+    state_name='Xxxx' # Name of state with no spaces. Use CamelCase
+    sep=',' # The character used to delimit records
+
+    def __init__(self, input_path, *args):
+        super(StatePreparer, self).__init__(input_path, *args)
+
+        if not self.transformer:
+            self.transformer = StateTransformer()
+
+    def process(self):
+            reader = self.dict_iterator(self.open(self.input_path))
+            for row in reader:
+                yield row
+
 class StateTransformer(BaseTransformer):
+    date_format='%m/%d/%Y' # The format used for dates
+    input_fields = None # This can be a list of column names for the input file.
+                        # Use None if the file has headers
+
 
     #### Contact methods #######################################################
 

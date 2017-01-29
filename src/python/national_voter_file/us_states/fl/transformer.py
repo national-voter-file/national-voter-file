@@ -1,19 +1,38 @@
-from national_voter_file.transformers.base_transformer import BaseTransformer
-import usaddress
-
 import csv
 import os
 import re
 import sys
+
+from national_voter_file.transformers.base import (DATA_DIR,
+                                                   BasePreparer,
+                                                   BaseTransformer)
+import usaddress
 import datetime
 
-class StatePreparer:
-    col_type_dict = BaseTransformer.col_type_dict.copy()
-    col_type_dict['TITLE'] = set([str, type(None)])
-    col_type_dict['ABSENTEE_TYPE'] = set([str, type(None)])
-    col_type_dict['BIRTHDATE'] = set([datetime.date, type(None)])
-    col_type_dict['COUNTY_VOTER_REF'] = set([str, type(None)])
-    col_type_dict['BIRTH_STATE'] = set([str, type(None)])
+__all__ = ['default_file', 'StatePreparer', 'StateTransformer']
+
+default_file = 'AllFLSample20160908.txt'
+
+class StatePreparer(BasePreparer):
+
+    state_path = 'fl'
+    state_name='Florida'
+    sep = "\t"
+
+    def __init__(self, input_path, *args):
+        super(StatePreparer, self).__init__(input_path, *args)
+
+        if not self.transformer:
+            self.transformer = StateTransformer()
+
+    def process(self):
+            reader = self.dict_iterator(self.open(self.input_path))
+            for row in reader:
+                yield row
+
+
+class StateTransformer(BaseTransformer):
+    date_format="%m/%d/%Y"
 
     input_fields = [
         'County Code',
@@ -55,26 +74,6 @@ class StatePreparer:
 		'Daytime Phone Extension',
 		'Email address'
     ]
-
-    def __init__(self, voter_in_file_path=None, output_path=None):
-        from national_voter_file.transformers import DATA_DIR
-
-        self.voter_in_file_path = voter_in_file_path \
-                                   or os.path.join(DATA_DIR,
-                                                   'Florida',
-                                                   'AllFLSample20160908.txt')
-        self.output_path = output_path \
-                           or os.path.join(DATA_DIR,
-                                           'Florida',
-                                           'AllFLSample20160908_out.csv')
-
-        self.transformer = StateTransformer(date_format="%m/%d/%Y", sep='\t',
-                                            input_fields=self.input_fields)
-
-    def process(self):
-        self.transformer(self.voter_in_file_path, self.output_path)
-
-class StateTransformer(BaseTransformer):
 
     florida_party_map = {
         'AIP':'AI',
@@ -283,7 +282,7 @@ class StateTransformer(BaseTransformer):
             'RAW_CITY': input_dict['Residence City (USPS)'],
             'RAW_ZIP': input_dict['Residence Zipcode']
         }
-        
+
         if(not raw_dict['RAW_ADDR1'].strip()):
             raw_dict['RAW_ADDR1'] = '--Not provided--'
 
