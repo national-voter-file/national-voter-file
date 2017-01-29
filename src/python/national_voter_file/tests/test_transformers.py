@@ -131,6 +131,30 @@ def test_ny_transformer():
     assert len(ny_dict_list) > 1
 
 
+def test_mi_transformer():
+    mi_test = load_states(['mi'])[0]
+
+    input_path = os.path.join(TEST_DATA_DIR, 'michigan.csv')
+    output_path = os.path.join(TEST_DATA_DIR, 'michigan_test.csv')
+
+    state_transformer = mi_test.transformer.StateTransformer()
+    state_preparer = getattr(mi_test.transformer,
+                             'StatePreparer',
+                             BasePreparer)(input_path,
+                                           'mi',
+                                           mi_test.transformer,
+                                           state_transformer)
+
+    writer = CsvOutput(state_transformer)
+    writer(state_preparer.process(), output_path)
+
+    assert os.path.exists(os.path.join(TEST_DATA_DIR, 'michigan_test.csv'))
+    mi_dict_list = read_transformer_output('michigan_test.csv')
+
+    assert sorted(mi_dict_list[0].keys()) == BASE_TRANSFORMER_COLS
+    assert len(mi_dict_list) > 1
+
+
 # def test_co_transformer():
 #     co_test = co_transformer.COTransformer(date_format='%m/%d/%Y', sep=',')
 #     co_test(
