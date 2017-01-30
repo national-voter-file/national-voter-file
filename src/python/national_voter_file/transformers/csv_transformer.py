@@ -42,7 +42,7 @@ class CsvOutput(object):
                 output_dict = self.state_transformer.process_row(input_dict)
                 output_dict = self.state_transformer.fix_missing_mailing_addr(output_dict)
 
-                BaseTransformer.validate_output_row(output_dict) # validate here
+                self.state_transformer.validate_output_row(output_dict) # validate here
                 writer.writerow(output_dict)
 
     open = BasePreparer.open

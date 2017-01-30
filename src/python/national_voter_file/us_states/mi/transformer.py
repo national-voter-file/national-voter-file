@@ -2,18 +2,20 @@ import csv
 import os
 import re
 import sys
+from national_voter_file.transformers.base import (DATA_DIR,
+                                                   BasePreparer,
+                                                   BaseTransformer)
 import zipfile
 from datetime import date
-
-from src.main.python.transformers.base_transformer import BaseTransformer
 import usaddress
 
+__all__ = ['default_file', 'StatePreparer', 'StateTransformer']
 
-class StatePreparer:
+default_file = 'mi_sample.csv'
+
+
+class StatePreparer(BasePreparer):
     """
-    This class prepares the data to be parsed by row by the StateTransformer
-    based on the state's data file download defaults.
-
     Michigan's voter file has a strange layout which defines columns by their
     starting index and length in the table with no actual delimiters. Some columns
     seem to flow into each other. There's an intermediary step here that creates
@@ -21,6 +23,9 @@ class StatePreparer:
     based off of the column string indices as described in the Michigan voter file
     documentation (offset by one because their indices start at 1).
     """
+    state_path = 'mi'
+    state_name = 'Michigan'
+    sep = ','
 
     col_indices = (
         (0, 35),
@@ -63,6 +68,36 @@ class StatePreparer:
         (519, 520)
     )
 
+    def __init__(self, input_path, *args):
+        super(StatePreparer, self).__init__(input_path, *args)
+
+        if not self.transformer:
+            self.transformer = StateTransformer()
+
+    def process(self):
+        if self.input_path.endswith('.zip'):
+            z = zipfile.ZipFile(self.input_path)
+            return self.zip_voters(
+                os.path.join(os.path.dirname(self.input_path), 'entire_state_v.lst')
+            )
+        else:
+            return self.voters(self.input_path)
+
+    def zip_voters(self, voter_file_path):
+        with open(voter_file_path, 'r') as infile:
+            for row in infile:
+                # Yield column with spaces stripped
+                yield [row[slice(*c)].strip() for c in self.col_indices]
+
+    def voters(self, voter_file_path):
+        reader = self.dict_iterator(self.open(self.input_path))
+        for row in reader:
+            yield row
+
+
+class StateTransformer(BaseTransformer):
+    date_format = "%m%d%Y"
+
     input_fields = [
         'LAST_NAME',
         'FIRST_NAME',
@@ -104,45 +139,6 @@ class StatePreparer:
         'UOCAVA_STATUS' # M - military, C - Civilian overseas, N - Non UOCAVA, O - Other/Legacy Overseas
     ]
 
-    def __init__(self, voter_zip_file_path=None, output_path=None):
-        from src.main.python.transformers import DATA_DIR
-
-        self.voter_zip_file_path = voter_zip_file_path \
-                                   or os.path.join(DATA_DIR,
-                                                   'Michigan',
-                                                   'FOIA_Voters.zip')
-        self.output_path = output_path \
-                           or os.path.join(DATA_DIR,
-                                           'Michigan',
-                                           'voters_out.csv')
-
-        self.transformer = StateTransformer(date_format="%m%d%Y", sep=",",
-                                            input_fields=self.input_fields)
-
-    def process(self):
-        z = zipfile.ZipFile(self.voter_zip_file_path)
-        mi_file_path = os.path.join(os.path.dirname(self.voter_zip_file_path),
-                                    'entire_state_v.lst')
-
-        # mi_file = os.path.join(DATA_DIR, 'Michigan', 'entire_state_v.lst')
-        self.voters(mi_file_path)
-
-    def voters(self, voter_file_path):
-        with open(voter_file_path, 'r') as infile, open(self.output_path, 'w') as outfile:
-            writer = csv.writer(outfile, delimiter=',')
-            for row in infile:
-                # Create new row of all columns stripped of extra spaces
-                out_row = [row[slice(*c)].strip() for c in self.col_indices]
-                writer.writerow(out_row)
-
-
-class StateTransformer(BaseTransformer):
-    # Managing required types within subclass
-    col_type_dict = BaseTransformer.col_type_dict.copy()
-    col_type_dict['RACE'] = set([str, type(None)])
-    col_type_dict['PRECINCT_SPLIT'] = set([str, type(None)])
-    col_type_dict['COUNTY_VOTER_REF'] = set([str, type(None)])
-
     # Odd glitch where ~40 voters' gender is shown as 1 or 2
     gender_map = {
         'F': 'F',
@@ -152,6 +148,12 @@ class StateTransformer(BaseTransformer):
         '': 'U',
         ' ': 'U'
     }
+
+    # Managing required types within subclass
+    col_type_dict = BaseTransformer.col_type_dict.copy()
+    col_type_dict['RACE'] = set([str, type(None)])
+    col_type_dict['PRECINCT_SPLIT'] = set([str, type(None)])
+    col_type_dict['COUNTY_VOTER_REF'] = set([str, type(None)])
 
     #### Contact methods ######################################################
 
@@ -239,16 +241,37 @@ class StateTransformer(BaseTransformer):
             input_dict[x] for x in address_components if input_dict[x] is not None
         ])
 
-        # use the usaddress_tag method to handle errors
+        raw_dict = {
+            'RAW_ADDR1': address_str,
+            # Including Raw Addr 2 as same because not as clear of a division
+            'RAW_ADDR2': address_str,
+            'RAW_CITY': input_dict['CITY'],
+            'RAW_ZIP': input_dict['ZIP']
+        }
+
+        for r in ['RAW_ADDR1', 'RAW_ADDR2']:
+            if not raw_dict[r].strip():
+                raw_dict[r] = '--Not provided--'
+
         usaddress_dict, usaddress_type = self.usaddress_tag(address_str)
 
-        converted_addr = self.convert_usaddress_dict(usaddress_dict)
+        if usaddress_dict:
+            converted_addr = self.convert_usaddress_dict(usaddress_dict)
 
-        converted_addr.update({
-            'PLACE_NAME': input_dict['CITY'],
-            'STATE_NAME': input_dict['STATE'],
-            'ZIP_CODE': input_dict['ZIP']
-        })
+            converted_addr.update({
+                'PLACE_NAME': input_dict['CITY'],
+                'STATE_NAME': input_dict['STATE'],
+                'ZIP_CODE': input_dict['ZIP'],
+                'VALIDATION_STATUS': '2'
+            })
+            converted_addr.update(raw_dict)
+        else:
+            converted_addr = self.constructEmptyResidentialAddress()
+            converted_addr.update(raw_dict)
+            converted_addr.update({
+                'STATE_NAME': input_dict['STATE'],
+                'VALIDATION_STATUS': '1'
+            })
 
         return converted_addr
 
@@ -272,7 +295,8 @@ class StateTransformer(BaseTransformer):
             usaddress_dict, usaddress_type = self.usaddress_tag(address_str)
             if usaddress_type == 'Ambiguous':
                 print('Warn - {}: Ambiguous mailing address, falling back to residential'.format(usaddress_type))
-            else:
+            # Making sure the usaddress_dict is not None
+            elif usaddress_dict:
                 mail_addr_dict = {
                     'MAIL_ADDRESS_LINE1': self.construct_mail_address_1(
                         usaddress_dict, usaddress_type
@@ -283,6 +307,8 @@ class StateTransformer(BaseTransformer):
                     'MAIL_STATE': usaddress_dict.get('StateName', None),
                     'MAIL_COUNTRY': 'USA'
                 }
+            else:
+                mail_addr_dict = {}
         return mail_addr_dict
 
     #### Political methods ####################################################
@@ -323,6 +349,4 @@ class StateTransformer(BaseTransformer):
 
 if __name__ == '__main__':
     preparer = StatePreparer(*sys.argv[1:])
-    #preparer.process()
-    mi_file_path = os.path.join(os.path.dirname(preparer.output_path), 'mi.csv')
-    preparer.transformer(preparer.output_path, mi_file_path)
+    preparer.process()
