@@ -126,8 +126,13 @@ class StateTransformer(BaseTransformer):
                 'BIRTHDATE'
         """
 
+        if(input_dict['Birthdate']):
+            date = self.convert_date(input_dict['Birthdate'])
+        else:
+            date = None
+
         return {
-            'BIRTHDATE': self.convert_date(input_dict['Birthdate']),
+            'BIRTHDATE': date,
             'BIRTHDATE_IS_ESTIMATE': 'N'
         }
 
