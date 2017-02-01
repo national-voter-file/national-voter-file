@@ -7,3 +7,4 @@ __pycache__
 national_voter_file.egg-info
 dist
 build
+nohup.out

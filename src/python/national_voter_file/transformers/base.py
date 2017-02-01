@@ -189,7 +189,7 @@ class BaseTransformer(object):
         'STATE_VOTER_REF': set([str]),
         'COUNTY_VOTER_REF': set([str, type(None)]),
         'REGISTRATION_DATE': set([datetime.date, type(None)]),
-        'REGISTRATION_STATUS': set([str]),
+        'REGISTRATION_STATUS': set([str, type(None)]),
         'ABSENTEE_TYPE': set([str, type(None)]),
         'PARTY': set([str, type(None)]),
         'CONGRESSIONAL_DIST': set([str]),
