@@ -401,7 +401,13 @@ class StateTransformer(BaseTransformer):
             Dictionary with following keys
                 'PRECINCT_SPLIT'
         """
-        return {'PRECINCT_SPLIT': "%04d/%02d"%(int(input_dict['PrecinctCode']), int(input_dict['PrecinctPart']))}
+        # Found some precincts that don't follow this standard
+        try:
+            precinct_split = "%04d/%02d"%(int(input_dict['PrecinctCode']), int(input_dict['PrecinctPart']))
+        except ValueError:
+            precinct_split = input_dict['PrecinctCode'] + "/" +input_dict['PrecinctPart']
+
+        return {'PRECINCT_SPLIT':precinct_split}
 
 if __name__ == '__main__':
     preparer = StatePreparer(*sys.argv[1:])

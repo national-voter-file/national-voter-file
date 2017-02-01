@@ -2,6 +2,7 @@ import csv
 import os
 import zipfile
 import argparse
+import traceback
 
 from national_voter_file.transformers.base import (DATA_DIR,
                                                    BasePreparer,
@@ -48,7 +49,7 @@ class CsvOutput(object):
                 except Exception as err:
                         print("Exception processing row")
                         print(input_dict)
-                        print(traceback.format_exc())
+                        raise err
 
     open = BasePreparer.open
 
