@@ -48,9 +48,9 @@ class StateTransformer(BaseTransformer):
         """
         output_dict = {
             'TITLE': input_dict['Title'],
-            'FIRST_NAME': input_dict['FName'],
+            'FIRST_NAME': flag_empty_field(input_dict['FName']),
             'MIDDLE_NAME': input_dict['MName'],
-            'LAST_NAME': input_dict['LName'],
+            'LAST_NAME': flag_empty_field(input_dict['LName']),
             'NAME_SUFFIX': input_dict['NameSuffix'],
         }
         return output_dict

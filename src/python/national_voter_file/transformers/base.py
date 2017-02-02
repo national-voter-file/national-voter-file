@@ -569,6 +569,9 @@ class BaseTransformer(object):
         else:
             return " "
 
+    def flag_empty_field(self, field_val):
+        return field_val if field_val else "XXX-MISSING-XXX"
+        
     @classmethod
     def map_extract_by_keys(cls, *keys, defaults={}):
         """
