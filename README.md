@@ -8,8 +8,7 @@ We want to pull politics into the 21st century, and we're starting from the grou
 
 * Reliable, up-to-date voter data for every state in the country (including address changes, and redrawn districts)
 * Per-household insights, done by grouping voters together based on address
-* Per-voter insights, such as when people change their names and genders
-
+* Per-voter insights, such as when people change their party affiliation or address
 * And for thousands to use our voter file to power their campaigns' donation, canvassing, and phonebanking efforts!
 
 ## How can I help?
