@@ -11,7 +11,7 @@ import sys
 
 
 TEST_DATA_DIR = os.path.join(os.path.dirname(__file__), 'test_data')
-TEST_STATES = ['fl', 'mi', 'nc', 'ny', 'oh', 'pa', 'wa']
+TEST_STATES = ['co', 'fl', 'mi', 'nc', 'ny', 'oh', 'pa', 'wa']
 
 NUM_ROWS = 100
 
@@ -26,18 +26,72 @@ def _blank(item):
 
 # Obtain the information needed from individual states 
 state_modules = load_states(TEST_STATES)
-OH = state_modules['oh']
+CO = state_modules['co']
 FL = state_modules['fl']
-NY = state_modules['ny']
 MI = state_modules['mi']
+NY = state_modules['ny']
+OH = state_modules['oh']
 PA = state_modules['pa']
+colorado_party_keys = CO.transformer.StateTransformer().co_party_map.keys()
 ohio_party_keys = OH.transformer.StateTransformer().ohio_party_map.keys()
 florida_party_keys = FL.transformer.StateTransformer().florida_party_map.keys()
 florida_race_keys = FL.transformer.StateTransformer().florida_race_map.keys()
 ny_party_keys = NY.transformer.StateTransformer().ny_party_map.keys()
 ny_other_party_keys = NY.transformer.StateTransformer().ny_other_party_map.keys()
 
-
+COLORADO_SCHEMA = {
+    'VOTER_ID': lambda: str(randint(1000, 99999999)),
+    'COUNTY_CODE': lambda: str(randint(1, 88)),
+    'COUNTY': lambda: fake.city(),
+    'LAST_NAME': lambda: fake.last_name(),
+    'FIRST_NAME': lambda: fake.first_name(),
+    'MIDDLE_NAME': lambda: _empty(fake.first_name()),
+    'NAME_SUFFIX': lambda: _empty(random.choice(['Jr', 'Sr', 'II'])),
+    'VOTER_NAME': lambda: '{}, {} {}'.format(fake.last_name(), fake.first_name(), _empty(fake.first_name())),
+    'STATUS_CODE': lambda: random.choice(['A', 'I']),
+    'PRECINCT_NAME': lambda: str(randint(1000, 99999999)),
+    'ADDRESS_LIBRARY_ID': lambda: str(randint(1000, 99999999)),
+    'HOUSE_NUM': lambda: str(randint(1000, 99999)),
+    'HOUSE_SUFFIX': lambda: _empty(random.choice(['B'])),
+    'PRE_DIR': lambda: _empty(random.choice(['N', 'S', 'E', 'W'])),
+    'STREET_NAME': lambda: fake.street_name(),
+    'STREET_TYPE': lambda: _empty(random.choice(['Drive', 'Terrace', 'Lane', 'Crossing'])),
+    'POST_DIR': lambda: _empty(random.choice(['N', 'S', 'E', 'W'])),
+    'UNIT_TYPE': lambda: _empty(random.choice(['#', 'APT'])),
+    'UNIT_NUM': lambda: _empty(random.choice(['#', 'APT'])),
+    'ADDRESS_NON_STD': lambda: "",
+    'RESIDENTIAL_ADDRESS': lambda: _empty(fake.street_address().upper()),
+    'RESIDENTIAL_CITY': lambda: _empty(fake.city().upper()),
+    'RESIDENTIAL_STATE': lambda: _empty(fake.state_abbr()),
+    'RESIDENTIAL_ZIP_CODE': lambda: _empty(fake.zipcode()),
+    'RESIDENTIAL_ZIP_PLUS': lambda: _empty(fake.numerify(text='####')),
+    'EFFECTIVE_DATE': lambda: fake.date(pattern='%m/%d/%Y'),
+    'REGISTRATION_DATE': lambda: fake.date(pattern='%m/%d/%Y'),
+    'STATUS': lambda: random.choice(['Active', 'Inactive']),
+    'STATUS_REASON': lambda: random.choice(['Undeliverable Ballot', 'Returned Mail', 'NCOA', 'Failed to Vote']),
+    'BIRTH_YEAR': lambda: str(randint(1910, 1999)),
+    'GENDER': lambda: random.choice(['Male', 'Female']),
+    'PRECINCT': lambda: str(randint(100000000, 999999999)),
+    'SPLIT': lambda: str(randint(100, 999)),
+    'VOTER_STATUS_ID': lambda: str(randint(1, 2)),
+    'PARTY': lambda: random.choice(list(colorado_party_keys)),
+    'PARTY_AFFILIATION_DATE': lambda: fake.date(pattern='%m/%d/%Y'),
+    'PHONE_NUM': lambda: _empty(fake.phone_number()),
+    'MAIL_ADDR1': lambda: _empty(fake.street_address().upper()),
+    'MAIL_ADDR2': lambda: _empty(fake.street_address().upper()),
+    'MAIL_ADDR3': lambda: _empty(fake.street_address().upper()),
+    'MAILING_CITY': lambda: _empty(fake.city().upper()),
+    'MAILING_STATE': lambda: _empty(fake.state_abbr()),
+    'MAILING_ZIP_CODE': lambda: _empty(fake.zipcode()),
+    'MAILING_ZIP_PLUS': lambda: _empty(fake.numerify(text='####')),
+    'MAILING_COUNTRY': lambda: _empty('USA'),
+    'SPL_ID': lambda: str(randint(100000000, 999999999)),
+    'PERMANENT_MAIL_IN_VOTER': lambda: random.choice(['Yes', 'No']),
+    'CONGRESSIONAL': lambda: 'Congressional {}'.format(str(randint(1, 45))),
+    'STATE_SENATE': lambda: 'State Senate {}'.format(str(randint(1, 45))),
+    'STATE_HOUSE': lambda: 'State House {}'.format(str(randint(1, 45))),
+    'ID_REQUIRED': lambda: random.choice(['Y', 'N'])
+}
 
 OHIO_SCHEMA = {
     'SOS_VOTERID': lambda: 'OH{}'.format(str(randint(1000, 999999)).zfill(10)),
@@ -495,7 +549,9 @@ def make_state_data(state_name, state_schema,
 
 
 if __name__ == '__main__':
-    states = {'oh': ([OHIO_SCHEMA],
+    states = {'co': ([COLORADO_SCHEMA],
+                       {}),
+              'oh': ([OHIO_SCHEMA],
                        {}),
               'fl': ([FLORIDA_SCHEMA],
                           {'sep': '\t',
