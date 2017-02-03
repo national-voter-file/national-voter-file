@@ -404,6 +404,48 @@ MICHIGAN_SCHEMA = {
     'UOCAVA_STATUS': lambda: random.choice(['M', 'C', 'N', 'O'])
 }
 
+WASHINGTON_SCHEMA = {
+'StateVoterID': lambda:'WA{}'.format(str(randint(1000, 999999)).zfill(10)),
+'CountyVoterID': lambda:  str(randint(1, 88)),
+'Title': lambda: ' ',
+'FName': lambda:  fake.first_name().upper(),
+'MName': lambda:  fake.first_name().upper(),
+'LName': lambda:  fake.last_name().upper(),
+'NameSuffix': lambda:  _empty(fake.suffix().upper()),
+'Birthdate': lambda:  _empty(fake.date(pattern='%m/%d/%Y')),
+'Gender': lambda:  random.choice(['F', 'M', 'U']),
+'RegStNum': lambda:  _empty(fake.building_number()),
+'RegStFrac': lambda: _empty(str(randint(1, 13))) ,
+'RegStName': lambda:  fake.street_name().upper(),
+'RegStType': lambda:  fake.street_suffix(),
+'RegUnitType': lambda:  _empty(random.choice(['APT', 'UNIT', 'FLOOR', "", ])),
+'RegStPreDirection': lambda:  _empty(random.choice(['S', 'E', 'W', "", ])),
+'RegStPostDirection': lambda:  _empty(random.choice(['S', 'E', 'W', "", ])),
+'RegUnitNum': lambda:  _blank(fake.building_number()),
+'RegCity': lambda:  fake.city().upper(),
+'RegState': lambda:  _blank(fake.state_abbr().upper()),
+'RegZipCode': lambda:  _blank(fake.zipcode()),
+'CountyCode': lambda:  random.choice(['SN','CR','AS','PI']),
+'PrecinctCode': lambda: str(randint(1, 999999)) ,
+'PrecinctPart': lambda:  str(randint(1, 999999)) ,
+'LegislativeDistrict': lambda:  _empty(str(randint(1, 100))),
+'CongressionalDistrict': lambda:  _empty(str(randint(1, 100))),
+'Mail1': lambda:  _blank(fake.street_address().upper()),
+'Mail2': lambda:  _blank(fake.secondary_address().upper()),
+'Mail3': lambda:  _blank(fake.secondary_address().upper()),
+'Mail4': lambda:  _blank(fake.secondary_address().upper()),
+'MailCity': lambda:  fake.city().upper(),
+'MailZip': lambda:  _blank(fake.zipcode()),
+'MailState': lambda:  _blank(fake.state_abbr().upper()),
+'MailCountry': lambda:  ' ',
+'Registrationdate': lambda:  _empty(fake.date(pattern='%m/%d/%Y')),
+'AbsenteeType': lambda:  random.choice(['N', 'P', ' ', 'V']),
+'LastVoted': lambda:  _empty(fake.date(pattern='%m/%d/%Y')),
+'StatusCode': lambda:  random.choice(['A', 'I']),
+'Dflag': lambda:  ' '
+}
+
+
 def fakePAdistrict():
     prefix = random.choice(['LG', 'SN', 'MN', 'CO', 'CN', 'SAN', randint(1,1000)])
     return '%s%s%d' % (prefix, random.choice(['', '-']), randint(1,100000))
@@ -453,7 +495,9 @@ if __name__ == '__main__':
                                 'input_fields': pa.StatePreparer.input_fields}),
               'michigan': ([MICHIGAN_SCHEMA],
                            {'has_header': False,
-                            'input_fields': mi.StatePreparer.input_fields})
+                            'input_fields': mi.StatePreparer.input_fields}),
+              'washington': ([WASHINGTON_SCHEMA],
+                                {'sep':'\t'}),
     }
     keys = states.keys()
     if len(sys.argv) > 1:

@@ -48,9 +48,9 @@ class StateTransformer(BaseTransformer):
         """
         output_dict = {
             'TITLE': input_dict['Title'],
-            'FIRST_NAME': input_dict['FName'],
+            'FIRST_NAME': self.flag_empty_field(input_dict['FName']),
             'MIDDLE_NAME': input_dict['MName'],
-            'LAST_NAME': input_dict['LName'],
+            'LAST_NAME': self.flag_empty_field(input_dict['LName']),
             'NAME_SUFFIX': input_dict['NameSuffix'],
         }
         return output_dict
@@ -126,8 +126,13 @@ class StateTransformer(BaseTransformer):
                 'BIRTHDATE'
         """
 
+        if(input_dict['Birthdate']):
+            date = self.convert_date(input_dict['Birthdate'])
+        else:
+            date = None
+
         return {
-            'BIRTHDATE': self.convert_date(input_dict['Birthdate']),
+            'BIRTHDATE': date,
             'BIRTHDATE_IS_ESTIMATE': 'N'
         }
 
@@ -292,7 +297,10 @@ class StateTransformer(BaseTransformer):
             Dictionary with following keys
                 'REGISTRATION_DATE'
         """
-        date = self.convert_date(input_dict['Registrationdate'])
+        if(input_dict['Registrationdate']):
+            date = self.convert_date(input_dict['Registrationdate'])
+        else:
+            date = None
         return {'REGISTRATION_DATE': date}
 
     def extract_registration_status(self, input_dict):
@@ -393,7 +401,13 @@ class StateTransformer(BaseTransformer):
             Dictionary with following keys
                 'PRECINCT_SPLIT'
         """
-        return {'PRECINCT_SPLIT': "%04d/%02d"%(int(input_dict['PrecinctCode']), int(input_dict['PrecinctPart']))}
+        # Found some precincts that don't follow this standard
+        try:
+            precinct_split = "%04d/%02d"%(int(input_dict['PrecinctCode']), int(input_dict['PrecinctPart']))
+        except ValueError:
+            precinct_split = input_dict['PrecinctCode'] + "/" +input_dict['PrecinctPart']
+
+        return {'PRECINCT_SPLIT':precinct_split}
 
 if __name__ == '__main__':
     preparer = StatePreparer(*sys.argv[1:])

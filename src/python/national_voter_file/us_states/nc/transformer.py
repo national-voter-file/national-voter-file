@@ -14,7 +14,7 @@ default_file = 'ncvoter_StatewideSAMPLE.csv'
 
 class StatePreparer(BasePreparer):
 
-    state_path = 'NC' # Two letter code for state
+    state_path = 'nc' # Two letter code for state
     state_name = 'NorthCarolina' # Name of state with no spaces. Use CamelCase
     sep='\t' # The character used to delimit records
 

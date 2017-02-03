@@ -1,7 +1,8 @@
 import csv
 import os
 import zipfile
-import argparse 
+import argparse
+import traceback
 
 from national_voter_file.transformers.base import (DATA_DIR,
                                                    BasePreparer,
@@ -39,11 +40,16 @@ class CsvOutput(object):
             )
             writer.writeheader()
             for input_dict in input_iter:
-                output_dict = self.state_transformer.process_row(input_dict)
-                output_dict = self.state_transformer.fix_missing_mailing_addr(output_dict)
+                try:
+                    output_dict = self.state_transformer.process_row(input_dict)
+                    output_dict = self.state_transformer.fix_missing_mailing_addr(output_dict)
 
-                BaseTransformer.validate_output_row(output_dict) # validate here
-                writer.writerow(output_dict)
+                    self.state_transformer.validate_output_row(output_dict) # validate here
+                    writer.writerow(output_dict)
+                except Exception as err:
+                        print("Exception processing row")
+                        print(input_dict)
+                        raise err
 
     open = BasePreparer.open
 
