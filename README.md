@@ -15,7 +15,7 @@ We want to pull politics into the 21st century, and we're starting from the grou
 ## How can I help?
 
 * We chat on Slack. [Join us!](http://goo.gl/forms/8SJRDlo7Lx2rUsan1)
-* Take a look at our [Issues](http://waffle.io/getmovement/national-voter-file) to see where you can fit in.
+* Take a look at our [Project](https://github.com/national-voter-file/national-voter-file/projects/1) to see where you can help.
 
 Here's the bulk of the work:
 
