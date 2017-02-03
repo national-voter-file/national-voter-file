@@ -105,6 +105,30 @@ def test_oh_transformer():
     assert sorted(oh_dict_list[0].keys()) == BASE_TRANSFORMER_COLS
     assert len(oh_dict_list) > 1
 
+def test_nc_transformer():
+
+    nc_test = load_states(['nc'])[0]
+
+    input_path = os.path.join(TEST_DATA_DIR, 'north_carolina.csv')
+    output_path = os.path.join(TEST_DATA_DIR, 'north_carolina_test.csv')
+
+    state_transformer = nc_test.transformer.StateTransformer()
+    state_preparer = getattr(nc_test.transformer,
+                             'StatePreparer',
+                             BasePreparer)(input_path,
+                                           'nc',
+                                           nc_test.transformer,
+                                           state_transformer)
+
+    writer = CsvOutput(state_transformer)
+    writer(state_preparer.process(), output_path)
+
+    assert os.path.exists(os.path.join(TEST_DATA_DIR, 'north_carolina_test.csv'))
+    nc_dict_list = read_transformer_output('north_carolina_test.csv')
+    print(nc_dict_list)
+    assert len(nc_dict_list) > 1
+    assert sorted(nc_dict_list[0].keys()) == BASE_TRANSFORMER_COLS
+
 
 def test_ny_transformer():
 
@@ -173,19 +197,6 @@ def test_ny_transformer():
 #     assert len(mi_dict_list) > 1
 #
 #
-
-#
-# def test_nc_transformer():
-#     nc_test = nc_transformer.NCTransformer(date_format='%m/%d/%Y', sep='\t')
-#     nc_test(
-#         os.path.join(TEST_DATA_DIR, 'north_carolina.csv'),
-#         os.path.join(TEST_DATA_DIR, 'north_carolina_test.csv'),
-#     )
-#     assert os.path.exists(os.path.join(TEST_DATA_DIR, 'north_carolina_test.csv'))
-#     nc_dict_list = read_transformer_output('north_carolina_test.csv')
-#
-#     assert sorted(nc_dict_list[0].keys()) == BASE_TRANSFORMER_COLS
-#     assert len(nc_dict_list) > 1
 
 # def test_pa_transformer():
 #     state_test = pa.StateTransformer(date_format='%m/%d/%Y', sep='\t',

@@ -1,22 +1,54 @@
-from src.main.python.transformers.base_transformer import BaseTransformer
-import usaddress
-from datetime import datetime
-import datetime as dt
+import csv
+import os
+import re
+import sys
 
-class NCTransformer(BaseTransformer):
-    col_type_dict = BaseTransformer.col_type_dict.copy()
-    col_type_dict['ABSENTEE_TYPE'] = set([str, type(None)])
-    col_type_dict['PRECINCT'] = set([str, type(None)])
-    col_type_dict['PRECINCT_SPLIT'] = set([str, type(None)])
-    col_type_dict['CONGRESSIONAL_DIST'] = set([str, type(None)])
-    col_type_dict['BIRTH_STATE'] = set([str, type(None)])
+from national_voter_file.transformers.base import (DATA_DIR,
+                                                   BasePreparer,
+                                                   BaseTransformer)
+import usaddress
+
+__all__ = ['default_file', 'StatePreparer', 'StateTransformer']
+
+default_file = 'ncvoter_StatewideSAMPLE.csv'
+
+class StatePreparer(BasePreparer):
+
+    state_path = 'NC' # Two letter code for state
+    state_name = 'NorthCarolina' # Name of state with no spaces. Use CamelCase
+    sep='\t' # The character used to delimit records
+
+    def __init__(self, input_path, *args):
+        super(StatePreparer, self).__init__(input_path, *args)
+
+        if not self.transformer:
+            self.transformer = StateTransformer()
+
+    def process(self):
+            reader = self.dict_iterator(self.open(self.input_path))
+            for row in reader:
+                yield row
+
+class StateTransformer(BaseTransformer):
+    date_format='%m/%d/%Y' # The format used for dates
+    input_fields = None # This can be a list of column names for the input file.
+                        # Use None if the file has headers
+
+    north_carolina_party_map = {
+        'DEM':'DEM',
+        'REP':'REP',
+        'LIB' : 'LIB',
+        'UNA':'UN',
+        ' ' : 'UN',
+        '': 'UN'
+    }
 
     #### Contact methods #######################################################
 
-    def extract_name(self, input_columns):
+    def extract_name(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: dictionary of form {colname: value} from raw data
         Outputs:
             Dictionary with following keys
                 'TITLE'
@@ -26,104 +58,103 @@ class NCTransformer(BaseTransformer):
                 'NAME_SUFFIX'
         """
         output_dict = {
-            'TITLE': input_columns['name_prefx_cd'],
-            'FIRST_NAME': input_columns['first_name'],
-            'MIDDLE_NAME': input_columns['middle_name'],
-            'LAST_NAME': input_columns['last_name'],
-            'NAME_SUFFIX': input_columns['name_suffix_lbl'],
+            'TITLE': input_dict['name_prefx_cd'],
+            'FIRST_NAME': input_dict['first_name'],
+            'MIDDLE_NAME': input_dict['middle_name'],
+            'LAST_NAME': input_dict['last_name'],
+            'NAME_SUFFIX': input_dict['name_suffix_lbl'],
         }
-        return output_dict
+        return output_dict 
 
-    def extract_email(self, input_columns):
+    def extract_email(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: dictionary of form {colname: value} from raw data
         Outputs:
             Dictionary with following keys
                 'EMAIL'
         """
-        return {'EMAIL': None}
+        return {'EMAIL' : None}
 
-    def extract_phone_number(self, input_columns):
+    def extract_phone_number(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: dictionary of form {colname: value} from raw data
         Outputs:
             Dictionary with following keys
                 'PHONE'
         """
-        return {'PHONE': input_columns['full_phone_number']}
+        #TODO: Add parenthesis to area code?
+        return {'PHONE' : input_dict['full_phone_number']}
 
-    def extract_do_not_call_status(self, input_columns):
+    def extract_do_not_call_status(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: dictionary of form {colname: value} from raw data
         Outputs:
             Dictionary with following keys
                 'DO_NOT_CALL_STATUS'
         """
-        return {'DO_NOT_CALL_STATUS': None}
+        return {'DO_NOT_CALL_STATUS' : None}
 
     #### Demographics methods ##################################################
 
-    def extract_gender(self, input_columns):
+    def extract_gender(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: dictionary of form {colname: value} from raw data
         Outputs:
             Dictionary with following keys
                 'GENDER'
         """
-        return {'GENDER': input_columns['gender_code']}
+        gender = input_dict['gender_code']
+        if len(gender) == 0:
+            gender = 'U'
+        return {'GENDER' : gender}
 
-    def extract_birthdate(self, input_columns):
+    def extract_race(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
-        Outputs:
-            Dictionary with following keys
-                'BIRTHDATE'
-        """
-        #We don't have birthdate, so we'll guess
-        by = int(datetime.now().year) - int(input_columns['birth_age'])
-        bd = dt.date(by, 1, 1)
-
-        output_dict = {
-            'BIRTHDATE': bd,
-            'BIRTHDATE_IS_ESTIMATE': "Y",
-        }
-
-        return output_dict
-
-    def extract_birth_state(self, input_columns):
-        """
-        Inputs:
-            input_columns: name or list of columns
-        Outputs:
-            Dictionary with following keys
-                'BIRTH_STATE'
-        """
-        return {'BIRTH_STATE' : input_columns['birth_state']}
-
-    def extract_language_choice(self, input_columns):
-        """
-        Inputs:
-            input_columns: name or list of columns
-        Outputs:
-            Dictionary with following keys
-                'LANGUAGE_CHOICE'
-        """
-        return {'LANGUAGE_CHOICE': None}
-
-    def extract_race(self, input_columns):
-        """
-        Inputs:
-            input_columns: name or list of columns
+            input_dict: dictionary of form {colname: value} from raw data
         Outputs:
             Dictionary with following keys
                 'RACE'
         """
-        return {'RACE' : input_columns['race_code']}
+        return {'RACE' : input_dict['race_code']}
+
+    def extract_birth_state(self, input_dict):
+        """
+        Inputs:
+            input_dict: dictionary of form {colname: value} from raw data
+        Outputs:
+            Dictionary with following keys
+                'BIRTH_STATE'
+        """
+        return {'BIRTH_STATE': input_dict['birth_state']}
+    
+
+    def extract_birthdate(self, input_dict):
+        """
+        Inputs:
+            input_dict: dictionary of form {colname: value} from raw data
+        Outputs:
+            Dictionary with following keys
+                'BIRTHDATE'
+        """
+        #TODO: Estimate from age/age range?
+        return {'BIRTHDATE' : None,
+                'BIRTHDATE_IS_ESTIMATE' : 'Yes'}
+
+    def extract_language_choice(self, input_dict):
+        """
+        Inputs:
+            input_dict: dictionary of form {colname: value} from raw data
+
+        Outputs:
+            Dictionary with following keys
+                'LANGUAGE_CHOICE'
+        """
+        return {'LANGUAGE_CHOICE' : None}
 
     #### Address methods #######################################################
 
@@ -165,27 +196,53 @@ class NCTransformer(BaseTransformer):
                 'USPS_BOX_TYPE'
                 'ZIP_CODE'
         """
+        # columns to create address, in order
         address_components = [
             'res_street_address',
-            'res_city_desc',
-            'state_cd',
-            'zip_code'
         ]
         # create address string for usaddress.tag
         address_str = ' '.join([
             input_dict[x] for x in address_components if input_dict[x] is not None
         ])
+
+        # save the raw information too
+        raw_dict = {
+            'RAW_ADDR1' : input_dict['res_street_address'],
+            'RAW_ADDR2' : None,
+            'RAW_CITY'  : input_dict['res_city_desc'],
+            'RAW_ZIP'   : input_dict['zip_code']
+        }
+        if (not raw_dict['RAW_ADDR1'].strip()):
+            raw_dict['RAW_ADDR1'] = '--Not provided--'
+
+        state_name = input_dict['state_cd']
+        if len(state_name.strip()) == 0:
+            state_name = 'NC'
+
         # use the usaddress_tag method to handle errors
         usaddress_dict, usaddress_type = self.usaddress_tag(address_str)
 
-        converted_addr = self.convert_usaddress_dict(usaddress_dict)
+        # use the convert_usaddress_dict to get correct column names
+        # and fill in missing values
+        if(usaddress_dict):
+            converted_addr = self.convert_usaddress_dict(usaddress_dict)
 
-        converted_addr.update({'PLACE_NAME':input_dict['res_city_desc'],
-                                'STATE_NAME':input_dict['state_cd'],
-                                'ZIP_CODE':input_dict['zip_code']
-        })
+            converted_addr.update({'PLACE_NAME': raw_dict['RAW_CITY'],
+                                   'STATE_NAME': state_name,
+                                   'ZIP_CODE': raw_dict['RAW_ZIP'],
+                                   'VALIDATION_STATUS':'2'
+            })
 
-        return converted_addr
+            converted_addr.update(raw_dict)
+        else:
+            converted_addr = self.constructEmptyResidentialAddress()
+            converted_addr.update(raw_dict)
+            converted_addr.update({
+                'STATE_NAME': state_name,
+                'VALIDATION_STATUS': '1'
+            })
+            
+        return converted_addr 
 
     def extract_county_code(self, input_dict):
         """
@@ -195,7 +252,7 @@ class NCTransformer(BaseTransformer):
             Dictionary with following keys
                 'COUNTYCODE'
         """
-        return {'COUNTYCODE': input_dict['county_id']}
+        return {'COUNTYCODE' : input_dict['county_id']}
 
     def extract_mailing_address(self, input_dict):
         """
@@ -212,164 +269,146 @@ class NCTransformer(BaseTransformer):
                 'MAIL_ZIP_CODE'
                 'MAIL_COUNTRY'
         """
-        mail_str = ' '.join([
-            x for x in [
-                input_dict['mail_addr1'],
-                input_dict['mail_addr2'],
-                input_dict['mail_addr3'],
-                input_dict['mail_addr4'],
-                input_dict['mail_city'],
-                input_dict['mail_state'],
-                input_dict['mail_zipcode']
-            ] if x is not None
-        ])
-
-        usaddress_dict, usaddress_type = self.usaddress_tag(mail_str)
-        return {
-            'MAIL_ADDRESS_LINE1': self.construct_mail_address_1(
-                usaddress_dict,
-                usaddress_type,
-            ),
-            'MAIL_ADDRESS_LINE2': self.construct_mail_address_2(usaddress_dict),
-            'MAIL_CITY': input_dict['mail_city'],
-            'MAIL_ZIP_CODE': input_dict['mail_zipcode'],
-            'MAIL_STATE': input_dict['mail_state'],
-            'MAIL_COUNTRY': 'USA',
-        }
+        if( input_dict['mail_addr1'].strip() and input_dict['mail_city'].strip()):
+            return {
+                'MAIL_ADDRESS_LINE1': input_dict['mail_addr1'],
+                'MAIL_ADDRESS_LINE2': " ".join([
+                    input_dict['mail_addr2'],
+                    input_dict['mail_addr3'],
+                    input_dict['mail_addr4']]),
+                'MAIL_CITY': input_dict['mail_city'],
+                'MAIL_STATE': input_dict['mail_state'],
+                'MAIL_ZIP_CODE': input_dict['mail_zipcode'],
+                'MAIL_COUNTRY': 'USA'
+            }
+        else:
+            return {}
 
     #### Political methods #####################################################
 
-    def extract_state_voter_ref(self, input_columns):
+    def extract_state_voter_ref(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: dictionary of form {colname: value} from raw data
         Outputs:
             Dictionary with following keys
                 'STATE_VOTER_REF'
         """
-        return {'STATE_VOTER_REF': input_columns['voter_reg_num']}
+        return {'STATE_VOTER_REF' : 'NC' + input_dict['voter_reg_num']}
 
-    def extract_county_voter_ref(self, input_columns):
+    def extract_county_voter_ref(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: dictionary of form {colname: value} from raw data
         Outputs:
             Dictionary with following keys
                 'COUNTY_VOTER_REF'
         """
-        return {'COUNTY_VOTER_REF': input_columns['voter_reg_num']}
+        return {'COUNTY_VOTER_REF' : None}
 
-    def extract_registration_date(self, input_columns):
+    def extract_registration_date(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: dictionary of form {colname: value} from raw data
         Outputs:
             Dictionary with following keys
                 'REGISTRATION_DATE'
         """
-        date = self.convert_date(input_columns['registr_dt'])
-        return {'REGISTRATION_DATE': date}
+        date = self.convert_date(input_dict['registr_dt'])
+        return {'REGISTRATION_DATE' : date}
 
-    def extract_registration_status(self, input_columns):
+    def extract_registration_status(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: dictionary of form {colname: value} from raw data
         Outputs:
             Dictionary with following keys
                 'REGISTRATION_STATUS'
         """
-        return {'REGISTRATION_STATUS': input_columns['status_cd']}
+        return {'REGISTRATION_STATUS' : input_dict['voter_status_desc']}
 
-    def extract_absentee_type(self, input_columns):
+    def extract_absentee_type(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: dictionary of form {colname: value} from raw data
         Outputs:
             Dictionary with following keys
-                'ABSTENTEE_TYPE'
+                'ABSENTEE_TYPE'
         """
-        return {'ABSENTEE_TYPE': input_columns['absent_ind']}
+        return {'ABSENTEE_TYPE' : None}
 
-    def extract_party(self, input_columns):
+    def extract_party(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: dictionary of form {colname: value} from raw data
         Outputs:
             Dictionary with following keys
                 'PARTY'
         """
-        if input_columns['party_cd'] == 'UNA':
-                party = 'UN'
-        else:
-                party = input_columns['party_cd']
-        return {'PARTY': party}
+        party = self.north_carolina_party_map[input_dict['party_cd']]
+        return {'PARTY' : party}
 
-    def extract_congressional_dist(self, input_columns):
+    def extract_congressional_dist(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: dictionary of form {colname: value} from raw data
         Outputs:
             Dictionary with following keys
                 'CONGRESSIONAL_DIST'
         """
-        return {'CONGRESSIONAL_DIST': input_columns['cong_dist_abbrv']}
+        #TODO: cong_dist default value?
+        cong_dist = input_dict['cong_dist_abbrv'] 
+        if ' ' == cong_dist:
+            cong_dist = 'none'
+        return {'CONGRESSIONAL_DIST' : cong_dist}
 
-    def extract_upper_house_dist(self, input_columns):
+    def extract_upper_house_dist(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: dictionary of form {colname: value} from raw data
         Outputs:
             Dictionary with following keys
                 'UPPER_HOUSE_DIST'
         """
-        return {'UPPER_HOUSE_DIST': input_columns['nc_senate_abbrv']}
+        return {'UPPER_HOUSE_DIST' : input_dict['nc_senate_abbrv']}
 
-    def extract_lower_house_dist(self, input_columns):
+    def extract_lower_house_dist(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: dictionary of form {colname: value} from raw data
         Outputs:
             Dictionary with following keys
                 'LOWER_HOUSE_DIST'
         """
-        return {'LOWER_HOUSE_DIST': input_columns['nc_house_abbrv']}
+        return {'LOWER_HOUSE_DIST' : input_dict['nc_house_abbrv']}
 
-    def extract_precinct(self, input_columns):
+    def extract_precinct(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: dictionary of form {colname: value} from raw data
         Outputs:
             Dictionary with following keys
                 'PRECINCT'
         """
-        return {'PRECINCT': input_columns['precinct_abbrv']}
+        return {'PRECINCT' : input_dict['precinct_abbrv'],
+                'PRECINCT_SPLIT' : input_dict['precinct_abbrv']}
 
-    def extract_county_board_dist(self, input_columns):
+    def extract_county_board_dist(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: dictionary of form {colname: value} from raw data
         Outputs:
             Dictionary with following keys
                 'COUNTY_BOARD_DIST'
         """
-        return {'COUNTY_BOARD_DIST': None}
+        return {'COUNTY_BOARD_DIST' : None}
 
-    def extract_school_board_dist(self, input_columns):
+    def extract_school_board_dist(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: dictionary of form {colname: value} from raw data
         Outputs:
             Dictionary with following keys
                 'SCHOOL_BOARD_DIST'
         """
-        return {'SCHOOL_BOARD_DIST': input_columns['school_dist_abbrv']} #I think...
-
-    def extract_precinct_split(self, input_columns):
-        """
-        Inputs:
-            input_columns: name or list of columns
-        Outputs:
-            Dictionary with following keys
-                'PRECINCT_SPLIT'
-        """
-        return {'PRECINCT_SPLIT': None}
+        return {'SCHOOL_BOARD_DIST' : input_dict['school_dist_abbrv']}
