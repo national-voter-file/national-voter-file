@@ -71,3 +71,8 @@ docker-compose run etl \
 With `--skip-pidfile`, the 'pidfile' (by default named _RUNNING_) will neither be checked
 nor written to, and with `--log-stdout` the log messages will write to standard out.
 
+## Elasticsearch Geocoder (WIP)
+
+Most instructions are the same, but can be run with
+
+`docker-compose run -d geocoder python /geocoder/daemon.py`

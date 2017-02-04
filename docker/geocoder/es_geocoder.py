@@ -28,7 +28,7 @@ SQL_COLUMNS = [
 ]
 
 # connection_database_name = 'DevVoter'
-ES_URL = 'http://elasticsearch/{q_idx}/_search'
+ES_URL = 'http://elasticsearch:9200/{q_idx}/_search'
 
 
 def create_query(data, q_type='census'):
@@ -168,7 +168,7 @@ def interpolate_census(data, res_data):
 
     if addr_is_even == l_range['is_even']:
         tiger_range = l_range
-    elif addr_is_even == r_range['is_even']
+    elif addr_is_even == r_range['is_even']:
         tiger_range = r_range
     else:
         # Throw error
