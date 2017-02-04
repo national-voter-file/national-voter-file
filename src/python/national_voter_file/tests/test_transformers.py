@@ -14,7 +14,7 @@ TEST_DATA_DIR = os.path.join(os.path.dirname(__file__), 'test_data')
 BASE_TRANSFORMER_COLS = sorted(
     BaseTransformer.col_type_dict.keys()
 )
-TEST_STATES = ['fl', 'mi', 'nc', 'ny', 'oh', 'ok', 'wa']
+TEST_STATES = ['ok']
 
 # Because tests assert for existence of files, remove any _test.csv before tests
 def setup():
