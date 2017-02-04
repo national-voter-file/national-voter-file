@@ -160,7 +160,7 @@ class StateTransformer(BaseTransformer):
                 'GENDER'
         """
 
-        return {'GENDER': ""}
+        return {'GENDER': "U"}
 
     def extract_race(self, input_dict):
         """
@@ -171,7 +171,7 @@ class StateTransformer(BaseTransformer):
                 'RACE'
         """
 
-        return {'RACE': ""}
+        return {'RACE': "U"}
 
     def extract_birth_state(self, input_columns):
         """
@@ -425,7 +425,7 @@ class StateTransformer(BaseTransformer):
             Dictionary with following keys
                 'UPPER_HOUSE_DIST'
         """
-        return {'UPPER_HOUSE_DIST': input_dict['Senate District']}
+        return {'UPPER_HOUSE_DIST': None}
 
     def extract_lower_house_dist(self, input_dict):
         """
@@ -435,7 +435,7 @@ class StateTransformer(BaseTransformer):
             Dictionary with following keys
                 'LOWER_HOUSE_DIST'
         """
-        return {'LOWER_HOUSE_DIST': input_dict['House District']}
+        return {'LOWER_HOUSE_DIST': None}
 
     def extract_precinct(self, input_dict):
         """
@@ -447,7 +447,7 @@ class StateTransformer(BaseTransformer):
                 'PRECINCT_SPLIT'
 
         """
-        split = input_dict['Precinct Split'] if input_dict['Precinct Split'].strip() else input_dict['Precinct']
+        split = input_dict['Precinct']
 
         return {
                 'PRECINCT': input_dict['Precinct'],
