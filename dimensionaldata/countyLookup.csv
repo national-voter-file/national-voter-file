@@ -1,0 +1,514 @@
+COUNTY_NAME,COUNTY_CODE,COUNTYFP,CLASSFP,STATE,TYPE
+Alamance County,1,1,H1,NC,county
+Alexander County,2,3,H1,NC,county
+Alleghany County,3,5,H1,NC,county
+Anson County,4,7,H1,NC,county
+Ashe County,5,9,H1,NC,county
+Avery County,6,11,H1,NC,county
+Beaufort County,7,13,H1,NC,county
+Bertie County,8,15,H1,NC,county
+Bladen County,9,17,H1,NC,county
+Brunswick County,10,19,H1,NC,county
+Buncombe County,11,21,H1,NC,county
+Burke County,12,23,H1,NC,county
+Cabarrus County,13,25,H1,NC,county
+Caldwell County,14,27,H1,NC,county
+Camden County,15,29,H1,NC,county
+Carteret County,16,31,H1,NC,county
+Caswell County,17,33,H1,NC,county
+Catawba County,18,35,H1,NC,county
+Chatham County,19,37,H1,NC,county
+Cherokee County,20,39,H1,NC,county
+Chowan County,21,41,H1,NC,county
+Clay County,22,43,H1,NC,county
+Cleveland County,23,45,H1,NC,county
+Columbus County,24,47,H1,NC,county
+Craven County,25,49,H1,NC,county
+Cumberland County,26,51,H1,NC,county
+Currituck County,27,53,H1,NC,county
+Dare County,28,55,H1,NC,county
+Davidson County,29,57,H1,NC,county
+Davie County,30,59,H1,NC,county
+Duplin County,31,61,H1,NC,county
+Durham County,32,63,H1,NC,county
+Edgecombe County,33,65,H1,NC,county
+Forsyth County,34,67,H1,NC,county
+Franklin County,35,69,H1,NC,county
+Gaston County,36,71,H1,NC,county
+Gates County,37,73,H1,NC,county
+Graham County,38,75,H1,NC,county
+Granville County,39,77,H1,NC,county
+Greene County,40,79,H1,NC,county
+Guilford County,41,81,H1,NC,county
+Halifax County,42,83,H1,NC,county
+Harnett County,43,85,H1,NC,county
+Haywood County,44,87,H1,NC,county
+Henderson County,45,89,H1,NC,county
+Hertford County,46,91,H1,NC,county
+Hoke County,47,93,H1,NC,county
+Hyde County,48,95,H1,NC,county
+Iredell County,49,97,H1,NC,county
+Jackson County,50,99,H1,NC,county
+Johnston County,51,101,H1,NC,county
+Jones County,52,103,H1,NC,county
+Lee County,53,105,H1,NC,county
+Lenoir County,54,107,H1,NC,county
+Lincoln County,55,109,H1,NC,county
+McDowell County,56,111,H1,NC,county
+Macon County,57,113,H1,NC,county
+Madison County,58,115,H1,NC,county
+Martin County,59,117,H1,NC,county
+Mecklenburg County,60,119,H1,NC,county
+Mitchell County,61,121,H1,NC,county
+Montgomery County,62,123,H1,NC,county
+Moore County,63,125,H1,NC,county
+Nash County,64,127,H1,NC,county
+New Hanover County,65,129,H1,NC,county
+Northampton County,66,131,H1,NC,county
+Onslow County,67,133,H1,NC,county
+Orange County,68,135,H1,NC,county
+Pamlico County,69,137,H1,NC,county
+Pasquotank County,70,139,H1,NC,county
+Pender County,71,141,H1,NC,county
+Perquimans County,72,143,H1,NC,county
+Person County,73,145,H1,NC,county
+Pitt County,74,147,H1,NC,county
+Polk County,75,149,H1,NC,county
+Randolph County,76,151,H1,NC,county
+Richmond County,77,153,H1,NC,county
+Robeson County,78,155,H1,NC,county
+Rockingham County,79,157,H1,NC,county
+Rowan County,80,159,H1,NC,county
+Rutherford County,81,161,H1,NC,county
+Sampson County,82,163,H1,NC,county
+Scotland County,83,165,H1,NC,county
+Stanly County,84,167,H1,NC,county
+Stokes County,85,169,H1,NC,county
+Surry County,86,171,H1,NC,county
+Swain County,87,173,H1,NC,county
+Transylvania County,88,175,H1,NC,county
+Tyrrell County,89,177,H1,NC,county
+Union County,90,179,H1,NC,county
+Vance County,91,181,H1,NC,county
+Wake County,92,183,H1,NC,county
+Warren County,93,185,H1,NC,county
+Washington County,94,187,H1,NC,county
+Watauga County,95,189,H1,NC,county
+Wayne County,96,191,H1,NC,county
+Wilkes County,97,193,H1,NC,county
+Wilson County,98,195,H1,NC,county
+Yadkin County,99,197,H1,NC,county
+Yancey County,0,199,H1,NC,county
+Albany,1,1,H1,NY,county
+Allegany,2,3,H1,NY,county
+Bronx,3,5,H6,NY,county
+Broome,4,7,H1,NY,county
+Cattaraugus,5,9,H1,NY,county
+Cayuga,6,11,H1,NY,county
+Chautauqua,7,13,H1,NY,county
+Chemung,8,15,H1,NY,county
+Chenango,9,17,H1,NY,county
+Clinton,10,19,H1,NY,county
+Columbia,11,21,H1,NY,county
+Cortland,12,23,H1,NY,county
+Delaware,13,25,H1,NY,county
+Dutchess,14,27,H1,NY,county
+Erie,15,29,H1,NY,county
+Essex,16,31,H1,NY,county
+Franklin,17,33,H1,NY,county
+Fulton,18,35,H1,NY,county
+Genesee,19,37,H1,NY,county
+Greene,20,39,H1,NY,county
+Hamilton,21,41,H1,NY,county
+Herkimer,22,43,H1,NY,county
+Jefferson,23,45,H1,NY,county
+Kings,24,47,H6,NY,county
+Lewis,25,49,H1,NY,county
+Livingston,26,51,H1,NY,county
+Madison,27,53,H1,NY,county
+Monroe,28,55,H1,NY,county
+Montgomery,29,57,H1,NY,county
+Nassau,30,59,H1,NY,county
+New York,31,61,H6,NY,county
+Niagara,32,63,H1,NY,county
+Oneida,33,65,H1,NY,county
+Onondaga,34,67,H1,NY,county
+Ontario,35,69,H1,NY,county
+Orange,36,71,H1,NY,county
+Orleans,37,73,H1,NY,county
+Oswego,38,75,H1,NY,county
+Otsego,39,77,H1,NY,county
+Putnam,40,79,H1,NY,county
+Queens,41,81,H6,NY,county
+Rensselaer,42,83,H1,NY,county
+Richmond,43,85,H6,NY,county
+Rockland,44,87,H1,NY,county
+Saratoga,45,89,H1,NY,county
+Schenectady,46,91,H1,NY,county
+Schoharie,47,93,H1,NY,county
+Schuyler,48,95,H1,NY,county
+Seneca,49,97,H1,NY,county
+St.Lawrence,50,99,H1,NY,county
+Steuben,51,101,H1,NY,county
+Suffolk,52,103,H1,NY,county
+Sullivan,53,105,H1,NY,county
+Tioga,54,107,H1,NY,county
+Tompkins,55,109,H1,NY,county
+Ulster,56,111,H1,NY,county
+Warren,57,113,H1,NY,county
+Washington,58,115,H1,NY,county
+Wayne,59,117,H1,NY,county
+Westchester,60,119,H1,NY,county
+Wyoming,61,121,H1,NY,county
+Yates,62,123,H1,NY,county
+Adair County,1,1,H1,OK,county
+Alfalfa County,2,3,H1,OK,county
+Atoka County,3,5,H1,OK,county
+Beaver County,4,7,H1,OK,county
+Beckham County,5,9,H1,OK,county
+Blaine County,6,11,H1,OK,county
+Bryan County,7,13,H1,OK,county
+Caddo County,8,15,H1,OK,county
+Canadian County,9,17,H1,OK,county
+Carter County,10,19,H1,OK,county
+Cherokee County,11,21,H1,OK,county
+Choctaw County,12,23,H1,OK,county
+Cimarron County,13,25,H1,OK,county
+Cleveland County,14,27,H1,OK,county
+Coal County,15,29,H1,OK,county
+Comanche County,16,31,H1,OK,county
+Cotton County,17,33,H1,OK,county
+Craig County,18,35,H1,OK,county
+Creek County,19,37,H1,OK,county
+Custer County,20,39,H1,OK,county
+Delaware County,21,41,H1,OK,county
+Dewey County,22,43,H1,OK,county
+Ellis County,23,45,H1,OK,county
+Garfield County,24,47,H1,OK,county
+Garvin County,25,49,H1,OK,county
+Grady County,26,51,H1,OK,county
+Grant County,27,53,H1,OK,county
+Greer County,28,55,H1,OK,county
+Harmon County,29,57,H1,OK,county
+Harper County,30,59,H1,OK,county
+Haskell County,31,61,H1,OK,county
+Hughes County,32,63,H1,OK,county
+Jackson County,33,65,H1,OK,county
+Jefferson County,34,67,H1,OK,county
+Johnston County,35,69,H1,OK,county
+Kay County,36,71,H1,OK,county
+Kingfisher County,37,73,H1,OK,county
+Kiowa County,38,75,H1,OK,county
+Latimer County,39,77,H1,OK,county
+Le Flore County,40,79,H1,OK,county
+Lincoln County,41,81,H1,OK,county
+Logan County,42,83,H1,OK,county
+Love County,43,85,H1,OK,county
+McClain County,44,87,H1,OK,county
+McCurtain County,45,89,H1,OK,county
+McIntosh County,46,91,H1,OK,county
+Major County,47,93,H1,OK,county
+Marshall County,48,95,H1,OK,county
+Mayes County,49,97,H1,OK,county
+Murray County,50,99,H1,OK,county
+Muskogee County,51,101,H1,OK,county
+Noble County,52,103,H1,OK,county
+Nowata County,53,105,H1,OK,county
+Okfuskee County,54,107,H1,OK,county
+Oklahoma County,55,109,H1,OK,county
+Okmulgee County,56,111,H1,OK,county
+Osage County,57,113,H1,OK,county
+Ottawa County,58,115,H1,OK,county
+Pawnee County,59,117,H1,OK,county
+Payne County,60,119,H1,OK,county
+Pittsburg County,61,121,H1,OK,county
+Pontotoc County,62,123,H1,OK,county
+Pottawatomie County,63,125,H1,OK,county
+Pushmataha County,64,127,H1,OK,county
+Roger Mills County,65,129,H1,OK,county
+Rogers County,66,131,H1,OK,county
+Seminole County,67,133,H1,OK,county
+Sequoyah County,68,135,H1,OK,county
+Stephens County,69,137,H1,OK,county
+Texas County,70,139,H1,OK,county
+Tillman County,71,141,H1,OK,county
+Tulsa County,72,143,H1,OK,county
+Wagoner County,73,145,H1,OK,county
+Washington County,74,147,H1,OK,county
+Washita County,75,149,H1,OK,county
+Woods County,76,151,H1,OK,county
+Woodward County,77,153,H1,OK,county
+Adams County,1,1,H1,OH,county
+Allen County,2,3,H1,OH,county
+Ashland County,3,5,H1,OH,county
+Ashtabula County,4,7,H1,OH,county
+Athens County,5,9,H1,OH,county
+Auglaize County,6,11,H1,OH,county
+Belmont County,7,13,H1,OH,county
+Brown County,8,15,H1,OH,county
+Butler County,9,17,H1,OH,county
+Carroll County,10,19,H1,OH,county
+Champaign County,11,21,H1,OH,county
+Clark County,12,23,H1,OH,county
+Clermont County,13,25,H1,OH,county
+Clinton County,14,27,H1,OH,county
+Columbiana County,15,29,H1,OH,county
+Coshocton County,16,31,H1,OH,county
+Crawford County,17,33,H1,OH,county
+Cuyahoga County,18,35,H1,OH,county
+Darke County,19,37,H1,OH,county
+Defiance County,20,39,H1,OH,county
+Delaware County,21,41,H1,OH,county
+Erie County,22,43,H1,OH,county
+Fairfield County,23,45,H1,OH,county
+Fayette County,24,47,H1,OH,county
+Franklin County,25,49,H1,OH,county
+Fulton County,26,51,H1,OH,county
+Gallia County,27,53,H1,OH,county
+Geauga County,28,55,H1,OH,county
+Greene County,29,57,H1,OH,county
+Guernsey County,30,59,H1,OH,county
+Hamilton County,31,61,H1,OH,county
+Hancock County,32,63,H1,OH,county
+Hardin County,33,65,H1,OH,county
+Harrison County,34,67,H1,OH,county
+Henry County,35,69,H1,OH,county
+Highland County,36,71,H1,OH,county
+Hocking County,37,73,H1,OH,county
+Holmes County,38,75,H1,OH,county
+Huron County,39,77,H1,OH,county
+Jackson County,40,79,H1,OH,county
+Jefferson County,41,81,H1,OH,county
+Knox County,42,83,H1,OH,county
+Lake County,43,85,H1,OH,county
+Lawrence County,44,87,H1,OH,county
+Licking County,45,89,H1,OH,county
+Logan County,46,91,H1,OH,county
+Lorain County,47,93,H1,OH,county
+Lucas County,48,95,H1,OH,county
+Madison County,49,97,H1,OH,county
+Mahoning County,50,99,H1,OH,county
+Marion County,51,101,H1,OH,county
+Medina County,52,103,H1,OH,county
+Meigs County,53,105,H1,OH,county
+Mercer County,54,107,H1,OH,county
+Miami County,55,109,H1,OH,county
+Monroe County,56,111,H1,OH,county
+Montgomery County,57,113,H1,OH,county
+Morgan County,58,115,H1,OH,county
+Morrow County,59,117,H1,OH,county
+Muskingum County,60,119,H1,OH,county
+Noble County,61,121,H1,OH,county
+Ottawa County,62,123,H1,OH,county
+Paulding County,63,125,H1,OH,county
+Perry County,64,127,H1,OH,county
+Pickaway County,65,129,H1,OH,county
+Pike County,66,131,H1,OH,county
+Portage County,67,133,H1,OH,county
+Preble County,68,135,H1,OH,county
+Putnam County,69,137,H1,OH,county
+Richland County,70,139,H1,OH,county
+Ross County,71,141,H1,OH,county
+Sandusky County,72,143,H1,OH,county
+Scioto County,73,145,H1,OH,county
+Seneca County,74,147,H1,OH,county
+Shelby County,75,149,H1,OH,county
+Stark County,76,151,H1,OH,county
+Summit County,77,153,H1,OH,county
+Trumbull County,78,155,H1,OH,county
+Tuscarawas County,79,157,H1,OH,county
+Union County,80,159,H1,OH,county
+Van Wert County,81,161,H1,OH,county
+Vinton County,82,163,H1,OH,county
+Warren County,83,165,H1,OH,county
+Washington County,84,167,H1,OH,county
+Wayne County,85,169,H1,OH,county
+Williams County,86,171,H1,OH,county
+Wood County,87,173,H1,OH,county
+Wyandot County,88,175,H1,OH,county
+Adams County,1,1,H1,CO,county
+Alamosa County,2,3,H1,CO,county
+Arapahoe County,3,5,H1,CO,county
+Archuleta County,4,7,H1,CO,county
+Baca County,5,9,H1,CO,county
+Bent County,6,11,H1,CO,county
+Boulder County,7,13,H1,CO,county
+Broomfield County,64,14,H6,CO,county
+Chaffee County,8,15,H1,CO,county
+Cheyenne County,9,17,H1,CO,county
+Clear Creek County,10,19,H1,CO,county
+Conejos County,11,21,H1,CO,county
+Costilla County,12,23,H1,CO,county
+Crowley County,13,25,H1,CO,county
+Custer County,14,27,H1,CO,county
+Delta County,15,29,H1,CO,county
+Denver County,16,31,H6,CO,county
+Dolores County,17,33,H1,CO,county
+Douglas County,18,35,H1,CO,county
+Eagle County,19,37,H1,CO,county
+Elbert County,20,39,H1,CO,county
+El Paso County,21,41,H1,CO,county
+Fremont County,22,43,H1,CO,county
+Garfield County,23,45,H1,CO,county
+Gilpin County,24,47,H1,CO,county
+Grand County,25,49,H1,CO,county
+Gunnison County,26,51,H1,CO,county
+Hinsdale County,27,53,H1,CO,county
+Huerfano County,28,55,H1,CO,county
+Jackson County,29,57,H1,CO,county
+Jefferson County,30,59,H1,CO,county
+Kiowa County,31,61,H1,CO,county
+Kit Carson County,32,63,H1,CO,county
+Lake County,33,65,H1,CO,county
+La Plata County,34,67,H1,CO,county
+Larimer County,35,69,H1,CO,county
+Las Animas County,36,71,H1,CO,county
+Lincoln County,37,73,H1,CO,county
+Logan County,38,75,H1,CO,county
+Mesa County,39,77,H1,CO,county
+Mineral County,40,79,H1,CO,county
+Moffat County,41,81,H1,CO,county
+Montezuma County,42,83,H1,CO,county
+Montrose County,43,85,H1,CO,county
+Morgan County,44,87,H1,CO,county
+Otero County,45,89,H1,CO,county
+Ouray County,46,91,H1,CO,county
+Park County,47,93,H1,CO,county
+Phillips County,48,95,H1,CO,county
+Pitkin County,49,97,H1,CO,county
+Prowers County,50,99,H1,CO,county
+Pueblo County,51,101,H1,CO,county
+Rio Blanco County,52,103,H1,CO,county
+Rio Grande County,53,105,H1,CO,county
+Routt County,54,107,H1,CO,county
+Saguache County,55,109,H1,CO,county
+San Juan County,56,111,H1,CO,county
+San Miguel County,57,113,H1,CO,county
+Sedgwick County,58,115,H1,CO,county
+Summit County,59,117,H1,CO,county
+Teller County,60,119,H1,CO,county
+Washington County,61,121,H1,CO,county
+Weld County,62,123,H1,CO,county
+Yuma County,63,125,H1,CO,county
+Adams County,AD,1,H1,WA,county
+Asotin County,AS,3,H1,WA,county
+Benton County,BE,5,H1,WA,county
+Chelan County,CH,7,H1,WA,county
+Clallam County,CM,9,H1,WA,county
+Clark County,CR,11,H1,WA,county
+Columbia County,CU,13,H1,WA,county
+Cowlitz County,CZ,15,H1,WA,county
+Douglas County,DG,17,H1,WA,county
+Ferry County,FE,19,H1,WA,county
+Franklin County,FR,21,H1,WA,county
+Garfield County,GA,23,H1,WA,county
+Grant County,GR,25,H1,WA,county
+Grays Harbor County,GY,27,H1,WA,county
+Island County,IS,29,H1,WA,county
+Jefferson County,JE,31,H1,WA,county
+King County,KI,33,H1,WA,county
+Kitsap County,KP,35,H1,WA,county
+Kittitas County,KS,37,H1,WA,county
+Klickitat County,KT,39,H1,WA,county
+Lewis County,LE,41,H1,WA,county
+Lincoln County,LI,43,H1,WA,county
+Mason County,MA,45,H1,WA,county
+Okanogan County,OK,47,H1,WA,county
+Pacific County,PA,49,H1,WA,county
+Pend Oreille County,PE,51,H1,WA,county
+Pierce County,PI,53,H1,WA,county
+San Juan County,SJ,55,H1,WA,county
+Skagit County,SK,57,H1,WA,county
+Skamania County,SM,59,H1,WA,county
+Snohomish County,SN,61,H1,WA,county
+Spokane County,SP,63,H1,WA,county
+Stevens County,ST,65,H1,WA,county
+Thurston County,TH,67,H1,WA,county
+Wahkiakum County,WK,69,H1,WA,county
+Walla Walla County,WL,71,H1,WA,county
+Whatcom County,WM,73,H1,WA,county
+Whitman County,WT,75,H1,WA,county
+Yakima County,YA,77,H1,WA,county
+Alcona County,1,1,H1,MI,county
+Alger County,2,3,H1,MI,county
+Allegan County,3,5,H1,MI,county
+Alpena County,4,7,H1,MI,county
+Antrim County,5,9,H1,MI,county
+Arenac County,6,11,H1,MI,county
+Baraga County,7,13,H1,MI,county
+Barry County,8,15,H1,MI,county
+Bay County,9,17,H1,MI,county
+Benzie County,10,19,H1,MI,county
+Berrien County,11,21,H1,MI,county
+Branch County,12,23,H1,MI,county
+Calhoun County,13,25,H1,MI,county
+Cass County,14,27,H1,MI,county
+Charlevoix County,15,29,H1,MI,county
+Cheboygan County,16,31,H1,MI,county
+Chippewa County,17,33,H1,MI,county
+Clare County,18,35,H1,MI,county
+Clinton County,19,37,H1,MI,county
+Crawford County,20,39,H1,MI,county
+Delta County,21,41,H1,MI,county
+Dickinson County,22,43,H1,MI,county
+Eaton County,23,45,H1,MI,county
+Emmet County,24,47,H1,MI,county
+Genesee County,25,49,H1,MI,county
+Gladwin County,26,51,H1,MI,county
+Gogebic County,27,53,H1,MI,county
+Grand Traverse County,28,55,H1,MI,county
+Gratiot County,29,57,H1,MI,county
+Hillsdale County,30,59,H1,MI,county
+Houghton County,31,61,H1,MI,county
+Huron County,32,63,H1,MI,county
+Ingham County,33,65,H1,MI,county
+Ionia County,34,67,H1,MI,county
+Iosco County,35,69,H1,MI,county
+Iron County,36,71,H1,MI,county
+Isabella County,37,73,H1,MI,county
+Jackson County,38,75,H1,MI,county
+Kalamazoo County,39,77,H1,MI,county
+Kalkaska County,40,79,H1,MI,county
+Kent County,41,81,H1,MI,county
+Keweenaw County,42,83,H1,MI,county
+Lake County,43,85,H1,MI,county
+Lapeer County,44,87,H1,MI,county
+Leelanau County,45,89,H1,MI,county
+Lenawee County,46,91,H1,MI,county
+Livingston County,47,93,H1,MI,county
+Luce County,48,95,H1,MI,county
+Mackinac County,49,97,H1,MI,county
+Macomb County,50,99,H1,MI,county
+Manistee County,51,101,H1,MI,county
+Marquette County,52,103,H1,MI,county
+Mason County,53,105,H1,MI,county
+Mecosta County,54,107,H1,MI,county
+Menominee County,55,109,H1,MI,county
+Midland County,56,111,H1,MI,county
+Missaukee County,57,113,H1,MI,county
+Monroe County,58,115,H1,MI,county
+Montcalm County,59,117,H1,MI,county
+Montmorency County,60,119,H1,MI,county
+Muskegon County,61,121,H1,MI,county
+Newaygo County,62,123,H1,MI,county
+Oakland County,63,125,H1,MI,county
+Oceana County,64,127,H1,MI,county
+Ogemaw County,65,129,H1,MI,county
+Ontonagon County,66,131,H1,MI,county
+Osceola County,67,133,H1,MI,county
+Oscoda County,68,135,H1,MI,county
+Otsego County,69,137,H1,MI,county
+Ottawa County,70,139,H1,MI,county
+Presque Isle County,71,141,H1,MI,county
+Roscommon County,72,143,H1,MI,county
+Saginaw County,73,145,H1,MI,county
+St. Clair County,74,147,H1,MI,county
+St. Joseph County,75,149,H1,MI,county
+Sanilac County,76,151,H1,MI,county
+Schoolcraft County,77,153,H1,MI,county
+Shiawassee County,78,155,H1,MI,county
+Tuscola County,79,157,H1,MI,county
+Van Buren County,80,159,H1,MI,county
+Washtenaw County,81,161,H1,MI,county
+Wayne County,82,163,H1,MI,county
+Wexford County,83,165,H1,MI,county

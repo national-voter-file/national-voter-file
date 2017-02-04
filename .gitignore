@@ -1,4 +1,10 @@
 data
 .DS_Store
 docker-compose-Linux-x86_64
+venv
 __pycache__
+*.pyc
+national_voter_file.egg-info
+dist
+build
+nohup.out
