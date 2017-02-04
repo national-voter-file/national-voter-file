@@ -21,6 +21,59 @@ def _empty(item):
 def _blank(item):
     return random.choice([item, ''])
 
+COLORADO_FIELDS = [
+    'VOTER_ID',
+    'COUNTY_CODE',
+    'COUNTY',
+    'LAST_NAME',
+    'FIRST_NAME',
+    'MIDDLE_NAME',
+    'NAME_SUFFIX',
+    'VOTER_NAME',
+    'STATUS_CODE', # A = active, I = inactive
+    'PRECINCT_NAME',
+    'ADDRESS_LIBRARY_ID',
+    'HOUSE_NUM',
+    'HOUSE_SUFFIX',
+    'PRE_DIR',
+    'STREET_NAME',
+    'STREET_TYPE',
+    'POST_DIR',
+    'UNIT_TYPE',
+    'UNIT_NUM',
+    'ADDRESS_NON_STD',
+    'RESIDENTIAL_ADDRESS',
+    'RESIDENTIAL_CITY',
+    'RESIDENTIAL_STATE',
+    'RESIDENTIAL_ZIP_CODE',
+    'RESIDENTIAL_ZIP_PLUS',
+    'EFFECTIVE_DATE',
+    'REGISTRATION_DATE',
+    'STATUS', # Active, Inacti
+    'STATUS_REASON', # Undeliverable Ballot, Returned Mail, NCOA, 
+    'BIRTH_YEAR', # YYYY
+    'GENDER',
+    'PRECINCT',
+    'SPLIT',
+    'VOTER_STATUS_ID',
+    'PARTY',
+    'PARTY_AFFILIATION_DATE',
+    'PHONE_NUM',
+    'MAIL_ADDR1',
+    'MAIL_ADDR2',
+    'MAIL_ADDR3',
+    'MAILING_CITY',
+    'MAILING_STATE',
+    'MAILING_ZIP_CODE',
+    'MAILING_ZIP_PLUS',
+    'MAILING_COUNTRY',
+    'SPL_ID',
+    'PERMANENT_MAIL_IN_VOTER', # No
+    'CONGRESSIONAL', # Congressional 6
+    'STATE_SENATE', # State Senate 2
+    'STATE_HOUSE', # State House 45
+    'ID_REQUIRED' # Y or N
+]
 
 OHIO_SCHEMA = {
     'SOS_VOTERID': lambda: 'OH{}'.format(str(randint(1000, 999999)).zfill(10)),
