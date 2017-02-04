@@ -127,7 +127,7 @@ class StateTransformer(BaseTransformer):
             Dictionary with following keys
                 'EMAIL'
         """
-        return {'EMAIL': ""}
+        return {'EMAIL': None}
 
     def extract_phone_number(self, input_dict):
         """
@@ -349,7 +349,7 @@ class StateTransformer(BaseTransformer):
             Dictionary with following keys
                 'STATE_VOTER_REF'
         """
-        return {'STATE_VOTER_REF': "FL"+input_dict['VoterID']}
+        return {'STATE_VOTER_REF': "OK"+input_dict['VoterID']}
 
     def extract_county_voter_ref(self, input_dict):
         """
