@@ -371,7 +371,7 @@ class StateTransformer(BaseTransformer):
         """
         if len(input_dict['OriginalRegistration']) > 0:
             date = self.convert_date(input_dict['OriginalRegistration'])
-        else
+        else:
             date = None
         return {'REGISTRATION_DATE': date}
 
