@@ -369,7 +369,10 @@ class StateTransformer(BaseTransformer):
             Dictionary with following keys
                 'REGISTRATION_DATE'
         """
-        date = self.convert_date(input_dict['OriginalRegistration'])
+        if len(input_dict['OriginalRegistration']) > 0:
+            date = self.convert_date(input_dict['OriginalRegistration'])
+        else
+            date = None
         return {'REGISTRATION_DATE': date}
 
     def extract_registration_status(self, input_dict):
