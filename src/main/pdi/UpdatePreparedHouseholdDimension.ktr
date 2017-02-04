@@ -89,6 +89,27 @@
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
+    <notepad>
+      <note>If we succeeded in parsing the address then we can &#xd;&#xa;update the enriched fields. &#xd;&#xa;Otherwise leave them alone</note>
+      <xloc>608</xloc>
+      <yloc>256</yloc>
+      <width>395</width>
+      <heigth>67</heigth>
+      <fontname>Arial</fontname>
+      <fontsize>10</fontsize>
+      <fontbold>N</fontbold>
+      <fontitalic>N</fontitalic>
+      <fontcolorred>0</fontcolorred>
+      <fontcolorgreen>0</fontcolorgreen>
+      <fontcolorblue>0</fontcolorblue>
+      <backgroundcolorred>255</backgroundcolorred>
+      <backgroundcolorgreen>205</backgroundcolorgreen>
+      <backgroundcolorblue>112</backgroundcolorblue>
+      <bordercolorred>100</bordercolorred>
+      <bordercolorgreen>100</bordercolorgreen>
+      <bordercolorblue>100</bordercolorblue>
+      <drawshadow>Y</drawshadow>
+    </notepad>
   </notepads>
   <connection>
     <name>Voter</name>
@@ -117,10 +138,13 @@
   <order>
   <hop> <from>Get Variables</from><to>Lookup report date key</to><enabled>Y</enabled> </hop>
   <hop> <from>Lookup report date key</from><to>Text file input</to><enabled>Y</enabled> </hop>
-  <hop> <from>Lookup or Add Housholds 2</from><to>Write to log</to><enabled>Y</enabled> </hop>
+  <hop> <from>Lookup or Add Housholds Raw Data</from><to>Write to log</to><enabled>Y</enabled> </hop>
   <hop> <from>Lookup or Add Mailing Addrs</from><to>Write Mailing Address Errors</to><enabled>Y</enabled> </hop>
-  <hop> <from>Text file input</from><to>Lookup or Add Housholds 2</to><enabled>Y</enabled> </hop>
-  <hop> <from>Lookup or Add Housholds 2</from><to>Lookup or Add Mailing Addrs</to><enabled>Y</enabled> </hop>
+  <hop> <from>Text file input</from><to>Lookup or Add Housholds Raw Data</to><enabled>Y</enabled> </hop>
+  <hop> <from>Update Enriched Fields</from><to>Lookup or Add Mailing Addrs</to><enabled>Y</enabled> </hop>
+  <hop> <from>Lookup or Add Housholds Raw Data</from><to>Don&#x27;t Overwrite manual addresses</to><enabled>Y</enabled> </hop>
+  <hop> <from>Don&#x27;t Overwrite manual addresses</from><to>Update Enriched Fields</to><enabled>Y</enabled> </hop>
+  <hop> <from>Don&#x27;t Overwrite manual addresses</from><to>Lookup or Add Mailing Addrs</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Get Variables</name>
@@ -180,7 +204,7 @@
     </step>
 
   <step>
-    <name>Lookup or Add Housholds 2</name>
+    <name>Lookup or Add Housholds Raw Data</name>
     <type>CombinationLookup</type>
     <description/>
     <distribute>Y</distribute>
@@ -193,7 +217,7 @@
       <schema/>
       <table>household_dim</table>
       <connection>Voter</connection>
-      <commit>1000</commit>
+      <commit>1</commit>
       <cache_size>25</cache_size>
       <replace>N</replace>
       <preloadCache>N</preloadCache>
@@ -201,48 +225,24 @@
       <crcfield>hashcode</crcfield>
       <fields>
         <key>
-          <name>ADDRESS_NUMBER</name>
-          <lookup>address_number</lookup>
+          <name>RAW_ADDR1</name>
+          <lookup>RAW_ADDR1</lookup>
         </key>
         <key>
-          <name>ADDRESS_NUMBER_SUFFIX</name>
-          <lookup>address_number_suffix</lookup>
+          <name>RAW_ADDR2</name>
+          <lookup>RAW_ADDR2</lookup>
         </key>
         <key>
-          <name>STREET_NAME</name>
-          <lookup>street_name</lookup>
+          <name>RAW_CITY</name>
+          <lookup>RAW_CITY</lookup>
         </key>
         <key>
-          <name>STREET_NAME_POST_TYPE</name>
-          <lookup>street_name_post_type</lookup>
-        </key>
-        <key>
-          <name>OCCUPANCY_TYPE</name>
-          <lookup>occupancy_type</lookup>
-        </key>
-        <key>
-          <name>STREET_NAME_PRE_DIRECTIONAL</name>
-          <lookup>street_name_pre_directional</lookup>
-        </key>
-        <key>
-          <name>STREET_NAME_POST_DIRECTIONAL</name>
-          <lookup>street_name_post_directional</lookup>
-        </key>
-        <key>
-          <name>OCCUPANCY_IDENTIFIER</name>
-          <lookup>occupancy_identifier</lookup>
-        </key>
-        <key>
-          <name>PLACE_NAME</name>
-          <lookup>place_name</lookup>
+          <name>RAW_ZIP</name>
+          <lookup>RAW_ZIP</lookup>
         </key>
         <key>
           <name>STATE_NAME</name>
-          <lookup>state_name</lookup>
-        </key>
-        <key>
-          <name>ZIP_CODE</name>
-          <lookup>zip_code</lookup>
+          <lookup>STATE_NAME</lookup>
         </key>
         <return>
           <name>household_id</name>
@@ -315,7 +315,7 @@
       <last_update_field/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>816</xloc>
+      <xloc>1200</xloc>
       <yloc>176</yloc>
       <draw>Y</draw>
       </GUI>
@@ -435,7 +435,7 @@
       <field>
         <name>ADDRESS_NUMBER</name>
         <type>String</type>
-        <format>&#x23;.&#x23;</format>
+        <format>&#x23;</format>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -444,7 +444,7 @@
         <position>-1</position>
         <length>15</length>
         <precision>0</precision>
-        <trim_type>both</trim_type>
+        <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
       <field>
@@ -539,8 +539,8 @@
       </field>
       <field>
         <name>CONGRESSIONAL_DIST</name>
-        <type>Number</type>
-        <format>&#x23;.&#x23;</format>
+        <type>String</type>
+        <format>&#x23;</format>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -549,7 +549,7 @@
         <position>-1</position>
         <length>15</length>
         <precision>0</precision>
-        <trim_type>both</trim_type>
+        <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
       <field>
@@ -600,7 +600,7 @@
       <field>
         <name>COUNTY_VOTER_REF</name>
         <type>String</type>
-        <format>&#x23;.&#x23;</format>
+        <format>&#x23;</format>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -609,7 +609,7 @@
         <position>-1</position>
         <length>15</length>
         <precision>0</precision>
-        <trim_type>both</trim_type>
+        <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
       <field>
@@ -735,15 +735,15 @@
       <field>
         <name>LOWER_HOUSE_DIST</name>
         <type>String</type>
-        <format/>
+        <format>&#x23;</format>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>0</length>
-        <precision>-1</precision>
+        <length>15</length>
+        <precision>0</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
@@ -757,7 +757,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>22</length>
+        <length>26</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -772,7 +772,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>9</length>
+        <length>8</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -825,7 +825,7 @@
       <field>
         <name>MAIL_ZIP_CODE</name>
         <type>String</type>
-        <format>&#x23;.&#x23;</format>
+        <format>&#x23;</format>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -834,7 +834,7 @@
         <position>-1</position>
         <length>15</length>
         <precision>0</precision>
-        <trim_type>both</trim_type>
+        <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
       <field>
@@ -960,7 +960,7 @@
       <field>
         <name>PRECINCT</name>
         <type>String</type>
-        <format>&#x23;.&#x23;</format>
+        <format>&#x23;</format>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -969,13 +969,13 @@
         <position>-1</position>
         <length>15</length>
         <precision>0</precision>
-        <trim_type>both</trim_type>
+        <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
       <field>
         <name>PRECINCT_SPLIT</name>
         <type>String</type>
-        <format>&#x23;.&#x23;</format>
+        <format/>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -983,8 +983,8 @@
         <ifnull/>
         <position>-1</position>
         <length>15</length>
-        <precision>0</precision>
-        <trim_type>both</trim_type>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
       <field>
@@ -999,6 +999,66 @@
         <position>-1</position>
         <length>0</length>
         <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>RAW_ADDR1</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>26</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>RAW_ADDR2</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>8</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>RAW_CITY</name>
+        <type>String</type>
+        <format/>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>13</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>RAW_ZIP</name>
+        <type>String</type>
+        <format>&#x23;</format>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>15</length>
+        <precision>0</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
@@ -1303,9 +1363,9 @@
         <repeat>N</repeat>
       </field>
       <field>
-        <name>ZIP_CODE</name>
-        <type>String</type>
-        <format>&#x23;.&#x23;</format>
+        <name>VALIDATION_STATUS</name>
+        <type>Integer</type>
+        <format>&#x23;</format>
         <currency>&#x24;</currency>
         <decimal>.</decimal>
         <group>,</group>
@@ -1314,7 +1374,22 @@
         <position>-1</position>
         <length>15</length>
         <precision>0</precision>
-        <trim_type>both</trim_type>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+      </field>
+      <field>
+        <name>ZIP_CODE</name>
+        <type>String</type>
+        <format>&#x23;</format>
+        <currency>&#x24;</currency>
+        <decimal>.</decimal>
+        <group>,</group>
+        <nullif>-</nullif>
+        <ifnull/>
+        <position>-1</position>
+        <length>15</length>
+        <precision>0</precision>
+        <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
     </fields>
@@ -1401,8 +1476,8 @@
       </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>816</xloc>
-      <yloc>272</yloc>
+      <xloc>1200</xloc>
+      <yloc>320</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1512,14 +1587,185 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>432</xloc>
-      <yloc>272</yloc>
+      <yloc>336</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Update Enriched Fields</name>
+    <type>Update</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Voter</connection>
+    <skip_lookup>N</skip_lookup>
+    <commit>100</commit>
+    <use_batch>N</use_batch>
+    <error_ignored>N</error_ignored>
+    <ignore_flag_field/>
+    <lookup>
+      <schema/>
+      <table>household_dim</table>
+      <key>
+        <name>household_id</name>
+        <field>household_id</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+        </key>
+      <value>
+        <name>ADDRESS_NUMBER</name>
+        <rename>ADDRESS_NUMBER</rename>
+        </value>
+      <value>
+        <name>ADDRESS_NUMBER_PREFIX</name>
+        <rename>ADDRESS_NUMBER_PREFIX</rename>
+        </value>
+      <value>
+        <name>ADDRESS_NUMBER_SUFFIX</name>
+        <rename>ADDRESS_NUMBER_SUFFIX</rename>
+        </value>
+      <value>
+        <name>BUILDING_NAME</name>
+        <rename>BUILDING_NAME</rename>
+        </value>
+      <value>
+        <name>CORNER_OF</name>
+        <rename>CORNER_OF</rename>
+        </value>
+      <value>
+        <name>INTERSECTION_SEPARATOR</name>
+        <rename>INTERSECTION_SEPARATOR</rename>
+        </value>
+      <value>
+        <name>LANDMARK_NAME</name>
+        <rename>LANDMARK_NAME</rename>
+        </value>
+      <value>
+        <name>NOT_ADDRESS</name>
+        <rename>NOT_ADDRESS</rename>
+        </value>
+      <value>
+        <name>OCCUPANCY_IDENTIFIER</name>
+        <rename>OCCUPANCY_IDENTIFIER</rename>
+        </value>
+      <value>
+        <name>OCCUPANCY_TYPE</name>
+        <rename>OCCUPANCY_TYPE</rename>
+        </value>
+      <value>
+        <name>PLACE_NAME</name>
+        <rename>PLACE_NAME</rename>
+        </value>
+      <value>
+        <name>STATE_NAME</name>
+        <rename>STATE_NAME</rename>
+        </value>
+      <value>
+        <name>STREET_NAME</name>
+        <rename>STREET_NAME</rename>
+        </value>
+      <value>
+        <name>STREET_NAME_POST_DIRECTIONAL</name>
+        <rename>STREET_NAME_POST_DIRECTIONAL</rename>
+        </value>
+      <value>
+        <name>STREET_NAME_POST_MODIFIER</name>
+        <rename>STREET_NAME_POST_MODIFIER</rename>
+        </value>
+      <value>
+        <name>STREET_NAME_POST_TYPE</name>
+        <rename>STREET_NAME_POST_TYPE</rename>
+        </value>
+      <value>
+        <name>STREET_NAME_PRE_DIRECTIONAL</name>
+        <rename>STREET_NAME_PRE_DIRECTIONAL</rename>
+        </value>
+      <value>
+        <name>STREET_NAME_PRE_MODIFIER</name>
+        <rename>STREET_NAME_PRE_MODIFIER</rename>
+        </value>
+      <value>
+        <name>STREET_NAME_PRE_TYPE</name>
+        <rename>STREET_NAME_PRE_TYPE</rename>
+        </value>
+      <value>
+        <name>SUBADDRESS_IDENTIFIER</name>
+        <rename>SUBADDRESS_IDENTIFIER</rename>
+        </value>
+      <value>
+        <name>SUBADDRESS_TYPE</name>
+        <rename>SUBADDRESS_TYPE</rename>
+        </value>
+      <value>
+        <name>USPS_BOX_GROUP_ID</name>
+        <rename>USPS_BOX_GROUP_ID</rename>
+        </value>
+      <value>
+        <name>USPS_BOX_GROUP_TYPE</name>
+        <rename>USPS_BOX_GROUP_TYPE</rename>
+        </value>
+      <value>
+        <name>USPS_BOX_ID</name>
+        <rename>USPS_BOX_ID</rename>
+        </value>
+      <value>
+        <name>USPS_BOX_TYPE</name>
+        <rename>USPS_BOX_TYPE</rename>
+        </value>
+      <value>
+        <name>VALIDATION_STATUS</name>
+        <rename>VALIDATION_STATUS</rename>
+        </value>
+      <value>
+        <name>ZIP_CODE</name>
+        <rename>ZIP_CODE</rename>
+        </value>
+      </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>944</xloc>
+      <yloc>32</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Don&#x27;t Overwrite manual addresses</name>
+    <type>SwitchCase</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+<fieldname>VALIDATION_STATUS</fieldname>
+<use_contains>N</use_contains>
+<case_value_type>String</case_value_type>
+<case_value_format/>
+<case_value_decimal/>
+<case_value_group/>
+<default_target_step>Lookup or Add Mailing Addrs</default_target_step>
+<cases><case><value>2</value>
+<target_step>Update Enriched Fields</target_step>
+</case></cases>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>704</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step_error_handling>
       <error>
-        <source_step>Lookup or Add Housholds 2</source_step>
+        <source_step>Lookup or Add Housholds Raw Data</source_step>
         <target_step>Write to log</target_step>
         <is_enabled>Y</is_enabled>
         <nr_valuename/>
