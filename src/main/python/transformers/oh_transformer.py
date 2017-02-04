@@ -1,10 +1,30 @@
 from base_transformer import BaseTransformer
 import usaddress
 
-class WATransformer(BaseTransformer):
+class OHTransformer(BaseTransformer):
+
+    """
+    A few required columns in the BaseTransformer did not have values in the
+    Ohio data. Not sure what the best way of updating those on a case by case
+    basis is, but given how irregular some files are it might just be worth
+    allowing None for all columns
+    """
     col_type_dict = BaseTransformer.col_type_dict.copy()
-    col_type_dict['BIRTH_STATE'] = set([str, type(None)])
-    col_type_dict['RACE'] = set([str, type(None)])
+    col_type_dict['TITLE'] = set([str, type(None)])
+    col_type_dict['GENDER'] = set([str, type(None)])
+    col_type_dict['ABSENTEE_TYPE'] = set([str, type(None)])
+    col_type_dict['PRECINCT_SPLIT'] = set([str, type(None)])
+
+    ohio_party_map = {
+        "C": "AMC",
+        "D":"DEM",
+        "G":"GRN",
+        "L":"LIB",
+        "N":"NLP",
+        "R":"REP",
+        "S":"SP",
+        " ":"UN"
+    }
 
     #### Contact methods #######################################################
 
@@ -21,11 +41,11 @@ class WATransformer(BaseTransformer):
                 'NAME_SUFFIX'
         """
         output_dict = {
-            'TITLE': input_dict['Title'],
-            'FIRST_NAME': input_dict['FName'],
-            'MIDDLE_NAME': input_dict['MName'],
-            'LAST_NAME': input_dict['LName'],
-            'NAME_SUFFIX': input_dict['NameSuffix'],
+            'TITLE': None,
+            'FIRST_NAME': input_dict['FIRST_NAME'],
+            'MIDDLE_NAME': input_dict['MIDDLE_NAME'],
+            'LAST_NAME': input_dict['LAST_NAME'],
+            'NAME_SUFFIX': input_dict['SUFFIX'],
         }
         return output_dict
 
@@ -69,28 +89,8 @@ class WATransformer(BaseTransformer):
             Dictionary with following keys
                 'GENDER'
         """
-        return {'GENDER': input_dict['Gender']}
+        return {'GENDER': None}
 
-    def extract_race(self, input_columns):
-        """
-        Inputs:
-            input_columns: name or list of columns
-        Outputs:
-            Dictionary with following keys
-                'RACE'
-        """
-        return {'RACE': None}
-		
-    def extract_birth_state(self, input_columns):
-        """
-        Inputs:
-            input_columns: name or list of columns
-        Outputs:
-            Dictionary with following keys
-                'BIRTH_STATE'
-        """
-        return {'BIRTH_STATE': None}		
-		
     def extract_birthdate(self, input_dict):
         """
         Inputs:
@@ -99,7 +99,7 @@ class WATransformer(BaseTransformer):
             Dictionary with following keys
                 'BIRTHDATE'
         """
-        return {'BIRTHDATE': self.convert_date(input_dict['Birthdate'])}
+        return {'BIRTHDATE': self.convert_date(input_dict['DATE_OF_BIRTH'])}
 
     def extract_language_choice(self, input_dict):
         """
@@ -115,9 +115,8 @@ class WATransformer(BaseTransformer):
 
     def extract_registration_address(self, input_dict):
         """
+        Relies on the usaddress package.
 
-        Washington state data is beautifully parsed into the same fields
-        that we require, so an easy mapping.
         Inputs:
             input_dict: dictionary of form {colname: value} from raw data
         Outputs:
@@ -149,36 +148,25 @@ class WATransformer(BaseTransformer):
                 'USPS_BOX_TYPE'
                 'ZIP_CODE'
         """
-        output_dict = {
-            'ADDRESS_NUMBER':input_dict['RegStNum'],
-            'ADDRESS_NUMBER_PREFIX':None,
-            'ADDRESS_NUMBER_SUFFIX':input_dict['RegStFrac'],
-            'BUILDING_NAME':None,
-            'CORNER_OF':None,
-            'INTERSECTION_SEPARATOR':None,
-            'LANDMARK_NAME':None,
-            'NOT_ADDRESS':None,
-            'OCCUPANCY_TYPE':input_dict['RegUnitType'],
-            'OCCUPANCY_IDENTIFIER':input_dict['RegUnitNum'],
-            'PLACE_NAME':input_dict['RegCity'],
-            'STATE_NAME':input_dict['RegState'],
-            'STREET_NAME':input_dict['RegStName'],
-            'STREET_NAME_PRE_DIRECTIONAL':input_dict['RegStPreDirection'],
-            'STREET_NAME_PRE_MODIFIER':None,
-            'STREET_NAME_PRE_TYPE':None,
-            'STREET_NAME_POST_DIRECTIONAL':input_dict['RegStPostDirection'],
-            'STREET_NAME_POST_MODIFIER':None,
-            'STREET_NAME_POST_TYPE':input_dict['RegStType'],
-            'SUBADDRESS_IDENTIFIER':None,
-            'SUBADDRESS_TYPE':None,
-            'USPS_BOX_GROUP_ID':None,
-            'USPS_BOX_GROUP_TYPE':None,
-            'USPS_BOX_ID':None,
-            'USPS_BOX_TYPE':None,
-            'ZIP_CODE':input_dict['RegZipCode']
-        }
-        return output_dict
+        address_components = [
+            'RESIDENTIAL_ADDRESS1',
+            'RESIDENTIAL_SECONDARY_ADDR'
+        ]
+        address_str = ' '.join([
+            input_dict[x] for x in address_components if input_dict[x] is not None
+        ])
+        usaddress_dict, usaddress_type = self.usaddress_tag(address_str)
 
+        converted_addr = self.convert_usaddress_dict(usaddress_dict)
+
+        converted_addr.update({'PLACE_NAME':input_dict['RESIDENTIAL_CITY'],
+                                'STATE_NAME':input_dict['RESIDENTIAL_STATE'],
+                                'ZIP_CODE':input_dict['RESIDENTIAL_ZIP']
+        })
+
+
+
+        return converted_addr
 
     def extract_county_code(self, input_dict):
         """
@@ -188,9 +176,7 @@ class WATransformer(BaseTransformer):
             Dictionary with following keys
                 'COUNTYCODE'
         """
-        return {'COUNTYCODE': input_dict['CountyCode']}
-
-
+        return {'COUNTYCODE': input_dict['COUNTY_NUMBER']}
 
     def extract_mailing_address(self, input_dict):
         """
@@ -210,17 +196,18 @@ class WATransformer(BaseTransformer):
                 'MAIL_COUNTRY'
         """
 
-        if( input_dict['Mail1'].strip() and input_dict['MailCity'].strip()):
+        if( input_dict['MAILING_ADDRESS1'].strip() and input_dict['MAILING_CITY'].strip()):
             return {
-                'MAIL_ADDRESS_LINE1': input_dict['Mail1'],
-                'MAIL_ADDRESS_LINE2': " ".join([input_dict['Mail2'], input_dict['Mail3'], input_dict['Mail4']]),
-                'MAIL_CITY': input_dict['MailCity'],
-                'MAIL_STATE': input_dict['MailState'],
-                'MAIL_ZIP_CODE': input_dict['MailZip'],
-                'MAIL_COUNTRY': input_dict['MailCountry'] if input_dict['MailCountry']  else "USA"
+                'MAIL_ADDRESS_LINE1': input_dict['MAILING_ADDRESS1'],
+                'MAIL_ADDRESS_LINE2': input_dict['MAILING_SECONDARY_ADDRESS'],
+                'MAIL_CITY': input_dict['MAILING_CITY'],
+                'MAIL_STATE': input_dict['MAILING_STATE'],
+                'MAIL_ZIP_CODE': input_dict['MAILING_ZIP'],
+                'MAIL_COUNTRY': input_dict['MAILING_COUNTRY'] if input_dict['MAILING_COUNTRY']  else "USA"
             }
         else:
-            return { }
+            return {}
+
 
     #### Political methods #####################################################
 
@@ -232,7 +219,7 @@ class WATransformer(BaseTransformer):
             Dictionary with following keys
                 'STATE_VOTER_REF'
         """
-        return {'STATE_VOTER_REF': input_dict['StateVoterID']}
+        return {'STATE_VOTER_REF': input_dict['SOS_VOTERID']}
 
     def extract_county_voter_ref(self, input_dict):
         """
@@ -242,7 +229,7 @@ class WATransformer(BaseTransformer):
             Dictionary with following keys
                 'COUNTY_VOTER_REF'
         """
-        return {'COUNTY_VOTER_REF': input_dict['CountyVoterID']}
+        return {'COUNTY_VOTER_REF': input_dict['COUNTY_ID']}
 
     def extract_registration_date(self, input_dict):
         """
@@ -252,7 +239,7 @@ class WATransformer(BaseTransformer):
             Dictionary with following keys
                 'REGISTRATION_DATE'
         """
-        date = self.convert_date(input_dict['Registrationdate'])
+        date = self.convert_date(input_dict['REGISTRATION_DATE'])
         return {'REGISTRATION_DATE': date}
 
     def extract_registration_status(self, input_dict):
@@ -263,7 +250,7 @@ class WATransformer(BaseTransformer):
             Dictionary with following keys
                 'REGISTRATION_STATUS'
         """
-        return {'REGISTRATION_STATUS': input_dict['StatusCode']}
+        return {'REGISTRATION_STATUS': input_dict['VOTER_STATUS']}
 
     def extract_absentee_type(self, input_dict):
         """
@@ -273,7 +260,7 @@ class WATransformer(BaseTransformer):
             Dictionary with following keys
                 'ABSTENTEE_TYPE'
         """
-        return {'ABSENTEE_TYPE': input_dict['AbsenteeType']}
+        return {'ABSENTEE_TYPE': None}
 
     def extract_party(self, input_dict):
         """
@@ -283,7 +270,8 @@ class WATransformer(BaseTransformer):
             Dictionary with following keys
                 'PARTY'
         """
-        return {'PARTY': None}
+        party = input_dict['PARTY_AFFILIATION']
+        return {'PARTY': self.ohio_party_map[party]}
 
     def extract_congressional_dist(self, input_dict):
         """
@@ -293,7 +281,7 @@ class WATransformer(BaseTransformer):
             Dictionary with following keys
                 'CONGRESSIONAL_DIST'
         """
-        return {'CONGRESSIONAL_DIST': input_dict['CongressionalDistrict']}
+        return {'CONGRESSIONAL_DIST': input_dict['CONGRESSIONAL_DISTRICT']}
 
     def extract_upper_house_dist(self, input_dict):
         """
@@ -303,7 +291,7 @@ class WATransformer(BaseTransformer):
             Dictionary with following keys
                 'UPPER_HOUSE_DIST'
         """
-        return {'UPPER_HOUSE_DIST': None}
+        return {'UPPER_HOUSE_DIST': input_dict['STATE_SENATE_DISTRICT']}
 
     def extract_lower_house_dist(self, input_dict):
         """
@@ -313,7 +301,7 @@ class WATransformer(BaseTransformer):
             Dictionary with following keys
                 'LOWER_HOUSE_DIST'
         """
-        return {'LOWER_HOUSE_DIST': None}
+        return {'LOWER_HOUSE_DIST': input_dict['STATE_REPRESENTATIVE_DISTRICT']}
 
     def extract_precinct(self, input_dict):
         """
@@ -323,7 +311,7 @@ class WATransformer(BaseTransformer):
             Dictionary with following keys
                 'PRECINCT'
         """
-        return {'PRECINCT': input_dict['PrecinctCode']}
+        return {'PRECINCT': input_dict['PRECINCT_CODE']}
 
     def extract_county_board_dist(self, input_dict):
         """
@@ -333,6 +321,7 @@ class WATransformer(BaseTransformer):
             Dictionary with following keys
                 'COUNTY_BOARD_DIST'
         """
+        # Not sure if mapping exists, verify
         return {'COUNTY_BOARD_DIST': None}
 
     def extract_school_board_dist(self, input_dict):
@@ -343,6 +332,7 @@ class WATransformer(BaseTransformer):
             Dictionary with following keys
                 'SCHOOL_BOARD_DIST'
         """
+        # Not sure if mapping exists, verify
         return {'SCHOOL_BOARD_DIST': None}
 
     def extract_precinct_split(self, input_dict):
@@ -353,4 +343,5 @@ class WATransformer(BaseTransformer):
             Dictionary with following keys
                 'PRECINCT_SPLIT'
         """
-        return {'PRECINCT_SPLIT': input_dict['PrecinctPart']}
+        # Not sure if mapping exists, verify
+        return {'PRECINCT_SPLIT': None}
