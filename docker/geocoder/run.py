@@ -8,7 +8,7 @@ _daemon.conf_.
 """
 import logging
 import time
-from mapzen_geocoder import *
+from es_geocoder import *
 
 log = logging.getLogger()
 

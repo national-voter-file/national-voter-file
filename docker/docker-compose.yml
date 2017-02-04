@@ -25,10 +25,10 @@ services:
       - ./grasshopper-loader/test/data:/usr/src/app/test/data/
 
   geocoder:
-    build: ../src/python/national_voter_file/geocoder
+    build: ./geocoder
     links:
       - postgis
       - elasticsearch
     volumes:
-      - ../src/python/national_voter_file/geocoder:/usr/src/app/geocoder
-    command: python /usr/src/app/geocoder/daemon.py
+      - ./geocoder:/usr/src/app/geocoder
+    command: python ./daemon.py
