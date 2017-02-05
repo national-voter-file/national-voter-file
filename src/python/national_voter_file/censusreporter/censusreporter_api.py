@@ -39,15 +39,17 @@ def json_data(tables=None, geoids=None, release='latest'):
     tables = _clean_list_arg(tables,'B01001')
 
     #If the URL is too big it will fail, estimating the size here and if it is too big we'll break this up
-    #Each table uses 7 characters and each geoid uses up to 14 characters.
     #This should never happen, but we're going to check just to make sure
     maxURLSize = 4020
-    urlSize = (len(tables) * 7) + (len(geoids) * 14)
+    geoSize = len(geoids[0]) + 1
+    tblSize = len(tables[0]) + 1
+    urlSize = (len(tables) * tblSize) + (len(geoids) * geoSize)
 
     if urlSize > maxURLSize:
-        tableSize = len(tables) * 7
-        maxGeos = int((maxURLSize - tableSize) / 14)
+        tableSize = len(tables) * tblSize
+        maxGeos = int((maxURLSize - tableSize) / geoSize)
         print("URL maybe too big, breaking up.")
+        print((len(tables) * tblSize) + (len(geoids[:maxGeos]) * geoSize))
         resp = get_url_response(tables, geoids[:maxGeos], release)
         if "error" in resp:
             raise Exception(resp['error'])
