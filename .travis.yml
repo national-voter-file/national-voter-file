@@ -5,4 +5,6 @@ python:
 install:
   - pip install -r src/python/national_voter_file/tests/requirements.txt
   - python setup.py install
-script: nosetests src/python/national_voter_file/tests
+script:
+  - pylint --rcfile=.pylintrc src/python/national_voter_file/us_states/ -f parseable -r n
+  - nosetests src/python/national_voter_file/tests

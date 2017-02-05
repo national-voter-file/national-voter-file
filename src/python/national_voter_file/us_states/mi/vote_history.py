@@ -1,6 +1,6 @@
-import pandas as pd
 import os
 import csv
+import pandas as pd
 from src.main.python.transformers import DATA_DIR
 
 
@@ -21,7 +21,7 @@ def clean_mi_history(el_path, input_path, output_path):
     with open(os.path.join(EL_DIR, 'mi_elections.csv'), 'w') as of:
         writer = csv.writer(of, delimiter=',')
         writer.writerow(['type', 'date', 'state'])
-        for k in el_col_map.keys():
+        for k in el_col_map:
             writer.writerow([el_col_map[k]['DESCR'], el_col_map[k]['DATE'], 'MI'])
 
     # Create history dir if doesn't already exist

@@ -2,21 +2,20 @@ import csv
 import os
 import re
 import sys
+import datetime
 
 from national_voter_file.transformers.base import (DATA_DIR,
                                                    BasePreparer,
                                                    BaseTransformer)
 import usaddress
-import datetime
 
 __all__ = ['default_file', 'StatePreparer', 'StateTransformer']
 
 default_file = 'AllFLSample20160908.txt'
 
 class StatePreparer(BasePreparer):
-
     state_path = 'fl'
-    state_name='Florida'
+    state_name = 'Florida'
     sep = "\t"
 
     def __init__(self, input_path, *args):
@@ -26,13 +25,13 @@ class StatePreparer(BasePreparer):
             self.transformer = StateTransformer()
 
     def process(self):
-            reader = self.dict_iterator(self.open(self.input_path))
-            for row in reader:
-                yield row
+        reader = self.dict_iterator(self.open(self.input_path))
+        for row in reader:
+            yield row
 
 
 class StateTransformer(BaseTransformer):
-    date_format="%m/%d/%Y"
+    date_format = "%m/%d/%Y"
 
     col_type_dict = BaseTransformer.col_type_dict.copy()
     col_type_dict['PRECINCT_SPLIT'] = set([str, type(None)])
@@ -44,42 +43,42 @@ class StateTransformer(BaseTransformer):
     input_fields = [
         'County Code',
         'Voter ID',
-		'Name Last',
-		'Name Suffix',
-		'Name First',
-		'Name Middle',
-		'Requested public records exemption',
-		'Residence Address Line 1',
-		'Residence Address Line 2',
-		'Residence City (USPS)',
-		'Residence State',
-		'Residence Zipcode',
-		'Mailing Address Line 1',
-		'Mailing Address Line 2',
-		'Mailing Address Line 3',
-		'Mailing City',
-		'Mailing State',
-		'Mailing Zipcode',
-		'Mailing Country',
-		'Gender',
-		'Race',
-		'Birth Date',
-		'Registration Date',
-		'Party Affiliation',
-		'Precinct',
-		'Precinct Group',
-		'Precinct Split',
-		'Precinct Suffix',
-		'Voter Status',
-		'Congressional District',
-		'House District',
-		'Senate District',
-		'County Commission District',
-		'School Board District',
-		'Daytime Area Code',
-		'Daytime Phone Number',
-		'Daytime Phone Extension',
-		'Email address'
+        'Name Last',
+        'Name Suffix',
+        'Name First',
+        'Name Middle',
+        'Requested public records exemption',
+        'Residence Address Line 1',
+        'Residence Address Line 2',
+        'Residence City (USPS)',
+        'Residence State',
+        'Residence Zipcode',
+        'Mailing Address Line 1',
+        'Mailing Address Line 2',
+        'Mailing Address Line 3',
+        'Mailing City',
+        'Mailing State',
+        'Mailing Zipcode',
+        'Mailing Country',
+        'Gender',
+        'Race',
+        'Birth Date',
+        'Registration Date',
+        'Party Affiliation',
+        'Precinct',
+        'Precinct Group',
+        'Precinct Split',
+        'Precinct Suffix',
+        'Voter Status',
+        'Congressional District',
+        'House District',
+        'Senate District',
+        'County Commission District',
+        'School Board District',
+        'Daytime Area Code',
+        'Daytime Phone Number',
+        'Daytime Phone Extension',
+        'Email address'
     ]
 
     florida_party_map = {
@@ -241,44 +240,11 @@ class StateTransformer(BaseTransformer):
     #### Address methods #######################################################
 
     def extract_registration_address(self, input_dict):
-        """
-        Relies on the usaddress package.
-
-        Inputs:
-            input_dict: dictionary of form {colname: value} from raw data
-        Outputs:
-            Dictionary with following keys
-                'ADDRESS_NUMBER'
-                'ADDRESS_NUMBER_PREFIX'
-                'ADDRESS_NUMBER_SUFFIX'
-                'BUILDING_NAME'
-                'CORNER_OF'
-                'INTERSECTION_SEPARATOR'
-                'LANDMARK_NAME'
-                'NOT_ADDRESS'
-                'OCCUPANCY_TYPE'
-                'OCCUPANCY_IDENTIFIER'
-                'PLACE_NAME'
-                'STATE_NAME'
-                'STREET_NAME'
-                'STREET_NAME_PRE_DIRECTIONAL'
-                'STREET_NAME_PRE_MODIFIER'
-                'STREET_NAME_PRE_TYPE'
-                'STREET_NAME_POST_DIRECTIONAL'
-                'STREET_NAME_POST_MODIFIER'
-                'STREET_NAME_POST_TYPE'
-                'SUBADDRESS_IDENTIFIER'
-                'SUBADDRESS_TYPE'
-                'USPS_BOX_GROUP_ID'
-                'USPS_BOX_GROUP_TYPE'
-                'USPS_BOX_ID'
-                'USPS_BOX_TYPE'
-                'ZIP_CODE'
-            """
         address_components = [
             'Residence Address Line 1',
             'Residence Address Line 2'
         ]
+
         address_str = ' '.join([
             input_dict[x] for x in address_components if input_dict[x] is not None
         ])
@@ -290,7 +256,7 @@ class StateTransformer(BaseTransformer):
             'RAW_ZIP': input_dict['Residence Zipcode']
         }
 
-        if(not raw_dict['RAW_ADDR1'].strip()):
+        if not raw_dict['RAW_ADDR1'].strip():
             raw_dict['RAW_ADDR1'] = '--Not provided--'
 
         # FL leaves state column blank frequently
@@ -298,15 +264,16 @@ class StateTransformer(BaseTransformer):
         if len(state_name.strip()) == 0:
             state_name = 'FL'
 
-        usaddress_dict, usaddress_type = self.usaddress_tag(address_str)
+        usaddress_dict = self.usaddress_tag(address_str)[0]
 
-        if(usaddress_dict):
+        if usaddress_dict:
             converted_addr = self.convert_usaddress_dict(usaddress_dict)
 
-            converted_addr.update({'PLACE_NAME': raw_dict['RAW_CITY'],
-                                   'STATE_NAME': state_name,
-                                   'ZIP_CODE': raw_dict['RAW_ZIP'],
-                                   'VALIDATION_STATUS':'2'
+            converted_addr.update({
+                'PLACE_NAME': raw_dict['RAW_CITY'],
+                'STATE_NAME': state_name,
+                'ZIP_CODE': raw_dict['RAW_ZIP'],
+                'VALIDATION_STATUS':'2'
             })
 
             converted_addr.update(raw_dict)
@@ -321,34 +288,10 @@ class StateTransformer(BaseTransformer):
         return converted_addr
 
     def extract_county_code(self, input_dict):
-        """
-        Inputs:
-            input_dict: dictionary of form {colname: value} from raw data
-        Outputs:
-            Dictionary with following keys
-                'COUNTYCODE'
-        """
         return {'COUNTYCODE': input_dict['County Code']}
 
     def extract_mailing_address(self, input_dict):
-        """
-        Relies on the usaddress package.
-
-        We provide template code.
-
-        Inputs:
-            input_dict: dictionary of form {colname: value} from raw data
-        Outputs:
-            Dictionary with following keys
-                'MAIL_ADDRESS_LINE1'
-                'MAIL_ADDRESS_LINE2'
-                'MAIL_CITY'
-                'MAIL_STATE'
-                'MAIL_ZIP_CODE'
-                'MAIL_COUNTRY'
-        """
-
-        if( input_dict['Mailing Address Line 1'].strip() and input_dict['Mailing City'].strip()):
+        if input_dict['Mailing Address Line 1'].strip() and input_dict['Mailing City'].strip():
             return {
                 'MAIL_ADDRESS_LINE1': input_dict['Mailing Address Line 1'],
                 'MAIL_ADDRESS_LINE2': " ".join([
@@ -365,136 +308,47 @@ class StateTransformer(BaseTransformer):
     #### Political methods #####################################################
 
     def extract_state_voter_ref(self, input_dict):
-        """
-        Inputs:
-            input_dict: dictionary of form {colname: value} from raw data
-        Outputs:
-            Dictionary with following keys
-                'STATE_VOTER_REF'
-        """
-        return {'STATE_VOTER_REF': "FL"+input_dict['Voter ID']}
+        return {'STATE_VOTER_REF': "FL" + input_dict['Voter ID']}
 
     def extract_county_voter_ref(self, input_dict):
-        """
-        Inputs:
-            input_dict: dictionary of form {colname: value} from raw data
-        Outputs:
-            Dictionary with following keys
-                'COUNTY_VOTER_REF'
-        """
         return {'COUNTY_VOTER_REF': None}
 
     def extract_registration_date(self, input_dict):
-        """
-        Inputs:
-            input_dict: dictionary of form {colname: value} from raw data
-        Outputs:
-            Dictionary with following keys
-                'REGISTRATION_DATE'
-        """
-        date = self.convert_date(input_dict['Registration Date'])
-        return {'REGISTRATION_DATE': date}
+        return {'REGISTRATION_DATE': self.convert_date(input_dict['Registration Date'])}
 
     def extract_registration_status(self, input_dict):
-        """
-        Inputs:
-            input_dict: dictionary of form {colname: value} from raw data
-        Outputs:
-            Dictionary with following keys
-                'REGISTRATION_STATUS'
-        """
         return {'REGISTRATION_STATUS': input_dict['Voter Status']}
 
     def extract_absentee_type(self, input_dict):
-        """
-        Inputs:
-            input_dict: dictionary of form {colname: value} from raw data
-        Outputs:
-            Dictionary with following keys
-                'ABSTENTEE_TYPE'
-        """
         return {'ABSENTEE_TYPE': None}
 
     def extract_party(self, input_dict):
-        """
-        Inputs:
-            input_dict: dictionary of form {colname: value} from raw data
-        Outputs:
-            Dictionary with following keys
-                'PARTY'
-        """
-        party = input_dict['Party Affiliation']
-        return {'PARTY': self.florida_party_map[party]}
+        return {'PARTY': self.florida_party_map[input_dict['Party Affiliation']]}
 
 
     def extract_congressional_dist(self, input_dict):
-        """
-        Inputs:
-            input_dict: dictionary of form {colname: value} from raw data
-        Outputs:
-            Dictionary with following keys
-                'CONGRESSIONAL_DIST'
-        """
         return {'CONGRESSIONAL_DIST': input_dict['Congressional District']}
 
     def extract_upper_house_dist(self, input_dict):
-        """
-        Inputs:
-            input_dict: dictionary of form {colname: value} from raw data
-        Outputs:
-            Dictionary with following keys
-                'UPPER_HOUSE_DIST'
-        """
         return {'UPPER_HOUSE_DIST': input_dict['Senate District']}
 
     def extract_lower_house_dist(self, input_dict):
-        """
-        Inputs:
-            input_dict: dictionary of form {colname: value} from raw data
-        Outputs:
-            Dictionary with following keys
-                'LOWER_HOUSE_DIST'
-        """
         return {'LOWER_HOUSE_DIST': input_dict['House District']}
 
     def extract_precinct(self, input_dict):
-        """
-        Inputs:
-            input_dict: dictionary of form {colname: value} from raw data
-        Outputs:
-            Dictionary with following keys
-                'PRECINCT'
-                'PRECINCT_SPLIT'
-
-        """
         split = input_dict['Precinct Split'] if input_dict['Precinct Split'].strip() else input_dict['Precinct']
 
         return {
-                'PRECINCT': input_dict['Precinct'],
-                'PRECINCT_SPLIT': split
-            }
-
+            'PRECINCT': input_dict['Precinct'],
+            'PRECINCT_SPLIT': split
+        }
 
     def extract_county_board_dist(self, input_dict):
-        """
-        Inputs:
-            input_dict: dictionary of form {colname: value} from raw data
-        Outputs:
-            Dictionary with following keys
-                'COUNTY_BOARD_DIST'
-        """
-        # Not sure if mapping exists, verify
+        # TODO: Not sure if mapping exists, verify
         return {'COUNTY_BOARD_DIST': None}
 
     def extract_school_board_dist(self, input_dict):
-        """
-        Inputs:
-            input_dict: dictionary of form {colname: value} from raw data
-        Outputs:
-            Dictionary with following keys
-                'SCHOOL_BOARD_DIST'
-        """
-        # Not sure if mapping exists, verify
+        # TODO: Not sure if mapping exists, verify
         return {'SCHOOL_BOARD_DIST': None}
 
 if __name__ == '__main__':
