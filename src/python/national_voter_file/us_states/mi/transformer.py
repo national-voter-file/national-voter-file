@@ -98,6 +98,31 @@ class StatePreparer(BasePreparer):
 class StateTransformer(BaseTransformer):
     date_format = "%m%d%Y"
 
+    col_map = {
+        'TITLE': None,
+        'FIRST_NAME': 'FIRST_NAME',
+        'MIDDLE_NAME': 'MIDDLE_NAME',
+        'LAST_NAME': 'LAST_NAME',
+        'NAME_SUFFIX': 'NAME_SUFFIX',
+        'RACE': None,
+        'BIRTH_STATE': None,
+        'LANGUAGE_CHOICE': None,
+        'EMAIL': None,
+        'PHONE': None,
+        'DO_NOT_CALL_STATUS': None,
+        'COUNTYCODE': 'COUNTYCODE',
+        'STATE_VOTER_REF': 'STATE_VOTER_REF',
+        'COUNTY_VOTER_REF': None,
+        'PARTY': None,
+        'CONGRESSIONAL_DIST': 'CONGRESSIONAL_DIST',
+        'UPPER_HOUSE_DIST': 'UPPER_HOUSE_DIST',
+        'LOWER_HOUSE_DIST': 'LOWER_HOUSE_DIST',
+        'PRECINCT': 'WARD_PRECINCT',
+        'COUNTY_BOARD_DIST': 'COUNTY_BOARD_DIST',
+        'PRECINCT_SPLIT': None,
+        'REGISTRATION_STATUS': 'REGISTRATION_STATUS'
+    }
+
     input_fields = [
         'LAST_NAME',
         'FIRST_NAME',
@@ -155,35 +180,17 @@ class StateTransformer(BaseTransformer):
     col_type_dict['PRECINCT_SPLIT'] = set([str, type(None)])
     col_type_dict['COUNTY_VOTER_REF'] = set([str, type(None)])
 
-    #### Contact methods ######################################################
-
-    extract_name = BaseTransformer.map_extract_by_keys(
-        'TITLE', 'FIRST_NAME', 'MIDDLE_NAME', 'LAST_NAME', 'NAME_SUFFIX',
-        defaults={'TITLE': None}
-    )
-
-    extract_email = lambda self, i: {'EMAIL': None}
-
-    extract_phone_number = lambda self, i: {'PHONE': None}
-
-    extract_do_not_call_status = lambda self, i: {'DO_NOT_CALL_STATUS': None}
 
     #### Demographics methods #################################################
 
     def extract_gender(self, input_dict):
         return {'GENDER': self.gender_map[input_dict['GENDER']]}
 
-    extract_race = lambda self, i: {'RACE': None}
-
-    extract_birth_state = lambda self, i: {'BIRTH_STATE': None}
-
     def extract_birthdate(self, input_dict):
         return {
             'BIRTHDATE': date(int(input_dict['BIRTH_YEAR']), 1, 1),
             'BIRTHDATE_IS_ESTIMATE': 'Y'
         }
-
-    extract_language_choice = lambda self, i: {'LANGUAGE_CHOICE': None}
 
     #### Address methods ######################################################
 
@@ -275,8 +282,6 @@ class StateTransformer(BaseTransformer):
 
         return converted_addr
 
-    extract_county_code = BaseTransformer.map_extract_by_keys('COUNTYCODE')
-
     def extract_mailing_address(self, input_dict):
         # columns to create address, in order
         address_components = [
@@ -313,38 +318,17 @@ class StateTransformer(BaseTransformer):
 
     #### Political methods ####################################################
 
-    extract_state_voter_ref = BaseTransformer.map_extract_by_keys('STATE_VOTER_REF')
-
-    extract_county_voter_ref = lambda self, i: {'COUNTY_VOTER_REF': None}
-
     def extract_registration_date(self, input_dict):
         return {'REGISTRATION_DATE': self.convert_date(input_dict['DATE_OF_REGISTRATION'])}
-
-    extract_registration_status = BaseTransformer.map_extract_by_keys('REGISTRATION_STATUS')
 
     # TODO: Check if this would be absentee status or UOCAVA
     def extract_absentee_type(self, input_dict):
         return {'ABSENTEE_TYPE': input_dict['PERMANENT_ABSENTEE_IND']}
 
-    extract_party = lambda self, i: {'PARTY': None}
-
-    extract_congressional_dist = BaseTransformer.map_extract_by_keys('CONGRESSIONAL_DIST')
-
-    extract_upper_house_dist = BaseTransformer.map_extract_by_keys('UPPER_HOUSE_DIST')
-
-    extract_lower_house_dist = BaseTransformer.map_extract_by_keys('LOWER_HOUSE_DIST')
-
-    def extract_precinct(self, input_dict):
-        return {'PRECINCT': input_dict['WARD_PRECINCT']}
-
-    extract_county_board_dist = BaseTransformer.map_extract_by_keys('COUNTY_BOARD_DIST')
-
     # TODO: Maps back to schools in Documents/schoolcd.lst, want to find the
     # best way of bringing that in without changing this too much
     def extract_school_board_dist(self, input_dict):
         return {'SCHOOL_BOARD_DIST': input_dict['SCHOOL_CODE']}
-
-    extract_precinct_split = lambda self, i: {'PRECINCT_SPLIT': None}
 
 
 if __name__ == '__main__':

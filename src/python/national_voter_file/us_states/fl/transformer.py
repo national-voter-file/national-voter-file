@@ -34,6 +34,13 @@ class StatePreparer(BasePreparer):
 class StateTransformer(BaseTransformer):
     date_format="%m/%d/%Y"
 
+    col_type_dict = BaseTransformer.col_type_dict.copy()
+    col_type_dict['PRECINCT_SPLIT'] = set([str, type(None)])
+
+    col_map = {
+        'PRECINCT_SPLIT': None
+    }
+
     input_fields = [
         'County Code',
         'Voter ID',

@@ -34,6 +34,13 @@ class StateTransformer(BaseTransformer):
     input_fields = None # This can be a list of column names for the input file.
                         # Use None if the file has headers
 
+    col_type_dict = BaseTransformer.col_type_dict.copy()
+    col_type_dict['PRECINCT_SPLIT'] = set([str, type(None)])
+
+    col_map = {
+        'PRECINCT_SPLIT': None
+    }
+
     north_carolina_party_map = {
         'DEM':'DEM',
         'REP':'REP',
@@ -64,7 +71,7 @@ class StateTransformer(BaseTransformer):
             'LAST_NAME': input_dict['last_name'],
             'NAME_SUFFIX': input_dict['name_suffix_lbl'],
         }
-        return output_dict 
+        return output_dict
 
     def extract_email(self, input_dict):
         """
@@ -131,7 +138,7 @@ class StateTransformer(BaseTransformer):
                 'BIRTH_STATE'
         """
         return {'BIRTH_STATE': input_dict['birth_state']}
-    
+
 
     def extract_birthdate(self, input_dict):
         """
@@ -241,8 +248,8 @@ class StateTransformer(BaseTransformer):
                 'STATE_NAME': state_name,
                 'VALIDATION_STATUS': '1'
             })
-            
-        return converted_addr 
+
+        return converted_addr
 
     def extract_county_code(self, input_dict):
         """
@@ -357,7 +364,7 @@ class StateTransformer(BaseTransformer):
                 'CONGRESSIONAL_DIST'
         """
         #TODO: cong_dist default value?
-        cong_dist = input_dict['cong_dist_abbrv'] 
+        cong_dist = input_dict['cong_dist_abbrv']
         if ' ' == cong_dist:
             cong_dist = 'none'
         return {'CONGRESSIONAL_DIST' : cong_dist}
