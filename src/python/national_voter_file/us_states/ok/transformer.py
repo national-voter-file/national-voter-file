@@ -34,6 +34,8 @@ class StatePreparer(BasePreparer):
 class StateTransformer(BaseTransformer):
     date_format="%m/%d/%Y"
 
+    input_fields = None
+
     oklahoma_party_map = {
         "DEM": "DEM",
         "REP": "REP",
