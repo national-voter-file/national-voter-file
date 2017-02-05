@@ -59,4 +59,4 @@ def run_state_transformer(state_test):
 
 def test_all_transformers():
     for state_test in load_states(TEST_STATES):
-        run_state_transformer(state_test)
+        yield (run_state_transformer, state_test)
