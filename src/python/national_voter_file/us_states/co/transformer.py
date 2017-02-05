@@ -258,15 +258,10 @@ class StateTransformer(BaseTransformer):
     extract_school_board_dist = lambda self, i: {'SCHOOL_BOARD_DIST': None}
 
     def extract_precinct(self, input_dict):
-        """
-        Inputs:
-            input_dict: dictionary of form {colname: value} from raw data
-        Outputs:
-            Dictionary with following keys
-                'PRECINCT'
-        """
-        return {'PRECINCT' : input_dict['PRECINCT'],
-                'PRECINCT_SPLIT' : input_dict['SPLIT']}
+        return {'PRECINCT' : input_dict['PRECINCT'] }
+
+    def extract_precinct_split(self, input_dict):
+        return {'PRECINCT_SPLIT' : input_dict['SPLIT'] }
 
 
 if __name__ == '__main__':
