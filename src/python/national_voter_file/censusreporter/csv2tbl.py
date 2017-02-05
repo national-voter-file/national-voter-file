@@ -84,4 +84,4 @@ sqlfile = open(outfile,'w')
 sqlfile.write(sql)
 sqlfile.close
 
-print '%s created.' % (outfile)
+print('%s created.' % (outfile))
