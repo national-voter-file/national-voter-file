@@ -192,7 +192,7 @@ class BaseTransformer(object):
         'REGISTRATION_STATUS': set([str, type(None)]),
         'ABSENTEE_TYPE': set([str, type(None)]),
         'PARTY': set([str, type(None)]),
-        'CONGRESSIONAL_DIST': set([str]),
+        'CONGRESSIONAL_DIST': set([str, type(None)]),
         'UPPER_HOUSE_DIST': set([str, type(None)]),
         'LOWER_HOUSE_DIST': set([str, type(None)]),
         'PRECINCT': set([str]),
@@ -230,7 +230,8 @@ class BaseTransformer(object):
                       "AE", #Americans Elect
                       "AMP", # American Patriot Party
                       "OTH", #otherwise
-                      "UN" #Unaffiliated
+                      "UN", #Unaffiliated
+                      type(None)
         ]),
         'GENDER': set(['M', 'F', 'U']),
         'RACE':set([
