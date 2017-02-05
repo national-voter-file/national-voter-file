@@ -41,3 +41,11 @@ def load(states=STATES, modules=['transformer']):
     return [importlib.import_module("national_voter_file.us_states.%s" % (state))
             for state in states]
 
+def load_dict(states=STATES, modules=['transformer']):
+    for m in modules:
+        #import sub-modules
+        [importlib.import_module("national_voter_file.us_states.%s.%s" % (state, m))
+         for state in states]
+    return {state : importlib.import_module("national_voter_file.us_states.%s" % (state))
+            for state in states}
+
