@@ -12,11 +12,11 @@
 import csv, os, string, sys
 
 if len(sys.argv)<2:
-	print "\nUsage: csv2tbl.py path/datafile.csv (0,1,2,3 = column name format):"
-	print "\nFormat: 0 = TitleCasedWords"
-	print "        1 = Titlecased_Words_Underscored"
-	print "        2 = lowercase_words_underscored"
-	print "        3 = Words_underscored_only (leave case as in source)"
+	print("\nUsage: csv2tbl.py path/datafile.csv (0,1,2,3 = column name format):")
+	print("\nFormat: 0 = TitleCasedWords")
+	print("        1 = Titlecased_Words_Underscored")
+	print("        2 = lowercase_words_underscored")
+	print("        3 = Words_underscored_only (leave case as in source)")
 	sys.exit()
 else:
 	if len(sys.argv)==2:
@@ -71,7 +71,7 @@ for row in reader:
 			fld = string.strip(row[i])
 			if len(fld) > cols[i][1]:
 				cols[i][1] = len(fld)
-	else: print 'Warning: Line %s ignored. Different width than header' % (rc)
+	else: print('Warning: Line %s ignored. Different width than header' % (rc))
 
 print
 
@@ -84,4 +84,4 @@ sqlfile = open(outfile,'w')
 sqlfile.write(sql)
 sqlfile.close
 
-print '%s created.' % (outfile)
+print('%s created.' % (outfile))

@@ -1,31 +1,48 @@
-from src.main.python.transformers.base_transformer import BaseTransformer
-import usaddress
+import csv
+import os
+import re
+import sys
+
+from national_voter_file.transformers.base import (DATA_DIR,
+                                                   BasePreparer,
+                                                   BaseTransformer)
 from datetime import date
+import usaddress
 
-class COTransformer(BaseTransformer):
+__all__ = ['default_file', 'StatePreparer', 'StateTransformer']
 
-    """
-    A few required columns in the BaseTransformer did not have values in the
-    Ohio data. Not sure what the best way of updating those on a case by case
-    basis is, but given how irregular some files are it might just be worth
-    allowing None for all columns
-    """
-    col_type_dict = BaseTransformer.col_type_dict.copy()
-    col_type_dict['TITLE'] = set([str, type(None)])
-    col_type_dict['GENDER'] = set([str, type(None)])
-    col_type_dict['RACE'] = set([str, type(None)])
-    col_type_dict['BIRTH_STATE'] = set([str, type(None)])
-    col_type_dict['ABSENTEE_TYPE'] = set([str, type(None)])
-    col_type_dict['COUNTY_VOTER_REF'] = set([str, type(None)])
+default_file = 'co_sample.csv'
+
+
+class StatePreparer(BasePreparer):
+    state_path = 'co'
+    state_name='Colorado'
+    sep = ","
+
+    def __init__(self, input_path, *args):
+        super(StatePreparer, self).__init__(input_path, *args)
+
+        if not self.transformer:
+            self.transformer = StateTransformer()
+
+    def process(self):
+        reader = self.dict_iterator(self.open(self.input_path))
+        for row in reader:
+            yield row
+
+
+class StateTransformer(BaseTransformer):
+    date_format = "%m/%d/%Y"
+    input_fields = None #The file has headers
 
     co_party_map = {
-        "DEM":"DEM",
-        "REP":"REP",
-        "LBR":"LIB",
-        "GRN":"GRN",
-        "ACN":"AMC",
-        "UNI":"UTY",
-        "UAF":"UN"
+        "DEM": "DEM",
+        "REP": "REP",
+        "LBR": "LIB",
+        "GRN": "GRN",
+        "ACN": "AMC",
+        "UNI": "UTY",
+        "UAF": "UN"
     }
 
     co_gender_map = {
@@ -36,35 +53,15 @@ class COTransformer(BaseTransformer):
     #### Contact methods #######################################################
 
     def extract_name(self, input_dict):
-        """
-        Inputs:
-            input_dict: dictionary of form {colname: value} from raw data
-        Outputs:
-            Dictionary with following keys
-                'TITLE'
-                'FIRST_NAME'
-                'MIDDLE_NAME'
-                'LAST_NAME'
-                'NAME_SUFFIX'
-        """
-        output_dict = {
+        return {
             'TITLE': None,
             'FIRST_NAME': input_dict['FIRST_NAME'],
             'MIDDLE_NAME': input_dict['MIDDLE_NAME'],
             'LAST_NAME': input_dict['LAST_NAME'],
             'NAME_SUFFIX': input_dict['NAME_SUFFIX'],
         }
-        return output_dict
 
-    def extract_email(self, input_dict):
-        """
-        Inputs:
-            input_dict: dictionary of form {colname: value} from raw data
-        Outputs:
-            Dictionary with following keys
-                'EMAIL'
-        """
-        return {'EMAIL': None}
+    extract_email = lambda self, i: {'EMAIL': None}
 
     def extract_phone_number(self, input_dict):
         """
@@ -76,71 +73,25 @@ class COTransformer(BaseTransformer):
         """
         return {'PHONE': input_dict['PHONE_NUM']}
 
-    def extract_do_not_call_status(self, input_dict):
-        """
-        Inputs:
-            input_dict: dictionary of form {colname: value} from raw data
-        Outputs:
-            Dictionary with following keys
-                'DO_NOT_CALL_STATUS'
-        """
-        return {'DO_NOT_CALL_STATUS': None}
+    extract_do_not_call_status = lambda self, i: {'DO_NOT_CALL_STATUS': None}
 
     #### Demographics methods ##################################################
 
     def extract_gender(self, input_dict):
-        """
-        Inputs:
-            input_dict: dictionary of form {colname: value} from raw data
-        Outputs:
-            Dictionary with following keys
-                'GENDER'
-        """
         return {'GENDER': self.co_gender_map.get(input_dict['GENDER'], None)}
 
-    def extract_race(self, input_dict):
-        """
-        Inputs:
-            input_columns: name or list of columns
-        Outputs:
-            Dictionary with following keys
-                'RACE'
-        """
-        return {'RACE': None}
+    extract_race = lambda self, i: {'RACE': None}
 
-    def extract_birth_state(self, input_columns):
-        """
-        Inputs:
-            input_columns: name or list of columns
-        Outputs:
-            Dictionary with following keys
-                'BIRTH_STATE'
-        """
-        return {'BIRTH_STATE': None}
+    extract_birth_state = lambda self, i: {'BIRTH_STATE': None}
 
     def extract_birthdate(self, input_dict):
-        """
-        Inputs:
-            input_dict: dictionary of form {colname: value} from raw data
-        Outputs:
-            Dictionary with following keys
-                'BIRTHDATE'
-        """
         # TODO: Putting Jan 1 of birth year, need to figure out how to handle
         return {
             'BIRTHDATE': date(int(input_dict['BIRTH_YEAR']), 1, 1),
             'BIRTHDATE_IS_ESTIMATE':'Y'
-            }
+        }
 
-    def extract_language_choice(self, input_dict):
-        """
-        Inputs:
-            input_dict: dictionary of form {colname: value} from raw data
-        Outputs:
-            Dictionary with following keys
-                'LANGUAGE_CHOICE'
-        """
-        return {'LANGUAGE_CHOICE': None}
+    extract_language_choice = lambda self, i: {'LANGUAGE_CHOICE': None}
 
     #### Address methods #######################################################
 
@@ -192,26 +143,35 @@ class COTransformer(BaseTransformer):
              input_dict['UNIT_NUM']
         ])
 
+        raw_dict = {
+            'RAW_ADDR1': address_str,
+            # Including Raw Addr 2 as same because not as clear of a division
+            'RAW_ADDR2': address_str,
+            'RAW_CITY': input_dict['RESIDENTIAL_CITY'],
+            'RAW_ZIP': input_dict['RESIDENTIAL_ZIP_CODE']
+        }
+
+        for r in ['RAW_ADDR1', 'RAW_ADDR2']:
+            if not raw_dict[r].strip():
+                raw_dict[r] = '--Not provided--'
+
         usaddress_dict, usaddress_type = self.usaddress_tag(address_str)
 
         converted_addr = self.convert_usaddress_dict(usaddress_dict)
 
-        converted_addr.update({'PLACE_NAME':input_dict['RESIDENTIAL_CITY'],
-                               'STATE_NAME':input_dict['RESIDENTIAL_STATE'],
-                               'ZIP_CODE':input_dict['RESIDENTIAL_ZIP_CODE']
+        converted_addr.update({
+            'PLACE_NAME': input_dict['RESIDENTIAL_CITY'],
+            'STATE_NAME': input_dict['RESIDENTIAL_STATE'],
+            'ZIP_CODE': input_dict['RESIDENTIAL_ZIP_CODE'],
+            'VALIDATION_STATUS': '2'
         })
+
+        converted_addr.update(raw_dict)
 
         return converted_addr
 
     def extract_county_code(self, input_dict):
-        """
-        Inputs:
-            input_dict: dictionary of form {colname: value} from raw data
-        Outputs:
-            Dictionary with following keys
-                'COUNTYCODE'
-        """
-        return {'COUNTYCODE': input_dict['COUNTY_CODE']}
+        return {'COUNTYCODE' : input_dict['COUNTY_CODE']}
 
     def extract_mailing_address(self, input_dict):
         """
@@ -264,100 +224,38 @@ class COTransformer(BaseTransformer):
     #### Political methods #####################################################
 
     def extract_state_voter_ref(self, input_dict):
-        """
-        Inputs:
-            input_dict: dictionary of form {colname: value} from raw data
-        Outputs:
-            Dictionary with following keys
-                'STATE_VOTER_REF'
-        """
-        return {'STATE_VOTER_REF': input_dict['VOTER_ID']}
+        return {'STATE_VOTER_REF' : input_dict['VOTER_ID']}
 
-    def extract_county_voter_ref(self, input_dict):
-        """
-        Inputs:
-            input_dict: dictionary of form {colname: value} from raw data
-        Outputs:
-            Dictionary with following keys
-                'COUNTY_VOTER_REF'
-        """
-        return {'COUNTY_VOTER_REF': None}
+    extract_county_voter_ref = lambda self, i: {'COUNTY_VOTER_REF': None}
 
     def extract_registration_date(self, input_dict):
-        """
-        Inputs:
-            input_dict: dictionary of form {colname: value} from raw data
-        Outputs:
-            Dictionary with following keys
-                'REGISTRATION_DATE'
-        """
-        date = self.convert_date(input_dict['REGISTRATION_DATE'])
-        return {'REGISTRATION_DATE': date}
+        return {'REGISTRATION_DATE': self.convert_date(input_dict['REGISTRATION_DATE'])}
 
     def extract_registration_status(self, input_dict):
-        """
-        Inputs:
-            input_dict: dictionary of form {colname: value} from raw data
-        Outputs:
-            Dictionary with following keys
-                'REGISTRATION_STATUS'
-        """
-        # TODO: Assuming this is for A/I, but if for full Active/Inactive can use STATUS
-        return {'REGISTRATION_STATUS': input_dict['STATUS_CODE']}
+        return {'REGISTRATION_STATUS' : input_dict['STATUS_CODE']}
 
-    def extract_absentee_type(self, input_dict):
-        """
-        Inputs:
-            input_dict: dictionary of form {colname: value} from raw data
-        Outputs:
-            Dictionary with following keys
-                'ABSENTEE_TYPE'
-        """
-        # TODO: PERMANENT_MAIL_IN_VOTER listed, but only has No's
-        return {'ABSENTEE_TYPE': None}
+    extract_absentee_type = lambda self, i: {'ABSENTEE_TYPE': None}
 
     def extract_party(self, input_dict):
-        """
-        Inputs:
-            input_dict: dictionary of form {colname: value} from raw data
-        Outputs:
-            Dictionary with following keys
-                'PARTY'
-        """
         return {'PARTY': self.co_party_map[input_dict['PARTY']]}
 
     def extract_congressional_dist(self, input_dict):
-        """
-        Inputs:
-            input_dict: dictionary of form {colname: value} from raw data
-        Outputs:
-            Dictionary with following keys
-                'CONGRESSIONAL_DIST'
-        """
         # Starts with 14 chars of "Congressional ", skipping
         return {'CONGRESSIONAL_DIST': input_dict['CONGRESSIONAL'][14:]}
 
     def extract_upper_house_dist(self, input_dict):
-        """
-        Inputs:
-            input_dict: dictionary of form {colname: value} from raw data
-        Outputs:
-            Dictionary with following keys
-                'UPPER_HOUSE_DIST'
-        """
         # Starts with 13 chars of "State Senate ", skipping
         return {'UPPER_HOUSE_DIST': input_dict['STATE_SENATE'][13:]}
 
     def extract_lower_house_dist(self, input_dict):
-        """
-        Inputs:
-            input_dict: dictionary of form {colname: value} from raw data
-        Outputs:
-            Dictionary with following keys
-                'LOWER_HOUSE_DIST'
-        """
         # Starts with 12 chars of "State House ", skipping
         return {'LOWER_HOUSE_DIST': input_dict['STATE_HOUSE'][12:]}
+
+    extract_precinct = BaseTransformer.map_extract_by_keys('PRECINCT')
+
+    extract_county_board_dist = lambda self, i: {'COUNTY_BOARD_DIST': None}
+
+    extract_school_board_dist = lambda self, i: {'SCHOOL_BOARD_DIST': None}
 
     def extract_precinct(self, input_dict):
         """
@@ -367,37 +265,10 @@ class COTransformer(BaseTransformer):
             Dictionary with following keys
                 'PRECINCT'
         """
-        return {'PRECINCT': input_dict['PRECINCT']}
+        return {'PRECINCT' : input_dict['PRECINCT'],
+                'PRECINCT_SPLIT' : input_dict['SPLIT']}
 
-    def extract_county_board_dist(self, input_dict):
-        """
-        Inputs:
-            input_dict: dictionary of form {colname: value} from raw data
-        Outputs:
-            Dictionary with following keys
-                'COUNTY_BOARD_DIST'
-        """
-        # Not sure if mapping exists, verify
-        return {'COUNTY_BOARD_DIST': None}
 
-    def extract_school_board_dist(self, input_dict):
-        """
-        Inputs:
-            input_dict: dictionary of form {colname: value} from raw data
-        Outputs:
-            Dictionary with following keys
-                'SCHOOL_BOARD_DIST'
-        """
-        # Not sure if mapping exists, verify
-        return {'SCHOOL_BOARD_DIST': None}
-
-    def extract_precinct_split(self, input_dict):
-        """
-        Inputs:
-            input_dict: dictionary of form {colname: value} from raw data
-        Outputs:
-            Dictionary with following keys
-                'PRECINCT_SPLIT'
-        """
-        # Not sure if mapping exists, verify
-        return {'PRECINCT_SPLIT': input_dict['SPLIT']}
+if __name__ == '__main__':
+    preparer = StatePreparer(*sys.argv[1:])
+    preparer.process()
