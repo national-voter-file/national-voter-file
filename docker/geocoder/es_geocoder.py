@@ -31,24 +31,8 @@ SQL_COLUMNS = [
 ES_URL = 'http://elasticsearch:9200/{q_idx}/_search'
 
 
-def create_query(data, q_type='census'):
-    if q_type == 'address':
-        query = create_point_query(data)
-    elif q_type == 'census':
-        query = create_census_query(data)
-    else:
-        # TODO: Throw specific error
-        pass
-
-    for s in data['STREET_NAME'].split(' '):
-        query['query']['bool']['must'].append(
-            {'term': {"properties.street": s.lower()}}
-        )
-    return query
-
-
 def create_point_query(data):
-    return {
+    point_query = {
         'query': {
             'bool': {
                 'must': [
@@ -57,25 +41,34 @@ def create_point_query(data):
                 ],
                 'should': [
                     {'term': {'properties.zip': str(data['ZIP_CODE'])}},
-                    {'term': {'properties.city': data['PLACE_NAME'].lower()}},
-                    {'term': {'properties.street': data['STREET_NAME_POST_TYPE'].lower()}}
+                    {'term': {'properties.city': data['PLACE_NAME'].lower()}}
                 ]
             }
         }
     }
+    if data['STREET_NAME_POST_TYPE']:
+        point_query['query']['bool']['should'].append(
+            {'term': {'properties.street': data['STREET_NAME_POST_TYPE'].lower()}}
+        )
+
+    for s in data['STREET_NAME'].split(' '):
+        point_query['query']['bool']['must'].append(
+            {'term': {"properties.street": s.lower()}}
+        )
+
+    return point_query
 
 
 def create_census_query(data):
-    return {
+    census_query = {
         'query': {
             'bool': {
                 'must': [
-                    {'term': {'properties.state': data['STATE_NAME'].lower()}}
+                    {'term': {'properties.STATE': data['STATE_NAME'].lower()}}
                 ],
                 'should': [
                     {'term': {'properties.ZIPL': str(data['ZIP_CODE'])}},
-                    {'term': {'properties.ZIPR': str(data['ZIP_CODE'])}},
-                    {'term': {'properties.FULLNAME': data['STREET_NAME_POST_TYPE'].lower()}}
+                    {'term': {'properties.ZIPR': str(data['ZIP_CODE'])}}
                 ],
                 'filter': {
                     'bool': {
@@ -130,9 +123,21 @@ def create_census_query(data):
             }
         }
     }
+    if data['STREET_NAME_POST_TYPE']:
+        census_query['query']['bool']['should'].append(
+            {'term': {'properties.FULLNAME': data['STREET_NAME_POST_TYPE'].lower()}}
+        )
+
+    for s in data['STREET_NAME'].split(' '):
+        census_query['query']['bool']['must'].append(
+            {'term': {"properties.FULLNAME": s.lower()}}
+        )
+    return census_query
 
 
 def handle_census_range(range_from, range_to):
+    from_int = 0
+    to_int = 0
     if range_from:
         from_int = int(range_from) if range_from.isdigit() else 0
     if range_to:
@@ -155,8 +160,8 @@ def handle_census_range(range_from, range_to):
 
 def interpolate_census(data, res_data):
     tiger_feat = res_data['_source']
-    data_line = LineString([Point(*p) for p in tiger_feat['geometry']])
-    line_dist = data_line.distance
+    data_line = LineString([Point(*p) for p in tiger_feat['geometry']['coordinates']])
+    line_len = data_line.length
 
     addr_int = int(data['ADDRESS_NUMBER'])
     addr_is_even = addr_int % 2 == 0
@@ -171,13 +176,16 @@ def interpolate_census(data, res_data):
     elif addr_is_even == r_range['is_even']:
         tiger_range = r_range
     else:
-        # Throw error
-        pass
+        # TODO: Throw error, for now default to l_range
+        tiger_range = l_range
 
-    if tiger_range['from_int'] > tiger_range['to_int']:
-        range_dist = ((tiger_range['from_int'] - addr_int) / tiger_range['range_diff']) * line_dist
+    # Check for divide by zero errors, otherwise create distance
+    if tiger_range['range_diff'] == 0:
+        range_dist = 0
+    elif tiger_range['from_int'] > tiger_range['to_int']:
+        range_dist = ((tiger_range['from_int'] - addr_int) / tiger_range['range_diff']) * line_len
     else:
-        range_dist = ((addr_int - tiger_range['from_int']) / tiger_range['range_diff']) * line_dist
+        range_dist = ((addr_int - tiger_range['from_int']) / tiger_range['range_diff']) * line_len
 
     inter_pt = data_line.interpolate(range_dist)
     return {'lat': inter_pt.y, 'lon': inter_pt.x}
@@ -199,27 +207,30 @@ def get_unmatched_address_records(cur, limit=1):
 
 # Request Mapzen, check status
 def request_elasticsearch(addr_row, q_type='census'):
-    query_data = create_query(addr_row, q_type=q_type)
+    if q_type == 'census':
+        query_data = create_census_query(addr_row)
+    elif q_type == 'address':
+        query_data = create_point_query(addr_row)
 
-    response = requests.post(es_url.format(q_idx=q_type), json=query_data)
+    response = requests.post(ES_URL.format(q_idx=q_type), json=query_data)
     # Check headers, status for success and rate limiting
     if response.status_code == 200:
         response_json = response.json()
-        if len(response_json) == 0:
-            return household_id, None
+        if len(response_json['hits']['hits']) == 0:
+            return addr_row['HOUSEHOLD_ID'], None
 
+        addr_hit = response_json['hits']['hits'][0]
         if q_type == 'address':
-            geom_dict = dict(lon=response_json[0]['geometry']['coordinates'][0],
-                             lat=response_json[1]['geometry']['coordinates'][1])
+            geom_dict = dict(lon=addr_hit['geometry']['coordinates'][0],
+                             lat=addr_hit['geometry']['coordinates'][1])
         elif q_type == 'census':
-            geom_dict = interpolate_census(addr_row, response_json[0])
+            geom_dict = interpolate_census(addr_row, addr_hit)
 
-        return household_id, geom_dict
+        time.sleep(0.01)
 
-    elif response.status_code == 429:
-        time.sleep(0.3)
+        return addr_row['HOUSEHOLD_ID'], geom_dict
     else:
-        return household_id, None
+        return addr_row['HOUSEHOLD_ID'], None
 
 
 # Either update record to coordinates or change status to failed
@@ -261,10 +272,10 @@ def run_geocoder(config, log):
     except Exception as ex:
         log.error('Connection error with {}: {}'.format(config['databases']['DevVoter']['database'], ex))
 
-    results = get_unmatched_address_records(cur, limit=5)
+    results = get_unmatched_address_records(cur, limit=100)
     result_dicts = [dict(zip(SQL_COLUMNS, r)) for r in results]
 
-    for row in results:
+    for row in result_dicts:
         h_id, geom = request_elasticsearch(row, q_type='census')
         if h_id:
             update_address_record(cur, h_id, geom)
@@ -274,7 +285,7 @@ def run_geocoder(config, log):
             os.environ['WAIT_TIME'] = time_wait.strftime('%Y-%m-%d %H:%M')
             log.info('Setting wait time to {}'.format(os.environ['WAIT_TIME']))
             break
-        time.sleep(0.2)
+        time.sleep(0.1)
 
     conn.commit()
     cur.close()
