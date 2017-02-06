@@ -2,11 +2,12 @@ import csv
 import os
 import re
 import sys
+import zipfile
+from datetime import date
+
 from national_voter_file.transformers.base import (DATA_DIR,
                                                    BasePreparer,
                                                    BaseTransformer)
-import zipfile
-from datetime import date
 import usaddress
 
 __all__ = ['default_file', 'StatePreparer', 'StateTransformer']
@@ -15,6 +16,10 @@ default_file = 'mi_sample.csv'
 
 
 class StatePreparer(BasePreparer):
+    state_path = 'mi'
+    state_name = 'Michigan'
+    sep = ','
+
     """
     Michigan's voter file has a strange layout which defines columns by their
     starting index and length in the table with no actual delimiters. Some columns
@@ -23,9 +28,6 @@ class StatePreparer(BasePreparer):
     based off of the column string indices as described in the Michigan voter file
     documentation (offset by one because their indices start at 1).
     """
-    state_path = 'mi'
-    state_name = 'Michigan'
-    sep = ','
 
     col_indices = (
         (0, 35),
@@ -260,7 +262,7 @@ class StateTransformer(BaseTransformer):
             if not raw_dict[r].strip():
                 raw_dict[r] = '--Not provided--'
 
-        usaddress_dict, usaddress_type = self.usaddress_tag(address_str)
+        usaddress_dict = self.usaddress_tag(address_str)[0]
 
         if usaddress_dict:
             converted_addr = self.convert_usaddress_dict(usaddress_dict)

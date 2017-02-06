@@ -33,6 +33,7 @@ class StatePreparer(BasePreparer):
     """
 
     state_path = 'pa'
+    state_name = 'Pennsylvania'
     sep = "\t"
     voter_file_re = re.compile(r'.+FVE.+\.txt')
 
@@ -199,8 +200,7 @@ class StateTransformer(BaseTransformer):
     extract_birth_state = lambda self, i: {'BIRTH_STATE': None, 'BIRTHDATE_IS_ESTIMATE': 'N'}
 
     def extract_birthdate(self, input_dict):
-        return {'BIRTHDATE': self.convert_date(input_dict['BIRTHDATE'])
-                if input_dict['BIRTHDATE'] else None}
+        return {'BIRTHDATE': self.convert_date(input_dict['BIRTHDATE']) if input_dict['BIRTHDATE'] else None}
 
     extract_language_choice = lambda self, i: {'LANGUAGE_CHOICE': None}
 
@@ -263,9 +263,7 @@ class StateTransformer(BaseTransformer):
         usaddress_dict, usaddress_type = self.usaddress_tag(address_str)
         converted_addr = dict([(k, '')
                                for k in self.usaddress_to_standard_colnames_dict.values()])
-        converted_addr.update(dict([(k, input_dict[k])
-                               for k in address_components]
-                              + [('VALIDATION_STATUS', '3')]))
+        converted_addr.update(dict([(k, input_dict[k]) for k in address_components] + [('VALIDATION_STATUS', '3')]))
 
         # use the convert_usaddress_dict to get correct column names
         # and fill in missing values
@@ -309,8 +307,7 @@ class StateTransformer(BaseTransformer):
         return {'COUNTY_VOTER_REF': input_dict['STATE_VOTER_REF']}
 
     def extract_registration_date(self, input_dict):
-        return {'REGISTRATION_DATE': self.convert_date(input_dict['REGISTRATION_DATE'])
-                if input_dict['REGISTRATION_DATE'] else None}
+        return {'REGISTRATION_DATE': self.convert_date(input_dict['REGISTRATION_DATE']) if input_dict['REGISTRATION_DATE'] else None}
 
     extract_registration_status = BaseTransformer.map_extract_by_keys('REGISTRATION_STATUS')
     extract_absentee_type = lambda self, i: {'ABSENTEE_TYPE': ''}
@@ -349,9 +346,7 @@ class StateTransformer(BaseTransformer):
 
     def _zonecode_column(self, key, input_dict):
         """Gets the county-specific column for `key` with fallback to default column"""
-        return self.zonecode_column_by_county.get(
-            input_dict['COUNTYCODE'], {}).get(key,
-                                                 self.zonecode_column_defaults.get(key))
+        return self.zonecode_column_by_county.get(input_dict['COUNTYCODE'], {}).get(key, self.zonecode_column_defaults.get(key))
 
     def extract_precinct(self, input_dict):
         """

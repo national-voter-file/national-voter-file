@@ -17,11 +17,13 @@ Here are the basic steps you want to perform:
 * And then include file info documentation if there was any that came with the data: in `docs/state-voter-file-data-descriptions/`
 
 # How to run test suite
-We use [Nosetest](http://nose.readthedocs.io/en/latest/) to run automated tests on our files. At the moment these tests are rudimentry, but at least verify basic functionality of the transformers.
+We use [Nosetest](http://nose.readthedocs.io/en/latest/) to run automated tests on our files. At the moment these tests are rudimentry, but at least verify basic functionality of the transformers:
 
-You can run the tests by cd'ing to `/src/python` directory and issuing the command:
+```nosetests src/python/national_voter_file/tests/test_transformers.py```
 
-  ```nosetests national_voter_file/tests/test_transformers.py```
+To run it using a specific version of Python:
+
+```python3.5 -m nose src/python/national_voter_file/tests/test_transformers.py```
 
 # How to Invoke transformers
 We now have a standard script to run any state. It takes arguments to speifcy the state code, and the input and output directories:
