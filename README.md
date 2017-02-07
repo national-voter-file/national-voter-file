@@ -16,7 +16,7 @@ Glad you asked! Simple, we:
 
 ### 1. Collect voter files from every state
 
-We've done eight states so far. We'd [love your help collecting them all](https://trello.com/b/IlZkwYc0/national-voter-file-states-pipeline).
+We've done nine states so far. We'd [love your help collecting them all](https://trello.com/b/IlZkwYc0/national-voter-file-states-pipeline).
 
 ### 2. Extract and transform that data
 
