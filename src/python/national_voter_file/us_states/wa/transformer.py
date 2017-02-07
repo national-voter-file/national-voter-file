@@ -55,7 +55,9 @@ class StateTransformer(BaseTransformer):
     #### Demographics methods ##################################################
 
     def extract_gender(self, input_dict):
-        return {'GENDER': input_dict['Gender']}
+        gender = input_dict['Gender']
+        gender = gender if gender == 'M' or gender == 'F' else 'U'
+        return {'GENDER': gender}
 
     def extract_race(self, input_columns):
         return {'RACE': None}
