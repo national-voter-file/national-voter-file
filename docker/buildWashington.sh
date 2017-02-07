@@ -15,9 +15,9 @@ docker-compose run etl /opt/pentaho/data-integration/pan.sh -file /national-vote
 
 ##################
 ## Python script to clean up and enrich the Washington Voter File
-docker-compose run etl python3 /national-voter-file/src/main/python/transformers/washington_prepare.py
+docker-compose run etl python3 /national-voter-file/src/python/national_voter_file/transformers/csv_transformer.py -s wa -d /national-voter-file/data/Washington/201605_VRDB_ExtractSAMPLE.txt -o /national-voter-file/data/Washington
 
 
 ###################
 ## Run job to process sample voter file
-docker-compose run etl /opt/pentaho/data-integration/kitchen.sh -file /national-voter-file/src/main/pdi/ProcessPreparedVoterFile.kjb -param:reportDate=2016-05-30 -param:reportFile=/national-voter-file/data/Washington/201605_VRDB_ExtractSAMPLE_OUT.csv -param:reporterKey=1
+docker-compose run etl /opt/pentaho/data-integration/kitchen.sh -file /national-voter-file/src/main/pdi/ProcessPreparedVoterFile.kjb -param:reportDate=2016-05-30 -param:reportFile=/national-voter-file/data/Washington/wa_output.csv -param:reporterKey=1
