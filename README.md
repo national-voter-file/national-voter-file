@@ -4,22 +4,33 @@ We provide an easy-to-use, modern-era database with voter files for each of the 
 
 We want to pull politics into the 21st century, and we're starting from the ground up.
 
-## Our goals
+### Goals
 
 * Reliable, up-to-date voter data for every state in the country (including address changes, and redrawn districts)
-* Per-household insights, done by grouping voters together based on address
-* Per-voter insights, such as when people change their party affiliation or address
-* And for thousands to use our voter file to power their campaigns' donation, canvassing, and phonebanking efforts!
+* All available via an easy-to-consume REST API
+* For thousands to use our voter file to power their campaigns' donation, canvassing, and phonebanking efforts!
+
+## How does it work?
+
+Glad you asked! Simple, we:
+
+### 1. Collect voter files from every state
+
+We've done eight states so far. We'd [love your help collecting them all](https://trello.com/b/IlZkwYc0/national-voter-file-states-pipeline).
+
+### 2. Extract and transform that data
+
+Each state does it differently, some (way) worse than others. Using well-tested, state-specific [transformer scripts](src/python/national_voter_file/transformers/README.md) written in Python, we turn them into consistent CSV files.
+
+### 3. Load that data into a Postgres database
+
+We load the data using [Pentaho](blob/master/tools/README.md), and contain the database and its query layer [within Docker](tree/master/docker/README.md) so that it is platform agnostic.
+
+### 4. Build [a simple, accessible, easy-to-vend API](https://github.com/national-voter-file/national-voter-file-api) for consumers.
+
+We haven't started on this yet. It's coming soon!
 
 ## How can I help?
 
 * We chat on Slack. [Join us!](http://goo.gl/forms/8SJRDlo7Lx2rUsan1)
-* Take a look at our [Project](https://github.com/national-voter-file/national-voter-file/projects/1) to see where you can help.
-
-Here's the bulk of the work:
-
-1. [Collect voter files for every state](https://trello.com/b/IlZkwYc0/national-voter-file-states-pipeline) and store them securely.
-2. Write [state-specific Python scripts](https://github.com/national-voter-file/national-voter-file/blob/master/src/main/python/NewYorkPrepare.py) to turn them into a [standardized input file](https://docs.google.com/spreadsheets/d/e/2PACX-1vTkv4Js43Wl_I0mpqt7FnFMt1pOTy1GwTZfPCW--TufdUzepSEHBAxsQTV3Ic_u9t5TY28OqSy-I28L/pubhtml).
-3. Make sure that [data is clean and consistent](https://github.com/national-voter-file/national-voter-file/issues/56) nationally.
-4. Load that data into [a queryable database](https://github.com/national-voter-file/national-voter-file/tree/master/docker) using [Pentaho](https://github.com/national-voter-file/national-voter-file/blob/master/tools/README.md).
-5. Build [a simple, accessible, easy-to-vend API](https://github.com/national-voter-file/national-voter-file-api) for consumers.
+* Take a look at our [newcomer issues](https://github.com/national-voter-file/national-voter-file/projects/1) to see where you can help.
