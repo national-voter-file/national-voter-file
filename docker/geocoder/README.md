@@ -73,6 +73,24 @@ nor written to, and with `--log-stdout` the log messages will write to standard 
 
 ## Elasticsearch Geocoder (WIP)
 
-Most instructions are the same, but can be run with
+First, you'll need to clone the [`grasshopper-loader`](https://github.com/cfpb/grasshopper-loader)
+repository into the `geocoder` directory where it'll be ignored by git. Add either
+ADDRFEAT files from the Census TIGER dataset or statewide master address files (some
+listed in the repo in the `data.json` file) in the `test/data` directories.
 
-`docker-compose run -d geocoder python /geocoder/daemon.py`
+Most instructions are the same, but instead of using the standard `docker-compose.yml`
+file you can use the version with multiple containers for geocoding by running:
+
+```
+docker-compose -f docker-compose-full.yml build
+docker-compose -f docker-compose-full.yml up
+```
+
+Any commands that you would ordinarily run can be run the same by adding `-f docker-compose-full.yml`.
+In order to use the Elasticsearch geocoding, you'll need to load in data with
+[`grasshopper-loader`](https://github.com/cfpb/grasshopper-loader) first. You should
+be able to follow the same instructions for loading data as are included in
+that repository's README (as well as the parent repository for [`grasshopper`](https://github.com/cfpb/grasshopper)
+by running commands similar to this:
+
+`docker-compose -f docker-compose-full.yml run loader ./tiger.js -d test/data/tiger`
