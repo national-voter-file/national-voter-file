@@ -30,7 +30,7 @@ We load the data using [Pentaho](blob/master/tools/README.md), and contain the d
 
 We haven't started on this yet. It's coming soon!
 
-## How can I help?
+## This sounds awesome! How can I help?
 
 * We chat on Slack. [Join us!](http://goo.gl/forms/8SJRDlo7Lx2rUsan1)
 * Take a look at our [newcomer issues](https://github.com/national-voter-file/national-voter-file/projects/1) to see where you can help.
