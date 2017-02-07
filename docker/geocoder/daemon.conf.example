@@ -2,13 +2,13 @@
   "comment": [
       "File names here are presumed to be relative to this local directory.",
       "Modify this example with your API keys and save as daemon.conf."
-  ], 
+  ],
 
   "pid_file": "RUNNING",
 
   "databases": {
     "DevVoter": {
-      "host": "127.0.0.1",
+      "host": "postgis",
       "port": "5432",
       "database": "VOTER",
       "user": "postgres",

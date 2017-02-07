@@ -1,15 +1,13 @@
- version: '2'
- services:
-   postgis:
-          build: ./postgis
-          volumes:
-            - ../src/main/sql:/sql
-          ports:
-            - "5432:5432"
+version: '2'
+services:
+  postgis:
+    build: ./postgis
+    volumes:
+      - ../src/main/sql:/sql
+    ports:
+      - "5432:5432"
 
-
-   etl:
-          build: ./etl
-          volumes:
-            - ..:/national-voter-file
-          
+  etl:
+    build: ./etl
+    volumes:
+      - ..:/national-voter-file

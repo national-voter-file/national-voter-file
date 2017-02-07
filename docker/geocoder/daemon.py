@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python
 # The python3 path is intentionally hardcoded to set the daemon's process
 # name as this script's name (instead of python3).
 """
@@ -21,7 +21,7 @@ import run
 def get_full_path(relative_path):
     this_dir = os.path.dirname(os.path.abspath(__file__))
     full_relative_path = os.path.abspath('/'.join((this_dir, relative_path)))
-    return full_relative_path 
+    return full_relative_path
 
 #------------------------------------------
 # Logging
@@ -37,7 +37,7 @@ def setup_logfile_directory(log_config):
                 os.makedirs(os.path.dirname(h['filename']), exist_ok=True)
                 did_something=True
     return did_something
-        
+
 
 def setup_logging(config, stdout=False):
     log = logging.getLogger()
@@ -62,7 +62,7 @@ def setup_logging(config, stdout=False):
                 sys.stderr.write(
                         'Configuration has no "logging" entry.\n'
                         '...logs will not be written to a file.\n')
-                
+
         except Exception as e:
             sys.stderr.write("Error when initializing logging: {}\n".format(e))
 
@@ -153,7 +153,7 @@ def get_parser():
         Usage:
             docker-compose run -d \\
                 etl /national-voter-file/src/main/python/geocoder/daemon.py
-    
+
         To kill the daemonized container later:
             docker exec `cat ../src/main/python/geocoder/RUNNING` kill -9 1
     """
@@ -229,7 +229,7 @@ def main():
                     os.remove(options.pidfile)
                     log.debug('Removed PID file: {}'.format(options.pidfile))
                 sys.exit(0)
-    
+
             # Set the signal handlers
             signal.signal(signal.SIGINT, sigint_handler)
             signal.signal(signal.SIGTERM, sigint_handler)

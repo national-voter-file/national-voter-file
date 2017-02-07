@@ -8,12 +8,12 @@ _daemon.conf_.
 """
 import logging
 import time
-from mapzen_geocoder import *
+from es_geocoder import *
 
 log = logging.getLogger()
 
 
-def run(config, sleep_duration=2.9):
+def run(config, sleep_duration=0.5):
     while True:
         log.info('Running the main module.')
 
