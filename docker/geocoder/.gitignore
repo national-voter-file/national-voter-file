@@ -2,3 +2,4 @@ logs/
 __pycache__/
 *.pyc
 *.conf
+.env
