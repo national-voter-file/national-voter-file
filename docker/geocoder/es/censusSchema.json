@@ -1,0 +1,95 @@
+{
+  "properties": {
+    "geometry": {
+      "properties": {
+        "coordinates": {
+          "type": "double"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "properties": {
+      "properties": {
+        "ARIDL": {
+          "type": "string"
+        },
+        "ARIDR": {
+          "type": "string"
+        },
+        "EDGE_MTFCC": {
+          "type": "string"
+        },
+        "FULLNAME": {
+          "type": "string",
+          "analyzer": "address_synonyms"
+        },
+        "LFROMHN": {
+          "type": "string"
+        },
+        "LFROMTYP": {
+          "type": "string"
+        },
+        "LINEARID": {
+          "type": "string"
+        },
+        "LTOHN": {
+          "type": "string"
+        },
+        "LTOTYP": {
+          "type": "string"
+        },
+        "OFFSETL": {
+          "type": "string"
+        },
+        "OFFSETR": {
+          "type": "string"
+        },
+        "PARITYL": {
+          "type": "string"
+        },
+        "PARITYR": {
+          "type": "string"
+        },
+        "RFROMHN": {
+          "type": "string"
+        },
+        "RFROMTYP": {
+          "type": "string"
+        },
+        "ROAD_MTFCC": {
+          "type": "string"
+        },
+        "RTOHN": {
+          "type": "string"
+        },
+        "RTOTYP": {
+          "type": "string"
+        },
+        "STATE": {
+          "type": "string",
+          "analyzer": "state_synonyms"
+        },
+        "TFIDL": {
+          "type": "long"
+        },
+        "TFIDR": {
+          "type": "long"
+        },
+        "TLID": {
+          "type": "long"
+        },
+        "ZIPL": {
+          "type": "string"
+        },
+        "ZIPR": {
+          "type": "string"
+        }
+      }
+    },
+    "type": {
+      "type": "string"
+    }
+  }
+}

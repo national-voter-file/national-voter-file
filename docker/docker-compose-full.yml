@@ -31,4 +31,4 @@ services:
       - elasticsearch
     volumes:
       - ./geocoder:/geocoder
-    command: python /geocoder/daemon.py --skip-pidfile
+    env_file: ./geocoder/.env

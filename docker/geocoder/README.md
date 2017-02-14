@@ -73,24 +73,46 @@ nor written to, and with `--log-stdout` the log messages will write to standard 
 
 ## Elasticsearch Geocoder (WIP)
 
-First, you'll need to clone the [`grasshopper-loader`](https://github.com/cfpb/grasshopper-loader)
-repository into the `geocoder` directory where it'll be ignored by git. Add either
-ADDRFEAT files from the Census TIGER dataset or statewide master address files (some
-listed in the repo in the `data.json` file) in the `test/data` directories.
+To use the full geocoding setup, you'll need to use the Docker Compose configuration
+from the `docker-compose-full.yml` file. In general, any commands that you would
+ordinarily run can be run the same by adding `-f docker-compose-full.yml`.
 
-Most instructions are the same, but instead of using the standard `docker-compose.yml`
-file you can use the version with multiple containers for geocoding by running:
+The Elasticsearch TIGER loading script reads directly from S3 into memory, but because
+it uses `boto3`, you'll need valid AWS credentials in the format of the `.env.sample`
+file in a `.env` file before creating the containers. The operations we're running
+won't have a cost for anyone reading the data, but `boto3` requires valid credentials.
+
+After you've copied the `.env.sample` file and substituted your own credentials,
+build the containers with these commands:
 
 ```
 docker-compose -f docker-compose-full.yml build
 docker-compose -f docker-compose-full.yml up
 ```
 
-Any commands that you would ordinarily run can be run the same by adding `-f docker-compose-full.yml`.
-In order to use the Elasticsearch geocoding, you'll need to load in data with
-[`grasshopper-loader`](https://github.com/cfpb/grasshopper-loader) first. You should
-be able to follow the same instructions for loading data as are included in
-that repository's README (as well as the parent repository for [`grasshopper`](https://github.com/cfpb/grasshopper)
-by running commands similar to this:
+### ES TIGER Data Loading
 
-`docker-compose -f docker-compose-full.yml run loader ./tiger.js -d test/data/tiger`
+Because of issues loading TIGER data, both with `grasshopper-loader` and the Census
+FTP site itself, we have an S3 Bucket ([viewer here](https://nvf-tiger-2016.s3.amazonaws.com/index.html))
+with all of the `ADDRFEAT` files downloaded and broken up into directories by
+STATE FIPS code for easier loading.
+
+If you've successfully built and started the containers as shown above, you should
+be able to start loading TIGER data with:
+
+`docker-compose -f docker-compose-full.yml run geocoder python /geocoder/es_tiger_loader.py WA`
+
+Where `WA` is the two letter state abbreviation for the state you want to load
+TIGER data from.
+
+The [`grasshopper-loader`](https://github.com/cfpb/grasshopper-loader) repository
+will work for loading address point data (following their instructions for `index.js`),
+and you can clone it into the `geocoder` directory and it will be ignored by git.
+
+`docker-compose -f docker-compose-full.yml run loader ./index.js -h elasticsearch -f ./data.json`
+
+### Running the Geocoder
+
+To start the geocoder itself (which can run into issues if it's started at
+the same time as the other containers), run
+`docker-compose -f docker-compose-full.yml -d run geocoder python /geocoder/daemon.py --skip-pidfile`
