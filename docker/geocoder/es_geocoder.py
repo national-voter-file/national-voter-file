@@ -6,6 +6,10 @@ import requests
 import os
 from datetime import datetime, timedelta
 from shapely.geometry import Point, LineString
+import aiohttp
+import asyncio
+import aiopg
+import json
 import time
 
 
@@ -31,7 +35,7 @@ SQL_COLUMNS = [
 ES_URL = 'http://elasticsearch:9200/{q_idx}/_search'
 
 
-def create_point_query(data):
+async def create_point_query(data):
     point_query = {
         'query': {
             'bool': {
@@ -59,7 +63,7 @@ def create_point_query(data):
     return point_query
 
 
-def create_census_query(data):
+async def create_census_query(data):
     census_query = {
         'query': {
             'bool': {
@@ -135,7 +139,7 @@ def create_census_query(data):
     return census_query
 
 
-def handle_census_range(range_from, range_to):
+async def handle_census_range(range_from, range_to):
     from_int = 0
     to_int = 0
     if range_from:
@@ -158,7 +162,7 @@ def handle_census_range(range_from, range_to):
     }
 
 
-def interpolate_census(data, res_data):
+async def interpolate_census(data, res_data):
     tiger_feat = res_data['_source']
     data_line = LineString([Point(*p) for p in tiger_feat['geometry']['coordinates']])
     line_len = data_line.length
@@ -166,10 +170,10 @@ def interpolate_census(data, res_data):
     addr_int = int(data['ADDRESS_NUMBER'])
     addr_is_even = addr_int % 2 == 0
 
-    l_range = handle_census_range(tiger_feat['properties']['LFROMHN'],
-                                  tiger_feat['properties']['LTOHN'])
-    r_range = handle_census_range(tiger_feat['properties']['RFROMHN'],
-                                  tiger_feat['properties']['RTOHN'])
+    l_range = await handle_census_range(tiger_feat['properties']['LFROMHN'],
+                                        tiger_feat['properties']['LTOHN'])
+    r_range = await handle_census_range(tiger_feat['properties']['RFROMHN'],
+                                        tiger_feat['properties']['RTOHN'])
 
     if addr_is_even == l_range['is_even']:
         tiger_range = l_range
@@ -191,32 +195,21 @@ def interpolate_census(data, res_data):
     return {'lat': inter_pt.y, 'lon': inter_pt.x}
 
 
-# fetch address records to query.  Limit = number of rows requested
-def get_unmatched_address_records(cur, limit=1):
-    query_address = '''
-        SELECT {columns}
-        FROM HOUSEHOLD_DIM
-        WHERE GEOCODE_STATUS = 1
-        LIMIT {limit}
-        '''.format(columns=', '.join(SQL_COLUMNS), limit=limit)
-
-    # Run the address query
-    cur.execute(query_address)
-    return cur.fetchall()
-
-
-# Request Mapzen, check status
-def request_elasticsearch(addr_row, q_type='census'):
+async def request_elasticsearch(client, addr_row, q_type='census'):
     if q_type == 'census':
-        query_data = create_census_query(addr_row)
+        query_data = await create_census_query(addr_row)
     elif q_type == 'address':
-        query_data = create_point_query(addr_row)
+        query_data = await create_point_query(addr_row)
 
-    response = requests.post(ES_URL.format(q_idx=q_type), json=query_data)
-    # Check headers, status for success and rate limiting
-    if response.status_code == 200:
-        response_json = response.json()
-        if len(response_json['hits']['hits']) == 0:
+    async with client.post(ES_URL.format(q_idx=q_type),
+                           data=json.dumps(query_data)) as response:
+        response_json = await response.json()
+
+        if not 'hits' in response_json:
+            return addr_row['HOUSEHOLD_ID'], None
+        elif response_json['hits'].get('hits', 0) == 0:
+            return addr_row['HOUSEHOLD_ID'], None
+        elif len(response_json['hits']['hits']) == 0:
             return addr_row['HOUSEHOLD_ID'], None
 
         addr_hit = response_json['hits']['hits'][0]
@@ -224,69 +217,77 @@ def request_elasticsearch(addr_row, q_type='census'):
             geom_dict = dict(lon=addr_hit['geometry']['coordinates'][0],
                              lat=addr_hit['geometry']['coordinates'][1])
         elif q_type == 'census':
-            geom_dict = interpolate_census(addr_row, addr_hit)
-
-        time.sleep(0.01)
+            geom_dict = await interpolate_census(addr_row, addr_hit)
 
         return addr_row['HOUSEHOLD_ID'], geom_dict
-    else:
-        return addr_row['HOUSEHOLD_ID'], None
 
 
-# Either update record to coordinates or change status to failed
-def update_address_record(cur, household_id, addr_dict):
-    if addr_dict:
-        status = 3
-        update_statement = '''
-            UPDATE household_dim
-            SET
-                GEOM = ST_SetSRID(ST_MakePoint({lon}, {lat}), 4326),
-                GEOCODE_STATUS = {g_status}
-            WHERE HOUSEHOLD_ID = {h_id}
-            '''.format(lon=addr_dict['lon'],
-                       lat=addr_dict['lat'],
-                       g_status=status,
-                       h_id=household_id)
-    else:
-        status = 2
-        update_statement = '''
-            UPDATE household_dim
-            SET GEOCODE_STATUS = {g_status}
-            WHERE HOUSEHOLD_ID = {h_id}
-            '''.format(g_status=status, h_id=household_id)
+async def get_unmatched_addresses(db_conn):
+    async with aiopg.create_pool(db_conn) as pool:
+        async with pool.acquire() as conn:
+            async with conn.cursor() as cur:
+                query_address = '''
+                    SELECT {columns}
+                    FROM HOUSEHOLD_DIM
+                    WHERE GEOCODE_STATUS = 1
+                    LIMIT {limit}
+                    '''.format(columns=', '.join(SQL_COLUMNS), limit=1000)
+                await cur.execute(query_address)
+                return await cur.fetchall()
 
-    cur.execute(update_statement)
+
+async def update_address(db_conn, household_id, addr_dict):
+    async with aiopg.create_pool(db_conn) as pool:
+        async with pool.acquire() as conn:
+            async with conn.cursor() as cur:
+                if addr_dict:
+                    status = 3
+                    update_statement = '''
+                        UPDATE household_dim
+                        SET
+                            GEOM = ST_SetSRID(ST_MakePoint({lon}, {lat}), 4326),
+                            GEOCODE_STATUS = {g_status}
+                        WHERE HOUSEHOLD_ID = {h_id}
+                        '''.format(lon=addr_dict['lon'],
+                                   lat=addr_dict['lat'],
+                                   g_status=status,
+                                   h_id=household_id)
+                else:
+                    status = 2
+                    update_statement = '''
+                        UPDATE household_dim
+                        SET GEOCODE_STATUS = {g_status}
+                        WHERE HOUSEHOLD_ID = {h_id}
+                        '''.format(g_status=status, h_id=household_id)
+                await cur.execute(update_statement)
+
+
+async def handle_update(client, db_conn, log, row):
+    h_id, geom = await request_elasticsearch(client, row, q_type='census')
+    if h_id:
+        await update_address(db_conn, h_id, geom)
+        log.info('Updated address with household id: {}'.format(h_id))
+
+
+async def geocoder_loop(config, log, db_conn, loop, client):
+    addrs_to_geocode = await get_unmatched_addresses(db_conn)
+    addr_dicts = [dict(zip(SQL_COLUMNS, a)) for a in addrs_to_geocode]
+
+    await asyncio.gather(*[handle_update(client, db_conn, log, row)
+                           for row in addr_dicts])
 
 
 def run_geocoder(config, log):
-    # Check env var set to postpone execution if hitting rate limits
-    wait_time = os.environ.get('WAIT_TIME', None)
-    if wait_time:
-        wait_dt = datetime.strptime(wait_time, '%Y-%m-%d %H:%M')
-        if wait_dt > datetime.now():
-            return
+    dev_config = config['databases']['DevVoter']
+    DB_CONN = 'dbname={} user={} password={} host={}'.format(
+        dev_config['database'],
+        dev_config['user'],
+        dev_config['password'],
+        dev_config['host']
+    )
 
-    try:
-        conn = psycopg2.connect(**config['databases']['DevVoter'])
-        cur = conn.cursor()
-    except Exception as ex:
-        log.error('Connection error with {}: {}'.format(config['databases']['DevVoter']['database'], ex))
-
-    results = get_unmatched_address_records(cur, limit=100)
-    result_dicts = [dict(zip(SQL_COLUMNS, r)) for r in results]
-
-    for row in result_dicts:
-        h_id, geom = request_elasticsearch(row, q_type='census')
-        if h_id:
-            update_address_record(cur, h_id, geom)
-            log.info('Updated address with household id: {}'.format(h_id))
-        else:
-            time_wait = (datetime.now() + timedelta(hours=1))
-            os.environ['WAIT_TIME'] = time_wait.strftime('%Y-%m-%d %H:%M')
-            log.info('Setting wait time to {}'.format(os.environ['WAIT_TIME']))
-            break
-        time.sleep(0.1)
-
-    conn.commit()
-    cur.close()
-    conn.close()
+    loop = asyncio.get_event_loop()
+    # TODO: Working on getting the right number of concurrent connections
+    conn = aiohttp.TCPConnector(limit=20)
+    client = aiohttp.ClientSession(connector=conn, loop=loop)
+    loop.run_until_complete(geocoder_loop(config, log, DB_CONN, loop, client))
