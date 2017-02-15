@@ -24,7 +24,7 @@ Each state does it differently, some (way) worse than others. Using well-tested,
 
 ### 3. Load that data into a Postgres database
 
-We load the data using [Pentaho](blob/master/tools/README.md), and contain the database and its query layer [within Docker](tree/master/docker/README.md) so that it is platform agnostic.
+We load the data using [Pentaho](tools/README.md), and contain the database and its query layer [within Docker](tree/master/docker/README.md) so that it is platform agnostic.
 
 ### 4. Build [a simple, accessible, easy-to-vend API](https://github.com/national-voter-file/national-voter-file-api) for consumers.
 
