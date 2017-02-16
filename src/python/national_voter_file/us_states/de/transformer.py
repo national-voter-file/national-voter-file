@@ -15,8 +15,8 @@ default_file = 'DE_Sample.csv'
 
 class StatePreparer(BasePreparer):
     state_path = 'de' # Two letter code for state
-    state_name='Delaware' # Name of state with no spaces. Use CamelCase
-    sep=',' # The character used to delimit records
+    state_name = 'Delaware' # Name of state with no spaces. Use CamelCase
+    sep = ',' # The character used to delimit records
 
 
     def __init__(self, input_path, *args):
@@ -26,9 +26,9 @@ class StatePreparer(BasePreparer):
             self.transformer = StateTransformer()
 
     def process(self):
-            reader = self.dict_iterator(self.open(self.input_path))
-            for row in reader:
-                yield row
+        reader = self.dict_iterator(self.open(self.input_path))
+        for row in reader:
+            yield row
 
 class StateTransformer(BaseTransformer):
     date_format = "%Y%m%d"
@@ -51,14 +51,41 @@ class StateTransformer(BaseTransformer):
         'STATE_VOTER_REF': 'UNIQUE-ID',
         'COUNTY_VOTER_REF': None,
         'ABSENTEE_TYPE': None,
-        'LOWER_HOUSE_DIST': None,
         'PRECINCT': None,
         'PRECINCT_SPLIT': None,
         'REGISTRATION_STATUS': 'STATUS',
         'SCHOOL_BOARD_DIST': 'SCH-DIST',
-        'UPPER_HOUSE_DIST': None
+        'UPPER_HOUSE_DIST': 'SD',
+        'LOWER_HOUSE_DIST': 'RD',
+        'CONGRESSIONAL_DIST': 'ED'
     }
-
+    de_party_map = {
+        'D': 'DEM',
+        'R': 'REP',
+        'I': 'UN',
+        'L': 'LIB',
+        'A': 'AI',
+        'B': 'FED',
+        'C': 'CIT',
+        'E': 'LIB',
+        'F': 'NEW',
+        'K': 'DEL',
+        'N': 'ALI',
+        'O': 'OTH',
+        'P': 'TAX',
+        'S': 'STS',
+        'U': 'UNI',
+        'W': 'IND',
+        'X': 'ROL',
+        'Y': 'BLU',
+        'Q': 'AMC',
+        'V': 'NLP',
+        'M': 'REF',
+        'H': 'GRN',
+        'J': 'WOR',
+        'T': 'CON',
+        'Z': 'SP',
+    }
 
     col_type_dict = BaseTransformer.col_type_dict.copy()
     col_type_dict['PRECINCT_SPLIT'] = set([str, type(None)])
@@ -174,7 +201,7 @@ class StateTransformer(BaseTransformer):
             Dictionary with following keys
                 'COUNTYCODE'
         """
-        return { 'COUNTYCODE': input_dict['COUNTY'] }
+        return {'COUNTYCODE': input_dict['COUNTY']}
 
     def extract_mailing_address(self, input_dict):
         """
@@ -235,7 +262,7 @@ class StateTransformer(BaseTransformer):
             Dictionary with following keys
                 'REGISTRATION_DATE'
         """
-        return {'REGISTRATION_DATE': self.convert_date(input_columns['DATE-REG']) }
+        return {'REGISTRATION_DATE': self.convert_date(input_columns['DATE-REG'])}
 
 
     def extract_party(self, input_columns):
@@ -246,27 +273,8 @@ class StateTransformer(BaseTransformer):
             Dictionary with following keys
                 'PARTY'
         """
-        party_mapping = {
-            'D': 'DEM',
-            'R': 'REP',
-            'I': 'UN',
-            'L': 'LIB',
-            'Q': 'AMC',
-            'V': 'NLP',
-            'M': 'REF',
-        }
-        return { 'PARTY' : party_mapping.get(input_columns['PARTY'], input_columns['PARTY']) }
 
-    def extract_congressional_dist(self, input_columns):
-        """
-        Inputs:
-            input_columns: name or list of columns
-        Outputs:
-            Dictionary with following keys
-                'CONGRESSIONAL_DIST'
-        """
-        return {'CONGRESSIONAL_DIST': input_columns['RD']}
-
+        return {'PARTY' : self.de_party_map.get(input_columns['PARTY'], input_columns['PARTY'])}
 
     def extract_county_board_dist(self, input_columns):
         """

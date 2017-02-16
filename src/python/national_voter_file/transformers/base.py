@@ -239,6 +239,20 @@ class BaseTransformer(object):
                       "AMP", # American Patriot Party
                       "OTH", #otherwise
                       "UN", #Unaffiliated
+
+
+                      "DEL", #A Delaware Party
+                      "FED", #Federalist Party
+                      "CIT", #Citizen's Party
+                      'LIB', #Liberal Party
+                      "NEW", #New Frontier
+                      "ALI", #New Alliance
+                      "TAX", #US Taxpayers
+                      'STS', #National Statesman
+                      'UNI', #National Unity
+                      'IND', #Independent Party of Delaware
+                      'ROL', #Rights of Life
+                      'BLU', #Blue Enigma
                       type(None)
         ]),
         'GENDER': set(['M', 'F', 'U']),
