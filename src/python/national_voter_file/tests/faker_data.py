@@ -5,13 +5,14 @@ from national_voter_file.us_states.all import load_dict as load_states
 from faker import Faker
 import random
 from random import randint
+import string
 import csv
 import os
 import sys
 
 
 TEST_DATA_DIR = os.path.join(os.path.dirname(__file__), 'test_data')
-TEST_STATES = ['co', 'fl', 'mi', 'nc', 'ny', 'oh', 'ok', 'pa', 'wa']
+TEST_STATES = ['de', 'co', 'fl', 'mi', 'nc', 'ny', 'oh', 'ok', 'pa', 'wa']
 
 NUM_ROWS = 100
 
@@ -147,6 +148,49 @@ COLORADO_SCHEMA = {
     'STATE_SENATE': lambda: 'State Senate {}'.format(str(randint(1, 45))),
     'STATE_HOUSE': lambda: 'State House {}'.format(str(randint(1, 45))),
     'ID_REQUIRED': lambda: random.choice(['Y', 'N'])
+}
+
+DELAWARE_SCHEMA = {
+    'UNIQUE-ID': lambda: str(randint(1000, 99999999)),
+    'LAST-NAME': lambda: fake.last_name(),
+    'FIRST-NAME': lambda: fake.first_name(),
+    'MID-INIT': lambda: _empty(random.choice(string.ascii_letters)),
+    'SUFFIX': lambda: _empty(random.choice(['Jr', 'Sr', 'II'])),
+    'YEAR-OF-BIRTH': lambda: str(randint(1910, 1999)),
+    'HOME-NO': lambda: str(randint(1000, 99999)),
+    'HOME-APT': lambda: _empty(fake.secondary_address()),
+    'HOME-STREET': lambda: fake.street_name(),
+    'HOME-DEV': lambda: _empty(fake.lexify(text="???????????")),
+    'HOME-CITY': lambda: fake.city(),
+    'HOME-ZIPCODE': lambda: _empty(fake.zipcode()),
+    'COUNTY': lambda: random.choice(['S', 'K', 'N']),
+    'ED': lambda: fake.numerify(text="##"),
+    'RD': lambda: fake.numerify(text="##"),
+    'SD': lambda: fake.numerify(text="##"),
+    'CNLEVY': lambda: fake.numerify(text="##"),
+    'WILM': lambda: fake.numerify(text="#"),
+    'CODE-HOME-CITY': lambda: _empty( fake.lexify(text="?").upper() + fake.numerify(text="##")),
+    'SCH-DIST': lambda: fake.lexify(text="??").upper(),
+    'PARTY': lambda: random.choice(['R', 'D', 'I' ]),
+    'DATE-REG': lambda: fake.date(pattern='%Y%m%d'),
+    'PP-HIST-1': lambda: random.choice(['0', '2002', '2004', '2006', '2008', '2010', '2012', '2014', '2016' ]),
+    'PP-HIST-2': lambda: random.choice(['0', '2002', '2004', '2006', '2008', '2010', '2012', '2014', '2016' ]),
+    'PR-HIST-1': lambda: random.choice(['0', '2002', '2004', '2006', '2008', '2010', '2012', '2014', '2016' ]),
+    'PR-HIST-2': lambda: random.choice(['0', '2002', '2004', '2006', '2008', '2010', '2012', '2014', '2016' ]),
+    'GEN-HIST-1': lambda: random.choice(['0', '2002', '2004', '2006', '2008', '2010', '2012', '2014', '2016' ]),
+    'GEN-HIST-2': lambda: random.choice(['0', '2002', '2004', '2006', '2008', '2010', '2012', '2014', '2016' ]),
+    'GEN-HIST-3': lambda: random.choice(['0', '2002', '2004', '2006', '2008', '2010', '2012', '2014', '2016' ]),
+    'GEN-HIST-4': lambda: random.choice(['0', '2002', '2004', '2006', '2008', '2010', '2012', '2014', '2016' ]),
+    'GEN-HIST-5': lambda: random.choice(['0', '2002', '2004', '2006', '2008', '2010', '2012', '2014', '2016' ]),
+    'MAIL-NO': lambda: _empty(str(randint(1000, 99999))),
+    'MAIL-APT': lambda: _empty(fake.secondary_address()),
+    'MAIL-STR': lambda: _empty(fake.street_name()),
+    'MAIL-CITY': lambda: _empty(fake.city()),
+    'MAIL-STATE': lambda: _empty('DE'),
+    'MAIL-ZIP': lambda: _empty(fake.zipcode()),
+    'DATE-LAST-CHG': lambda: fake.date(pattern='%Y%m%d'),
+    'CODE-CHANGE': lambda: random.choice(['CR', 'P6', 'P1']),
+    'STATUS': lambda: random.choice(['A', 'I' ])
 }
 
 OHIO_SCHEMA = {
@@ -657,7 +701,9 @@ def make_state_data(state_name, state_schema,
 
 
 if __name__ == '__main__':
-    states = {'co': ([COLORADO_SCHEMA],
+    states = {'de': ([DELAWARE_SCHEMA],
+                       {}),
+              'co': ([COLORADO_SCHEMA],
                        {}),
               'oh': ([OHIO_SCHEMA],
                        {}),
