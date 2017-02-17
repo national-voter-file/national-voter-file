@@ -262,7 +262,11 @@ class StateTransformer(BaseTransformer):
             Dictionary with following keys
                 'REGISTRATION_DATE'
         """
-        return {'REGISTRATION_DATE': self.convert_date(input_columns['DATE-REG'])}
+
+        try:
+            return {'REGISTRATION_DATE': self.convert_date(input_columns['DATE-REG'])}
+        except ValueError:
+            return {'REGISTRATION_DATE': None}
 
 
     def extract_party(self, input_columns):
