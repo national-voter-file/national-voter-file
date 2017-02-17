@@ -1,16 +1,9 @@
-# Query from database to get address data
-
-from __future__ import print_function, unicode_literals
-import psycopg2
-import requests
 import os
-from datetime import datetime, timedelta
 from shapely.geometry import Point, LineString
 import aiohttp
 import asyncio
-import aiopg
+import asyncpg
 import json
-import time
 
 
 GEOCODE_STATUS_CODES = {
@@ -40,22 +33,22 @@ async def create_point_query(data):
         'query': {
             'bool': {
                 'must': [
-                    {'term': {'properties.number': data['ADDRESS_NUMBER']}},
-                    {'term': {'properties.state': data['STATE_NAME'].lower()}}
+                    {'term': {'properties.number': data['address_number']}},
+                    {'term': {'properties.state': data['state_name'].lower()}}
                 ],
                 'should': [
-                    {'term': {'properties.zip': str(data['ZIP_CODE'])}},
-                    {'term': {'properties.city': data['PLACE_NAME'].lower()}}
+                    {'term': {'properties.zip': str(data['zip_code'])}},
+                    {'term': {'properties.city': data['place_name'].lower()}}
                 ]
             }
         }
     }
-    if data['STREET_NAME_POST_TYPE']:
+    if data['street_name_post_type']:
         point_query['query']['bool']['should'].append(
-            {'term': {'properties.street': data['STREET_NAME_POST_TYPE'].lower()}}
+            {'term': {'properties.street': data['street_name_post_type'].lower()}}
         )
 
-    for s in data['STREET_NAME'].split(' '):
+    for s in data['street_name'].split(' '):
         point_query['query']['bool']['must'].append(
             {'term': {"properties.street": s.lower()}}
         )
@@ -68,11 +61,11 @@ async def create_census_query(data):
         'query': {
             'bool': {
                 'must': [
-                    {'term': {'properties.STATE': data['STATE_NAME'].lower()}}
+                    {'term': {'properties.STATE': data['state_name'].lower()}}
                 ],
                 'should': [
-                    {'term': {'properties.ZIPL': str(data['ZIP_CODE'])}},
-                    {'term': {'properties.ZIPR': str(data['ZIP_CODE'])}}
+                    {'term': {'properties.ZIPL': str(data['zip_code'])}},
+                    {'term': {'properties.ZIPR': str(data['zip_code'])}}
                 ],
                 'filter': {
                     'bool': {
@@ -83,16 +76,16 @@ async def create_census_query(data):
                                         {
                                             'bool': {
                                                 'should': [
-                                                    {'range': {'properties.LFROMHN': {'lte': data['ADDRESS_NUMBER']}}},
-                                                    {'range': {'properties.RFROMHN': {'lte': data['ADDRESS_NUMBER']}}}
+                                                    {'range': {'properties.LFROMHN': {'lte': data['address_number']}}},
+                                                    {'range': {'properties.RFROMHN': {'lte': data['address_number']}}}
                                                 ]
                                             }
                                         },
                                         {
                                             'bool': {
                                                 'should': [
-                                                    {'range': {'properties.LTOHN': {'gte': data['ADDRESS_NUMBER']}}},
-                                                    {'range': {'properties.RTOHN': {'gte': data['ADDRESS_NUMBER']}}}
+                                                    {'range': {'properties.LTOHN': {'gte': data['address_number']}}},
+                                                    {'range': {'properties.RTOHN': {'gte': data['address_number']}}}
                                                 ]
                                             }
                                         }
@@ -105,16 +98,16 @@ async def create_census_query(data):
                                         {
                                             'bool': {
                                                 'should': [
-                                                    {'range': {'properties.LFROMHN': {'gte': data['ADDRESS_NUMBER']}}},
-                                                    {'range': {'properties.RFROMHN': {'gte': data['ADDRESS_NUMBER']}}}
+                                                    {'range': {'properties.LFROMHN': {'gte': data['address_number']}}},
+                                                    {'range': {'properties.RFROMHN': {'gte': data['address_number']}}}
                                                 ]
                                             }
                                         },
                                         {
                                             'bool': {
                                                 'should': [
-                                                    {'range': {'properties.LTOHN': {'lte': data['ADDRESS_NUMBER']}}},
-                                                    {'range': {'properties.RTOHN': {'lte': data['ADDRESS_NUMBER']}}}
+                                                    {'range': {'properties.LTOHN': {'lte': data['address_number']}}},
+                                                    {'range': {'properties.RTOHN': {'lte': data['address_number']}}}
                                                 ]
                                             }
                                         }
@@ -127,12 +120,12 @@ async def create_census_query(data):
             }
         }
     }
-    if data['STREET_NAME_POST_TYPE']:
+    if data['street_name_post_type']:
         census_query['query']['bool']['should'].append(
-            {'term': {'properties.FULLNAME': data['STREET_NAME_POST_TYPE'].lower()}}
+            {'term': {'properties.FULLNAME': data['street_name_post_type'].lower()}}
         )
 
-    for s in data['STREET_NAME'].split(' '):
+    for s in data['street_name'].split(' '):
         census_query['query']['bool']['must'].append(
             {'term': {"properties.FULLNAME": s.lower()}}
         )
@@ -167,7 +160,7 @@ async def interpolate_census(data, res_data):
     data_line = LineString([Point(*p) for p in tiger_feat['geometry']['coordinates']])
     line_len = data_line.length
 
-    addr_int = int(data['ADDRESS_NUMBER'])
+    addr_int = int(data['address_number'])
     addr_is_even = addr_int % 2 == 0
 
     l_range = await handle_census_range(tiger_feat['properties']['LFROMHN'],
@@ -206,11 +199,11 @@ async def request_elasticsearch(client, addr_row, q_type='census'):
         response_json = await response.json()
 
         if not 'hits' in response_json:
-            return addr_row['HOUSEHOLD_ID'], None
+            return addr_row['household_id'], None
         elif response_json['hits'].get('hits', 0) == 0:
-            return addr_row['HOUSEHOLD_ID'], None
+            return addr_row['household_id'], None
         elif len(response_json['hits']['hits']) == 0:
-            return addr_row['HOUSEHOLD_ID'], None
+            return addr_row['household_id'], None
 
         addr_hit = response_json['hits']['hits'][0]
         if q_type == 'address':
@@ -219,75 +212,68 @@ async def request_elasticsearch(client, addr_row, q_type='census'):
         elif q_type == 'census':
             geom_dict = await interpolate_census(addr_row, addr_hit)
 
-        return addr_row['HOUSEHOLD_ID'], geom_dict
+        return addr_row['household_id'], geom_dict
 
 
-async def get_unmatched_addresses(db_conn):
-    async with aiopg.create_pool(db_conn) as pool:
-        async with pool.acquire() as conn:
-            async with conn.cursor() as cur:
-                query_address = '''
-                    SELECT {columns}
-                    FROM HOUSEHOLD_DIM
-                    WHERE GEOCODE_STATUS = 1
-                    LIMIT {limit}
-                    '''.format(columns=', '.join(SQL_COLUMNS), limit=1000)
-                await cur.execute(query_address)
-                return await cur.fetchall()
+async def get_unmatched_addresses(pool):
+    async with pool.acquire() as conn:
+        async with conn.transaction():
+            # Run the query passing the request argument.
+            query_address = '''
+                SELECT {columns}
+                FROM HOUSEHOLD_DIM
+                WHERE GEOCODE_STATUS = 1
+                LIMIT {limit}
+                '''.format(columns=', '.join(SQL_COLUMNS), limit=10000)
+            return await conn.fetch(query_address)
 
 
-async def update_address(db_conn, household_id, addr_dict):
-    async with aiopg.create_pool(db_conn) as pool:
-        async with pool.acquire() as conn:
-            async with conn.cursor() as cur:
-                if addr_dict:
-                    status = 3
-                    update_statement = '''
-                        UPDATE household_dim
-                        SET
-                            GEOM = ST_SetSRID(ST_MakePoint({lon}, {lat}), 4326),
-                            GEOCODE_STATUS = {g_status}
-                        WHERE HOUSEHOLD_ID = {h_id}
-                        '''.format(lon=addr_dict['lon'],
-                                   lat=addr_dict['lat'],
-                                   g_status=status,
-                                   h_id=household_id)
-                else:
-                    status = 2
-                    update_statement = '''
-                        UPDATE household_dim
-                        SET GEOCODE_STATUS = {g_status}
-                        WHERE HOUSEHOLD_ID = {h_id}
-                        '''.format(g_status=status, h_id=household_id)
-                await cur.execute(update_statement)
+async def update_address(pool, household_id, addr_dict):
+    async with pool.acquire() as conn:
+        async with conn.transaction():
+            if addr_dict:
+                status = 3
+                update_statement = '''
+                    UPDATE household_dim
+                    SET
+                        GEOM = ST_SetSRID(ST_MakePoint({lon}, {lat}), 4326),
+                        GEOCODE_STATUS = {g_status}
+                    WHERE HOUSEHOLD_ID = {h_id}
+                    '''.format(lon=addr_dict['lon'],
+                               lat=addr_dict['lat'],
+                               g_status=status,
+                               h_id=household_id)
+            else:
+                status = 2
+                update_statement = '''
+                    UPDATE household_dim
+                    SET GEOCODE_STATUS = {g_status}
+                    WHERE HOUSEHOLD_ID = {h_id}
+                    '''.format(g_status=status, h_id=household_id)
+            await conn.execute(update_statement)
 
 
-async def handle_update(client, db_conn, log, row):
+async def handle_update(client, pool, log, row):
     h_id, geom = await request_elasticsearch(client, row, q_type='census')
     if h_id:
-        await update_address(db_conn, h_id, geom)
+        await update_address(pool, h_id, geom)
         log.info('Updated address with household id: {}'.format(h_id))
 
 
-async def geocoder_loop(config, log, db_conn, loop, client):
-    addrs_to_geocode = await get_unmatched_addresses(db_conn)
-    addr_dicts = [dict(zip(SQL_COLUMNS, a)) for a in addrs_to_geocode]
-
-    await asyncio.gather(*[handle_update(client, db_conn, log, row)
-                           for row in addr_dicts])
+async def geocoder_loop(sem, config, log, loop, client):
+    dev_config = config['databases']['DevVoter']
+    pool = await asyncpg.create_pool(**dev_config)
+    async with sem:
+        while True:
+            addrs_to_geocode = await get_unmatched_addresses(pool)
+            await asyncio.gather(*[handle_update(client, pool, log, row)
+                                   for row in addrs_to_geocode])
 
 
 def run_geocoder(config, log):
-    dev_config = config['databases']['DevVoter']
-    DB_CONN = 'dbname={} user={} password={} host={}'.format(
-        dev_config['database'],
-        dev_config['user'],
-        dev_config['password'],
-        dev_config['host']
-    )
-
+    sem = asyncio.Semaphore(1000)
     loop = asyncio.get_event_loop()
     # TODO: Working on getting the right number of concurrent connections
-    conn = aiohttp.TCPConnector(limit=20)
+    conn = aiohttp.TCPConnector(limit=200)
     client = aiohttp.ClientSession(connector=conn, loop=loop)
-    loop.run_until_complete(geocoder_loop(config, log, DB_CONN, loop, client))
+    loop.run_until_complete(geocoder_loop(sem, config, log, loop, client))
