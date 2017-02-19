@@ -47,7 +47,7 @@ class StateTransformer(BaseTransformer):
         ' ' : 'UN',
         '': 'UN'
     }
-    
+
     # There are #<street type> artifacts in street address. These
     # will be ignored until more information can clarify purpose.
     hashtag_patterns = ['#RD', '#ROAD', '#DR', '#DRIVE', '#LN', '#LANE']
@@ -59,7 +59,7 @@ class StateTransformer(BaseTransformer):
     def extract_name(self, input_dict):
         first_name = input_dict['first_name']
         #TODO: Use standard value for none
-        if first_name is None or '' == first_name:
+        if first_name is None or first_name == '':
             first_name = 'none'
         return {
             'TITLE': input_dict['name_prefx_cd'],
@@ -286,7 +286,7 @@ class StateTransformer(BaseTransformer):
     def extract_congressional_dist(self, input_dict):
         cong_dist = input_dict['cong_dist_abbrv']
         #TODO: Use standard value for none
-        if ' ' == cong_dist or not cong_dist or len(cong_dist) == 0:
+        if cong_dist == ' ' or not cong_dist or len(cong_dist) == 0:
             cong_dist = 'none'
         return {'CONGRESSIONAL_DIST' : cong_dist}
 
