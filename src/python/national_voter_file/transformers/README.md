@@ -16,6 +16,17 @@ Here are the basic steps you want to perform:
 ** `src/test/python/test_data/{STATE NAME}.csv`
 * And then include file info documentation if there was any that came with the data: in `docs/state-voter-file-data-descriptions/`
 
+# How to generate fake data
+
+For the transformer tests, a fake data file is required. The transformers test runs the transformer on this file. It lives at
+`src/test/python/test_data/{STATE NAME}.csv` and is generated with the following command:
+
+```
+python3 national_voter_file/tests/faker_data.py {STATE NAME}
+```
+
+Note that `STATE NAME` is the shortened name of hte state in this case (ie. co or de).
+
 # How to run test suite
 We use [Nosetest](http://nose.readthedocs.io/en/latest/) to run automated tests on our files. At the moment these tests are rudimentry, but at least verify basic functionality of the transformers:
 
@@ -26,7 +37,30 @@ To run it using a specific version of Python:
 ```python3.5 -m nose src/python/national_voter_file/tests/test_transformers.py```
 
 # How to Invoke transformers
-We now have a standard script to run any state. It takes arguments to speifcy the state code, and the input and output directories:
+We now have a standard script to run any state. It takes arguments to specify the state code, and the input and output directories:
 
   ``` python3.5 national_voter_file/transformers/csv_transformer.py
  -s ny -o ../../data/NewYork -d ../../data/NewYork```
+
+# Tips on running the python code
+
+## Installing Dependencies
+
+Dependencies are installed via the `requirements.txt` file in this folder.
+
+```
+pip install -r requirements.txt
+```
+
+It's recommended to use [Virtualenv](https://virtualenv.pypa.io/en/stable/) for managing these.
+
+## Common Errors
+
+If you see the error:
+
+```
+ImportError: No module named 'national_voter_file'
+```
+
+come up when you run any of these python scripts, note that you might need to set the `PYTHONPATH`
+environment variable. For the transformer scripts, it should be set to `national_voter_file/src/python`.
