@@ -172,7 +172,7 @@ DELAWARE_SCHEMA = {
     'CODE-HOME-CITY': lambda: _empty( fake.lexify(text="?").upper() + fake.numerify(text="##")),
     'SCH-DIST': lambda: fake.lexify(text="??").upper(),
     'PARTY': lambda: random.choice(['R', 'D', 'I' ]),
-    'DATE-REG': lambda: fake.date(pattern='%Y%m%d'),
+    'DATE-REG': lambda: random.choice([fake.date(pattern='%Y%m%d'), fake.date(pattern='%Y%m00')]),
     'PP-HIST-1': lambda: random.choice(['0', '2002', '2004', '2006', '2008', '2010', '2012', '2014', '2016' ]),
     'PP-HIST-2': lambda: random.choice(['0', '2002', '2004', '2006', '2008', '2010', '2012', '2014', '2016' ]),
     'PR-HIST-1': lambda: random.choice(['0', '2002', '2004', '2006', '2008', '2010', '2012', '2014', '2016' ]),

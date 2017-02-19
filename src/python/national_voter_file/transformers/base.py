@@ -478,14 +478,15 @@ class BaseTransformer(object):
 
     #### Basic conversion methods ##############################################
 
-    def convert_date(self, date_str):
+    def convert_date(self, date_str, date_format=None):
         """
         Inputs:
             date_str: a string representing a date
+            date_format: optional, format of the date passed in
         Outputs:
             A datetime object created according to self.date_format
         """
-        return datetime.datetime.strptime(date_str, self.date_format).date()
+        return datetime.datetime.strptime(date_str, date_format or self.date_format).date()
 
     def usaddress_tag(self, address_str):
         """

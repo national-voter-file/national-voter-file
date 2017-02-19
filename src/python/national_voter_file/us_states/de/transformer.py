@@ -266,8 +266,7 @@ class StateTransformer(BaseTransformer):
         try:
             return {'REGISTRATION_DATE': self.convert_date(input_columns['DATE-REG'])}
         except ValueError:
-            return {'REGISTRATION_DATE': None}
-
+            return {'REGISTRATION_DATE': self.convert_date(input_columns['DATE-REG'], '%Y%m00')}
 
     def extract_party(self, input_columns):
         """
