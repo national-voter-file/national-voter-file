@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/national-voter-file/national-voter-file.svg?branch=master)](https://travis-ci.org/national-voter-file/national-voter-file)
+
 # National Voter File
 
 We provide an easy-to-use, modern-era database with voter files for each of the fifty states. It uses a data model that represents a national voter file as well as associated campaign measures in a shared data warehouse.
