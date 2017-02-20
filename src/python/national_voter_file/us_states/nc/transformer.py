@@ -48,12 +48,22 @@ class StateTransformer(BaseTransformer):
         '': 'UN'
     }
 
+    # There are #<street type> artifacts in street address. These
+    # will be ignored until more information can clarify purpose.
+    hashtag_patterns = ['#RD', '#ROAD', '#DR', '#DRIVE', '#LN', '#LANE']
+    hashtag_patterns += ['#WAY', '#CIRCLE', '#CIR', '#SLIP', '#BLVD', '#MAIN']
+    hashtag_patterns += ['#HILL', '#HIGHWAY']
+
     #### Contact methods #######################################################
 
     def extract_name(self, input_dict):
+        first_name = input_dict['first_name']
+        #TODO: Use standard value for none
+        if first_name is None or first_name == '':
+            first_name = 'none'
         return {
             'TITLE': input_dict['name_prefx_cd'],
-            'FIRST_NAME': input_dict['first_name'],
+            'FIRST_NAME': first_name,
             'MIDDLE_NAME': input_dict['middle_name'],
             'LAST_NAME': input_dict['last_name'],
             'NAME_SUFFIX': input_dict['name_suffix_lbl'],
@@ -170,9 +180,18 @@ class StateTransformer(BaseTransformer):
             input_dict[x] for x in address_components if input_dict[x] is not None
         ])
 
+        # res_street_address contains #<description> in some entries.
+        # This is removed until we know we should not remove it.
+        res_street_addr = input_dict['res_street_address']
+        for pattern in self.hashtag_patterns:
+            if pattern in res_street_addr:
+                res_street_addr = ' '.join(res_street_addr.split(pattern))
+            if pattern in address_str:
+                address_str = ' '.join(address_str.split(pattern))
+
         # save the raw information too
         raw_dict = {
-            'RAW_ADDR1' : input_dict['res_street_address'],
+            'RAW_ADDR1' : res_street_addr,
             'RAW_ADDR2' : None,
             'RAW_CITY'  : input_dict['res_city_desc'],
             'RAW_ZIP'   : input_dict['zip_code']
@@ -265,9 +284,9 @@ class StateTransformer(BaseTransformer):
         return {'PARTY' : self.north_carolina_party_map[input_dict['party_cd']]}
 
     def extract_congressional_dist(self, input_dict):
-        # TODO: cong_dist default value?
         cong_dist = input_dict['cong_dist_abbrv']
-        if cong_dist == ' ':
+        #TODO: Use standard value for none
+        if cong_dist == ' ' or not cong_dist or len(cong_dist) == 0:
             cong_dist = 'none'
         return {'CONGRESSIONAL_DIST' : cong_dist}
 
@@ -278,8 +297,13 @@ class StateTransformer(BaseTransformer):
         return {'LOWER_HOUSE_DIST' : input_dict['nc_house_abbrv']}
 
     def extract_precinct(self, input_dict):
-        return {'PRECINCT' : input_dict['precinct_abbrv'],
-                'PRECINCT_SPLIT' : input_dict['precinct_abbrv']}
+        precinct = input_dict['precinct_abbrv']
+        # TODO: Use a standard value for none
+        if not precinct:
+            precinct = "none"
+        precinct_split = precinct
+        return {'PRECINCT' : precinct,
+                'PRECINCT_SPLIT' : precinct_split}
 
     def extract_county_board_dist(self, input_dict):
         return {'COUNTY_BOARD_DIST' : None}
