@@ -144,14 +144,19 @@ class StateTransformer(BaseTransformer):
             'RAW_ADDR2': input_dict['Legal Address Line 2'],
             'RAW_CITY': input_dict['Legal Address City'],
             'RAW_ZIP': input_dict['Legal Address Zip'],
-            'VALIDATION_STATUS': '2'
         }
 
         for r in ['RAW_ADDR1', 'RAW_ADDR2']:
             if not raw_dict[r].strip():
                 raw_dict[r] = '--Not provided--'
 
-        converted_addr = self.convert_usaddress_dict(usaddress_dict)
+        if usaddress_dict:
+            converted_addr = self.convert_usaddress_dict(usaddress_dict)
+            validation_status = '2'
+        else:
+            converted_addr = self.constructEmptyResidentialAddress()
+            validation_status = '1'
+
         converted_addr.update(raw_dict)
 
         state_name = input_dict['Legal Address State']
@@ -159,7 +164,8 @@ class StateTransformer(BaseTransformer):
             state_name = 'VT'
 
         converted_addr.update({
-            'STATE_NAME': state_name
+            'STATE_NAME': state_name,
+            'VALIDATION_STATUS': validation_status
         })
 
         return converted_addr
@@ -220,17 +226,24 @@ class StateTransformer(BaseTransformer):
         mail_str = ' '.join([input_dict[x] for x in columns if input_dict[x] is not None])
         usaddress_dict, usaddress_type = self.usaddress_tag(mail_str)
 
-        return {
-            'MAIL_ADDRESS_LINE1': self.construct_mail_address_1(
-                usaddress_dict,
-                usaddress_type,
-            ),
-            'MAIL_ADDRESS_LINE2': self.construct_mail_address_2(usaddress_dict),
-            'MAIL_CITY': usaddress_dict.get('PlaceName', None),
-            'MAIL_ZIP_CODE': usaddress_dict.get('ZipCode', None),
-            'MAIL_STATE': usaddress_dict.get('StateName', None),
-            'MAIL_COUNTRY': 'USA',
-        }
+        mail_addr_dict = {}
+
+        if usaddress_type in ['Ambiguous', None]:
+            print('Warn - {}: Ambiguous mailing address, falling back to residential'.format(usaddress_type))
+        else:
+            mail_addr_dict = {
+                'MAIL_ADDRESS_LINE1': self.construct_mail_address_1(
+                    usaddress_dict,
+                    usaddress_type,
+                ),
+                'MAIL_ADDRESS_LINE2': self.construct_mail_address_2(usaddress_dict),
+                'MAIL_CITY': usaddress_dict.get('PlaceName', None),
+                'MAIL_ZIP_CODE': usaddress_dict.get('ZipCode', None),
+                'MAIL_STATE': usaddress_dict.get('StateName', None),
+                'MAIL_COUNTRY': 'USA',
+            }
+
+        return mail_addr_dict
 
 
     #### Political methods #####################################################
