@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/national-voter-file/national-voter-file.svg?branch=master)](https://travis-ci.org/national-voter-file/national-voter-file)
+![Slack](https://nationalvoterfileslackin.herokuapp.com/badge.svg) [![Build Status](https://travis-ci.org/national-voter-file/national-voter-file.svg?branch=master)](https://travis-ci.org/national-voter-file/national-voter-file)
 
 # National Voter File
 
@@ -34,5 +34,5 @@ We haven't started on this yet. It's coming soon!
 
 ## This sounds awesome! How can I help?
 
-* We chat on Slack. [Join us!](https://airtable.com/shraBEItZa0sYiMB0)
+* We chat on Slack. [Join us!](https://nationalvoterfileslackin.herokuapp.com/)
 * Take a look at our [newcomer issues](https://github.com/national-voter-file/national-voter-file/projects/1) to see where you can help.
