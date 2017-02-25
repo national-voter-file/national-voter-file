@@ -234,6 +234,7 @@ class BaseTransformer(object):
                       "SCC", #Stop Common Core
                       "NLP", #Natural Law
                       "SP", #Socialist
+                      "SWP", #Socialist Worker's Party
                       "UTY", #Unity
                       "AE", #Americans Elect
                       "AMP", # American Patriot Party
@@ -251,8 +252,12 @@ class BaseTransformer(object):
                       'STS', #National Statesman
                       'UNI', #National Unity
                       'IND', #Independent Party of Delaware
+                      'IPU', #Independent Patriot Party of Utah
+                      'GPU', #Green Party of Utah (Desert Greens)
+                      'PCP', #Personal Choice Party
                       'ROL', #Rights of Life
                       'BLU', #Blue Enigma
+                      'UJP', #Utah Justice Party
                       type(None)
         ]),
         'GENDER': set(['M', 'F', 'U']),
