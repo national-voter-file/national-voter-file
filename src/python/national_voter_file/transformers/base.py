@@ -234,6 +234,7 @@ class BaseTransformer(object):
                       "SCC", #Stop Common Core
                       "NLP", #Natural Law
                       "SP", #Socialist
+                      "SWP", #Socialist Worker's Party
                       "UTY", #Unity
                       "AE", #Americans Elect
                       "AMP", # American Patriot Party

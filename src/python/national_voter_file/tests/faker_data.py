@@ -632,7 +632,7 @@ MICHIGAN_SCHEMA = {
 UTAH_SCHEMA = {
     'Voter ID': lambda: str(randint(1, 1000000)),
     'Last Name': lambda: fake.last_name(),
-    'First Name': lambda: _blank(fake.first_name()),
+    'First Name': lambda: _blank(fake.first_name()), # First Name can be missing
     'Middle Name': lambda: _blank(fake.first_name()),
     'Name Suffix': lambda: fake.suffix(),
     'Status': lambda: random.choice(['Active', 'Inactive']),
@@ -722,7 +722,7 @@ UTAH_SCHEMA = {
     '6/26/2012': lambda: _blank('6/26/2012'),
     '11/6/2012': lambda: _blank('11/6/2012'),
     '8/13/2013': lambda: _blank('8/13/2013'),
-    '11/5/2013': lambda: _blank('11/5/2013'),
+    '11/5/2013': lambda: _blank('11/5/2013')
 }
 
 WASHINGTON_SCHEMA = {

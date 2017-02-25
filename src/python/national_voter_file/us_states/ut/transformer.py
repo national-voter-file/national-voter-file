@@ -38,11 +38,6 @@ class StateTransformer(BaseTransformer):
                         # Use None if the file has headers
 
     col_map = {
-        'TITLE': None,
-        'FIRST_NAME': 'First Name',
-        'LAST_NAME': 'Last Name',
-        'MIDDLE_NAME': 'Middle Name',
-        'NAME_SUFFIX': 'Name Suffix',
         'GENDER': None,
         'RACE': None,
         'BIRTH_STATE': None,
@@ -55,7 +50,7 @@ class StateTransformer(BaseTransformer):
         'UPPER_HOUSE_DIST': 'State Senate',
         'LOWER_HOUSE_DIST': 'State House',
         'SCHOOL_BOARD_DIST': 'State Schoolboard',
-        'COUNTY_BOARD_DIST': None, # TODO: what is this?
+        'COUNTY_BOARD_DIST': None,
         'COUNTYCODE': 'County ID',
         'COUNTY_VOTER_REF': None,
         'PRECINCT': 'Precinct',
@@ -64,13 +59,13 @@ class StateTransformer(BaseTransformer):
     }
 
     ut_party_map = {
+        # Commented values appeared in the data file but couldn't be mapped
         'Republican': 'REP',
         'Unaffiliated': 'UN',
         'Democratic': 'DEM',
         'Libertarian': 'LIB',
         'Independent American': 'AI',
         'Constitution': 'AMC',
-        #'American': '',
         'Independent': 'UN',
         'Other': 'UN',
         'Green': 'GRN',
@@ -78,24 +73,44 @@ class StateTransformer(BaseTransformer):
         'Americans Elect': 'AE',
         'Reform': 'REF',
         'Natural Law': 'NLP',
-        #'Socialist Workers': '',
+        'Socialist Workers': 'SWP',
         'Socialist': 'SP',
         'Utah Justice Party': 'UJP',
-        #'Populist': '',
         'U.S. Taxpayers': 'TAX',
         'Peace and Freedom': 'PF',
-        #'Independents for Economic Recovery': '',
         'Independent Patriot Party Of Utah': 'IPU',
         'Independent Patriot Party of Utah': 'IPU',
         'Desert Greens': 'GPU',
+        #'American': '',
+        #'Populist': '',
+        #'Independents for Economic Recovery': '',
     }
 
     col_type_dict = BaseTransformer.col_type_dict.copy()
-    # TODO: not sure about these
     col_type_dict['PRECINCT_SPLIT'] = set([str, type(None)])
-    col_type_dict['FIRST_NAME'] = set([str, type(None)])
 
     #### Demographics methods ##################################################
+
+    def extract_name(self, input_columns):
+        """
+        Inputs:
+            input_columns: name or list of columns
+        Outputs:
+            Dictionary with following keys
+                'TITLE'
+                'FIRST_NAME'
+                'MIDDLE_NAME'
+                'LAST_NAME'
+                'NAME_SUFFIX'
+        """
+        return {
+            'TITLE': None,
+            # Some rows are missing the First Name value
+            'FIRST_NAME': input_columns['First Name'] or '--Missing--',
+            'MIDDLE_NAME': input_columns['Middle Name'],
+            'LAST_NAME': input_columns['Last Name'],
+            'NAME_SUFFIX': input_columns['Name Suffix'],
+        }
 
     def extract_birthdate(self, input_columns):
         """
@@ -109,7 +124,7 @@ class StateTransformer(BaseTransformer):
         try:
             dob = self.convert_date(input_columns['DOB'])
         except ValueError:
-            # TODO: warning?
+            # Some rows have invalid date values
             pass
 
         return {
@@ -220,6 +235,7 @@ class StateTransformer(BaseTransformer):
                     state = None
                     zipcode = state_zip[-1]
         except ValueError:
+            # Some rows have weird values for this field
             pass
 
         return {
@@ -248,7 +264,7 @@ class StateTransformer(BaseTransformer):
         try:
             d = self.convert_date(input_columns['Registration Date'])
         except ValueError:
-            #TODO: warning?
+            # Some rows have invalid date values
             pass
 
         return {'REGISTRATION_DATE': d}
