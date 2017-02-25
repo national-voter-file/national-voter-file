@@ -148,7 +148,7 @@ class BaseTransformer(object):
     # Acceptable column output types
     col_type_dict = {
         'TITLE': set([str, type(None)]),
-        'FIRST_NAME': set([str]),
+        'FIRST_NAME': set([str, type(None)]),
         'MIDDLE_NAME': set([str, type(None)]),
         'LAST_NAME': set([str]),
         'NAME_SUFFIX': set([str, type(None)]),
