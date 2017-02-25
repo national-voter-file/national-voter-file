@@ -93,16 +93,16 @@ class StateTransformer(BaseTransformer):
     col_type_dict['STATE_NAME'] = set([str, type(None)])
     #### Demographics methods ##################################################
 
-    def extract_birthdate(self, input_columns):
+    def extract_birthdate(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'BIRTHDATE'
         """
         return {
-            'BIRTHDATE': date(int(input_columns['YEAR-OF-BIRTH']), 1, 1),
+            'BIRTHDATE': date(int(input_dict['YEAR-OF-BIRTH']), 1, 1),
             'BIRTHDATE_IS_ESTIMATE': 'Y'
         }
 
@@ -254,37 +254,37 @@ class StateTransformer(BaseTransformer):
     #### Political methods #####################################################
 
 
-    def extract_registration_date(self, input_columns):
+    def extract_registration_date(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'REGISTRATION_DATE'
         """
 
         try:
-            return {'REGISTRATION_DATE': self.convert_date(input_columns['DATE-REG'])}
+            return {'REGISTRATION_DATE': self.convert_date(input_dict['DATE-REG'])}
         except ValueError:
-            return {'REGISTRATION_DATE': self.convert_date(input_columns['DATE-REG'], '%Y%m00')}
+            return {'REGISTRATION_DATE': self.convert_date(input_dict['DATE-REG'], '%Y%m00')}
 
-    def extract_party(self, input_columns):
+    def extract_party(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'PARTY'
         """
 
-        return {'PARTY' : self.de_party_map.get(input_columns['PARTY'], input_columns['PARTY'])}
+        return {'PARTY' : self.de_party_map.get(input_dict['PARTY'], input_dict['PARTY'])}
 
-    def extract_county_board_dist(self, input_columns):
+    def extract_county_board_dist(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'COUNTY_BOARD_DIST'
         """
-        return {'COUNTY_BOARD_DIST': input_columns['CNLEVY']}
+        return {'COUNTY_BOARD_DIST': input_dict['CNLEVY']}

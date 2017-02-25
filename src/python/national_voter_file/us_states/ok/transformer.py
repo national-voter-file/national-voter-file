@@ -78,7 +78,7 @@ class StateTransformer(BaseTransformer):
     def extract_race(self, input_dict):
         return {'RACE': "U"}
 
-    def extract_birth_state(self, input_columns):
+    def extract_birth_state(self, input_dict):
         return {'BIRTH_STATE': None}
 
     def extract_birthdate(self, input_dict):

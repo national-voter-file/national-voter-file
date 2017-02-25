@@ -128,7 +128,7 @@ class StateTransformer(BaseTransformer):
             'BIRTHDATE_IS_ESTIMATE':'N'
         }
 
-    def extract_birth_state(self, input_columns):
+    def extract_birth_state(self, input_dict):
         return {'BIRTH_STATE': None}
 
     def extract_race(self, input_dict):
