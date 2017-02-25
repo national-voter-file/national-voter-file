@@ -89,7 +89,10 @@ class StatePreparer(BasePreparer):
         with open(voter_file_path, 'r') as infile:
             for row in infile:
                 # Yield column with spaces stripped
-                yield [row[slice(*c)].strip() for c in self.col_indices]
+                yield dict(zip(
+                    self.transformer.input_fields,
+                    [row[slice(*c)].strip() for c in self.col_indices]
+                ))
 
     def voters(self, voter_file_path):
         reader = self.dict_iterator(self.open(self.input_path))
