@@ -168,10 +168,6 @@ class StateTransformer(BaseTransformer):
             'RAW_ZIP': input_dict['HOME-ZIPCODE']
         }
 
-        for r in ['RAW_ADDR1', 'RAW_ADDR2']:
-            if not raw_dict[r].strip():
-                raw_dict[r] = '--Not provided--'
-
         usaddress_dict = self.usaddress_tag(address_str)[0]
 
         if usaddress_dict:

@@ -118,9 +118,6 @@ class StateTransformer(BaseTransformer):
             'RAW_ZIP': input_dict['Zip']
         }
 
-        if not raw_dict['RAW_ADDR1'].strip():
-            raw_dict['RAW_ADDR1'] = '--Not provided--'
-
         # OK doesn't have residence state
         state_name = 'OK'
 
