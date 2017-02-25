@@ -16,8 +16,8 @@ default_file = 'voters.txt'
 class StatePreparer(BasePreparer):
 
     state_path = 'ut' # Two letter code for state
-    state_name='Utah' # Name of state with no spaces. Use CamelCase
-    sep=',' # The character used to delimit records
+    state_name = 'Utah' # Name of state with no spaces. Use CamelCase
+    sep = ',' # The character used to delimit records
 
     def __init__(self, input_path, *args):
         super(StatePreparer, self).__init__(input_path, *args)
@@ -26,14 +26,14 @@ class StatePreparer(BasePreparer):
             self.transformer = StateTransformer()
 
     def process(self):
-            fp = open(self.input_path, 'r', encoding='utf-8-sig')
+        fp = open(self.input_path, 'r', encoding='utf-8-sig')
 
-            reader = self.dict_iterator(fp)
-            for row in reader:
-                yield row
+        reader = self.dict_iterator(fp)
+        for row in reader:
+            yield row
 
 class StateTransformer(BaseTransformer):
-    date_format='%m/%d/%Y' # The format used for dates
+    date_format = '%m/%d/%Y' # The format used for dates
     input_fields = None # This can be a list of column names for the input file.
                         # Use None if the file has headers
 
@@ -251,7 +251,7 @@ class StateTransformer(BaseTransformer):
             #TODO: warning?
             pass
 
-        return { 'REGISTRATION_DATE': d }
+        return {'REGISTRATION_DATE': d}
 
     def extract_registration_status(self, input_columns):
         """
@@ -261,9 +261,7 @@ class StateTransformer(BaseTransformer):
             Dictionary with following keys
                 'REGISTRATION_STATUS'
         """
-        return {
-            'REGISTRATION_STATUS': input_columns['Status'],
-        }
+        return {'REGISTRATION_STATUS': input_columns['Status']}
 
     def extract_party(self, input_columns):
         """
@@ -274,7 +272,4 @@ class StateTransformer(BaseTransformer):
                 'PARTY'
         """
         party = input_columns['Party']
-        return {
-            'PARTY': self.ut_party_map.get(party),
-        }
-
+        return {'PARTY': self.ut_party_map.get(party)}
