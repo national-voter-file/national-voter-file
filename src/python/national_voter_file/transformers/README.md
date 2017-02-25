@@ -36,6 +36,10 @@ To run it using a specific version of Python:
 
 ```python3.5 -m nose src/python/national_voter_file/tests/test_transformers.py```
 
+Make sure your code also passes our linter:
+
+```pylint --rcfile=.pylintrc src/python/national_voter_file/us_states/ -f parseable -r n```
+
 # How to Invoke transformers
 We now have a standard script to run any state. It takes arguments to specify the state code, and the input and output directories:
 

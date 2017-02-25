@@ -15,8 +15,8 @@ default_file = 'some_good_sample_datafile.csv'
 class StatePreparer(BasePreparer):
 
     state_path = 'xx' # Two letter code for state
-    state_name='Xxxx' # Name of state with no spaces. Use CamelCase
-    sep=',' # The character used to delimit records
+    state_name = 'Xxxx' # Name of state with no spaces. Use CamelCase
+    sep = ',' # The character used to delimit records
 
     def __init__(self, input_path, *args):
         super(StatePreparer, self).__init__(input_path, *args)
@@ -25,12 +25,12 @@ class StatePreparer(BasePreparer):
             self.transformer = StateTransformer()
 
     def process(self):
-            reader = self.dict_iterator(self.open(self.input_path))
-            for row in reader:
-                yield row
+        reader = self.dict_iterator(self.open(self.input_path))
+        for row in reader:
+            yield row
 
 class StateTransformer(BaseTransformer):
-    date_format='%m/%d/%Y' # The format used for dates
+    date_format = '%m/%d/%Y' # The format used for dates
     input_fields = None # This can be a list of column names for the input file.
                         # Use None if the file has headers
 
@@ -157,20 +157,22 @@ class StateTransformer(BaseTransformer):
                 'USPS_BOX_TYPE'
                 'ZIP_CODE'
         """
+
+        # # columns to create address, in order
+        # address_components = []
+        # # create address string for usaddress.tag
+        # address_str = ' '.join([
+        #     input_dict[x] for x in address_components if input_dict[x] is not None
+        # ])
+        # # use the usaddress_tag method to handle errors
+        # usaddress_dict, usaddress_type = self.usaddress_tag(address_str)
+        # # use the convert_usaddress_dict to get correct column names
+        # # and fill in missing values
+        # return self.convert_usaddress_dict(usaddress_dict)
+
         raise NotImplementedError(
             'Must implement extract_registration_address method'
         )
-        # columns to create address, in order
-        address_components = []
-        # create address string for usaddress.tag
-        address_str = ' '.join([
-            input_dict[x] for x in address_components if input_dict[x] is not None
-        ])
-        # use the usaddress_tag method to handle errors
-        usaddress_dict, usaddress_type = self.usaddress_tag(address_str)
-        # use the convert_usaddress_dict to get correct column names
-        # and fill in missing values
-        return self.convert_usaddress_dict(usaddress_dict)
 
     def extract_county_code(self, input_dict):
         """
@@ -199,22 +201,24 @@ class StateTransformer(BaseTransformer):
                 'MAIL_ZIP_CODE'
                 'MAIL_COUNTRY'
         """
+
+        # mail_str = ' '.join([x for x in columns])
+        # usaddress_dict, usaddress_type = self.usaddress_tag(mail_str)
+        # return {
+        #     'MAIL_ADDRESS_LINE1': self.construct_mail_address_1(
+        #         usaddress_dict,
+        #         usaddress_type,
+        #     ),
+        #     'MAIL_ADDRESS_LINE2': self.construct_mail_address_2(usaddress_dict),
+        #     'MAIL_CITY': input_dict['MAIL_CITY'],
+        #     'MAIL_ZIP_CODE': input_dict['MAIL_ZIP'],
+        #     'MAIL_STATE': input_dict['MAIL_STATE'],
+        #     'MAIL_COUNTRY': input_dict['MAIL_COUNTRY'],
+        # }
+
         raise NotImplementedError(
             'Must implement extract_mailing_address method'
         )
-        mail_str = ' '.join([x for x in columns])
-        usaddress_dict, usaddress_type = self.usaddress_tag(mail_str)
-        return {
-            'MAIL_ADDRESS_LINE1': self.construct_mail_address_1(
-                usaddress_dict,
-                usaddress_type,
-            ),
-            'MAIL_ADDRESS_LINE2': self.construct_mail_address_2(usaddress_dict),
-            'MAIL_CITY': input_dict['MAIL_CITY'],
-            'MAIL_ZIP_CODE': input_dict['MAIL_ZIP'],
-            'MAIL_STATE': input_dict['MAIL_STATE'],
-            'MAIL_COUNTRY': input_dict['MAIL_COUNTRY'],
-        }
 
     #### Political methods #####################################################
 
