@@ -2,7 +2,7 @@
 
 ##################
 ## Python script to clean up and enrich the Michigan Voter File
-docker-compose run etl python3 /national-voter-file/src/python/national_voter_file/transformers/csv_transformer.py -s mi -d /national-voter-file/data/Michigan/FOIA_Voters.zip -o /national-voter-file/data/Washington
+docker-compose run etl python3 /national-voter-file/src/python/national_voter_file/transformers/csv_transformer.py -s mi -d /national-voter-file/data/Michigan/FOIA_Voters.zip -o /national-voter-file/data/Michigan
 
 
 ###################

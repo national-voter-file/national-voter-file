@@ -88,7 +88,7 @@ class StatePreparer(BasePreparer):
     def zip_voters(self, voter_file_path):
         with open(voter_file_path, 'r') as infile:
             for row in infile:
-                # Yield column with spaces stripped
+                # Use column indices to split rows, yield dict in row format
                 yield dict(zip(
                     self.transformer.input_fields,
                     [row[slice(*c)].strip() for c in self.col_indices]
