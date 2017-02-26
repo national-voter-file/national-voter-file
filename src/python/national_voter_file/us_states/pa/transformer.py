@@ -351,7 +351,7 @@ class StateTransformer(BaseTransformer):
     def extract_precinct(self, input_dict):
         """
         Inputs:
-            input_dict: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'PRECINCT'
@@ -362,7 +362,7 @@ class StateTransformer(BaseTransformer):
     def extract_county_board_dist(self, input_dict):
         """
         Inputs:
-            input_dict: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'COUNTY_BOARD_DIST'
@@ -373,7 +373,7 @@ class StateTransformer(BaseTransformer):
     def extract_school_board_dist(self, input_dict):
         """
         Inputs:
-            input_dict: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'SCHOOL_BOARD_DIST'
@@ -384,7 +384,7 @@ class StateTransformer(BaseTransformer):
     def extract_precinct_split(self, input_dict):
         """
         Inputs:
-            input_dict: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'PRECINCT_SPLIT'

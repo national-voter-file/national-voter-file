@@ -37,10 +37,10 @@ class StateTransformer(BaseTransformer):
 
     #### Contact methods #######################################################
 
-    def extract_name(self, input_columns):
+    def extract_name(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'TITLE'
@@ -51,30 +51,30 @@ class StateTransformer(BaseTransformer):
         """
         raise NotImplementedError('Must implement extract_name method.')
 
-    def extract_email(self, input_columns):
+    def extract_email(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'EMAIL'
         """
         raise NotImplementedError('Must implement extract_email method')
 
-    def extract_phone_number(self, input_columns):
+    def extract_phone_number(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'PHONE'
         """
         raise NotImplementedError('Must implement extract_phone_number method')
 
-    def extract_do_not_call_status(self, input_columns):
+    def extract_do_not_call_status(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'DO_NOT_CALL_STATUS'
@@ -85,30 +85,30 @@ class StateTransformer(BaseTransformer):
 
     #### Demographics methods ##################################################
 
-    def extract_gender(self, input_columns):
+    def extract_gender(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'GENDER'
         """
         raise NotImplementedError('Must implement extract_gender method')
 
-    def extract_birthdate(self, input_columns):
+    def extract_birthdate(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'BIRTHDATE'
         """
         raise NotImplementedError('Must implement extract_birthdate method')
 
-    def extract_language_choice(self, input_columns):
+    def extract_language_choice(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'LANGUAGE_CHOICE'
@@ -222,10 +222,10 @@ class StateTransformer(BaseTransformer):
 
     #### Political methods #####################################################
 
-    def extract_state_voter_ref(self, input_columns):
+    def extract_state_voter_ref(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'STATE_VOTER_REF'
@@ -234,10 +234,10 @@ class StateTransformer(BaseTransformer):
             'Must implement extract_state_voter_ref method'
         )
 
-    def extract_county_voter_ref(self, input_columns):
+    def extract_county_voter_ref(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'COUNTY_VOTER_REF'
@@ -246,10 +246,10 @@ class StateTransformer(BaseTransformer):
             'Must implement extract_county_voter_ref method'
         )
 
-    def extract_registration_date(self, input_columns):
+    def extract_registration_date(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'REGISTRATION_DATE'
@@ -258,10 +258,10 @@ class StateTransformer(BaseTransformer):
             'Must implement extract_registration_date method'
         )
 
-    def extract_registration_status(self, input_columns):
+    def extract_registration_status(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'REGISTRATION_STATUS'
@@ -270,10 +270,10 @@ class StateTransformer(BaseTransformer):
             'Must implement extract_registration_status method'
         )
 
-    def extract_absentee_type(self, input_columns):
+    def extract_absentee_type(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'ABSENTEE_TYPE'
@@ -282,10 +282,10 @@ class StateTransformer(BaseTransformer):
             'Must implement extract_absentee_type method'
         )
 
-    def extract_party(self, input_columns):
+    def extract_party(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'PARTY'
@@ -294,10 +294,10 @@ class StateTransformer(BaseTransformer):
             'Must implement extract_party method'
         )
 
-    def extract_congressional_dist(self, input_columns):
+    def extract_congressional_dist(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'CONGRESSIONAL_DIST'
@@ -306,10 +306,10 @@ class StateTransformer(BaseTransformer):
             'Must implement extract_congressional_dist method'
         )
 
-    def extract_upper_house_dist(self, input_columns):
+    def extract_upper_house_dist(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'UPPER_HOUSE_DIST'
@@ -318,10 +318,10 @@ class StateTransformer(BaseTransformer):
             'Must implement extract_upper_house_dist method'
         )
 
-    def extract_lower_house_dist(self, input_columns):
+    def extract_lower_house_dist(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'LOWER_HOUSE_DIST'
@@ -330,10 +330,10 @@ class StateTransformer(BaseTransformer):
             'Must implement extract_lower_house_dist method'
         )
 
-    def extract_precinct(self, input_columns):
+    def extract_precinct(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'PRECINCT'
@@ -342,10 +342,10 @@ class StateTransformer(BaseTransformer):
             'Must implement extract_precinct method'
         )
 
-    def extract_county_board_dist(self, input_columns):
+    def extract_county_board_dist(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'COUNTY_BOARD_DIST'
@@ -354,10 +354,10 @@ class StateTransformer(BaseTransformer):
             'Must implement extract_county_board_dist method'
         )
 
-    def extract_school_board_dist(self, input_columns):
+    def extract_school_board_dist(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'SCHOOL_BOARD_DIST'
@@ -366,10 +366,10 @@ class StateTransformer(BaseTransformer):
             'Must implement extract_school_board_dist method'
         )
 
-    def extract_precinct_split(self, input_columns):
+    def extract_precinct_split(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'PRECINCT_SPLIT'

@@ -206,7 +206,7 @@ class BaseTransformer(object):
         'PRECINCT': set([str]),
         'COUNTY_BOARD_DIST': set([str, type(None)]),
         'SCHOOL_BOARD_DIST': set([str, type(None)]),
-        'PRECINCT_SPLIT': set([str]),
+        'PRECINCT_SPLIT': set([str, type(None)]),
         'RAW_ADDR1': set([str, type(None)]),
         'RAW_ADDR2': set([str, type(None)]),
         'RAW_CITY': set([str, type(None)]),
@@ -609,17 +609,17 @@ class BaseTransformer(object):
         If you set defaults for one of the keys, then if the value is
         None or false-y, like an empty string, then the default will be used.
         """
-        def extract(self, input_columns):
-            return {key:(input_columns.get(key) or defaults.get(key))
+        def extract(self, input_dict):
+            return {key:(input_dict.get(key) or defaults.get(key))
                     for key in keys}
         return extract
 
     #### Contact methods #######################################################
 
-    def extract_name(self, input_columns):
+    def extract_name(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'TITLE'
@@ -636,7 +636,7 @@ class BaseTransformer(object):
 
         if all(col in self.col_map for col in col_list):
             return dict(
-                (c, input_columns.get(self.col_map[c], None)) for c in col_list
+                (c, input_dict.get(self.col_map[c], None)) for c in col_list
             )
         else:
             raise NotImplementedError(
@@ -644,10 +644,10 @@ class BaseTransformer(object):
                 ' or include {} in col_map'.format(', '.join(col_list))
             )
 
-    def extract_email(self, input_columns):
+    def extract_email(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'EMAIL'
@@ -656,7 +656,7 @@ class BaseTransformer(object):
 
         if all(col in self.col_map for col in col_list):
             return dict(
-                (c, input_columns.get(self.col_map[c], None)) for c in col_list
+                (c, input_dict.get(self.col_map[c], None)) for c in col_list
             )
         else:
             raise NotImplementedError(
@@ -664,10 +664,10 @@ class BaseTransformer(object):
                 ' or include {} in col_map'.format(', '.join(col_list))
             )
 
-    def extract_phone_number(self, input_columns):
+    def extract_phone_number(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'PHONE'
@@ -676,7 +676,7 @@ class BaseTransformer(object):
 
         if all(col in self.col_map for col in col_list):
             return dict(
-                (c, input_columns.get(self.col_map[c], None)) for c in col_list
+                (c, input_dict.get(self.col_map[c], None)) for c in col_list
             )
         else:
             raise NotImplementedError(
@@ -684,10 +684,10 @@ class BaseTransformer(object):
                 ' or include {} in col_map'.format(', '.join(col_list))
             )
 
-    def extract_do_not_call_status(self, input_columns):
+    def extract_do_not_call_status(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'DO_NOT_CALL_STATUS'
@@ -696,7 +696,7 @@ class BaseTransformer(object):
 
         if all(col in self.col_map for col in col_list):
             return dict(
-                (c, input_columns.get(self.col_map[c], None)) for c in col_list
+                (c, input_dict.get(self.col_map[c], None)) for c in col_list
             )
         else:
             raise NotImplementedError(
@@ -706,10 +706,10 @@ class BaseTransformer(object):
 
     #### Demographics methods ##################################################
 
-    def extract_gender(self, input_columns):
+    def extract_gender(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'GENDER'
@@ -718,7 +718,7 @@ class BaseTransformer(object):
 
         if all(col in self.col_map for col in col_list):
             return dict(
-                (c, input_columns.get(self.col_map[c], None)) for c in col_list
+                (c, input_dict.get(self.col_map[c], None)) for c in col_list
             )
         else:
             raise NotImplementedError(
@@ -726,10 +726,10 @@ class BaseTransformer(object):
                 ' or include {} in col_map'.format(', '.join(col_list))
             )
 
-    def extract_race(self, input_columns):
+    def extract_race(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'RACE'
@@ -738,7 +738,7 @@ class BaseTransformer(object):
 
         if all(col in self.col_map for col in col_list):
             return dict(
-                (c, input_columns.get(self.col_map[c], None)) for c in col_list
+                (c, input_dict.get(self.col_map[c], None)) for c in col_list
             )
         else:
             raise NotImplementedError(
@@ -746,10 +746,10 @@ class BaseTransformer(object):
                 ' or include {} in col_map'.format(', '.join(col_list))
             )
 
-    def extract_birth_state(self, input_columns):
+    def extract_birth_state(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'BIRTH_STATE'
@@ -759,7 +759,7 @@ class BaseTransformer(object):
 
         if all(col in self.col_map for col in col_list):
             return dict(
-                (c, input_columns.get(self.col_map[c], None)) for c in col_list
+                (c, input_dict.get(self.col_map[c], None)) for c in col_list
             )
         else:
             raise NotImplementedError(
@@ -767,10 +767,10 @@ class BaseTransformer(object):
                 ' or include {} in col_map'.format(', '.join(col_list))
             )
 
-    def extract_birthdate(self, input_columns):
+    def extract_birthdate(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'BIRTHDATE'
@@ -778,10 +778,10 @@ class BaseTransformer(object):
         """
         raise NotImplementedError('Must implement extract_birthdate method')
 
-    def extract_language_choice(self, input_columns):
+    def extract_language_choice(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'LANGUAGE_CHOICE'
@@ -790,7 +790,7 @@ class BaseTransformer(object):
 
         if all(col in self.col_map for col in col_list):
             return dict(
-                (c, input_columns.get(self.col_map[c], None)) for c in col_list
+                (c, input_dict.get(self.col_map[c], None)) for c in col_list
             )
         else:
             raise NotImplementedError(
@@ -909,10 +909,10 @@ class BaseTransformer(object):
 
     #### Political methods #####################################################
 
-    def extract_state_voter_ref(self, input_columns):
+    def extract_state_voter_ref(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'STATE_VOTER_REF'
@@ -921,7 +921,7 @@ class BaseTransformer(object):
 
         if all(col in self.col_map for col in col_list):
             return dict(
-                (c, input_columns.get(self.col_map[c], None)) for c in col_list
+                (c, input_dict.get(self.col_map[c], None)) for c in col_list
             )
         else:
             raise NotImplementedError(
@@ -929,10 +929,10 @@ class BaseTransformer(object):
                 ' or include {} in col_map'.format(', '.join(col_list))
             )
 
-    def extract_county_voter_ref(self, input_columns):
+    def extract_county_voter_ref(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'COUNTY_VOTER_REF'
@@ -941,7 +941,7 @@ class BaseTransformer(object):
 
         if all(col in self.col_map for col in col_list):
             return dict(
-                (c, input_columns.get(self.col_map[c], None)) for c in col_list
+                (c, input_dict.get(self.col_map[c], None)) for c in col_list
             )
         else:
             raise NotImplementedError(
@@ -949,10 +949,10 @@ class BaseTransformer(object):
                 ' or include {} in col_map'.format(', '.join(col_list))
             )
 
-    def extract_registration_date(self, input_columns):
+    def extract_registration_date(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'REGISTRATION_DATE'
@@ -961,10 +961,10 @@ class BaseTransformer(object):
             'Must implement extract_registration_date method'
         )
 
-    def extract_registration_status(self, input_columns):
+    def extract_registration_status(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'REGISTRATION_STATUS'
@@ -973,7 +973,7 @@ class BaseTransformer(object):
 
         if all(col in self.col_map for col in col_list):
             return dict(
-                (c, input_columns.get(self.col_map[c], None)) for c in col_list
+                (c, input_dict.get(self.col_map[c], None)) for c in col_list
             )
         else:
             raise NotImplementedError(
@@ -981,10 +981,10 @@ class BaseTransformer(object):
                 ' or include {} in col_map'.format(', '.join(col_list))
             )
 
-    def extract_absentee_type(self, input_columns):
+    def extract_absentee_type(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'ABSTENTEE_TYPE'
@@ -993,7 +993,7 @@ class BaseTransformer(object):
 
         if all(col in self.col_map for col in col_list):
             return dict(
-                (c, input_columns.get(self.col_map[c], None)) for c in col_list
+                (c, input_dict.get(self.col_map[c], None)) for c in col_list
             )
         else:
             raise NotImplementedError(
@@ -1001,10 +1001,10 @@ class BaseTransformer(object):
                 ' or include {} in col_map'.format(', '.join(col_list))
             )
 
-    def extract_party(self, input_columns):
+    def extract_party(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'PARTY'
@@ -1013,7 +1013,7 @@ class BaseTransformer(object):
 
         if all(col in self.col_map for col in col_list):
             return dict(
-                (c, input_columns.get(self.col_map[c], None)) for c in col_list
+                (c, input_dict.get(self.col_map[c], None)) for c in col_list
             )
         else:
             raise NotImplementedError(
@@ -1021,10 +1021,10 @@ class BaseTransformer(object):
                 ' or include {} in col_map'.format(', '.join(col_list))
             )
 
-    def extract_congressional_dist(self, input_columns):
+    def extract_congressional_dist(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'CONGRESSIONAL_DIST'
@@ -1033,7 +1033,7 @@ class BaseTransformer(object):
 
         if all(col in self.col_map for col in col_list):
             return dict(
-                (c, input_columns.get(self.col_map[c], None)) for c in col_list
+                (c, input_dict.get(self.col_map[c], None)) for c in col_list
             )
         else:
             raise NotImplementedError(
@@ -1041,10 +1041,10 @@ class BaseTransformer(object):
                 ' or include {} in col_map'.format(', '.join(col_list))
             )
 
-    def extract_upper_house_dist(self, input_columns):
+    def extract_upper_house_dist(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'UPPER_HOUSE_DIST'
@@ -1053,7 +1053,7 @@ class BaseTransformer(object):
 
         if all(col in self.col_map for col in col_list):
             return dict(
-                (c, input_columns.get(self.col_map[c], None)) for c in col_list
+                (c, input_dict.get(self.col_map[c], None)) for c in col_list
             )
         else:
             raise NotImplementedError(
@@ -1061,10 +1061,10 @@ class BaseTransformer(object):
                 ' or include {} in col_map'.format(', '.join(col_list))
             )
 
-    def extract_lower_house_dist(self, input_columns):
+    def extract_lower_house_dist(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'LOWER_HOUSE_DIST'
@@ -1073,7 +1073,7 @@ class BaseTransformer(object):
 
         if all(col in self.col_map for col in col_list):
             return dict(
-                (c, input_columns.get(self.col_map[c], None)) for c in col_list
+                (c, input_dict.get(self.col_map[c], None)) for c in col_list
             )
         else:
             raise NotImplementedError(
@@ -1081,10 +1081,10 @@ class BaseTransformer(object):
                 ' or include {} in col_map'.format(', '.join(col_list))
             )
 
-    def extract_precinct(self, input_columns):
+    def extract_precinct(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'PRECINCT'
@@ -1095,7 +1095,7 @@ class BaseTransformer(object):
 
         if all(col in self.col_map for col in col_list):
             return dict(
-                (c, input_columns.get(self.col_map[c], None)) for c in col_list
+                (c, input_dict.get(self.col_map[c], None)) for c in col_list
             )
         else:
             raise NotImplementedError(
@@ -1103,10 +1103,10 @@ class BaseTransformer(object):
                 ' or include {} in col_map'.format(', '.join(col_list))
             )
 
-    def extract_precinct_split(self, input_columns):
+    def extract_precinct_split(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'PRECINCT_SPLIT'
@@ -1116,7 +1116,7 @@ class BaseTransformer(object):
 
         if all(col in self.col_map for col in col_list):
             return dict(
-                (c, input_columns.get(self.col_map[c], None)) for c in col_list
+                (c, input_dict.get(self.col_map[c], None)) for c in col_list
             )
         else:
             raise NotImplementedError(
@@ -1124,10 +1124,10 @@ class BaseTransformer(object):
                 ' or include {} in col_map'.format(', '.join(col_list))
             )
 
-    def extract_county_board_dist(self, input_columns):
+    def extract_county_board_dist(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'COUNTY_BOARD_DIST'
@@ -1136,7 +1136,7 @@ class BaseTransformer(object):
 
         if all(col in self.col_map for col in col_list):
             return dict(
-                (c, input_columns.get(self.col_map[c], None)) for c in col_list
+                (c, input_dict.get(self.col_map[c], None)) for c in col_list
             )
         else:
             raise NotImplementedError(
@@ -1144,10 +1144,10 @@ class BaseTransformer(object):
                 ' or include {} in col_map'.format(', '.join(col_list))
             )
 
-    def extract_school_board_dist(self, input_columns):
+    def extract_school_board_dist(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'SCHOOL_BOARD_DIST'
@@ -1156,7 +1156,7 @@ class BaseTransformer(object):
 
         if all(col in self.col_map for col in col_list):
             return dict(
-                (c, input_columns.get(self.col_map[c], None)) for c in col_list
+                (c, input_dict.get(self.col_map[c], None)) for c in col_list
             )
         else:
             raise NotImplementedError(

@@ -189,7 +189,7 @@ class StateTransformer(BaseTransformer):
     def extract_race(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'RACE'
@@ -197,10 +197,10 @@ class StateTransformer(BaseTransformer):
         race = input_dict['Race'].strip()
         return {'RACE': self.florida_race_map[race]}
 
-    def extract_birth_state(self, input_columns):
+    def extract_birth_state(self, input_dict):
         """
         Inputs:
-            input_columns: name or list of columns
+            input_dict: names of columns and corresponding values
         Outputs:
             Dictionary with following keys
                 'BIRTH_STATE'
