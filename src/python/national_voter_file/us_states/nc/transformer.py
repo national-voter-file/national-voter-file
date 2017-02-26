@@ -197,9 +197,6 @@ class StateTransformer(BaseTransformer):
             'RAW_ZIP'   : input_dict['zip_code']
         }
 
-        if not raw_dict['RAW_ADDR1'].strip():
-            raw_dict['RAW_ADDR1'] = '--Not provided--'
-
         state_name = input_dict['state_cd']
         if len(state_name.strip()) == 0:
             state_name = 'NC'
