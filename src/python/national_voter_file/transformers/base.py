@@ -602,18 +602,6 @@ class BaseTransformer(object):
     def flag_empty_field(self, field_val):
         return field_val if field_val else "XXX-MISSING-XXX"
 
-    @classmethod
-    def map_extract_by_keys(cls, *keys, defaults={}):
-        """
-        Convenience method to create a mapper for `keys` list to the output.
-        If you set defaults for one of the keys, then if the value is
-        None or false-y, like an empty string, then the default will be used.
-        """
-        def extract(self, input_dict):
-            return {key:(input_dict.get(key) or defaults.get(key))
-                    for key in keys}
-        return extract
-
     #### Contact methods #######################################################
 
     def extract_name(self, input_dict):
