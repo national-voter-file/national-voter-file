@@ -10,7 +10,7 @@
   2. `state_name` - CamelCase state namme (e.g. NewYork)
   3. `sep` - Delimiter between columns
   4. `date_format` - The python date parser format string for how to read dates for this voter file.
-  5. `col_map` - A mapping of column names that don't need to transformed in any way.
+  5. `col_map` - A mapping of column names that don't need to be transformed in any way.
   6. `input_fields` - a list of column names for the source file. This should be set to `None` when the file has a header row.
 
 * The next step is to add tests in the following places:
