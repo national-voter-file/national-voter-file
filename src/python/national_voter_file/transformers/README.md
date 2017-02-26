@@ -1,33 +1,37 @@
 # Adding a new state
 
-Here are the basic steps you want to perform:
+* Create a new transformer from an existing one:
 
-* copy `state_transformer_template.py` to `us_states/{state_postal_initials}/transfomer.py` (e.g. `us_states/pa/transformer.py`)
-* Update the values in the headers
+```cp -R us_states/mi us_states/{new_state_postal_initials}```
+
+* Update it accordingly. Besides updating the methods, you'll need to update these variables:
+
   1. `state_path` - this is the two letter state code (e.g. tx)
   2. `state_name` - CamelCase state namme (e.g. NewYork)
   3. `sep` - Delimiter between columns
   4. `date_format` - The python date parser format string for how to read dates for this voter file.
-  5. `input_fields` - a list of column names for the source file. This should be set to `None` when the file has a header row.
+  5. `col_map` - A mapping of column names that don't need to be transformed in any way.
+  6. `input_fields` - a list of column names for the source file. This should be set to `None` when the file has a header row.
 
 * The next step is to add tests in the following places:
+
 ** `src/test/python/test_transformers.py` (with a `test_{state initials}_transformer()` method, ideally in alphabetical order)
 ** `src/test/python/faker_data.py` (add in your state)
-** `src/test/python/test_data/{STATE NAME}.csv`
-* And then include file info documentation if there was any that came with the data: in `docs/state-voter-file-data-descriptions/`
+** `src/test/python/test_data/{new_state_postal_initials}.csv`
 
-# How to generate fake data
+* And then include file info documentation if there was any that came with the data, in `docs/state-voter-file-data-descriptions/`
+
+# Generating fake data
 
 For the transformer tests, a fake data file is required. The transformers test runs the transformer on this file. It lives at
-`src/test/python/test_data/{STATE NAME}.csv` and is generated with the following command:
+`src/test/python/test_data/{new_state_postal_initials}.csv` and is generated with the following command:
 
 ```
-python3 national_voter_file/tests/faker_data.py {STATE NAME}
+python3 national_voter_file/tests/faker_data.py {new_state_postal_initials}
 ```
 
-Note that `STATE NAME` is the shortened name of hte state in this case (ie. co or de).
+# Running tests
 
-# How to run test suite
 We use [Nosetest](http://nose.readthedocs.io/en/latest/) to run automated tests on our files. At the moment these tests are rudimentry, but at least verify basic functionality of the transformers:
 
 ```nosetests src/python/national_voter_file/tests/test_transformers.py```
@@ -41,6 +45,7 @@ Make sure your code also passes our linter:
 ```pylint --rcfile=.pylintrc src/python/national_voter_file/us_states/ -f parseable -r n```
 
 # How to Invoke transformers
+
 We now have a standard script to run any state. It takes arguments to specify the state code, and the input and output directories:
 
   ``` python3.5 national_voter_file/transformers/csv_transformer.py
@@ -58,7 +63,7 @@ pip install -r requirements.txt
 
 It's recommended to use [Virtualenv](https://virtualenv.pypa.io/en/stable/) for managing these.
 
-## Common Errors
+## Common errors
 
 If you see the error:
 
