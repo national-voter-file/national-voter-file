@@ -73,10 +73,10 @@ class StateTransformer(BaseTransformer):
     #### Demographics methods ##################################################
 
     def extract_gender(self, input_dict):
-        return {'GENDER': "U"}
+        return {'GENDER': None}
 
     def extract_race(self, input_dict):
-        return {'RACE': "U"}
+        return {'RACE': None}
 
     def extract_birth_state(self, input_dict):
         return {'BIRTH_STATE': None}
