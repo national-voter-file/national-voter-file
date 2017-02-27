@@ -15,12 +15,12 @@ BASE_TRANSFORMER_COLS = sorted(
     BaseTransformer.col_type_dict.keys()
 )
 
-TEST_STATES = ['co', 'de', 'fl', 'mi', 'nc', 'ny', 'oh', 'ok', 'wa']
+TEST_STATES = ['co', 'de', 'fl', 'mi', 'nc', 'ny', 'oh', 'ok', 'ut', 'wa']
 
 STATE_CODE_MAP = {'Colorado' : 'CO', 'Delaware' : 'DE', 'Florida' : 'FL',
                   'Michigan' : 'MI', 'NorthCarolina' : 'NC',
                   'NewYork' : 'NY', 'Ohio' : 'OH', 'Oklahoma' : 'OK',
-                  'Washington' : 'WA'}
+                  'Utah' : 'UT', 'Washington' : 'WA'}
 
 
 # Because tests assert for existence of files, remove any _test.csv before tests

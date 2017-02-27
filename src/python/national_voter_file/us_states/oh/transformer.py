@@ -72,7 +72,7 @@ class StateTransformer(BaseTransformer):
     def extract_race(self, input_dict):
         return {'RACE': None}
 
-    def extract_birth_state(self, input_columns):
+    def extract_birth_state(self, input_dict):
         return {'BIRTH_STATE': None}
 
     def extract_birthdate(self, input_dict):
@@ -101,9 +101,6 @@ class StateTransformer(BaseTransformer):
             'RAW_CITY': input_dict['RESIDENTIAL_CITY'],
             'RAW_ZIP': input_dict['RESIDENTIAL_ZIP']
         }
-
-        if not raw_dict['RAW_ADDR1'].strip():
-            raw_dict['RAW_ADDR1'] = '--Not provided--'
 
         usaddress_dict = self.usaddress_tag(address_str)[0]
 
@@ -194,8 +191,7 @@ class StateTransformer(BaseTransformer):
         return {'SCHOOL_BOARD_DIST': school_board_dist}
 
     def extract_precinct_split(self, input_dict):
-        # No split, copying precinct
-        return {'PRECINCT_SPLIT': input_dict['PRECINCT_CODE']}
+        return {'PRECINCT_SPLIT': None}
 
 if __name__ == '__main__':
     preparer = StatePreparer(*sys.argv[1:])

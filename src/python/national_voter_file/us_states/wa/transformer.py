@@ -59,10 +59,10 @@ class StateTransformer(BaseTransformer):
         gender = gender if gender == 'M' or gender == 'F' else 'U'
         return {'GENDER': gender}
 
-    def extract_race(self, input_columns):
+    def extract_race(self, input_dict):
         return {'RACE': None}
 
-    def extract_birth_state(self, input_columns):
+    def extract_birth_state(self, input_dict):
         return {'BIRTH_STATE': None}
 
     def extract_birthdate(self, input_dict):

@@ -83,6 +83,27 @@ class StatePreparer(BasePreparer):
 class StateTransformer(BaseTransformer):
     date_format = "%m/%d/%Y"
 
+    col_map = {
+        'TITLE': 'TITLE',
+        'FIRST_NAME': 'FIRST_NAME',
+        'MIDDLE_NAME': 'MIDDLE_NAME',
+        'LAST_NAME': 'LAST_NAME',
+        'NAME_SUFFIX': 'NAME_SUFFIX',
+        'RACE': None,
+        'BIRTH_STATE': None,
+        'LANGUAGE_CHOICE': None,
+        'GENDER': 'GENDER',
+        'EMAIL': None,
+        'PHONE': 'PHONE',
+        'DO_NOT_CALL_STATUS': None,
+        'COUNTYCODE': 'COUNTYCODE',
+        'STATE_VOTER_REF': 'STATE_VOTER_REF',
+        'COUNTY_VOTER_REF': None,
+        'PRECINCT_SPLIT': None,
+        'REGISTRATION_STATUS': 'REGISTRATION_STATUS',
+        'ABSENTEE_TYPE': None,
+    }
+
     input_fields = [
         'STATE_VOTER_REF',
         'TITLE',
@@ -176,33 +197,8 @@ class StateTransformer(BaseTransformer):
                 # "county wide" and "county council"
                 self._set_county_zonetype(zonedict, 'county_board')
 
-
-    #### Contact methods ######################################################
-
-    extract_name = BaseTransformer.map_extract_by_keys('TITLE',
-                                                       'FIRST_NAME',
-                                                       'MIDDLE_NAME',
-                                                       'LAST_NAME',
-                                                       'NAME_SUFFIX', defaults={
-                                                           'FIRST_NAME': '_',
-                                                           'LAST_NAME': '_',
-                                                       })
-
-    extract_email = lambda self, i: {'EMAIL': None}
-    extract_phone_number = BaseTransformer.map_extract_by_keys('PHONE')
-    extract_do_not_call_status = lambda self, i: {'DO_NOT_CALL_STATUS': None}
-
-    #### Demographics methods #################################################
-
-    extract_gender = BaseTransformer.map_extract_by_keys('GENDER', defaults={'GENDER':'U'})
-
-    extract_race = lambda self, i: {'RACE': 'U'}
-    extract_birth_state = lambda self, i: {'BIRTH_STATE': None, 'BIRTHDATE_IS_ESTIMATE': 'N'}
-
     def extract_birthdate(self, input_dict):
-        return {'BIRTHDATE': self.convert_date(input_dict['BIRTHDATE']) if input_dict['BIRTHDATE'] else None}
-
-    extract_language_choice = lambda self, i: {'LANGUAGE_CHOICE': None}
+        return {'BIRTHDATE': self.convert_date(input_dict['BIRTHDATE']) if input_dict['BIRTHDATE'] else None, 'BIRTHDATE_IS_ESTIMATE': 'N'}
 
     #### Address methods ######################################################
 
@@ -290,27 +286,21 @@ class StateTransformer(BaseTransformer):
         })
         return converted_addr
 
-    extract_county_code = BaseTransformer.map_extract_by_keys('COUNTYCODE')
-
-    extract_mailing_address = BaseTransformer.map_extract_by_keys('MAIL_ADDRESS_LINE1',
-                                                                  'MAIL_ADDRESS_LINE2',
-                                                                  'MAIL_CITY',
-                                                                  'MAIL_STATE',
-                                                                  'MAIL_ZIP_CODE',
-                                                                  'MAIL_COUNTRY')
-
-    #### Political methods ####################################################
-
-    extract_state_voter_ref = BaseTransformer.map_extract_by_keys('STATE_VOTER_REF')
+    def extract_mailing_address(self, input_dict):
+        return {
+            'MAIL_ADDRESS_LINE1': input_dict['MAIL_ADDRESS_LINE1'],
+            'MAIL_ADDRESS_LINE2': input_dict['MAIL_ADDRESS_LINE2'],
+            'MAIL_CITY': input_dict['MAIL_CITY'],
+            'MAIL_STATE': input_dict['MAIL_STATE'],
+            'MAIL_ZIP_CODE': input_dict['MAIL_ZIP_CODE'],
+            'MAIL_COUNTRY': input_dict['MAIL_COUNTRY']
+        }
 
     def extract_county_voter_ref(self, input_dict):
         return {'COUNTY_VOTER_REF': input_dict['STATE_VOTER_REF']}
 
     def extract_registration_date(self, input_dict):
         return {'REGISTRATION_DATE': self.convert_date(input_dict['REGISTRATION_DATE']) if input_dict['REGISTRATION_DATE'] else None}
-
-    extract_registration_status = BaseTransformer.map_extract_by_keys('REGISTRATION_STATUS')
-    extract_absentee_type = lambda self, i: {'ABSENTEE_TYPE': ''}
 
     def extract_party(self, input_dict):
         return {'PARTY': self.party_map.get(input_dict['_PARTY_CODE'])}
@@ -349,46 +339,18 @@ class StateTransformer(BaseTransformer):
         return self.zonecode_column_by_county.get(input_dict['COUNTYCODE'], {}).get(key, self.zonecode_column_defaults.get(key))
 
     def extract_precinct(self, input_dict):
-        """
-        Inputs:
-            input_dict: name or list of columns
-        Outputs:
-            Dictionary with following keys
-                'PRECINCT'
-        """
         column = self._zonecode_column('precinct', input_dict)
         return {'PRECINCT': input_dict['_DISTRICT%d' % column]}
 
     def extract_county_board_dist(self, input_dict):
-        """
-        Inputs:
-            input_dict: name or list of columns
-        Outputs:
-            Dictionary with following keys
-                'COUNTY_BOARD_DIST'
-        """
         column = self._zonecode_column('county_board', input_dict)
         return {'COUNTY_BOARD_DIST': input_dict['_DISTRICT%d' % column]}
 
     def extract_school_board_dist(self, input_dict):
-        """
-        Inputs:
-            input_dict: name or list of columns
-        Outputs:
-            Dictionary with following keys
-                'SCHOOL_BOARD_DIST'
-        """
         column = self._zonecode_column('school_board', input_dict)
         return {'SCHOOL_BOARD_DIST': input_dict['_DISTRICT%d' % column]}
 
     def extract_precinct_split(self, input_dict):
-        """
-        Inputs:
-            input_dict: name or list of columns
-        Outputs:
-            Dictionary with following keys
-                'PRECINCT_SPLIT'
-        """
         column = self._zonecode_column('precinct_split', input_dict)
         return {'PRECINCT_SPLIT': input_dict['_DISTRICT%d' % column]}
 

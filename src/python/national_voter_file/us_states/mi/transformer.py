@@ -88,8 +88,11 @@ class StatePreparer(BasePreparer):
     def zip_voters(self, voter_file_path):
         with open(voter_file_path, 'r') as infile:
             for row in infile:
-                # Yield column with spaces stripped
-                yield [row[slice(*c)].strip() for c in self.col_indices]
+                # Use column indices to split rows, yield dict in row format
+                yield dict(zip(
+                    self.transformer.input_fields,
+                    [row[slice(*c)].strip() for c in self.col_indices]
+                ))
 
     def voters(self, voter_file_path):
         reader = self.dict_iterator(self.open(self.input_path))
@@ -256,10 +259,6 @@ class StateTransformer(BaseTransformer):
             'RAW_CITY': input_dict['CITY'],
             'RAW_ZIP': input_dict['ZIP']
         }
-
-        for r in ['RAW_ADDR1', 'RAW_ADDR2']:
-            if not raw_dict[r].strip():
-                raw_dict[r] = '--Not provided--'
 
         usaddress_dict = self.usaddress_tag(address_str)[0]
 

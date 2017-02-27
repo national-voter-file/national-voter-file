@@ -12,7 +12,7 @@ import sys
 
 
 TEST_DATA_DIR = os.path.join(os.path.dirname(__file__), 'test_data')
-TEST_STATES = ['de', 'co', 'fl', 'mi', 'nc', 'ny', 'oh', 'ok', 'pa', 'wa']
+TEST_STATES = ['de', 'co', 'fl', 'mi', 'nc', 'ny', 'oh', 'ok', 'pa', 'ut', 'wa']
 
 NUM_ROWS = 100
 
@@ -34,6 +34,7 @@ NY = state_modules['ny']
 OH = state_modules['oh']
 PA = state_modules['pa']
 OK = state_modules['ok']
+UT = state_modules['ut']
 colorado_party_keys = CO.transformer.StateTransformer().co_party_map.keys()
 oklahoma_party_keys = OK.transformer.StateTransformer().oklahoma_party_map.keys()
 ohio_party_keys = OH.transformer.StateTransformer().ohio_party_map.keys()
@@ -41,6 +42,7 @@ florida_party_keys = FL.transformer.StateTransformer().florida_party_map.keys()
 florida_race_keys = FL.transformer.StateTransformer().florida_race_map.keys()
 ny_party_keys = NY.transformer.StateTransformer().ny_party_map.keys()
 ny_other_party_keys = NY.transformer.StateTransformer().ny_other_party_map.keys()
+utah_party_keys = UT.transformer.StateTransformer().ut_party_map.keys()
 
 OKLAHOMA_SCHEMA = {
         'Precinct': lambda: str(randint(1, 99)).zfill(2) + str(randint(1000, 9999)),
@@ -172,7 +174,7 @@ DELAWARE_SCHEMA = {
     'CODE-HOME-CITY': lambda: _empty( fake.lexify(text="?").upper() + fake.numerify(text="##")),
     'SCH-DIST': lambda: fake.lexify(text="??").upper(),
     'PARTY': lambda: random.choice(['R', 'D', 'I' ]),
-    'DATE-REG': lambda: fake.date(pattern='%Y%m%d'),
+    'DATE-REG': lambda: random.choice([fake.date(pattern='%Y%m%d'), fake.date(pattern='%Y%m00')]),
     'PP-HIST-1': lambda: random.choice(['0', '2002', '2004', '2006', '2008', '2010', '2012', '2014', '2016' ]),
     'PP-HIST-2': lambda: random.choice(['0', '2002', '2004', '2006', '2008', '2010', '2012', '2014', '2016' ]),
     'PR-HIST-1': lambda: random.choice(['0', '2002', '2004', '2006', '2008', '2010', '2012', '2014', '2016' ]),
@@ -627,6 +629,102 @@ MICHIGAN_SCHEMA = {
     'UOCAVA_STATUS': lambda: random.choice(['M', 'C', 'N', 'O'])
 }
 
+UTAH_SCHEMA = {
+    'Voter ID': lambda: str(randint(1, 1000000)),
+    'Last Name': lambda: fake.last_name(),
+    'First Name': lambda: _blank(fake.first_name()), # First Name can be missing
+    'Middle Name': lambda: _blank(fake.first_name()),
+    'Name Suffix': lambda: fake.suffix(),
+    'Status': lambda: random.choice(['Active', 'Inactive']),
+    'Absentee': lambda: _blank(random.choice([0, 1])),
+    'UOCAVA': lambda: _blank('YES'),
+    'Registration Date': lambda: random.choice([fake.date(pattern='%m/%d/%Y'), '12:00:00 AM']), # some weird data
+    'Original Registration Date': lambda: random.choice([fake.date(pattern='%m/%d/%Y'), '12:00:00 AM']),
+    'Party': lambda: random.choice(list(utah_party_keys)),
+    'Phone': lambda: _blank(fake.phone_number()),
+    'Mailing Address': lambda: _blank(fake.street_address()),
+    'Mailing city, state  zip': lambda: _blank('%s, %s  %s' % (fake.city(), fake.state_abbr().upper(), fake.zipcode())),
+    'County ID': lambda: random.choice(['Salt Lake', 'Utah', 'Davis', 'Weber', 'Washington']),
+    'Precinct': lambda: random.choice(['PR09', 'SLC080:00', 'COT036:01', 'LA29:I-N-', '41']),
+    'House Number': lambda: fake.building_number(),
+    'House Number Suffix': lambda: _blank('1/2'),
+    'Direction Prefix': lambda: _blank(random.choice(['E', 'N', 'S', 'W'])),
+    'Street': lambda: fake.street_name(),
+    'Direction Suffix': lambda: _blank(random.choice(['E', 'N', 'S', 'W'])),
+    'Street Type': lambda: _blank(random.choice(['Dr', 'St', 'Rd', 'Ln', 'Cir', 'Ave', 'Way', 'Ct', 'Blvd', 'Pl'])),
+    'Unit Type': lambda: _blank(random.choice(['Apt', 'Bldg', 'Bsmt', 'Lot', 'Ste', 'Trlr', 'Unit', '#'])),
+    'Unit Number': lambda: random.choice(['123', '5c', 'F-101', 'Front']),
+    'City': lambda: fake.city(),
+    'Zip': lambda: fake.zipcode(),
+    'DOB': lambda: random.choice([fake.date(pattern='%m/%d/%Y'), '12:00:00 AM']),  # some weird data in the file
+    'Congressional': lambda: _blank(random.randint(1, 4)),
+    'State House': lambda: _blank(random.randint(1, 75)),
+    'State Senate': lambda: _blank(random.randint(1, 29)),
+    'State Schoolboard': lambda: _blank(random.randint(1, 15)),
+    'Local Schoolboard': lambda: _blank(random.choice(['Granite School Board 1', 'Cache County Sch District 8', 'SB 2'])),
+    'County Council': lambda: _blank(random.randint(1, 6)),
+    'City Council': lambda: _blank(random.choice(['Salt Lake City Council 6', 'Cedar City Council 2'])),
+    '11/6/1990': lambda: _blank('11/6/1990'),
+    '11/5/1991': lambda: _blank('11/5/1991'),
+    '11/3/1992': lambda: _blank('11/3/1992'),
+    '11/2/1993': lambda: _blank('11/2/1993'),
+    '11/8/1994': lambda: _blank('11/8/1994'),
+    '5/23/1995': lambda: _blank('5/23/1995'),
+    '9/12/1995': lambda: _blank('9/12/1995'),
+    '10/3/1995': lambda: _blank('10/3/1995'),
+    '11/7/1995': lambda: _blank('11/7/1995'),
+    '6/25/1996': lambda: _blank('6/25/1996'),
+    '8/6/1996': lambda: _blank('8/6/1996'),
+    '11/5/1996': lambda: _blank('11/5/1996'),
+    '2/4/1997': lambda: _blank('2/4/1997'),
+    '5/6/1997': lambda: _blank('5/6/1997'),
+    '8/1/1997': lambda: _blank('8/1/1997'),
+    '10/7/1997': lambda: _blank('10/7/1997'),
+    '11/4/1997': lambda: _blank('11/4/1997'),
+    '6/23/1998': lambda: _blank('6/23/1998'),
+    '11/3/1998': lambda: _blank('11/3/1998'),
+    '5/4/1999': lambda: _blank('5/4/1999'),
+    '8/3/1999': lambda: _blank('8/3/1999'),
+    '10/5/1999': lambda: _blank('10/5/1999'),
+    '11/2/1999': lambda: _blank('11/2/1999'),
+    '5/2/2000': lambda: _blank('5/2/2000'),
+    '6/27/2000': lambda: _blank('6/27/2000'),
+    '11/7/2000': lambda: _blank('11/7/2000'),
+    '2/6/2001': lambda: _blank('2/6/2001'),
+    '10/2/2001': lambda: _blank('10/2/2001'),
+    '11/6/2001': lambda: _blank('11/6/2001'),
+    '6/25/2002': lambda: _blank('6/25/2002'),
+    '11/5/2002': lambda: _blank('11/5/2002'),
+    '2/4/2003': lambda: _blank('2/4/2003'),
+    '8/5/2003': lambda: _blank('8/5/2003'),
+    '10/7/2003': lambda: _blank('10/7/2003'),
+    '11/4/2003': lambda: _blank('11/4/2003'),
+    '5/4/2004': lambda: _blank('5/4/2004'),
+    '6/22/2004': lambda: _blank('6/22/2004'),
+    '8/3/2004': lambda: _blank('8/3/2004'),
+    '11/2/2004': lambda: _blank('11/2/2004'),
+    '10/4/2005': lambda: _blank('10/4/2005'),
+    '11/8/2005': lambda: _blank('11/8/2005'),
+    '6/27/2006': lambda: _blank('6/27/2006'),
+    '11/7/2006': lambda: _blank('11/7/2006'),
+    '6/26/2007': lambda: _blank('6/26/2007'),
+    '9/11/2007': lambda: _blank('9/11/2007'),
+    '11/6/2007': lambda: _blank('11/6/2007'),
+    '2/5/2008': lambda: _blank('2/5/2008'),
+    '6/24/2008': lambda: _blank('6/24/2008'),
+    '11/4/2008': lambda: _blank('11/4/2008'),
+    '9/15/2009': lambda: _blank('9/15/2009'),
+    '11/4/2009': lambda: _blank('11/4/2009'),
+    '6/22/2010': lambda: _blank('6/22/2010'),
+    '11/2/2010': lambda: _blank('11/2/2010'),
+    '9/13/2011': lambda: _blank('9/13/2011'),
+    '11/8/2011': lambda: _blank('11/8/2011'),
+    '6/26/2012': lambda: _blank('6/26/2012'),
+    '11/6/2012': lambda: _blank('11/6/2012'),
+    '8/13/2013': lambda: _blank('8/13/2013'),
+    '11/5/2013': lambda: _blank('11/5/2013')
+}
+
 WASHINGTON_SCHEMA = {
 'StateVoterID': lambda:'WA{}'.format(str(randint(1000, 999999)).zfill(10)),
 'CountyVoterID': lambda:  str(randint(1, 88)),
@@ -726,6 +824,7 @@ if __name__ == '__main__':
               'mi': ([MICHIGAN_SCHEMA],
                            {'has_header': False,
                             'input_fields': MI.transformer.StateTransformer.input_fields}),
+              'ut': ([UTAH_SCHEMA], {}),
               'wa': ([WASHINGTON_SCHEMA],
                                 {'sep':'\t'}),
     }

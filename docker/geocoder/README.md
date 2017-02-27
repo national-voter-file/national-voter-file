@@ -115,4 +115,4 @@ and you can clone it into the `geocoder` directory and it will be ignored by git
 
 To start the geocoder itself (which can run into issues if it's started at
 the same time as the other containers), run
-`docker-compose -f docker-compose-full.yml -d run geocoder python /geocoder/daemon.py --skip-pidfile`
+`docker-compose -f docker-compose-full.yml -d run geocoder python /geocoder/daemon.py`
