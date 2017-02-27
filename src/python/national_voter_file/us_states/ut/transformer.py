@@ -38,6 +38,11 @@ class StateTransformer(BaseTransformer):
                         # Use None if the file has headers
 
     col_map = {
+        'TITLE': None,
+        'FIRST_NAME': 'First Name',
+        'MIDDLE_NAME': 'Middle Name',
+        'LAST_NAME': 'Last Name',
+        'NAME_SUFFIX': 'Name Suffix',
         'GENDER': None,
         'RACE': None,
         'BIRTH_STATE': None,
@@ -87,30 +92,11 @@ class StateTransformer(BaseTransformer):
     }
 
     col_type_dict = BaseTransformer.col_type_dict.copy()
+    # File contains some missing First Name values
+    col_type_dict['FIRST_NAME'] = set([str, type(None)])
     col_type_dict['PRECINCT_SPLIT'] = set([str, type(None)])
 
     #### Demographics methods ##################################################
-
-    def extract_name(self, input_columns):
-        """
-        Inputs:
-            input_columns: name or list of columns
-        Outputs:
-            Dictionary with following keys
-                'TITLE'
-                'FIRST_NAME'
-                'MIDDLE_NAME'
-                'LAST_NAME'
-                'NAME_SUFFIX'
-        """
-        return {
-            'TITLE': None,
-            # Some rows are missing the First Name value
-            'FIRST_NAME': input_columns['First Name'] or '--Missing--',
-            'MIDDLE_NAME': input_columns['Middle Name'],
-            'LAST_NAME': input_columns['Last Name'],
-            'NAME_SUFFIX': input_columns['Name Suffix'],
-        }
 
     def extract_birthdate(self, input_columns):
         """
