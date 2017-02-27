@@ -1,12 +1,12 @@
+import os
+import csv
+
 from national_voter_file.transformers.base import (DATA_DIR,
                                                    BasePreparer,
                                                    BaseTransformer)
 from national_voter_file.us_states.all import load as load_states
 
 from national_voter_file.transformers.csv_transformer import CsvOutput
-
-import os
-import csv
 
 # Need to add test data
 
@@ -17,6 +17,11 @@ BASE_TRANSFORMER_COLS = sorted(
 
 TEST_STATES = ['co', 'de', 'fl', 'mi', 'nc', 'ny', 'oh', 'ok', 'wa']
 
+STATE_CODE_MAP = {'Colorado' : 'CO', 'Delaware' : 'DE', 'Florida' : 'FL',
+                  'Michigan' : 'MI', 'NorthCarolina' : 'NC',
+                  'NewYork' : 'NY', 'Ohio' : 'OH', 'Oklahoma' : 'OK',
+                  'Washington' : 'WA'}
+
 
 # Because tests assert for existence of files, remove any _test.csv before tests
 def setup():
@@ -26,11 +31,15 @@ def setup():
 
 
 # Util for reading output file in tests
-def read_transformer_output(test_filename):
+def read_transformer_output(test_filename, state):
     test_dict_list = []
     with open(os.path.join(TEST_DATA_DIR, test_filename)) as test_f:
         test_reader = csv.DictReader(test_f)
         for row in test_reader:
+            # Make sure first two characters are the state code
+            assert row['STATE_VOTER_REF'][0:2] == STATE_CODE_MAP[state]
+            # The rest of the characters should be digits
+            assert row['STATE_VOTER_REF'][2:].isdigit()
             test_dict_list.append(row)
     return test_dict_list
 
@@ -39,6 +48,7 @@ def run_state_transformer(state_test):
     state_path = state_test.transformer.StatePreparer.state_path
     input_path = os.path.join(TEST_DATA_DIR, '{}.csv'.format(state_path))
     output_path = os.path.join(TEST_DATA_DIR, '{}_test.csv'.format(state_path))
+    state = state_test.transformer.StatePreparer.state_name
 
     state_transformer = state_test.transformer.StateTransformer()
     state_preparer = getattr(state_test.transformer,
@@ -52,7 +62,7 @@ def run_state_transformer(state_test):
 
     assert os.path.exists(os.path.join(TEST_DATA_DIR, '{}.csv'.format(state_path)))
 
-    state_dict_list = read_transformer_output('{}_test.csv'.format(state_path))
+    state_dict_list = read_transformer_output('{}_test.csv'.format(state_path), state)
     assert sorted(state_dict_list[0].keys()) == BASE_TRANSFORMER_COLS
     assert len(state_dict_list) > 1
 

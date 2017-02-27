@@ -174,7 +174,7 @@ class StateTransformer(BaseTransformer):
     #### Political methods #####################################################
 
     def extract_state_voter_ref(self, input_dict):
-        return {'STATE_VOTER_REF' : input_dict['VOTER_ID']}
+        return {'STATE_VOTER_REF' : 'CO' + input_dict['VOTER_ID']}
 
     extract_county_voter_ref = lambda self, i: {'COUNTY_VOTER_REF': None}
 

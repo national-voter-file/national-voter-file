@@ -113,7 +113,6 @@ class StateTransformer(BaseTransformer):
         'PHONE': None,
         'DO_NOT_CALL_STATUS': None,
         'COUNTYCODE': 'COUNTYCODE',
-        'STATE_VOTER_REF': 'STATE_VOTER_REF',
         'COUNTY_VOTER_REF': None,
         'PARTY': None,
         'CONGRESSIONAL_DIST': 'CONGRESSIONAL_DIST',
@@ -319,6 +318,8 @@ class StateTransformer(BaseTransformer):
         return mail_addr_dict
 
     #### Political methods ####################################################
+    def extract_state_voter_ref(self, input_dict):
+        return {'STATE_VOTER_REF' : 'MI' + input_dict['STATE_VOTER_REF']}
 
     def extract_registration_date(self, input_dict):
         return {'REGISTRATION_DATE': self.convert_date(input_dict['DATE_OF_REGISTRATION'])}
