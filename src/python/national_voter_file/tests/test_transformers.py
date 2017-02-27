@@ -15,12 +15,10 @@ BASE_TRANSFORMER_COLS = sorted(
     BaseTransformer.col_type_dict.keys()
 )
 
-TEST_STATES = ['co', 'de', 'fl', 'mi', 'nc', 'ny', 'oh', 'ok', 'ut', 'wa']
-
-STATE_CODE_MAP = {'Colorado' : 'CO', 'Delaware' : 'DE', 'Florida' : 'FL',
-                  'Michigan' : 'MI', 'NorthCarolina' : 'NC',
-                  'NewYork' : 'NY', 'Ohio' : 'OH', 'Oklahoma' : 'OK',
-                  'Utah' : 'UT', 'Washington' : 'WA'}
+TEST_STATES = {'Colorado' : 'CO', 'Delaware' : 'DE', 'Florida' : 'FL',
+              'Michigan' : 'MI', 'NorthCarolina' : 'NC',
+              'NewYork' : 'NY', 'Ohio' : 'OH', 'Oklahoma' : 'OK',
+              'Utah' : 'UT', 'Washington' : 'WA'}
 
 
 # Because tests assert for existence of files, remove any _test.csv before tests
@@ -37,7 +35,7 @@ def read_transformer_output(test_filename, state):
         test_reader = csv.DictReader(test_f)
         for row in test_reader:
             # Make sure first two characters are the state code
-            assert row['STATE_VOTER_REF'][0:2] == STATE_CODE_MAP[state]
+            assert row['STATE_VOTER_REF'][0:2] == TEST_STATES[state]
             # The rest of the characters should be digits
             assert row['STATE_VOTER_REF'][2:].isdigit()
             test_dict_list.append(row)
@@ -68,5 +66,5 @@ def run_state_transformer(state_test):
 
 
 def test_all_transformers():
-    for state_test in load_states(TEST_STATES):
+    for state_test in load_states([x.lower() for x in TEST_STATES.values()]):
         yield (run_state_transformer, state_test)

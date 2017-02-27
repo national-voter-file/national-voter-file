@@ -164,8 +164,6 @@ class StateTransformer(BaseTransformer):
     def extract_state_voter_ref(self, input_dict):
         return {'STATE_VOTER_REF' : 'CO' + input_dict['VOTER_ID']}
 
-    extract_county_voter_ref = lambda self, i: {'COUNTY_VOTER_REF': None}
-
     def extract_registration_date(self, input_dict):
         return {'REGISTRATION_DATE': self.convert_date(input_dict['REGISTRATION_DATE'])}
 
