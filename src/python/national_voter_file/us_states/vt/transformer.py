@@ -12,9 +12,6 @@ __all__ = ['default_file', 'StatePreparer', 'StateTransformer']
 
 default_file = 'vt-voter-files--SAMPLE.txt'
 
-# import pprint
-# pp = pprint.PrettyPrinter(indent=4)
-# pp.pprint(input_columns)
 
 class StatePreparer(BasePreparer):
 
@@ -31,6 +28,10 @@ class StatePreparer(BasePreparer):
     def process(self):
             reader = self.dict_iterator(self.open(self.input_path))
             for row in reader:
+                # import pprint
+                # pp = pprint.PrettyPrinter(indent=4)
+                # pp.pprint(row)
+                # break
                 yield row
 
 class StateTransformer(BaseTransformer):
@@ -198,7 +199,7 @@ class StateTransformer(BaseTransformer):
             'WINDHAM': 'WDH',
             'WINDSOR': 'WDR',
         }
-        return {'COUNTYCODE': county_code_map[input_dict['County']]}
+        return {'COUNTYCODE': county_code_map[input_dict.get('County')]}
 
     def extract_mailing_address(self, input_dict):
         """
