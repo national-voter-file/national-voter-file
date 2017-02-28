@@ -83,7 +83,7 @@ class StateTransformer(BaseTransformer):
 
     def extract_gender(self, input_dict):
         gender = input_dict['gender_code']
-        if len(gender) == 0:
+        if len(gender) == 0 or gender == ' ':
             gender = 'U'
         return {'GENDER' : gender}
 
@@ -95,7 +95,10 @@ class StateTransformer(BaseTransformer):
             Dictionary with following keys
                 'RACE'
         """
-        return {'RACE' : input_dict['race_code']}
+        race = input_dict['race_code']
+        if len(race) == 0 or race == ' ':
+            race = 'U'
+        return {'RACE' : race}
 
     def extract_birth_state(self, input_dict):
         """
