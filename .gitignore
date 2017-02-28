@@ -9,3 +9,4 @@ dist
 build
 nohup.out
 docker/grasshopper-loader
+.python-version
