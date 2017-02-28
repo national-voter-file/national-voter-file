@@ -62,7 +62,6 @@ class StateTransformer(BaseTransformer):
         'PHONE': 'PHONE_NUM',
         'DO_NOT_CALL_STATUS': None,
         'COUNTYCODE': 'COUNTY_CODE',
-        'STATE_VOTER_REF': 'VOTER_ID',
         'COUNTY_VOTER_REF': None,
         'PARTY': None,
         'CONGRESSIONAL_DIST': 'CONGRESSIONAL_DIST',
@@ -161,6 +160,9 @@ class StateTransformer(BaseTransformer):
             return {}
 
     #### Political methods #####################################################
+
+    def extract_state_voter_ref(self, input_dict):
+        return {'STATE_VOTER_REF' : 'CO' + input_dict['VOTER_ID']}
 
     def extract_registration_date(self, input_dict):
         return {'REGISTRATION_DATE': self.convert_date(input_dict['REGISTRATION_DATE'])}

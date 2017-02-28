@@ -60,7 +60,6 @@ class StateTransformer(BaseTransformer):
         'COUNTY_VOTER_REF': None,
         'PRECINCT': 'Precinct',
         'PRECINCT_SPLIT': None,
-        'STATE_VOTER_REF': 'Voter ID',
     }
 
     ut_party_map = {
@@ -237,6 +236,8 @@ class StateTransformer(BaseTransformer):
         }
 
     #### Political methods #####################################################
+    def extract_state_voter_ref(self, input_dict):
+        return {'STATE_VOTER_REF' : 'UT' + input_dict['Voter ID']}
 
     def extract_registration_date(self, input_columns):
         """
