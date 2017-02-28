@@ -733,7 +733,7 @@ VERMONT_SCHEMA = {
     '2014 Gen Election Participation': lambda: random.choice(['T', 'F']),
     'County': lambda: random.choice(['ADDISON','BENNINGTON','CALEDONIA','CHITTENDEN','ESSEX','FRANKLIN','GRAND ISLE','LAMOILLE','ORANGE','ORLEANS','RUTLAND','WASHINGTON','WINDHAM','WINDSOR']),
     'Date last Voted': lambda: _blank(fake.date(pattern='%m/%d/%Y')),
-    'Date of Registration': lambda: _blank(fake.date(pattern='%m/%d/%Y')),
+    'Date of Registration': lambda: fake.date(pattern='%m/%d/%Y'),
     'Fire District': lambda: _blank(fake.city().upper()),
     'First Name': lambda: fake.first_name().upper(),
     'Garbage District': lambda: _blank(fake.city().upper()),
@@ -869,7 +869,7 @@ if __name__ == '__main__':
                             'input_fields': MI.transformer.StateTransformer.input_fields}),
               'ut': ([UTAH_SCHEMA], {}),
               'vt': ([VERMONT_SCHEMA],
-                       {}),
+                                 {'sep':'|'}),
               'wa': ([WASHINGTON_SCHEMA],
                                 {'sep':'\t'}),
     }
