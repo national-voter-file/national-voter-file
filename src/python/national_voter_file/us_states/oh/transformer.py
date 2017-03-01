@@ -29,7 +29,7 @@ class StatePreparer(BasePreparer):
             yield row
 
 class StateTransformer(BaseTransformer):
-    date_format = '%m/%d/%Y'
+    date_format = '%Y-%m-%d'
     input_fields = None
 
     ohio_party_map = {
