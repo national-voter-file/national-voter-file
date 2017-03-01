@@ -57,13 +57,9 @@ class StateTransformer(BaseTransformer):
     #### Contact methods #######################################################
 
     def extract_name(self, input_dict):
-        first_name = input_dict['first_name']
-        #TODO: Use standard value for none
-        if first_name is None or first_name == '':
-            first_name = 'none'
         return {
             'TITLE': input_dict['name_prefx_cd'],
-            'FIRST_NAME': first_name,
+            'FIRST_NAME': input_dict['first_name'], 
             'MIDDLE_NAME': input_dict['middle_name'],
             'LAST_NAME': input_dict['last_name'],
             'NAME_SUFFIX': input_dict['name_suffix_lbl'],
@@ -84,7 +80,7 @@ class StateTransformer(BaseTransformer):
     def extract_gender(self, input_dict):
         gender = input_dict['gender_code']
         if len(gender) == 0 or gender == ' ':
-            gender = 'U'
+            gender = None
         return {'GENDER' : gender}
 
     def extract_race(self, input_dict):
@@ -97,7 +93,7 @@ class StateTransformer(BaseTransformer):
         """
         race = input_dict['race_code']
         if len(race) == 0 or race == ' ':
-            race = 'U'
+            race = None 
         return {'RACE' : race}
 
     def extract_birth_state(self, input_dict):
@@ -285,9 +281,8 @@ class StateTransformer(BaseTransformer):
 
     def extract_congressional_dist(self, input_dict):
         cong_dist = input_dict['cong_dist_abbrv']
-        #TODO: Use standard value for none
-        if cong_dist == ' ' or not cong_dist or len(cong_dist) == 0:
-            cong_dist = 'none'
+        if cong_dist == ' ' or len(cong_dist) == 0:
+            cong_dist = None
         return {'CONGRESSIONAL_DIST' : cong_dist}
 
     def extract_upper_house_dist(self, input_dict):
@@ -298,9 +293,6 @@ class StateTransformer(BaseTransformer):
 
     def extract_precinct(self, input_dict):
         precinct = input_dict['precinct_abbrv']
-        # TODO: Use a standard value for none
-        if not precinct:
-            precinct = "none"
         precinct_split = precinct
         return {'PRECINCT' : precinct,
                 'PRECINCT_SPLIT' : precinct_split}

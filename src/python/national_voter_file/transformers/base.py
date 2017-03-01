@@ -148,7 +148,7 @@ class BaseTransformer(object):
     # Acceptable column output types
     col_type_dict = {
         'TITLE': set([str, type(None)]),
-        'FIRST_NAME': set([str]),
+        'FIRST_NAME': set([str, type(None)]),
         'MIDDLE_NAME': set([str, type(None)]),
         'LAST_NAME': set([str]),
         'NAME_SUFFIX': set([str, type(None)]),
@@ -203,7 +203,7 @@ class BaseTransformer(object):
         'CONGRESSIONAL_DIST': set([str, type(None)]),
         'UPPER_HOUSE_DIST': set([str, type(None)]),
         'LOWER_HOUSE_DIST': set([str, type(None)]),
-        'PRECINCT': set([str]),
+        'PRECINCT': set([str, type(None)]),
         'COUNTY_BOARD_DIST': set([str, type(None)]),
         'SCHOOL_BOARD_DIST': set([str, type(None)]),
         'PRECINCT_SPLIT': set([str, type(None)]),
