@@ -249,6 +249,9 @@ class StateTransformer(BaseTransformer):
 
     #### Political methods #####################################################
 
+    def extract_state_voter_ref(self, input_dict):
+        return {'STATE_VOTER_REF' : 'VT' + input_dict['VoterID']}
+
     def extract_registration_date(self, input_columns):
         """
         Inputs:
