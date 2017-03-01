@@ -28,10 +28,6 @@ class StatePreparer(BasePreparer):
     def process(self):
             reader = self.dict_iterator(self.open(self.input_path))
             for row in reader:
-                # import pprint
-                # pp = pprint.PrettyPrinter(indent=4)
-                # pp.pprint(row)
-                # break
                 yield row
 
 class StateTransformer(BaseTransformer):
