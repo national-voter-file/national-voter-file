@@ -16,8 +16,8 @@ default_file = 'vt-voter-files--SAMPLE.txt'
 class StatePreparer(BasePreparer):
 
     state_path = 'vt' # Two letter code for state
-    state_name='Vermont' # Name of state with no spaces. Use CamelCase
-    sep='|' # The character used to delimit records
+    state_name = 'Vermont' # Name of state with no spaces. Use CamelCase
+    sep = '|' # The character used to delimit records
 
     def __init__(self, input_path, *args):
         super(StatePreparer, self).__init__(input_path, *args)
@@ -26,12 +26,12 @@ class StatePreparer(BasePreparer):
             self.transformer = StateTransformer()
 
     def process(self):
-            reader = self.dict_iterator(self.open(self.input_path))
-            for row in reader:
-                yield row
+        reader = self.dict_iterator(self.open(self.input_path))
+        for row in reader:
+            yield row
 
 class StateTransformer(BaseTransformer):
-    date_format='%m/%d/%Y' # The format used for dates
+    date_format = '%m/%d/%Y' # The format used for dates
     input_fields = None # This can be a list of column names for the input file.
                         # Use None if the file has headers
 
@@ -143,10 +143,6 @@ class StateTransformer(BaseTransformer):
             'RAW_ZIP': input_dict['Legal Address Zip'],
         }
 
-        for r in ['RAW_ADDR1', 'RAW_ADDR2']:
-            if not raw_dict[r].strip():
-                raw_dict[r] = '--Not provided--'
-
         if usaddress_dict:
             converted_addr = self.convert_usaddress_dict(usaddress_dict)
             validation_status = '2'
@@ -176,7 +172,7 @@ class StateTransformer(BaseTransformer):
                 'COUNTYCODE'
         """
 
-        # Note this mapping is the same as the abbreviations the voter file 
+        # Note this mapping is the same as the abbreviations the voter file
         # uses when referring to Senate districts, with the exception of
         # Essex and Orelans which share a Senate district (ESX-ORL)
         county_code_map = {
@@ -267,6 +263,6 @@ class StateTransformer(BaseTransformer):
                 'CONGRESSIONAL_DIST'
         """
 
-        # FIXME: Vermont only has 1 at-large Congressional District. Is this OK as a default value?
-        return {'CONGRESSIONAL_DIST': 'AL'}
-
+        # Vermont only has 1 at-large Congressional District. This is the CensusReporter 
+        # GeoID for the VT At-large CD.
+        return {'CONGRESSIONAL_DIST': '50000US5000'}
