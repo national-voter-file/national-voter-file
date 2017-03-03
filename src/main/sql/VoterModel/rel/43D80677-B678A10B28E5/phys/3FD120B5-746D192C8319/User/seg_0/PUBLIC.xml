@@ -1,8 +1,0 @@
-<?xml version = '1.0' encoding = 'UTF-8'?>
-<UserOraclev10g class="oracle.dbtools.crest.model.design.storage.oracle.v10g.UserOraclev10g" name="PUBLIC" directorySegmentName="seg_0" id="PUBLIC">
-<createdBy>beng</createdBy>
-<createdTime>2016-07-18 13:11:10 UTC</createdTime>
-<ownerDesignName>VoterModel</ownerDesignName>
-<nullInstance>true</nullInstance>
-<storableNullInstance>true</storableNullInstance>
-</UserOraclev10g>

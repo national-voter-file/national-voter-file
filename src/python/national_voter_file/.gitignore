@@ -1,4 +1,0 @@
-nohup.out
-__pycache__
-*.pyc
-transformers/test_data/*_test.*
