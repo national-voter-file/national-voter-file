@@ -59,7 +59,7 @@ class StateTransformer(BaseTransformer):
     def extract_name(self, input_dict):
         return {
             'TITLE': input_dict['name_prefx_cd'],
-            'FIRST_NAME': input_dict['first_name'], 
+            'FIRST_NAME': input_dict['first_name'],
             'MIDDLE_NAME': input_dict['middle_name'],
             'LAST_NAME': input_dict['last_name'],
             'NAME_SUFFIX': input_dict['name_suffix_lbl'],
@@ -93,7 +93,7 @@ class StateTransformer(BaseTransformer):
         """
         race = input_dict['race_code']
         if len(race) == 0 or race == ' ':
-            race = None 
+            race = None
         return {'RACE' : race}
 
     def extract_birth_state(self, input_dict):
