@@ -12,6 +12,24 @@ We want to pull politics into the 21st century, and we're starting from the grou
 * All available via an easy-to-consume REST API
 * For thousands to use our voter file to power their campaigns' donation, canvassing, and phonebanking efforts!
 
+## What about privacy?
+
+We realize that voter files contain a lot of sensitive information. That's why we
+will make sure that organizations that use the voter file are candidates or
+politically oriented nonprofits that would have a reason to organize voters--not
+businesses and individuals trying to profit or use your personal information for
+malicious purposes.
+
+The problem we're trying to solve is that the two major political parties each
+control their own versions of this information that grassroots candidates without
+their approval can't access easily. We want to make sure that these candidates
+and organizations who want to use it for appropriate purposes are able to.
+
+## Will this data be publicly available?
+
+No. The access will be restricted to the political candidates and issue-based nonprofits,
+and will not be publicly available on search engines.
+
 ## How does it work?
 
 Glad you asked! Simple, we:
