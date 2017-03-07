@@ -68,58 +68,6 @@ def setup_logging(config, stdout=False):
 
 
 #------------------------------------------
-# Container ID management
-
-def setup_pid(options, config):
-    """This puts the Docker container ID in the PID file,
-
-    because the PID is kind of meaningless...containers
-    must have a process in the foreground to keep running.
-    But this way, you can spin up a container with this and
-    leave it going, and easily kill it later, using
-
-    docker exec `cat <path/to/pidfile>` kill -9 1
-    """
-    log = logging.getLogger()
-    # Initialize container id file
-    if not options.pidfile:
-        options.pidfile = str(config['pid_file'])
-
-    options.pidfile = get_full_path(options.pidfile)
-    # Read existing pid file
-    try:
-        pf = open(options.pidfile, 'r')
-        container_id = pf.read().strip()
-        pf.close()
-    except (IOError):
-        container_id = None
-
-    # Check existing pid file
-    if container_id:
-        msg = 'ERROR: pid file exists. Container already running?\nID: {}\n'
-        sys.stderr.write(msg.format(container_id))
-        sys.exit(1)
-
-    # Write pid file
-    # Get the current docker container id
-    with open('/proc/self/cgroup') as groups:
-        line_with_container_id = next(g for g in groups if 'docker' in g)
-        container_id = line_with_container_id.rsplit('/', 1)[-1]
-
-    try:
-        os.makedirs(os.path.dirname(options.pidfile), exist_ok=True)
-        pf = open(options.pidfile, 'w+')
-    except IOError as e:
-        sys.stderr.write('Failed to write PID file: {}\n'.format(e))
-        sys.exit(1)
-
-    pf.write('{}\n'.format(container_id))
-    pf.close()
-    # Log
-    log.debug('Wrote First PID file: {}'.format(options.pidfile))
-
-
-#------------------------------------------
 # Configuration
 
 def get_configuration(options):
@@ -179,12 +127,6 @@ def get_parser():
         default=default['pidfile'],
         help='pid file (default: from the config file)')
 
-    parser.add_argument(
-        '--skip-pidfile',
-        default=default['skip_pidfile'],
-        action='store_true',
-        help='Skip creating PID file')
-
     return parser
 
 
@@ -218,22 +160,6 @@ def main():
 
     # Different try/except ... (now using the logging system)
     try:
-        if not options.skip_pidfile:
-            setup_pid(options, config)
-
-            # Handle the interrupts
-            def sigint_handler(signum, frame):
-                log.info('Signal Received: {}'.format(signum))
-                # Delete Pidfile
-                if not options.skip_pidfile and os.path.exists(options.pidfile):
-                    os.remove(options.pidfile)
-                    log.debug('Removed PID file: {}'.format(options.pidfile))
-                sys.exit(0)
-
-            # Set the signal handlers
-            signal.signal(signal.SIGINT, sigint_handler)
-            signal.signal(signal.SIGTERM, sigint_handler)
-
         run.run(config)
 
     # Pass the exit up stream rather then handle it as an general exception

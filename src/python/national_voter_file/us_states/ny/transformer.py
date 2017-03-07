@@ -130,7 +130,7 @@ class StateTransformer(BaseTransformer):
             'BIRTHDATE_IS_ESTIMATE':'N'
         }
 
-    def extract_birth_state(self, input_columns):
+    def extract_birth_state(self, input_dict):
         return {'BIRTH_STATE': None}
 
     def extract_race(self, input_dict):
@@ -158,9 +158,6 @@ class StateTransformer(BaseTransformer):
             'RAW_CITY': input_dict['RCITY'],
             'RAW_ZIP': input_dict['RZIP5']
         }
-
-        if not raw_dict['RAW_ADDR1'].strip():
-            raw_dict['RAW_ADDR1'] = '--Not provided--'
 
         usaddress_dict = self.usaddress_tag(address_str)[0]
         if usaddress_dict:

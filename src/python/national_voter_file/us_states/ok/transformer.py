@@ -73,12 +73,12 @@ class StateTransformer(BaseTransformer):
     #### Demographics methods ##################################################
 
     def extract_gender(self, input_dict):
-        return {'GENDER': "U"}
+        return {'GENDER': None}
 
     def extract_race(self, input_dict):
-        return {'RACE': "U"}
+        return {'RACE': None}
 
-    def extract_birth_state(self, input_columns):
+    def extract_birth_state(self, input_dict):
         return {'BIRTH_STATE': None}
 
     def extract_birthdate(self, input_dict):
@@ -117,9 +117,6 @@ class StateTransformer(BaseTransformer):
             'RAW_CITY': input_dict['City'],
             'RAW_ZIP': input_dict['Zip']
         }
-
-        if not raw_dict['RAW_ADDR1'].strip():
-            raw_dict['RAW_ADDR1'] = '--Not provided--'
 
         # OK doesn't have residence state
         state_name = 'OK'

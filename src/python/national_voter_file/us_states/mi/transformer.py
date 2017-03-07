@@ -88,8 +88,11 @@ class StatePreparer(BasePreparer):
     def zip_voters(self, voter_file_path):
         with open(voter_file_path, 'r') as infile:
             for row in infile:
-                # Yield column with spaces stripped
-                yield [row[slice(*c)].strip() for c in self.col_indices]
+                # Use column indices to split rows, yield dict in row format
+                yield dict(zip(
+                    self.transformer.input_fields,
+                    [row[slice(*c)].strip() for c in self.col_indices]
+                ))
 
     def voters(self, voter_file_path):
         reader = self.dict_iterator(self.open(self.input_path))
@@ -113,7 +116,6 @@ class StateTransformer(BaseTransformer):
         'PHONE': None,
         'DO_NOT_CALL_STATUS': None,
         'COUNTYCODE': 'COUNTYCODE',
-        'STATE_VOTER_REF': 'STATE_VOTER_REF',
         'COUNTY_VOTER_REF': None,
         'PARTY': None,
         'CONGRESSIONAL_DIST': 'CONGRESSIONAL_DIST',
@@ -258,10 +260,6 @@ class StateTransformer(BaseTransformer):
             'RAW_ZIP': input_dict['ZIP']
         }
 
-        for r in ['RAW_ADDR1', 'RAW_ADDR2']:
-            if not raw_dict[r].strip():
-                raw_dict[r] = '--Not provided--'
-
         usaddress_dict = self.usaddress_tag(address_str)[0]
 
         if usaddress_dict:
@@ -319,6 +317,8 @@ class StateTransformer(BaseTransformer):
         return mail_addr_dict
 
     #### Political methods ####################################################
+    def extract_state_voter_ref(self, input_dict):
+        return {'STATE_VOTER_REF' : 'MI' + input_dict['STATE_VOTER_REF']}
 
     def extract_registration_date(self, input_dict):
         return {'REGISTRATION_DATE': self.convert_date(input_dict['DATE_OF_REGISTRATION'])}
