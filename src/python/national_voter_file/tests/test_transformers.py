@@ -16,9 +16,9 @@ BASE_TRANSFORMER_COLS = sorted(
 )
 
 TEST_STATES = {'Colorado' : 'CO', 'Delaware' : 'DE', 'Florida' : 'FL',
-              'Michigan' : 'MI', 'NorthCarolina' : 'NC',
-              'NewJersey' : 'NJ', 'NewYork' : 'NY', 'Ohio' : 'OH',
-              'Oklahoma' : 'OK', 'Utah' : 'UT', 'Washington' : 'WA'}
+               'Michigan' : 'MI', 'NorthCarolina' : 'NC',
+               'NewJersey' : 'NJ', 'NewYork' : 'NY', 'Ohio' : 'OH',
+               'Oklahoma' : 'OK', 'Utah' : 'UT', 'Washington' : 'WA'}
 
 
 # Because tests assert for existence of files, remove any _test.csv before tests

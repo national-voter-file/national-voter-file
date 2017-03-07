@@ -89,7 +89,7 @@ class StateTransformer(BaseTransformer):
         'CONGRESSIONAL_DIST': 'CONGRESSIONAL',
         'UPPER_HOUSE_DIST': 'LEGISLATIVE',
         'LOWER_HOUSE_DIST': 'LEGISLATIVE',
-        'ABSENTEE_TYPE': None, 
+        'ABSENTEE_TYPE': None,
         'COUNTY_BOARD_DIST': 'FREEHOLDER',
         'PRECINCT_SPLIT': None,
         'REGISTRATION_STATUS': 'STATUS'
