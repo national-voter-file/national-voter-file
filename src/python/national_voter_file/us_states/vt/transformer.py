@@ -263,6 +263,6 @@ class StateTransformer(BaseTransformer):
                 'CONGRESSIONAL_DIST'
         """
 
-        # Vermont only has 1 at-large Congressional District. This is the CensusReporter 
+        # Vermont only has 1 at-large Congressional District. This is the CensusReporter
         # GeoID for the VT At-large CD.
         return {'CONGRESSIONAL_DIST': '50000US5000'}
