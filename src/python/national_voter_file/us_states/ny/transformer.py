@@ -94,7 +94,9 @@ class StateTransformer(BaseTransformer):
 
     ny_other_party_map = {
         "LBT": "LIB",
-        "SAP": "SAP"
+        "SAP": "SAP",
+        "GRE": "GRN"
+
     }
 
     #### Contact methods #######################################################
