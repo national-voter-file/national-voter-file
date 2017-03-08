@@ -12,7 +12,8 @@ import sys
 
 
 TEST_DATA_DIR = os.path.join(os.path.dirname(__file__), 'test_data')
-TEST_STATES = ['de', 'co', 'fl', 'mi', 'nc', 'ny', 'oh', 'ok', 'pa', 'ut', 'wa']
+
+TEST_STATES = ['de', 'co', 'fl', 'mi', 'nc', 'ny', 'oh', 'ok', 'pa', 'ut', 'vt', 'wa']
 
 NUM_ROWS = 100
 
@@ -725,6 +726,48 @@ UTAH_SCHEMA = {
     '11/5/2013': lambda: _blank('11/5/2013')
 }
 
+VERMONT_SCHEMA = {
+    '2008 Gen Election Participation': lambda: random.choice(['T', 'F']),
+    '2010 Gen Election Participation': lambda: random.choice(['T', 'F']),
+    '2012 Gen Election Participation': lambda: random.choice(['T', 'F']),
+    '2014 Gen Election Participation': lambda: random.choice(['T', 'F']),
+    'County': lambda: random.choice(['ADDISON','BENNINGTON','CALEDONIA','CHITTENDEN','ESSEX','FRANKLIN','GRAND ISLE','LAMOILLE','ORANGE','ORLEANS','RUTLAND','WASHINGTON','WINDHAM','WINDSOR']),
+    'Date last Voted': lambda: _blank(fake.date(pattern='%m/%d/%Y')),
+    'Date of Registration': lambda: fake.date(pattern='%m/%d/%Y'),
+    'Fire District': lambda: _blank(fake.city().upper()),
+    'First Name': lambda: fake.first_name().upper(),
+    'Garbage District': lambda: _blank(fake.city().upper()),
+    'Last Name': lambda: fake.last_name().upper(),
+    'Legal Address City': lambda: fake.city().upper(),
+    'Legal Address Line 1': lambda: _blank(fake.street_address().upper()),
+    'Legal Address Line 2': lambda: _blank(fake.secondary_address().upper()),
+    'Legal Address State': lambda: 'VT',
+    'Legal Address Zip': lambda: _blank(fake.zipcode()),
+    'Mailing Address City': lambda: fake.city().upper(),
+    'Mailing Address Line 1': lambda: _blank(fake.street_address().upper()),
+    'Mailing Address Line 2': lambda: _blank(fake.secondary_address().upper()),
+    'Mailing Address State': lambda: 'VT',
+    'Mailing Address Zip': lambda: _blank(fake.zipcode()),
+    'Mailing Address in care of': lambda: '',
+    'Middle Name': lambda: _empty(fake.first_name().upper()),
+    'Police District': lambda: _blank(fake.city().upper()),
+    'Polling Location': lambda: _blank(fake.street_address().upper()),
+    'School District': lambda: _blank(fake.city().upper()),
+    'Senate District': lambda: fake.lexify(text="???").upper(),
+    'Sewer District': lambda: _blank(fake.city().upper()),
+    'Status': lambda: 'ACTIVE',
+    'Suffix': lambda:  _blank(fake.suffix().upper()),
+    'Telephone': lambda: _blank(fake.phone_number()),
+    'Town of Registration': lambda: _blank(fake.city().upper()),
+    'Town-Nemrc Number': lambda: fake.numerify(text="##"),
+    'Village': lambda: '',
+    'VoterID': lambda: '000{}'.format(str(randint(100000, 999999))),
+    'Voting District': lambda: fake.bothify(text="???-#-#"),
+    'Ward': lambda: '',
+    'Water District': lambda: '',
+    'Year of Birth': lambda: str(randint(1910, 1999))
+}
+
 WASHINGTON_SCHEMA = {
 'StateVoterID': lambda:'WA{}'.format(str(randint(1000, 999999)).zfill(10)),
 'CountyVoterID': lambda:  str(randint(1, 88)),
@@ -825,6 +868,8 @@ if __name__ == '__main__':
                            {'has_header': False,
                             'input_fields': MI.transformer.StateTransformer.input_fields}),
               'ut': ([UTAH_SCHEMA], {}),
+              'vt': ([VERMONT_SCHEMA],
+                                 {'sep':'|'}),
               'wa': ([WASHINGTON_SCHEMA],
                                 {'sep':'\t'}),
     }
