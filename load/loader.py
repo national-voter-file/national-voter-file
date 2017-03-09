@@ -4,57 +4,56 @@ import subprocess
 import json
 
 
-def get_parser():
-    parser = argparse.ArgumentParser(description='Run data loading for NVF')
+parser = argparse.ArgumentParser(description='Run data loading for NVF')
 
-    parser.add_argument(
-        'task',
-        type=str,
-        choices=['transform', 'dimdata', 'precincts', 'load'],
-        required=True,
-        help='Designates what action will be run by the loader'
-    )
+parser.add_argument(
+    'task',
+    type=str,
+    choices=['dates', 'dimdata', 'precincts', 'transform', 'load'],
+    help='Designates what action will be run by the loader'
+)
 
-    parser.add_argument(
-        '-s', '--state',
-        type=str,
-        required=True,
-        help='Indicates which state to perform the action for as its two letter abbreviation'
-    )
+parser.add_argument(
+    '-s', '--state',
+    type=str,
+    required=False,
+    help='''
+    Indicates which state to perform the action for as its two letter abbreviation.
+    Required for all commands other than "date".
+    '''
+)
 
-    parser.add_argument(
-        '-c', '--configfile',
-        default='build_conf.json',
-        help='Config file (default: "build_conf.json")'
-    )
+parser.add_argument(
+    '-c', '--configfile',
+    default='load_conf.json',
+    help='Config file (default: "load_conf.json")'
+)
 
-    parser.add_argument(
-        '--input_file',
-        require=False,
-        help='Input file for any argument, relative to data_dir or other in conf'
-    )
+parser.add_argument(
+    '--input_file',
+    required=False,
+    help='Input file for any argument, relative to data_path or other in conf'
+)
 
-    parser.add_argument(
-        '--report_date',
-        require=False,
-        help='If running load step, required, and date in format YYYY-MM-DD'
-    )
+parser.add_argument(
+    '--report_date',
+    required=False,
+    help='If running load step, required, and date in format YYYY-MM-DD'
+)
 
-    parser.add_argument(
-        '--reporter_key',
-        require=False,
-        help='If running load command, the key for the associated reporter'
-    )
+parser.add_argument(
+    '--reporter_key',
+    required=False,
+    help='If running load command, the key for the associated reporter'
+)
 
-    return parser
 
-# TODO: Maybe add this back? Also just one script, so maybe should be run on initial
 # Docker setup for local dev
-# def populate_date_dim(opts, conf):
-#     subprocess.call([
-#         os.path.join(conf['pdi_path'], 'pan.sh'),
-#         '-file', os.path.join(conf['nvf_path'], 'src', 'main', 'pdi', 'populateDateDimension.ktr')
-#      ])
+def populate_date_dim(opts, conf):
+    subprocess.call([
+        os.path.join(conf['pdi_path'], 'pan.sh'),
+        '-file', os.path.join(conf['nvf_path'], 'src', 'main', 'pdi', 'populateDateDimension.ktr')
+     ])
 
 
 def load_dimensional_data(opts, conf):
@@ -76,31 +75,32 @@ def load_precincts(opts, conf):
     # i.e. every precinct loading file is namespaced as pdi/SS/precincts.ktr
     subprocess.call([
         os.path.join(conf['pdi_path'], 'pan.sh'),
-        '-file', os.path.join(conf['nvf_path'], 'src', 'main', 'pdi', opts.state.lower(), 'precincts.ktr')
+        # TODO: Potentially flag above for --update vs --save?
+        '-file', os.path.join(conf['nvf_path'], 'src', 'main', 'pdi', opts.state.lower(), 'save_precincts.ktr'),
+        '-param:reportDate={}'.format(opts.report_date),
+        '-param:reportFile={}'.format(opts.input_file)
     ])
 
 
 # Assuming will have access to run directly, won't have to use subprocess
 def run_transformer(opts, conf):
-    from national_voter_file.transformers.base import (DATA_DIR,
-                                                       BasePreparer,
+    from national_voter_file.transformers.base import (BasePreparer,
                                                        BaseTransformer)
     from national_voter_file.us_states.all import load as load_states
 
     from national_voter_file.transformers.csv_transformer import CsvOutput
 
-    state_path = opts.state.transformer.StatePreparer.state_path
-    input_path = os.path.join(conf['data_dir'], opts.input_file)
-    output_path = os.path.join(conf['data_dir'], '{}_output.csv'.format(opts.state))
-
-    state = opts.state.transformer.StatePreparer.state_name
-
-    state_transformer = opts.state.transformer.StateTransformer()
-    state_preparer = getattr(opts.state.transformer,
+    state = load_states(['mi'])[0]
+    state_path = state.transformer.StatePreparer.state_path
+    input_path = os.path.join(conf['data_path'], opts.input_file)
+    output_path = os.path.join(conf['data_path'], '{}_output.csv'.format(opts.state))
+    
+    state_transformer = state.transformer.StateTransformer()
+    state_preparer = getattr(state.transformer,
                              'StatePreparer',
                              BasePreparer)(input_path,
                                            state_path,
-                                           opts.state.transformer,
+                                           state.transformer,
                                            state_transformer)
     writer = CsvOutput(state_transformer)
     writer(state_preparer.process(), output_path)
@@ -108,7 +108,7 @@ def run_transformer(opts, conf):
 
 def load_data(opts, conf):
     if not opts.input_file:
-        opts.input_file = os.path.join(conf['data_dir'], opts.state, '{}_output.csv'.format(opts.state))
+        opts.input_file = os.path.join(conf['data_path'], opts.state, '{}_output.csv'.format(opts.state))
 
     subprocess.call([
         os.path.join(conf['pdi_path'], 'kitchen.sh'),
@@ -122,20 +122,23 @@ def load_data(opts, conf):
 
 
 if __name__ == '__main__':
-    parser = get_parser()
-    options = parser.parse_args()
+    opts = parser.parse_args()
 
-    with open(os.path.join(os.path.dirname(__file__), options.configfile)) as f:
+    with open(os.path.join(os.path.dirname(__file__), opts.configfile)) as f:
         conf = json.load(f)
 
-    if options.task == 'load' and options.report_date is None:
+    if opts.task != 'dates' and opts.state is None:
+        raise Exception('--state is required if dates is the designated task')
+    if opts.task == 'load' and opts.report_date is None:
         raise Exception('--report_date is required if load is the designated task')
 
-    if options.task == 'load':
-        load_data(options, conf)
-    elif options.task == 'transform':
-        run_transformer(options, conf)
-    elif options.task == 'precincts':
-        load_precincts(options, conf)
-    elif options.task == 'dimdata':
-        load_dimensional_data(options, conf)
+    if opts.task == 'load':
+        load_data(opts, conf)
+    elif opts.task == 'transform':
+        run_transformer(opts, conf)
+    elif opts.task == 'precincts':
+        load_precincts(opts, conf)
+    elif opts.task == 'dimdata':
+        load_dimensional_data(opts, conf)
+    elif opts.task == 'dates':
+        populate_date_dim(opts, conf)
