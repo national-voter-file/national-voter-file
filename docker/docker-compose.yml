@@ -11,3 +11,6 @@ services:
     build: ./etl
     volumes:
       - ..:/national-voter-file
+    entrypoint:
+      - python3
+      - /national-voter-file/load/loader.py
