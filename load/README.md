@@ -22,9 +22,3 @@ Using Michigan as an example:
 * Load precincts with `docker-compose run etl precincts -s mi --report_date=2017-01-01 --input_file=mi/entire_state_v.lst`
 * Run transformer with `docker-compose run etl transform -s mi --input_file=mi/mi.csv`
 * Load transformed data with `docker-compose run etl load -s mi --input_file=mi/mi_output.csv --report_date=2017-01-01 --reporter_key=5`
-
-## To-Dos
-
-* Change naming conventions, move everything to lowercase state postal abbreviations
-* More documentation
-* Figure out flexibility on loading precinct files (specifically for Washington)
