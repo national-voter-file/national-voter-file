@@ -99,8 +99,10 @@ def run_transformer(opts, conf):
 
     state = load_states([opts.state])[0]
     state_path = state.transformer.StatePreparer.state_path
+
     input_path = os.path.join(conf['data_path'], opts.input_file)
-    output_path = os.path.join(os.path.dirname(input_path), '{}_output.csv'.format(opts.state))
+    output_path = os.path.join(os.path.dirname(input_path),
+                               '{}_output.csv'.format(opts.state))
 
     state_transformer = state.transformer.StateTransformer()
     state_preparer = getattr(state.transformer,
@@ -114,8 +116,15 @@ def run_transformer(opts, conf):
 
 
 def load_data(opts, conf):
+    from national_voter_file.us_states.all import load as load_states
+
     if not opts.input_file:
-        opts.input_file = os.path.join(conf['data_path'], opts.state, '{}_output.csv'.format(opts.state))
+        state = load_states([opts.state])[0]
+        opts.input_file = os.path.join(
+            conf['data_path'],
+            state.transformer.StatePreparer.state_name,
+            '{}_output.csv'.format(opts.state)
+        )
     else:
         opts.input_file = os.path.join(conf['data_path'], opts.input_file)
 
