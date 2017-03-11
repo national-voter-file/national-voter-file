@@ -150,7 +150,7 @@ class BaseTransformer(object):
         'TITLE': set([str, type(None)]),
         'FIRST_NAME': set([str, type(None)]),
         'MIDDLE_NAME': set([str, type(None)]),
-        'LAST_NAME': set([str]),
+        'LAST_NAME': set([str, type(None)]),
         'NAME_SUFFIX': set([str, type(None)]),
         'GENDER': set([str, type(None)]),
         'RACE':set([str, type(None)]),
@@ -259,6 +259,10 @@ class BaseTransformer(object):
                       'ROL', #Rights of Life
                       'BLU', #Blue Enigma
                       'UJP', #Utah Justice Party
+                      'FDM', #New York Freedom Party
+                      'RTH', #Rent is Too Damn High 
+                      'TXP', # New York Tax Payers
+                      'APP', # From New York File
                       type(None)
         ]),
         'GENDER': set(['M', 'F', 'U']),
