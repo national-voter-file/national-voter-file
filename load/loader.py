@@ -81,9 +81,10 @@ def load_precincts(opts, conf):
 
     # Just making manual exceptions for now
     if opts.state == 'wa':
+        wa_path = os.path.dirname(os.path.join(conf['data_path'],
+                                  opts.input_file))
         subprocess_args.append('-param:ocdFile={}'.format(
-            # TODO: This should be changed to wa/state-wa-precincts.csv after update
-            os.path.join(conf['data_path'], 'Washington', 'state-wa-precincts.csv')
+            os.path.join(wa_path, 'state-wa-precincts.csv')
         ))
 
     subprocess.call(subprocess_args)
