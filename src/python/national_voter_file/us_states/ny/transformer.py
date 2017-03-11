@@ -84,6 +84,7 @@ class StateTransformer(BaseTransformer):
         "REP": "REP",
         "CON": "CON",
         "GRE": "GRN",
+        "REF": "REF",
         "WOR": "WOR",
         "IND": "IDP",
         "WEP": "WEP",
@@ -95,7 +96,12 @@ class StateTransformer(BaseTransformer):
     ny_other_party_map = {
         "LBT": "LIB",
         "SAP": "SAP",
-        "GRE": "GRN"
+        "FDM": "FDM",
+        "GRE": "GRN",
+        "RTH": "RTH",
+        "SWP": "SWP",
+        "TXP": "TXP",
+        "APP": "APP"
 
     }
 
@@ -196,7 +202,7 @@ class StateTransformer(BaseTransformer):
                 ]))
 
                 if address_type == 'Ambiguous':
-                    print("Warn - %s: Ambiguous mailing address falling back to residential (%s)" % address_type, input_dict['MAILADD1'])
+                    print("Warn - %s: Ambiguous mailing address falling back to residential (%s)" % (address_type, input_dict['MAILADD1']))
                     tagged_address = {}
 
                 if len(tagged_address) > 0:
@@ -237,11 +243,11 @@ class StateTransformer(BaseTransformer):
         return {'ABSENTEE_TYPE': None}
 
     def extract_party(self, input_dict):
-        party = input_dict['ENROLLMENT']
+        party = input_dict['ENROLLMENT'].upper()
         if party != "OTH":
             party_code = self.ny_party_map[party]
         else:
-            party_code = self.ny_other_party_map[input_dict['OTHERPARTY']]
+            party_code = self.ny_other_party_map[input_dict['OTHERPARTY'].upper()]
 
         return {'PARTY': party_code}
 
