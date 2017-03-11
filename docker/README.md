@@ -22,14 +22,6 @@ We use [docker-compose](https://docs.docker.com/compose/) to manage interactions
 
 Note: The host should be `postgis` when accessed from inside the ETL docker container.
 
-## Extracting, transforming, and loading (ETL)
-
-This container is intended to run [Pentaho Data Integration](http://community.pentaho.com/projects/data-integration/) transforms and python scripts with some handy modules. These scripts and transforms are how we enrich, clean, and load data into the postgres database.
-
-Typically, you will invoke commands in this container as
-
-`docker-compose run etl`
-
 ## Loading Data
 
 The `load` directory has controls for loading data, and is the main entrypoint for
