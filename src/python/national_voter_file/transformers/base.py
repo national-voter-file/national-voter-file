@@ -220,12 +220,13 @@ class BaseTransformer(object):
                       'REP', #Republican
                       "AI", #American Independant
                       "PF", #Peace and Freedom
+                      "CP", #Constitution Party
                       "AMC", #American Constitution
                       "GRN", #Green
-                      "LIB", #Libretarian
+                      "LIB", #Libertarian
                       "ECO", #Ecology
                       "IDP", #Independence Party
-                      "PSL", #Party for socialism and Liberation
+                      "PSL", #Party for Socialism and Liberation
                       "REF", #Reform Party
                       "SAP", #Sapient
                       "CON", #Conservative
