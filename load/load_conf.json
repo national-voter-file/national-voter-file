@@ -1,0 +1,5 @@
+{
+  "pdi_path": "/opt/pentaho/data-integration",
+  "nvf_path": "/national-voter-file",
+  "data_path": "/national-voter-file/data"
+}
