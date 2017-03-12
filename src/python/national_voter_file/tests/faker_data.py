@@ -26,7 +26,7 @@ def _empty(item):
 def _blank(item):
     return random.choice([item, ''])
 
-# Obtain the information needed from individual states 
+# Obtain the information needed from individual states
 state_modules = load_states(TEST_STATES)
 CO = state_modules['co']
 FL = state_modules['fl']
@@ -246,7 +246,9 @@ OHIO_SCHEMA = {
     'STATE_SENATE_DISTRICT': lambda: str(randint(1, 100)),
     'TOWNSHIP': lambda: _empty(fake.city().upper()),
     'VILLAGE': lambda: _empty(fake.city().upper()),
-    'WARD': lambda: _empty(fake.city().upper())
+    'WARD': lambda: _empty(fake.city().upper()),
+    'PRIMARY-05/07/2013': lambda: _blank(random.choice(['R', 'D'])),
+    'GENERAL-11/03/2015': lambda: _blank('X')
 }
 
 
@@ -688,7 +690,10 @@ MICHIGAN_SCHEMA = {
     'SCHOOL_PRECINCT': lambda: _empty(fake.numerify(text='###')),
     'PERMANENT_ABSENTEE_IND': lambda: random.choice(['Y', 'N']),
     'REGISTRATION_STATUS': lambda: random.choice(['A', 'V', 'C', 'R', 'CH']),
-    'UOCAVA_STATUS': lambda: random.choice(['M', 'C', 'N', 'O'])
+    'UOCAVA_STATUS': lambda: random.choice(['M', 'C', 'N', 'O']),
+    'ELECTION_DATE': lambda: fake.date(pattern='%m%d%Y'),
+    'ELECTION_TYPE': lambda: _empty(random.choice(['SPECIAL', 'GENERAL'])),
+    'ABSENTEE_TYPE': lambda: random.choice(['Y', 'N'])
 }
 
 UTAH_SCHEMA = {
@@ -930,8 +935,8 @@ if __name__ == '__main__':
                                 'has_header': False,
                                 'input_fields': PA.transformer.StateTransformer.input_fields}),
               'mi': ([MICHIGAN_SCHEMA],
-                           {'has_header': False,
-                            'input_fields': MI.transformer.StateTransformer.input_fields}),
+                           {'input_fields': MI.transformer.StateTransformer.input_fields +
+                            ['ELECTION_DATE', 'ELECTION_TYPE', 'ABSENTEE_TYPE']}),
               'ut': ([UTAH_SCHEMA], {}),
               'vt': ([VERMONT_SCHEMA],
                                  {'sep':'|'}),

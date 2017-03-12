@@ -2,6 +2,7 @@ import csv
 import os
 import re
 import sys
+from datetime import datetime
 
 from national_voter_file.transformers.base import (DATA_DIR,
                                                    BasePreparer,
@@ -17,16 +18,39 @@ class StatePreparer(BasePreparer):
     state_name = 'Ohio'
     sep = ','
 
-    def __init__(self, input_path, *args):
-        super(StatePreparer, self).__init__(input_path, *args)
+    def __init__(self, input_path, *args, **kwargs):
+        super(StatePreparer, self).__init__(input_path, *args, **kwargs)
 
         if not self.transformer:
             self.transformer = StateTransformer()
 
     def process(self):
-        reader = self.dict_iterator(self.open(self.input_path))
+        if not self.history:
+            reader = self.dict_iterator(self.open(self.input_path))
+            for row in reader:
+                yield row
+        else:
+            hist_iter = self.history_iterator(self.input_path)
+            for row in hist_iter:
+                yield row
+
+    def history_iterator(self, input_path):
+        with open(input_path, 'r') as f:
+            reader = csv.reader(f)
+            header_row = next(reader)
+        elec_cols = [c for c in header_row if re.match(r'\w{5,7}-\d{2}\/\d{2}\/\d{4}', c)]
+
+        reader = csv.DictReader(self.open(input_path), delimiter=self.sep)
         for row in reader:
-            yield row
+            for c in elec_cols:
+                elec_split = c.split('-')
+                yield {
+                    'SOS_VOTERID': row['SOS_VOTERID'],
+                    'ELECTION_DATE': elec_split[1],
+                    'ELECTION_TYPE': elec_split[0],
+                    'VOTE_METHOD': row[c]
+                }
+
 
 class StateTransformer(BaseTransformer):
     date_format = '%Y-%m-%d'
@@ -192,6 +216,19 @@ class StateTransformer(BaseTransformer):
 
     def extract_precinct_split(self, input_dict):
         return {'PRECINCT_SPLIT': None}
+
+    # HISTORY METHODS
+    hist_state_voter_ref = extract_state_voter_ref
+
+    def hist_election_info(self, input_dict):
+        return {
+            'ELECTION_DATE': datetime.strptime(
+                input_dict['ELECTION_DATE'], '%m/%d/%Y'
+            ).date(),
+            'ELECTION_TYPE': input_dict['ELECTION_TYPE'],
+            'VOTE_METHOD': input_dict['VOTE_METHOD']
+        }
+
 
 if __name__ == '__main__':
     preparer = StatePreparer(*sys.argv[1:])
