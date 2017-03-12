@@ -1,4 +1,4 @@
-![Slack](https://nationalvoterfileslackin.herokuapp.com/badge.svg) [![Build Status](https://travis-ci.org/national-voter-file/national-voter-file.svg?branch=master)](https://travis-ci.org/national-voter-file/national-voter-file)
+[![Slack](https://nationalvoterfileslackin.herokuapp.com/badge.svg)](https://nationalvoterfileslackin.herokuapp.com) [![Build Status](https://travis-ci.org/national-voter-file/national-voter-file.svg?branch=master)](https://travis-ci.org/national-voter-file/national-voter-file)
 
 # National Voter File
 
