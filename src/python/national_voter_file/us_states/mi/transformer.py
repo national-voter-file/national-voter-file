@@ -108,15 +108,15 @@ class StatePreparer(BasePreparer):
         """
         if self.input_path.endswith('.zip'):
             z = zipfile.ZipFile(self.input_path)
-            if not self.history:
-                return self.yield_zip_rows(os.path.join(
-                    os.path.dirname(self.input_path),
-                    'entire_state_v.lst'
-                ))
-            else:
+            if self.history:
                 return self.yield_history_rows(os.path.join(
                     os.path.dirname(self.input_path),
                     'entire_state_h.lst'
+                ))
+            else:
+                return self.yield_zip_rows(os.path.join(
+                    os.path.dirname(self.input_path),
+                    'entire_state_v.lst'
                 ))
         else:
             return self.yield_rows(self.input_path)
