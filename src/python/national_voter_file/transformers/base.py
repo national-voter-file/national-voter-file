@@ -326,7 +326,6 @@ class BaseTransformer(object):
         'ELECTION_TYPE': set([str, type(None)]),
         'VOTE_METHOD': set([str, type(None)])
     }
-    history_fields = []
 
     #### Extract decorator
     def check_col_map(col_list):
@@ -367,10 +366,10 @@ class BaseTransformer(object):
             output_dict: A dictionary containing the fields given in
                 self.col_type_dict
         """
-        if not history:
-            method_str = 'extract'
-        else:
+        if history:
             method_str = 'hist_'
+        else:
+            method_str = 'extract'
         output_dict = {}
         # Build a list of all instance methods that begin with method string
         extract_funcs = [
@@ -469,10 +468,10 @@ class BaseTransformer(object):
             None
         """
         # Check to make sure correct columns are present
-        if not history:
-            type_dict = cls.col_type_dict
-        else:
+        if history:
             type_dict = cls.history_type_dict
+        else:
+            type_dict = cls.col_type_dict
 
         correct_output_col_set = set(type_dict.keys())
         output_dict_col_set = set(output_dict.keys())

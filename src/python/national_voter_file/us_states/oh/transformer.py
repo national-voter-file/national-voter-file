@@ -39,11 +39,8 @@ class StatePreparer(BasePreparer):
             reader = csv.reader(f)
             header_row = next(reader)
         elec_cols = [c for c in header_row if re.match(r'\w{5,7}-\d{2}\/\d{2}\/\d{4}', c)]
-        fieldnames = ['SOS_VOTERID'] + elec_cols
 
-        reader = csv.DictReader(
-            input_path, delimiter=self.sep, fieldnames=fieldnames
-        )
+        reader = csv.DictReader(self.open(input_path), delimiter=self.sep)
         for row in reader:
             for c in elec_cols:
                 elec_split = c.split('-')

@@ -85,33 +85,49 @@ class StatePreparer(BasePreparer):
         (38, 39)
     )
 
-    def __init__(self, input_path, *args):
-        super(StatePreparer, self).__init__(input_path, *args)
+    # Has separate fields list because of intermediary loading from zip
+    history_fields = [
+        'STATE_VOTER_REF',
+        'COUNTYCODE',
+        'JURISDICTION',
+        'SCHOOL_CODE',
+        'ELECTION_CODE',
+        'ABSENTEE_TYPE'
+    ]
+
+    def __init__(self, input_path, *args, **kwargs):
+        super(StatePreparer, self).__init__(input_path, *args, **kwargs)
 
         if not self.transformer:
             self.transformer = StateTransformer()
 
     def process(self):
+        """
+        Process zip into separate files and use separate history generator for
+        processing vote history, otherwise use simple row generator
+        """
         if self.input_path.endswith('.zip'):
             z = zipfile.ZipFile(self.input_path)
             if not self.history:
-                return self.zip_voters(os.path.join(
+                return self.yield_zip_rows(os.path.join(
                     os.path.dirname(self.input_path),
                     'entire_state_v.lst'
                 ))
             else:
-                return self.history_iterator(os.path.join(
+                return self.yield_history_rows(os.path.join(
                     os.path.dirname(self.input_path),
                     'entire_state_h.lst'
                 ))
         else:
-            if not self.history:
-                return self.voters(self.input_path)
-            else:
-                return self.history_iterator(self.input_path)
+            return self.yield_rows(self.input_path)
 
-    def zip_voters(self, voter_file_path):
-        with open(voter_file_path, 'r') as infile:
+    def yield_rows(self, input_path):
+        reader = csv.DictReader(self.open(input_path), delimiter=self.sep)
+        for row in reader:
+            yield row
+
+    def yield_zip_rows(self, input_path):
+        with open(input_path, 'r') as infile:
             for row in infile:
                 # Use column indices to split rows, yield dict in row format
                 yield dict(zip(
@@ -119,12 +135,8 @@ class StatePreparer(BasePreparer):
                     [row[slice(*c)].strip() for c in self.col_indices]
                 ))
 
-    def voters(self, voter_file_path):
-        reader = self.dict_iterator(self.open(self.input_path))
-        for row in reader:
-            yield row
-
-    def history_iterator(self, input_path, election_code_file=None):
+    def yield_history_rows(self, input_path, election_code_file=None):
+        # For processing zip and raw .lst files
         if not election_code_file:
             election_code_file = os.path.join(
                 os.path.dirname(input_path),
@@ -143,13 +155,12 @@ class StatePreparer(BasePreparer):
         with open(input_path, 'r') as infile:
             for row in infile:
                 hist_dict = dict(zip(
-                    self.transformer.history_fields,
+                    self.history_fields,
                     [row[slice(*c)].strip() for c in self.history_indices]
                 ))
                 el_vals = ec_map[hist_dict.pop('ELECTION_CODE')]
                 hist_dict.update(el_vals)
                 yield hist_dict
-
 
 
 class StateTransformer(BaseTransformer):
@@ -235,15 +246,6 @@ class StateTransformer(BaseTransformer):
     col_type_dict['RACE'] = set([str, type(None)])
     col_type_dict['PRECINCT_SPLIT'] = set([str, type(None)])
     col_type_dict['COUNTY_VOTER_REF'] = set([str, type(None)])
-
-    history_fields = [
-        'STATE_VOTER_REF',
-        'COUNTYCODE',
-        'JURISDICTION',
-        'SCHOOL_CODE',
-        'ELECTION_CODE',
-        'ABSENTEE_TYPE'
-    ]
 
 
     #### Demographics methods #################################################
@@ -400,7 +402,7 @@ class StateTransformer(BaseTransformer):
         return {
             'ELECTION_DATE': self.convert_date(input_dict['ELECTION_DATE']),
             'ELECTION_TYPE': input_dict['ELECTION_TYPE'],
-            'VOTE_METHOD': input_dict['VOTE_METHOD']
+            'VOTE_METHOD': input_dict['ABSENTEE_TYPE']
         }
 
 
