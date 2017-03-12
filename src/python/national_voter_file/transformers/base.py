@@ -53,7 +53,8 @@ class BasePreparer(object):
     sep = ','
     default_file = 'input.csv'
 
-    def __init__(self, input_path, state_path=None, state_module=None, transformer=None):
+    def __init__(self, input_path, state_path=None, state_module=None,
+                 transformer=None, history=False):
 
         if transformer:
             self.transformer = transformer
@@ -65,6 +66,7 @@ class BasePreparer(object):
             self.default_file = state_module.default_file
         else:
             self.default_file = default_file
+        self.history = history
         filename = self.default_file
 
         if os.path.isdir(input_path):
@@ -216,68 +218,67 @@ class BaseTransformer(object):
 
     # some columns can only have certain values
     limited_value_dict = {
-        'PARTY': set(['DEM', #Democrat
-                      'REP', #Republican
-                      "AI", #American Independant
-                      "PF", #Peace and Freedom
-                      "CP", #Constitution Party
-                      "AMC", #American Constitution
-                      "GRN", #Green
-                      "LIB", #Libertarian
-                      "ECO", #Ecology
-                      "IDP", #Independence Party
-                      "PSL", #Party for Socialism and Liberation
-                      "REF", #Reform Party
-                      "SAP", #Sapient
-                      "CON", #Conservative
-                      "WOR", #Working Families
-                      "WEP", #Womens Equality
-                      "SCC", #Stop Common Core
-                      "NLP", #Natural Law
-                      "SP", #Socialist
-                      "SWP", #Socialist Worker's Party
-                      "UTY", #Unity
-                      "AE", #Americans Elect
-                      "AMP", # American Patriot Party
-                      "OTH", #otherwise
-                      "UN", #Unaffiliated
-
-
-                      "DEL", #A Delaware Party
-                      "FED", #Federalist Party
-                      "CIT", #Citizen's Party
-                      'LIB', #Liberal Party
-                      "NEW", #New Frontier
-                      "ALI", #New Alliance
-                      "TAX", #US Taxpayers
-                      'STS', #National Statesman
-                      'UNI', #National Unity
-                      'IND', #Independent Party of Delaware
-                      'IPU', #Independent Patriot Party of Utah
-                      'GPU', #Green Party of Utah (Desert Greens)
-                      'PCP', #Personal Choice Party
-                      'ROL', #Rights of Life
-                      'BLU', #Blue Enigma
-                      'UJP', #Utah Justice Party
-                      type(None)
+        'PARTY': set([
+            'DEM', #Democrat
+            'REP', #Republican
+            "AI", #American Independant
+            "PF", #Peace and Freedom
+            "CP", #Constitution Party
+            "AMC", #American Constitution
+            "GRN", #Green
+            "LIB", #Libertarian
+            "ECO", #Ecology
+            "IDP", #Independence Party
+            "PSL", #Party for Socialism and Liberation
+            "REF", #Reform Party
+            "SAP", #Sapient
+            "CON", #Conservative
+            "WOR", #Working Families
+            "WEP", #Womens Equality
+            "SCC", #Stop Common Core
+            "NLP", #Natural Law
+            "SP", #Socialist
+            "SWP", #Socialist Worker's Party
+            "UTY", #Unity
+            "AE", #Americans Elect
+            "AMP", # American Patriot Party
+            "OTH", #otherwise
+            "UN", #Unaffiliated
+            "DEL", #A Delaware Party
+            "FED", #Federalist Party
+            "CIT", #Citizen's Party
+            'LIB', #Liberal Party
+            "NEW", #New Frontier
+            "ALI", #New Alliance
+            "TAX", #US Taxpayers
+            'STS', #National Statesman
+            'UNI', #National Unity
+            'IND', #Independent Party of Delaware
+            'IPU', #Independent Patriot Party of Utah
+            'GPU', #Green Party of Utah (Desert Greens)
+            'PCP', #Personal Choice Party
+            'ROL', #Rights of Life
+            'BLU', #Blue Enigma
+            'UJP', #Utah Justice Party
+            type(None)
         ]),
         'GENDER': set(['M', 'F', 'U']),
         'RACE':set([
-        'I', #American Indian or Alaskan Native
-        'A', #Asian Or Pacific Islander
-        'B', #Black, Not Hispanic
-        'H', #Hispanic
-        'W', #White, not Hispanic
-        'O', #other
-        'M', #Multi-racial
-        "U" #Unknown
+            'I', #American Indian or Alaskan Native
+            'A', #Asian Or Pacific Islander
+            'B', #Black, Not Hispanic
+            'H', #Hispanic
+            'W', #White, not Hispanic
+            'O', #other
+            'M', #Multi-racial
+            "U" #Unknown
         ]),
         'VALIDATION_STATUS':set([
-        '1', # Unparsable
-        '2', #Parsed by USAddress
-        '3', # Manual Override
-        '4', # Validated
-        '5' # Rejected
+            '1', # Unparsable
+            '2', #Parsed by USAddress
+            '3', # Manual Override
+            '4', # Validated
+            '5' # Rejected
         ])
     }
 
@@ -314,12 +315,21 @@ class BaseTransformer(object):
     col_map = {}
     input_fields = []
 
+    history_type_dict = {
+        'STATE_VOTER_REF': set([str]),
+        'ELECTION_DATE': set([datetime.date]),
+        'ELECTION_TYPE': set([str, type(None)]),
+        'VOTE_METHOD': set([str, type(None)])
+    }
+    history_fields = []
+
 
     #### Row processing methods ################################################
 
-    def process_row(self, input_dict):
+    def process_row(self, input_dict, history=False):
         """
-        Calls each class method that begins with 'extract'
+        Calls each class method that begins with 'extract' or 'hist'
+        depending on history argument
         Passes input_dict as the argument to each method
         Updates output_dict with the results from each method
 
@@ -329,10 +339,14 @@ class BaseTransformer(object):
             output_dict: A dictionary containing the fields given in
                 self.col_type_dict
         """
+        if not history:
+            method_str = 'extract'
+        else:
+            method_str = 'hist_'
         output_dict = {}
-        # Build a list of all instance methods that begin with 'extract'
+        # Build a list of all instance methods that begin with method string
         extract_funcs = [
-            getattr(self, x) for x in dir(self) if x.startswith('extract')
+            getattr(self, x) for x in dir(self) if x.startswith(method_str)
         ]
         for func in extract_funcs:
             output_dict.update(func(input_dict))
@@ -415,7 +429,7 @@ class BaseTransformer(object):
     #### Output validation methods #############################################
 
     @classmethod
-    def validate_output_row(cls, output_dict):
+    def validate_output_row(cls, output_dict, history=False):
         """
         Ensures
         - Output columns match those in cls.col_type_dict
@@ -427,7 +441,12 @@ class BaseTransformer(object):
             None
         """
         # Check to make sure correct columns are present
-        correct_output_col_set = set(cls.col_type_dict.keys())
+        if not history:
+            type_dict = cls.col_type_dict
+        else:
+            type_dict = cls.history_type_dict
+
+        correct_output_col_set = set(type_dict.keys())
         output_dict_col_set = set(output_dict.keys())
 
         missing_cols = correct_output_col_set - output_dict_col_set
@@ -451,7 +470,7 @@ class BaseTransformer(object):
                 value_type = str if len(value.strip()) > 0 else type(None)
             else:
                 value_type = type(value)
-            acceptable_types = cls.col_type_dict[colname]
+            acceptable_types = type_dict[colname]
             if value_type not in acceptable_types:
                 type_errors.append(
                     'Column {} requires type(s) {}, found {}.'.format(
@@ -465,22 +484,23 @@ class BaseTransformer(object):
             raise TypeError(error_str)
 
         # check to make sure columns contain correct values
-        value_errors = []
-        for col, vals in cls.limited_value_dict.items():
-            output_value = output_dict[col]
-            # if we allow None, ignore None
-            if output_value is None and type(None) in cls.col_type_dict[col]:
-                continue
-            if output_value not in vals:
-                error_message = 'Column {} requires value(s) {}, found {}'.format(
-                    col,
-                    list(vals),
-                    output_value,
-                )
-                value_errors.append(error_message)
-        if len(value_errors) > 0:
-            error_str = '\n'.join(sorted(value_errors))
-            raise ValueError(error_str)
+        if not history:
+            value_errors = []
+            for col, vals in cls.limited_value_dict.items():
+                output_value = output_dict[col]
+                # if we allow None, ignore None
+                if output_value is None and type(None) in cls.col_type_dict[col]:
+                    continue
+                if output_value not in vals:
+                    error_message = 'Column {} requires value(s) {}, found {}'.format(
+                        col,
+                        list(vals),
+                        output_value,
+                    )
+                    value_errors.append(error_message)
+            if len(value_errors) > 0:
+                error_str = '\n'.join(sorted(value_errors))
+                raise ValueError(error_str)
 
     #### Basic conversion methods ##############################################
 
