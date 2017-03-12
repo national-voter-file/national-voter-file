@@ -3,6 +3,7 @@ import datetime
 from collections import defaultdict
 from io import TextIOWrapper
 import zipfile
+from functools import wraps
 
 import usaddress
 import os
@@ -260,7 +261,7 @@ class BaseTransformer(object):
                       'BLU', #Blue Enigma
                       'UJP', #Utah Justice Party
                       'FDM', #New York Freedom Party
-                      'RTH', #Rent is Too Damn High 
+                      'RTH', #Rent is Too Damn High
                       'TXP', # New York Tax Payers
                       'APP', # From New York File
                       type(None)
@@ -318,6 +319,29 @@ class BaseTransformer(object):
     col_map = {}
     input_fields = []
 
+    #### Extract decorator
+    def check_col_map(col_list):
+        """
+        Decorator that takes argument col_list and checks to see if all columns
+        are in the transformer's col_map object.
+        If so, it returns a dict with the columns as keys, otherwise raises a
+        NotImplementedError
+        """
+        def extract_decorator(f):
+            @wraps(f)
+            def wrapped(self, input_dict):
+                if all(col in self.col_map for col in col_list):
+                    return {
+                        (c, input_dict.get(self.col_map[c])) for c in col_list
+                    }
+                else:
+                    raise NotImplementedError(
+                        'Must implement {} method or include {} in col_map'.format(
+                            f.__name__, ', '.join(col_list)
+                        )
+                    )
+            return wrapped
+        return extract_decorator
 
     #### Row processing methods ################################################
 
@@ -609,6 +633,7 @@ class BaseTransformer(object):
 
     #### Contact methods #######################################################
 
+    @check_col_map(['TITLE', 'FIRST_NAME', 'MIDDLE_NAME', 'LAST_NAME', 'NAME_SUFFIX'])
     def extract_name(self, input_dict):
         """
         Inputs:
@@ -621,22 +646,9 @@ class BaseTransformer(object):
                 'LAST_NAME'
                 'NAME_SUFFIX'
         """
-        col_list = ['TITLE',
-                    'FIRST_NAME',
-                    'MIDDLE_NAME',
-                    'LAST_NAME',
-                    'NAME_SUFFIX']
+        raise NotImplementedError('Must implement extract_name method')
 
-        if all(col in self.col_map for col in col_list):
-            return dict(
-                (c, input_dict.get(self.col_map[c], None)) for c in col_list
-            )
-        else:
-            raise NotImplementedError(
-                'Must implement extract_name method'
-                ' or include {} in col_map'.format(', '.join(col_list))
-            )
-
+    @check_col_map(['EMAIL'])
     def extract_email(self, input_dict):
         """
         Inputs:
@@ -645,18 +657,9 @@ class BaseTransformer(object):
             Dictionary with following keys
                 'EMAIL'
         """
-        col_list = ['EMAIL']
+        raise NotImplementedError('Must implement extract_email method')
 
-        if all(col in self.col_map for col in col_list):
-            return dict(
-                (c, input_dict.get(self.col_map[c], None)) for c in col_list
-            )
-        else:
-            raise NotImplementedError(
-                'Must implement extract_email method'
-                ' or include {} in col_map'.format(', '.join(col_list))
-            )
-
+    @check_col_map(['PHONE'])
     def extract_phone_number(self, input_dict):
         """
         Inputs:
@@ -665,18 +668,9 @@ class BaseTransformer(object):
             Dictionary with following keys
                 'PHONE'
         """
-        col_list = ['PHONE']
+        raise NotImplementedError('Must implement extract_phone_number method')
 
-        if all(col in self.col_map for col in col_list):
-            return dict(
-                (c, input_dict.get(self.col_map[c], None)) for c in col_list
-            )
-        else:
-            raise NotImplementedError(
-                'Must implement extract_phone_number method'
-                ' or include {} in col_map'.format(', '.join(col_list))
-            )
-
+    @check_col_map(['DO_NOT_CALL_STATUS'])
     def extract_do_not_call_status(self, input_dict):
         """
         Inputs:
@@ -685,20 +679,10 @@ class BaseTransformer(object):
             Dictionary with following keys
                 'DO_NOT_CALL_STATUS'
         """
-        col_list = ['DO_NOT_CALL_STATUS']
-
-        if all(col in self.col_map for col in col_list):
-            return dict(
-                (c, input_dict.get(self.col_map[c], None)) for c in col_list
-            )
-        else:
-            raise NotImplementedError(
-                'Must implement extract_do_not_call_status method'
-                ' or include {} in col_map'.format(', '.join(col_list))
-            )
+        raise NotImplementedError('Must implement extract_do_not_call_status method')
 
     #### Demographics methods ##################################################
-
+    @check_col_map(['GENDER'])
     def extract_gender(self, input_dict):
         """
         Inputs:
@@ -707,18 +691,9 @@ class BaseTransformer(object):
             Dictionary with following keys
                 'GENDER'
         """
-        col_list = ['GENDER']
+        raise NotImplementedError('Must implement extract_gender method')
 
-        if all(col in self.col_map for col in col_list):
-            return dict(
-                (c, input_dict.get(self.col_map[c], None)) for c in col_list
-            )
-        else:
-            raise NotImplementedError(
-                'Must implement extract_gender method'
-                ' or include {} in col_map'.format(', '.join(col_list))
-            )
-
+    @check_col_map(['RACE'])
     def extract_race(self, input_dict):
         """
         Inputs:
@@ -727,18 +702,9 @@ class BaseTransformer(object):
             Dictionary with following keys
                 'RACE'
         """
-        col_list = ['RACE']
+        raise NotImplementedError('Must implement extract_race method')
 
-        if all(col in self.col_map for col in col_list):
-            return dict(
-                (c, input_dict.get(self.col_map[c], None)) for c in col_list
-            )
-        else:
-            raise NotImplementedError(
-                'Must implement extract_race method'
-                ' or include {} in col_map'.format(', '.join(col_list))
-            )
-
+    @check_col_map(['BIRTH_STATE'])
     def extract_birth_state(self, input_dict):
         """
         Inputs:
@@ -747,18 +713,7 @@ class BaseTransformer(object):
             Dictionary with following keys
                 'BIRTH_STATE'
         """
-        col_list = ['BIRTH_STATE']
-        # print(self.col_map.k)
-
-        if all(col in self.col_map for col in col_list):
-            return dict(
-                (c, input_dict.get(self.col_map[c], None)) for c in col_list
-            )
-        else:
-            raise NotImplementedError(
-                'Must implement extract_birth_state method'
-                ' or include {} in col_map'.format(', '.join(col_list))
-            )
+        raise NotImplementedError('Must implement extract_birth_state method')
 
     def extract_birthdate(self, input_dict):
         """
@@ -771,6 +726,7 @@ class BaseTransformer(object):
         """
         raise NotImplementedError('Must implement extract_birthdate method')
 
+    @check_col_map(['LANGUAGE_CHOICE'])
     def extract_language_choice(self, input_dict):
         """
         Inputs:
@@ -779,17 +735,7 @@ class BaseTransformer(object):
             Dictionary with following keys
                 'LANGUAGE_CHOICE'
         """
-        col_list = ['LANGUAGE_CHOICE']
-
-        if all(col in self.col_map for col in col_list):
-            return dict(
-                (c, input_dict.get(self.col_map[c], None)) for c in col_list
-            )
-        else:
-            raise NotImplementedError(
-                'Must implement extract_language_choice method'
-                ' or include {} in col_map'.format(', '.join(col_list))
-            )
+        raise NotImplementedError('Must implement extract_language_choice method')
 
     #### Address methods #######################################################
 
@@ -846,6 +792,7 @@ class BaseTransformer(object):
         # and fill in missing values
         return self.convert_usaddress_dict(usaddress_dict)
 
+    @check_col_map(['COUNTYCODE'])
     def extract_county_code(self, input_dict):
         """
         Inputs:
@@ -854,17 +801,7 @@ class BaseTransformer(object):
             Dictionary with following keys
                 'COUNTYCODE'
         """
-        col_list = ['COUNTYCODE']
-
-        if all(col in self.col_map for col in col_list):
-            return dict(
-                (c, input_dict.get(self.col_map[c], None)) for c in col_list
-            )
-        else:
-            raise NotImplementedError(
-                'Must implement extract_county_code method'
-                ' or include {} in col_map'.format(', '.join(col_list))
-            )
+        raise NotImplementedError('Must implement extract_county_code method')
 
     def extract_mailing_address(self, input_dict):
         """
@@ -902,6 +839,7 @@ class BaseTransformer(object):
 
     #### Political methods #####################################################
 
+    @check_col_map(['STATE_VOTER_REF'])
     def extract_state_voter_ref(self, input_dict):
         """
         Inputs:
@@ -910,18 +848,9 @@ class BaseTransformer(object):
             Dictionary with following keys
                 'STATE_VOTER_REF'
         """
-        col_list = ['STATE_VOTER_REF']
+        raise NotImplementedError('Must implement extract_state_voter_ref method')
 
-        if all(col in self.col_map for col in col_list):
-            return dict(
-                (c, input_dict.get(self.col_map[c], None)) for c in col_list
-            )
-        else:
-            raise NotImplementedError(
-                'Must implement extract_state_voter_ref method'
-                ' or include {} in col_map'.format(', '.join(col_list))
-            )
-
+    @check_col_map(['COUNTY_VOTER_REF'])
     def extract_county_voter_ref(self, input_dict):
         """
         Inputs:
@@ -930,17 +859,7 @@ class BaseTransformer(object):
             Dictionary with following keys
                 'COUNTY_VOTER_REF'
         """
-        col_list = ['COUNTY_VOTER_REF']
-
-        if all(col in self.col_map for col in col_list):
-            return dict(
-                (c, input_dict.get(self.col_map[c], None)) for c in col_list
-            )
-        else:
-            raise NotImplementedError(
-                'Must implement extract_county_voter_ref method'
-                ' or include {} in col_map'.format(', '.join(col_list))
-            )
+        raise NotImplementedError('Must implement extract_county_voter_ref method')
 
     def extract_registration_date(self, input_dict):
         """
@@ -954,6 +873,7 @@ class BaseTransformer(object):
             'Must implement extract_registration_date method'
         )
 
+    @check_col_map(['REGISTRATION_STATUS'])
     def extract_registration_status(self, input_dict):
         """
         Inputs:
@@ -962,18 +882,9 @@ class BaseTransformer(object):
             Dictionary with following keys
                 'REGISTRATION_STATUS'
         """
-        col_list = ['REGISTRATION_STATUS']
+        raise NotImplementedError('Must implement extract_registration_status method')
 
-        if all(col in self.col_map for col in col_list):
-            return dict(
-                (c, input_dict.get(self.col_map[c], None)) for c in col_list
-            )
-        else:
-            raise NotImplementedError(
-                'Must implement extract_registration_status method'
-                ' or include {} in col_map'.format(', '.join(col_list))
-            )
-
+    @check_col_map(['ABSENTEE_TYPE'])
     def extract_absentee_type(self, input_dict):
         """
         Inputs:
@@ -982,18 +893,9 @@ class BaseTransformer(object):
             Dictionary with following keys
                 'ABSTENTEE_TYPE'
         """
-        col_list = ['ABSENTEE_TYPE']
+        raise NotImplementedError('Must implement extract_absentee_type method')
 
-        if all(col in self.col_map for col in col_list):
-            return dict(
-                (c, input_dict.get(self.col_map[c], None)) for c in col_list
-            )
-        else:
-            raise NotImplementedError(
-                'Must implement extract_absentee_type method'
-                ' or include {} in col_map'.format(', '.join(col_list))
-            )
-
+    @check_col_map(['PARTY'])
     def extract_party(self, input_dict):
         """
         Inputs:
@@ -1002,18 +904,9 @@ class BaseTransformer(object):
             Dictionary with following keys
                 'PARTY'
         """
-        col_list = ['PARTY']
+        raise NotImplementedError('Must implement extract_party method')
 
-        if all(col in self.col_map for col in col_list):
-            return dict(
-                (c, input_dict.get(self.col_map[c], None)) for c in col_list
-            )
-        else:
-            raise NotImplementedError(
-                'Must implement extract_party method'
-                ' or include {} in col_map'.format(', '.join(col_list))
-            )
-
+    @check_col_map(['CONGRESSIONAL_DIST'])
     def extract_congressional_dist(self, input_dict):
         """
         Inputs:
@@ -1022,18 +915,9 @@ class BaseTransformer(object):
             Dictionary with following keys
                 'CONGRESSIONAL_DIST'
         """
-        col_list = ['CONGRESSIONAL_DIST']
+        raise NotImplementedError('Must implement extract_congressional_dist method')
 
-        if all(col in self.col_map for col in col_list):
-            return dict(
-                (c, input_dict.get(self.col_map[c], None)) for c in col_list
-            )
-        else:
-            raise NotImplementedError(
-                'Must implement extract_congressional_dist method'
-                ' or include {} in col_map'.format(', '.join(col_list))
-            )
-
+    @check_col_map(['UPPER_HOUSE_DIST'])
     def extract_upper_house_dist(self, input_dict):
         """
         Inputs:
@@ -1042,18 +926,9 @@ class BaseTransformer(object):
             Dictionary with following keys
                 'UPPER_HOUSE_DIST'
         """
-        col_list = ['UPPER_HOUSE_DIST']
+        raise NotImplementedError('Must implement extract_upper_house_dist method')
 
-        if all(col in self.col_map for col in col_list):
-            return dict(
-                (c, input_dict.get(self.col_map[c], None)) for c in col_list
-            )
-        else:
-            raise NotImplementedError(
-                'Must implement extract_upper_house_dist method'
-                ' or include {} in col_map'.format(', '.join(col_list))
-            )
-
+    @check_col_map(['LOWER_HOUSE_DIST'])
     def extract_lower_house_dist(self, input_dict):
         """
         Inputs:
@@ -1062,18 +937,9 @@ class BaseTransformer(object):
             Dictionary with following keys
                 'LOWER_HOUSE_DIST'
         """
-        col_list = ['LOWER_HOUSE_DIST']
+        raise NotImplementedError('Must implement extract_lower_house_dist method')
 
-        if all(col in self.col_map for col in col_list):
-            return dict(
-                (c, input_dict.get(self.col_map[c], None)) for c in col_list
-            )
-        else:
-            raise NotImplementedError(
-                'Must implement extract_lower_house_dist method'
-                ' or include {} in col_map'.format(', '.join(col_list))
-            )
-
+    @check_col_map(['PRECINCT'])
     def extract_precinct(self, input_dict):
         """
         Inputs:
@@ -1084,18 +950,9 @@ class BaseTransformer(object):
                 'PRECINCT_SPLIT'
 
         """
-        col_list = ['PRECINCT']
+        raise NotImplementedError('Must implement extract_precinct method')
 
-        if all(col in self.col_map for col in col_list):
-            return dict(
-                (c, input_dict.get(self.col_map[c], None)) for c in col_list
-            )
-        else:
-            raise NotImplementedError(
-                'Must implement extract_precinct method'
-                ' or include {} in col_map'.format(', '.join(col_list))
-            )
-
+    @check_col_map(['PRECINCT_SPLIT'])
     def extract_precinct_split(self, input_dict):
         """
         Inputs:
@@ -1105,18 +962,9 @@ class BaseTransformer(object):
                 'PRECINCT_SPLIT'
 
         """
-        col_list = ['PRECINCT_SPLIT']
+        raise NotImplementedError('Must implement extract_precinct_split method')
 
-        if all(col in self.col_map for col in col_list):
-            return dict(
-                (c, input_dict.get(self.col_map[c], None)) for c in col_list
-            )
-        else:
-            raise NotImplementedError(
-                'Must implement extract_precinct_split method'
-                ' or include {} in col_map'.format(', '.join(col_list))
-            )
-
+    @check_col_map(['COUNTY_BOARD_DIST'])
     def extract_county_board_dist(self, input_dict):
         """
         Inputs:
@@ -1125,18 +973,9 @@ class BaseTransformer(object):
             Dictionary with following keys
                 'COUNTY_BOARD_DIST'
         """
-        col_list = ['COUNTY_BOARD_DIST']
+        raise NotImplementedError('Must implement extract_county_board_dist method')
 
-        if all(col in self.col_map for col in col_list):
-            return dict(
-                (c, input_dict.get(self.col_map[c], None)) for c in col_list
-            )
-        else:
-            raise NotImplementedError(
-                'Must implement extract_county_board_dist method'
-                ' or include {} in col_map'.format(', '.join(col_list))
-            )
-
+    @check_col_map(['SCHOOL_BOARD_DIST'])
     def extract_school_board_dist(self, input_dict):
         """
         Inputs:
@@ -1145,14 +984,4 @@ class BaseTransformer(object):
             Dictionary with following keys
                 'SCHOOL_BOARD_DIST'
         """
-        col_list = ['SCHOOL_BOARD_DIST']
-
-        if all(col in self.col_map for col in col_list):
-            return dict(
-                (c, input_dict.get(self.col_map[c], None)) for c in col_list
-            )
-        else:
-            raise NotImplementedError(
-                'Must implement extract_school_board_dist method'
-                ' or include {} in col_map'.format(', '.join(col_list))
-            )
+        raise NotImplementedError('Must implement extract_school_board_dist method')
