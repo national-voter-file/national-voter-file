@@ -53,4 +53,5 @@ We haven't started on this yet. It's coming soon!
 ## This sounds awesome! How can I help?
 
 * We chat on Slack. [Join us!](https://nationalvoterfileslackin.herokuapp.com/)
+* Get a local development environment using Docker, [Docker setup instructions](docker/README.md)
 * Take a look at our [newcomer issues](https://github.com/national-voter-file/national-voter-file/projects/1) to see where you can help.
