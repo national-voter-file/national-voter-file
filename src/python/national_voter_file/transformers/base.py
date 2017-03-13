@@ -1,3 +1,4 @@
+import os
 import csv
 import datetime
 from collections import defaultdict
@@ -6,7 +7,6 @@ import zipfile
 from functools import wraps
 
 import usaddress
-import os
 
 DATA_DIR = os.path.join(os.path.abspath(os.getcwd()), 'data')
 
@@ -53,6 +53,7 @@ class BasePreparer(object):
 
     sep = ','
     default_file = 'input.csv'
+    state_name = ''
 
     def __init__(self, input_path, state_path=None, state_module=None,
                  transformer=None, history=False):
@@ -65,8 +66,6 @@ class BasePreparer(object):
             self.state_path = self.state_name
         if state_module:
             self.default_file = state_module.default_file
-        else:
-            self.default_file = default_file
         self.history = history
         filename = self.default_file
 
@@ -95,7 +94,7 @@ class BasePreparer(object):
         #TODO: we have to be smarter here about whether we're being passed a file
         # or whether we should hunt down for a particular filename
         # based on what each state spits out
-        if mode=='r' and isinstance(path_or_handle, zipfile.ZipExtFile):
+        if mode == 'r' and isinstance(path_or_handle, zipfile.ZipExtFile):
             # see pa.py for an example of needing zipfile support
             return TextIOWrapper(path_or_handle,
                                  encoding='utf8',
@@ -387,30 +386,40 @@ class BaseTransformer(object):
             parts so we have to glue it back together for the mailing address fields
         """
         if('MAIL_CITY' not in orig_dict):
-            if(orig_dict['STREET_NAME'] ):
-                copied_addr =  {
-                        'MAIL_ADDRESS_LINE1': self.construct_val(orig_dict, [
-                            'ADDRESS_NUMBER_PREFIX', 'ADDRESS_NUMBER', 'ADDRESS_NUMBER_SUFFIX',
-                            'STREET_NAME_PRE_DIRECTIONAL','STREET_NAME_PRE_MODIFIER', 'STREET_NAME_PRE_TYPE',
+            if(orig_dict['STREET_NAME']):
+                copied_addr = {
+                    'MAIL_ADDRESS_LINE1': self.construct_val(
+                        orig_dict,
+                        [
+                            'ADDRESS_NUMBER_PREFIX',
+                            'ADDRESS_NUMBER',
+                            'ADDRESS_NUMBER_SUFFIX',
+                            'STREET_NAME_PRE_DIRECTIONAL',
+                            'STREET_NAME_PRE_MODIFIER',
+                            'STREET_NAME_PRE_TYPE',
                             'STREET_NAME',
-                            'STREET_NAME_POST_DIRECTIONAL','STREET_NAME_POST_MODIFIER', 'STREET_NAME_POST_TYPE'
-                        ]),
-
-                        'MAIL_ADDRESS_LINE2': self.construct_val(orig_dict, [
-                            'OCCUPANCY_TYPE', 'OCCUPANCY_IDENTIFIER']),
-                        'MAIL_CITY': orig_dict['PLACE_NAME'],
-                        'MAIL_STATE': orig_dict['STATE_NAME'],
-                        'MAIL_ZIP_CODE': orig_dict['ZIP_CODE'],
-                        'MAIL_COUNTRY': "USA"
+                            'STREET_NAME_POST_DIRECTIONAL',
+                            'STREET_NAME_POST_MODIFIER',
+                            'STREET_NAME_POST_TYPE'
+                        ]
+                    ),
+                    'MAIL_ADDRESS_LINE2': self.construct_val(
+                        orig_dict,
+                        ['OCCUPANCY_TYPE', 'OCCUPANCY_IDENTIFIER']
+                    ),
+                    'MAIL_CITY': orig_dict['PLACE_NAME'],
+                    'MAIL_STATE': orig_dict['STATE_NAME'],
+                    'MAIL_ZIP_CODE': orig_dict['ZIP_CODE'],
+                    'MAIL_COUNTRY': "USA"
                 }
             else:
                 copied_addr = {
-                    'MAIL_ADDRESS_LINE1':orig_dict['RAW_ADDR1'],
-                    'MAIL_ADDRESS_LINE2':orig_dict['RAW_ADDR2'],
-                        'MAIL_CITY': orig_dict['RAW_CITY'],
-                        'MAIL_STATE': orig_dict['STATE_NAME'],
-                        'MAIL_ZIP_CODE': orig_dict['RAW_ZIP'],
-                        'MAIL_COUNTRY': "USA"
+                    'MAIL_ADDRESS_LINE1': orig_dict['RAW_ADDR1'],
+                    'MAIL_ADDRESS_LINE2': orig_dict['RAW_ADDR2'],
+                    'MAIL_CITY': orig_dict['RAW_CITY'],
+                    'MAIL_STATE': orig_dict['STATE_NAME'],
+                    'MAIL_ZIP_CODE': orig_dict['RAW_ZIP'],
+                    'MAIL_COUNTRY': 'USA'
                 }
             orig_dict.update(copied_addr)
         return orig_dict
@@ -425,32 +434,32 @@ class BaseTransformer(object):
 
     def constructEmptyResidentialAddress(self):
         return {
-                'ADDRESS_NUMBER':None,
-                'ADDRESS_NUMBER_PREFIX':None,
-                'ADDRESS_NUMBER_SUFFIX':None,
-                'BUILDING_NAME':None,
-                'CORNER_OF':None,
-                'INTERSECTION_SEPARATOR':None,
-                'LANDMARK_NAME':None,
-                'NOT_ADDRESS':None,
-                'OCCUPANCY_TYPE':None,
-                'OCCUPANCY_IDENTIFIER':None,
-                'PLACE_NAME':None,
-                'STATE_NAME':None,
-                'STREET_NAME':None,
-                'STREET_NAME_PRE_DIRECTIONAL':None,
-                'STREET_NAME_PRE_MODIFIER':None,
-                'STREET_NAME_PRE_TYPE':None,
-                'STREET_NAME_POST_DIRECTIONAL':None,
-                'STREET_NAME_POST_MODIFIER':None,
-                'STREET_NAME_POST_TYPE':None,
-                'SUBADDRESS_IDENTIFIER':None,
-                'SUBADDRESS_TYPE':None,
-                'USPS_BOX_GROUP_ID':None,
-                'USPS_BOX_GROUP_TYPE':None,
-                'USPS_BOX_ID':None,
-                'USPS_BOX_TYPE':None,
-                'ZIP_CODE':None
+            'ADDRESS_NUMBER': None,
+            'ADDRESS_NUMBER_PREFIX': None,
+            'ADDRESS_NUMBER_SUFFIX': None,
+            'BUILDING_NAME': None,
+            'CORNER_OF': None,
+            'INTERSECTION_SEPARATOR': None,
+            'LANDMARK_NAME': None,
+            'NOT_ADDRESS': None,
+            'OCCUPANCY_TYPE': None,
+            'OCCUPANCY_IDENTIFIER': None,
+            'PLACE_NAME': None,
+            'STATE_NAME': None,
+            'STREET_NAME': None,
+            'STREET_NAME_PRE_DIRECTIONAL': None,
+            'STREET_NAME_PRE_MODIFIER': None,
+            'STREET_NAME_PRE_TYPE': None,
+            'STREET_NAME_POST_DIRECTIONAL': None,
+            'STREET_NAME_POST_MODIFIER': None,
+            'STREET_NAME_POST_TYPE': None,
+            'SUBADDRESS_IDENTIFIER': None,
+            'SUBADDRESS_TYPE': None,
+            'USPS_BOX_GROUP_ID': None,
+            'USPS_BOX_GROUP_TYPE': None,
+            'USPS_BOX_ID': None,
+            'USPS_BOX_TYPE': None,
+            'ZIP_CODE': None
         }
 
     #### Output validation methods #############################################
@@ -492,7 +501,7 @@ class BaseTransformer(object):
         type_errors = []
         for colname, value in output_dict.items():
             # Strip strings, if empty strings set type to None
-            if type(value) == str:
+            if isinstance(value, str):
                 output_dict[colname] = value.strip()
                 value_type = str if len(value.strip()) > 0 else type(None)
             else:
@@ -796,20 +805,7 @@ class BaseTransformer(object):
                 'USPS_BOX_TYPE'
                 'ZIP_CODE'
         """
-        raise NotImplementedError(
-            'Must implement extract_registration_address method'
-        )
-        # columns to create address, in order
-        address_components = []
-        # create address string for usaddress.tag
-        address_str = ' '.join([
-            input_dict[x] for x in address_components if input_dict[x] is not None
-        ])
-        # use the usaddress_tag method to handle errors
-        usaddress_dict = self.usaddress_tag(address_str)
-        # use the convert_usaddress_dict to get correct column names
-        # and fill in missing values
-        return self.convert_usaddress_dict(usaddress_dict)
+        raise NotImplementedError('Must implement extract_registration_address method')
 
     @check_col_map(['COUNTYCODE'])
     def extract_county_code(self, input_dict):
@@ -839,22 +835,7 @@ class BaseTransformer(object):
                 'MAIL_ZIP_CODE'
                 'MAIL_COUNTRY'
         """
-        raise NotImplementedError(
-            'Must implement extract_mailing_address method'
-        )
-        mail_str = ' '.join([x for x in columns])
-        usaddress_dict, usaddress_type = self.usaddress_tag(mail_str)
-        return {
-            'MAIL_ADDRESS_LINE1': self.construct_mail_address_1(
-                usaddress_dict,
-                usaddress_type,
-            ),
-            'MAIL_ADDRESS_LINE2': self.construct_mail_address_2(usaddress_dict),
-            'MAIL_CITY': input_dict['MAIL_CITY'],
-            'MAIL_ZIP_CODE': input_dict['MAIL_ZIP'],
-            'MAIL_STATE': input_dict['MAIL_STATE'],
-            'MAIL_COUNTRY': input_dict['MAIL_COUNTRY'],
-        }
+        raise NotImplementedError('Must implement extract_mailing_address method')
 
     #### Political methods #####################################################
 

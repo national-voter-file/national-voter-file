@@ -60,9 +60,9 @@ class CsvOutput(object):
                         )
                     writer.writerow(output_dict)
                 except Exception as err:
-                        print("Exception processing row")
-                        print(input_dict)
-                        raise err
+                    print("Exception processing row")
+                    print(input_dict)
+                    raise err
 
     open = BasePreparer.open
 
@@ -71,7 +71,7 @@ def main():
     args = parser.parse_args()
     states = args.states.split(',')
     state_mods = load_states(states)
-    for i,s in enumerate(state_mods):
+    for i, s in enumerate(state_mods):
         state = states[i]
         input_path = args.input_path
         output_path = args.output_path
