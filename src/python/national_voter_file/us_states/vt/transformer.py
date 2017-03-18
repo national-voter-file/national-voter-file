@@ -19,8 +19,8 @@ class StatePreparer(BasePreparer):
     state_name = 'Vermont' # Name of state with no spaces. Use CamelCase
     sep = '|' # The character used to delimit records
 
-    def __init__(self, input_path, *args):
-        super(StatePreparer, self).__init__(input_path, *args)
+    def __init__(self, input_path, *args, **kwargs):
+        super(StatePreparer, self).__init__(input_path, *args, **kwargs)
 
         if not self.transformer:
             self.transformer = StateTransformer()
