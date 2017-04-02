@@ -122,7 +122,8 @@
   <order>
   <hop> <from>Get Variables</from><to>Lookup report date key</to><enabled>Y</enabled> </hop>
   <hop> <from>Lookup report date key</from><to>Text file input</to><enabled>Y</enabled> </hop>
-  <hop> <from>Text file input</from><to>Voter Lookup&#x2f;Update</to><enabled>Y</enabled> </hop>
+  <hop> <from>Text file input</from><to>Strings cut</to><enabled>Y</enabled> </hop>
+  <hop> <from>Strings cut</from><to>Voter Lookup&#x2f;Update</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Get Variables</name>
@@ -1310,23 +1311,38 @@
           <to>VALID_TO</to>
         </date>
         <field>
+          <name>ABSENTEE_TYPE</name>
+          <lookup>ABSTENTEE_TYPE</lookup>
+          <update>Insert</update>
+        </field>
+        <field>
+          <name>BIRTH_STATE</name>
+          <lookup>BIRTH_STATE</lookup>
+          <update>Insert</update>
+        </field>
+        <field>
+          <name>RACE</name>
+          <lookup>RACE</lookup>
+          <update>Insert</update>
+        </field>
+        <field>
+          <name>BIRTHDATE</name>
+          <lookup>birthdate</lookup>
+          <update>Insert</update>
+        </field>
+        <field>
           <name>COUNTY_VOTER_REF</name>
           <lookup>county_voter_ref</lookup>
           <update>Insert</update>
         </field>
         <field>
-          <name>REGISTRATION_DATE</name>
-          <lookup>registration_date</lookup>
-          <update>Insert</update>
-        </field>
-        <field>
-          <name>REGISTRATION_STATUS</name>
-          <lookup>registration_status</lookup>
-          <update>Insert</update>
-        </field>
-        <field>
           <name>FIRST_NAME</name>
           <lookup>first_name</lookup>
+          <update>Insert</update>
+        </field>
+        <field>
+          <name>GENDER</name>
+          <lookup>gender</lookup>
           <update>Insert</update>
         </field>
         <field>
@@ -1345,13 +1361,33 @@
           <update>Insert</update>
         </field>
         <field>
-          <name>BIRTHDATE</name>
-          <lookup>birthdate</lookup>
+          <name>REGISTRATION_DATE</name>
+          <lookup>registration_date</lookup>
           <update>Insert</update>
         </field>
         <field>
-          <name>GENDER</name>
-          <lookup>gender</lookup>
+          <name>REGISTRATION_STATUS</name>
+          <lookup>registration_status</lookup>
+          <update>Insert</update>
+        </field>
+        <field>
+          <name>EMAIL</name>
+          <lookup>EMAIL</lookup>
+          <update>Insert</update>
+        </field>
+        <field>
+          <name>PHONE</name>
+          <lookup>PHONE</lookup>
+          <update>Insert</update>
+        </field>
+        <field>
+          <name>DO_NOT_CALL_STATUS</name>
+          <lookup>DO_NOT_CALL_STATUS</lookup>
+          <update>Insert</update>
+        </field>
+        <field>
+          <name>LANGUAGE_CHOICE</name>
+          <lookup>LANGUAGE_CHOICE</lookup>
           <update>Insert</update>
         </field>
         <return>
@@ -1372,7 +1408,124 @@
       <start_date_field_name/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>400</xloc>
+      <xloc>544</xloc>
+      <yloc>176</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Strings cut</name>
+    <type>StringCut</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>STATE_VOTER_REF</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>20</cut_to>
+      </field>
+      <field>
+        <in_stream_name>COUNTY_VOTER_REF</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>20</cut_to>
+      </field>
+      <field>
+        <in_stream_name>TITLE</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>5</cut_to>
+      </field>
+      <field>
+        <in_stream_name>FIRST_NAME</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>50</cut_to>
+      </field>
+      <field>
+        <in_stream_name>LAST_NAME</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>50</cut_to>
+      </field>
+      <field>
+        <in_stream_name>MIDDLE_NAME</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>50</cut_to>
+      </field>
+      <field>
+        <in_stream_name>NAME_SUFFIX</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>10</cut_to>
+      </field>
+      <field>
+        <in_stream_name>GENDER</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>1</cut_to>
+      </field>
+      <field>
+        <in_stream_name>RACE</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>1</cut_to>
+      </field>
+      <field>
+        <in_stream_name>BIRTH_STATE</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>2</cut_to>
+      </field>
+      <field>
+        <in_stream_name>REGISTRATION_STATUS</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>15</cut_to>
+      </field>
+      <field>
+        <in_stream_name>ABSENTEE_TYPE</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>1</cut_to>
+      </field>
+      <field>
+        <in_stream_name>EMAIL</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>50</cut_to>
+      </field>
+      <field>
+        <in_stream_name>PHONE</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>15</cut_to>
+      </field>
+      <field>
+        <in_stream_name>DO_NOT_CALL_STATUS</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>1</cut_to>
+      </field>
+      <field>
+        <in_stream_name>LANGUAGE_CHOICE</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>3</cut_to>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>384</xloc>
       <yloc>176</yloc>
       <draw>Y</draw>
       </GUI>

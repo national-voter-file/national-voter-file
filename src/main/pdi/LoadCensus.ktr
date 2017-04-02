@@ -16,7 +16,7 @@
         </parameter>
         <parameter>
             <name>filterState</name>
-            <default_value>WA</default_value>
+            <default_value>FL</default_value>
             <description>State to filter off of</description>
         </parameter>
         <parameter>
@@ -1804,7 +1804,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1232</xloc>
-      <yloc>240</yloc>
+      <yloc>208</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1913,7 +1913,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>9</length>
+        <length>8</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -1943,8 +1943,8 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>19</length>
-        <precision>17</precision>
+        <length>18</length>
+        <precision>16</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
@@ -1973,7 +1973,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>8</length>
+        <length>9</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -2168,7 +2168,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>7</length>
+        <length>8</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -2333,7 +2333,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>8</length>
+        <length>9</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -2528,7 +2528,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>7</length>
+        <length>8</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -2783,7 +2783,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>6</length>
+        <length>5</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -2858,7 +2858,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>8</length>
+        <length>9</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -2873,7 +2873,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>8</length>
+        <length>9</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -3083,7 +3083,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>7</length>
+        <length>8</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -3158,7 +3158,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -3278,7 +3278,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>7</length>
+        <length>8</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -3323,7 +3323,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -3368,7 +3368,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>8</length>
+        <length>9</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -3413,7 +3413,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>7</length>
+        <length>8</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -3443,7 +3443,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>7</length>
+        <length>8</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -3728,7 +3728,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>8</length>
+        <length>9</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -3803,7 +3803,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -3938,7 +3938,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -4043,7 +4043,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -4148,7 +4148,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -4253,7 +4253,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -4343,7 +4343,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -4358,7 +4358,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -4448,7 +4448,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -5018,7 +5018,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>8</length>
+        <length>9</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -5228,7 +5228,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -5333,7 +5333,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -5618,7 +5618,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>7</length>
+        <length>8</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -5633,7 +5633,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -5693,7 +5693,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>4</length>
+        <length>5</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -5738,7 +5738,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -5798,7 +5798,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>3</length>
+        <length>4</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -5963,7 +5963,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -6233,7 +6233,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>7</length>
+        <length>8</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -6293,7 +6293,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>7</length>
+        <length>8</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -6413,7 +6413,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>6</length>
+        <length>7</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -6458,7 +6458,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>7</length>
+        <length>8</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -6473,7 +6473,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>7</length>
+        <length>8</length>
         <precision>1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -6578,22 +6578,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>6</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>FUNCSTAT</name>
-        <type>String</type>
-        <format/>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif>-</nullif>
-        <ifnull/>
-        <position>-1</position>
-        <length>0</length>
+        <length>11</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
@@ -6638,23 +6623,8 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>19</length>
+        <length>18</length>
         <precision>14</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-      </field>
-      <field>
-        <name>LSAD</name>
-        <type>String</type>
-        <format/>
-        <currency>&#x24;</currency>
-        <decimal>.</decimal>
-        <group>,</group>
-        <nullif>-</nullif>
-        <ifnull/>
-        <position>-1</position>
-        <length>0</length>
-        <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
       </field>
@@ -6668,7 +6638,7 @@
         <nullif>-</nullif>
         <ifnull/>
         <position>-1</position>
-        <length>19</length>
+        <length>25</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
         <repeat>N</repeat>
