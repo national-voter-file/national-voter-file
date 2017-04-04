@@ -101,7 +101,8 @@
   </connection>
   <order>
   <hop> <from>Text file input</from><to>Add constants</to><enabled>Y</enabled> </hop>
-  <hop> <from>Add constants</from><to>Combination lookup&#x2f;update</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add constants</from><to>Value Mapper</to><enabled>Y</enabled> </hop>
+  <hop> <from>Value Mapper</from><to>Combination lookup&#x2f;update</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Text file input</name>
@@ -279,7 +280,7 @@
       <cache_size>9999</cache_size>
       <replace>N</replace>
       <preloadCache>N</preloadCache>
-      <crc>N</crc>
+      <crc>Y</crc>
       <crcfield>hashcode</crcfield>
       <fields>
         <key>
@@ -304,7 +305,7 @@
       <last_update_field/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>512</xloc>
+      <xloc>704</xloc>
       <yloc>144</yloc>
       <draw>Y</draw>
       </GUI>
@@ -338,6 +339,46 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>320</xloc>
+      <yloc>144</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Value Mapper</name>
+    <type>ValueMapper</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <field_to_use>ElectionType</field_to_use>
+    <target_field/>
+    <non_match_default>Other</non_match_default>
+    <fields>
+      <field>
+        <source_value>PRI</source_value>
+        <target_value>Primary</target_value>
+      </field>
+      <field>
+        <source_value>OTH</source_value>
+        <target_value>Other</target_value>
+      </field>
+      <field>
+        <source_value>GEN</source_value>
+        <target_value>General </target_value>
+      </field>
+      <field>
+        <source_value>PPP</source_value>
+        <target_value>Presidential Preference Primary</target_value>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>480</xloc>
       <yloc>144</yloc>
       <draw>Y</draw>
       </GUI>

@@ -6,8 +6,24 @@
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
+    <trans_status>0</trans_status>
     <directory>&#x2f;</directory>
     <parameters>
+        <parameter>
+            <name>reportDate</name>
+            <default_value>2017-03-7</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>reportFileDir</name>
+            <default_value>C&#x3a;&#x5c;dev&#x5c;GitHub&#x5c;national-voter-file&#x5c;national-voter-file&#x5c;data&#x5c;Florida&#x5c;20170307_VoterHistory</default_value>
+            <description/>
+        </parameter>
+        <parameter>
+            <name>reporterKey</name>
+            <default_value>4</default_value>
+            <description/>
+        </parameter>
     </parameters>
     <log>
 <trans-log-table><connection/>
@@ -69,7 +85,7 @@
   <created_date>2017&#x2f;04&#x2f;01 19&#x3a;21&#x3a;31.512</created_date>
   <modified_user>-</modified_user>
   <modified_date>2017&#x2f;04&#x2f;01 19&#x3a;21&#x3a;31.512</modified_date>
-    <key_for_session_key/>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA&#x3d;</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -79,7 +95,7 @@
     <server/>
     <type>POSTGRESQL</type>
     <access>JNDI</access>
-    <database>ProdVoter</database>
+    <database>Voter</database>
     <port>1521</port>
     <username/>
     <password>Encrypted </password>
@@ -99,10 +115,179 @@
     </attributes>
   </connection>
   <order>
-  <hop> <from>Text file input</from><to>User Defined Java Expression</to><enabled>Y</enabled> </hop>
-  <hop> <from>User Defined Java Expression</from><to>Database lookup</to><enabled>Y</enabled> </hop>
-  <hop> <from>Database lookup</from><to>Table output</to><enabled>Y</enabled> </hop>
+  <hop> <from>Add constants</from><to>Map Election Type</to><enabled>Y</enabled> </hop>
+  <hop> <from>Format State Voter Ref</from><to>Lookup Election</to><enabled>Y</enabled> </hop>
+  <hop> <from>Text file input</from><to>Add constants</to><enabled>Y</enabled> </hop>
+  <hop> <from>Lookup Voter</from><to>Table output</to><enabled>Y</enabled> </hop>
+  <hop> <from>Map Election Type</from><to>Map Voting Method</to><enabled>Y</enabled> </hop>
+  <hop> <from>Map Voting Method</from><to>Format State Voter Ref</to><enabled>Y</enabled> </hop>
+  <hop> <from>Select values</from><to>Text file input</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Variables</from><to>Lookup report date key</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get File Names</from><to>Get Variables</to><enabled>Y</enabled> </hop>
+  <hop> <from>Lookup report date key</from><to>Select values</to><enabled>Y</enabled> </hop>
+  <hop> <from>Lookup Election</from><to>Lookup County 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Lookup County 2</from><to>Lookup Voter</to><enabled>Y</enabled> </hop>
   </order>
+  <step>
+    <name>Format State Voter Ref</name>
+    <type>Janino</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+       <formula><field_name>StateVoterID</field_name>
+<formula_string>&#x22;FL&#x22;&#x2b;RawVoterID</formula_string>
+<value_type>String</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<replace_field/>
+</formula>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>560</xloc>
+      <yloc>416</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Lookup Election</name>
+    <type>CombinationLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+      <schema/>
+      <table>election_dim</table>
+      <connection>Voter</connection>
+      <commit>1</commit>
+      <cache_size>9999</cache_size>
+      <replace>N</replace>
+      <preloadCache>N</preloadCache>
+      <crc>Y</crc>
+      <crcfield>hashcode</crcfield>
+      <fields>
+        <key>
+          <name>STATE</name>
+          <lookup>STATE</lookup>
+        </key>
+        <key>
+          <name>ElectionType</name>
+          <lookup>election_type</lookup>
+        </key>
+        <key>
+          <name>ElectionDate</name>
+          <lookup>election_date</lookup>
+        </key>
+        <return>
+          <name>election_id</name>
+          <creation_method>autoinc</creation_method>
+          <use_autoinc>Y</use_autoinc>
+        </return>
+      </fields>
+      <sequence/>
+      <last_update_field/>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>752</xloc>
+      <yloc>416</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Add constants</name>
+    <type>Constant</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>STATE</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>FL</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>jurisdictionType</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif>county</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>368</xloc>
+      <yloc>288</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Map Election Type</name>
+    <type>ValueMapper</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <field_to_use>ElectionType</field_to_use>
+    <target_field/>
+    <non_match_default>Other</non_match_default>
+    <fields>
+      <field>
+        <source_value>PRI</source_value>
+        <target_value>Primary</target_value>
+      </field>
+      <field>
+        <source_value>OTH</source_value>
+        <target_value>Other</target_value>
+      </field>
+      <field>
+        <source_value>GEN</source_value>
+        <target_value>General </target_value>
+      </field>
+      <field>
+        <source_value>PPP</source_value>
+        <target_value>Presidential Preference Primary</target_value>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>368</xloc>
+      <yloc>416</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
   <step>
     <name>Text file input</name>
     <type>TextFileInput</type>
@@ -114,10 +299,10 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <accept_filenames>N</accept_filenames>
-    <passing_through_fields>N</passing_through_fields>
-    <accept_field/>
-    <accept_stepname/>
+    <accept_filenames>Y</accept_filenames>
+    <passing_through_fields>Y</passing_through_fields>
+    <accept_field>filename</accept_field>
+    <accept_stepname>Select values</accept_stepname>
     <separator>	</separator>
     <enclosure>&#x22;</enclosure>
     <enclosure_breaks>N</enclosure_breaks>
@@ -141,8 +326,8 @@
     <encoding/>
     <add_to_result_filenames>Y</add_to_result_filenames>
     <file>
-      <name>C&#x3a;&#x5c;dev&#x5c;GitHub&#x5c;national-voter-file&#x5c;national-voter-file&#x5c;data&#x5c;Florida&#x5c;20170307_VoterHistory&#x5c;BAK_H_20170307.txt</name>
-      <filemask/>
+      <name>C&#x3a;&#x5c;dev&#x5c;GitHub&#x5c;national-voter-file&#x5c;national-voter-file&#x5c;data&#x5c;Florida&#x5c;20170307_VoterHistory</name>
+      <filemask>.&#x2a;&#x5c;.txt</filemask>
       <exclude_filemask/>
       <file_required>N</file_required>
       <include_subfolders>N</include_subfolders>
@@ -255,40 +440,14 @@
     <sizeFieldName/>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>304</xloc>
-      <yloc>208</yloc>
+      <xloc>368</xloc>
+      <yloc>160</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>User Defined Java Expression</name>
-    <type>Janino</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-       <formula><field_name>StateVoterID</field_name>
-<formula_string>&#x22;FL&#x22;&#x2b;RawVoterID</formula_string>
-<value_type>String</value_type>
-<value_length>-1</value_length>
-<value_precision>-1</value_precision>
-<replace_field/>
-</formula>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>480</xloc>
-      <yloc>96</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Database lookup</name>
+    <name>Lookup Voter</name>
     <type>DBLookup</type>
     <description/>
     <distribute>Y</distribute>
@@ -301,12 +460,12 @@
     <connection>Voter</connection>
     <cache>Y</cache>
     <cache_load_all>N</cache_load_all>
-    <cache_size>1000</cache_size>
+    <cache_size>500</cache_size>
     <lookup>
       <schema/>
       <table>voter_dim</table>
       <orderby/>
-      <fail_on_multiple>Y</fail_on_multiple>
+      <fail_on_multiple>N</fail_on_multiple>
       <eat_row_on_failure>N</eat_row_on_failure>
       <key>
         <name>StateVoterID</name>
@@ -314,17 +473,29 @@
         <condition>&#x3d;</condition>
         <name2/>
       </key>
+      <key>
+        <name>ElectionDate</name>
+        <field>valid_from</field>
+        <condition>&#x3c;&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>ElectionDate</name>
+        <field>valid_to</field>
+        <condition>&#x3e;</condition>
+        <name2/>
+      </key>
       <value>
         <name>voter_id</name>
-        <rename>VOTER_KEY</rename>
+        <rename>voter_id</rename>
         <default/>
-        <type>Integer</type>
+        <type>None</type>
       </value>
     </lookup>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>576</xloc>
-      <yloc>208</yloc>
+      <xloc>1168</xloc>
+      <yloc>416</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -342,7 +513,7 @@
            </partitioning>
     <connection>Voter</connection>
     <schema/>
-    <table>vote_fact</table>
+    <table>VOTE_FACT</table>
     <commit>1000</commit>
     <truncate>N</truncate>
     <ignore_errors>N</ignore_errors>
@@ -358,11 +529,319 @@
     <return_keys>N</return_keys>
     <return_field/>
     <fields>
+        <field>
+          <column_name>voter_key</column_name>
+          <stream_name>voter_id</stream_name>
+        </field>
+        <field>
+          <column_name>election_key</column_name>
+          <stream_name>election_id</stream_name>
+        </field>
+        <field>
+          <column_name>county_key</column_name>
+          <stream_name>county_key</stream_name>
+        </field>
+        <field>
+          <column_name>reporter_key</column_name>
+          <stream_name>reporterKey</stream_name>
+        </field>
+        <field>
+          <column_name>report_date_key</column_name>
+          <stream_name>date_key</stream_name>
+        </field>
+        <field>
+          <column_name>voting_method</column_name>
+          <stream_name>VotingMethod</stream_name>
+        </field>
     </fields>
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>880</xloc>
-      <yloc>208</yloc>
+      <xloc>1344</xloc>
+      <yloc>416</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get File Names</name>
+    <type>GetFileNames</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <filter>
+      <filterfiletype>all_files</filterfiletype>
+    </filter>
+    <doNotFailIfNoFile>N</doNotFailIfNoFile>
+    <rownum>N</rownum>
+    <isaddresult>Y</isaddresult>
+    <filefield>N</filefield>
+    <rownum_field/>
+    <filename_Field/>
+    <wildcard_Field/>
+    <exclude_wildcard_Field/>
+    <dynamic_include_subfolders>N</dynamic_include_subfolders>
+    <limit>0</limit>
+    <file>
+      <name>&#x24;&#x7b;reportFileDir&#x7d;</name>
+      <filemask>.&#x2a;&#x5c;.txt</filemask>
+      <exclude_filemask/>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>48</xloc>
+      <yloc>16</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Map Voting Method</name>
+    <type>ValueMapper</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <field_to_use>HistoryCode</field_to_use>
+    <target_field>VotingMethod</target_field>
+    <non_match_default/>
+    <fields>
+      <field>
+        <source_value>A</source_value>
+        <target_value>Absentee</target_value>
+      </field>
+      <field>
+        <source_value>B</source_value>
+        <target_value>Absentee Ballot Not Counted</target_value>
+      </field>
+      <field>
+        <source_value>E</source_value>
+        <target_value>Early</target_value>
+      </field>
+      <field>
+        <source_value>N</source_value>
+        <target_value>Did Not Vote</target_value>
+      </field>
+      <field>
+        <source_value>P</source_value>
+        <target_value>Provisional Ballot Not Counted</target_value>
+      </field>
+      <field>
+        <source_value>Y</source_value>
+        <target_value>Polls</target_value>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>368</xloc>
+      <yloc>528</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Select values</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>        <select_unspecified>N</select_unspecified>
+      <remove>        <name>short_filename</name>
+      </remove>      <remove>        <name>path</name>
+      </remove>      <remove>        <name>type</name>
+      </remove>      <remove>        <name>exists</name>
+      </remove>      <remove>        <name>ishidden</name>
+      </remove>      <remove>        <name>isreadable</name>
+      </remove>      <remove>        <name>iswriteable</name>
+      </remove>      <remove>        <name>lastmodifiedtime</name>
+      </remove>      <remove>        <name>size</name>
+      </remove>      <remove>        <name>extension</name>
+      </remove>      <remove>        <name>uri</name>
+      </remove>      <remove>        <name>rooturi</name>
+      </remove>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>544</xloc>
+      <yloc>32</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get Variables</name>
+    <type>GetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>reportDate</name>
+        <variable>&#x24;&#x7b;reportDate&#x7d;</variable>
+        <type>Date</type>
+        <format>yyyy-MM-dd</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>reporterKey</name>
+        <variable>&#x24;&#x7b;reporterKey&#x7d;</variable>
+        <type>Integer</type>
+        <format>&#x23;</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>reportFileDir</name>
+        <variable>&#x24;&#x7b;reportFileDir&#x7d;</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>208</xloc>
+      <yloc>16</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Lookup report date key</name>
+    <type>DBLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Voter</connection>
+    <cache>Y</cache>
+    <cache_load_all>N</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema/>
+      <table>date_dim</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>Y</eat_row_on_failure>
+      <key>
+        <name>reportDate</name>
+        <field>date_value</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>date_id</name>
+        <rename>date_key</rename>
+        <default/>
+        <type>None</type>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>352</xloc>
+      <yloc>16</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Lookup County 2</name>
+    <type>DBLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>Voter</connection>
+    <cache>Y</cache>
+    <cache_load_all>Y</cache_load_all>
+    <cache_size>0</cache_size>
+    <lookup>
+      <schema/>
+      <table>jurisdiction_dim</table>
+      <orderby/>
+      <fail_on_multiple>N</fail_on_multiple>
+      <eat_row_on_failure>N</eat_row_on_failure>
+      <key>
+        <name>CountyCode</name>
+        <field>voter_file_code</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>STATE</name>
+        <field>state_name</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>jurisdictionType</name>
+        <field>entity_type</field>
+        <condition>&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>ElectionDate</name>
+        <field>valid_from</field>
+        <condition>&#x3c;&#x3d;</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>ElectionDate</name>
+        <field>valid_to</field>
+        <condition>&#x3e;</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>jurisdiction_id</name>
+        <rename>county_key</rename>
+        <default/>
+        <type>None</type>
+      </value>
+    </lookup>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>960</xloc>
+      <yloc>416</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

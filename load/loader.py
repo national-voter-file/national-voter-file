@@ -10,7 +10,7 @@ parser = argparse.ArgumentParser(description='Run data loading for NVF')
 parser.add_argument(
     'task',
     type=str,
-    choices=['dates', 'dimdata', 'precincts', 'transform', 'load'],
+    choices=['dates', 'dimdata', 'precincts', 'transform', 'load', 'history'],
     help='Designates what action will be run by the loader'
 )
 
@@ -89,6 +89,21 @@ def load_precincts(opts, conf):
 
     subprocess.call(subprocess_args)
 
+def load_voting_history(opts, conf):
+
+    # Just making manual exceptions for now
+    if opts.state == 'fl':
+        fl_path = os.path.dirname(os.path.join(conf['data_path'],
+                                  opts.input_file))
+        subprocess.call([
+        os.path.join(conf['pdi_path'], 'pan.sh'),
+        '-file', os.path.join(conf['nvf_path'], 'src', 'main', 'pdi', 'fl','SaveVotingHistory.ktr'),
+        '-param:reportDate={}'.format(opts.report_date),
+        '-param:reportFileDir={}'.format(opts.input_file),
+        '-param:reporterKey={}'.format(opts.reporter_key)
+    ])
+
+
 
 # Assuming will have access to run directly, won't have to use subprocess
 def run_transformer(opts, conf):
@@ -156,6 +171,8 @@ if __name__ == '__main__':
         run_transformer(opts, conf)
     elif opts.task == 'precincts':
         load_precincts(opts, conf)
+    elif opts.task == 'history':
+        load_voting_history(opts,conf)
     elif opts.task == 'dimdata':
         load_dimensional_data(opts, conf)
     elif opts.task == 'dates':
