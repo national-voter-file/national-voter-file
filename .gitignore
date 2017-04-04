@@ -9,5 +9,4 @@ national_voter_file.egg-info
 dist
 build
 nohup.out
-docker/grasshopper-loader
 .python-version

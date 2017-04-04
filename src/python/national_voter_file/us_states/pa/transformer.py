@@ -42,8 +42,8 @@ class StatePreparer(BasePreparer):
     # and Party at the time of vote. These match the 40 elections listed
     # in the corresponding "Election Map" county file.
 
-    def __init__(self, input_path, *args):
-        super(StatePreparer, self).__init__(input_path, *args)
+    def __init__(self, input_path, *args, **kwargs):
+        super(StatePreparer, self).__init__(input_path, *args, **kwargs)
 
         self.voter_zip_file_path = self.input_path
 
