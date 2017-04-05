@@ -138,8 +138,6 @@
   <order>
   <hop> <from>Get Variables</from><to>Lookup report date key</to><enabled>Y</enabled> </hop>
   <hop> <from>Lookup report date key</from><to>Text file input</to><enabled>Y</enabled> </hop>
-  <hop> <from>Lookup or Add Housholds Raw Data</from><to>Write to log</to><enabled>Y</enabled> </hop>
-  <hop> <from>Lookup or Add Mailing Addrs</from><to>Write Mailing Address Errors</to><enabled>Y</enabled> </hop>
   <hop> <from>Update Enriched Fields</from><to>Lookup or Add Mailing Addrs</to><enabled>Y</enabled> </hop>
   <hop> <from>Lookup or Add Housholds Raw Data</from><to>Don&#x27;t Overwrite manual addresses</to><enabled>Y</enabled> </hop>
   <hop> <from>Don&#x27;t Overwrite manual addresses</from><to>Update Enriched Fields</to><enabled>Y</enabled> </hop>
@@ -388,6 +386,219 @@
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>208</xloc>
       <yloc>48</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Strings cut</name>
+    <type>StringCut</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>ADDRESS_NUMBER</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>15</cut_to>
+      </field>
+      <field>
+        <in_stream_name>ADDRESS_NUMBER_PREFIX</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>2</cut_to>
+      </field>
+      <field>
+        <in_stream_name>ADDRESS_NUMBER_SUFFIX</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>5</cut_to>
+      </field>
+      <field>
+        <in_stream_name>MAIL_ADDRESS_LINE1</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>110</cut_to>
+      </field>
+      <field>
+        <in_stream_name>MAIL_ADDRESS_LINE1</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>110</cut_to>
+      </field>
+      <field>
+        <in_stream_name>MAIL_ADDRESS_LINE2</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>50</cut_to>
+      </field>
+      <field>
+        <in_stream_name>MAIL_ADDRESS_LINE2</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>50</cut_to>
+      </field>
+      <field>
+        <in_stream_name>MAIL_CITY</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>50</cut_to>
+      </field>
+      <field>
+        <in_stream_name>MAIL_COUNTRY</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>30</cut_to>
+      </field>
+      <field>
+        <in_stream_name>MAIL_STATE</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>20</cut_to>
+      </field>
+      <field>
+        <in_stream_name>MAIL_ZIP_CODE</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>10</cut_to>
+      </field>
+      <field>
+        <in_stream_name>OCCUPANCY_IDENTIFIER</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>20</cut_to>
+      </field>
+      <field>
+        <in_stream_name>OCCUPANCY_TYPE</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>20</cut_to>
+      </field>
+      <field>
+        <in_stream_name>PLACE_NAME</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>50</cut_to>
+      </field>
+      <field>
+        <in_stream_name>RAW_ADDR1</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>110</cut_to>
+      </field>
+      <field>
+        <in_stream_name>RAW_ADDR2</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>50</cut_to>
+      </field>
+      <field>
+        <in_stream_name>RAW_CITY</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>50</cut_to>
+      </field>
+      <field>
+        <in_stream_name>STREET_NAME</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>50</cut_to>
+      </field>
+      <field>
+        <in_stream_name>STREET_NAME_POST_DIRECTIONAL</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>10</cut_to>
+      </field>
+      <field>
+        <in_stream_name>STREET_NAME_POST_MODIFIER</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>10</cut_to>
+      </field>
+      <field>
+        <in_stream_name>STREET_NAME_POST_TYPE</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>10</cut_to>
+      </field>
+      <field>
+        <in_stream_name>STREET_NAME_PRE_DIRECTIONAL</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>10</cut_to>
+      </field>
+      <field>
+        <in_stream_name>STREET_NAME_PRE_MODIFIER</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>10</cut_to>
+      </field>
+      <field>
+        <in_stream_name>STREET_NAME_PRE_TYPE</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>10</cut_to>
+      </field>
+      <field>
+        <in_stream_name>SUBADDRESS_IDENTIFIER</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>10</cut_to>
+      </field>
+      <field>
+        <in_stream_name>SUBADDRESS_TYPE</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>10</cut_to>
+      </field>
+      <field>
+        <in_stream_name>USPS_BOX_GROUP_ID</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>10</cut_to>
+      </field>
+      <field>
+        <in_stream_name>USPS_BOX_GROUP_TYPE</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>2</cut_to>
+      </field>
+      <field>
+        <in_stream_name>USPS_BOX_ID</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>10</cut_to>
+      </field>
+      <field>
+        <in_stream_name>USPS_BOX_TYPE</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>10</cut_to>
+      </field>
+      <field>
+        <in_stream_name>ZIP_CODE</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>10</cut_to>
+      </field>
+      <field>
+        <in_stream_name>INTERSECTION_SEPARATOR</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>5</cut_to>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>384</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1598,233 +1809,10 @@
       </GUI>
     </step>
 
-  <step>
-    <name>Write Mailing Address Errors</name>
-    <type>WriteToLog</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <loglevel>log_level_basic</loglevel>
-      <displayHeader>Y</displayHeader>
-      <limitRows>N</limitRows>
-      <limitRowsNumber>10</limitRowsNumber>
-      <logmessage>Mailing Address Error</logmessage>
-    <fields>
-      <field>
-        <name>reportDate</name>
-        </field>
-      <field>
-        <name>reportFile</name>
-        </field>
-      <field>
-        <name>reporterKey</name>
-        </field>
-      <field>
-        <name>date_key</name>
-        </field>
-      <field>
-        <name>MAIL_ADDRESS_LINE1</name>
-        </field>
-      <field>
-        <name>MAIL_ADDRESS_LINE2</name>
-        </field>
-      <field>
-        <name>MAIL_CITY</name>
-        </field>
-      <field>
-        <name>MAIL_STATE</name>
-        </field>
-      <field>
-        <name>MAIL_ZIP_CODE</name>
-        </field>
-      <field>
-        <name>MAIL_COUNTRY</name>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>1328</xloc>
-      <yloc>320</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Write to log</name>
-    <type>WriteToLog</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-      <loglevel>log_level_basic</loglevel>
-      <displayHeader>Y</displayHeader>
-      <limitRows>N</limitRows>
-      <limitRowsNumber>0</limitRowsNumber>
-      <logmessage/>
-    <fields>
-      <field>
-        <name>reportDate</name>
-        </field>
-      <field>
-        <name>reportFile</name>
-        </field>
-      <field>
-        <name>reporterKey</name>
-        </field>
-      <field>
-        <name>date_key</name>
-        </field>
-      <field>
-        <name>ADDRESS_NUMBER</name>
-        </field>
-      <field>
-        <name>ADDRESS_NUMBER_PREFIX</name>
-        </field>
-      <field>
-        <name>ADDRESS_NUMBER_SUFFIX</name>
-        </field>
-      <field>
-        <name>BUILDING_NAME</name>
-        </field>
-      <field>
-        <name>CORNER_OF</name>
-        </field>
-      <field>
-        <name>INTERSECTION_SEPARATOR</name>
-        </field>
-      <field>
-        <name>LANDMARK_NAME</name>
-        </field>
-      <field>
-        <name>NOT_ADDRESS</name>
-        </field>
-      <field>
-        <name>OCCUPANCY_TYPE</name>
-        </field>
-      <field>
-        <name>OCCUPANCY_IDENTIFIER</name>
-        </field>
-      <field>
-        <name>PLACE_NAME</name>
-        </field>
-      <field>
-        <name>STATE_NAME</name>
-        </field>
-      <field>
-        <name>STREET_NAME</name>
-        </field>
-      <field>
-        <name>STREET_NAME_PRE_DIRECTIONAL</name>
-        </field>
-      <field>
-        <name>STREET_NAME_PRE_MODIFIER</name>
-        </field>
-      <field>
-        <name>STREET_NAME_PRE_TYPE</name>
-        </field>
-      <field>
-        <name>STREET_NAME_POST_DIRECTIONAL</name>
-        </field>
-      <field>
-        <name>STREET_NAME_POST_MODIFIER</name>
-        </field>
-      <field>
-        <name>STREET_NAME_POST_TYPE</name>
-        </field>
-      <field>
-        <name>SUBADDRESS_IDENTIFIER</name>
-        </field>
-      <field>
-        <name>SUBADDRESS_TYPE</name>
-        </field>
-      <field>
-        <name>ZIP_CODE</name>
-        </field>
-      <field>
-        <name>STATE_VOTER_REF</name>
-        </field>
-      <field>
-        <name>COUNTY_VOTER_REF</name>
-        </field>
-      </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>560</xloc>
-      <yloc>336</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
-  <step>
-    <name>Strings cut</name>
-    <type>StringCut</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-         <partitioning>
-           <method>none</method>
-           <schema_name/>
-           </partitioning>
-    <fields>
-      <field>
-        <in_stream_name>MAIL_ADDRESS_LINE1</in_stream_name>
-        <out_stream_name/>
-        <cut_from/>
-        <cut_to>110</cut_to>
-      </field>
-      <field>
-        <in_stream_name>MAIL_ADDRESS_LINE2</in_stream_name>
-        <out_stream_name/>
-        <cut_from/>
-        <cut_to>50</cut_to>
-      </field>
-      <field>
-        <in_stream_name>RAW_ADDR1</in_stream_name>
-        <out_stream_name/>
-        <cut_from/>
-        <cut_to>110</cut_to>
-      </field>
-      <field>
-        <in_stream_name>RAW_ADDR2</in_stream_name>
-        <out_stream_name/>
-        <cut_from/>
-        <cut_to>50</cut_to>
-      </field>
-      <field>
-        <in_stream_name>MAIL_CITY</in_stream_name>
-        <out_stream_name/>
-        <cut_from/>
-        <cut_to>50</cut_to>
-      </field>
-      <field>
-        <in_stream_name>RAW_CITY</in_stream_name>
-        <out_stream_name/>
-        <cut_from/>
-        <cut_to>50</cut_to>
-      </field>
-    </fields>
-     <cluster_schema/>
- <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
-      <xloc>384</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-      </GUI>
-    </step>
-
   <step_error_handling>
       <error>
         <source_step>Lookup or Add Housholds Raw Data</source_step>
-        <target_step>Write to log</target_step>
+        <target_step/>
         <is_enabled>Y</is_enabled>
         <nr_valuename/>
         <descriptions_valuename/>
@@ -1836,7 +1824,7 @@
       </error>
       <error>
         <source_step>Lookup or Add Mailing Addrs</source_step>
-        <target_step>Write Mailing Address Errors</target_step>
+        <target_step/>
         <is_enabled>Y</is_enabled>
         <nr_valuename/>
         <descriptions_valuename/>
