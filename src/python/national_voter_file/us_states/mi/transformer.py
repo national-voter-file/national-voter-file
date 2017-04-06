@@ -109,15 +109,9 @@ class StatePreparer(BasePreparer):
         if self.input_path.endswith('.zip'):
             z = zipfile.ZipFile(self.input_path)
             if self.history:
-                return self.yield_history_rows(os.path.join(
-                    os.path.dirname(self.input_path),
-                    'entire_state_h.lst'
-                ))
+                return self.yield_history_rows('entire_state_h.lst', zip_obj=z)
             else:
-                return self.yield_zip_rows(os.path.join(
-                    os.path.dirname(self.input_path),
-                    'entire_state_v.lst'
-                ))
+                return self.yield_zip_rows(z, 'entire_state_v.lst')
         else:
             return self.yield_rows(self.input_path)
 
@@ -126,38 +120,44 @@ class StatePreparer(BasePreparer):
         for row in reader:
             yield row
 
-    def yield_zip_rows(self, input_path):
-        with open(input_path, 'r') as infile:
+    def yield_zip_rows(self, zip_obj, input_path):
+        with zip_obj.open(input_path, 'r') as infile:
             for row in infile:
                 # Use column indices to split rows, yield dict in row format
                 yield dict(zip(
                     self.transformer.input_fields,
-                    [row[slice(*c)].strip() for c in self.col_indices]
+                    [row[slice(*c)].strip().decode('utf-8') for c in self.col_indices]
                 ))
 
-    def yield_history_rows(self, input_path, election_code_file=None):
+    def yield_history_rows(self, input_path, zip_obj=None, elec_code_file=None):
         # For processing zip and raw .lst files
-        if not election_code_file:
-            election_code_file = os.path.join(
-                os.path.dirname(input_path),
-                'electionscd.lst'
-            )
+        if not elec_code_file:
+            elec_code_file = os.path.join(DATA_DIR, 'Michigan', 'electionscd.lst')
         # Create mapping of election codes and values
         ec_map = {}
         ei = self.election_indices
-        with open(election_code_file, 'r') as ec:
+        with open(elec_code_file, 'r') as ec:
             for row in ec:
-                ec_map[row[slice(*ei[0])]] = {
+                ec_map[row[slice(*ei[0])].strip()] = {
                     'ELECTION_DATE': row[slice(*ei[1])],
                     'ELECTION_TYPE': row[slice(*ei[2])]
                 }
 
-        with open(input_path, 'r') as infile:
+        if zip_obj is not None:
+            open_f = zip_obj.open
+        else:
+            open_f = open
+
+        with open_f(input_path, 'r') as infile:
             for row in infile:
-                hist_dict = dict(zip(
-                    self.history_fields,
-                    [row[slice(*c)].strip() for c in self.history_indices]
-                ))
+                row_vals = []
+                for c in self.history_indices:
+                    val = row[slice(*c)].strip()
+                    if hasattr(val, 'decode'):
+                        val = val.decode('utf-8')
+                    row_vals.append(val)
+
+                hist_dict = dict(zip(self.history_fields, row_vals))
                 el_vals = ec_map[hist_dict.pop('ELECTION_CODE')]
                 hist_dict.update(el_vals)
                 yield hist_dict
