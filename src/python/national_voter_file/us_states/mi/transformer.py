@@ -2,7 +2,7 @@ import csv
 import os
 import re
 import sys
-import zipfile
+from zipfile import ZipFile
 from datetime import date
 
 from national_voter_file.transformers.base import (DATA_DIR,
@@ -107,13 +107,14 @@ class StatePreparer(BasePreparer):
         processing vote history, otherwise use simple row generator
         """
         if self.input_path.endswith('.zip'):
-            z = zipfile.ZipFile(self.input_path)
-            if self.history:
-                return self.yield_history_rows('entire_state_h.lst', zip_obj=z)
-            else:
-                return self.yield_zip_rows(z, 'entire_state_v.lst')
+            z = ZipFile(self.input_path)
         else:
             return self.yield_rows(self.input_path)
+
+        if self.history:
+            return self.yield_history_rows('entire_state_h.lst', zip_obj=z)
+        else:
+            return self.yield_zip_rows(z, 'entire_state_v.lst')
 
     def yield_rows(self, input_path):
         reader = csv.DictReader(self.open(input_path), delimiter=self.sep)
