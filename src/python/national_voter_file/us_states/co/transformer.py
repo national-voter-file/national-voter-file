@@ -2,6 +2,9 @@ import csv
 import os
 import re
 import sys
+import gzip
+from zipfile import ZipFile
+from io import BytesIO, TextIOWrapper
 from datetime import date
 from national_voter_file.transformers.base import (DATA_DIR,
                                                    BasePreparer,
@@ -16,7 +19,10 @@ default_file = 'co_sample.csv'
 class StatePreparer(BasePreparer):
     state_path = 'co'
     state_name = 'Colorado'
-    sep = ","
+    sep = ','
+
+    voter_pre = 'Registered_Voters_List'
+    hist_pre = 'Master_Voting_History_List'
 
     def __init__(self, input_path, *args, **kwargs):
         super(StatePreparer, self).__init__(input_path, *args, **kwargs)
@@ -25,9 +31,42 @@ class StatePreparer(BasePreparer):
             self.transformer = StateTransformer()
 
     def process(self):
+        if self.input_path.endswith('.zip'):
+            z = ZipFile(self.input_path)
+        else:
+            return self.yield_rows()
+
+        if self.history:
+            return self.yield_hist_rows(z)
+        else:
+            return self.yield_zip_rows(z)
+
+    def yield_rows(self):
         reader = self.dict_iterator(self.open(self.input_path))
         for row in reader:
             yield row
+
+    def yield_zip_rows(self, zip_obj):
+        prefix = self.voter_pre
+        file_list = [f for f in zip_obj.namelist() if prefix in f and f.endswith('.zip')]
+
+        for f in file_list:
+            z_data = ZipFile(BytesIO(zip_obj.read(f)))
+            for z_f in z_data.namelist():
+                with z_data.open(z_f) as zdf:
+                    reader = csv.DictReader(TextIOWrapper(zdf), delimiter=self.sep)
+                    for row in reader:
+                        yield row
+
+    def yield_hist_rows(self, zip_obj):
+        prefix = self.hist_pre
+        file_list = [f for f in zip_obj.namelist() if prefix in f and f.endswith('.gz')]
+
+        for f in file_list:
+            with gzip.open(BytesIO(zip_obj.read(f)), 'rt') as gf:
+                reader = csv.DictReader(gf, delimiter=self.sep)
+                for row in reader:
+                    yield row
 
 
 class StateTransformer(BaseTransformer):
@@ -113,16 +152,22 @@ class StateTransformer(BaseTransformer):
 
         usaddress_dict = self.usaddress_tag(address_str)[0]
 
-        converted_addr = self.convert_usaddress_dict(usaddress_dict)
-
-        converted_addr.update({
-            'PLACE_NAME': input_dict['RESIDENTIAL_CITY'],
-            'STATE_NAME': input_dict['RESIDENTIAL_STATE'],
-            'ZIP_CODE': input_dict['RESIDENTIAL_ZIP_CODE'],
-            'VALIDATION_STATUS': '2'
-        })
-
-        converted_addr.update(raw_dict)
+        if usaddress_dict:
+            converted_addr = self.convert_usaddress_dict(usaddress_dict)
+            converted_addr.update(raw_dict)
+            converted_addr.update({
+                'PLACE_NAME': input_dict['RESIDENTIAL_CITY'],
+                'STATE_NAME': input_dict['RESIDENTIAL_STATE'],
+                'ZIP_CODE': input_dict['RESIDENTIAL_ZIP_CODE'],
+                'VALIDATION_STATUS': '2'
+            })
+        else:
+            converted_addr = self.constructEmptyResidentialAddress()
+            converted_addr.update(raw_dict)
+            converted_addr.update({
+                'STATE_NAME': input_dict['RESIDENTIAL_STATE'],
+                'VALIDATION_STATUS': '1'
+            })
 
         return converted_addr
 
@@ -181,6 +226,16 @@ class StateTransformer(BaseTransformer):
     def extract_lower_house_dist(self, input_dict):
         # Starts with 12 chars of "State House ", skipping
         return {'LOWER_HOUSE_DIST': input_dict['STATE_HOUSE'][12:]}
+
+    hist_state_voter_ref = extract_state_voter_ref
+
+    def hist_election_info(self, input_dict):
+        return {
+            'ELECTION_DATE': self.convert_date(input_dict['ELECTION_DATE']),
+            'ELECTION_TYPE': input_dict['ELECTION_TYPE'],
+            # TODO: Need to standardize vote method codes
+            'VOTE_METHOD': input_dict['VOTING_METHOD']
+        }
 
 
 if __name__ == '__main__':
