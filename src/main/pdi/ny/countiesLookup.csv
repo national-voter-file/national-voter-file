@@ -1,13 +1,13 @@
 COUNTY NAME,COUNTY CODE,COUNTYFP,CLASSFP
-Albany,1,1,H1
-Allegany,2,3,H1
-Bronx,3,5,H6
-Broome,4,7,H1
-Cattaraugus,5,9,H1
-Cayuga,6,11,H1
-Chautauqua,7,13,H1
-Chemung,8,15,H1
-Chenango,9,17,H1
+Albany,01,1,H1
+Allegany,02,3,H1
+Bronx,03,5,H6
+Broome,04,7,H1
+Cattaraugus,05,9,H1
+Cayuga,06,11,H1
+Chautauqua,07,13,H1
+Chemung,08,15,H1
+Chenango,09,17,H1
 Clinton,10,19,H1
 Columbia,11,21,H1
 Cortland,12,23,H1

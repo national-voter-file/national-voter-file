@@ -16,7 +16,7 @@
         </parameter>
         <parameter>
             <name>reportFile</name>
-            <default_value>C&#x3a;&#x5c;dev&#x5c;GitHub&#x5c;national-voter-file&#x5c;national-voter-file&#x5c;data&#x5c;Washington&#x5c;201605_VRDB_ExtractSAMPLE_OUT.csv</default_value>
+            <default_value>C&#x3a;&#x5c;dev&#x5c;GitHub&#x5c;national-voter-file&#x5c;national-voter-file&#x5c;data&#x5c;NewYork&#x5c;AllNYSVoters_20170306&#x5c;ny_output.csv</default_value>
             <description/>
         </parameter>
         <parameter>
@@ -129,8 +129,13 @@
   <hop> <from>Add entity types</from><to>Lookup report date key</to><enabled>Y</enabled> </hop>
   <hop> <from>Text file input</from><to>Strings cut</to><enabled>Y</enabled> </hop>
   <hop> <from>Strings cut</from><to>Lookup State</to><enabled>Y</enabled> </hop>
-  <hop> <from>Lookup Party</from><to>Strings cut 2</to><enabled>Y</enabled> </hop>
   <hop> <from>Strings cut 2</from><to>Voter Lookup&#x2f;Update</to><enabled>Y</enabled> </hop>
+  <hop> <from>Handle Inactive Voters</from><to>Calculator</to><enabled>Y</enabled> </hop>
+  <hop> <from>Calculator</from><to>Select values 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Select values 2</from><to>Select values</to><enabled>Y</enabled> </hop>
+  <hop> <from>Lookup Party</from><to>Handle Inactive Voters</to><enabled>Y</enabled> </hop>
+  <hop> <from>Handle Inactive Voters</from><to>Strings cut 2</to><enabled>Y</enabled> </hop>
+  <hop> <from>Select values</from><to>Strings cut 2</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add entity types</name>
@@ -442,7 +447,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1328</xloc>
-      <yloc>576</yloc>
+      <yloc>832</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -749,7 +754,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1568</xloc>
-      <yloc>576</yloc>
+      <yloc>832</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -1010,6 +1015,123 @@
     </step>
 
   <step>
+    <name>Strings cut 2</name>
+    <type>StringCut</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <in_stream_name>STATE_VOTER_REF</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>31</cut_to>
+      </field>
+      <field>
+        <in_stream_name>COUNTY_VOTER_REF</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>20</cut_to>
+      </field>
+      <field>
+        <in_stream_name>TITLE</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>5</cut_to>
+      </field>
+      <field>
+        <in_stream_name>FIRST_NAME</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>50</cut_to>
+      </field>
+      <field>
+        <in_stream_name>LAST_NAME</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>50</cut_to>
+      </field>
+      <field>
+        <in_stream_name>MIDDLE_NAME</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>50</cut_to>
+      </field>
+      <field>
+        <in_stream_name>NAME_SUFFIX</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>10</cut_to>
+      </field>
+      <field>
+        <in_stream_name>GENDER</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>1</cut_to>
+      </field>
+      <field>
+        <in_stream_name>RACE</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>1</cut_to>
+      </field>
+      <field>
+        <in_stream_name>BIRTH_STATE</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>2</cut_to>
+      </field>
+      <field>
+        <in_stream_name>REGISTRATION_STATUS</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>15</cut_to>
+      </field>
+      <field>
+        <in_stream_name>ABSENTEE_TYPE</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>1</cut_to>
+      </field>
+      <field>
+        <in_stream_name>EMAIL</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>50</cut_to>
+      </field>
+      <field>
+        <in_stream_name>PHONE</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>15</cut_to>
+      </field>
+      <field>
+        <in_stream_name>DO_NOT_CALL_STATUS</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>1</cut_to>
+      </field>
+      <field>
+        <in_stream_name>LANGUAGE_CHOICE</in_stream_name>
+        <out_stream_name/>
+        <cut_from/>
+        <cut_to>3</cut_to>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1136</xloc>
+      <yloc>720</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
     <name>Table output</name>
     <type>TableOutput</type>
     <description/>
@@ -1094,7 +1216,7 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1744</xloc>
-      <yloc>576</yloc>
+      <yloc>832</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
@@ -2287,14 +2409,14 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1136</xloc>
-      <yloc>576</yloc>
+      <yloc>832</yloc>
       <draw>Y</draw>
       </GUI>
     </step>
 
   <step>
-    <name>Strings cut 2</name>
-    <type>StringCut</type>
+    <name>Handle Inactive Voters</name>
+    <type>SwitchCase</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -2303,108 +2425,436 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <fields>
-      <field>
-        <in_stream_name>STATE_VOTER_REF</in_stream_name>
-        <out_stream_name/>
-        <cut_from/>
-        <cut_to>20</cut_to>
-      </field>
-      <field>
-        <in_stream_name>COUNTY_VOTER_REF</in_stream_name>
-        <out_stream_name/>
-        <cut_from/>
-        <cut_to>20</cut_to>
-      </field>
-      <field>
-        <in_stream_name>TITLE</in_stream_name>
-        <out_stream_name/>
-        <cut_from/>
-        <cut_to>5</cut_to>
-      </field>
-      <field>
-        <in_stream_name>FIRST_NAME</in_stream_name>
-        <out_stream_name/>
-        <cut_from/>
-        <cut_to>50</cut_to>
-      </field>
-      <field>
-        <in_stream_name>LAST_NAME</in_stream_name>
-        <out_stream_name/>
-        <cut_from/>
-        <cut_to>50</cut_to>
-      </field>
-      <field>
-        <in_stream_name>MIDDLE_NAME</in_stream_name>
-        <out_stream_name/>
-        <cut_from/>
-        <cut_to>50</cut_to>
-      </field>
-      <field>
-        <in_stream_name>NAME_SUFFIX</in_stream_name>
-        <out_stream_name/>
-        <cut_from/>
-        <cut_to>10</cut_to>
-      </field>
-      <field>
-        <in_stream_name>GENDER</in_stream_name>
-        <out_stream_name/>
-        <cut_from/>
-        <cut_to>1</cut_to>
-      </field>
-      <field>
-        <in_stream_name>RACE</in_stream_name>
-        <out_stream_name/>
-        <cut_from/>
-        <cut_to>1</cut_to>
-      </field>
-      <field>
-        <in_stream_name>BIRTH_STATE</in_stream_name>
-        <out_stream_name/>
-        <cut_from/>
-        <cut_to>2</cut_to>
-      </field>
-      <field>
-        <in_stream_name>REGISTRATION_STATUS</in_stream_name>
-        <out_stream_name/>
-        <cut_from/>
-        <cut_to>15</cut_to>
-      </field>
-      <field>
-        <in_stream_name>ABSENTEE_TYPE</in_stream_name>
-        <out_stream_name/>
-        <cut_from/>
-        <cut_to>1</cut_to>
-      </field>
-      <field>
-        <in_stream_name>EMAIL</in_stream_name>
-        <out_stream_name/>
-        <cut_from/>
-        <cut_to>50</cut_to>
-      </field>
-      <field>
-        <in_stream_name>PHONE</in_stream_name>
-        <out_stream_name/>
-        <cut_from/>
-        <cut_to>15</cut_to>
-      </field>
-      <field>
-        <in_stream_name>DO_NOT_CALL_STATUS</in_stream_name>
-        <out_stream_name/>
-        <cut_from/>
-        <cut_to>1</cut_to>
-      </field>
-      <field>
-        <in_stream_name>LANGUAGE_CHOICE</in_stream_name>
-        <out_stream_name/>
-        <cut_from/>
-        <cut_to>3</cut_to>
-      </field>
-    </fields>
-     <cluster_schema/>
+<fieldname>REGISTRATION_STATUS</fieldname>
+<use_contains>N</use_contains>
+<case_value_type>String</case_value_type>
+<case_value_format/>
+<case_value_decimal/>
+<case_value_group/>
+<default_target_step>Calculator</default_target_step>
+<cases><case><value>ACTIVE</value>
+<target_step>Strings cut 2</target_step>
+</case></cases>     <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>1136</xloc>
-      <yloc>464</yloc>
+      <yloc>448</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Calculator</name>
+    <type>Calculator</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+       <calculation><field_name>appendVal</field_name>
+<calc_type>COPY_FIELD</calc_type>
+<field_a>BIRTHDATE</field_a>
+<field_b/>
+<field_c/>
+<value_type>String</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask>-yyyy-MM-dd</conversion_mask>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+       <calculation><field_name> STATE_VOTER_REF2</field_name>
+<calc_type>ADD</calc_type>
+<field_a>STATE_VOTER_REF</field_a>
+<field_b>appendVal</field_b>
+<field_c/>
+<value_type>String</value_type>
+<value_length>-1</value_length>
+<value_precision>-1</value_precision>
+<remove>N</remove>
+<conversion_mask/>
+<decimal_symbol/>
+<grouping_symbol/>
+<currency_symbol/>
+</calculation>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1360</xloc>
+      <yloc>320</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Select values</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>      <field>        <name>reportDate</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>reportFile</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>reporterKey</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>congress_entity</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>state_entity</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>upper_house_entity</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>county_entity</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>lower_house_entity</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>city_entity</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>date_key</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>ABSENTEE_TYPE</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>ADDRESS_NUMBER</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>ADDRESS_NUMBER_PREFIX</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>ADDRESS_NUMBER_SUFFIX</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>BIRTHDATE</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>BIRTHDATE_IS_ESTIMATE</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>BIRTH_STATE</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>BUILDING_NAME</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>CONGRESSIONAL_DIST</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>CORNER_OF</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>COUNTYCODE</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>COUNTY_BOARD_DIST</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>COUNTY_VOTER_REF</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>DO_NOT_CALL_STATUS</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>EMAIL</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>FIRST_NAME</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>GENDER</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>INTERSECTION_SEPARATOR</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>LANDMARK_NAME</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>LANGUAGE_CHOICE</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>LAST_NAME</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>LOWER_HOUSE_DIST</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>MAIL_ADDRESS_LINE1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>MAIL_ADDRESS_LINE2</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>MAIL_CITY</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>MAIL_COUNTRY</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>MAIL_STATE</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>MAIL_ZIP_CODE</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>MIDDLE_NAME</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>NAME_SUFFIX</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>NOT_ADDRESS</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>OCCUPANCY_IDENTIFIER</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>OCCUPANCY_TYPE</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>PARTY</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>PHONE</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>PLACE_NAME</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>PRECINCT</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>PRECINCT_SPLIT</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>RACE</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>RAW_ADDR1</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>RAW_ADDR2</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>RAW_CITY</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>RAW_ZIP</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>REGISTRATION_DATE</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>REGISTRATION_STATUS</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>SCHOOL_BOARD_DIST</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>STATE_NAME</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name> STATE_VOTER_REF2</name>
+        <rename>STATE_VOTER_REF</rename>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>STREET_NAME</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>STREET_NAME_POST_DIRECTIONAL</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>STREET_NAME_POST_MODIFIER</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>STREET_NAME_POST_TYPE</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>STREET_NAME_PRE_DIRECTIONAL</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>STREET_NAME_PRE_MODIFIER</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>STREET_NAME_PRE_TYPE</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>SUBADDRESS_IDENTIFIER</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>SUBADDRESS_TYPE</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>TITLE</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>UPPER_HOUSE_DIST</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>USPS_BOX_GROUP_ID</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>USPS_BOX_GROUP_TYPE</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>USPS_BOX_ID</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>USPS_BOX_TYPE</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>VALIDATION_STATUS</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>ZIP_CODE</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>state_key</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>county_key</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>congressional_dist_key</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>lower_house_dist_key</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>upper_house_dist_key</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>precinct_key</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>      <field>        <name>party_key</name>
+        <rename/>
+        <length>-2</length>
+        <precision>-2</precision>
+      </field>        <select_unspecified>N</select_unspecified>
+    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1616</xloc>
+      <yloc>320</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Select values 2</name>
+    <type>SelectValues</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>        <select_unspecified>N</select_unspecified>
+      <remove>        <name>STATE_VOTER_REF</name>
+      </remove>      <remove>        <name>appendVal</name>
+      </remove>    </fields>     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>1488</xloc>
+      <yloc>320</yloc>
       <draw>Y</draw>
       </GUI>
     </step>

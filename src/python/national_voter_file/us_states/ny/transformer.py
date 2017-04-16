@@ -273,7 +273,7 @@ class StateTransformer(BaseTransformer):
 
     def extract_precinct_split(self, input_dict):
         # There is no split, so copy the precinct
-        return {'PRECINCT_SPLIT': "%03d/%02d" % (int(input_dict['ED']), int(input_dict['AD']))}
+        return {'PRECINCT_SPLIT': "%02d/%03d/%02d" % (int(input_dict['COUNTYCODE']), int(input_dict['ED']), int(input_dict['AD']))}
 
 if __name__ == '__main__':
     preparer = StatePreparer(*sys.argv[1:])

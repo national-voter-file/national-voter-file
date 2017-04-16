@@ -93,8 +93,6 @@ def load_voting_history(opts, conf):
 
     # Just making manual exceptions for now
     if opts.state == 'fl':
-        fl_path = os.path.dirname(os.path.join(conf['data_path'],
-                                  opts.input_file))
         subprocess.call([
         os.path.join(conf['pdi_path'], 'pan.sh'),
         '-file', os.path.join(conf['nvf_path'], 'src', 'main', 'pdi', 'fl','SaveVotingHistory.ktr'),
@@ -102,7 +100,14 @@ def load_voting_history(opts, conf):
         '-param:reportFileDir={}'.format(opts.input_file),
         '-param:reporterKey={}'.format(opts.reporter_key)
     ])
-
+    elif opts.state == 'ny':
+        subprocess.call([
+        os.path.join(conf['pdi_path'], 'pan.sh'),
+        '-file', os.path.join(conf['nvf_path'], 'src', 'main', 'pdi', 'ny','SaveVotingHistory.ktr'),
+        '-param:reportDate={}'.format(opts.report_date),
+        '-param:reportFile  ={}'.format(opts.input_file),
+        '-param:reporterKey={}'.format(opts.reporter_key)
+    ])
 
 
 # Assuming will have access to run directly, won't have to use subprocess
