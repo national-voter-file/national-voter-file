@@ -168,7 +168,7 @@ if __name__ == '__main__':
     if opts.task != 'dates' and opts.state is None:
         raise Exception('--state is required for tasks other than "dates"')
 
-    opts.state = opts.state.lower() if opts.state   is not None else None
+    opts.state = opts.state.lower() if opts.state is not None else None
 
     if opts.task == 'load':
         load_data(opts, conf)
