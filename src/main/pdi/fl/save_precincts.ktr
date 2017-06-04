@@ -10,13 +10,13 @@
     <directory>&#x2f;</directory>
     <parameters>
         <parameter>
-            <name>countyFile</name>
-            <default_value>C&#x3a;&#x5c;dev&#x5c;GitHub&#x5c;national-voter-file&#x5c;national-voter-file&#x5c;data&#x5c;Florida&#x5c;counties.csv</default_value>
+            <name>reportDate</name>
+            <default_value>2016-08-31</default_value>
             <description/>
         </parameter>
         <parameter>
-            <name>reportInputDir</name>
-            <default_value>C&#x3a;&#x5c;dev&#x5c;GitHub&#x5c;national-voter-file&#x5c;national-voter-file&#x5c;data&#x5c;Florida&#x5c;20170307_VoterDetail</default_value>
+            <name>reportFile</name>
+            <default_value>C&#x3a;&#x5c;dev&#x5c;GitHub&#x5c;national-voter-file&#x5c;national-voter-file&#x5c;data&#x5c;NewYork&#x5c;AllNYSVoters_20170306&#x5c;AllNYSVoters_20170306.txt</default_value>
             <description/>
         </parameter>
     </parameters>
@@ -117,6 +117,7 @@
   <hop> <from>User Defined Java Expression</from><to>Dimension lookup&#x2f;update</to><enabled>Y</enabled> </hop>
   <hop> <from>Text file input</from><to>Add constants</to><enabled>Y</enabled> </hop>
   <hop> <from>Add constants</from><to>Stream lookup</to><enabled>Y</enabled> </hop>
+  <hop> <from>Get Variables</from><to>Text file input</to><enabled>Y</enabled> </hop>
   </order>
   <step>
     <name>Add constants</name>
@@ -162,7 +163,7 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <filename>&#x24;&#x7b;countyFile&#x7d;</filename>
+    <filename>&#x24;&#x7b;Internal.Transformation.Filename.Directory&#x7d;&#x5c;countiesLookup.csv</filename>
     <filename_field/>
     <rownum_field/>
     <include_filename>N</include_filename>
@@ -237,7 +238,7 @@
           <lookup>county_code</lookup>
         </key>
         <date>
-          <name/>
+          <name>reportDate</name>
           <from>valid_from</from>
           <to>valid_to</to>
         </date>
@@ -438,10 +439,10 @@
            <method>none</method>
            <schema_name/>
            </partitioning>
-    <accept_filenames>N</accept_filenames>
-    <passing_through_fields>N</passing_through_fields>
+    <accept_filenames>Y</accept_filenames>
+    <passing_through_fields>Y</passing_through_fields>
     <accept_field>reportFile</accept_field>
-    <accept_stepname/>
+    <accept_stepname>Get Variables</accept_stepname>
     <separator>	</separator>
     <enclosure>&#x22;</enclosure>
     <enclosure_breaks>N</enclosure_breaks>
@@ -1108,6 +1109,51 @@
      <cluster_schema/>
  <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
       <xloc>752</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>Get Variables</name>
+    <type>GetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <fields>
+      <field>
+        <name>reportDate</name>
+        <variable>&#x24;&#x7b;reportDate&#x7d;</variable>
+        <type>Date</type>
+        <format>yyyy-MM-dd</format>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>reportFile</name>
+        <variable>&#x24;&#x7b;reportFile&#x7d;</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>64</xloc>
       <yloc>160</yloc>
       <draw>Y</draw>
       </GUI>
