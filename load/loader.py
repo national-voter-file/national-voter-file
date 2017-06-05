@@ -51,22 +51,22 @@ parser.add_argument(
 
 # Docker setup for local dev
 def populate_date_dim(opts, conf):
-    subprocess.call([
+    subprocess.check_call([
         os.path.join(conf['pdi_path'], 'pan.sh'),
         '-file', os.path.join(conf['nvf_path'], 'src', 'main', 'pdi', 'populateDateDimension.ktr')
-     ])
+    ])
 
 
 def load_dimensional_data(opts, conf):
     dim_dir = os.path.join(conf['nvf_path'], 'dimensionaldata')
 
-    subprocess.call([
+    subprocess.check_call([
         os.path.join(conf['pdi_path'], 'pan.sh'),
         '-file', os.path.join(conf['nvf_path'], 'src', 'main', 'pdi', 'LoadCensus.ktr'),
         '-param:censusFile={}'.format(os.path.join(dim_dir, 'census.csv')),
         '-param:filterState={}'.format(opts.state.upper()),
         '-param:lookupFile={}'.format(os.path.join(dim_dir, 'countyLookup.csv'))
-     ])
+    ])
 
 
 # TODO: Need to figure out how to standardize, seems very different
@@ -87,13 +87,13 @@ def load_precincts(opts, conf):
             os.path.join(wa_path, 'state-wa-precincts.csv')
         ))
 
-    subprocess.call(subprocess_args)
+    subprocess.check_call(subprocess_args)
 
 def load_voting_history(opts, conf):
 
     # Just making manual exceptions for now
     if opts.state == 'fl':
-        subprocess.call([
+        subprocess.check_call([
         os.path.join(conf['pdi_path'], 'pan.sh'),
         '-file', os.path.join(conf['nvf_path'], 'src', 'main', 'pdi', 'fl','SaveVotingHistory.ktr'),
         '-param:reportDate={}'.format(opts.report_date),
@@ -101,7 +101,7 @@ def load_voting_history(opts, conf):
         '-param:reporterKey={}'.format(opts.reporter_key)
     ])
     elif opts.state == 'ny':
-        subprocess.call([
+        subprocess.check_call([
         os.path.join(conf['pdi_path'], 'pan.sh'),
         '-file', os.path.join(conf['nvf_path'], 'src', 'main', 'pdi', 'ny','SaveVotingHistory.ktr'),
         '-param:reportDate={}'.format(opts.report_date),
@@ -149,7 +149,7 @@ def load_data(opts, conf):
     else:
         opts.input_file = os.path.join(conf['data_path'], opts.input_file)
 
-    subprocess.call([
+    subprocess.check_call([
         os.path.join(conf['pdi_path'], 'kitchen.sh'),
         '-file', os.path.join(conf['nvf_path'], 'src', 'main', 'pdi', 'ProcessPreparedVoterFile.kjb'),
         '-param:reportDate={}'.format(opts.report_date),
@@ -177,7 +177,7 @@ if __name__ == '__main__':
     elif opts.task == 'precincts':
         load_precincts(opts, conf)
     elif opts.task == 'history':
-        load_voting_history(opts,conf)
+        load_voting_history(opts, conf)
     elif opts.task == 'dimdata':
         load_dimensional_data(opts, conf)
     elif opts.task == 'dates':
