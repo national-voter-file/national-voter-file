@@ -531,6 +531,18 @@
         <currency/>
         <decimal/>
         <group/>
+        <nullif>Florida</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+      <field>
+        <name>state_abbreviation</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
         <nullif>FL</nullif>
         <length>-1</length>
         <precision>-1</precision>
@@ -635,8 +647,8 @@
           <lookup>precinct_code</lookup>
         </key>
         <key>
-          <name>STATE_NAME</name>
-          <lookup>state_name</lookup>
+          <name>state_abbreviation</name>
+          <lookup>state_abbreviation</lookup>
         </key>
         <key>
           <name>County Code</name>
@@ -681,6 +693,11 @@
           <name>House District</name>
           <lookup>LOWER_HOUSE_DISTRICT</lookup>
           <update>Update</update>
+        </field>
+        <field>
+          <name>county_name</name>
+          <lookup>county_name</lookup>
+          <update>Insert</update>
         </field>
         <return>
           <name>precinct_id</name>
@@ -947,8 +964,8 @@
     <encoding/>
     <add_to_result_filenames>N</add_to_result_filenames>
     <file>
-      <name>&#x24;&#x7b;reportInputDir&#x7d;</name>
-      <filemask>.&#x2a;&#x5c;.txt</filemask>
+      <name/>
+      <filemask/>
       <exclude_filemask/>
       <file_required>N</file_required>
       <include_subfolders>N</include_subfolders>
