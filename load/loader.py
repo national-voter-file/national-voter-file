@@ -4,7 +4,6 @@ import subprocess
 import json
 from datetime import date
 
-
 parser = argparse.ArgumentParser(description='Run data loading for NVF')
 
 parser.add_argument(
@@ -48,9 +47,16 @@ parser.add_argument(
     help='If running load command, the key for the associated reporter'
 )
 
+parser.add_argument(
+    '--update_jndi',
+    action='store_true',
+    required=False,
+    help='Push a new copy of simple JNDI to Pentaho installation based on voter db connection info'
+)
+
 
 # Docker setup for local dev
-def populate_date_dim(opts, conf):
+def populate_date_dim(conf):
     subprocess.check_call([
         os.path.join(conf['pdi_path'], 'pan.sh'),
         '-file', os.path.join(conf['nvf_path'], 'src', 'main', 'pdi', 'populateDateDimension.ktr')
@@ -82,38 +88,37 @@ def load_precincts(opts, conf):
     # Just making manual exceptions for now
     if opts.state == 'wa':
         wa_path = os.path.dirname(os.path.join(conf['data_path'],
-                                  opts.input_file))
+                                               opts.input_file))
         subprocess_args.append('-param:ocdFile={}'.format(
             os.path.join(wa_path, 'state-wa-precincts.csv')
         ))
 
     subprocess.check_call(subprocess_args)
 
-def load_voting_history(opts, conf):
 
+def load_voting_history(opts, conf):
     # Just making manual exceptions for now
     if opts.state == 'fl':
         subprocess.check_call([
-        os.path.join(conf['pdi_path'], 'pan.sh'),
-        '-file', os.path.join(conf['nvf_path'], 'src', 'main', 'pdi', 'fl','SaveVotingHistory.ktr'),
-        '-param:reportDate={}'.format(opts.report_date),
-        '-param:reportFileDir={}'.format(opts.input_file),
-        '-param:reporterKey={}'.format(opts.reporter_key)
-    ])
+            os.path.join(conf['pdi_path'], 'pan.sh'),
+            '-file', os.path.join(conf['nvf_path'], 'src', 'main', 'pdi', 'fl','SaveVotingHistory.ktr'),
+            '-param:reportDate={}'.format(opts.report_date),
+            '-param:reportFileDir={}'.format(opts.input_file),
+            '-param:reporterKey={}'.format(opts.reporter_key)
+        ])
     elif opts.state == 'ny':
         subprocess.check_call([
-        os.path.join(conf['pdi_path'], 'pan.sh'),
-        '-file', os.path.join(conf['nvf_path'], 'src', 'main', 'pdi', 'ny','SaveVotingHistory.ktr'),
-        '-param:reportDate={}'.format(opts.report_date),
-        '-param:reportFile  ={}'.format(opts.input_file),
-        '-param:reporterKey={}'.format(opts.reporter_key)
-    ])
+            os.path.join(conf['pdi_path'], 'pan.sh'),
+            '-file', os.path.join(conf['nvf_path'], 'src', 'main', 'pdi', 'ny','SaveVotingHistory.ktr'),
+            '-param:reportDate={}'.format(opts.report_date),
+            '-param:reportFile  ={}'.format(opts.input_file),
+            '-param:reporterKey={}'.format(opts.reporter_key)
+        ])
 
 
 # Assuming will have access to run directly, won't have to use subprocess
 def run_transformer(opts, conf):
-    from national_voter_file.transformers.base import (BasePreparer,
-                                                       BaseTransformer)
+    from national_voter_file.transformers.base import (BasePreparer)
     from national_voter_file.us_states.all import load as load_states
 
     from national_voter_file.transformers.csv_transformer import CsvOutput
@@ -159,26 +164,49 @@ def load_data(opts, conf):
     ])
 
 
+# Create a jndi file inside the pentaho instalation that can be referenced as voter
+# The connection properties are taken from the config file associated with
+# this run.
+def create_simple_jndi(conf):
+    jndi_file = os.path.join(conf['pdi_path'], 'simple-jndi', 'jdbc.properties')
+
+    target = open(jndi_file, 'w')
+    target.truncate()
+    target.write('''
+Voter/type=javax.sql.DataSource
+Voter/driver=org.postgresql.Driver
+Voter/url=%s
+Voter/user=%s
+Voter/password=%s
+    ''' % (conf['db_url'], conf['db_username'], conf['db_password']))
+
+    target.close()
+
+
 if __name__ == '__main__':
-    opts = parser.parse_args()
+    run_opts = parser.parse_args()
 
-    with open(os.path.join(os.path.dirname(__file__), opts.configfile)) as f:
-        conf = json.load(f)
+    with open(os.path.join(os.path.dirname(__file__), run_opts.configfile)) as f:
+        run_conf = json.load(f)
 
-    if opts.task != 'dates' and opts.state is None:
+    if run_opts.update_jndi:
+        print('Updating pentaho jndi file with one generated from our configuration')
+        create_simple_jndi(run_conf)
+
+    if run_opts.task != 'dates' and run_opts.state is None:
         raise Exception('--state is required for tasks other than "dates"')
 
-    opts.state = opts.state.lower() if opts.state is not None else None
+    run_opts.state = run_opts.state.lower() if run_opts.state is not None else None
 
-    if opts.task == 'load':
-        load_data(opts, conf)
-    elif opts.task == 'transform':
-        run_transformer(opts, conf)
-    elif opts.task == 'precincts':
-        load_precincts(opts, conf)
-    elif opts.task == 'history':
-        load_voting_history(opts, conf)
-    elif opts.task == 'dimdata':
-        load_dimensional_data(opts, conf)
-    elif opts.task == 'dates':
-        populate_date_dim(opts, conf)
+    if run_opts.task == 'load':
+        load_data(run_opts, run_conf)
+    elif run_opts.task == 'transform':
+        run_transformer(run_opts, run_conf)
+    elif run_opts.task == 'precincts':
+        load_precincts(run_opts, run_conf)
+    elif run_opts.task == 'history':
+        load_voting_history(run_opts, run_conf)
+    elif run_opts.task == 'dimdata':
+        load_dimensional_data(run_opts, run_conf)
+    elif run_opts.task == 'dates':
+        populate_date_dim(run_conf)
