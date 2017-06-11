@@ -6,7 +6,7 @@ import re
 import collections
 from jsonmerge import merge
 
-API_URL="http://api.censusreporter.org/1.0/data/show/{release}?table_ids={table_ids}&geo_ids={geoids}"
+API_URL = "https://api.censusreporter.org/1.0/data/show/{release}?table_ids={table_ids}&geo_ids={geoids}"
 
 
 def _clean_list_arg(arg,default):
