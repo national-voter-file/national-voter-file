@@ -7050,7 +7050,7 @@
       </field>
       <field>
         <name>GEOID</name>
-        <type>Integer</type>
+        <type>String</type>
         <format>&#x23;</format>
         <currency>&#x24;</currency>
         <decimal>.</decimal>

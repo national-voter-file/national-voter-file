@@ -1,7 +1,7 @@
 # This gets all the census data, can be filted by level and state.
 # Should play with all the chunk sizes, to see how that affects speed.  I'm leaving a message in censusreporter_api.py for now that will alert you if the size gets too big and it does a json_merge.  json_merge is slow, we want to avoid those.
 import pandas as pd
-from censusreporter_api import *
+from .censusreporter_api import *
 import os
 from io import BytesIO
 import io
@@ -19,13 +19,13 @@ def getTractInfo(url, regex=''):
 
 
 
-BASE_URL = "http://www2.census.gov/geo/docs/maps-data/data/gazetteer/"
+BASE_URL = "https://www2.census.gov/geo/docs/maps-data/data/gazetteer/"
 YEAR = datetime.datetime.now().year
 GAZ_YEAR_URL = '{}{}_Gazetteer/'.format(BASE_URL, YEAR)
 
 # For easier Windows compatibility
 OUTPUT_DIR = os.path.join(
-    os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.getcwd())))),
+    os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.realpath(__file__)))))),
     'dimensionaldata'
 )
 if not os.path.exists(OUTPUT_DIR):
@@ -111,7 +111,7 @@ def get_combinedData(thePD=None, tables=None):
         if handledError in errorMsg:
             pattern = re.compile("^\s+|\s*,\s*|\s+$")
             geoList = pattern.split(errorMsg.partition(handledError)[2].replace(".", ""))
-            thePD = thePD[-thePD.index.isin(geoList)]
+            thePD = thePD[~thePD.index.isin(geoList)]
 
             #If everything was not valid, then we'll just return nothing
             if len(thePD) == 0:
@@ -158,7 +158,10 @@ def parse_voter_file_id(row):
     else:
         state_mult = 1000
 
-    voter_file_id = int(row['GEOID']) - (int(row['STATEFP']) * state_mult)
+    if all([a.isdigit() for a in str(row['GEOID']) + str(row['STATEFP'])]):
+        voter_file_id = int(row['GEOID']) - (int(row['STATEFP']) * state_mult)
+    else:
+        return '1'
 
     # Some states with 1 district return 0, return 1 for those
     if voter_file_id > 0:
@@ -284,7 +287,7 @@ if __name__ == '__main__':
     FILE_BASE_URL = GAZ_YEAR_URL + str(YEAR) + "_Gaz_"
     output_df = pd.DataFrame()
 
-    if types == 'ALL' or "COUNTY" in types:
+    if 'ALL' in types or "COUNTY" in types:
         county_df = get_census_data(
             'County',
             FILE_BASE_URL + 'counties_national.zip',
@@ -298,7 +301,7 @@ if __name__ == '__main__':
         )
         output_df = output_df.append(county_df)
 
-    if types == 'ALL' or "CONGRESS" in types:
+    if 'ALL' in types or "CONGRESS" in types:
         """
         Now we do congressional districts.  These are numbered, so we need to guess
         which one it is.  We'll start with the year and subtract 1789 (first congress)
@@ -332,7 +335,7 @@ if __name__ == '__main__':
         )
         output_df = pd.concat([output_df, congress_df])
 
-    if types == 'ALL' or "LOWER" in types:
+    if 'ALL' in types or "LOWER" in types:
         state_house_df = get_census_data(
             'Lower House',
             FILE_BASE_URL + "sldl_national.zip",
@@ -347,7 +350,7 @@ if __name__ == '__main__':
         )
         output_df = pd.concat([output_df, state_house_df])
 
-    if types == 'ALL' or "UPPER" in types:
+    if 'ALL' in types or "UPPER" in types:
         upper_house_df = get_census_data(
             'Upper House',
             FILE_BASE_URL + "sldu_national.zip",
@@ -365,7 +368,7 @@ if __name__ == '__main__':
     # School Districts: high school pattern is: 96000US0400450,
     # elementary school district pattern is: 95000US0400005
 
-    if types == 'ALL' or "CITY" in types:
+    if 'ALL' in types or "CITY" in types:
         city_base_url = GAZ_YEAR_URL + str(YEAR)
         city_df_list = []
         """
@@ -386,12 +389,12 @@ if __name__ == '__main__':
         city_df = pd.concat(city_df_list)
         output_df = pd.concat([output_df, city_df])
 
-    if types == 'ALL' or "STATE" in types:
+    if 'ALL' in types or "STATE" in types:
         state_df = get_state(state_list, STATE_CODES)
         state_df['NAME'] = state_df['USPS'].apply(lambda x: STATE_ABBREVS[x])
         output_df = pd.concat([output_df, state_df])
 
-    if types == 'ALL' or "TRACT" in types:
+    if 'ALL' in types or "TRACT" in types:
         tracts_df_list = []
         div_tract_df_list = []
         temp_tract_df_list = []
@@ -421,5 +424,8 @@ if __name__ == '__main__':
 
         tract_df = pd.concat(tracts_df_list)
         output_df = pd.concat([output_df, tract_df])
-
+    df_cols = output_df.columns.values.tolist()
+    for c in ['FUNCSTAT', 'LSAD', 'SHEETS', 'TYPE']:
+        if c in df_cols:
+            output_df.drop(c, axis=1, inplace=True)
     output_df.to_csv(os.path.join(OUTPUT_DIR, "census.csv"), index_label="FIPS", sep=',')
