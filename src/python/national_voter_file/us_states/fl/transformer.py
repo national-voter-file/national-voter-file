@@ -34,10 +34,9 @@ class StateTransformer(BaseTransformer):
     date_format = "%m/%d/%Y"
 
     col_type_dict = BaseTransformer.col_type_dict.copy()
-    col_type_dict['PRECINCT_SPLIT'] = set([str, type(None)])
 
     col_map = {
-        'PRECINCT_SPLIT': None
+
     }
 
     input_fields = [
@@ -333,10 +332,13 @@ class StateTransformer(BaseTransformer):
         return {'LOWER_HOUSE_DIST': input_dict['House District']}
 
     def extract_precinct(self, input_dict):
-        split = input_dict['Precinct Split'] if input_dict['Precinct Split'].strip() else input_dict['Precinct']
-
         return {
             'PRECINCT': input_dict['Precinct'],
+        }
+
+    def extract_precinct_split(self, input_dict):
+        split = input_dict['Precinct Split'] if input_dict['Precinct Split'].strip() else input_dict['Precinct']
+        return{
             'PRECINCT_SPLIT': split
         }
 
