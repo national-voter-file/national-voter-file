@@ -94,6 +94,7 @@ class StateTransformer(BaseTransformer):
         'PSL':'PSL',
         'REF':'REF',
         'REP':'REP',
+        'IND':'IPF',
         ' ':'UN',
         '':'UN'
     }

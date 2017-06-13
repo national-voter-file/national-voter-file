@@ -255,6 +255,7 @@ class BaseTransformer(object):
             'UNI', #National Unity
             'IND', #Independent Party of Delaware
             'IPU', #Independent Patriot Party of Utah
+            'IPF', #Independent Party of Florida
             'GPU', #Green Party of Utah (Desert Greens)
             'PCP', #Personal Choice Party
             'ROL', #Rights of Life
