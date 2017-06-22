@@ -153,7 +153,6 @@ FROM county_dim
   JOIN male_voters m ON m.county_key = county_id
   JOIN female_voters f ON f.county_key = county_id;
 
-
 -- Analyze rejected Ballots by county
 WITH election AS (
     SELECT election_id
@@ -186,26 +185,139 @@ WITH election AS (
         JOIN voter_dim ON voter_id = voter_key
       WHERE reporter_key = 4 AND date_key = 2623
       GROUP BY county_key
-)
+  )
 SELECT
   entity_name,
   total_pop,
   registered_voters,
   votes_cast,
   votes_rejected,
-  votes_rejected / votes_cast  AS pct_votes_rejected,
-  votes_cast / registered_voters as voter_turnout
+  votes_rejected / votes_cast    AS pct_votes_rejected,
+  votes_cast / registered_voters AS voter_turnout
 FROM votes_cast
   JOIN votes_rejected ON votes_cast.county_key = votes_rejected.county_key
-  JOIN registered_voters on votes_cast.county_key = registered_voters.county_key
+  JOIN registered_voters ON votes_cast.county_key = registered_voters.county_key
   JOIN jurisdiction_dim ON votes_cast.county_key = jurisdiction_dim.jurisdiction_id
 ORDER BY pct_votes_rejected DESC;
-select * from party_dim;
+SELECT *
+FROM party_dim;
 
-select party_name, lower_house.entity_name, count(1) from voter_report_fact
-  join party_dim on party_id = party_key
-  join jurisdiction_dim lower_house on lower_house.jurisdiction_id = voter_report_fact.lower_house_dist_key
-where reporter_key = 4 group by party_name, lower_house.entity_name order by lower_house.entity_name;
+SELECT
+  party_name,
+  lower_house.entity_name,
+  count(1)
+FROM voter_report_fact
+  JOIN party_dim ON party_id = party_key
+  JOIN jurisdiction_dim lower_house ON lower_house.jurisdiction_id = voter_report_fact.lower_house_dist_key
+WHERE reporter_key = 4
+GROUP BY party_name, lower_house.entity_name
+ORDER BY lower_house.entity_name;
 
 
-select * from voter_re
+
+
+WITH voter_summary AS (
+    SELECT
+      county_key,
+      gender,
+      DATE_PART('year', voter_report_date) - DATE_PART('year', birthdate) "age",
+      voter_report_date - registration_date                               "days registered",
+      party_code
+    FROM voter_report_fact
+      JOIN voter_dim ON voter_report_fact.voter_key = voter_dim.voter_id
+      JOIN party_dim ON voter_report_fact.party_key = party_dim.party_id
+    WHERE reporter_key = 3 AND date_key = 2622 AND registration_status IN ('ACTIVE', 'ACT')),
+    grand_total AS (SELECT
+                      county_key,
+                      count(*)
+                    FROM voter_summary
+                    GROUP BY county_key),
+    male_totals AS (SELECT
+                      county_key,
+                      count(*) "Males"
+                    FROM voter_summary
+                    WHERE gender = 'M'
+                    GROUP BY county_key),
+    female_totals AS (SELECT
+                        county_key,
+                        count(*) "Females"
+                      FROM voter_summary
+                      WHERE gender = 'F'
+                      GROUP BY county_key),
+    age_18_24 AS (SELECT
+                    county_key,
+                    count(*) "age_18_24"
+                  FROM voter_summary
+                  WHERE age < 25
+                  GROUP BY county_key),
+    age_25_34 AS (SELECT
+                    county_key,
+                    count(*) "age_25_34"
+                  FROM voter_summary
+                  WHERE age BETWEEN 25 AND 34
+                  GROUP BY county_key),
+    age_35_44 AS (SELECT
+                    county_key,
+                    count(*) "age_35_44"
+                  FROM voter_summary
+                  WHERE age BETWEEN 35 AND 44
+                  GROUP BY county_key),
+    age_45_54 AS (SELECT
+                    county_key,
+                    count(*) "age_45_54"
+                  FROM voter_summary
+                  WHERE age BETWEEN 45 AND 54
+                  GROUP BY county_key),
+    age_55_64 AS (SELECT
+                    county_key,
+                    count(*) "age_55_64"
+                  FROM voter_summary
+                  WHERE age BETWEEN 55 AND 64
+                  GROUP BY county_key),
+    age_gt_64 AS (SELECT
+                    county_key,
+                    count(*) "age_gt_64"
+                  FROM voter_summary
+                  WHERE age > 64
+                  GROUP BY county_key),
+    democrats AS (SELECT
+                    county_key,
+                    count(*) "democrats"
+                  FROM voter_summary
+                  WHERE party_code = 'DEM'
+                  GROUP BY county_key),
+    republicans AS (SELECT
+                      county_key,
+                      count(*) "republicans"
+                    FROM voter_summary
+                    WHERE party_code = 'REP'
+                    GROUP BY county_key),
+    inactive AS (SELECT
+                   county_key,
+                   count(*) "inactive"
+                 FROM voter_report_fact
+                   JOIN voter_dim ON voter_report_fact.voter_key = voter_dim.voter_id
+                 WHERE reporter_key = 3 AND date_key = 2622 AND registration_status IN ('INACTIVE', 'INA')
+                 GROUP BY county_key),
+    purged AS (SELECT
+                 county_key,
+                 count(*) "purged"
+               FROM voter_report_fact
+                 JOIN voter_dim ON voter_report_fact.voter_key = voter_dim.voter_id
+               WHERE reporter_key = 3 AND date_key = 2622 AND registration_status IN ('PURGED')
+               GROUP BY county_key)
+
+SELECT *
+FROM grand_total
+  JOIN male_totals ON grand_total.county_key = male_totals.county_key
+  JOIN female_totals ON grand_total.county_key = female_totals.county_key
+  JOIN age_18_24 ON grand_total.county_key = age_18_24.county_key
+  JOIN age_25_34 ON grand_total.county_key = age_25_34.county_key
+  JOIN age_35_44 ON grand_total.county_key = age_35_44.county_key
+  JOIN age_45_54 ON grand_total.county_key = age_45_54.county_key
+  JOIN age_55_64 ON grand_total.county_key = age_55_64.county_key
+  JOIN age_gt_64 ON grand_total.county_key = age_gt_64.county_key
+  JOIN democrats ON grand_total.county_key = democrats.county_key
+  JOIN republicans ON grand_total.county_key = republicans.county_key
+  JOIN inactive ON grand_total.county_key = inactive.county_key
+  JOIN purged ON grand_total.county_key = purged.county_key;
