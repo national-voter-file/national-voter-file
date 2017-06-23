@@ -21,6 +21,7 @@ Run: `docker-compose run etl transform -s wa --input_file=wa_test_file.csv`
 * Load precincts with `docker-compose run etl precincts -s oh --input_file=test/oh.csv`
 * Run transformer with `docker-compose run etl transform -s oh --input_file=test/oh.csv`
 * Load transformed data with `docker-compose run etl load -s oh --input_file=test/oh_output.csv --reporter_key=2`
+* Create summary table data with `docker-compose run etl summary -s oh --reporter_key=2`
 
 ## Use of loader in AWS Batch
 We make extensive use of the loader in the AWS batch loading process. For this, we add a volume mount called `work`
