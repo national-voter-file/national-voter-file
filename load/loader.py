@@ -9,7 +9,7 @@ parser = argparse.ArgumentParser(description='Run data loading for NVF')
 parser.add_argument(
     'task',
     type=str,
-    choices=['dates', 'dimdata', 'precincts', 'transform', 'load', 'history'],
+    choices=['dates', 'dimdata', 'precincts', 'transform', 'load', 'history', 'summary'],
     help='Designates what action will be run by the loader'
 )
 
@@ -164,6 +164,16 @@ def load_data(opts, conf):
     ])
 
 
+def create_report_summary(opts, conf):
+    subprocess.check_call([
+        os.path.join(conf['pdi_path'], 'kitchen.sh'),
+        '-file', os.path.join(conf['nvf_path'], 'src', 'main', 'pdi', 'CreateVoterReportSummaries.kjb'),
+        '-param:reportDate={}'.format(opts.report_date),
+        '-param:reporter_key={}'.format(opts.reporter_key),
+        '-param:state_abbrev={}'.format(opts.state.upper())
+    ])
+
+
 # Create a jndi file inside the pentaho instalation that can be referenced as voter
 # The connection properties are taken from the config file associated with
 # this run.
@@ -210,3 +220,5 @@ if __name__ == '__main__':
         load_dimensional_data(run_opts, run_conf)
     elif run_opts.task == 'dates':
         populate_date_dim(run_conf)
+    elif run_opts.task == 'summary':
+        create_report_summary(run_opts, run_conf)
