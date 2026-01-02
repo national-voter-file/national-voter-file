@@ -15,7 +15,7 @@ We want to pull politics into the 21st century, and we're starting from the grou
 ## Will this data be publicly available?
 
 The access will to the political candidates and issue-based nonprofits, and will not be publicly available on search engines.
-It will be accessible trought the [https://repmyblock.org](Rep My Block) website.
+It will be accessible trought the [Rep My Block](https://repmyblock.org) website.
 
 ## How does it work?
 
